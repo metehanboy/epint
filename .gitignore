@@ -182,6 +182,7 @@ src/epint/_version.py
 
 # Swagger/OpenAPI JSON files in endpoints
 src/epint/resources/endpoints/**/*.json
+src/epint/resources/.endpoint_cache.json
 
 # Temporary scripts and analysis files
 *.py
