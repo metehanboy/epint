@@ -1,0 +1,146 @@
+endpoints:
+  delivery_period_list:
+    endpoint: /v1/markets/pfm/data/delivery-period-list
+    method: POST
+    auth: true
+    short_name: delivery_period_list
+    short_name_tr: Teslimat Dönemi Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Teslimat Dönemi Listeleme Servisi
+    description: VEP sayfaları için Teslimat Dönemi Listesi verir
+    response_structure:
+      items: list
+  delivery_year_list_data:
+    endpoint: /v1/markets/pfm/data/delivery-year-list
+    method: POST
+    auth: true
+    short_name: delivery_year_list_data
+    short_name_tr: Teslimat Yılı Listeme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Teslimat Yılı Listeme Servisi
+    description: VEP sayfaları için Teslimat Yılı Listesini verir.
+    response_structure:
+      items: list
+  ggf_delivery_period_list:
+    endpoint: /v1/markets/pfm/data/ggf-delivery-period-list
+    method: POST
+    auth: true
+    short_name: ggf_delivery_period_list
+    short_name_tr: GGF Teslimat Dönemi Listesi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: GGF Teslimat Dönemi Listesi
+    description: GGF Teslimat Dönemi Listesi
+    response_structure:
+      items: list
+  load_type_list_data:
+    endpoint: /v1/markets/pfm/data/load-type-list
+    method: POST
+    auth: true
+    short_name: load_type_list_data
+    short_name_tr: Yük Tipi Listeme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Yük Tipi Listeme Servisi
+    description: VEP sayfaları için Yük Tipi listesini verir.
+    response_structure:
+      items: list
+  th_delivery_period_list:
+    endpoint: /v1/markets/pfm/data/th-delivery-period-list
+    method: POST
+    auth: true
+    short_name: th_delivery_period_list
+    short_name_tr: VEP İşlem Akışı Teslimat Dönemi Listesi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: VEP İşlem Akışı Teslimat Dönemi Listesi
+    description: VEP İşlem Akışı Teslimat Dönemi Listesi
+    response_structure:
+      items: list

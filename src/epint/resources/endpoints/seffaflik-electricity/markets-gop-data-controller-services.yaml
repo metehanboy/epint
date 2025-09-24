@@ -1,0 +1,23 @@
+endpoints:
+  matching_quantity_organization_list:
+    endpoint: /v1/markets/dam/data/clearing-quantity-organization-list
+    method: POST
+    auth: true
+    short_name: matching_quantity_organization_list
+    short_name_tr: Göp Eşleşme Miktarı Organizasyon Listeleme Servisi
+    params:
+    - period
+    required:
+    - period
+    response:
+    - items
+    var_type:
+    - name: period
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Göp Eşleşme Miktarı Organizasyon Listeleme Servisi
+    description: Göp Eşleşme Miktarı için organizasyonları listeler.
+    response_structure:
+      items: list

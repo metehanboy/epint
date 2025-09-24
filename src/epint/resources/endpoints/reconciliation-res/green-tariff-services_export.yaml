@@ -1,0 +1,811 @@
+endpoints:
+  export_recon_green_tariffs:
+    endpoint: /v1/green-tariff/details/export
+    method: POST
+    auth: true
+    short_name: export_recon_green_tariffs
+    short_name_tr: ''
+    params:
+    - effectiveDate
+    - version
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: Fatura tutarının değişiklik zamanı
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: &id001
+      - XLSX
+      - CSV
+      - PDF
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  exportK3Sanction:
+    endpoint: /v1/k3-sanction/export
+    method: POST
+    auth: true
+    short_name: exportK3Sanction
+    short_name_tr: exportK3Sanction
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    - organizationId
+    - page
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: organizationId
+      var_type: int
+      description: ''
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  exportUprRetroCorrection:
+    endpoint: /v1/luy-invoice/export/upr/retro/correction
+    method: POST
+    auth: true
+    short_name: exportUprRetroCorrection
+    short_name_tr: LUY GDDK Değişim Raporu Listeleme
+    params:
+    - period
+    - version
+    - region
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: ''
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: LUY GDDK Değişim Raporu Listeleme
+    description: LUY GDDK değişim raporunu listeler.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_luy_invoices:
+    endpoint: /v1/luy-invoice/invoice/export
+    method: POST
+    auth: true
+    short_name: export_luy_invoices
+    short_name_tr: LUY Fatura Listeleme
+    params:
+    - period
+    - version
+    - region
+    - settlementPointId
+    - statuses
+    - isLastVersion
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: statuses
+      var_type: list
+      description: ''
+      required: false
+      items: int
+    - name: isLastVersion
+      var_type: bool
+      description: ''
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: LUY Fatura Listeleme
+    description: Lisansız üretim yapan UEVCB'lere ait faturaları listeler.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_luy_invoice_history:
+    endpoint: /v1/luy-invoice/invoice/history/export
+    method: POST
+    auth: true
+    short_name: export_luy_invoice_history
+    short_name_tr: LUY Fatura Geçmiş Listeleme
+    params:
+    - period
+    - version
+    - region
+    - settlementPointId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+      example: 40W000000000001V
+    summary: LUY Fatura Geçmiş Listeleme
+    description: Lisanssız üretim yapan UEVCB'lere ait faturaların versiyon geçmişini
+      listeler.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_res_reconciliation_details:
+    endpoint: /v1/payment-obligation/kb/export
+    method: POST
+    auth: true
+    short_name: export_res_reconciliation_details
+    short_name_tr: ''
+    params:
+    - page
+    - period
+    - version
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: ''
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_recon_payment_obligations:
+    endpoint: /v1/payment-obligation/export
+    method: POST
+    auth: true
+    short_name: export_recon_payment_obligations
+    short_name_tr: ''
+    params:
+    - effectiveDate
+    - versions
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: Fatura tutarının değişiklik zamanı
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: versions
+      var_type: list
+      description: Versiyon
+      required: false
+      items: str
+      example: '2020-01-01T00:00:00+03:00'
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_diff_recon_res_cost_settlement_point_details:
+    endpoint: /v1/res/retrospective/detail-export
+    method: POST
+    auth: true
+    short_name: export_diff_recon_res_cost_settlement_point_details
+    short_name_tr: ''
+    params:
+    - period
+    - version
+    - powerPlantId
+    - settlementPointId
+    - page
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+    - name: powerPlantId
+      var_type: int
+      description: Enerji Santrali İsmi
+      required: false
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_diff_recon_payment_obligation:
+    endpoint: /v1/res/retrospective/export
+    method: POST
+    auth: true
+    short_name: export_diff_recon_payment_obligation
+    short_name_tr: ''
+    params:
+    - periodList
+    - version
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: periodList
+      var_type: list
+      description: Faturanın ait olduğu uzlaştırma dönemi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+      items: str
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_diff_recon_green_tariffs:
+    endpoint: /v1/res/retrospective/kb/list
+    method: POST
+    auth: true
+    short_name: export_diff_recon_green_tariffs
+    short_name_tr: ''
+    params:
+    - page
+    - period
+    - version
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: ''
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  export_loss_generation:
+    endpoint: /v1/rescostsettlement/export
+    method: POST
+    auth: true
+    short_name: export_loss_generation
+    short_name_tr: ''
+    params:
+    - period
+    - version
+    - region
+    - category
+    - powerPlantId
+    - settlementPointId
+    - page
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: category
+      var_type: list
+      description: Kategori
+      required: false
+      example: TRIMMED_GENERATION, CAPACITY_RATIO, DOWN_REGULATION
+      items: str
+    - name: powerPlantId
+      var_type: int
+      description: Enerji Santrali İsmi
+      required: false
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_all_yeta_records:
+    endpoint: /v1/yeta/export
+    method: POST
+    auth: true
+    short_name: export_all_yeta_records
+    short_name_tr: ''
+    params:
+    - period
+    - version
+    - page
+    - versions
+    - region
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: ''
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: versions
+      var_type: list
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+      items: str
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  exportTemplateExcel:
+    endpoint: /v1/yeta/exportTemplateFile
+    method: GET
+    auth: true
+    short_name: exportTemplateExcel
+    short_name_tr: exportTemplateExcel
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict

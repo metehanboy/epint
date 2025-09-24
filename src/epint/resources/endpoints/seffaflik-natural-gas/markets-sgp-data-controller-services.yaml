@@ -1,0 +1,1041 @@
+endpoints:
+  additional_notifications:
+    endpoint: /v1/markets/sgp/data/additional-notifications
+    method: POST
+    auth: true
+    short_name: additional_notifications
+    short_name_tr: İlave Dengeleyici Bildirimleri Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: İlave Dengeleyici Bildirimleri Listeleme Servisi
+    description: Şebekede oluşan dengesizliği gidermeyi amaçlayan işlemler için piyasa
+      katılımcılarına yapılan bildirimleri ifade eder.
+    response_structure:
+      items: list
+      page: str
+  balancing_gas_price:
+    endpoint: /v1/markets/sgp/data/balancing-gas-price
+    method: POST
+    auth: true
+    short_name: balancing_gas_price
+    short_name_tr: Dengeleme Gazı Fiyatları (DGF) Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Dengeleme Gazı Fiyatları (DGF) Listeleme Servisi
+    description: 'İlgili gaz gününde İletim Şirketince gerçekleştirilen İlave Dengeleme
+      Alış veya Satış işlemlerinin Ağırlıklı Ortalama Fiyatını gösterir. (*) ile gösterilen
+      fiyatlar kesinleşmemiş fiyatlardır. İlave Dengeleyici Alış Fiyatı (İDAF); İlgili
+      ticaret aralığında iletim şirketinin alış işlemlerinin ağırlıklı ortalamasını,
+      -İlave Dengeleyici Satış Fiyatı (İDSF); İlgili ticaret aralığında iletim şirketinin
+      satış işlemlerinin ağırlıklı ortalamasını, -Dengeleme Gazı Alış Fiyatı (DGAF);
+      İlgili gaz gününe ait dengeleme gazı alış fiyatını, -Dengeleme Gazı Satış Fiyatı
+      (DGSF); İlgili gaz gününe ait dengeleme gazı satış fiyatını ifade eder. *Fiyat:
+      TL/1000 sm3'
+    response_structure:
+      items: list
+      page: str
+  bast:
+    endpoint: /v1/markets/sgp/data/bast
+    method: POST
+    auth: true
+    short_name: bast
+    short_name_tr: Bakiye Sıfırlama Tutarı (BAST) Listeleme Servisi
+    params:
+    - period
+    - page
+    required:
+    - period
+    response:
+    - items
+    - page
+    - statistics
+    - isAllowanceFinal
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Dönem
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Bakiye Sıfırlama Tutarı (BAST) Listeleme Servisi
+    description: İletim Şirketi alacak veya borcunun düşülmesinden sonra EPİAŞ'ta
+      kalan ve mevzuata uygun şekilde Katılımcılara Dağıtılacak Tutarı gösterir.
+    response_structure:
+      items: list
+      page: str
+      statistics: str
+      isAllowanceFinal: bool
+  blue_code_operation:
+    endpoint: /v1/markets/sgp/data/blue-code-operation
+    method: POST
+    auth: true
+    short_name: blue_code_operation
+    short_name_tr: 2 Kodlu İşlemler Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: 2 Kodlu İşlemler Listeleme Servisi
+    description: Şebekede oluşan dengesizliği gidermeyi amaçlayan 2 Kodlu İlave Dengeleyici
+      İşlemlerini ifade eder.
+    response_structure:
+      items: list
+      page: str
+  daily_matched_quantity:
+    endpoint: /v1/markets/sgp/data/daily-matched-quantity
+    method: POST
+    auth: true
+    short_name: daily_matched_quantity
+    short_name_tr: SGP Günlük Eşleşme Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: SGP Günlük Eşleşme Miktarı Listeleme Servisi
+    description: 'Spot Doğal Gaz Piyasasında günlük kontratlardaki gün öncesi ve gün
+      içi eşleşmelerin Toplam Miktarını gösterir. -GÖEM: (G-1 08:00 – G 08:00 ) arasında
+      gerçekleşen eşleşmelerin toplam miktarıdır. -GİEM: (G 08:00) (G+1 08:00 ) arasında
+      gerçekleşen eşleşmelerin toplam miktarıdır. -GEEM: (G+1 08:00- 14:00) arasında
+      gerçekleşen eşleşmelerin toplam miktarıdır. -TOPLAM: Gün öncesi, gün içi ve
+      gün ertesi kontratlarının toplam eşleşme miktarıdır.'
+    response_structure:
+      items: list
+      page: str
+  daily_reference_price:
+    endpoint: /v1/markets/sgp/data/daily-reference-price
+    method: POST
+    auth: true
+    short_name: daily_reference_price
+    short_name_tr: Günlük Referans Fiyatı (GRF) Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Günlük Referans Fiyatı (GRF) Listeleme Servisi
+    description: Spot Doğal Gaz Piyasasında gün öncesi ve gün içi eşleşmelerinin Ağırlıklı
+      Ortalama Fiyatını gösterir. (*) ile gösterilen fiyatlar kesinleşmemiş fiyatlardır.
+      GRF(EUR/MWh), GRF (USD/1000Sm3) ve GRF (USD/MMBtu) değerleri GRF ilan tarihi
+      itibarıyla TCMB tarafından ilan edilmiş en güncel EURTRY & USDTRY döviz alış
+      kuru dikkate alınarak hesaplanmıştır. 1Sm3 = 10,64 kWh
+    response_structure:
+      items: list
+      page: str
+      statistics: str
+  daily_trade_volume:
+    endpoint: /v1/markets/sgp/data/daily-trade-volume
+    method: POST
+    auth: true
+    short_name: daily_trade_volume
+    short_name_tr: SGP Günlük İşlem Hacmi Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: SGP Günlük İşlem Hacmi Listeleme Servisi
+    description: 'Spot Doğal Gaz Piyasasında günlük kontratlardaki eşleşmelerin Toplam
+      Tutarını gösterir. GÖİH: (G-1 08:00 G 08:00) arasında gerçekleşen eşleşmelerin
+      toplam hacmidir. GİİH: (G 08:00 G+1 08:00) arasında gerçekleşen eşleşmelerin
+      toplam hacmidir. GEİH: (G+1 08:00 14:00) arasında gerçekleşen eşleşmelerin toplam
+      hacmidir. TOPLAM: Gün öncesi, gün içi ve gün ertesi kontratlarının toplam hacmidir.'
+    response_structure:
+      items: list
+      page: str
+  four_code_operation:
+    endpoint: /v1/markets/sgp/data/four-code-operation
+    method: POST
+    auth: true
+    short_name: four_code_operation
+    short_name_tr: 4 Kodlu İşlemler Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: 4 Kodlu İşlemler Listeleme Servisi
+    description: Şebekede oluşan dengesizliği gidermeyi amaçlayan 4 Kodlu İlave Dengeleyici
+      İşlemlerini ifade eder.
+    response_structure:
+      items: list
+      page: str
+  gddk_amount:
+    endpoint: /v1/markets/sgp/data/gddk-amount
+    method: POST
+    auth: true
+    short_name: gddk_amount
+    short_name_tr: Geriye Dönük Düzeltme Kalemi (GDDK) Tutarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Geriye Dönük Düzeltme Kalemi (GDDK) Tutarı Listeleme Servisi
+    description: Geçmiş dönem faturalarında yapılan geriye dönük düzeltmeler ile yeni
+      faturada oluşan Toplam Alacak veya Borç Tutarını gösterir.
+    response_structure:
+      items: list
+      page: str
+      statistics: str
+  green_code_operation:
+    endpoint: /v1/markets/sgp/data/green-code-operation
+    method: POST
+    auth: true
+    short_name: green_code_operation
+    short_name_tr: 1 Kodlu İşlemler Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: 1 Kodlu İşlemler Listeleme Servisi
+    description: Şebekede oluşan dengesizliği gidermeyi amaçlayan 1 Kodlu İlave Dengeleyici
+      İşlemlerini ifade eder.
+    response_structure:
+      items: list
+      page: str
+  grf_match_quantity:
+    endpoint: /v1/markets/sgp/data/grf-match-quantity
+    method: POST
+    auth: true
+    short_name: grf_match_quantity
+    short_name_tr: GRF Eşleşme Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: GRF Eşleşme Miktarı Listeleme Servisi
+    description: Spot Doğal Gaz Piyasasında günlük kontratlardaki gün öncesi ve gün
+      içi eşleşmelerin Toplam Miktarını gösterir. (*) ile gösterilen eşleşme miktarları
+      kesinleşmemiş eşleşme miktarlarıdır.
+    response_structure:
+      items: list
+      page: str
+  grf_trade_volume:
+    endpoint: /v1/markets/sgp/data/grf-trade-volume
+    method: POST
+    auth: true
+    short_name: grf_trade_volume
+    short_name_tr: GRF İşlem Hacmi Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: GRF İşlem Hacmi Listeleme Servisi
+    description: Spot Doğal Gaz Piyasasında günlük kontratlardaki gün öncesi ve gün
+      içi eşleşmelerin Toplam Tutarını gösterir. G-1 08:00 ile G+1 08:00 arasında
+      gerçekleşen işlemlerin toplam hacmidir.
+    response_structure:
+      items: list
+      page: str
+  imbalance_amount:
+    endpoint: /v1/markets/sgp/data/imbalance-amount
+    method: POST
+    auth: true
+    short_name: imbalance_amount
+    short_name_tr: SGP Dengesizlik Tutarı Listeleme Servisi
+    params:
+    - period
+    - page
+    required:
+    - period
+    response:
+    - items
+    - page
+    - statistics
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Dönem
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: SGP Dengesizlik Tutarı Listeleme Servisi
+    description: Taşıtanların Alış veya Satış ağırlıklı işlemleri sonucu şebekede
+      oluşan dengesizlik için ödemekle yükümlü oldukları Tutarı gösterir. *Uzlaştırmaya
+      esas tahsisat verileri yayınlanmaktadır.
+    response_structure:
+      items: list
+      page: str
+      statistics: str
+  imbalance_system:
+    endpoint: /v1/markets/sgp/data/imbalance-system
+    method: POST
+    auth: true
+    short_name: imbalance_system
+    short_name_tr: Dengesizlik Sistem Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Dengesizlik Sistem Listeleme Servisi
+    description: Önceki gaz gününe kıyasla, Şebeke Stok Gazı Miktarında oluşan artış
+      veya azalışı gösterir. Büyükse (+) , küçükse (-) işaretlenir.
+    response_structure:
+      items: list
+      page: str
+  stp_last_reconciliation_date:
+    endpoint: /v1/markets/sgp/data/last-reconciliation-date
+    method: GET
+    auth: true
+    short_name: stp_last_reconciliation_date
+    short_name_tr: Sgp Son Uzlaştırma Tarihi Servisi
+    params: []
+    required: null
+    response:
+    - stpLatestReconciliationDate
+    var_type: []
+    summary: Sgp Son Uzlaştırma Tarihi Servisi
+    description: Sgp Son Uzlaştırma Tarihi Servisi
+    response_structure:
+      stpLatestReconciliationDate: datetime
+  total_match_quantity:
+    endpoint: /v1/markets/sgp/data/match-quantity
+    method: POST
+    auth: true
+    short_name: total_match_quantity
+    short_name_tr: SGP Toplam Eşleşme Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: SGP Toplam Eşleşme Miktarı Listeleme Servisi
+    description: Spot Doğal Gaz Piyasasında günlük ve haftalık kontratlardaki eşleşmelerin
+      Toplam Miktarını gösterir.
+    response_structure:
+      items: list
+      page: str
+  orange_code_operation:
+    endpoint: /v1/markets/sgp/data/orange-code-operation
+    method: POST
+    auth: true
+    short_name: orange_code_operation
+    short_name_tr: 3 Kodlu İşlemler Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: 3 Kodlu İşlemler Listeleme Servisi
+    description: Şebekede oluşan dengesizliği gidermeyi amaçlayan 3 Kodlu İlave Dengeleyici
+      İşlemlerini ifade eder.
+    response_structure:
+      items: list
+      page: str
+  physical_realization:
+    endpoint: /v1/markets/sgp/data/physical-realization
+    method: POST
+    auth: true
+    short_name: physical_realization
+    short_name_tr: Fiziki Gerçekleşme Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - statistics
+    - isAllowanceFinal
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Fiziki Gerçekleşme Listeleme Servisi
+    description: Taşıtanların Alış veya Satış yoluyla, fiziki şebeke noktalarından
+      sisteme eklediği veya çıkardığı Doğal Gaz Miktarını gösterir.
+    response_structure:
+      items: list
+      page: str
+      statistics: str
+      isAllowanceFinal: bool
+  sgp_price:
+    endpoint: /v1/markets/sgp/data/sgp-price
+    method: POST
+    auth: true
+    short_name: sgp_price
+    short_name_tr: SGP Fiyatlar Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: SGP Fiyatlar Listeleme Servisi
+    description: Spot Doğal Gaz Piyasasında ilgili ticaret aralığında gerçekleşen
+      eşleşmelerin Ağırlıklı Ortalama Fiyatını gösterir. Gün Öncesi Fiyatı (GÖF);
+      (G-1 08:00 - G 08:00), Gün İçi Fiyatı (GİF); (G 08:00 – G+1 08:00), Gün Ertesi
+      Fiyatı (GEF); (G+1) (08:00 - 14:00), Ağırlıklı Ortalama Fiyatı (AOF); (G-1 08:00
+      – G+1 14:00)
+    response_structure:
+      items: list
+      page: str
+  shippers_imbalance_quantity:
+    endpoint: /v1/markets/sgp/data/shippers-imbalance-quantity
+    method: POST
+    auth: true
+    short_name: shippers_imbalance_quantity
+    short_name_tr: Dengesizlik Taşıtan Listeleme Servisi
+    params:
+    - period
+    - page
+    required:
+    - period
+    response:
+    - items
+    - page
+    - isAllowanceFinal
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Dönem
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Dengesizlik Taşıtan Listeleme Servisi
+    description: Taşıtanların Alış veya Satış ağırlıklı işlemleri sonucu şebekede
+      oluşan Doğal Gaz Fazlalığı veya Eksikliği Miktarını gösterir. *İlk tahsisat
+      verilerine göre hesaplanmıştır.
+    response_structure:
+      items: list
+      page: str
+      isAllowanceFinal: bool
+  system_direction:
+    endpoint: /v1/markets/sgp/data/system-direction
+    method: POST
+    auth: true
+    short_name: system_direction
+    short_name_tr: Sistem Yönü Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - isAllowanceFinal
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Sistem Yönü Listeleme Servisi
+    description: İletim Şirketince ilgili gün için hedeflenen Şebeke Stok Gazı Miktarı
+      değerine kıyasla, gerçekleşen değeri gösterir. Büyükse (+) , küçükse (-) değerlenir.
+      *Uzlaştırmaya esas tahsisat verileri yayınlanmaktadır.
+    response_structure:
+      items: list
+      page: str
+      isAllowanceFinal: bool
+  total_trade_volume:
+    endpoint: /v1/markets/sgp/data/total-trade-volume
+    method: POST
+    auth: true
+    short_name: total_trade_volume
+    short_name_tr: SGP Toplam İşlem Hacmi Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: SGP Toplam İşlem Hacmi Listeleme Servisi
+    description: 'Spot Doğal Gaz Piyasasında günlük ve haftalık kontratlardaki eşleşmelerin
+      Toplam Tutarını gösterir. -GÖİH:(G-1 08:00 - G 08:00) arasında gerçekleşen eşleşmelerin
+      toplam hacmidir. -GİİH:(G 08:00) ile (G+1 08:00) arasında gerçekleşen eşleşmelerin
+      toplam hacmidir. -GEİH: (G+1 08:00 - 14:00) arasında gerçekleşen eşleşmelerin
+      toplam hacmidir. -TOPLAM: Gün öncesi,gün içi ve gün ertesi kontratlarının toplam
+      işlem hacmidir (İlgili kontrata ait toplam işlem hacmidir).'
+    response_structure:
+      items: list
+      page: str
+  transaction_history:
+    endpoint: /v1/markets/sgp/data/transaction-history
+    method: POST
+    auth: true
+    short_name: transaction_history
+    short_name_tr: SGP İşlem Akışı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: SGP İşlem Akışı Listeleme Servisi
+    description: Spot kontratların Eşleşme Zamanlarını gösterir.
+    response_structure:
+      items: list
+      page: str
+  virtual_realization:
+    endpoint: /v1/markets/sgp/data/virtual-realization
+    method: POST
+    auth: true
+    short_name: virtual_realization
+    short_name_tr: Sanal Gerçekleşme Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - statistics
+    - isAllowanceFinal
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Sanal Gerçekleşme Listeleme Servisi
+    description: Taşıtanların Alış veya Satış yoluyla, sanal şebeke noktalarından
+      (UDN) sisteme eklediği veya çıkardığı Doğal Gaz Miktarını gösterir. *Uzlaştırmaya
+      esas tahsisat verileri yayınlanmaktadır.
+    response_structure:
+      items: list
+      page: str
+      statistics: str
+      isAllowanceFinal: bool
+  weekly_matched_quantity:
+    endpoint: /v1/markets/sgp/data/weekly-matched-quantity
+    method: POST
+    auth: true
+    short_name: weekly_matched_quantity
+    short_name_tr: SGP Haftalık Eşleşme Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: SGP Haftalık Eşleşme Miktarı Listeleme Servisi
+    description: 'Spot Doğal Gaz Piyasasında haftalık kontratlardaki eşleşmelerin
+      Toplam Miktarını gösterir. HIEM: Hafta içi kontratlarına ait toplam eşleşme
+      miktarıdır. HSEM: Hafta sonu kontratlarına ait toplam eşleşme miktarıdır. HTEM:
+      Hafta tümü kontratlarına ait toplam eşleşme miktarıdır. TOPLAM: Hafta içi, hafta
+      sonu ve hafta tümü kontratlarının toplam eşleşme miktarıdır.'
+    response_structure:
+      items: list
+      page: str
+  weekly_ref_price:
+    endpoint: /v1/markets/sgp/data/weekly-ref-price
+    method: POST
+    auth: true
+    short_name: weekly_ref_price
+    short_name_tr: Haftalık Referans Fiyatı (HRF) Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Haftalık Referans Fiyatı (HRF) Listeleme Servisi
+    description: 'Spot Doğal Gaz Piyasasında haftalık kontratlardaki eşleşmelerin
+      Ağırlıklı Ortalama Fiyatını gösterir. HI: Hafta İçi HS: Hafta Sonu HT: Hafta
+      Tamamı *Fiyat: TL/1000 sm3'
+    response_structure:
+      items: list
+      page: str
+  weekly_trade_volume:
+    endpoint: /v1/markets/sgp/data/weekly-trade-volume
+    method: POST
+    auth: true
+    short_name: weekly_trade_volume
+    short_name_tr: SGP Haftalık İşlem Hacmi Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: SGP Haftalık İşlem Hacmi Listeleme Servisi
+    description: 'Spot Doğal Gaz Piyasasında haftalık kontratlardaki eşleşmelerin
+      Toplam Tutarını gösterir. HIIH: hafta içi kontratlarına ait toplam işlem hacmidir.
+      HSIH: hafta sonu kontratlarına ait toplam işlem hacmidir. HTIH: hafta tümü kontratlarına
+      ait toplam işlem hacmidir. TOPLAM: Hafta içi, hafta sonu ve hafta tümü kontratlarının
+      toplam işlem hacmidir.'
+    response_structure:
+      items: list
+      page: str

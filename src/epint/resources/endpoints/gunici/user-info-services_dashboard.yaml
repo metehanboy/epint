@@ -1,0 +1,37 @@
+endpoints:
+  dashboard_configs_save:
+    endpoint: /rest/v1/dashboard-configs/update
+    method: POST
+    auth: true
+    short_name: dashboard_configs_save
+    short_name_tr: Dashboard konfigürasyon güncelleme
+    params:
+    - configs
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: configs
+      var_type: str
+      description: ''
+      required: false
+    summary: Dashboard konfigürasyon güncelleme
+    description: Dashboard konfigürasyon güncelleme
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

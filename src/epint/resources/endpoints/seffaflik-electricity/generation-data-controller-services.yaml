@@ -1,0 +1,61 @@
+endpoints:
+  dpp_first_version:
+    endpoint: /v1/generation/data/dpp-first-version
+    method: POST
+    auth: true
+    short_name: dpp_first_version
+    short_name_tr: Kesinleşmiş Günlük Üretim Planı (KGÜP) İlk Versiyon Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - region
+    - organizationId
+    - uevcbId
+    - page
+    required:
+    - startDate
+    - endDate
+    - region
+    response:
+    - items
+    - page
+    - totals
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+      required: true
+      example: TR1
+    - name: organizationId
+      var_type: int
+      description: Organizasyon Id bilgisi(bkz.Organizasyon Listesi Getirme Servisi)
+      required: false
+      example: 1234
+    - name: uevcbId
+      var_type: int
+      description: UEVÇB Id bilgisi(bkz.Uevçb Listeleme Servisi)
+      required: false
+      example: 1234
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Kesinleşmiş Günlük Üretim Planı (KGÜP) İlk Versiyon Listeleme Servisi
+    description: Kesinleşmiş Gün Öncesi Üretim Programı, katılımcının bir sonraki
+      güne ilişkin gerçekleştirmeyi öngördüğü ve sistem işletmecisine dengeleme güç
+      piyasasının başlangıcında bildirdiği üretim değeridir.
+    response_structure:
+      items: list
+      page: str
+      totals: str

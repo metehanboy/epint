@@ -1,0 +1,38 @@
+endpoints:
+  transaction_history:
+    endpoint: /v1/markets/idm/data/transaction-history
+    method: POST
+    auth: true
+    short_name: transaction_history
+    short_name_tr: GİP İşlem Akışı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: GİP İşlem Akışı Listeleme Servisi
+    description: Gün İçi Piyasası’nda gerçekleşen anlık işlemlerin fiyat ve miktarlarıdır.
+    response_structure:
+      items: list
+      page: str

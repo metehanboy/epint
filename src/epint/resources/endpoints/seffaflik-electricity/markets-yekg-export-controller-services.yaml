@@ -1,0 +1,573 @@
+endpoints:
+  bilateral_contract_export:
+    endpoint: /v1/markets/yek-g/export/bilateral-contract-list
+    method: POST
+    auth: true
+    short_name: bilateral_contract_export
+    short_name_tr: YEK-G İkili Anlaşma Miktarları Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: YEK-G İkili Anlaşma Miktarları Dışa Aktarım Servisi
+    description: Seçilen tarihte hesaplar arası transfer edilen YEK-G Belgelerinin
+      sayısı kaynak ve adet bazlı gösterilir. İkili Anlaşma Piyasasında veriler takip
+      eden iş günü 15:00'dan sonra yayımlanır. YEK-G İkili Anlaşma Miktarları Listesini
+      XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  cancelation_quantity_export:
+    endpoint: /v1/markets/yek-g/export/cancelation-quantity
+    method: POST
+    auth: true
+    short_name: cancelation_quantity_export
+    short_name_tr: YEK-G İtfa İşlem Miktarları Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: YEK-G İtfa İşlem Miktarları Dışa Aktarım Servisi
+    description: Seçilen tarihte YEK-G Belgesinin ifşa amacıyla kullanılmak üzere
+      itfa edilme sayısını göstermektedir. Veriler Organize YEK-G ve YEK-G İkili Anlaşmalar
+      Piyasasının aynı iş günü 15:00'dan sonra yayımlanır. YEK-G İtfa İşlem Miktarları
+      Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  expiry_quantity_export:
+    endpoint: /v1/markets/yek-g/export/expiry-quantity
+    method: POST
+    auth: true
+    short_name: expiry_quantity_export
+    short_name_tr: İlga edilen YEK-G Belge Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: İlga edilen YEK-G Belge Miktarı Dışa Aktarım Servisi
+    description: Seçilen tarihte üretim tarihinden itibaren 12 ay geçmesine rağmen
+      itfa edilmemiş olması sebebiyle İlga edilen YEK-G Belgelerinin sayısını kaynak
+      ve adet bazlı gösterir. İkili Anlaşma Piyasasında veriler takip eden iş günü
+      15:00'dan sonra, Organize Piyasada ise seans sonrası sürecinden sonra yayımlanır.
+      İlga edilen YEK-G Belge Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  exported_document_quantity_export:
+    endpoint: /v1/markets/yek-g/export/exported-document-quantity
+    method: POST
+    auth: true
+    short_name: exported_document_quantity_export
+    short_name_tr: İhraç edilen YEK-G Belge Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: İhraç edilen YEK-G Belge Miktarı Dışa Aktarım Servisi
+    description: Seçilen tarihte kaynak bazında kullanıcı hesaplarına ihraç edilen
+      toplam YEK-G Belgesi sayısını gösterir. Veriler Organize YEK-G ve YEK-G İkili
+      Anlaşmalar Piyasasının takip eden iş günü 15:00'dan sonra yayımlanır. İhraç
+      edilen YEK-G Belge Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  yekg_market_bid_ask_quantity_export:
+    endpoint: /v1/markets/yek-g/export/market-bid-ask-quantity
+    method: POST
+    auth: true
+    short_name: yekg_market_bid_ask_quantity_export
+    short_name_tr: YEK-G Org. Piyasa Alış/Satış Teklif Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: YEK-G Org. Piyasa Alış/Satış Teklif Miktarı Dışa Aktarım Servisi
+    description: Kaynak bazlı açılan her bir kontrata ilişkin verilmiş olan alış ve
+      satış teklif miktarlarını göstermektedir. YEK-G Org. Piyasa Alış/Satış Teklif
+      Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  yekg_min_max_match_amount_export:
+    endpoint: /v1/markets/yek-g/export/min-max-match-amount-list
+    method: POST
+    auth: true
+    short_name: yekg_min_max_match_amount_export
+    short_name_tr: YEK-G Min-Max Eşleşme Fiyatları Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: YEK-G Min-Max Eşleşme Fiyatları Dışa Aktarım Servisi
+    description: Seçilen Tarihte YEK-G Belgelerinin kaynak bazında minimum ve maksimum
+      eşleşme fiyatlarını gösterir. Veriler Organize YEK-G Piyasasında seans süresince
+      yayımlanır. YEK-G Min-Max Eşleşme Fiyatları Listesini XLSX, CSV ya da PDF olarak
+      dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  trading_volume_export:
+    endpoint: /v1/markets/yek-g/export/trading-volume
+    method: POST
+    auth: true
+    short_name: trading_volume_export
+    short_name_tr: YEK-G Org. Piyasa İşlem Hacmi Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: YEK-G Org. Piyasa İşlem Hacmi Dışa Aktarım Servisi
+    description: Her bir kaynakta açılan kontratlara verilmiş olan tekliflerin eşleşmesi
+      ile oluşan işlem hacminin gösterilmesi. YEK-G Org. Piyasa İşlem Hacmi Listesini
+      XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  yekg_weighted_average_price_export:
+    endpoint: /v1/markets/yek-g/export/weighted-average-price
+    method: POST
+    auth: true
+    short_name: yekg_weighted_average_price_export
+    short_name_tr: Org. YEK-G Piyasa Ağırlıklı Ortalama Fiyat Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Org. YEK-G Piyasa Ağırlıklı Ortalama Fiyat Dışa Aktarım Servisi
+    description: Seçilen Tarihte Organize YEK-G Piyasasında belirli bir enerji kaynağına
+      ilişkin YEK-G Belgelesinin eşleştiği fiyatlara göre Ağırlıklı Ortalama Fiyat
+      olarak gösterir. Org. YEK-G Piyasa Ağırlıklı Ortalama Fiyat Listesini XLSX,
+      CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  export_withdrawal_quantity:
+    endpoint: /v1/markets/yek-g/export/withdrawal-quantity
+    method: POST
+    auth: true
+    short_name: export_withdrawal_quantity
+    short_name_tr: İptal edilen YEK-G Belge Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: İptal edilen YEK-G Belge Miktarı Dışa Aktarım Servisi
+    description: Seçilen tarihte ihraç ve transfer süresinde oluşabilecek hatalar
+      sebebiyle iptal edilen YEK-G Belgelerinin sayısını kaynak ve adet bazlı gösterir.
+      İkili Anlaşma Piyasası’nda veriler takip eden iş günü 15:00’dan sonra, Organize
+      Piyasa’da ise sean sonrası sürecinden sonra yayımlanır. İkili Anlaşma Piyasası’nda
+      veriler takip eden iş günü 15:00’dan sonra, Organize Piyasa’da ise seans sonrası
+      sürecinden sonra yayımlanır. İptal edilen YEK-G Belge Miktarı Listesini XLSX,
+      CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  yekg_matching_quantity_export:
+    endpoint: /v1/markets/yek-g/export/yekg-matching-quantity
+    method: POST
+    auth: true
+    short_name: yekg_matching_quantity_export
+    short_name_tr: Org. YEK-G Piyasa Eşleşme Miktarları Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Org. YEK-G Piyasa Eşleşme Miktarları Dışa Aktarım Servisi
+    description: Seçilen tarihte YEK-G Belgelerinin kaynak bazında gerçekleşen son
+      eşleşme miktarı ve işlem miktarlarını gösterir. Veriler Organize YEK-G Piyasası’nda
+      seans süresince yayımlanır. Org. YEK-G Piyasa Eşleşme Miktarları Listesini XLSX,
+      CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object

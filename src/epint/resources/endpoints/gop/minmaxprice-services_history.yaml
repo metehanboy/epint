@@ -1,0 +1,46 @@
+endpoints:
+  operation_history_operation_codes:
+    endpoint: /operationhistory/operationcodes
+    method: POST
+    auth: true
+    short_name: operation_history_operation_codes
+    short_name_tr: Operation History / Operation Code List Service
+    params:
+    - header
+    - body
+    required: [header, body]
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: header
+      var_type: array
+      description: Request header bilgisini tutar. GOP servisleri için gerekli header bilgileri.
+      required: true
+      items: dict
+      properties:
+        key:
+          type: string
+          description: Header anahtarı (transactionId, application, language)
+        value:
+          type: string
+          description: Header değeri
+    - name: body
+      var_type: dict
+      description: Request body bilgisini tutar. Swagger modeline göre düzenlenmiştir.
+      properties: {}
+      required: true
+    summary: Operation History / Operation Code List Service
+    description: This service returns available operations for query.
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str

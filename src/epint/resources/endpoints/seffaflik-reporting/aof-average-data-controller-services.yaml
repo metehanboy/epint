@@ -1,0 +1,129 @@
+endpoints:
+  aof_average_daily_data:
+    endpoint: /v1/aof-average/data/daily
+    method: POST
+    auth: true
+    short_name: aof_average_daily_data
+    short_name_tr: Epiaş Web Sitesi İçin AOF Günlük Aritmetik Ortalama Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Epiaş Web Sitesi İçin AOF Günlük Aritmetik Ortalama Listeleme Servisi
+    description: Epiaş web sitesinde gösterilmek üzere Güniçi AOF fiyatının seçilen
+      tarihlere göre günlük aritmetik ortalamasını dönen servistir.
+    response_structure:
+      items: list
+      statistics: list
+  aof_average_default_data:
+    endpoint: /v1/aof-average/data/default
+    method: POST
+    auth: true
+    short_name: aof_average_default_data
+    short_name_tr: AOF Aritmetik Ortalama Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: AOF Aritmetik Ortalama Listeleme Servisi
+    description: Gün içi AOF fiyatının seçilen tarihlere göre çeyreklik(QUARTERLY),
+      yarı-yıl(HALF-YEAR) ve yıllık(YEARLY) aritmetik ortalamasını dönen servistir.
+    response_structure:
+      items: list
+      statistics: list
+  aof_average_monthly_data:
+    endpoint: /v1/aof-average/data/monthly
+    method: POST
+    auth: true
+    short_name: aof_average_monthly_data
+    short_name_tr: AOF Aylık Aritmetik Ortalama Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: AOF Aylık Aritmetik Ortalama Listeleme Servisi
+    description: Gün içi AOF fiyatının seçilen tarihlere göre aylık aritmetik ortalamasını
+      dönen servistir.
+    response_structure:
+      items: list
+      statistics: list
+  aof_average_weekly_data:
+    endpoint: /v1/aof-average/data/weekly
+    method: POST
+    auth: true
+    short_name: aof_average_weekly_data
+    short_name_tr: AOF Haftalık Aritmetik Ortalama Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: AOF Haftalık Aritmetik Ortalama Listeleme Servisi
+    description: Gün içi AOF fiyatının seçilen tarihlere göre haftalık aritmetik ortalamasını
+      dönen servistir.
+    response_structure:
+      items: list
+      statistics: list

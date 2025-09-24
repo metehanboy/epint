@@ -1,0 +1,126 @@
+endpoints:
+  dashboard_day_ahead_market:
+    endpoint: /v1/dashboard/day-ahead-market
+    method: GET
+    auth: true
+    short_name: dashboard_day_ahead_market
+    short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gün Öncesi Piyasası Servisi
+    params: []
+    required: null
+    response:
+    - items
+    - latestUpdateTime
+    var_type: []
+    summary: Şeffaflık Ana Sayfası(Dashboard) Gün Öncesi Piyasası Servisi
+    description: Şeffaflık Ana Sayfası(Dashboard) Gün Öncesi Piyasası Servisi
+    response_structure:
+      items: list
+      latestUpdateTime: datetime
+  intra_day_market:
+    endpoint: /v1/dashboard/intra-day-market
+    method: GET
+    auth: true
+    short_name: intra_day_market
+    short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gün İçi Piyasası Servisi
+    params: []
+    required: null
+    response:
+    - items
+    - latestUpdateTime
+    var_type: []
+    summary: Şeffaflık Ana Sayfası(Dashboard) Gün İçi Piyasası Servisi
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere, Gün İçi Piyasası verilerini
+      getirir.
+    response_structure:
+      items: list
+      latestUpdateTime: datetime
+  dashboard_market_message_system:
+    endpoint: /v1/dashboard/market-message-system
+    method: GET
+    auth: true
+    short_name: dashboard_market_message_system
+    short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Piyasa Mesaj Sistemi Servisi
+    params: []
+    required: null
+    response:
+    - items
+    - page
+    var_type: []
+    summary: Şeffaflık Ana Sayfası(Dashboard) Piyasa Mesaj Sistemi Servisi
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere, piyasa mesaj sistemi verilerini
+      getirir.
+    response_structure:
+      items: list
+      page: str
+  dashboard_realtime_consumption:
+    endpoint: /v1/dashboard/realtime-consumption
+    method: GET
+    auth: true
+    short_name: dashboard_realtime_consumption
+    short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Tüketim Servisi
+    params: []
+    required: null
+    response:
+    - items
+    - latestUpdateTime
+    var_type: []
+    summary: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Tüketim Servisi
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere, gerçek zamanlı Tüketim
+      verilerini getirir.
+    response_structure:
+      items: list
+      latestUpdateTime: datetime
+  dashboard_realtime_generation:
+    endpoint: /v1/dashboard/realtime-generation
+    method: GET
+    auth: true
+    short_name: dashboard_realtime_generation
+    short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Üretim Servisi
+    params: []
+    required: null
+    response:
+    - items
+    - latestUpdateTime
+    var_type: []
+    summary: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Üretim Servisi
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere, gerçek zamanlı üretim verilerini
+      getirir.
+    response_structure:
+      items: list
+      latestUpdateTime: datetime
+  dashboard_spot_gas_market:
+    endpoint: /v1/dashboard/spot-gas-market
+    method: GET
+    auth: true
+    short_name: dashboard_spot_gas_market
+    short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Spot Gaz Piyasası Servisi
+    params: []
+    required: null
+    response:
+    - items
+    - latestUpdateTime
+    var_type: []
+    summary: Şeffaflık Ana Sayfası(Dashboard) Spot Gaz Piyasası Servisi
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere,spot gaz piyasası verilerini
+      getirir.
+    response_structure:
+      items: list
+      latestUpdateTime: datetime
+  dashboard_weighted_average_price:
+    endpoint: /v1/dashboard/weighted-average-price
+    method: GET
+    auth: true
+    short_name: dashboard_weighted_average_price
+    short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Ağırlıklı Ortalama Fiyat Servisi
+    params: []
+    required: null
+    response:
+    - items
+    - latestUpdateTime
+    var_type: []
+    summary: Şeffaflık Ana Sayfası(Dashboard) Ağırlıklı Ortalama Fiyat Servisi
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere, Ağırlıklı Ortalama Fiyat
+      verilerini getirir.
+    response_structure:
+      items: list
+      latestUpdateTime: datetime

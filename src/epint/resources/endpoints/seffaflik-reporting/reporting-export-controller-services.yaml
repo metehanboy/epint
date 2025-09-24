@@ -1,0 +1,815 @@
+endpoints:
+  daily_prices_export:
+    endpoint: /v1/export/daily-prices
+    method: POST
+    auth: true
+    short_name: daily_prices_export
+    short_name_tr: Günlük Fiyatlar Verisi Dışa Aktarım Servisi
+    params:
+    - date
+    - page
+    - exportType
+    required:
+    - date
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Günlük Fiyatlar Verisi Dışa Aktarım Servisi
+    description: Günlük Fiyatlar Verisi Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  daily_prices_average_export:
+    endpoint: /v1/export/daily-prices-average
+    method: POST
+    auth: true
+    short_name: daily_prices_average_export
+    short_name_tr: Günlük Fiyatlar Ortalama Verisi Dışa Aktarım Servisi
+    params:
+    - date
+    - page
+    - exportType
+    required:
+    - date
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Günlük Fiyatlar Ortalama Verisi Dışa Aktarım Servisi
+    description: Günlük Fiyatlar Ortalama Verisi Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  daily_prices_min_max_export:
+    endpoint: /v1/export/daily-prices-min-max
+    method: POST
+    auth: true
+    short_name: daily_prices_min_max_export
+    short_name_tr: Günlük Fiyatlar Min Maks Fiyat Dışa Aktarım Servisi
+    params:
+    - date
+    - page
+    - exportType
+    required:
+    - date
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Günlük Fiyatlar Min Maks Fiyat Dışa Aktarım Servisi
+    description: Günlük Fiyatlar Min Maks Fiyat Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  daily_prices_min_max_monthly_export:
+    endpoint: /v1/export/daily-prices-min-max-monthly
+    method: POST
+    auth: true
+    short_name: daily_prices_min_max_monthly_export
+    short_name_tr: Günlük Fiyatlar Aylık Min Maks Fiyat Dışa Aktarım Servisi
+    params:
+    - date
+    - page
+    - exportType
+    required:
+    - date
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Günlük Fiyatlar Aylık Min Maks Fiyat Dışa Aktarım Servisi
+    description: Günlük Fiyatlar Aylık Min Maks Fiyat Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  daily_prices_min_max_yearly_export:
+    endpoint: /v1/export/daily-prices-min-max-yearly
+    method: POST
+    auth: true
+    short_name: daily_prices_min_max_yearly_export
+    short_name_tr: Günlük Fiyatlar Yıllık Min Maks Fiyat Dışa Aktarım Servisi
+    params:
+    - date
+    - page
+    - exportType
+    required:
+    - date
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Günlük Fiyatlar Yıllık Min Maks Fiyat Dışa Aktarım Servisi
+    description: Günlük Fiyatlar Yıllık Min Maks Fiyat Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  daily_report_export:
+    endpoint: /v1/export/daily-report
+    method: POST
+    auth: true
+    short_name: daily_report_export
+    short_name_tr: Günlük Rapor Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Günlük Rapor Dışa Aktarım Servisi
+    description: Günlük Rapor Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  dgp_talimat_export:
+    endpoint: /v1/export/dgp-talimat
+    method: POST
+    auth: true
+    short_name: dgp_talimat_export
+    short_name_tr: DGP Talimatları Dışa Aktarım Servisi
+    params:
+    - date
+    - page
+    - exportType
+    required:
+    - date
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: DGP Talimatları Dışa Aktarım Servisi
+    description: DGP Talimatları Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  dgp_talimat_agr_ort_export:
+    endpoint: /v1/export/dgp-talimat-agr-ort
+    method: POST
+    auth: true
+    short_name: dgp_talimat_agr_ort_export
+    short_name_tr: DGP Talimatları (Ağırlıklı Ortalama) Dışa Aktarım Servisi
+    params:
+    - date
+    - page
+    - exportType
+    required:
+    - date
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: DGP Talimatları (Ağırlıklı Ortalama) Dışa Aktarım Servisi
+    description: DGP Talimatları (Ağırlıklı Ortalama) Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  electricity_market_volume_physically_export:
+    endpoint: /v1/export/electricity-market-volume-physically
+    method: POST
+    auth: true
+    short_name: electricity_market_volume_physically_export
+    short_name_tr: Elektrik Piyasa Hacimleri Fiziksel Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Elektrik Piyasa Hacimleri Fiziksel Dışa Aktarım Servisi
+    description: Elektrik Piyasa Hacimleri Fiziksel Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  eligible_consumer_and_meter_increases_export:
+    endpoint: /v1/export/eligible-consumer-and-meter-increases
+    method: POST
+    auth: true
+    short_name: eligible_consumer_and_meter_increases_export
+    short_name_tr: Serbest Tüketici ve Sayaç Artış Miktarı Dışa Aktarım Servisi
+    params:
+    - exportType
+    required:
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Serbest Tüketici ve Sayaç Artış Miktarı Dışa Aktarım Servisi
+    description: Serbest Tüketici ve Sayaç Artış Miktarı Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  idm_contract_summary_export:
+    endpoint: /v1/export/idm-contract-summary
+    method: POST
+    auth: true
+    short_name: idm_contract_summary_export
+    short_name_tr: GİP Kontrat Özeti Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: GİP Kontrat Özeti Dışa Aktarım Servisi
+    description: GİP Kontrat Özeti Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  idm_order_list_export:
+    endpoint: /v1/export/idm-order-list
+    method: POST
+    auth: true
+    short_name: idm_order_list_export
+    short_name_tr: GiP Teklif Listesi Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - contractId
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - contractId
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: contractId
+      var_type: int
+      description: Kontrat Id
+      required: true
+      example: ''
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: GiP Teklif Listesi Dışa Aktarım Servisi
+    description: GiP Teklif Listesi Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  mcp_smp_averages_export:
+    endpoint: /v1/export/mcp-smp-averages
+    method: POST
+    auth: true
+    short_name: mcp_smp_averages_export
+    short_name_tr: SMF ve PTF Ortalamaları Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: SMF ve PTF Ortalamaları Dışa Aktarım Servisi
+    description: SMF ve PTF Ortalamaları
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  ptf_smf_periodic_price_averages_export:
+    endpoint: /v1/export/periodic-price-averages
+    method: POST
+    auth: true
+    short_name: ptf_smf_periodic_price_averages_export
+    short_name_tr: Dönemlik Fiyat Ortalamaları Listeleme Dışa Aktarım Servisi
+    params:
+    - page
+    - exportType
+    required:
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Dönemlik Fiyat Ortalamaları Listeleme Dışa Aktarım Servisi
+    description: PTF SMF ve SDF Listeleme Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  periodic_price_volume_export:
+    endpoint: /v1/export/periodic-price-volume
+    method: POST
+    auth: true
+    short_name: periodic_price_volume_export
+    short_name_tr: Dönemlik Piyasa Hacimleri Dışa Aktarım Servisi
+    params:
+    - page
+    - exportType
+    required:
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Dönemlik Piyasa Hacimleri Dışa Aktarım Servisi
+    description: Dönemlik Piyasa Hacimleri Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  ptf_sm_sdf_export:
+    endpoint: /v1/export/ptf-smf-sdf
+    method: POST
+    auth: true
+    short_name: ptf_sm_sdf_export
+    short_name_tr: PTF SMF ve SDF Listeleme Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: PTF SMF ve SDF Listeleme Dışa Aktarım Servisi
+    description: PTF SMF ve SDF Listeleme Dışa Aktarım Servisi
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  smp_mcp_multiple_daytime_avg_export:
+    endpoint: /v1/export/smp-mcp-multiple-daytime-avg
+    method: POST
+    auth: true
+    short_name: smp_mcp_multiple_daytime_avg_export
+    short_name_tr: PTF ve SMF 3 Zamanlı Fiyat Ortalamaları Rapor Dışa Aktarım Servisi
+    params:
+    - page
+    - exportType
+    required:
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: PTF ve SMF 3 Zamanlı Fiyat Ortalamaları Rapor Dışa Aktarım Servisi
+    description: PTF ve SMF 3 Zamanlı Fiyat Ortalamaları
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object

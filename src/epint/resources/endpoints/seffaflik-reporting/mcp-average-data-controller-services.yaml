@@ -1,0 +1,131 @@
+endpoints:
+  mcp_average_daily_data:
+    endpoint: /v1/mcp-average/data/daily
+    method: POST
+    auth: true
+    short_name: mcp_average_daily_data
+    short_name_tr: Epiaş Web Sitesi İçin GÖP Takas Fiyatı Günlük Aritmetik Ortalama
+      Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Epiaş Web Sitesi İçin GÖP Takas Fiyatı Günlük Aritmetik Ortalama Listeleme
+      Servisi
+    description: Epiaş web sitesinde gösterilmek üzere piyasa takas fiyatının seçilen
+      tarihlere göre günlük aritmetik ortalamasını dönen servistir.
+    response_structure:
+      items: list
+      statistics: list
+  mcp_average_default_data:
+    endpoint: /v1/mcp-average/data/default
+    method: POST
+    auth: true
+    short_name: mcp_average_default_data
+    short_name_tr: GÖP Piyasa Takas Fiyatı Aritmetik Ortalama Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: GÖP Piyasa Takas Fiyatı Aritmetik Ortalama Listeleme Servisi
+    description: Piyasa takas fiyatının seçilen tarihlere göre çeyreklik(QUARTERLY),
+      yarı-yıl(HALF-YEAR) ve yıllık(YEARLY) aritmetik ortalamasını dönen servistir.
+    response_structure:
+      items: list
+      statistics: list
+  mcp_average_monthly_data:
+    endpoint: /v1/mcp-average/data/monthly
+    method: POST
+    auth: true
+    short_name: mcp_average_monthly_data
+    short_name_tr: GÖP Piyasa Takas Fiyatı Aylık Aritmetik Ortalama Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: GÖP Piyasa Takas Fiyatı Aylık Aritmetik Ortalama Listeleme Servisi
+    description: Piyasa takas fiyatının seçilen tarihlere göre aylık aritmetik ortalamasını
+      dönen servistir.
+    response_structure:
+      items: list
+      statistics: list
+  mcp_average_weekly_data:
+    endpoint: /v1/mcp-average/data/weekly
+    method: POST
+    auth: true
+    short_name: mcp_average_weekly_data
+    short_name_tr: GÖP Piyasa Takas Fiyatı Haftalık Aritmetik Ortalama Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: GÖP Piyasa Takas Fiyatı Haftalık Aritmetik Ortalama Listeleme Servisi
+    description: Piyasa takas fiyatının seçilen tarihlere göre haftalık aritmetik
+      ortalamasını dönen servistir.
+    response_structure:
+      items: list
+      statistics: list

@@ -1,0 +1,82 @@
+endpoints:
+  MenuController_getMenuTree_GET:
+    endpoint: /v1/menu/get-menu-tree
+    method: GET
+    auth: true
+    short_name: MenuController_getMenuTree_GET
+    short_name_tr: ''
+    params: []
+    required: null
+    response:
+    - items
+    - page
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      items: list
+      page: str
+  get_page_settings:
+    endpoint: /v1/menu/get-page-settings
+    method: POST
+    auth: true
+    short_name: get_page_settings
+    short_name_tr: Sayfa Ayarları
+    params:
+    - menuId
+    required: null
+    response:
+    - menuId
+    - descriptionTr
+    - descriptionEn
+    - historyTr
+    - historyEn
+    - rangeType
+    - rangeMaxValue
+    - sourceTr
+    - sourceEn
+    - seoKeywordsTr
+    - seoKeywordsEn
+    var_type:
+    - name: menuId
+      var_type: int
+      description: ''
+      required: false
+      example: ''
+    summary: Sayfa Ayarları
+    description: Sayfa metin açıklamaları ve sayfa ayalarını içeren servis
+    response_structure:
+      menuId: int
+      descriptionTr: str
+      descriptionEn: str
+      historyTr: str
+      historyEn: str
+      rangeType: str
+      rangeMaxValue: int
+      sourceTr: str
+      sourceEn: str
+      seoKeywordsTr: str
+      seoKeywordsEn: str
+  get_page_update_date:
+    endpoint: /v1/menu/get-page-update-date
+    method: POST
+    auth: true
+    short_name: get_page_update_date
+    short_name_tr: Sayfa Son Güncelleme Zamanı
+    params:
+    - menuId
+    required: null
+    response:
+    - updateTime
+    - menuId
+    var_type:
+    - name: menuId
+      var_type: int
+      description: ''
+      required: false
+      example: ''
+    summary: Sayfa Son Güncelleme Zamanı
+    description: Sayfada gösterilen verilerin son güncelleme zamanını döner.
+    response_structure:
+      updateTime: datetime
+      menuId: int

@@ -1,0 +1,380 @@
+endpoints:
+  brg_invite:
+    endpoint: /v1/brg/invite
+    method: POST
+    auth: true
+    short_name: brg_invite
+    short_name_tr: DSG Talep Servisi
+    summary: DSG Talep Servisi
+    description: DSG talepi gönderir.
+    
+    params:
+    - brgParticipantList
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    
+    var_type:
+    - name: brgParticipantList
+      var_type: list
+      description: DSG Üyesi ID listesi
+      required: false
+      example: "[12345, 67890]"
+      items: int
+    
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body:
+        content:
+          period: str
+          id: int
+          brgOwner: int
+          brgOwnerName: str
+          brgParticipant: int
+          brgParticipantName: str
+          brgTransitionStatus: dict
+          createUser: str
+          modifyUser: str
+          createDate: str
+          modifyDate: str
+  brg_query:
+    endpoint: /v1/brg/query
+    method: POST
+    auth: true
+    short_name: brg_query
+    short_name_tr: DSG Sorgulama Servisi
+    summary: DSG Sorgulama Servisi
+    description: DSG verilerini sorgular.
+    
+    params:
+    - page
+    - period
+    - invitationId
+    - invitationIdContains
+    - brgOwner
+    - brgOwnerContains
+    - brgParticipant
+    - brgParticipantContains
+    - statusIds
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    
+    var_type:
+    - name: page
+      var_type: dict
+      description: Sayfalama bilgileri
+      required: false
+      example: '{"number": 1, "size": 20, "total": 100}'
+    - name: period
+      var_type: datetime
+      description: DSG Dönemi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: invitationId
+      var_type: int
+      description: DSG Talep ID
+      required: false
+    - name: invitationIdContains
+      var_type: str
+      description: DSG Talep ID (İçinde Arama)
+      required: false
+    - name: brgOwner
+      var_type: int
+      description: DSG Sahibi ID
+      required: false
+    - name: brgOwnerContains
+      var_type: str
+      description: DSG Sahibi ID (İçinde Arama)
+      required: false
+    - name: brgParticipant
+      var_type: int
+      description: DSG Üyesi ID
+      required: false
+    - name: brgParticipantContains
+      var_type: str
+      description: DSG Üyesi ID (İçinde Arama)
+      required: false
+    - name: statusIds
+      var_type: list
+      description: DSG Durumu
+      required: false
+      example: "[1, 2, 3]"
+      items: int
+    
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body:
+        content:
+          items:
+          - periodStart: str
+            periodEnd: str
+            id: int
+            brgOwner: int
+            brgOwnerName: str
+            brgParticipant: int
+            brgParticipantName: str
+            brgStatus: dict
+            modifyUser: str
+            modifyDate: str
+            queriedPeriod: str
+          page:
+            number: int
+            size: int
+            total: int
+            sort: dict
+          sortableFields:
+          - str
+  brg_query_brgp:
+    endpoint: /v1/brg/query/brgp
+    method: POST
+    auth: true
+    short_name: brg_query_brgp
+    short_name_tr: DSG Uygun Organizasyon Sorgulama Servisi
+    summary: DSG Uygun Organizasyon Sorgulama Servisi
+    description: DSG talepi almaya uygun organizasyonları sorgular.
+    
+    params:
+    - id
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    
+    var_type:
+    - name: id
+      var_type: int
+      description: DSG ID
+      required: false
+      example: "12345"
+    
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body:
+        content:
+          label: str
+          value: str
+  brg_query_invitation:
+    endpoint: /v1/brg/query/invitation
+    method: POST
+    auth: true
+    short_name: brg_query_invitation
+    short_name_tr: DSG Talep Sorgulama Servisi
+    summary: DSG Talep Sorgulama Servisi
+    description: DSG talep verilerini sorgular.
+    
+    params:
+    - page
+    - period
+    - id
+    - idContains
+    - brgOwner
+    - brgOwnerContains
+    - brgParticipant
+    - brgParticipantContains
+    - kind
+    - statusIds
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    
+    var_type:
+    - name: page
+      var_type: dict
+      description: Sayfalama bilgileri
+      required: false
+      example: '{"number": 1, "size": 20, "total": 100}'
+    - name: period
+      var_type: datetime
+      description: DSG Dönemi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: id
+      var_type: int
+      description: DSG Talep ID
+      required: false
+    - name: idContains
+      var_type: str
+      description: DSG Talep ID (İçinde Arama)
+      required: false
+    - name: brgOwner
+      var_type: int
+      description: DSG Sahibi ID
+      required: false
+    - name: brgOwnerContains
+      var_type: str
+      description: DSG Sahibi ID (İçinde Arama)
+      required: false
+    - name: brgParticipant
+      var_type: int
+      description: DSG Üyesi ID
+      required: false
+    - name: brgParticipantContains
+      var_type: str
+      description: DSG Üyesi ID (İçinde Arama)
+      required: false
+    - name: kind
+      var_type: int
+      description: DSG Talep Tipi
+      required: false
+    - name: statusIds
+      var_type: list
+      description: DSG Talep Durumu
+      required: false
+      example: "[1, 2, 3]"
+      items: int
+    
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body:
+        content:
+          items:
+          - period: str
+            id: int
+            brgOwner: int
+            brgOwnerName: str
+            brgParticipant: int
+            brgParticipantName: str
+            brgTransitionStatus: dict
+            createUser: str
+            modifyUser: str
+            createDate: str
+            modifyDate: str
+          page:
+            number: int
+            size: int
+            total: int
+            sort: dict
+          sortableFields:
+          - str
+  brg_quit:
+    endpoint: /v1/brg/quit
+    method: POST
+    auth: true
+    short_name: brg_quit
+    short_name_tr: DSG Gruptan Çıkma Servisi
+    summary: DSG Gruptan Çıkma Servisi
+    description: Mevcut grubu DSG üyesi tarafından sonlandırır.
+    
+    params:
+    - id
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    
+    var_type:
+    - name: id
+      var_type: int
+      description: DSG ID
+      required: false
+      example: "12345"
+    
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body:
+        content:
+          periodStart: str
+          periodEnd: str
+          id: int
+          brgOwner: int
+          brgOwnerName: str
+          brgParticipant: int
+          brgParticipantName: str
+          brgStatus: dict
+          modifyUser: str
+          modifyDate: str
+          queriedPeriod: str

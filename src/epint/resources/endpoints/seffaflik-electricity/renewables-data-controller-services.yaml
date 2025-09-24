@@ -1,0 +1,34 @@
+endpoints:
+  licensed_powerplant_list:
+    endpoint: /v1/renewables/data/licensed-powerplant-list
+    method: POST
+    auth: true
+    short_name: licensed_powerplant_list
+    short_name_tr: Lisanslı Santral Listeleme Servisi
+    params:
+    - period
+    required:
+    - period
+    response: []
+    var_type:
+    - name: period
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Lisanslı Santral Listeleme Servisi
+    description: Lisanslı Santral Listeleme Servisi
+    response_structure: {}
+  renewables_participant_year_list:
+    endpoint: /v1/renewables/data/renewables-participant-year-list
+    method: GET
+    auth: true
+    short_name: renewables_participant_year_list
+    short_name_tr: YEKDEM Katılımcı Listesi Yıl Listesi Servisi
+    params: []
+    required: null
+    response: []
+    var_type: []
+    summary: YEKDEM Katılımcı Listesi Yıl Listesi Servisi
+    description: YEKDEM Katılımcı Listesi Yıl Listesi Servisi
+    response_structure: {}

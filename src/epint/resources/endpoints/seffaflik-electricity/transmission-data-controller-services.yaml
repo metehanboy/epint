@@ -1,0 +1,46 @@
+endpoints:
+  iskk_list:
+    endpoint: /v1/transmission/data/iskk-list
+    method: POST
+    auth: true
+    short_name: iskk_list
+    short_name_tr: İletim Sistemi Kayıp Katsayısı (ISKK) Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - region
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+      required: false
+      example: TR1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: İletim Sistemi Kayıp Katsayısı (ISKK) Listeleme Servisi
+    description: Uzlaştırma dönemi bazında iletim sistemi veriş ve çekiş miktarları
+      arasındaki farkın veriş miktarına oranlanmasıyla hesaplanan iletim sistemi kayıp
+      katsayısına ilişkin veri seti.
+    response_structure:
+      items: list
+      page: str

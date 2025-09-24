@@ -1,0 +1,129 @@
+endpoints:
+  smp_average_daily_data:
+    endpoint: /v1/smp-average/data/daily
+    method: POST
+    auth: true
+    short_name: smp_average_daily_data
+    short_name_tr: Epiaş Web Sitesi İçin SMF Günlük Aritmetik Ortalama Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Epiaş Web Sitesi İçin SMF Günlük Aritmetik Ortalama Listeleme Servisi
+    description: Epiaş web sitesinde gösterilmek üzere sistem marjinal fiyatının seçilen
+      tarihlere göre günlük aritmetik ortalamasını dönen servistir.
+    response_structure:
+      items: list
+      statistics: list
+  smp_average_default_data:
+    endpoint: /v1/smp-average/data/default
+    method: POST
+    auth: true
+    short_name: smp_average_default_data
+    short_name_tr: SMF Aritmetik Ortalama Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: SMF Aritmetik Ortalama Listeleme Servisi
+    description: Sistem marjinal fiyatının seçilen tarihlere göre çeyreklik(QUARTERLY),
+      yarı-yıl(HALF-YEAR) ve yıllık(YEARLY) aritmetik ortalamasını dönen servistir.
+    response_structure:
+      items: list
+      statistics: list
+  smp_average_monthly_data:
+    endpoint: /v1/smp-average/data/monthly
+    method: POST
+    auth: true
+    short_name: smp_average_monthly_data
+    short_name_tr: SMF Aylık Aritmetik Ortalama Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: SMF Aylık Aritmetik Ortalama Listeleme Servisi
+    description: Sistem marjinal fiyatının seçilen tarihlere göre aylık aritmetik
+      ortalamasını dönen servistir.
+    response_structure:
+      items: list
+      statistics: list
+  smp_average_weekly_data:
+    endpoint: /v1/smp-average/data/weekly
+    method: POST
+    auth: true
+    short_name: smp_average_weekly_data
+    short_name_tr: SMF Haftalık Aritmetik Ortalama Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: SMF Haftalık Aritmetik Ortalama Listeleme Servisi
+    description: Sistem marjinal fiyatının seçilen tarihlere göre haftalık aritmetik
+      ortalamasını dönen servistir.
+    response_structure:
+      items: list
+      statistics: list

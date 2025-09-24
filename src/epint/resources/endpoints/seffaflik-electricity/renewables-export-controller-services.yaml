@@ -1,0 +1,996 @@
+endpoints:
+  generation_forecast_export:
+    endpoint: /v1/renewables/export/generation-forecast
+    method: POST
+    auth: true
+    short_name: generation_forecast_export
+    short_name_tr: Üretim Tahmini Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Üretim Tahmini Dışa Aktarım Servisi
+    description: YEKDEM kapsamındaki santrallerin, Milli Yük Tevzi Merkezi’ne bildirdikleri
+      tahmini üretimleridir.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji
+      Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik
+      Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Üretim
+      Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.'
+      Bilgisi görüntülenecektir. Kullanıcı bu bilgilendirmeyi kapatmadan ekranda işlem
+      yapamaz.Üretim Tahmini Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  imbalance_cost_export:
+    endpoint: /v1/renewables/export/imbalance-cost
+    method: POST
+    auth: true
+    short_name: imbalance_cost_export
+    short_name_tr: Dengesizlik Maliyeti Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Dengesizlik Maliyeti Dışa Aktarım Servisi
+    description: YEKDEM kapsamındaki portföyün uzlaştırmaya esas veriş değerine göre
+      oluşturduğu dengesizlikdir.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir
+      Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte
+      Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını
+      takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.Dengesizlik
+      Maliyeti Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  renewables_imbalance_quantity_export:
+    endpoint: /v1/renewables/export/imbalance-quantity
+    method: POST
+    auth: true
+    short_name: renewables_imbalance_quantity_export
+    short_name_tr: Dengesizlik  Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - region
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+      required: false
+      example: TR1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Dengesizlik  Miktarı Dışa Aktarım Servisi
+    description: YEKDEM kapsamındaki portföyün uzlaştırmaya esas veriş değerine göre
+      oluşturduğu dengesizlik miktarıdır.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir
+      Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte
+      Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını
+      takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.Dengesizlik
+      Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  licensed_generation_cost_export:
+    endpoint: /v1/renewables/export/licensed-generation-cost
+    method: POST
+    auth: true
+    short_name: licensed_generation_cost_export
+    short_name_tr: YEK Bedeli (YEKBED) Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - region
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+      required: false
+      example: TR1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: YEK Bedeli (YEKBED) Dışa Aktarım Servisi
+    description: İlgili fatura dönemi için YEKDEM kapsamındaki lisanslı üretim santraline
+      sahip katılımcılara ödenecek YEK bedelini (TL) ifade etmektedir. https://www.epias.com.tr/wp-content/uploads/2023/10/z27csrjmDz4qqJ6b9mj2.jpg
+      https://www.epias.com.tr/wp-content/uploads/2023/10/DPgcwzhsEjfRWWcEzsKx.png
+      YEK Bedeli (YEKBED) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  licensed_realtime_generation_export:
+    endpoint: /v1/renewables/export/licensed-realtime-generation
+    method: POST
+    auth: true
+    short_name: licensed_realtime_generation_export
+    short_name_tr: YEKDEM Gerçek Zamanlı Üretim Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - powerPlantId
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: powerPlantId
+      var_type: int
+      description: Santral id değeri
+      required: false
+      example: 15909
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: YEKDEM Gerçek Zamanlı Üretim Dışa Aktarım Servisi
+    description: Lisanslı YEKDEM santrallerine ait elektrik üretiminin kaynak bazında
+      saatlik gösterimine ilişkin veri seti.Gerçek Zamanlı Üretim Listesini XLSX,
+      CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  new_installed_capacity_export:
+    endpoint: /v1/renewables/export/new-installed-capacity
+    method: POST
+    auth: true
+    short_name: new_installed_capacity_export
+    short_name_tr: Kurulu Güç YEKDEM Son Tarih Sonrası Veri İçin Dışa Aktarım Servisi
+    params:
+    - period
+    - exportType
+    required:
+    - period
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Dönem
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Kurulu Güç YEKDEM Son Tarih Sonrası Veri İçin Dışa Aktarım Servisi
+    description: YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır. Lisanslı
+      kurulu güç bilgileri EPİAŞ’a kayıtlı santraller olup, lisanssız kurulu güç bilgisi
+      dağıtım şirketlerinden temin edilmektedir.YEKDEM kapsamındaki üretim tesislerinin
+      kurulu güç miktarıdır.Kurulu Güç Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  old_installed_capacity_export:
+    endpoint: /v1/renewables/export/old-installed-capacity
+    method: POST
+    auth: true
+    short_name: old_installed_capacity_export
+    short_name_tr: Kurulu Güç YEKDEM Son Tarih ve Öncesi Verisi İçin Dışa Aktarım
+      Servisi
+    params:
+    - period
+    - exportType
+    required:
+    - period
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Dönem
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Kurulu Güç YEKDEM Son Tarih ve Öncesi Verisi İçin Dışa Aktarım Servisi
+    description: YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır. Lisanslı
+      kurulu güç bilgileri EPİAŞ'a kayıtlı santraller olup, lisanssız kurulu güç bilgisi
+      dağıtım şirketlerinden temin edilmektedir.YEKDEM kapsamındaki üretim tesislerinin
+      kurulu güç miktarıdır.Kurulu Güç Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  portfolio_income_export:
+    endpoint: /v1/renewables/export/portfolio-income
+    method: POST
+    auth: true
+    short_name: portfolio_income_export
+    short_name_tr: Yekdem Portföy Geliri Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Yekdem Portföy Geliri Dışa Aktarım Servisi
+    description: YEKDEM kapsamındaki portföyün saatlik toplam geliridir.29 Nisan 2016
+      tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi
+      ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin,
+      Resmi Gazete'de yayımlanmasını takiben Üretim Tahmini raporunun en son 30 Nisan
+      2016 tarihli verisi görüntülenebilecektir.YEKDEM Portföy Geliri Listesini XLSX,
+      CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  renewable_sm_licensed_injection_quantity_export:
+    endpoint: /v1/renewables/export/renewable-sm-licensed-injection-quantity
+    method: POST
+    auth: true
+    short_name: renewable_sm_licensed_injection_quantity_export
+    short_name_tr: Uzlaştırma Esas Veriş Miktarı (UEVM) Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - region
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+      required: false
+      example: TR1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Uzlaştırma Esas Veriş Miktarı (UEVM) Dışa Aktarım Servisi
+    description: YEKDEM kapsamındaki lisanslı santrallerin kaynak bazında saatlik
+      olarak uzlaştırmaya esas veriş değerlerine ilişkin veri seti.Uzlaştırma Esas
+      Veriş Miktarı (UEVM) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  renewables_participant_export:
+    endpoint: /v1/renewables/export/renewables-participant
+    method: POST
+    auth: true
+    short_name: renewables_participant_export
+    short_name_tr: YEKDEM Katılımcı Listesi Dışa Aktarım Servisi
+    params:
+    - year
+    - page
+    - exportType
+    required:
+    - year
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: year
+      var_type: float
+      description: Yıl Bilgisi
+      required: true
+      example: 2021.0
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: YEKDEM Katılımcı Listesi Dışa Aktarım Servisi
+    description: İlgili yıl içerisinde Yenilenebilir Enerji Destekleme Mekanizmasına
+      dahil olan lisanslı üretim santraline sahip tüzel kişilerin listesidir. 2020
+      yılından itibaren “Önceki Yıl gerçekleştirilen Üretim (MWh)” yayınlanmamaktadır.YEKDEM
+      Katılımcı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  renewables_support_mechanism_income_export:
+    endpoint: /v1/renewables/export/renewables-support-mechanism-income
+    method: POST
+    auth: true
+    short_name: renewables_support_mechanism_income_export
+    short_name_tr: YEK Geliri (YG) Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - region
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+      required: false
+      example: TR1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: YEK Geliri (YG) Dışa Aktarım Servisi
+    description: YEKDEM gelirine ilişkin veri setidir.YEK Geliri (YG) Listesini XLSX,
+      CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  res_generation_and_forecast_export:
+    endpoint: /v1/renewables/export/res-generation-and-forecast
+    method: POST
+    auth: true
+    short_name: res_generation_and_forecast_export
+    short_name_tr: RES Üretim ve Tahmin Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: RES Üretim ve Tahmin Dışa Aktarım Servisi
+    description: Türkiye Geneli İzlenebilen RES'lerin Toplam Güç Üretimi ve Tahminidir.
+      Veriler Rüzgar Gücü İzleme ve Tahmin Merkezi'nden temin edilmektedir. Veriler
+      10dk aralıklarla güncellenmektedir. Q5,Q25,Q75,Q95 tahmin aralıklarını ifade
+      etmektedir. Band tahmin aralıkları minimum ve maksimum risk senaryolarına göre
+      oluşturulmuştur.Türkiye geneli izlenebilen RES’lerin toplam güç üretimi ve tahiminidir.RES
+      Üretim ve Tahmin Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  spot_order_export:
+    endpoint: /v1/renewables/export/spot-order
+    method: POST
+    auth: true
+    short_name: spot_order_export
+    short_name_tr: Spot Teklifi Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Spot Teklifi Dışa Aktarım Servisi
+    description: Milli Yük Tevzi Merkezi’nin spot piyasaya sunduğu YEKDEM portföyü
+      teklif miktarıdır.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji
+      Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik
+      Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Spot
+      Teklifleri raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.'
+      Bilgisi görüntülenecektir. Kullanıcı bu bilgilendirmeyi kapatmadan ekranda işlem
+      yapamaz.Spot Teklifi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  total_cost_export:
+    endpoint: /v1/renewables/export/total-cost
+    method: POST
+    auth: true
+    short_name: total_cost_export
+    short_name_tr: Toplam Gider (YEKTOB) Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Toplam Gider (YEKTOB) Dışa Aktarım Servisi
+    description: İlgili fatura dönemi için YEKDEM kapsamındaki hem lisanslı hem de
+      lisanssız üretim santraline sahip katılımcılara ödenecek toplam YEK bedelini
+      (TL) ifade eder.Toplam Gider (YEKTOB) Listesini XLSX, CSV ya da PDF olarak dışa
+      aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  unit_cost_export:
+    endpoint: /v1/renewables/export/unit-cost
+    method: POST
+    auth: true
+    short_name: unit_cost_export
+    short_name_tr: Birim Maliyeti Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Birim Maliyeti Dışa Aktarım Servisi
+    description: Tedarik edilen birim enerji miktarı başına, hesaplanan YEKDEM maliyetidir.
+      YEKDEM birim maliyeti ilgili aylar için versiyonlu olarak yayımlanmaktadır.
+      Bir fatura döneminde, YEKDEM gelirinin YEK toplam bedelinden fazla olması durumunda,
+      Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin
+      Yönetmenliğin 13üncü maddesinin dördüncü fıkrası uyarınca hesaplama yapılmaktadır.Bir
+      fatura döneminde YEKDEM gelirinin YEK toplam bedelinden fazla olması durumunda,
+      Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin
+      Yönetmeliğin 13 üncü maddesinin dördüncü fıkrası uyarınca hesaplama yapılmakta
+      olup, Görevli Tedarik Şirketlerinin K1 kapsamındaki satışları hariç tüm satışlar
+      için tedarikçilere uygulanan birim fiyat 0 TL/MWh olmaktadır.Birim Maliyeti
+      Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  unlicensed_generation_amount_export:
+    endpoint: /v1/renewables/export/unlicensed-generation-amount
+    method: POST
+    auth: true
+    short_name: unlicensed_generation_amount_export
+    short_name_tr: Lisanssız Üretim Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - region
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+      required: false
+      example: TR1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Lisanssız Üretim Miktarı Dışa Aktarım Servisi
+    description: YEKDEM kapsamındaki lisanssız santrallerin kaynak bazında saatlik
+      olarak uzlaştırmaya esas lisanssız veriş değerleridir.YEKDEM kapsamındaki lisanssız
+      santraller.Lisanssız Üretim Miktarı Listesini XLSX, CSV ya da PDF olarak dışa
+      aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  unlicensed_generation_cost_export:
+    endpoint: /v1/renewables/export/unlicensed-generation-cost
+    method: POST
+    auth: true
+    short_name: unlicensed_generation_cost_export
+    short_name_tr: Lisanssız Üretim Bedeli Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - region
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+      required: false
+      example: TR1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Lisanssız Üretim Bedeli Dışa Aktarım Servisi
+    description: İlgili fatura dönemi için YEKDEM kapsamındaki lisanssız üretim santrallerine
+      sahip katılımcılara ödenecek YEK bedelini (TL) ifade etmektedir.Lisanssız Üretim
+      Bedeli Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object

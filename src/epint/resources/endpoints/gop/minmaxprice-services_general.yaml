@@ -1,0 +1,196 @@
+endpoints:
+  collateral_organization:
+    endpoint: /collateral/organization
+    method: POST
+    auth: true
+    short_name: collateral_organization
+    short_name_tr: List Collateral Rest Service
+    params:
+    - deliveryDay
+    - region
+    required:
+    - deliveryDay
+    - region
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: Deliveryday which collateral will be used in
+      required: true
+    - name: region
+      var_type: string
+      description: Region which collateral will be used in
+      required: true
+    summary: List Collateral Rest Service
+    description: List Collateral Rest Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  gate_operation_active:
+    endpoint: /gate/operation/active
+    method: POST
+    auth: true
+    short_name: gate_operation_active
+    short_name_tr: Gates / List Active Gates
+    params:
+    - effectiveDate
+    required:
+    - effectiveDate
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: datetime
+      description: Sürecin ilgili olduğu tarih bilgisidir. D+1 tarihli işlemleri için
+        D tarihi ile sorgulama yapılmalıdır.
+      required: true
+    summary: Gates / List Active Gates
+    description: Gates / List Active Gates
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  market_finalresults:
+    endpoint: /market/finalresults
+    method: POST
+    auth: true
+    short_name: market_finalresults
+    short_name_tr: Market Result / Region / List Service
+    params:
+    - deliveryDay
+    - region
+    required:
+    - deliveryDay
+    - region
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps Delivery Date. Its format must be ISO8601.
+      required: true
+    - name: region
+      var_type: string
+      description: This field keeps Information of Region.
+      required: true
+    summary: Market Result / Region / List Service
+    description: Market Result / Region / List Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  market_stats:
+    endpoint: /market/stats
+    method: POST
+    auth: true
+    short_name: market_stats
+    short_name_tr: MCP statistics Rest Service
+    params:
+    - deliveryDay
+    - regionCode
+    required:
+    - deliveryDay
+    - regionCode
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: The delivery day that MCP statistics will be fetch at.
+      required: true
+    - name: regionCode
+      var_type: string
+      description: ''
+      required: true
+    summary: MCP statistics Rest Service
+    description: MCP statistics Rest Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  objection_reply:
+    endpoint: /objection/reply
+    method: POST
+    auth: true
+    short_name: objection_reply
+    short_name_tr: Objection
+    params:
+    - objectionId
+    - objectionStatus
+    - reply
+    required:
+    - objectionId
+    - objectionStatus
+    - reply
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: objectionId
+      var_type: int
+      description: ''
+      required: true
+    - name: objectionStatus
+      var_type: string
+      description: ''
+      required: true
+      enum:
+      - ACTIVE
+      - ACCEPTED
+      - REJECTED
+    - name: reply
+      var_type: string
+      description: ''
+      required: true
+    summary: Objection
+    description: Objection
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str

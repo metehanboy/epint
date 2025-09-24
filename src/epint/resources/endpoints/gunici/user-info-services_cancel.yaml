@@ -1,0 +1,68 @@
+endpoints:
+  IntegrationController_cancelFutureIntegrationSystemProcess_POST:
+    endpoint: /rest/v1/integration/cancel
+    method: POST
+    auth: true
+    short_name: IntegrationController_cancelFutureIntegrationSystemProcess_POST
+    short_name_tr: IntegrationController_cancelFutureIntegrationSystemProcess_POST
+    params:
+    - deliveryDateTime
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDateTime
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  cancel_organization_limit_demand:
+    endpoint: /rest/v1/limit/organization-demand/cancel
+    method: POST
+    auth: true
+    short_name: cancel_organization_limit_demand
+    short_name_tr: Limit Değişiklik Talebi İptal Etme Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Limit Değişiklik Talebi İptal Etme Servisi
+    description: Limit Değişiklik Talebi İptal Etme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

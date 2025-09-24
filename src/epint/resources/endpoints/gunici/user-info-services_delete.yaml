@@ -1,0 +1,145 @@
+endpoints:
+  AnnouncementAdminController_deleteAnnouncement_POST:
+    endpoint: /rest/v1/announcement/exist/delete
+    method: POST
+    auth: true
+    short_name: AnnouncementAdminController_deleteAnnouncement_POST
+    short_name_tr: AnnouncementAdminController_deleteAnnouncement_POST
+    params:
+    - id
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: id
+      var_type: int
+      description: Duyuru id bilgisi
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  MenuController_delete_POST:
+    endpoint: /rest/v1/menu/delete
+    method: POST
+    auth: true
+    short_name: MenuController_delete_POST
+    short_name_tr: MenuController_delete_POST
+    params:
+    - menuId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: menuId
+      var_type: int
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  delete_notification:
+    endpoint: /rest/v1/notifications/delete
+    method: POST
+    auth: true
+    short_name: delete_notification
+    short_name_tr: Sms ve Mail Bildirimi Silme
+    params:
+    - receiverId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: receiverId
+      var_type: int
+      description: ''
+      required: false
+    summary: Sms ve Mail Bildirimi Silme
+    description: Sms ve Mail Bildirimi Silme
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  PageController_delete_POST:
+    endpoint: /rest/v1/page/delete
+    method: POST
+    auth: true
+    short_name: PageController_delete_POST
+    short_name_tr: PageController_delete_POST
+    params:
+    - pageId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageId
+      var_type: int
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

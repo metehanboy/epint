@@ -1,0 +1,222 @@
+endpoints:
+  primary_frequency_capacity_amount_export:
+    endpoint: /v1/markets/ancillary-services/export/primary-frequency-capacity-amount
+    method: POST
+    auth: true
+    short_name: primary_frequency_capacity_amount_export
+    short_name_tr: Primer Frekans Rezerv Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Primer Frekans Rezerv Miktarı Dışa Aktarım Servisi
+    description: Katılımcıların gerçek zamanlı frekans dengeleme için ayırması gereken
+      saatlik toplam birincil frekans kapasite hacimleridir. Primer Frekans Rezerv
+      Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  primary_frequency_capacity_price_export:
+    endpoint: /v1/markets/ancillary-services/export/primary-frequency-capacity-price
+    method: POST
+    auth: true
+    short_name: primary_frequency_capacity_price_export
+    short_name_tr: Primer Frekans Kontrolü (PFK) Fiyat Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Primer Frekans Kontrolü (PFK) Fiyat Dışa Aktarım Servisi
+    description: Saatlik bazda ihale ile belirlenen PFK kapasite bedelidir. Primer
+      Frekans Kontrolü (PFK) Fiyat Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  secondary_frequency_capacity_amount_export:
+    endpoint: /v1/markets/ancillary-services/export/secondary-frequency-capacity-amount
+    method: POST
+    auth: true
+    short_name: secondary_frequency_capacity_amount_export
+    short_name_tr: Sekonder Frekans Rezerv Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Sekonder Frekans Rezerv Miktarı Dışa Aktarım Servisi
+    description: Saatlik toplam belirlenen rezerv miktarlarıdır. Sekonder Frekans
+      Rezerv Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  secondary_frequency_capacity_price_export:
+    endpoint: /v1/markets/ancillary-services/export/secondary-frequency-capacity-price
+    method: POST
+    auth: true
+    short_name: secondary_frequency_capacity_price_export
+    short_name_tr: Sekonder Frekans Kontrolü (SFK) Fiyat Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Sekonder Frekans Kontrolü (SFK) Fiyat Dışa Aktarım Servisi
+    description: Saatlik bazda ihale ile belirlenen SFK kapasite bedelidir. Sekonder
+      Frekans Kontrolü (SFK) Fiyat Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object

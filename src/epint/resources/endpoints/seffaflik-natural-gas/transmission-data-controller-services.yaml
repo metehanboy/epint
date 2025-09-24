@@ -1,0 +1,589 @@
+endpoints:
+  capacity_point:
+    endpoint: /v1/transmission/data/capacity-point
+    method: POST
+    auth: true
+    short_name: capacity_point
+    short_name_tr: Kapasite Nokta Servisi
+    params:
+    - startDate
+    - endDate
+    - pointType
+    required:
+    - startDate
+    - endDate
+    - pointType
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: pointType
+      var_type: str
+      description: INPUT
+      required: true
+      example: INPUT
+    summary: Kapasite Nokta Servisi
+    description: Kapasite Nokta Servisi
+    response_structure:
+      items: list
+      page: str
+  daily_actualization_amount:
+    endpoint: /v1/transmission/data/daily-actualization-amount
+    method: POST
+    auth: true
+    short_name: daily_actualization_amount
+    short_name_tr: Günlük Gerçekleşme Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - storageFacilityId
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: storageFacilityId
+      var_type: int
+      description: Depolama Tesisi Id Bilgisi.
+      required: false
+      example: 1234
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Günlük Gerçekleşme Miktarı Listeleme Servisi
+    description: Şebekeden doğal gaz depolama tesislerine aktarılan doğal gaz miktarını
+      gösterir.
+    response_structure:
+      items: list
+      page: str
+  day_ahead:
+    endpoint: /v1/transmission/data/day-ahead
+    method: POST
+    auth: true
+    short_name: day_ahead
+    short_name_tr: Gün Öncesi (UDN) Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - totals
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Gün Öncesi (UDN) Listeleme Servisi
+    description: 'İkili anlaşma miktar bildirimini ifade eder. '
+    response_structure:
+      items: list
+      page: str
+      totals: str
+  day_end:
+    endpoint: /v1/transmission/data/day-end
+    method: POST
+    auth: true
+    short_name: day_end
+    short_name_tr: Gün Sonu (UDN) Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - totals
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Gün Sonu (UDN) Listeleme Servisi
+    description: Gün Sonu (UDN)
+    response_structure:
+      items: list
+      page: str
+      totals: str
+  entry_nomination:
+    endpoint: /v1/transmission/data/entry-nomination
+    method: POST
+    auth: true
+    short_name: entry_nomination
+    short_name_tr: Taşıma Giriş Miktarı Bildirimi (TMB) Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - totals
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Taşıma Giriş Miktarı Bildirimi (TMB) Listeleme Servisi
+    description: Fiziki Nokta bazlı giriş miktar bildirimini ifade eder.
+    response_structure:
+      items: list
+      page: str
+      totals: str
+  exit_nomination:
+    endpoint: /v1/transmission/data/exit-nomination
+    method: POST
+    auth: true
+    short_name: exit_nomination
+    short_name_tr: Taşıma Çıkış Miktarı Bildirimi (TMB) Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - totals
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Taşıma Çıkış Miktarı Bildirimi (TMB) Listeleme Servisi
+    description: Fiziki Nokta bazlı çıkış miktar bildirimini ifade eder.
+    response_structure:
+      items: list
+      page: str
+      totals: str
+  max_entry_amount:
+    endpoint: /v1/transmission/data/max-entry-amount
+    method: POST
+    auth: true
+    short_name: max_entry_amount
+    short_name_tr: Maks Giriş Kapasite Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - pointId
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: pointId
+      var_type: int
+      description: Nokta adı için kullanılan nokta id bilgisi.
+      required: false
+      example: 12
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Maks Giriş Kapasite Miktarı Listeleme Servisi
+    description: İletim Şirketi kapasite planına göre iletim şebekesine eklenmesi
+      beklenen doğal gaz miktarını gösterir.
+    response_structure:
+      items: list
+      page: str
+  max_exit_amount:
+    endpoint: /v1/transmission/data/max-exit-amount
+    method: POST
+    auth: true
+    short_name: max_exit_amount
+    short_name_tr: Maks Çıkış Kapasite Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - pointId
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: pointId
+      var_type: int
+      description: Nokta adı için kullanılan nokta id bilgisi.
+      required: false
+      example: 12
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Maks Çıkış Kapasite Miktarı Listeleme Servisi
+    description: İletim Şirketi kapasite planına göre iletim şebekesinden çıkması
+      beklenen doğal gaz miktarını gösterir.
+    response_structure:
+      items: list
+      page: str
+  actual_realization_entry_amount:
+    endpoint: /v1/transmission/data/realization-entry-amount
+    method: POST
+    auth: true
+    short_name: actual_realization_entry_amount
+    short_name_tr: Fiili Gerçekleşme Giriş Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - totals
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Fiili Gerçekleşme Giriş Miktarı Listeleme Servisi
+    description: Taşıtanların Alış işlemi sonucu, sisteme eklenen fiili doğal gaz
+      miktarını gösterir.
+    response_structure:
+      items: list
+      page: str
+      totals: str
+  actual_realization_exit_amount:
+    endpoint: /v1/transmission/data/realization-exit-amount
+    method: POST
+    auth: true
+    short_name: actual_realization_exit_amount
+    short_name_tr: Fiili Gerçekleşme Çıkış Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - totals
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Fiili Gerçekleşme Çıkış Miktarı Listeleme Servisi
+    description: Taşıtanların Satış işlemi sonucu, sistemden çıkan fiili doğal gaz
+      miktarını gösterir.
+    response_structure:
+      items: list
+      page: str
+      totals: str
+  rezerve_entry_amount:
+    endpoint: /v1/transmission/data/rezerve-entry-amount
+    method: POST
+    auth: true
+    short_name: rezerve_entry_amount
+    short_name_tr: Rezerve Giriş Kapasite Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - pointId
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: pointId
+      var_type: int
+      description: Nokta adı için kullanılan nokta id bilgisi.
+      required: false
+      example: 12
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Rezerve Giriş Kapasite Miktarı Listeleme Servisi
+    description: İletim Şirketi rezervasyon programına göre iletim şebekesine eklenmesi
+      beklenen doğal gaz miktarını gösterir.
+    response_structure:
+      items: list
+      page: str
+  rezerve_exit_amount:
+    endpoint: /v1/transmission/data/rezerve-exit-amount
+    method: POST
+    auth: true
+    short_name: rezerve_exit_amount
+    short_name_tr: Rezerve Çıkış Kapasite Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - pointId
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: pointId
+      var_type: int
+      description: Nokta adı için kullanılan nokta id bilgisi.
+      required: false
+      example: 12
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Rezerve Çıkış Kapasite Miktarı Listeleme Servisi
+    description: İletim Şirketi rezervasyon programına göre iletim şebekesinden çıkması
+      beklenen doğal gaz miktarını gösterir.
+    response_structure:
+      items: list
+      page: str
+  stock_amount:
+    endpoint: /v1/transmission/data/stock-amount
+    method: POST
+    auth: true
+    short_name: stock_amount
+    short_name_tr: Stok Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Stok Miktarı Listeleme Servisi
+    description: İletim Şebekesinde sıkışmış durumdaki günlük doğal gaz miktarını
+      gösterir.
+    response_structure:
+      items: list
+      page: str
+  storage_facility:
+    endpoint: /v1/transmission/data/storage-facility
+    method: GET
+    auth: true
+    short_name: storage_facility
+    short_name_tr: Depolama Tesisi Listeleme Servisi
+    params: []
+    required: null
+    response:
+    - items
+    - page
+    var_type: []
+    summary: Depolama Tesisi Listeleme Servisi
+    description: Depolama Tesisi Listeleme Servisi
+    response_structure:
+      items: list
+      page: str
+  transfer:
+    endpoint: /v1/transmission/data/transfer
+    method: POST
+    auth: true
+    short_name: transfer
+    short_name_tr: Transfer Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - totals
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Transfer Listeleme Servisi
+    description: Fiziki Nokta bazlı İkili anlaşma miktar bildirimini ifade eder.
+    response_structure:
+      items: list
+      page: str
+      totals: str

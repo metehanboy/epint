@@ -1,0 +1,398 @@
+endpoints:
+  injection_quantity_powerplant_list:
+    endpoint: /v1/generation/data/injection-quantity-powerplant-list
+    method: GET
+    auth: true
+    short_name: injection_quantity_powerplant_list
+    short_name_tr: Uzlaştırma Esas Veriş Miktarı (UEVM) Santral Listesi Servisi
+    params: []
+    required: null
+    response:
+    - items
+    var_type: []
+    summary: Uzlaştırma Esas Veriş Miktarı (UEVM) Santral Listesi Servisi
+    description: Uzlaştırma Esas Veriş Miktarı (UEVM) Santral Listesi Servisi
+    response_structure:
+      items:
+      - str
+  licensed_power_plant_investment_list:
+    endpoint: /v1/generation/data/licensed-powerplant-investment-list
+    method: POST
+    auth: true
+    short_name: licensed_power_plant_investment_list
+    short_name_tr: Lisanslı Santral Yatırımları Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required: null
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: str
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: str
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: Lisanslı Santral Yatırımları Listeleme Servisi
+    description: Enerji İşleri Genel Müdürlüğü tarafından ön kabulü tamamlanmış ve
+      devreye alınmış elektrik üretim tesislerinin aylık listesidir. Elektrik üretim
+      tesislerinin aylık listesidir.
+    response_structure:
+      items:
+      - str
+      page:
+        number: int
+        size: int
+        total: int
+        sort: object
+      totals: str
+  organization_list:
+    endpoint: /v1/generation/data/organization-list
+    method: POST
+    auth: true
+    short_name: organization_list
+    short_name_tr: Organizasyon Listesi Getirme Servisi
+    params:
+    - startDate
+    - endDate
+    required: null
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Organizasyon Listesi Getirme Servisi
+    description: İstekte verilen başlangıç ve bitiş tarihleri arasında tanımlı organizasyonların
+      listesini döner.
+    response_structure:
+      items:
+      - str
+  powerplant_list:
+    endpoint: /v1/generation/data/powerplant-list
+    method: GET
+    auth: true
+    short_name: powerplant_list
+    short_name_tr: Santral Listeleme Servisi
+    params: []
+    required: null
+    response:
+    - items
+    var_type: []
+    summary: Santral Listeleme Servisi
+    description: TEİAŞ Sistemlerine Ait Santral Bilgileri Listeleme Servisi.Bu servis
+      sonucunda dönen santral bilgileri(santral id bilgisi gibi) TEIAS sistemlerinden
+      alınan verilerdir.
+    response_structure:
+      items:
+      - str
+  powerplant_list_for_date_range:
+    endpoint: /v1/generation/data/powerplant-list-for-date-range
+    method: POST
+    auth: true
+    short_name: powerplant_list_for_date_range
+    short_name_tr: Tarih Araligina Gore Santral Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required: null
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: str
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: str
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Tarih Araligina Gore Santral Listeleme Servisi
+    description: TEİAŞ Sistemlerine Ait Santral Bilgilerini Tarih Araligina Gore Listeleme
+      Servisi.Bu servis sonucunda dönen santral bilgileri(santral id bilgisi gibi)
+      TEIAS sistemlerinden alınan verilerdir.
+    response_structure:
+      items:
+      - str
+  region_list:
+    endpoint: /v1/generation/data/region-list
+    method: GET
+    auth: true
+    short_name: region_list
+    short_name_tr: Bölge Listesi Getirme Servisi
+    params: []
+    required: null
+    response:
+    - items
+    var_type: []
+    summary: Bölge Listesi Getirme Servisi
+    description: Bölge Listesi Getirme Servisi
+    response_structure:
+      items:
+      - str
+  uevcb_list:
+    endpoint: /v1/generation/data/uevcb-list
+    method: POST
+    auth: true
+    short_name: uevcb_list
+    short_name_tr: Uevçb Listeleme Servisi
+    params:
+    - startDate
+    - organizationId
+    required: null
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: str
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: organizationId
+      var_type: int
+      description: Organizasyon Id bilgisi(bkz.Organizasyon Listesi Getirme Servisi)
+      required: false
+      example: 1234
+    summary: Uevçb Listeleme Servisi
+    description: Verilen organizasyon id'ye ait UEVÇB'lerin listesini döner.
+    response_structure:
+      items:
+      - str
+  uevcb_list_bulk:
+    endpoint: /v1/generation/data/uevcb-list-bulk
+    method: POST
+    auth: true
+    short_name: uevcb_list_bulk
+    short_name_tr: Toplu UEVÇB Listeleme servisi
+    params:
+    - startDate
+    - organizationIds
+    required: null
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: str
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: organizationIds
+      var_type: list
+      description: Toplu Organizasyon id'leri. 1000'den fazla olmamalıdır. Mükerrer
+        id girmemeye dikkat ediniz.
+      required: false
+      example: '[282,10374,15259]'
+      items: int
+    summary: Toplu UEVÇB Listeleme servisi
+    description: Verilen organizasyon id listesine ait Uevçbleri listeler.
+    response_structure:
+      items:
+      - str
+  power_plant_list_by_organization_id:
+    endpoint: /v1/markets/data/power-plant-list-by-organization-id
+    method: POST
+    auth: true
+    short_name: power_plant_list_by_organization_id
+    short_name_tr: Piyasa Mesaj Sistemi Santral Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required: null
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: str
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: str
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Piyasa Mesaj Sistemi Santral Listeleme Servisi
+    description: Verilen organizasyon id'ye ait santral'lerin listesini döner.
+    response_structure:
+      items:
+      - str
+  uevcb_list_by_power_plant_id:
+    endpoint: /v1/markets/data/uevcb-list-by-power-plant-id
+    method: POST
+    auth: true
+    short_name: /uevcb_list_by_power_plant_id
+    short_name_tr: Piyasa Mesaj Sistemi Uevçb Listeleme Servisi
+    params:
+    - startDate
+    - powerPlantId
+    required: null
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: str
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: powerPlantId
+      var_type: int
+      description: Enerji Santrali İsmi
+      required: false
+      example: 15909
+    summary: Piyasa Mesaj Sistemi Uevçb Listeleme Servisi
+    description: Verilen santral id'ye ait UEVÇB'lerin listesini döner.
+    response_structure:
+      items:
+      - str
+  umm_message_type_list:
+    endpoint: /v1/markets/data/umm-message-type-list
+    method: GET
+    auth: true
+    short_name: umm_message_type_list
+    short_name_tr: Piyasa Mesaj Sistemi Mesaj Tipi Listeleme Servisi
+    params: []
+    required: null
+    response:
+    - items
+    var_type: []
+    summary: Piyasa Mesaj Sistemi Mesaj Tipi Listeleme Servisi
+    description: Mesaj Tipi Listeleme Servisi
+    response_structure:
+      items:
+      - str
+  umm_region_list:
+    endpoint: /v1/markets/data/umm-region-list
+    method: GET
+    auth: true
+    short_name: umm_region_list
+    short_name_tr: Piyasa Mesaj Sistemi Bölge Listeleme Servisi
+    params: []
+    required: null
+    response:
+    - items
+    var_type: []
+    summary: Piyasa Mesaj Sistemi Bölge Listeleme Servisi
+    description: Piyasa Mesaj Sistemi Sayfası Bölge Listeleme Servisi
+    response_structure:
+      items:
+      - str
+  market_participants_organization_filter_list:
+    endpoint: /v1/markets/general-data/data/market-participants-organization-filter-list
+    method: GET
+    auth: true
+    short_name: market_participants_organization_filter_list
+    short_name_tr: Piyasa Katılımcıları Organizasyon Filtre Listesi Servisi
+    params: []
+    required: null
+    response:
+    - items
+    var_type: []
+    summary: Piyasa Katılımcıları Organizasyon Filtre Listesi Servisi
+    description: Piyasa Katılımcıları Organizasyon Filtre Listesi
+    response_structure:
+      items:
+      - str
+      page:
+        number: int
+        size: int
+        total: int
+        sort: object
+  distribution_list:
+    endpoint: /v1/markets/retroactive-adjustment/data/distribution-list
+    method: GET
+    auth: true
+    short_name: distribution_list
+    short_name_tr: Dağıtım Liste Servisi
+    params: []
+    required: null
+    response:
+    - items
+    var_type: []
+    summary: Dağıtım Liste Servisi
+    description: GDDK Dağıtım Liste
+    response_structure:
+      items:
+      - str
+  gddk_organization_list:
+    endpoint: /v1/markets/retroactive-adjustment/data/organization-list
+    method: GET
+    auth: true
+    short_name: gddk_organization_list
+    short_name_tr: Sayaç Okuyan Kurum Liste Servisi
+    params: []
+    required: null
+    response:
+    - items
+    var_type: []
+    summary: Sayaç Okuyan Kurum Liste Servisi
+    description: GDDK Sayaç Okuyan Kurum Liste
+    response_structure:
+      items:
+      - str
+  subscriber_profile_group_list:
+    endpoint: /v1/markets/retroactive-adjustment/data/subscriber-profile-group-list
+    method: GET
+    auth: true
+    short_name: subscriber_profile_group_list
+    short_name_tr: Profil Abone Grubu Liste Servisi
+    params: []
+    required: null
+    response:
+    - items
+    var_type: []
+    summary: Profil Abone Grubu Liste Servisi
+    description: GDDK Profil Abone Grubu Liste
+    response_structure:
+      items:
+      - str
+  volume_subscriber_profile_group_list:
+    endpoint: /v1/markets/retroactive-adjustment/data/volume-subscriber-profile-group-list
+    method: GET
+    auth: true
+    short_name: volume_subscriber_profile_group_list
+    short_name_tr: GDDK Hacim Profil Abone Grubu Liste Servisi
+    params: []
+    required: null
+    response:
+    - items
+    var_type: []
+    summary: GDDK Hacim Profil Abone Grubu Liste Servisi
+    description: GDDK Hacim Profil Abone Grubu Liste
+    response_structure:
+      items:
+      - str

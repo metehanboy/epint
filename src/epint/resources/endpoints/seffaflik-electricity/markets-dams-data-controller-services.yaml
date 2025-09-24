@@ -1,0 +1,329 @@
+endpoints:
+  active_fullness:
+    endpoint: /v1/dams/data/active-fullness
+    method: POST
+    auth: true
+    short_name: active_fullness
+    short_name_tr: Aktif Doluluk Listeleme Servisi
+    params:
+    - basinName
+    - damName
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: basinName
+      var_type: str
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '1234'
+    - name: damName
+      var_type: str
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: false
+      example: '1234'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Aktif Doluluk Listeleme Servisi
+    description: 'Bir barajın maksimum ve minimum işletme seviyeleri arasındaki hacimin
+      yüzdesidir. Formül: Aktif Doluluk= [( İlgili Tarihteki Seviyeye Karşılık Gelen
+      Hacim – Minimum Hacim ) / ( Maksimum Hacim – Minimum Hacim )] * 100. Veriler
+      saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük olarak
+      verilmektedir. Geriye dönük veri bulunmamaktadır.'
+    response_structure:
+      items: list
+      page: str
+  active_volume:
+    endpoint: /v1/dams/data/active-volume
+    method: POST
+    auth: true
+    short_name: active_volume
+    short_name_tr: Aktif Hacim Listeleme Servisi
+    params:
+    - basinName
+    - damName
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: basinName
+      var_type: str
+      description: Havza
+      required: false
+      example: Ceyhan
+    - name: damName
+      var_type: str
+      description: Baraj
+      required: false
+      example: ADATEPE
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Aktif Hacim Listeleme Servisi
+    description: Bir barajın ilgili tarihteki seviyeye karşılık gelen hacmi ve minimum
+      işletme seviyeleri arasındaki hacimdir. Veriler saat 17:00 itibariyle nihai
+      halini almaktadır. Baraj verileri günlük olarak verilmektedir. Geriye dönük
+      veri verilmemektedir.
+    response_structure:
+      items: list
+      page: str
+  basin_list:
+    endpoint: /v1/dams/data/basin-list
+    method: GET
+    auth: true
+    short_name: basin_list
+    short_name_tr: Havza listesini dönen servisir.
+    params: []
+    required: null
+    response: []
+    var_type: []
+    summary: Havza listesini dönen servisir.
+    description: Havza listesini dönen servisir.
+    response_structure: {}
+  daily_kot:
+    endpoint: /v1/dams/data/daily-kot
+    method: POST
+    auth: true
+    short_name: daily_kot
+    short_name_tr: Günlük Kot Listeleme Servisi
+    params:
+    - basinName
+    - damName
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: basinName
+      var_type: str
+      description: Havza
+      required: false
+      example: Ceyhan
+    - name: damName
+      var_type: str
+      description: Baraj
+      required: false
+      example: ADATEPE
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Günlük Kot Listeleme Servisi
+    description: Barajın ilgili gündeki su yüksekliğini belirtir. Veriler saat 17:00
+      itibariyle nihai halini almaktadır. Baraj verileri günlük olarak verilmektedir.
+      Geriye dönük veri bulunmamaktadır.
+    response_structure:
+      items: list
+      page: str
+  daily_volume:
+    endpoint: /v1/dams/data/daily-volume
+    method: POST
+    auth: true
+    short_name: daily_volume
+    short_name_tr: Günlük Hacim Listeleme Servisi
+    params:
+    - basinName
+    - damName
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: basinName
+      var_type: str
+      description: Havza
+      required: false
+      example: Ceyhan
+    - name: damName
+      var_type: str
+      description: Baraj
+      required: false
+      example: ADATEPE
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Günlük Hacim Listeleme Servisi
+    description: Bir barajın ilgili tarihteki seviyesine karşılık gelen hacimdir.
+      Veriler saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük
+      olarak verilmektedir. Geriye dönük veri verilmemektedir.
+    response_structure:
+      items: list
+      page: str
+  dam_kot:
+    endpoint: /v1/dams/data/dam-kot
+    method: POST
+    auth: true
+    short_name: dam_kot
+    short_name_tr: Kot Listeleme Servisi
+    params:
+    - basinName
+    - damName
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: basinName
+      var_type: str
+      description: Havza
+      required: false
+      example: Ceyhan
+    - name: damName
+      var_type: str
+      description: Baraj
+      required: false
+      example: ADATEPE
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Kot Listeleme Servisi
+    description: İlgili barajın maximum ve minumum seviyesini gösterir.
+    response_structure:
+      items: list
+      page: str
+  dam_list:
+    endpoint: /v1/dams/data/dam-list
+    method: POST
+    auth: true
+    short_name: dam_list
+    short_name_tr: Havza ismi ile Barajlar listesini dönen servisir.
+    params:
+    - basinName
+    required: null
+    response:
+    - damList
+    var_type:
+    - name: basinName
+      var_type: str
+      description: Havza
+      required: false
+      example: Ceyhan
+    summary: Havza ismi ile Barajlar listesini dönen servisir.
+    description: Havza ismi ile Barajlar listesini dönen servisir.
+    response_structure:
+      damList: list
+  dam_volume:
+    endpoint: /v1/dams/data/dam-volume
+    method: POST
+    auth: true
+    short_name: dam_volume
+    short_name_tr: Hacim Listeleme Servisi
+    params:
+    - basinName
+    - damName
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: basinName
+      var_type: str
+      description: Havza
+      required: false
+      example: Ceyhan
+    - name: damName
+      var_type: str
+      description: Baraj
+      required: false
+      example: ADATEPE
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Hacim Listeleme Servisi
+    description: İlgili barajın maksimum ve minumum hacim seviyesini gösterir.
+    response_structure:
+      items: list
+      page: str
+  flow_rate_and_installed_power:
+    endpoint: /v1/dams/data/flow-rate-and-installed-power
+    method: POST
+    auth: true
+    short_name: flow_rate_and_installed_power
+    short_name_tr: Debi ve Kurulu Güç Listeleme Servisi
+    params:
+    - basinName
+    - damName
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: basinName
+      var_type: str
+      description: Havza
+      required: false
+      example: Ceyhan
+    - name: damName
+      var_type: str
+      description: Baraj
+      required: false
+      example: ADATEPE
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Debi ve Kurulu Güç Listeleme Servisi
+    description: İlgili barajda üniteden geçen suyun miktarını ve barajın kurulu gücünü
+      gösterir.
+    response_structure:
+      items: list
+      page: str
+  water_energy_provision:
+    endpoint: /v1/dams/data/water-energy-provision
+    method: POST
+    auth: true
+    short_name: water_energy_provision
+    short_name_tr: Suyun Enerji Karşılığı Listeleme Servisi
+    params:
+    - basinName
+    - damName
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: basinName
+      var_type: str
+      description: Havza
+      required: false
+      example: Ceyhan
+    - name: damName
+      var_type: str
+      description: Baraj
+      required: false
+      example: ADATEPE
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Suyun Enerji Karşılığı Listeleme Servisi
+    description: Barajda yer alan suyun hesaplanan MWh cinsinden enerji karşılığıdır.
+      Veriler saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük
+      olarak verilmektedir. Geriye dönük veri verilmemektedir.
+    response_structure:
+      items: list
+      page: str

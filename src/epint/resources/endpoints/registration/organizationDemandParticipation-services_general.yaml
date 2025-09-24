@@ -1,0 +1,1674 @@
+endpoints:
+  aggregator_portfolio_invite:
+    endpoint: /v1/aggregator-portfolio/invite
+    method: POST
+    auth: true
+    short_name: aggregator_portfolio_invite
+    short_name_tr: ${AGGREGATOR_PORTFOLIO_INVITE_VALUE}
+    params:
+    - powerPlantEids
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: powerPlantEids
+      var_type: list
+      description: ${LICENSE_OWNER_EID}
+      required: false
+      items: int
+    summary: ${AGGREGATOR_PORTFOLIO_INVITE_VALUE}
+    description: ${AGGREGATOR_PORTFOLIO_INVITE_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  aggregator_portfolio_query:
+    endpoint: /v1/aggregator-portfolio/query
+    method: POST
+    auth: true
+    short_name: aggregator_portfolio_query
+    short_name_tr: ${AGGREGATOR_PORTFOLIO_QUERY_VALUE}
+    params:
+    - page
+    - period
+    - invitationId
+    - aggregatorEid
+    - licenseOwnerEid
+    - powerPlantEid
+    - statusIds
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: invitationId
+      var_type: int
+      description: ${AGGREGATOR_PORTFOLIO_INVITATION_ID}
+      required: false
+    - name: aggregatorEid
+      var_type: int
+      description: ${AGGREGATOR_EID}
+      required: false
+    - name: licenseOwnerEid
+      var_type: int
+      description: ${LICENSE_OWNER_EID}
+      required: false
+    - name: powerPlantEid
+      var_type: int
+      description: Santral ID
+      required: false
+    - name: statusIds
+      var_type: list
+      description: ${AGGREGATOR_PORTFOLIO_STATUS}
+      required: false
+      items: int
+    summary: ${AGGREGATOR_PORTFOLIO_QUERY_VALUE}
+    description: ${AGGREGATOR_PORTFOLIO_QUERY_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  aggregator_portfolio_query_invitation:
+    endpoint: /v1/aggregator-portfolio/query/invitation
+    method: POST
+    auth: true
+    short_name: aggregator_portfolio_query_invitation
+    short_name_tr: ${AGGREGATOR_PORTFOLIO_QUERY_INVITATION_VALUE}
+    params:
+    - page
+    - period
+    - id
+    - aggregatorEid
+    - licenseOwnerEid
+    - powerPlantEid
+    - kind
+    - statusIds
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: id
+      var_type: int
+      description: ${AGGREGATOR_PORTFOLIO_TRANSITION_ID}
+      required: false
+    - name: aggregatorEid
+      var_type: int
+      description: ${AGGREGATOR_EID}
+      required: false
+    - name: licenseOwnerEid
+      var_type: int
+      description: ${LICENSE_OWNER_EID}
+      required: false
+    - name: powerPlantEid
+      var_type: int
+      description: Santral ID
+      required: false
+    - name: kind
+      var_type: int
+      description: ${AGGREGATOR_PORTFOLIO_TRANSITION_KIND}
+      required: false
+    - name: statusIds
+      var_type: list
+      description: ${AGGREGATOR_PORTFOLIO_TRANSITION_STATUS}
+      required: false
+      items: int
+    summary: ${AGGREGATOR_PORTFOLIO_QUERY_INVITATION_VALUE}
+    description: ${AGGREGATOR_PORTFOLIO_QUERY_INVITATION_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  aggregator_portfolio_quit:
+    endpoint: /v1/aggregator-portfolio/quit
+    method: POST
+    auth: true
+    short_name: aggregator_portfolio_quit
+    short_name_tr: ${AGGREGATOR_PORTFOLIO_QUIT_VALUE}
+    params:
+    - id
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: id
+      var_type: int
+      description: ${AGGREGATOR_PORTFOLIO_ID}
+      required: false
+    summary: ${AGGREGATOR_PORTFOLIO_QUIT_VALUE}
+    description: ${AGGREGATOR_PORTFOLIO_QUIT_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  market_participation_query:
+    endpoint: /v1/market-participation/query
+    method: POST
+    auth: true
+    short_name: market_participation_query
+    short_name_tr: Piyasa Katılımı Sorgulama Servisi
+    params:
+    - page
+    - organizationEffectiveId
+    - marketTypeIds
+    - status
+    - effectiveDate
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: organizationEffectiveId
+      var_type: int
+      description: Organizasyon ID'si
+      required: false
+    - name: marketTypeIds
+      var_type: list
+      description: Piyasa Tipi ID'leri
+      required: false
+      items: int
+    - name: status
+      var_type: list
+      description: Durum
+      required: false
+      items: int
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    summary: Piyasa Katılımı Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz piyasa katılımı bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_demand_participation_fetch:
+    endpoint: /v1/organization-demand-participation/fetch
+    method: POST
+    auth: true
+    short_name: organization_demand_participation_fetch
+    short_name_tr: ${ORGANIZATION_DEMAND_PARTICIPATION_FETCH_VALUE}
+    params:
+    - page
+    - demandParticipationServiceType
+    - effectiveDate
+    - organizationId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: demandParticipationServiceType
+      var_type: int
+      description: ${DEMANDPARTICIPATIONSERVICETYPE}
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon ID'si
+      required: false
+    summary: ${ORGANIZATION_DEMAND_PARTICIPATION_FETCH_VALUE}
+    description: ${ORGANIZATION_DEMAND_PARTICIPATION_FETCH_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_fetch_active_organizations:
+    endpoint: /v1/organization/fetch-active-organizations
+    method: POST
+    auth: true
+    short_name: organization_fetch_active_organizations
+    short_name_tr: Aktif Organizasyonlar Sorgulama Servisi
+    params:
+    - effectiveDate
+    - types
+    - subTypes
+    - states
+    - exclusions
+    - effectiveIds
+    - isAggregator
+    - excludeNonAggregatorRetail
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: types
+      var_type: list
+      description: Tipler
+      required: false
+      items: int
+    - name: subTypes
+      var_type: list
+      description: Alt Tipler
+      required: false
+      items: int
+    - name: states
+      var_type: list
+      description: Durumlar
+      required: false
+      items: int
+    - name: exclusions
+      var_type: list
+      description: İstisnalar
+      required: false
+      items: int
+    - name: effectiveIds
+      var_type: list
+      description: ID'ler
+      required: false
+      items: int
+    - name: isAggregator
+      var_type: bool
+      description: Toplayıcı
+      required: false
+    - name: excludeNonAggregatorRetail
+      var_type: bool
+      description: ${EXCLUDE_NON_AGGREGATOR_RETAIL}
+      required: false
+    summary: Aktif Organizasyonlar Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz aktif organizasyon bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_fetch_main_organizations:
+    endpoint: /v1/organization/fetch-main-organizations
+    method: GET
+    auth: true
+    short_name: organization_fetch_main_organizations
+    short_name_tr: Ana Organizasyonlar Sorgulama Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Ana Organizasyonlar Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz ana organizasyon bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_fetch_organization_with_dam_participation:
+    endpoint: /v1/organization/fetch-organizations-with-dam-participation
+    method: POST
+    auth: true
+    short_name: organization_fetch_organization_with_dam_participation
+    short_name_tr: Organizasyon GÖP Katılımı Sorgulama Servisi
+    params:
+    - effectiveId
+    - eic
+    - stateIds
+    - typeIds
+    - isParticipating
+    - effectiveDate
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: eic
+      var_type: str
+      description: ETSO Kodu
+      required: false
+    - name: stateIds
+      var_type: list
+      description: Durum ID'leri
+      required: false
+      items: int
+    - name: typeIds
+      var_type: list
+      description: Tip ID'leri
+      required: false
+      items: int
+    - name: isParticipating
+      var_type: bool
+      description: Katılıyor
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    summary: Organizasyon GÖP Katılımı Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz organizasyon piyasa katılımı bilgilerini
+      bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  OrganizationController_fetchOrganizationsWithLicenses_POST:
+    endpoint: /v1/organization/fetch-organizations-with-licenses
+    method: POST
+    auth: true
+    short_name: OrganizationController_fetchOrganizationsWithLicenses_POST
+    short_name_tr: OrganizationController_fetchOrganizationsWithLicenses_POST
+    params:
+    - effectiveDate
+    - types
+    - subTypes
+    - states
+    - exclusions
+    - effectiveIds
+    - isAggregator
+    - excludeNonAggregatorRetail
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: types
+      var_type: list
+      description: Tipler
+      required: false
+      items: int
+    - name: subTypes
+      var_type: list
+      description: Alt Tipler
+      required: false
+      items: int
+    - name: states
+      var_type: list
+      description: Durumlar
+      required: false
+      items: int
+    - name: exclusions
+      var_type: list
+      description: İstisnalar
+      required: false
+      items: int
+    - name: effectiveIds
+      var_type: list
+      description: ID'ler
+      required: false
+      items: int
+    - name: isAggregator
+      var_type: bool
+      description: Toplayıcı
+      required: false
+    - name: excludeNonAggregatorRetail
+      var_type: bool
+      description: ${EXCLUDE_NON_AGGREGATOR_RETAIL}
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_fetch_single_organization:
+    endpoint: /v1/organization/fetch-single-organization
+    method: POST
+    auth: true
+    short_name: organization_fetch_single_organization
+    short_name_tr: Tekil Organizasyon Sorgulama Servisi
+    params:
+    - effectiveId
+    - effectiveDate
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    summary: Tekil Organizasyon Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz tekil organizasyon bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_fetch_summary:
+    endpoint: /v1/organization/fetch-summary
+    method: POST
+    auth: true
+    short_name: organization_fetch_summary
+    short_name_tr: Organizasyon Özet Sorgulama Servisi
+    params:
+    - effectiveId
+    - effectiveDate
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    summary: Organizasyon Özet Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz organizasyon özet bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_query:
+    endpoint: /v1/organization/query
+    method: POST
+    auth: true
+    short_name: organization_query
+    short_name_tr: Organizasyon Sorgulama Servisi
+    params:
+    - page
+    - effectiveId
+    - effectiveIdContains
+    - name
+    - eic
+    - shortName
+    - code
+    - isCategory
+    - licenseTypeIds
+    - stateIds
+    - typeIds
+    - subTypeIds
+    - mainOrganizationId
+    - recordStatusIds
+    - provinceId
+    - effectiveDate
+    - effectiveDateStart
+    - effectiveDateEnd
+    - taxNo
+    - isAggregator
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: effectiveIdContains
+      var_type: str
+      description: ID içerir
+      required: false
+    - name: name
+      var_type: str
+      description: Ad
+      required: false
+    - name: eic
+      var_type: str
+      description: ETSO Kodu
+      required: false
+    - name: shortName
+      var_type: str
+      description: Kısa Ad
+      required: false
+    - name: code
+      var_type: str
+      description: Kod
+      required: false
+    - name: isCategory
+      var_type: bool
+      description: Kategori
+      required: false
+    - name: licenseTypeIds
+      var_type: list
+      description: Lisans Tipi ID'leri
+      required: false
+      items: int
+    - name: stateIds
+      var_type: list
+      description: Durum ID'leri
+      required: false
+      items: int
+    - name: typeIds
+      var_type: list
+      description: Tip ID'leri
+      required: false
+      items: int
+    - name: subTypeIds
+      var_type: list
+      description: Alt Tip ID'leri
+      required: false
+      items: int
+    - name: mainOrganizationId
+      var_type: int
+      description: Ana Organizasyon ID
+      required: false
+    - name: recordStatusIds
+      var_type: list
+      description: Kayıt Durumu ID'leri
+      required: false
+      items: int
+    - name: provinceId
+      var_type: int
+      description: İl ID
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: taxNo
+      var_type: str
+      description: Vergi No
+      required: false
+    - name: isAggregator
+      var_type: bool
+      description: Toplayıcı
+      required: false
+    summary: Organizasyon Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz organizasyon bilgilerini bu servis ile
+      alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  fetch_aggregators_with_limits:
+    endpoint: /v1/power-plant/fetch-aggregators-with-limits
+    method: POST
+    auth: true
+    short_name: fetch_aggregators_with_limits
+    short_name_tr: ${AGGREGATOR_FETCH_WITH_LIMIT_VALUE}
+    params:
+    - page
+    - effectiveDate
+    - observerDate
+    - aggregatorEid
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: effectiveDate
+      var_type: str
+      description: ''
+      required: false
+    - name: observerDate
+      var_type: str
+      description: Gözlem Tarihi
+      required: false
+    - name: aggregatorEid
+      var_type: int
+      description: ${AGGREGATOR_EID}
+      required: false
+    summary: ${AGGREGATOR_FETCH_WITH_LIMIT_VALUE}
+    description: ${AGGREGATOR_FETCH_WITH_LIMIT_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  power_plant_regions:
+    endpoint: /v1/power-plant/fetch-regions
+    method: POST
+    auth: true
+    short_name: power_plant_regions
+    short_name_tr: Santral Bölge Sorgulama Servisi
+    params:
+    - effectiveId
+    - regionTypeId
+    - effectiveDateEnd
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: regionTypeId
+      var_type: int
+      description: ${REGIONTYPEID}
+      required: false
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    summary: Santral Bölge Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz santral bölge bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  power_plant_query:
+    endpoint: /v1/power-plant/query
+    method: POST
+    auth: true
+    short_name: power_plant_query
+    short_name_tr: Santral Sorgulama Servisi
+    params:
+    - page
+    - id
+    - ids
+    - idContains
+    - name
+    - eic
+    - licenseNumber
+    - organizationId
+    - organizationOrLicenseOwnerId
+    - organizationIdContains
+    - organizationName
+    - licenseTypeIds
+    - sourceGroupIds
+    - sourceTypeIds
+    - statusIds
+    - rsmStatusIds
+    - recordStatusIds
+    - installedPowerMin
+    - installedPowerMax
+    - effectiveDate
+    - effectiveDateStart
+    - effectiveDateEnd
+    - observerDate
+    - trimmingStatusIds
+    - licenseOwnerEid
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: id
+      var_type: int
+      description: ID
+      required: false
+    - name: ids
+      var_type: list
+      description: ID'ler
+      required: false
+      items: int
+    - name: idContains
+      var_type: str
+      description: ID içerir
+      required: false
+    - name: name
+      var_type: str
+      description: Ad
+      required: false
+    - name: eic
+      var_type: str
+      description: ETSO Kodu
+      required: false
+    - name: licenseNumber
+      var_type: str
+      description: Lisans No
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon ID
+      required: false
+    - name: organizationOrLicenseOwnerId
+      var_type: int
+      description: ${ORGANIZATIONORLICENSEOWNERID}
+      required: false
+    - name: organizationIdContains
+      var_type: str
+      description: Organizasyon ID içerir
+      required: false
+    - name: organizationName
+      var_type: str
+      description: Organizasyon Adı
+      required: false
+    - name: licenseTypeIds
+      var_type: list
+      description: Lisans Tipi ID'leri
+      required: false
+      items: int
+    - name: sourceGroupIds
+      var_type: list
+      description: Kaynak Grubu ID'leri
+      required: false
+      items: int
+    - name: sourceTypeIds
+      var_type: list
+      description: Kaynak Tipi ID'leri
+      required: false
+      items: int
+    - name: statusIds
+      var_type: list
+      description: Durum ID'leri
+      required: false
+      items: int
+    - name: rsmStatusIds
+      var_type: list
+      description: Yekdem Durumu ID'leri
+      required: false
+      items: int
+    - name: recordStatusIds
+      var_type: list
+      description: Kayıt Durumu ID'leri
+      required: false
+      items: int
+    - name: installedPowerMin
+      var_type: float
+      description: En Az Kurulu Güç
+      required: false
+    - name: installedPowerMax
+      var_type: float
+      description: En Fazla Kurulu Güç
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: observerDate
+      var_type: str
+      description: Gözlem Tarihi
+      required: false
+    - name: trimmingStatusIds
+      var_type: list
+      description: Kırpma Durumu
+      required: false
+      items: int
+    - name: licenseOwnerEid
+      var_type: int
+      description: ${LICENSE_OWNER_EID}
+      required: false
+    summary: Santral Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz santral bilgilerini bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  sae_storage_portfolio_invite:
+    endpoint: /v1/sae-storage-portfolio/invite
+    method: POST
+    auth: true
+    short_name: sae_storage_portfolio_invite
+    short_name_tr: ${SAE_STORAGE_PORTFOLIO_INVITE_VALUE}
+    params:
+    - saeEids
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: saeEids
+      var_type: list
+      description: UEVÇB ID
+      required: false
+      items: int
+    summary: ${SAE_STORAGE_PORTFOLIO_INVITE_VALUE}
+    description: ${SAE_STORAGE_PORTFOLIO_INVITE_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  sae_storage_portfolio_query:
+    endpoint: /v1/sae-storage-portfolio/query
+    method: POST
+    auth: true
+    short_name: sae_storage_portfolio_query
+    short_name_tr: ${SAE_STORAGE_PORTFOLIO_QUERY_VALUE}
+    params:
+    - page
+    - period
+    - invitationId
+    - aggregatorEid
+    - licenseOwnerEid
+    - saeEid
+    - statusIds
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: invitationId
+      var_type: int
+      description: ${SAE_STORAGE_PORTFOLIO_INVITATION_ID}
+      required: false
+    - name: aggregatorEid
+      var_type: int
+      description: ${AGGREGATOR_EID}
+      required: false
+    - name: licenseOwnerEid
+      var_type: int
+      description: ${LICENSE_OWNER_EID}
+      required: false
+    - name: saeEid
+      var_type: int
+      description: UEVÇB ID
+      required: false
+    - name: statusIds
+      var_type: list
+      description: ${SAE_STORAGE_PORTFOLIO_STATUS}
+      required: false
+      items: int
+    summary: ${SAE_STORAGE_PORTFOLIO_QUERY_VALUE}
+    description: ${SAE_STORAGE_PORTFOLIO_QUERY_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  sae_storage_portfolio_query_invitation:
+    endpoint: /v1/sae-storage-portfolio/query/invitation
+    method: POST
+    auth: true
+    short_name: sae_storage_portfolio_query_invitation
+    short_name_tr: ${SAE_STORAGE_PORTFOLIO_QUERY_INVITATION_VALUE}
+    params:
+    - page
+    - period
+    - id
+    - saeStorageEid
+    - licenseOwnerEid
+    - saeEid
+    - kind
+    - statusIds
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: id
+      var_type: int
+      description: ${SAE_STORAGE_PORTFOLIO_TRANSITION_ID}
+      required: false
+    - name: saeStorageEid
+      var_type: int
+      description: ${SAE_STORAGE_EID}
+      required: false
+    - name: licenseOwnerEid
+      var_type: int
+      description: ${LICENSE_OWNER_EID}
+      required: false
+    - name: saeEid
+      var_type: int
+      description: UEVÇB ID
+      required: false
+    - name: kind
+      var_type: int
+      description: ${SAE_STORAGE_PORTFOLIO_TRANSITION_KIND}
+      required: false
+    - name: statusIds
+      var_type: list
+      description: ${SAE_STORAGE_PORTFOLIO_TRANSITION_STATUS}
+      required: false
+      items: int
+    summary: ${SAE_STORAGE_PORTFOLIO_QUERY_INVITATION_VALUE}
+    description: ${SAE_STORAGE_PORTFOLIO_QUERY_INVITATION_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  sae_storage_portfolio_quit:
+    endpoint: /v1/sae-storage-portfolio/quit
+    method: POST
+    auth: true
+    short_name: sae_storage_portfolio_quit
+    short_name_tr: ${SAE_STORAGE_PORTFOLIO_QUIT_VALUE}
+    params:
+    - id
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: id
+      var_type: int
+      description: ${SAE_STORAGE_PORTFOLIO_ID}
+      required: false
+    summary: ${SAE_STORAGE_PORTFOLIO_QUIT_VALUE}
+    description: ${SAE_STORAGE_PORTFOLIO_QUIT_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  settlement_aggregation_entity_query:
+    endpoint: /v1/sae/query
+    method: POST
+    auth: true
+    short_name: settlement_aggregation_entity_query
+    short_name_tr: UEVÇB Sorgulama Servisi
+    params:
+    - page
+    - effectiveId
+    - effectiveIdContains
+    - name
+    - eic
+    - powerPlantEffectiveId
+    - powerPlantEffectiveIds
+    - powerPlantEffectiveIdContains
+    - organizationEffectiveId
+    - organizationEffectiveIdContains
+    - typeIds
+    - balancingMarketParticipationStatusIds
+    - statusIds
+    - recordStatusIds
+    - regionId
+    - balancingRegionId
+    - effectiveDate
+    - effectiveDateStart
+    - effectiveDateEnd
+    - greenTariffTypeIds
+    - groupOwnerSaeEid
+    - licenseOwnerEid
+    - gridType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: effectiveIdContains
+      var_type: str
+      description: ID içerir
+      required: false
+    - name: name
+      var_type: str
+      description: Ad
+      required: false
+    - name: eic
+      var_type: str
+      description: ETSO Kodu
+      required: false
+    - name: powerPlantEffectiveId
+      var_type: int
+      description: Santral ID
+      required: false
+    - name: powerPlantEffectiveIds
+      var_type: list
+      description: Santral ID'leri
+      required: false
+      items: int
+    - name: powerPlantEffectiveIdContains
+      var_type: str
+      description: Santral ID içerir
+      required: false
+    - name: organizationEffectiveId
+      var_type: int
+      description: Organizasyon ID'si
+      required: false
+    - name: organizationEffectiveIdContains
+      var_type: str
+      description: Organizasyon ID içerir
+      required: false
+    - name: typeIds
+      var_type: list
+      description: Tip ID'leri
+      required: false
+      items: int
+    - name: balancingMarketParticipationStatusIds
+      var_type: list
+      description: Dengeleme Piyasası Katılım Durumu ID'leri
+      required: false
+      items: int
+    - name: statusIds
+      var_type: list
+      description: Durum ID'leri
+      required: false
+      items: int
+    - name: recordStatusIds
+      var_type: list
+      description: Kayıt Durumu ID'leri
+      required: false
+      items: int
+    - name: regionId
+      var_type: int
+      description: Bölge ID
+      required: false
+    - name: balancingRegionId
+      var_type: int
+      description: ${BALANCINGREGIONID}
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: greenTariffTypeIds
+      var_type: list
+      description: YETA Abone Grubu
+      required: false
+      items: int
+    - name: groupOwnerSaeEid
+      var_type: int
+      description: ${GROUPOWNERSAEEID}
+      required: false
+    - name: licenseOwnerEid
+      var_type: int
+      description: ${LICENSE_OWNER_EID}
+      required: false
+    - name: gridType
+      var_type: int
+      description: ${GRID_TYPE}
+      required: false
+    summary: UEVÇB Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz UEVÇB bilgilerini bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

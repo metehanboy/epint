@@ -1,0 +1,47 @@
+endpoints:
+  get_state_customer_predefined_in_portfolio:
+    endpoint: v1/customer/get-state-customer-predefined-in-portfolio
+    method: POST
+    auth: true
+    short_name: get_state_customer_predefined_in_portfolio
+    short_name_tr: Portföyde önceden Tanımlanmış Abone Durumunu Getir
+    params:
+    - categoryType
+    - customerNo
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: categoryType
+      var_type: int
+      description: Abone kategori tipi lookup değeridir.
+      required: false
+    - name: customerNo
+      var_type: str
+      description: Abone tüketici no bilgisi.
+      required: false
+    summary: Portföyde önceden Tanımlanmış Abone Durumunu Getir
+    description: Tüketicinin bu kayıttan etkilenerek güncellenecek başka aboneliğinin
+      olup olmadığının kontrol edildiği servistir.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

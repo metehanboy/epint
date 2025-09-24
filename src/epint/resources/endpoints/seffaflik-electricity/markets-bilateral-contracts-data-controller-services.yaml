@@ -1,0 +1,135 @@
+endpoints:
+  amount_of_bilateral_contracts:
+    endpoint: /v1/markets/bilateral-contracts/data/amount-of-bilateral-contracts
+    method: POST
+    auth: true
+    short_name: amount_of_bilateral_contracts
+    short_name_tr: EÜAŞ - GTŞ İkili Anlaşmalar Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - statistics
+    - latestUpdateDate
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: EÜAŞ - GTŞ İkili Anlaşmalar Listeleme Servisi
+    description: Düzenlemeye tabi tarife kapsamına göre EÜAŞ ile GTŞ’lerin arasında
+      yapılan ikili anlaşmaların aylık toplamlarını göstermektedir.
+    response_structure:
+      items: list
+      page: str
+      statistics: str
+      latestUpdateDate: datetime
+  bilateral_contracts_bid_quantity:
+    endpoint: /v1/markets/bilateral-contracts/data/bilateral-contracts-bid-quantity
+    method: POST
+    auth: true
+    short_name: bilateral_contracts_bid_quantity
+    short_name_tr: İkili Anlaşma (İA) Alış Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - organizationId
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: organizationId
+      var_type: int
+      description: 'Organizasyon Id değeri. Tüm Liste için bkz: `Göp Eşleşme Miktarı
+        Organizasyon Listeleme Servisi`.'
+      required: false
+      example: 1234
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: İkili Anlaşma (İA) Alış Miktarı Listeleme Servisi
+    description: İkili anlaşmalara ait alış miktarları verisidir.
+    response_structure:
+      items: list
+      page: str
+      statistics: str
+  bilateral_contracts_offer_quantity:
+    endpoint: /v1/markets/bilateral-contracts/data/bilateral-contracts-offer-quantity
+    method: POST
+    auth: true
+    short_name: bilateral_contracts_offer_quantity
+    short_name_tr: İkili Anlaşma (İA) Satış Miktarı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - organizationId
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    - statistics
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: organizationId
+      var_type: int
+      description: 'Organizasyon Id değeri. Tüm Liste için bkz: `Göp Eşleşme Miktarı
+        Organizasyon Listeleme Servisi`.'
+      required: false
+      example: 1234
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: İkili Anlaşma (İA) Satış Miktarı Listeleme Servisi
+    description: İkili anlaşmalara ait satış miktarı verisidir.
+    response_structure:
+      items: list
+      page: str
+      statistics: str

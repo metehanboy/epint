@@ -1,0 +1,43 @@
+# Include the README
+include README.md
+
+# Include the license file
+include LICENSE
+
+# Include requirements files
+include requirements.txt
+include requirements-dev.txt
+
+# Include configuration files
+include pyproject.toml
+
+# Include package data files
+recursive-include src/epint/resources *.yml
+recursive-include src/epint/resources *.yaml
+recursive-include src/epint/resources *.json
+
+# Include source files
+recursive-include src/epint *.py
+
+# Exclude compiled Python files
+global-exclude *.pyc
+global-exclude __pycache__
+
+# Exclude version control files
+global-exclude .git*
+global-exclude .svn*
+
+# Exclude IDE files
+global-exclude .vscode
+global-exclude .idea
+global-exclude *.swp
+global-exclude *.swo
+
+# Exclude OS generated files
+global-exclude .DS_Store
+global-exclude Thumbs.db
+
+# Exclude build artifacts
+global-exclude build
+global-exclude dist
+global-exclude *.egg-info

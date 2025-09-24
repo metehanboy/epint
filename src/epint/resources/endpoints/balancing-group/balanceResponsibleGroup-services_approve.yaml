@@ -1,0 +1,57 @@
+endpoints:
+  brg_approve:
+    endpoint: /v1/brg/approve
+    method: POST
+    auth: true
+    short_name: brg_approve
+    short_name_tr: DSG Talep Onaylama Servisi
+    summary: DSG Talep Onaylama Servisi
+    description: Gönderilen DSG talebini onaylar.
+    
+    params:
+    - id
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    
+    var_type:
+    - name: id
+      var_type: int
+      description: DSG ID
+      required: false
+      example: "12345"
+    
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body:
+        content:
+          period: str
+          id: int
+          brgOwner: int
+          brgOwnerName: str
+          brgParticipant: int
+          brgParticipantName: str
+          brgTransitionStatus: dict
+          createUser: str
+          modifyUser: str
+          createDate: str
+          modifyDate: str

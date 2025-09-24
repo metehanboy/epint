@@ -1,0 +1,1495 @@
+endpoints:
+  AnnouncementAdminController_findAnnouncement_POST:
+    endpoint: /rest/v1/announcement/exist/get
+    method: POST
+    auth: true
+    short_name: AnnouncementAdminController_findAnnouncement_POST
+    short_name_tr: AnnouncementAdminController_findAnnouncement_POST
+    params:
+    - id
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: id
+      var_type: int
+      description: Duyuru id bilgisi
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body:
+        content:
+          id: int
+          title: str
+          message: str
+          category: dict
+          startTime: str
+          endTime: str
+          popUp: bool
+          displayTime: bool
+          createDate: str
+          modifyDate: str
+          createUser: str
+          modifyUser: str
+      dispatch: str
+  AnnouncementAdminController_saveAnnouncement_POST:
+    endpoint: /rest/v1/announcement/exist/save
+    method: POST
+    auth: true
+    short_name: AnnouncementAdminController_saveAnnouncement_POST
+    short_name_tr: AnnouncementAdminController_saveAnnouncement_POST
+    params:
+    - category
+    - messages
+    - categories
+    - startTime
+    - endTime
+    - popUp
+    - displayTime
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: category
+      var_type: int
+      description: Duyuru Kategorileri
+      required: false
+    - name: messages
+      var_type: list
+      description: Duyurunun mesaj bilgisi
+      required: false
+      items: str
+    - name: categories
+      var_type: list
+      description: ''
+      required: false
+      items: str
+    - name: startTime
+      var_type: str
+      description: Duyuru başlangıç tarihi
+      required: false
+      example: '2021-06-24 14:00:00'
+    - name: endTime
+      var_type: str
+      description: Duyuru bitiş tarihi
+      required: false
+      example: '2021-06-24 14:00:00'
+    - name: popUp
+      var_type: bool
+      description: ''
+      required: false
+    - name: displayTime
+      var_type: bool
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  read_announcement:
+    endpoint: /rest/v1/announcement/read
+    method: POST
+    auth: true
+    short_name: read_announcement
+    short_name_tr: Duyuru Mesajları Okuma
+    params:
+    - messages
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: messages
+      var_type: list
+      description: Duyuruların id bilgi listesi
+      required: false
+      items: int
+    summary: Duyuru Mesajları Okuma
+    description: Okunmamış mesajları okundu durumuna çekmek için kullanılacak servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  configs_save:
+    endpoint: /rest/v1/configs/update
+    method: POST
+    auth: true
+    short_name: configs_save
+    short_name_tr: Ayarları güncelleme
+    params:
+    - language
+    - region
+    - theme
+    - matchNotification
+    - objectionNotification
+    - contractTableConfig
+    - sessionTime
+    - notificationDisplayTime
+    - contractDetailNotification
+    - matchDetailNotification
+    - hourlyDetailNotification
+    - dailySummaryNotification
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: language
+      var_type: str
+      description: ''
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: theme
+      var_type: str
+      description: ''
+      required: false
+    - name: matchNotification
+      var_type: bool
+      description: ''
+      required: false
+    - name: objectionNotification
+      var_type: bool
+      description: ''
+      required: false
+    - name: contractTableConfig
+      var_type: str
+      description: ''
+      required: false
+    - name: sessionTime
+      var_type: int
+      description: ''
+      required: false
+    - name: notificationDisplayTime
+      var_type: int
+      description: ''
+      required: false
+    - name: contractDetailNotification
+      var_type: str
+      description: ''
+      required: false
+    - name: matchDetailNotification
+      var_type: str
+      description: ''
+      required: false
+    - name: hourlyDetailNotification
+      var_type: str
+      description: ''
+      required: false
+    - name: dailySummaryNotification
+      var_type: str
+      description: ''
+      required: false
+    summary: Ayarları güncelleme
+    description: Ayarları güncelleme
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  contracts_freeze_filter:
+    endpoint: /rest/v1/contract/filter
+    method: POST
+    auth: true
+    short_name: contracts_freeze_filter
+    short_name_tr: İleri tarihli kontrat dondurma arama
+    params:
+    - regions
+    - contractType
+    - startDate
+    - endDate
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: regions
+      var_type: list
+      description: Bölge bilgisi
+      required: false
+      example: '[''TR1'']'
+      items: str
+    - name: contractType
+      var_type: list
+      description: Kontrat tipi
+      required: false
+      example: '[''HOURLY'']'
+      items: str
+    - name: startDate
+      var_type: str
+      description: Fiziksel Teslimat Başlangıç Zamanı
+      required: false
+      example: '2023-01-01 12:00:00'
+    - name: endDate
+      var_type: str
+      description: Fiziksel Teslimat Bitiş Zamanı
+      required: false
+      example: '2023-01-01 14:00:00'
+    summary: İleri tarihli kontrat dondurma arama
+    description: İleri tarihli kontrat dondurma için aranan kontratları döner.
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  contract_indicators:
+    endpoint: /rest/v1/dashboard/contract-indicators
+    method: POST
+    auth: true
+    short_name: contract_indicators
+    short_name_tr: Kontrat Göstergeleri
+    params:
+    - region
+    - isMarket
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: isMarket
+      var_type: bool
+      description: ''
+      required: false
+    summary: Kontrat Göstergeleri
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  hourly_block_match:
+    endpoint: /rest/v1/dashboard/hourly-block-match
+    method: POST
+    auth: true
+    short_name: hourly_block_match
+    short_name_tr: Saatlik Blok Eşleşme Grafiği Servisi
+    params:
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Saatlik Blok Eşleşme Grafiği Servisi
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  matching_max_quantity:
+    endpoint: /rest/v1/dashboard/matching-max-quantities
+    method: POST
+    auth: true
+    short_name: matching_max_quantity
+    short_name_tr: En Yüksek Eşleşmeler Grafiği
+    params:
+    - contract
+    - region
+    - direction
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: contract
+      var_type: str
+      description: Kontrat bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: direction
+      var_type: str
+      description: ''
+      required: false
+    summary: En Yüksek Eşleşmeler Grafiği
+    description: En Yüksek Eşleşmeler Grafiği
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  matching_min_max_price:
+    endpoint: /rest/v1/dashboard/matching-price
+    method: POST
+    auth: true
+    short_name: matching_min_max_price
+    short_name_tr: En Yüksek En Düşük Eşleşmeler
+    params:
+    - contract
+    - region
+    - isMax
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: contract
+      var_type: str
+      description: Kontrat bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: isMax
+      var_type: bool
+      description: En Büyük Değer
+      required: false
+    summary: En Yüksek En Düşük Eşleşmeler
+    description: En Yüksek En Düşük Eşleşmeler
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  matching_min_max_quantity:
+    endpoint: /rest/v1/dashboard/matching-quantity/max-min
+    method: POST
+    auth: true
+    short_name: matching_min_max_quantity
+    short_name_tr: ${MATCHING_MIN_MAX_QUANTITY}
+    params:
+    - contractName
+    - region
+    - sortingInfo
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: contractName
+      var_type: str
+      description: Kontrat bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: sortingInfo
+      var_type: str
+      description: Sıralama bilgisi
+      required: false
+    summary: ${MATCHING_MIN_MAX_QUANTITY}
+    description: ${MATCHING_MIN_MAX_QUANTITY}
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  offer_max_quantity:
+    endpoint: /rest/v1/dashboard/offer-max-quantities
+    method: POST
+    auth: true
+    short_name: offer_max_quantity
+    short_name_tr: En Yüksek Teklifler Grafiği
+    params:
+    - contract
+    - region
+    - direction
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: contract
+      var_type: str
+      description: Kontrat bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: direction
+      var_type: str
+      description: ''
+      required: false
+    summary: En Yüksek Teklifler Grafiği
+    description: En Yüksek Teklifler Grafiği
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  IntegrationController_fetchDataToIntegrationSystem_POST:
+    endpoint: /rest/v1/integration/fetch
+    method: POST
+    auth: true
+    short_name: IntegrationController_fetchDataToIntegrationSystem_POST
+    short_name_tr: IntegrationController_fetchDataToIntegrationSystem_POST
+    params:
+    - integrationType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: integrationType
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  IntegrationController_saveFutureIntegrationSystemProcess_POST:
+    endpoint: /rest/v1/integration/save
+    method: POST
+    auth: true
+    short_name: IntegrationController_saveFutureIntegrationSystemProcess_POST
+    short_name_tr: IntegrationController_saveFutureIntegrationSystemProcess_POST
+    params:
+    - processTime
+    - deliveryDateTime
+    - description
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: processTime
+      var_type: str
+      description: ''
+      required: false
+    - name: deliveryDateTime
+      var_type: str
+      description: ''
+      required: false
+    - name: description
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  IntegrationController_sendDataToIntegrationSystem_POST:
+    endpoint: /rest/v1/integration/send
+    method: POST
+    auth: true
+    short_name: IntegrationController_sendDataToIntegrationSystem_POST
+    short_name_tr: IntegrationController_sendDataToIntegrationSystem_POST
+    params:
+    - deliveryDateTime
+    - description
+    - integrationType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDateTime
+      var_type: str
+      description: ''
+      required: false
+    - name: description
+      var_type: str
+      description: ''
+      required: false
+    - name: integrationType
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  IntegrationController_sendObjectionToIntegrationSystem_POST:
+    endpoint: /rest/v1/integration/send/objection
+    method: POST
+    auth: true
+    short_name: IntegrationController_sendObjectionToIntegrationSystem_POST
+    short_name_tr: IntegrationController_sendObjectionToIntegrationSystem_POST
+    params:
+    - effectiveDate
+    - description
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: ''
+      required: false
+    - name: description
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  check_organization_waiting_demands:
+    endpoint: /rest/v1/limit/organization-demand/check-waiting
+    method: POST
+    auth: true
+    short_name: check_organization_waiting_demands
+    short_name_tr: Organizasyonun Onayda Bekleyen Talebi Olup Olmadığını Dönen Servis
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Organizasyonun Onayda Bekleyen Talebi Olup Olmadığını Dönen Servis
+    description: Organizasyonun Onayda Bekleyen Talebi Olup Olmadığını Dönen Servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  save_organization_limit_demands:
+    endpoint: /rest/v1/limit/organization-demand/save
+    method: POST
+    auth: true
+    short_name: save_organization_limit_demands
+    short_name_tr: Limit Değişiklik Talebi Kaydetme Servisi
+    params:
+    - demandedMaxTotalBuyUpperBound
+    - demandedMaxTotalSellUpperBound
+    - participantDescription
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: demandedMaxTotalBuyUpperBound
+      var_type: int
+      description: Talep Edilen Maksimum Toplam Alış Miktarı
+      required: false
+    - name: demandedMaxTotalSellUpperBound
+      var_type: int
+      description: Talep Edilen Maksimum Toplam Satış Miktarı
+      required: false
+    - name: participantDescription
+      var_type: str
+      description: PK Açıklama
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Limit Değişiklik Talebi Kaydetme Servisi
+    description: Limit Değişiklik Talebi Kaydetme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  save_organization_upper_limits:
+    endpoint: /rest/v1/limit/organization-upper/save
+    method: POST
+    auth: true
+    short_name: save_organization_upper_limits
+    short_name_tr: Organizasyon Üst Limitleri Kaydetme Servisi
+    params:
+    - maxTotalBuy
+    - maxTotalSell
+    - netStatusBuy
+    - netStatusSell
+    - maxBuyQuantity
+    - maxSellQuantity
+    - maxBuyPrice
+    - minSellPrice
+    - isCheckMcp
+    - deviationAmount
+    - deviationType
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: maxTotalBuy
+      var_type: int
+      description: Maksimum toplam alış
+      required: false
+    - name: maxTotalSell
+      var_type: int
+      description: Maksimum toplam satış
+      required: false
+    - name: netStatusBuy
+      var_type: int
+      description: Net durum alış
+      required: false
+    - name: netStatusSell
+      var_type: int
+      description: Net durum satış
+      required: false
+    - name: maxBuyQuantity
+      var_type: int
+      description: Maksimum alış teklif miktarı
+      required: false
+    - name: maxSellQuantity
+      var_type: int
+      description: Maksimum satış teklif miktarı
+      required: false
+    - name: maxBuyPrice
+      var_type: float
+      description: Maksimum alış teklif fiyatı
+      required: false
+    - name: minSellPrice
+      var_type: float
+      description: Minimum satış teklif fiyatı
+      required: false
+    - name: isCheckMcp
+      var_type: bool
+      description: PTF'ye göre teklif kontrolu yap
+      required: false
+    - name: deviationAmount
+      var_type: float
+      description: PTF'ye göre sapma
+      required: false
+    - name: deviationType
+      var_type: str
+      description: PTF'ye göre sapma tipi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Organizasyon Üst Limitleri Kaydetme Servisi
+    description: Organizasyon Üst Limitleri Kaydetme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  save_user_upper_limits:
+    endpoint: /rest/v1/limit/user-upper/save
+    method: POST
+    auth: true
+    short_name: save_user_upper_limits
+    short_name_tr: Kullanıcı Üst Limitleri Kaydetme Servisi
+    params:
+    - usernames
+    - region
+    - maxBuyQuantity
+    - maxSellQuantity
+    - maxBuyPrice
+    - minSellPrice
+    - isCheckMcp
+    - deviationAmount
+    - deviationType
+    - isImplementedToAllUsers
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: usernames
+      var_type: list
+      description: Limit bilgileri kaydedilecek kullanıcılar.
+      required: false
+      items: str
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: maxBuyQuantity
+      var_type: int
+      description: Maksimum alış teklif miktar bilgisi
+      required: false
+    - name: maxSellQuantity
+      var_type: int
+      description: Maksimum satış teklif miktar bilgisi
+      required: false
+    - name: maxBuyPrice
+      var_type: float
+      description: Maksimum alış teklif fiyat bilgisi
+      required: false
+    - name: minSellPrice
+      var_type: float
+      description: Minimum satış teklif fiyat bilgisi
+      required: false
+    - name: isCheckMcp
+      var_type: bool
+      description: PTF'ye göre sapma kontrolu
+      required: false
+    - name: deviationAmount
+      var_type: float
+      description: PTF'ye göre sapma
+      required: false
+    - name: deviationType
+      var_type: str
+      description: PTF'ye göre sapma tipi
+      required: false
+    - name: isImplementedToAllUsers
+      var_type: bool
+      description: '*true* gönderilmesi durumunda sistemdeki tüm kullanıcılara uygular.'
+      required: false
+    summary: Kullanıcı Üst Limitleri Kaydetme Servisi
+    description: Kullanıcı Üst Limitleri Kaydetme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  save_user_limits:
+    endpoint: /rest/v1/limit/user/save
+    method: POST
+    auth: true
+    short_name: save_user_limits
+    short_name_tr: Kullanıcı Limitleri Kaydetme Servisi
+    params:
+    - region
+    - maxBuyQuantity
+    - maxSellQuantity
+    - maxBuyPrice
+    - minSellPrice
+    - isCheckMcp
+    - deviationAmount
+    - deviationType
+    - isCheckedPreventOffer
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: maxBuyQuantity
+      var_type: int
+      description: Maksimum alış teklif miktar bilgisi
+      required: false
+    - name: maxSellQuantity
+      var_type: int
+      description: Maksimum satış teklif miktar bilgisi
+      required: false
+    - name: maxBuyPrice
+      var_type: float
+      description: Maksimum alış teklif fiyat bilgisi
+      required: false
+    - name: minSellPrice
+      var_type: float
+      description: Minimum satış teklif fiyat bilgisi
+      required: false
+    - name: isCheckMcp
+      var_type: bool
+      description: PTF'ye göre sapma kontrolu
+      required: false
+    - name: deviationAmount
+      var_type: float
+      description: PTF'ye göre sapma
+      required: false
+    - name: deviationType
+      var_type: str
+      description: PTF'ye göre sapma tipi
+      required: false
+    - name: isCheckedPreventOffer
+      var_type: bool
+      description: Limit aşımında teklif kaydını engelle
+      required: false
+    summary: Kullanıcı Limitleri Kaydetme Servisi
+    description: Kullanıcı Limitleri Kaydetme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  MenuController_changeOrder_POST:
+    endpoint: /rest/v1/menu/change-order
+    method: POST
+    auth: true
+    short_name: MenuController_changeOrder_POST
+    short_name_tr: MenuController_changeOrder_POST
+    params:
+    - id1
+    - id2
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: id1
+      var_type: int
+      description: ''
+      required: false
+    - name: id2
+      var_type: int
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  filter_notification:
+    endpoint: /rest/v1/notifications/filter
+    method: POST
+    auth: true
+    short_name: filter_notification
+    short_name_tr: Sms ve Mail Bildirimleri Filtreleme
+    params:
+    - pageInfo
+    - subject
+    - sms
+    - email
+    - searchQuery
+    - sortingInfo
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: subject
+      var_type: str
+      description: ''
+      required: false
+    - name: sms
+      var_type: bool
+      description: ''
+      required: false
+    - name: email
+      var_type: bool
+      description: ''
+      required: false
+    - name: searchQuery
+      var_type: str
+      description: ''
+      required: false
+    - name: sortingInfo
+      var_type: str
+      description: ''
+      required: false
+    summary: Sms ve Mail Bildirimleri Filtreleme
+    description: Sms ve Mail Bildirimleri Filtreleme
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  objection_reply_screen:
+    endpoint: /rest/v1/objection/admin/reply
+    method: POST
+    auth: true
+    short_name: objection_reply_screen
+    short_name_tr: İtiraz Cevabı
+    params:
+    - objectionId
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: objectionId
+      var_type: int
+      description: Yapılacak itirazın eşleşme numara bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: İtiraz Cevabı
+    description: İtiraz Cevabı
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  objection_save:
+    endpoint: /rest/v1/objection/save
+    method: POST
+    auth: true
+    short_name: objection_save
+    short_name_tr: İtiraz Kaydetme
+    params:
+    - description
+    - matchingDetailId
+    - offerId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: description
+      var_type: str
+      description: Yapılacak olan itirazın açıklama bilgisi
+      required: false
+    - name: matchingDetailId
+      var_type: int
+      description: Yapılacak itirazın eşleşme numara bilgisi
+      required: false
+    - name: offerId
+      var_type: int
+      description: Teklifin tekil id bilgisi.
+      required: false
+    summary: İtiraz Kaydetme
+    description: Gerçekleşen eşleşmelere ait itirazların yapıldığı servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  offer_template:
+    endpoint: /rest/v1/offer/file/template
+    method: GET
+    auth: true
+    short_name: offer_template
+    short_name_tr: Toplu Teklif Yükleme Excel Şablonu
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Toplu Teklif Yükleme Excel Şablonu
+    description: Toplu Teklif Yükleme Excel Şablonu
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  PageController_changeOrder_POST:
+    endpoint: /rest/v1/page/change-order
+    method: POST
+    auth: true
+    short_name: PageController_changeOrder_POST
+    short_name_tr: PageController_changeOrder_POST
+    params:
+    - id1
+    - id2
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: id1
+      var_type: int
+      description: ''
+      required: false
+    - name: id2
+      var_type: int
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  PageController_savePage_POST:
+    endpoint: /rest/v1/page/save-or-update
+    method: POST
+    auth: true
+    short_name: PageController_savePage_POST
+    short_name_tr: PageController_savePage_POST
+    params:
+    - pageId
+    - menuId
+    - pageIndex
+    - authorization
+    - pageNameTr
+    - pageNameEn
+    - status
+    - organizationTypes
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageId
+      var_type: int
+      description: ''
+      required: false
+    - name: menuId
+      var_type: int
+      description: ''
+      required: false
+    - name: pageIndex
+      var_type: int
+      description: ''
+      required: false
+    - name: authorization
+      var_type: str
+      description: ''
+      required: false
+    - name: pageNameTr
+      var_type: str
+      description: ''
+      required: false
+    - name: pageNameEn
+      var_type: str
+      description: ''
+      required: false
+    - name: status
+      var_type: str
+      description: ''
+      required: false
+    - name: organizationTypes
+      var_type: list
+      description: ''
+      required: false
+      items: str
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  find_user_info:
+    endpoint: /rest/v1/user/info/detail
+    method: POST
+    auth: true
+    short_name: find_user_info
+    short_name_tr: Kullancıcı Bilgileri
+    params:
+    - userName
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: userName
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    summary: Kullancıcı Bilgileri
+    description: Kullanıcı bilgileri , limitleri ve yetkilerinin alındığı servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  logout:
+    endpoint: /rest/v1/user/logout
+    method: GET
+    auth: true
+    short_name: logout
+    short_name_tr: Kullancıcı Bilgileri
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Kullancıcı Bilgileri
+    description: Kullanıcı bilgileri , limitleri ve yetkilerinin alındığı servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  UserController_webSocketModels_POST:
+    endpoint: /rest/v1/user/websocket-models
+    method: POST
+    auth: true
+    short_name: UserController_webSocketModels_POST
+    short_name_tr: UserController_webSocketModels_POST
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

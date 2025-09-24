@@ -1,0 +1,611 @@
+endpoints:
+  daily_prices:
+    endpoint: /v1/data/daily-prices
+    method: POST
+    auth: true
+    short_name: daily_prices
+    short_name_tr: Günlük Fiyatlar Verisi Servisi
+    params:
+    - date
+    - page
+    required:
+    - date
+    response:
+    - items
+    - page
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Günlük Fiyatlar Verisi Servisi
+    description: Günlük Fiyatlar Verisi Servisi
+    response_structure:
+      items: list
+      page: str
+  daily_prices_average:
+    endpoint: /v1/data/daily-prices-average
+    method: POST
+    auth: true
+    short_name: daily_prices_average
+    short_name_tr: Günlük Fiyatlar Ortalama Verisi Servisi
+    params:
+    - date
+    - page
+    required:
+    - date
+    response:
+    - items
+    - page
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Günlük Fiyatlar Ortalama Verisi Servisi
+    description: Günlük Fiyatlar Ortalama Verisi Servisi
+    response_structure:
+      items: list
+      page: str
+  daily_prices_min_max:
+    endpoint: /v1/data/daily-prices-min-max
+    method: POST
+    auth: true
+    short_name: daily_prices_min_max
+    short_name_tr: Günlük Fiyatlar Min Maks Fiyat Servisi
+    params:
+    - date
+    - page
+    required:
+    - date
+    response:
+    - items
+    - page
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Günlük Fiyatlar Min Maks Fiyat Servisi
+    description: Günlük Fiyatlar Min Maks Fiyat Servisi
+    response_structure:
+      items: list
+      page: str
+  daily_prices_min_max_monthly:
+    endpoint: /v1/data/daily-prices-min-max-monthly
+    method: POST
+    auth: true
+    short_name: daily_prices_min_max_monthly
+    short_name_tr: Günlük Fiyatlar Aylık Min Maks Fiyat Servisi
+    params:
+    - date
+    - page
+    required:
+    - date
+    response:
+    - items
+    - page
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Günlük Fiyatlar Aylık Min Maks Fiyat Servisi
+    description: Günlük Fiyatlar Aylık Min Maks Fiyat Servisi
+    response_structure:
+      items: list
+      page: str
+  daily_prices_min_max_yearly:
+    endpoint: /v1/data/daily-prices-min-max-yearly
+    method: POST
+    auth: true
+    short_name: daily_prices_min_max_yearly
+    short_name_tr: Günlük Fiyatlar Yıllık Min Maks Fiyat Servisi
+    params:
+    - date
+    - page
+    required:
+    - date
+    response:
+    - items
+    - page
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Günlük Fiyatlar Yıllık Min Maks Fiyat Servisi
+    description: Günlük Fiyatlar Yıllık Min Maks Fiyat Servisi
+    response_structure:
+      items: list
+      page: str
+  daily_report:
+    endpoint: /v1/data/daily-report
+    method: POST
+    auth: true
+    short_name: daily_report
+    short_name_tr: Günlük Rapor Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Günlük Rapor Listeleme Servisi
+    description: Günlük Rapor Listeleme Servisi
+    response_structure:
+      items: list
+      page: str
+  dgp_talimat:
+    endpoint: /v1/data/dgp-talimat
+    method: POST
+    auth: true
+    short_name: dgp_talimat
+    short_name_tr: DGP Talimatları Listeleme Servisi
+    params:
+    - date
+    - page
+    required:
+    - date
+    response:
+    - items
+    - page
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: DGP Talimatları Listeleme Servisi
+    description: DGP Talimatları Listeleme Servisi
+    response_structure:
+      items: list
+      page: str
+  dgp_talimat_agr_ort:
+    endpoint: /v1/data/dgp-talimat-agr-ort
+    method: POST
+    auth: true
+    short_name: dgp_talimat_agr_ort
+    short_name_tr: DGP Talimatları (Ağırlıklı Ortalama) Listeleme Servisi
+    params:
+    - date
+    - page
+    required:
+    - date
+    response:
+    - items
+    - page
+    var_type:
+    - name: date
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: DGP Talimatları (Ağırlıklı Ortalama) Listeleme Servisi
+    description: DGP Talimatları (Ağırlıklı Ortalama) Listeleme Servisi
+    response_structure:
+      items: list
+      page: str
+  electricity_market_volume_physically:
+    endpoint: /v1/data/electricity-market-volume-physically
+    method: POST
+    auth: true
+    short_name: electricity_market_volume_physically
+    short_name_tr: Elektrik Piyasa Hacimleri Fiziksel Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Elektrik Piyasa Hacimleri Fiziksel Listeleme Servisi
+    description: Elektrik Piyasa Hacimleri Fiziksel Listeleme Servisi
+    response_structure:
+      items: list
+      page: str
+  eligible_consumer_and_meter_increases:
+    endpoint: /v1/data/eligible-consumer-and-meter-increases
+    method: GET
+    auth: true
+    short_name: eligible_consumer_and_meter_increases
+    short_name_tr: Serbest Tüketici ve Sayaç Artış Miktarı Servisi
+    params: []
+    required: null
+    response:
+    - items
+    - page
+    var_type: []
+    summary: Serbest Tüketici ve Sayaç Artış Miktarı Servisi
+    description: Serbest Tüketici ve Sayaç Artış Miktarı Servisi
+    response_structure:
+      items: list
+      page: str
+  gip_kontrat:
+    endpoint: /v1/data/gip-kontrat
+    method: POST
+    auth: true
+    short_name: gip_kontrat
+    short_name_tr: Gip Kontrat Listesi Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: Gip Kontrat Listesi Servisi
+    description: Gip Kontrat Listesi Servisi
+    response_structure:
+      items: list
+      page: str
+  idm_contract_summary:
+    endpoint: /v1/data/idm-contract-summary
+    method: POST
+    auth: true
+    short_name: idm_contract_summary
+    short_name_tr: GİP Kontrat Özeti Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: GİP Kontrat Özeti Listeleme Servisi
+    description: GİP Kontrat Özeti Listeleme Servisi
+    response_structure:
+      items: list
+      page: str
+  idm_order_list:
+    endpoint: /v1/data/idm-order-list
+    method: POST
+    auth: true
+    short_name: idm_order_list
+    short_name_tr: GiP Teklif Listesi Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - contractId
+    - page
+    required:
+    - startDate
+    - endDate
+    - contractId
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: contractId
+      var_type: int
+      description: Kontrat Id
+      required: true
+      example: ''
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: GiP Teklif Listesi Listeleme Servisi
+    description: GiP Teklif Listesi Listeleme Servisi
+    response_structure:
+      items: list
+      page: str
+  mcp_smp_arithmetic_averages:
+    endpoint: /v1/data/mcp-smp-arithmetic-averages
+    method: POST
+    auth: true
+    short_name: mcp_smp_arithmetic_averages
+    short_name_tr: SMF ve PTF Aritmetik Ortalamaları Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: SMF ve PTF Aritmetik Ortalamaları Listeleme Servisi
+    description: SMF ve PTF Aritmetik Ortalamaları
+    response_structure:
+      items: list
+      page: str
+  mcp_smp_averages:
+    endpoint: /v1/data/mcp-smp-averages
+    method: POST
+    auth: true
+    short_name: mcp_smp_averages
+    short_name_tr: SMF ve PTF Ortalamaları Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: SMF ve PTF Ortalamaları Listeleme Servisi
+    description: SMF ve PTF Ortalamaları
+    response_structure:
+      items: list
+      page: str
+  ptf_smf_periodic_price_averages:
+    endpoint: /v1/data/periodic-price-averages
+    method: POST
+    auth: true
+    short_name: ptf_smf_periodic_price_averages
+    short_name_tr: Dönemlik Fiyat Ortalamaları Listeleme Servisi
+    params:
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Dönemlik Fiyat Ortalamaları Listeleme Servisi
+    description: Dönemlik Fiyat Ortalamaları Listeleme Servisi
+    response_structure:
+      items: list
+      page: str
+  periodic_price_volume:
+    endpoint: /v1/data/periodic-price-volume
+    method: POST
+    auth: true
+    short_name: periodic_price_volume
+    short_name_tr: Dönemlik Piyasa Hacimleri Listeleme Servisi
+    params:
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Dönemlik Piyasa Hacimleri Listeleme Servisi
+    description: Dönemlik Piyasa Hacimleri Listeleme Servisi
+    response_structure:
+      items: list
+      page: str
+  ptf_sm_sdf:
+    endpoint: /v1/data/ptf-smf-sdf
+    method: POST
+    auth: true
+    short_name: ptf_sm_sdf
+    short_name_tr: PTF SMF ve SDF Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: PTF SMF ve SDF Listeleme Servisi
+    description: PTF SMF ve SDF Listeleme Servisi
+    response_structure:
+      items: list
+      page: str
+  smp_mcp_multiple_daytime_avg:
+    endpoint: /v1/data/smp-mcp-multiple-daytime-avg
+    method: POST
+    auth: true
+    short_name: smp_mcp_multiple_daytime_avg
+    short_name_tr: PTF ve SMF 3 Zamanlı Fiyat Ortalamaları Rapor Listeleme Servisi
+    params:
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: PTF ve SMF 3 Zamanlı Fiyat Ortalamaları Rapor Listeleme Servisi
+    description: PTF ve SMF 3 Zamanlı Fiyat Ortalamaları
+    response_structure:
+      items: list
+      page: str
+  Stsa:
+    endpoint: /v1/data/stsa
+    method: POST
+    auth: true
+    short_name: Stsa
+    short_name_tr: Serbest Tüketici Sayaç Adeti
+    params:
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Serbest Tüketici Sayaç Adeti
+    description: Serbest Tüketici Sayaç Adeti
+    response_structure:
+      items: list
+      page: str

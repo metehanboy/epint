@@ -1,0 +1,200 @@
+endpoints:
+  dsg_imbalance_quantity_export:
+    endpoint: /v1/markets/imbalance/export/dsg-imbalance-quantity
+    method: POST
+    auth: true
+    short_name: dsg_imbalance_quantity_export
+    short_name_tr: Dengeden Sorumlu Grup (DSG) Dengesizlik Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - region
+    - organizationId
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+      required: false
+      example: TR1
+    - name: organizationId
+      var_type: int
+      description: Organizasyon Id bilgisi(bkz.Organizasyon Listesi Getirme Servisi)
+      required: false
+      example: 1234
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Dengeden Sorumlu Grup (DSG) Dengesizlik Miktarı Dışa Aktarım Servisi
+    description: Dengeden sorumlu taraflar dengeleme yükümlülükleri kapsamında bir
+      araya gelerek dengeden sorumlu grup oluşturabilirler. Dengeden sorumlu grup
+      adına grup içinden bir dengeden sorumlu taraf, dengeden sorumlu grubun enerji
+      dengesizliğine ilişkin Piyasa İşletmecisine karşı mali sorumluluğunu üstlenir.
+      Dengeden sorumlu taraflarının portföyünde yer alan organizasyonların piyasa
+      işlemleri neticesinde gerçekleşen üretim/tüketim değerlerinden ne kadar saptığını
+      gösteren miktardır. Dengeden Sorumlu Grup (DSG) Dengesizlik Miktarı Listesini
+      XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  imbalance_amount_export:
+    endpoint: /v1/markets/imbalance/export/imbalance-amount
+    method: POST
+    auth: true
+    short_name: imbalance_amount_export
+    short_name_tr: Dengesizlik Tutarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - region
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+      required: false
+      example: TR1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Dengesizlik Tutarı Dışa Aktarım Servisi
+    description: Piyasa katılımcılarının Gün Öncesi Piyasasındaki Gün İçi Piyasası,
+      Dengeleme Güç Piyasası ve ikili Anlaşma işlemleri neticesinde gerçekleşen üretim/tüketim
+      değerlerinden sapmaları durumunda alacaklı/borçlu olduğu tutardır. Dengesizlik
+      Tutarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  imbalance_quantity_export:
+    endpoint: /v1/markets/imbalance/export/imbalance-quantity
+    method: POST
+    auth: true
+    short_name: imbalance_quantity_export
+    short_name_tr: Dengesizlik Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - region
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+      required: false
+      example: TR1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: Dengesizlik Miktarı Dışa Aktarım Servisi
+    description: Piyasa katılımcılarının Gün Öncesi Piyasasındaki Gün İçi Piyasası,
+      Dengeleme Güç Piyasası ve ikili Anlaşma işlemleri neticesinde gerçekleşen üretim/tüketim
+      değerlerinden ne kadar saptığını gösteren miktardır. Dengesizlik Miktarı Listesini
+      XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object

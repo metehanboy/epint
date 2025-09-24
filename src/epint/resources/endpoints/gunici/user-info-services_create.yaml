@@ -1,0 +1,58 @@
+endpoints:
+  create_notification:
+    endpoint: /rest/v1/notifications/create
+    method: POST
+    auth: true
+    short_name: create_notification
+    short_name_tr: Sms ve Mail Bildirimi Oluşturma
+    params:
+    - name
+    - surname
+    - email
+    - phone
+    - notifications
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: name
+      var_type: str
+      description: ''
+      required: false
+    - name: surname
+      var_type: str
+      description: ''
+      required: false
+    - name: email
+      var_type: str
+      description: ''
+      required: false
+    - name: phone
+      var_type: str
+      description: ''
+      required: false
+    - name: notifications
+      var_type: list
+      description: ''
+      required: false
+      items: str
+    summary: Sms ve Mail Bildirimi Oluşturma
+    description: Sms ve Mail Bildirimi Oluşturma
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

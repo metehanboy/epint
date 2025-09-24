@@ -1,0 +1,35 @@
+endpoints:
+  district_list:
+    endpoint: /v1/main/district-list
+    method: POST
+    auth: true
+    short_name: district_list
+    short_name_tr: İlçe Listeleme Servisi
+    params:
+    - provinceId
+    required:
+    - provinceId
+    response: []
+    var_type:
+    - name: provinceId
+      var_type: int
+      description: Şehir Id bilgisi(bkz.Şehir Listesi Getirme Servisi)
+      required: true
+      example: ''
+    summary: İlçe Listeleme Servisi
+    description: Şehir bilgisine göre ilçe listelesini dönen servistir.
+    response_structure: {}
+  province_list:
+    endpoint: /v1/main/province-list
+    method: GET
+    auth: true
+    short_name: province_list
+    short_name_tr: Şehir Listeleme Servisi
+    params: []
+    required: null
+    response: []
+    var_type: []
+    summary: Şehir Listeleme Servisi
+    description: EPİAŞ Sisteminde kayıtlı Türkiye şehir listelemesini dönen servistir.
+      İstanbul, Asya ve Avrupa olmak üzere ikiye ayrılmıştır.
+    response_structure: {}

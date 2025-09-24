@@ -1,0 +1,103 @@
+endpoints:
+  consumer_quantity:
+    endpoint: /v1/consumption/data/consumer-quantity
+    method: POST
+    auth: true
+    short_name: consumer_quantity
+    short_name_tr: Tüketici Sayısı Listeleme Servisi
+    params:
+    - period
+    - provinceId
+    - profileGroupId
+    - page
+    required:
+    - period
+    response:
+    - items
+    - page
+    var_type:
+    - name: period
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: provinceId
+      var_type: int
+      description: Şehir Id bilgisi(bkz.Şehir Listesi Getirme Servisi)
+      required: false
+      example: 160
+    - name: profileGroupId
+      var_type: int
+      description: Profil grup Id bilgisi(bkz.Profil Group Listesi Getirme Servisi)
+      required: false
+      example: 1234
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: Tüketici Sayısı Listeleme Servisi
+    description: İl bazında tüketici sayılarının tüketici türüne ve tüketici profil
+      gruplarına göre ayrımı aylık olarak gösterilmektedir.
+    response_structure:
+      items: list
+      page: str
+  consumer_sector_list:
+    endpoint: /v1/consumption/data/consumer-sector-list
+    method: GET
+    auth: true
+    short_name: consumer_sector_list
+    short_name_tr: Profil Grubu Listeleme Servisi
+    params: []
+    required: null
+    response: []
+    var_type: []
+    summary: Profil Grubu Listeleme Servisi
+    description: Tüketici bilgisi sayfalarının filtreleme alanları için Profil Grubu
+      Listeleme servisidir.
+    response_structure: {}
+  main_tariff_group_list:
+    endpoint: /v1/consumption/data/main-tariff-group-list
+    method: GET
+    auth: true
+    short_name: main_tariff_group_list
+    short_name_tr: Ana Tarife Grubu
+    params: []
+    required: null
+    response: []
+    var_type: []
+    summary: Ana Tarife Grubu
+    description: Ana Tarife gruplarını dönen servis.
+    response_structure: {}
+  profile_subscription_group_list:
+    endpoint: /v1/consumption/data/profile-subscription-group-list
+    method: POST
+    auth: true
+    short_name: profile_subscription_group_list
+    short_name_tr: Profil Abone Grubu Listeleme Servisi
+    params:
+    - period
+    - provinceId
+    - districtName
+    required:
+    - period
+    response: []
+    var_type:
+    - name: period
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: provinceId
+      var_type: int
+      description: Şehir Id bilgisi(bkz.Şehir Listesi Getirme Servisi)
+      required: false
+      example: 160
+    - name: districtName
+      var_type: str
+      description: İlçe Adı
+      required: false
+      example: ''
+    summary: Profil Abone Grubu Listeleme Servisi
+    description: İl ilçe st adedi sayfası için profil abone grubu listesi döner
+    response_structure: {}

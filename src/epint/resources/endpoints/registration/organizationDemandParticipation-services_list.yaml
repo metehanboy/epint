@@ -1,0 +1,78 @@
+endpoints:
+  OrganizationController_getDistributionAreaWithProvinces_GET:
+    endpoint: /v1/organization/get-distribution-area-with-provinces
+    method: GET
+    auth: true
+    short_name: OrganizationController_getDistributionAreaWithProvinces_GET
+    short_name_tr: OrganizationController_getDistributionAreaWithProvinces_GET
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_get_organization_provinces:
+    endpoint: /v1/organization/provinces/{effectiveId}
+    method: GET
+    auth: true
+    short_name: organization_get_organization_provinces
+    short_name_tr: Organizasyonun Bulunduğu İller Sorgulama Servisi
+    params:
+    - effectiveId
+    required:
+    - effectiveId
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: Organizasyonun ID bilgisi
+      required: true
+    summary: Organizasyonun Bulunduğu İller Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz organizasyonun bulunduğu İller bilgilerini
+      bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

@@ -1,0 +1,393 @@
+endpoints:
+  contract_price_summary:
+    endpoint: /v1/markets/vgp/data/contract-price-summary
+    method: POST
+    auth: true
+    short_name: contract_price_summary
+    short_name_tr: VGP Kontrat Fiyatları Özeti Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - isTransactionPeriod
+    - deliveryYear
+    - deliveryPeriod
+    - page
+    required:
+    - isTransactionPeriod
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: isTransactionPeriod
+      var_type: bool
+      description: İşlem Döneminin Boolean Bilgisi
+      required: true
+      example: true
+    - name: deliveryYear
+      var_type: str
+      description: Yıl Bilgisi
+      required: false
+      example: '2001'
+    - name: deliveryPeriod
+      var_type: str
+      description: Teslimat Tarihi Bilgisi
+      required: false
+      example: Q1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: VGP Kontrat Fiyatları Özeti Listeleme Servisi
+    description: 'Vadeli kontratların Eşleşme Fiyatı İstatistiklerini gösterir.İlk
+      Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen
+      ilk işlem fiyatını gösterir.En Yüksek Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde
+      her vadeli kontratta gerçekleşen en yüksek eşleşme fiyatını gösterir.En Düşük
+      Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen
+      en düşük eşleşme fiyatını gösterir.Son Eşleşme Fiyatı (TL/1000.Sm3): İlgili
+      günde her vadeli kontratta gerçekleşen son işlem fiyatını gösterir.'
+    response_structure:
+      items: list
+      page: str
+  delivery_period:
+    endpoint: /v1/markets/vgp/data/delivery-period
+    method: GET
+    auth: true
+    short_name: delivery_period
+    short_name_tr: Teslimat Dönemi
+    params: []
+    required: null
+    response:
+    - items
+    - page
+    var_type: []
+    summary: Teslimat Dönemi
+    description: Teslimat Dönemi
+    response_structure:
+      items: list
+      page: str
+  delivery_year:
+    endpoint: /v1/markets/vgp/data/delivery-year
+    method: GET
+    auth: true
+    short_name: delivery_year
+    short_name_tr: Teslimat Yılı
+    params: []
+    required: null
+    response:
+    - items
+    - page
+    var_type: []
+    summary: Teslimat Yılı
+    description: Teslimat Yılı
+    response_structure:
+      items: list
+      page: str
+  ggf:
+    endpoint: /v1/markets/vgp/data/ggf
+    method: POST
+    auth: true
+    short_name: ggf
+    short_name_tr: VGP Günlük Gösterge Fiyatı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - isTransactionPeriod
+    - deliveryYear
+    - deliveryPeriod
+    - page
+    required:
+    - isTransactionPeriod
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: isTransactionPeriod
+      var_type: bool
+      description: İşlem Döneminin Boolean Bilgisi
+      required: true
+      example: true
+    - name: deliveryYear
+      var_type: str
+      description: Yıl Bilgisi
+      required: false
+      example: '2001'
+    - name: deliveryPeriod
+      var_type: str
+      description: Teslimat Tarihi Bilgisi
+      required: false
+      example: Q1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: VGP Günlük Gösterge Fiyatı Listeleme Servisi
+    description: Vadeli Doğal Gaz Piyasasında (VGP) gün öncesi ve gün içi eşleşmelerinin
+      Ağırlıklı Ortalama Fiyatını gösterir.
+    response_structure:
+      items: list
+      page: str
+  matching_quantity:
+    endpoint: /v1/markets/vgp/data/matching-quantity
+    method: POST
+    auth: true
+    short_name: matching_quantity
+    short_name_tr: VGP Piyasa Eşleşme Miktarı (1000.Sm³/gün) Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - isTransactionPeriod
+    - deliveryYear
+    - deliveryPeriod
+    - page
+    required:
+    - isTransactionPeriod
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: isTransactionPeriod
+      var_type: bool
+      description: İşlem Döneminin Boolean Bilgisi
+      required: true
+      example: true
+    - name: deliveryYear
+      var_type: str
+      description: Yıl Bilgisi
+      required: false
+      example: '2001'
+    - name: deliveryPeriod
+      var_type: str
+      description: Teslimat Tarihi Bilgisi
+      required: false
+      example: Q1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: VGP Piyasa Eşleşme Miktarı (1000.Sm³/gün) Listeleme Servisi
+    description: Vadeli kontratların Teklif ve/veya Eşleşmelerinin Ağırlıklı Ortalama
+      Fiyatlarını gösterir.
+    response_structure:
+      items: list
+      page: str
+  open_position:
+    endpoint: /v1/markets/vgp/data/open-position
+    method: POST
+    auth: true
+    short_name: open_position
+    short_name_tr: VGP Açık Pozisyon Miktarı (1000.Sm³/gün) Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - isTransactionPeriod
+    - deliveryYear
+    - deliveryPeriod
+    - page
+    required:
+    - isTransactionPeriod
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: isTransactionPeriod
+      var_type: bool
+      description: İşlem Döneminin Boolean Bilgisi
+      required: true
+      example: true
+    - name: deliveryYear
+      var_type: str
+      description: Yıl Bilgisi
+      required: false
+      example: '2001'
+    - name: deliveryPeriod
+      var_type: str
+      description: Teslimat Tarihi Bilgisi
+      required: false
+      example: Q1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: VGP Açık Pozisyon Miktarı (1000.Sm³/gün) Listeleme Servisi
+    description: Vadeli kontratların Alış ve Satış Eşleşmeleri Fark Miktarını gösterir.
+    response_structure:
+      items: list
+      page: str
+  vgp_offer_price:
+    endpoint: /v1/markets/vgp/data/vgp-offer-price
+    method: POST
+    auth: true
+    short_name: vgp_offer_price
+    short_name_tr: VGP Teklif Fiyatları Listeleme Servisi
+    params:
+    - page
+    required: null
+    response:
+    - items
+    - page
+    var_type:
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: VGP Teklif Fiyatları Listeleme Servisi
+    description: Vadeli kontratların Teklif Fiyatı İstatistiklerini gösterir.
+    response_structure:
+      items: list
+      page: str
+  vgp_transaction_history:
+    endpoint: /v1/markets/vgp/data/vgp-transaction-history
+    method: POST
+    auth: true
+    short_name: vgp_transaction_history
+    short_name_tr: VGP İşlem Akışı Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - isTransactionPeriod
+    - deliveryYear
+    - deliveryPeriod
+    - page
+    required:
+    - isTransactionPeriod
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: isTransactionPeriod
+      var_type: bool
+      description: İşlem Döneminin Boolean Bilgisi
+      required: true
+      example: true
+    - name: deliveryYear
+      var_type: str
+      description: Yıl Bilgisi
+      required: false
+      example: '2001'
+    - name: deliveryPeriod
+      var_type: str
+      description: Teslimat Tarihi Bilgisi
+      required: false
+      example: Q1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: VGP İşlem Akışı Listeleme Servisi
+    description: 'Vadeli kontratların Eşleşme Zamanlarını gösterir.Eşleşme Fiyatı
+      (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen işlemin eşleşme
+      fiyatını gösterir. Eşleşme Miktarı (1000.Sm3): İlgili günde her vadeli kontratta
+      gerçekleşen işlemin eşleşme miktarını gösterir.'
+    response_structure:
+      items: list
+      page: str
+  vgp_volume:
+    endpoint: /v1/markets/vgp/data/vgp-volume
+    method: POST
+    auth: true
+    short_name: vgp_volume
+    short_name_tr: VGP İşlem Hacmi Listeleme Servisi
+    params:
+    - startDate
+    - endDate
+    - isTransactionPeriod
+    - deliveryYear
+    - deliveryPeriod
+    - page
+    required:
+    - isTransactionPeriod
+    response:
+    - items
+    - page
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: false
+      example: '2021-01-01T00:00:00+03:00'
+    - name: isTransactionPeriod
+      var_type: bool
+      description: İşlem Döneminin Boolean Bilgisi
+      required: true
+      example: true
+    - name: deliveryYear
+      var_type: str
+      description: Yıl Bilgisi
+      required: false
+      example: '2001'
+    - name: deliveryPeriod
+      var_type: str
+      description: Teslimat Tarihi Bilgisi
+      required: false
+      example: Q1
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    summary: VGP İşlem Hacmi Listeleme Servisi
+    description: Vadeli kontratların Eşleşme Tutarını gösterir.
+    response_structure:
+      items: list
+      page: str

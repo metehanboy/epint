@@ -1,0 +1,30 @@
+endpoints:
+  aoptf_and_yek_unit_cost_data:
+    endpoint: /v1/market/data/avg-mcp-and-renewables-unit-cost
+    method: POST
+    auth: true
+    short_name: aoptf_and_yek_unit_cost_data
+    short_name_tr: AOPTF ve YEKDEM birim maliyeti listeleme servisi.
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: AOPTF ve YEKDEM birim maliyeti listeleme servisi.
+    description: EPDK için, AOPTF ve YEKDEM birim maliyeti dönen servistir.
+    response_structure:
+      items: list

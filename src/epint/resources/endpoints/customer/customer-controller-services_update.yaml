@@ -1,0 +1,90 @@
+endpoints:
+  customer_update:
+    endpoint: v1/customer/update
+    method: POST
+    auth: true
+    short_name: customer_update
+    short_name_tr: Abone Güncelle
+    params:
+    - customerId
+    - startDate
+    - endDate
+    - title
+    - authorizedPerson1Name
+    - authorizedPerson2Name
+    - authorizedPerson1No
+    - authorizedPerson2No
+    - tariffGroup
+    - tariffTimeType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: customerId
+      var_type: int
+      description: Abone kayıt id.
+      required: false
+    - name: startDate
+      var_type: str
+      description: Abone portföy başlangıç bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: str
+      description: Abone portföy bitiş bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: title
+      var_type: str
+      description: Tüketici ad/soyad veya ünvan bilgisi.
+      required: false
+    - name: authorizedPerson1Name
+      var_type: str
+      description: Birinci yetkili kişi ad/soyad bilgisi. Abone tipine göre zorunluluk
+        arz edebilir.
+      required: false
+    - name: authorizedPerson2Name
+      var_type: str
+      description: İkinci yetkili kişi ad/soyad bilgisi.
+      required: false
+    - name: authorizedPerson1No
+      var_type: str
+      description: Birinci yetkili kişi tckn bilgisi. Abone tipine göre zorunluluk
+        arz edebilir.
+      required: false
+    - name: authorizedPerson2No
+      var_type: str
+      description: İkinci yetkili kişi tckn bilgisi.
+      required: false
+    - name: tariffGroup
+      var_type: int
+      description: Abone tarife grubu lookup değeridir.
+      required: false
+    - name: tariffTimeType
+      var_type: int
+      description: Abone tarife zaman tipi lookup değeridir.
+      required: false
+    summary: Abone Güncelle
+    description: Abone bilgilerinin güncellendiği servistir.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

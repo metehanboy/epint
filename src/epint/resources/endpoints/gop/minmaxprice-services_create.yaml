@@ -1,0 +1,362 @@
+endpoints:
+  contract_objection_create:
+    endpoint: /contract-objection/create
+    method: POST
+    auth: true
+    short_name: contract_objection_create
+    short_name_tr: İkili Anlaşmalar Karşılığı Olmayan Satış Kontrolü / İtiraz Et
+    params:
+    - message
+    required:
+    - message
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: message
+      var_type: string
+      description: İtiraz Metni
+      required: true
+    summary: İkili Anlaşmalar Karşılığı Olmayan Satış Kontrolü / İtiraz Et
+    description: İkili Anlaşmalar Karşılığı Olmayan Satış Kontrolü / İtiraz Et
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_create:
+    endpoint: /contract/create
+    method: POST
+    auth: true
+    short_name: contract_create
+    short_name_tr: Bilateral Agreements / Create Service
+    params:
+    - deliveryDay
+    - counterEic
+    - counterRegionCode
+    - offer
+    - cancellationType
+    - explanation
+    required:
+    - deliveryDay
+    - counterEic
+    - counterRegionCode
+    - offer
+    - cancellationType
+    - explanation
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps date. Its format must be ISO8601.
+      required: true
+    - name: counterEic
+      var_type: string
+      description: This field keeps the EIC code information of the participant which
+        will make a counter offer.
+      required: true
+    - name: counterRegionCode
+      var_type: string
+      description: This field keeps the region information of the participant which
+        will make a counter offer.
+      required: true
+    - name: offer
+      var_type: string
+      description: This field keeps the offer information of the participant which
+        will make a counter offer.
+      required: true
+    - name: cancellationType
+      var_type: string
+      description: This field keeps cancellation type of contract.
+      required: true
+      enum:
+      - UNILITERAL
+      - BILATERAL
+      - COLLATERAL_SANCTION
+      - BMO_SANCTION
+    - name: explanation
+      var_type: string
+      description: ''
+      required: true
+    summary: Bilateral Agreements / Create Service
+    description: Bilateral Agreements / Create Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  objection_create:
+    endpoint: /objection/create
+    method: POST
+    auth: true
+    short_name: objection_create
+    short_name_tr: Objection Create
+    params:
+    - offerDetailId
+    - message
+    required:
+    - offerDetailId
+    - message
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: offerDetailId
+      var_type: int
+      description: Id of offer which which objection is created for
+      required: true
+    - name: message
+      var_type: string
+      description: Objection text
+      required: true
+    summary: Objection Create
+    description: Objection Create
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_create_block:
+    endpoint: /offer/create/block
+    method: POST
+    auth: true
+    short_name: offer_create_block
+    short_name_tr: Offer / Create / Block Service
+    params:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    required:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This model keeps Information of Offer.
+      required: true
+    - name: offerType
+      var_type: string
+      description: This field keeps Offer Type.
+      required: true
+      enum: &id001
+      - HOURLY
+      - BLOCK
+      - FLEXIBLE
+    - name: regionCode
+      var_type: string
+      description: This field keeps Region Code of Offer.
+      required: true
+    - name: currencyCode
+      var_type: string
+      description: This field keeps Currency Code of Offer.
+      required: true
+    - name: offerDetails
+      var_type: array
+      description: This field keeps Model of Offer Detail.
+      required: true
+      items: dict
+    summary: Offer / Create / Block Service
+    description: Offer / Create / Block Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_create_flexible:
+    endpoint: /offer/create/flexible
+    method: POST
+    auth: true
+    short_name: offer_create_flexible
+    short_name_tr: Offer / Create / Flexible Service
+    params:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    required:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This model keeps Information of Offer.
+      required: true
+    - name: offerType
+      var_type: string
+      description: This field keeps Offer Type.
+      required: true
+      enum: *id001
+    - name: regionCode
+      var_type: string
+      description: This field keeps Region Code of Offer.
+      required: true
+    - name: currencyCode
+      var_type: string
+      description: This field keeps Currency Code of Offer.
+      required: true
+    - name: offerDetails
+      var_type: array
+      description: This field keeps Model of Offer Detail.
+      required: true
+      items: dict
+    summary: Offer / Create / Flexible Service
+    description: Offer / Create / Flexible Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_create_hourly:
+    endpoint: /offer/create/hourly
+    method: POST
+    auth: true
+    short_name: offer_create_hourly
+    short_name_tr: Offer / Create / Hourly Service
+    params:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    required:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This model keeps Information of Offer.
+      required: true
+    - name: offerType
+      var_type: string
+      description: This field keeps Offer Type.
+      required: true
+      enum: *id001
+    - name: regionCode
+      var_type: string
+      description: This field keeps Region Code of Offer.
+      required: true
+    - name: currencyCode
+      var_type: string
+      description: This field keeps Currency Code of Offer.
+      required: true
+    - name: offerDetails
+      var_type: array
+      description: This field keeps Model of Offer Detail.
+      required: true
+      items: dict
+    summary: Offer / Create / Hourly Service
+    description: Offer / Create / Hourly Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  tradeIncrease_create:
+    endpoint: /tradeIncrease/create
+    method: POST
+    auth: true
+    short_name: tradeIncrease_create
+    short_name_tr: Ticaret Artış Bildirimi Oluştur
+    params:
+    - deliveryStartDay
+    - deliveryEndDay
+    - regionCode
+    required:
+    - deliveryStartDay
+    - deliveryEndDay
+    - regionCode
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryStartDay
+      var_type: datetime
+      description: '#{TRADEINCREASE_REQUEST_FIELD_DELIVERYSTARTDAY}'
+      required: true
+    - name: deliveryEndDay
+      var_type: datetime
+      description: '#{TRADEINCREASE_REQUEST_FIELD_DELIVERYSTARTDAY}'
+      required: true
+    - name: regionCode
+      var_type: string
+      description: '#{TRADEINCREASE_REQUEST_FIELD_REGION_CODE}'
+      required: true
+    summary: Ticaret Artış Bildirimi Oluştur
+    description: Ticaret Artış Bildirimi Oluştur
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str

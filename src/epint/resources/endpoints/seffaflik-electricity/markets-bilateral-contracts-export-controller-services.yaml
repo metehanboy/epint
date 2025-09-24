@@ -1,0 +1,181 @@
+endpoints:
+  amount_of_bilateral_contracts_export:
+    endpoint: /v1/markets/bilateral-contracts/export/amount-of-bilateral-contracts
+    method: POST
+    auth: true
+    short_name: amount_of_bilateral_contracts_export
+    short_name_tr: EÜAŞ - GTŞ İkili Anlaşmalar Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: EÜAŞ - GTŞ İkili Anlaşmalar Dışa Aktarım Servisi
+    description: Düzenlemeye tabi tarife kapsamına göre EÜAŞ ile GTŞ’lerin arasında
+      yapılan ikili anlaşmaların aylık toplamlarını göstermektedir. EÜAŞ - GTŞ İkili
+      Anlaşmalar Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  bilateral_contracts_bid_quantity_export:
+    endpoint: /v1/markets/bilateral-contracts/export/bilateral-contracts-bid-quantity
+    method: POST
+    auth: true
+    short_name: bilateral_contracts_bid_quantity_export
+    short_name_tr: İkili Anlaşma (İA) Alış Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - organizationId
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: organizationId
+      var_type: int
+      description: 'Organizasyon Id değeri. Tüm Liste için bkz: `Göp Eşleşme Miktarı
+        Organizasyon Listeleme Servisi`.'
+      required: false
+      example: 1234
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: İkili Anlaşma (İA) Alış Miktarı Dışa Aktarım Servisi
+    description: İkili anlaşmalara ait alış miktarları verisidir. İkili Anlaşma (İA)
+      Alış Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object
+  bilateral_contracts_offer_quantity_export:
+    endpoint: /v1/markets/bilateral-contracts/export/bilateral-contracts-offer-quantity
+    method: POST
+    auth: true
+    short_name: bilateral_contracts_offer_quantity_export
+    short_name_tr: İkili Anlaşma (İA) Satış Miktarı Dışa Aktarım Servisi
+    params:
+    - startDate
+    - endDate
+    - organizationId
+    - page
+    - exportType
+    required:
+    - startDate
+    - endDate
+    - exportType
+    response:
+    - view
+    - model
+    - status
+    - empty
+    - reference
+    - viewName
+    - modelMap
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: organizationId
+      var_type: int
+      description: 'Organizasyon Id değeri. Tüm Liste için bkz: `Göp Eşleşme Miktarı
+        Organizasyon Listeleme Servisi`.'
+      required: false
+      example: 1234
+    - name: page
+      var_type: str
+      description: Sayfalama bilgisi.
+      required: false
+      example: ''
+    - name: exportType
+      var_type: str
+      description: XLSX, CSV ya da PDF
+      required: true
+      example: XLSX
+    summary: İkili Anlaşma (İA) Satış Miktarı Dışa Aktarım Servisi
+    description: İkili anlaşmalara ait satış miktarı verisidir. İkili Anlaşma (İA)
+      Satış Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure:
+      view: str
+      model: object
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: object

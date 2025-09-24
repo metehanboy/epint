@@ -1,0 +1,30 @@
+endpoints:
+  dsg_organization_list:
+    endpoint: /v1/markets/imbalance/data/dsg-organization-list
+    method: POST
+    auth: true
+    short_name: dsg_organization_list
+    short_name_tr: DSG Organizasyon Listesi Servisi
+    params:
+    - startDate
+    - endDate
+    required:
+    - startDate
+    - endDate
+    response:
+    - items
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    - name: endDate
+      var_type: datetime
+      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+      required: true
+      example: '2021-01-01T00:00:00+03:00'
+    summary: DSG Organizasyon Listesi Servisi
+    description: Dengeden Sorumlu Grup servisinde kullanılan Organizasyon Listesi
+    response_structure:
+      items: list

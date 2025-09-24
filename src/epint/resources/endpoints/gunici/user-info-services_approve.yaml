@@ -1,0 +1,103 @@
+endpoints:
+  approve_organization_limit_demand:
+    endpoint: /rest/v1/limit/organization-demand/approve
+    method: POST
+    auth: true
+    short_name: approve_organization_limit_demand
+    short_name_tr: Limit Değişiklik Talebi Onaylama Servisi
+    params:
+    - demandId
+    - approvedMaxTotalBuyUpperBound
+    - approvedMaxTotalSellUpperBound
+    - existDescription
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: demandId
+      var_type: int
+      description: Organizasyon Limit Değişlik Talebi Id Bilgisi
+      required: false
+    - name: approvedMaxTotalBuyUpperBound
+      var_type: int
+      description: Onaylanan Maksimum Toplam Alış Miktarı
+      required: false
+    - name: approvedMaxTotalSellUpperBound
+      var_type: int
+      description: Onaylanan Maksimum Toplam Satış Miktarı
+      required: false
+    - name: existDescription
+      var_type: str
+      description: EPİAŞ Açıklama
+      required: false
+    summary: Limit Değişiklik Talebi Onaylama Servisi
+    description: Limit Değişiklik Talebi Onaylama Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  save_and_approve_organization_limit_demand:
+    endpoint: /rest/v1/limit/organization-demand/save-approve
+    method: POST
+    auth: true
+    short_name: save_and_approve_organization_limit_demand
+    short_name_tr: Limit Değişiklik Gerçekleştirme Servisi
+    params:
+    - maxTotalBuyUpperBoundNewValue
+    - maxTotalSellUpperBoundNewValue
+    - existDescription
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: maxTotalBuyUpperBoundNewValue
+      var_type: int
+      description: Maksimum Toplam Alış Miktarı Yeni Değer
+      required: false
+    - name: maxTotalSellUpperBoundNewValue
+      var_type: int
+      description: Maksimum Toplam Satış Miktarı Yeni Değer
+      required: false
+    - name: existDescription
+      var_type: str
+      description: EPİAŞ Açıklama
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Limit Değişiklik Gerçekleştirme Servisi
+    description: Limit Değişiklik Gerçekleştirme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

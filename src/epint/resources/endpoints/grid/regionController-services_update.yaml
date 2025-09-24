@@ -1,0 +1,415 @@
+endpoints:
+  ec_meter_status_update:
+    endpoint: /v1/ec-meter/status-update
+    method: POST
+    auth: true
+    short_name: ec_meter_status_update
+    short_name_tr: Ölçüm Noktası Durum Güncelleme Servisi
+    params:
+    - descriptions
+    - effectiveDate
+    - effectiveId
+    - statusId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: descriptions
+      var_type: list
+      description: Açıklamalar
+      required: false
+      items: str
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: statusId
+      var_type: int
+      description: Durum ID
+      required: false
+    summary: Ölçüm Noktası Durum Güncelleme Servisi
+    description: Mevcut bir ölçüm noktasının durumunu bu servis ile güncelleyebilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  ec_meter_update:
+    endpoint: /v1/ec-meter/update
+    method: POST
+    auth: true
+    short_name: ec_meter_update
+    short_name_tr: Ölçüm Noktası Güncelleme Servisi
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    - descriptions
+    - address
+    - addressCode
+    - annualAverageConsumption
+    - annualEstimatedConsumptionT1
+    - annualEstimatedConsumptionT2
+    - annualEstimatedConsumptionT3
+    - bilateralConsumerGroupId
+    - busbarVoltageTypeId
+    - consumptionPointTypeId
+    - contractPower
+    - deletedFields
+    - districtId
+    - effectiveId
+    - facilityTypeId
+    - lastResortConsumerGroupId
+    - lineCircuitCountTypeId1
+    - lineCircuitCountTypeId2
+    - lineCircuitCountTypeId3
+    - lineConductorTypeId1
+    - lineConductorTypeId2
+    - lineConductorTypeId3
+    - lineCrossSection1
+    - lineCrossSection2
+    - lineCrossSection3
+    - lineLength1
+    - lineLength2
+    - lineLength3
+    - loadLoss
+    - loadProfileFeature
+    - mainMeterId
+    - mainTariffGroupId
+    - meteringVoltageTypeId
+    - noLoadLoss
+    - profileSubscriptionGroupId
+    - readingDataResetConfirmation
+    - readingDataTypeId
+    - readingOrganizationId
+    - readingPeriod
+    - readingTypeId
+    - remoteReadingStatusId
+    - substationId
+    - substationInputVoltage
+    - substationOutputVoltage
+    - substationPower
+    - tariffClassTypeId
+    - uniqueCode
+    - usageStatusTypeId
+    - withdrawPositionTypeId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: descriptions
+      var_type: list
+      description: Açıklamalar
+      required: false
+      items: str
+    - name: address
+      var_type: str
+      description: Adres
+      required: false
+    - name: addressCode
+      var_type: int
+      description: Adres Kodu
+      required: false
+    - name: annualAverageConsumption
+      var_type: float
+      description: Yıllık Ortalama Tüketim
+      required: false
+    - name: annualEstimatedConsumptionT1
+      var_type: float
+      description: T1 Yıllık Tahmini Tüketim
+      required: false
+    - name: annualEstimatedConsumptionT2
+      var_type: float
+      description: T2 Yıllık Tahmini Tüketim
+      required: false
+    - name: annualEstimatedConsumptionT3
+      var_type: float
+      description: T3 Yıllık Tahmini Tüketim
+      required: false
+    - name: bilateralConsumerGroupId
+      var_type: int
+      description: İkili Anlaşma Tüketici Grubu ID
+      required: false
+    - name: busbarVoltageTypeId
+      var_type: int
+      description: Bara Gerilim ID
+      required: false
+    - name: consumptionPointTypeId
+      var_type: int
+      description: Tüketim Noktası Tip ID
+      required: false
+    - name: contractPower
+      var_type: float
+      description: Sözleşme Gücü
+      required: false
+    - name: deletedFields
+      var_type: list
+      description: Silinen Alanlar
+      required: false
+      items: str
+    - name: districtId
+      var_type: int
+      description: İlçe ID
+      required: false
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: facilityTypeId
+      var_type: int
+      description: Tesis Tip ID
+      required: false
+    - name: lastResortConsumerGroupId
+      var_type: int
+      description: Son Kaynak Tüketici Grubu ID
+      required: false
+    - name: lineCircuitCountTypeId1
+      var_type: int
+      description: 1. Hat Devre Sayısı ID
+      required: false
+    - name: lineCircuitCountTypeId2
+      var_type: int
+      description: 2. Hat Devre Sayısı ID
+      required: false
+    - name: lineCircuitCountTypeId3
+      var_type: int
+      description: 3. Hat Devre Sayısı ID
+      required: false
+    - name: lineConductorTypeId1
+      var_type: int
+      description: 1. İletken Tipi Özdirenç ID
+      required: false
+    - name: lineConductorTypeId2
+      var_type: int
+      description: 2. İletken Tipi Özdirenç ID
+      required: false
+    - name: lineConductorTypeId3
+      var_type: int
+      description: 3. İletken Tipi Özdirenç ID
+      required: false
+    - name: lineCrossSection1
+      var_type: float
+      description: 1. Hat Kesiti
+      required: false
+    - name: lineCrossSection2
+      var_type: float
+      description: 2. Hat Kesiti
+      required: false
+    - name: lineCrossSection3
+      var_type: float
+      description: 3. Hat Kesiti
+      required: false
+    - name: lineLength1
+      var_type: float
+      description: 1. Hat Uzunluk
+      required: false
+    - name: lineLength2
+      var_type: float
+      description: 2. Hat Uzunluk
+      required: false
+    - name: lineLength3
+      var_type: float
+      description: 3. Hat Uzunluk
+      required: false
+    - name: loadLoss
+      var_type: float
+      description: Yükteki Kayıp
+      required: false
+    - name: loadProfileFeature
+      var_type: bool
+      description: Yük Profil Kayit Özelliği
+      required: false
+    - name: mainMeterId
+      var_type: int
+      description: Ana Sayaç ID
+      required: false
+    - name: mainTariffGroupId
+      var_type: int
+      description: Ana Tarife Grubu ID
+      required: false
+    - name: meteringVoltageTypeId
+      var_type: int
+      description: Bağlantı Noktası Gerilim Tip ID
+      required: false
+    - name: noLoadLoss
+      var_type: float
+      description: Boştaki Kayıp
+      required: false
+    - name: profileSubscriptionGroupId
+      var_type: int
+      description: Profil Abone Grubu ID
+      required: false
+    - name: readingDataResetConfirmation
+      var_type: bool
+      description: Okuma Verisi Silme Onayı
+      required: false
+    - name: readingDataTypeId
+      var_type: int
+      description: Uzlaştırma Veri Tip ID
+      required: false
+    - name: readingOrganizationId
+      var_type: int
+      description: Sayac Okuyan Kurum ID
+      required: false
+    - name: readingPeriod
+      var_type: int
+      description: Okuma Periyodu
+      required: false
+    - name: readingTypeId
+      var_type: int
+      description: Sayaç Okuma Tip ID
+      required: false
+    - name: remoteReadingStatusId
+      var_type: int
+      description: Uzaktan Okuma Durum ID
+      required: false
+    - name: substationId
+      var_type: int
+      description: Trafo Merkezi ID
+      required: false
+    - name: substationInputVoltage
+      var_type: float
+      description: Trafo Giriş Gerilimi
+      required: false
+    - name: substationOutputVoltage
+      var_type: float
+      description: Trafo Çıkış Gerilimi
+      required: false
+    - name: substationPower
+      var_type: float
+      description: Trafo Gücü
+      required: false
+    - name: tariffClassTypeId
+      var_type: int
+      description: Tarife Sınıf ID
+      required: false
+    - name: uniqueCode
+      var_type: str
+      description: Tekil Kod
+      required: false
+    - name: usageStatusTypeId
+      var_type: int
+      description: Kullanım Durum ID
+      required: false
+    - name: withdrawPositionTypeId
+      var_type: int
+      description: Çekiş Pozisyon ID
+      required: false
+    summary: Ölçüm Noktası Güncelleme Servisi
+    description: Mevcut bir ölçüm noktasını bu servis ile güncelleyebilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  uleg_meter_service_power_update:
+    endpoint: /v1/uleg-meter/service-power-update
+    method: POST
+    auth: true
+    short_name: uleg_meter_service_power_update
+    short_name_tr: LÜY Sayaç İşletmedeki Güç Güncelleme Servisi
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    - descriptions
+    - effectiveId
+    - servicePower
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: descriptions
+      var_type: list
+      description: Açıklamalar
+      required: false
+      items: str
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: servicePower
+      var_type: float
+      description: LÜY İşletmedeki Güç
+      required: false
+    summary: LÜY Sayaç İşletmedeki Güç Güncelleme Servisi
+    description: Mevcut bir LÜY sayacının işletmedeki gücünü bu servis ile güncelleyebilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

@@ -1,0 +1,500 @@
+endpoints:
+  pre_reconciliation_look_up_value:
+    endpoint: /v1/lookup/list
+    method: GET
+    auth: true
+    short_name: pre_reconciliation_look_up_value
+    short_name_tr: Onaylı Sayaçlar ve Veriler Sayfasında Kullanılan Lookup Değerleri
+      Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Onaylı Sayaçlar ve Veriler Sayfasında Kullanılan Lookup Değerleri Servisi
+    description: Onaylı sayaçlar ve veriler sayfasında kullanılan lookup değerleri
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body:
+        content:
+        - id: int
+          name: str
+          description: str
+          active: bool
+          createDate: str
+          modifyDate: str
+          createUser: str
+          modifyUser: str
+  file_template:
+    endpoint: /v1/meter-data/file/template
+    method: GET
+    auth: true
+    short_name: file_template
+    short_name_tr: OSF,PSF ve SVL Şablon Dosyaları Servisi
+    params:
+    - file
+    required:
+    - file
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: file
+      var_type: str
+      description: ''
+      required: true
+    summary: OSF,PSF ve SVL Şablon Dosyaları Servisi
+    description: OSF,PSF ve SVL şablon dosyalarını indirir.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  save_batch_hourly_meter_data:
+    endpoint: /v1/meter-data/hourly/batch/save
+    method: POST
+    auth: true
+    short_name: save_batch_hourly_meter_data
+    short_name_tr: Saatlik Sayaç Verileri Toplu Kayıt Servisi
+    params:
+    - meters
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: meters
+      var_type: list
+      description: Saatlik Sayaç Veri Listesi
+      required: false
+      items: str
+    summary: Saatlik Sayaç Verileri Toplu Kayıt Servisi
+    description: Saatlik Sayaç Verilerini sisteme kaydeder.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  save_hourly_meter_data:
+    endpoint: /v1/retrospective-meter-data/hourly/save
+    method: POST
+    auth: true
+    short_name: save_hourly_meter_data
+    short_name_tr: GDDK Saatlik Sayaç Verisi Kaydetme Servisi
+    params:
+    - meters
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: meters
+      var_type: list
+      description: Saatlik Sayaç Veri Listesi
+      required: false
+      items: str
+    summary: GDDK Saatlik Sayaç Verisi Kaydetme Servisi
+    description: Saatlik sayaçların GDDK verisinin kaydedileceği servistir.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  import_osf_form:
+    endpoint: /v1/meter-data/osf/import
+    method: POST
+    auth: true
+    short_name: import_osf_form
+    short_name_tr: Saatlik Sayaç Verilerini OSF Excel İle Yükleme Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Saatlik Sayaç Verilerini OSF Excel İle Yükleme Servisi
+    description: Saatlik sayaç verilerini OSF excel formatında sisteme kaydedilmesini
+      sağlar.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  save_profile_meter_data:
+    endpoint: /v1/meter-data/profile/save
+    method: POST
+    auth: true
+    short_name: save_profile_meter_data
+    short_name_tr: Üç ve Tek Zamanlı Sayaç Verileri Kayıt Servisi
+    params:
+    - datas
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: datas
+      var_type: list
+      description: Üç ve Tek Zamanlı Sayaç Veri Listesi
+      required: false
+      items: str
+    summary: Üç ve Tek Zamanlı Sayaç Verileri Kayıt Servisi
+    description: Üç ve tek zamanlı sayaç verilerini sisteme kaydeder.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  psf_import:
+    endpoint: /v1/meter-data/psf/import
+    method: POST
+    auth: true
+    short_name: psf_import
+    short_name_tr: Üç ve Tek Zamanlı Sayaç Verilerini PSF Excel Formatı İle Yükleme
+      Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Üç ve Tek Zamanlı Sayaç Verilerini PSF Excel Formatı İle Yükleme Servisi
+    description: Üç ve tek zamanlı sayaçların PSF excel formatında topluca sisteme
+      kaydedilmesini sağlar.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  svl_import:
+    endpoint: /v1/meter-data/svl/import
+    method: POST
+    auth: true
+    short_name: svl_import
+    short_name_tr: Üç ve Tek Zamanlı Sayaç Verilerini SVL Formatı İle Yükleme Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Üç ve Tek Zamanlı Sayaç Verilerini SVL Formatı İle Yükleme Servisi
+    description: Üç ve tek zamanlı sayaçların SVL formatında topluca sisteme kaydedilmesini
+      sağlar.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  PowerPlantPowerIncreaseController_importMrp_POST:
+    endpoint: /v1/power-increase/import
+    method: POST
+    auth: true
+    short_name: PowerPlantPowerIncreaseController_importMrp_POST
+    short_name_tr: PowerPlantPowerIncreaseController_importMrp_POST
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  retro_import_osf_form:
+    endpoint: /v1/retrospective-meter-data/osf/import
+    method: POST
+    auth: true
+    short_name: retro_import_osf_form
+    short_name_tr: GDDK Saatlik Sayaç Verilerini OSF Excel Formatı İle Sisteme Yükleme
+      Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: GDDK Saatlik Sayaç Verilerini OSF Excel Formatı İle Sisteme Yükleme Servisi
+    description: GDDK Saatlik sayaç verilerinin OSF excel formatında sisteme kaydedilmesini
+      sağlar.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  retro_save_profile_meter_data:
+    endpoint: /v1/retrospective-meter-data/profile/save
+    method: POST
+    auth: true
+    short_name: retro_save_profile_meter_data
+    short_name_tr: GDDK Profil Sayaç Verileri Kayıt Servisi
+    params:
+    - datas
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: datas
+      var_type: list
+      description: Üç ve Tek Zamanlı Sayaç Veri Listesi
+      required: false
+      items: str
+    summary: GDDK Profil Sayaç Verileri Kayıt Servisi
+    description: GDDK profil sayaç verilerini kaydeder.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  import_psf_form:
+    endpoint: /v1/retrospective-meter-data/psf/import
+    method: POST
+    auth: true
+    short_name: import_psf_form
+    short_name_tr: GDDK Üç ve Tek Zamanlı Sayaç Verilerini PSF Excel Formatı İle Sisteme
+      Yükleme Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: GDDK Üç ve Tek Zamanlı Sayaç Verilerini PSF Excel Formatı İle Sisteme
+      Yükleme Servisi
+    description: GDDK Üç ve tek zamanlı sayaç verilerinin PSF excel formatında topluca
+      sisteme kaydedilmesini sağlar.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  import_svl_form:
+    endpoint: /v1/retrospective-meter-data/svl/import
+    method: POST
+    auth: true
+    short_name: import_svl_form
+    short_name_tr: GDDK Saatlik Sayaç Verilerini SVL Formatı İle Sisteme Yükleme Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: GDDK Saatlik Sayaç Verilerini SVL Formatı İle Sisteme Yükleme Servisi
+    description: GDDK Saatlik sayaç verilerinin SVL formatında sisteme kaydedilmesini
+      sağlar.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

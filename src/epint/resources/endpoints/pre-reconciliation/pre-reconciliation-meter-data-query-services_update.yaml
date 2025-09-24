@@ -1,0 +1,160 @@
+endpoints:
+  PowerPlantPowerIncreaseController_updatePowerIncrease_POST:
+    endpoint: /v1/power-increase/update
+    method: POST
+    auth: true
+    short_name: PowerPlantPowerIncreaseController_updatePowerIncrease_POST
+    short_name_tr: PowerPlantPowerIncreaseController_updatePowerIncrease_POST
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    - organizationId
+    - organizationName
+    - powerPlantId
+    - powerPlantName
+    - capacityAmount
+    - description
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: organizationId
+      var_type: int
+      description: ''
+      required: false
+    - name: organizationName
+      var_type: str
+      description: ''
+      required: false
+    - name: powerPlantId
+      var_type: int
+      description: Enerji Santrali İsmi
+      required: false
+    - name: powerPlantName
+      var_type: str
+      description: ''
+      required: false
+    - name: capacityAmount
+      var_type: float
+      description: ''
+      required: false
+    - name: description
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  update_retrospective_hourly_meter_data_status:
+    endpoint: /v1/retrospective-meter-data/hourly/status/update
+    method: POST
+    auth: true
+    short_name: update_retrospective_hourly_meter_data_status
+    short_name_tr: GDDK Saatlik Sayaç Bilgilerinin Durum Güncelleme Servisi
+    params:
+    - items
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: items
+      var_type: list
+      description: Sayaç Veri Güncelleme Listesi
+      required: false
+      items: str
+    summary: GDDK Saatlik Sayaç Bilgilerinin Durum Güncelleme Servisi
+    description: GDDK Saatlik Sayaç Bilgilerinin Durum Güncellemesi Yapar.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  update_retrospective_profile_meter_data_status:
+    endpoint: /v1/retrospective-meter-data/profile/status/update
+    method: POST
+    auth: true
+    short_name: update_retrospective_profile_meter_data_status
+    short_name_tr: GDDK Profil Sayac Durum Bilgisi Güncelleme Servisi
+    params:
+    - items
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: items
+      var_type: list
+      description: Sayaç Veri Güncelleme Listesi
+      required: false
+      items: str
+    summary: GDDK Profil Sayac Durum Bilgisi Güncelleme Servisi
+    description: GDDK Profil Sayac Bilgilerinin Durum Bilgisini Günceller.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

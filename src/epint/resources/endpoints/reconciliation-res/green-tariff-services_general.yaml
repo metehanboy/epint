@@ -1,0 +1,255 @@
+endpoints:
+  dayAheadQueryForK3Sanction:
+    endpoint: /v1/k3-sanction/gop-query
+    method: POST
+    auth: true
+    short_name: dayAheadQueryForK3Sanction
+    short_name_tr: dayAheadQueryForK3Sanction
+    params:
+    - effectiveDate
+    - organizationId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: ''
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: organizationId
+      var_type: int
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body:
+        content:
+          id: int
+          effectiveDate: str
+          organizationId: int
+          organizationName: str
+          sanctionType: str
+          sanctionAmount: float
+          status: str
+          createDate: str
+          modifyDate: str
+          createUser: str
+          modifyUser: str
+  saveK3Sanction:
+    endpoint: /v1/k3-sanction/save
+    method: POST
+    auth: true
+    short_name: saveK3Sanction
+    short_name_tr: saveK3Sanction
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    - organizationId
+    - description
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: organizationId
+      var_type: int
+      description: ''
+      required: false
+    - name: description
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  calculateUnitPrices:
+    endpoint: /v1/res/unit-price/calculate
+    method: POST
+    auth: true
+    short_name: calculateUnitPrices
+    short_name_tr: calculateUnitPrices
+    params:
+    - period
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  unit_prices:
+    endpoint: /v1/res/unit-price/export
+    method: POST
+    auth: true
+    short_name: unit_prices
+    short_name_tr: ''
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    - powerPlantTypes
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: powerPlantTypes
+      var_type: list
+      description: ''
+      required: false
+      items: str
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum:
+      - XLSX
+      - CSV
+      - PDF
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  importYetaRecords:
+    endpoint: /v1/yeta/import
+    method: POST
+    auth: true
+    short_name: importYetaRecords
+    short_name_tr: importYetaRecords
+    params:
+    - isPreview
+    required:
+    - isPreview
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: isPreview
+      var_type: bool
+      description: ''
+      required: true
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
