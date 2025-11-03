@@ -18,13 +18,13 @@ endpoints:
     - isConfirmed
     - clientOrderId
     required:
-    - price
-    - quantity
     - contractName
-    - region
+    - isActive
     - offerType
     - optionType
-    - isActive
+    - price
+    - quantity
+    - region
     response:
     - status
     - txId
@@ -110,7 +110,7 @@ endpoints:
     short_name_tr: Saatlik Teklif Kaydetme
     params:
     - offers
-    required: null
+    required: []
     response:
     - status
     - txId
@@ -232,13 +232,13 @@ endpoints:
     - priceLeveledOfferDetails
     - levelQuantity
     required:
-    - price
-    - quantity
     - contractName
-    - region
+    - isActive
     - offerType
     - optionType
-    - isActive
+    - price
+    - quantity
+    - region
     response:
     - status
     - txId
@@ -340,7 +340,11 @@ endpoints:
     short_name: list_offers
     short_name_tr: Aktif Teklif Listeleme
     params: []
-    required: null
+    required:
+    - effectiveDateEnd
+    - effectiveDateStart
+    - pageInfo
+    - region
     response:
     - status
     - txId

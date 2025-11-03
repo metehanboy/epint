@@ -33,12 +33,12 @@ endpoints:
       description: Abone kayıt id.
       required: false
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy başlangıç bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy bitiş bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'

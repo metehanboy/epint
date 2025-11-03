@@ -119,12 +119,12 @@ endpoints:
       description: Sayaca ait tüketim noktası id.
       required: false
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy başlangıç bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy bitiş bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'
@@ -228,12 +228,12 @@ endpoints:
       description: Abone tüketici no bilgisi.
       required: false
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy başlangıç bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy bitiş bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'
@@ -383,12 +383,12 @@ endpoints:
       description: Abone tüketici no bilgisi.
       required: false
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy başlangıç bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy bitiş bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'
@@ -474,12 +474,12 @@ endpoints:
       description: Abone tüketici no bilgisi.
       required: false
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy başlangıç bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy bitiş bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'
@@ -626,12 +626,12 @@ endpoints:
       description: Sayaca ait tüketim noktası id. EIC gönderildiği durumda gönderilmemelidir.
       required: false
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy başlangıç bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Abone portföy bitiş bilgisi.
       required: false
       example: '2020-01-01T00:00:00+03:00'

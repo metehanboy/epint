@@ -89,12 +89,12 @@ endpoints:
       required: false
       items: str
     - name: startTime
-      var_type: str
+      var_type: datetime
       description: Duyuru başlangıç tarihi
       required: false
       example: '2021-06-24 14:00:00'
     - name: endTime
-      var_type: str
+      var_type: datetime
       description: Duyuru bitiş tarihi
       required: false
       example: '2021-06-24 14:00:00'
@@ -282,12 +282,12 @@ endpoints:
       example: '[''HOURLY'']'
       items: str
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Fiziksel Teslimat Başlangıç Zamanı
       required: false
       example: '2023-01-01 12:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Fiziksel Teslimat Bitiş Zamanı
       required: false
       example: '2023-01-01 14:00:00'
@@ -627,7 +627,7 @@ endpoints:
       description: ''
       required: false
     - name: deliveryDateTime
-      var_type: str
+      var_type: datetime
       description: ''
       required: false
     - name: description
@@ -669,7 +669,7 @@ endpoints:
     - body
     var_type:
     - name: deliveryDateTime
-      var_type: str
+      var_type: datetime
       description: ''
       required: false
     - name: description

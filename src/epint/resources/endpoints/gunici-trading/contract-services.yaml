@@ -9,7 +9,7 @@ endpoints:
     - deliveryDate
     - startTime
     - endTime
-    required: null
+    required: []
     response:
     - status
     - txId
@@ -21,7 +21,7 @@ endpoints:
     - dispatch
     var_type:
     - name: deliveryDate
-      var_type: str
+      var_type: datetime
       description: Teslim saat bilgisi
       required: false
       example: ''
@@ -153,10 +153,10 @@ endpoints:
     - contractType
     - isExcludeChart
     required:
-    - pageInfo
     - contractName
-    - region
     - contractType
+    - pageInfo
+    - region
     response:
     - status
     - txId

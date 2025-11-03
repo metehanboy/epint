@@ -12,9 +12,9 @@ endpoints:
     - region
     - organizationId
     required:
-    - pageInfo
-    - effectiveDateStart
     - effectiveDateEnd
+    - effectiveDateStart
+    - pageInfo
     response:
     - status
     - txId
@@ -73,8 +73,8 @@ endpoints:
     - region
     - organizationId
     required:
-    - effectiveDateStart
     - effectiveDateEnd
+    - effectiveDateStart
     response:
     - view
     - model
@@ -126,10 +126,10 @@ endpoints:
     - effectiveDateEnd
     - region
     - sortingInfoDto
-    required:
-    - pageInfo
-    - effectiveDateStart
+    required: &id001
     - effectiveDateEnd
+    - effectiveDateStart
+    - pageInfo
     - region
     response:
     - status
@@ -188,7 +188,7 @@ endpoints:
     - effectiveDateEnd
     - region
     - sortingInfoDto
-    required: null
+    required: []
     response:
     - view
     - model
@@ -240,11 +240,7 @@ endpoints:
     - effectiveDateEnd
     - region
     - sortingInfoDto
-    required:
-    - pageInfo
-    - effectiveDateStart
-    - effectiveDateEnd
-    - region
+    required: *id001
     response:
     - status
     - txId
@@ -303,8 +299,8 @@ endpoints:
     - region
     - sortingInfoDto
     required:
-    - effectiveDateStart
     - effectiveDateEnd
+    - effectiveDateStart
     - region
     response:
     - view

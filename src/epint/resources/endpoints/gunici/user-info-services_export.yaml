@@ -23,12 +23,12 @@ endpoints:
     - body
     var_type:
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
       required: false
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Bitiş tarihi
       required: false
       example: '2021-06-24 14:00:00'
@@ -64,7 +64,9 @@ endpoints:
     - searchQuery
     - announcementStatus
     - sortingInfo
-    required: null
+    required:
+    - endDate
+    - startDate
     response:
     - status
     - correlationId
@@ -77,14 +79,14 @@ endpoints:
     - body
     var_type:
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
-      required: false
+      required: true
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Bitiş tarihi
-      required: false
+      required: true
       example: '2021-06-24 14:00:00'
     - name: categories
       var_type: list
@@ -343,7 +345,7 @@ endpoints:
     - body
     var_type:
     - name: deliveryDateTime
-      var_type: str
+      var_type: datetime
       description: ''
       required: false
     summary: ''
@@ -870,12 +872,12 @@ endpoints:
     - body
     var_type:
     - name: deliveryDateStart
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
       required: false
       example: '2021-06-24 14:00:00'
     - name: deliveryDateEnd
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
       required: false
       example: '2021-06-24 14:00:00'
@@ -920,12 +922,12 @@ endpoints:
     - body
     var_type:
     - name: deliveryDateStart
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
       required: false
       example: '2021-06-24 14:00:00'
     - name: deliveryDateEnd
-      var_type: str
+      var_type: datetime
       description: Bitiş tarihi
       required: false
       example: '2021-06-24 14:00:00'
@@ -977,12 +979,12 @@ endpoints:
     - body
     var_type:
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: İtiraz başlangıç saat bilgisi
       required: false
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: İtiraz bitiş saat bilgisi
       required: false
       example: '2021-06-24 14:00:00'
@@ -1037,12 +1039,12 @@ endpoints:
     - body
     var_type:
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: İtiraz başlangıç saat bilgisi
       required: false
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: İtiraz bitiş saat bilgisi
       required: false
       example: '2021-06-24 14:00:00'
@@ -1090,7 +1092,7 @@ endpoints:
     - sortingInfo
     - version
     - organizationId
-    required: null
+    required: []
     response:
     - status
     - correlationId
@@ -1202,7 +1204,7 @@ endpoints:
     - username
     - sortingInfo
     - version
-    required: null
+    required: []
     response:
     - status
     - correlationId
@@ -1310,7 +1312,7 @@ endpoints:
     - username
     - sortingInfo
     - version
-    required: null
+    required: []
     response:
     - status
     - correlationId

@@ -836,11 +836,11 @@ endpoints:
       reference: bool
       viewName: str
       modelMap: dict
-  export:
+  transmission_loss_coefficient_export:
     endpoint: /v1/transmission-loss-coefficient/export
     method: POST
     auth: true
-    short_name: export
+    short_name: transmmission_loss_coefficient_export
     short_name_tr: ISKK Export Servisi.
     params:
     - page

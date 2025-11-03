@@ -20,7 +20,7 @@ endpoints:
     - body
     var_type:
     - name: deliveryDateTime
-      var_type: str
+      var_type: datetime
       description: ''
       required: false
     summary: ''

@@ -10,8 +10,8 @@ endpoints:
     - effectiveDate
     - parameterGroupType
     required:
-    - pageInfo
     - effectiveDate
+    - pageInfo
     - parameterGroupType
     response:
     - status

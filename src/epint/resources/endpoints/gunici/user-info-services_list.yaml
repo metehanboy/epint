@@ -59,12 +59,12 @@ endpoints:
       description: Sayfalama bilgisi
       required: false
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
       required: false
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Bitiş tarihi
       required: false
       example: '2021-06-24 14:00:00'
@@ -103,7 +103,10 @@ endpoints:
     - searchQuery
     - announcementStatus
     - sortingInfo
-    required: null
+    required:
+    - endDate
+    - pageInfo
+    - startDate
     response:
     - status
     - correlationId
@@ -118,16 +121,16 @@ endpoints:
     - name: pageInfo
       var_type: str
       description: Sayfalama bilgisi
-      required: false
+      required: true
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
-      required: false
+      required: true
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Bitiş tarihi
-      required: false
+      required: true
       example: '2021-06-24 14:00:00'
     - name: categories
       var_type: list
@@ -259,7 +262,7 @@ endpoints:
     short_name_tr: Aktif Kontrat Listeleme
     params:
     - region
-    required: null
+    required: []
     response:
     - status
     - correlationId
@@ -300,7 +303,10 @@ endpoints:
     - statuses
     - contractType
     - region
-    required: null
+    required:
+    - endDate
+    - pageInfo
+    - startDate
     response:
     - status
     - correlationId
@@ -315,16 +321,16 @@ endpoints:
     - name: pageInfo
       var_type: str
       description: Sayfalama bilgisi
-      required: false
+      required: true
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
-      required: false
+      required: true
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Bitiş tarihi
-      required: false
+      required: true
       example: '2021-06-24 14:00:00'
     - name: statuses
       var_type: list
@@ -363,7 +369,9 @@ endpoints:
     - statuses
     - contractType
     - region
-    required: null
+    required:
+    - endDate
+    - startDate
     response:
     - status
     - correlationId
@@ -376,14 +384,14 @@ endpoints:
     - body
     var_type:
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
-      required: false
+      required: true
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Bitiş tarihi
-      required: false
+      required: true
       example: '2021-06-24 14:00:00'
     - name: statuses
       var_type: list
@@ -418,7 +426,9 @@ endpoints:
     short_name_tr: Kontrat Listeleme
     params:
     - region
-    required: null
+    required:
+    - contractType
+    - region
     response:
     - status
     - correlationId
@@ -433,7 +443,7 @@ endpoints:
     - name: region
       var_type: str
       description: Bölge
-      required: false
+      required: true
     summary: Kontrat Listeleme
     description: Sistemde bulunan kontrat listesini döner.
     response_structure:
@@ -499,7 +509,9 @@ endpoints:
     - region
     - deliveryDateStart
     - deliveryDateEnd
-    required: null
+    required:
+    - deliveryDateEnd
+    - deliveryDateStart
     response:
     - status
     - correlationId
@@ -520,14 +532,14 @@ endpoints:
       description: Bölge
       required: false
     - name: deliveryDateStart
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
-      required: false
+      required: true
       example: '2021-06-24 14:00:00'
     - name: deliveryDateEnd
-      var_type: str
+      var_type: datetime
       description: Bitiş tarihi
-      required: false
+      required: true
       example: '2021-06-24 14:00:00'
     summary: Kontrat Listeleme
     description: Sistemde bulunan kontrat listesini döner.
@@ -555,7 +567,11 @@ endpoints:
     - region
     - sortingInfo
     - contractType
-    required: null
+    required:
+    - effectiveDateEnd
+    - effectiveDateStart
+    - pageInfo
+    - region
     response:
     - status
     - correlationId
@@ -570,7 +586,7 @@ endpoints:
     - name: pageInfo
       var_type: str
       description: Sayfalama bilgisi
-      required: false
+      required: true
     - name: contractName
       var_type: str
       description: Kontrat ismi
@@ -578,17 +594,17 @@ endpoints:
     - name: effectiveDateStart
       var_type: datetime
       description: Başlangıç Tarihi
-      required: false
+      required: true
       example: '2020-01-01T00:00:00+03:00'
     - name: effectiveDateEnd
       var_type: datetime
       description: Bitiş Tarihi
-      required: false
+      required: true
       example: '2020-01-01T00:00:00+03:00'
     - name: region
       var_type: str
       description: Bölge
-      required: false
+      required: true
     - name: sortingInfo
       var_type: str
       description: Sıralama bilgisi
@@ -1991,12 +2007,12 @@ endpoints:
       description: Sayfalama bilgisi
       required: false
     - name: deliveryDateStart
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
       required: false
       example: '2021-06-24 14:00:00'
     - name: deliveryDateEnd
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
       required: false
       example: '2021-06-24 14:00:00'
@@ -2093,12 +2109,12 @@ endpoints:
       description: Sayfalama bilgisi
       required: false
     - name: deliveryDateStart
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
       required: false
       example: '2021-06-24 14:00:00'
     - name: deliveryDateEnd
-      var_type: str
+      var_type: datetime
       description: Bitiş tarihi
       required: false
       example: '2021-06-24 14:00:00'
@@ -2353,12 +2369,12 @@ endpoints:
       description: Sayfalama bilgisi
       required: false
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: İtiraz başlangıç saat bilgisi
       required: false
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: İtiraz bitiş saat bilgisi
       required: false
       example: '2021-06-24 14:00:00'
@@ -2420,12 +2436,12 @@ endpoints:
       description: Sayfalama bilgisi
       required: false
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: İtiraz başlangıç saat bilgisi
       required: false
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: İtiraz bitiş saat bilgisi
       required: false
       example: '2021-06-24 14:00:00'
@@ -2506,12 +2522,12 @@ endpoints:
     - body
     var_type:
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: İtiraz başlangıç saat bilgisi
       required: false
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: İtiraz bitiş saat bilgisi
       required: false
       example: '2021-06-24 14:00:00'
@@ -2932,7 +2948,11 @@ endpoints:
     - username
     - sortingInfo
     - version
-    required: null
+    required:
+    - effectiveDateEnd
+    - effectiveDateStart
+    - pageInfo
+    - region
     response:
     - status
     - correlationId
@@ -2945,22 +2965,22 @@ endpoints:
     - body
     var_type:
     - name: pageInfo
-      var_type: str
+      var_type: object
       description: Sayfalama bilgisi
-      required: false
+      required: true
     - name: region
       var_type: str
       description: Bölge
-      required: false
+      required: true
     - name: effectiveDateStart
       var_type: datetime
       description: Başlangıç Tarihi
-      required: false
+      required: true
       example: '2020-01-01T00:00:00+03:00'
     - name: effectiveDateEnd
       var_type: datetime
       description: Bitiş Tarihi
-      required: false
+      required: true
       example: '2020-01-01T00:00:00+03:00'
     - name: contractTypes
       var_type: list
@@ -3048,7 +3068,11 @@ endpoints:
     - sortingInfo
     - version
     - organizationId
-    required: null
+    required:
+    - effectiveDateEnd
+    - effectiveDateStart
+    - pageInfo
+    - region
     response:
     - status
     - correlationId
@@ -3063,20 +3087,20 @@ endpoints:
     - name: pageInfo
       var_type: str
       description: Sayfalama bilgisi
-      required: false
+      required: true
     - name: region
       var_type: str
       description: Bölge
-      required: false
+      required: true
     - name: effectiveDateStart
       var_type: datetime
       description: Başlangıç Tarihi
-      required: false
+      required: true
       example: '2020-01-01T00:00:00+03:00'
     - name: effectiveDateEnd
       var_type: datetime
       description: Bitiş Tarihi
-      required: false
+      required: true
       example: '2020-01-01T00:00:00+03:00'
     - name: contractTypes
       var_type: list
@@ -3167,7 +3191,11 @@ endpoints:
     - username
     - sortingInfo
     - version
-    required: null
+    required:
+    - effectiveDateEnd
+    - effectiveDateStart
+    - pageInfo
+    - region
     response:
     - status
     - correlationId
@@ -3182,20 +3210,20 @@ endpoints:
     - name: pageInfo
       var_type: str
       description: Sayfalama bilgisi
-      required: false
+      required: true
     - name: region
       var_type: str
       description: Bölge
-      required: false
+      required: true
     - name: effectiveDateStart
       var_type: datetime
       description: Başlangıç Tarihi
-      required: false
+      required: true
       example: '2020-01-01T00:00:00+03:00'
     - name: effectiveDateEnd
       var_type: datetime
       description: Bitiş Tarihi
-      required: false
+      required: true
       example: '2020-01-01T00:00:00+03:00'
     - name: contractTypes
       var_type: list
@@ -3455,12 +3483,12 @@ endpoints:
       description: Sayfalama bilgisi
       required: false
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: Başlangıç tarihi
       required: false
       example: '2021-06-24 14:00:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: Bitiş tarihi
       required: false
       example: '2021-06-24 14:00:00'
@@ -3725,7 +3753,7 @@ endpoints:
     short_name: get_user_info
     short_name_tr: Kullancıcı Bilgileri
     params: []
-    required: null
+    required: []
     response:
     - status
     - correlationId
@@ -3756,7 +3784,7 @@ endpoints:
     short_name: list_user_by_organization
     short_name_tr: Kullancıcı Bilgileri
     params: []
-    required: null
+    required: []
     response:
     - status
     - correlationId
@@ -3788,7 +3816,7 @@ endpoints:
     short_name_tr: Kullancıcı Bilgileri
     params:
     - organizationId
-    required: null
+    required: []
     response:
     - status
     - correlationId

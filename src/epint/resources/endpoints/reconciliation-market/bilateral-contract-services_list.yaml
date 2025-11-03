@@ -22,12 +22,12 @@ endpoints:
     - body
     var_type:
     - name: paymentDateStart
-      var_type: str
+      var_type: datetime
       description: Başlangıç Tarihi
       required: false
       example: '2020-01-01T00:00:00+03:00'
     - name: paymentDateEnd
-      var_type: str
+      var_type: datetime
       description: Bitiş Tarihi
       required: false
       example: '2020-01-01T00:00:00+03:00'

@@ -25,12 +25,12 @@ endpoints:
     - body
     var_type:
     - name: startDate
-      var_type: str
+      var_type: datetime
       description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
       required: false
       example: '2021-01-01T00:00:00+03:00'
     - name: endDate
-      var_type: str
+      var_type: datetime
       description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
       required: false
       example: '2021-01-01T00:00:00+03:00'
