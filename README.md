@@ -1,233 +1,73 @@
-balancing-group:
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://epys-prp.epias.com.tr
-    prod:
-      https://epys.epias.com.tr
-    service_ticket:
-      prod:
-        https://epys.epias.com.tr
-      test:
-        https://epys.epias.com.tr
-        
-customer:
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://epys-prp.epias.com.tr
-    prod:
-      https://epys.epias.com.tr
-    service_ticket:
-      prod:
-        https://epys.epias.com.tr
-      test:
-        https://epys-prp.epias.com.tr
+# EPINT - EPIAS API Integration Package
 
-gop:
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://testgop.epias.com.tr
-    prod:
-      https://gop.epias.com.tr
-    service_ticket:
-      prod:
-        https://gop.epias.com.tr
-      test:
-        https://testgop.epias.com.tr
+Python paketi olarak Türkiye Enerji Piyasaları İşletme A.Ş. (EPİAŞ) API'lerine entegrasyon sağlar.
 
-grid:
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://epys-prp.epias.com.tr
-    prod:
-      https://epys.epias.com.tr
-    service_ticket:
-      prod:
-        https://epys.epias.com.tr
-      test:
-        https://epys-prp.epias.com.tr
+## Özellikler
 
-gunici:
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://gunici-prp.epias.com.tr
-    prod:
-      https://gunici.epias.com.tr
-    service_ticket:
-      prod:
-        https://gunici.epias.com.tr
-      test:
-        https://gunici-prp.epias.com.tr
+- EPİAŞ platformlarına (GOP, EPYS, GÜNİCİ, vb.) kolay erişim
+- Test ve prodüksiyon ortamları için otomatik yapılandırma
+- CAS (Central Authentication Service) kimlik doğrulama desteği
+- Çoklu servis entegrasyonu
 
-gunici-trading:
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://gunici-prp.epias.com.tr
-    prod:
-      https://gunici.epias.com.tr
-    service_ticket:
-      prod:
-        https://gunici.epias.com.tr
-      test:
-        https://gunici-prp.epias.com.tr
+## Kurulum
 
-pre-reconciliation:
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://epys-prp.epias.com.tr
-    prod:
-      https://epys.epias.com.tr
-    service_ticket:
-      prod:
-        https://epys.epias.com.tr
-      test:
-        https://epys-prp.epias.com.tr
+```bash
+pip install -e .
+```
 
-reconciliation-bpm:
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://epys-prp.epias.com.tr
-    prod:
-      https://epys.epias.com.tr
-    service_ticket:
-      prod:
-        https://epys.epias.com.tr
-      test:
-        https://epys-prp.epias.com.tr
+## Kullanım
 
-reconciliation-imbalance:
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://epys-prp.epias.com.tr
-    prod:
-      https://epys.epias.com.tr
-    service_ticket:
-      prod:
-        https://epys.epias.com.tr
-      test:
-        https://epys-prp.epias.com.tr
-    
-reconciliation-invoice
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://epys-prp.epias.com.tr
-    prod:
-      https://epys.epias.com.tr
-    service_ticket:
-      prod:
-        https://epys.epias.com.tr
-      test:
-        https://epys-prp.epias.com.tr
-reconciliation-market
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://epys-prp.epias.com.tr
-    prod:
-      https://epys.epias.com.tr
-    service_ticket:
-      prod:
-        https://epys.epias.com.tr
-      test:
-        https://epys-prp.epias.com.tr
-reconciliation-mof
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://epys-prp.epias.com.tr
-    prod:
-      https://epys.epias.com.tr
-    service_ticket:
-      prod:
-        https://epys.epias.com.tr
-      test:
-        https://epys-prp.epias.com.tr
-reconciliation-res
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://epys-prp.epias.com.tr
-    prod:
-      https://epys.epias.com.tr
-    service_ticket:
-      prod:
-        https://epys.epias.com.tr
-      test:
-        https://epys-prp.epias.com.tr
-registration
-  auth:
-    test:
-      https://testcas.epias.com.tr
-    prod:
-      https://cas.epias.com.tr
-  service_config:
-    test:
-      https://epys-prp.epias.com.tr
-    prod:
-      https://epys.epias.com.tr
-    service_ticket:
-      prod:
-        https://epys.epias.com.tr
-      test:
-        https://epys-prp.epias.com.tr
+```python
+import epint as ep
+
+# Kimlik doğrulama
+ep.set_auth('kullanici_adi', 'sifre')
+
+# Veri çekme
+data = ep.get_total_data(period='2024-01-01', region='TR1', organization=1)
+```
+
+## Desteklenen Servisler
+
+- **GOP**: Gün Öncesi Piyasası
+- **EPYS**: Elektrik Piyasası Yönetim Sistemi
+- **GÜNİCİ**: Gün İçi Piyasası
+- **Dengeleme Grubu**: Balancing Group servisleri
+- **Grid**: Şebeke servisleri
+- **Reconciliation**: Mutabakat servisleri
+- **Registration**: Kayıt servisleri
+
+## Gereksinimler
+
+- Python >= 3.8
+- requests >= 2.31.0
+- urllib3 >= 2.0.0
+- pyyaml >= 6.0.1
+
+## Geliştirme
+
+```bash
+# Development bağımlılıklarını kur
+pip install -e ".[dev]"
+
+# Testleri çalıştır
+pytest
+
+# Kod formatla
+black src/
+isort src/
+```
+
+## Lisans
+
+MIT License - Detaylar için [LICENSE](LICENSE) dosyasına bakın.
+
+## Katkıda Bulunma
+
+Pull request'ler kabul edilmektedir. Büyük değişiklikler için önce bir issue açarak değişikliği tartışın.
+
+## İletişim
+
+- Repository: https://github.com/metehanboy/epint
+- Issues: https://github.com/metehanboy/epint/issues
+
