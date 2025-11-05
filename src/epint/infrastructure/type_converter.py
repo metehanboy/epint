@@ -77,3 +77,61 @@ class TypeConverter:
             return float(value)
         except ValueError:
             return value
+
+    @staticmethod
+    def parse_response(response_data: Any, response_structure: Any) -> Any:
+        """Response'u response_structure'a göre parse eder ve type conversion yapar"""
+        if response_structure is None:
+            return response_data
+        
+        if response_data is None:
+            return None
+        
+        if isinstance(response_structure, dict):
+            # Dict yapısı - her key için parse et
+            parsed = {}
+            for key, structure in response_structure.items():
+                if key in response_data:
+                    parsed[key] = TypeConverter.parse_response(response_data[key], structure)
+                else:
+                    # Key yoksa None ekle, ancak response_data'nın diğer key'lerini koru
+                    if isinstance(response_data, dict):
+                        parsed[key] = None
+                    else:
+                        parsed[key] = None
+            # response_data'da olup response_structure'da olmayan key'leri de ekle
+            if isinstance(response_data, dict):
+                for key in response_data:
+                    if key not in parsed:
+                        parsed[key] = response_data[key]
+            return parsed
+        elif isinstance(response_structure, list):
+            # List yapısı - YAML'da list item'ları şu şekilde: [- item1, item2]
+            if len(response_structure) > 0:
+                item_structure = response_structure[0]
+                if isinstance(response_data, list):
+                    return [TypeConverter.parse_response(item, item_structure) for item in response_data]
+                else:
+                    return response_data
+            return response_data
+        else:
+            # Type tanımı (str, int, float, datetime, vb.)
+            if isinstance(response_structure, str):
+                target_type = response_structure.lower()
+                
+                # String değerleri convert et
+                if isinstance(response_data, str):
+                    if target_type in ["int", "float", "datetime", "date", "bool"]:
+                        return TypeConverter.convert_string_value(response_data, target_type)
+                    return response_data
+                # Zaten doğru type ise direkt döndür
+                elif target_type == "int" and isinstance(response_data, (int, float)):
+                    return int(response_data)
+                elif target_type == "float" and isinstance(response_data, (int, float)):
+                    return float(response_data)
+                elif target_type == "datetime" and isinstance(response_data, _dt.datetime):
+                    return response_data
+                elif target_type == "bool" and isinstance(response_data, bool):
+                    return response_data
+            
+            return response_data

@@ -16,6 +16,7 @@ from .endpoint_parser import EndpointParser
 from .validation_service import ValidationService
 from .request_builder import RequestBuilder
 from .logger import get_logger
+from .type_converter import TypeConverter
 import json
 import time
 
@@ -185,6 +186,9 @@ class EndpointManager:
         start_time = time.time()
 
         try:
+            # http_timeout parametresini validation'dan önce çıkar ve sakla
+            http_timeout = kwargs.pop('http_timeout', None)
+            
             self.logger.log_operation(
                 "endpoint_call_start",
                 endpoint=self.endpoint_name,
@@ -194,6 +198,11 @@ class EndpointManager:
             )
 
             result = self.validate_endpoint_call(**kwargs)
+            
+            # http_timeout'u validated_params'a ekle
+            if http_timeout is not None:
+                result.validated_params['http_timeout'] = http_timeout
+            
             response = self._make_http_request(result.validated_params, debug)
 
             duration = time.time() - start_time
@@ -224,12 +233,22 @@ class EndpointManager:
         auth_mode = get_auth_mode(self.endpoint_info.category)
         service_ticket_url = self.get_service_ticket_url()
 
+        # http_timeout parametresini çıkar (eğer varsa)
+        timeout = matched_params.pop('http_timeout', None)
+        if timeout is not None:
+            try:
+                timeout = int(timeout)
+            except (ValueError, TypeError):
+                timeout = None
+
         header = self.request_builder.prepare_headers(auth_mode, service_ticket_url)
         serialized_params = self.request_builder.serialize_parameters(
             matched_params, auth_mode, self.endpoint_info.category
         )
 
-        with HTTPClient() as client:
+        # HTTPClient'ı timeout ile oluştur (varsa), yoksa default timeout kullan
+        client = HTTPClient(timeout=timeout) if timeout is not None else HTTPClient()
+        with client:
             response = client.execute_request(
                 self.endpoint_info.method,
                 self.get_full_url(),
@@ -242,4 +261,13 @@ class EndpointManager:
             if not response.ok:
                 self._process_error_response(response)
 
-            return response.json()
+            response_data = response.json()
+            
+            # response_structure varsa parse et
+            if self.endpoint_info.response_structure:
+                response_data = TypeConverter.parse_response(
+                    response_data, 
+                    self.endpoint_info.response_structure
+                )
+            
+            return response_data

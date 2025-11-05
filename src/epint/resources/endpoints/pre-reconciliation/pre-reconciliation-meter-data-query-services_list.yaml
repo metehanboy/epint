@@ -158,10 +158,22 @@ endpoints:
       successMessage: str
       errors:
       - str
-      unsuccessfulList:
-      - str
-      dispatch: str
-      body: str
+      body:
+        content:
+          items:
+          - meterId: int
+            meterEic: str
+            effectiveDate: datetime
+            version: datetime
+            supply: float
+            withdrawal: float
+            lossesSupply: float
+            lossesWithdrawal: float
+          page:
+            number: int
+            size: int
+            total: int
+            sort: str
   list_meter_datas:
     endpoint: /v1/meter-data/approved-profile-meter-data/list
     method: POST
