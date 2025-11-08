@@ -1,0 +1,89 @@
+endpoints:
+  tradinglimits_detail_list:
+    endpoint: /tradinglimits/detail/list
+    method: POST
+    auth: true
+    short_name: tradinglimits_detail_list
+    short_name_tr: Trading Limits Listing Details
+    params:
+    - deliveryDay
+    - regionCode
+    - eic
+    required:
+    - deliveryDay
+    - regionCode
+    - eic
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: Delivery Day
+      required: true
+    - name: regionCode
+      var_type: string
+      description: Area code
+      required: true
+    - name: eic
+      var_type: string
+      description: EIC Information Organization
+      required: true
+    summary: Trading Limits Listing Details
+    description: Trading Limits Listing Details
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  tradinglimits_list:
+    endpoint: /tradinglimits/list
+    method: POST
+    auth: true
+    short_name: tradinglimits_list
+    short_name_tr: Trading Limits Listing
+    params:
+    - deliveryDay
+    - regionCode
+    - eic
+    required:
+    - deliveryDay
+    - regionCode
+    - eic
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: Delivery Day
+      required: true
+    - name: regionCode
+      var_type: string
+      description: Area code
+      required: true
+    - name: eic
+      var_type: string
+      description: EIC Information Organization
+      required: true
+    summary: Trading Limits Listing
+    description: Trading Limits Listing
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str

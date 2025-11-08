@@ -1,0 +1,269 @@
+endpoints:
+  amount-of-block-buying-export:
+    endpoint: /v1/markets/dam/export/amount-of-block-buying
+    method: POST
+    auth: true
+    short_name: amount-of-block-buying-export
+    short_name_tr: GÖP Blok Alış Miktarı Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Blok Alış Miktarı Dışa Aktarım Servisi
+    description: Gün Öncesi Piyasası'nda sunulan en az 4 en fazla 24 saati kapsayan
+      ve eşleşen blok alış tekliflerinin toplam miktarıdır.GÖP Blok Alış Miktarı Listesini
+      XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  amount-of-block-selling-export:
+    endpoint: /v1/markets/dam/export/amount-of-block-selling
+    method: POST
+    auth: true
+    short_name: amount-of-block-selling-export
+    short_name_tr: GÖP Blok Satış Miktarı Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Blok Satış Miktarı Dışa Aktarım Servisi
+    description: Gün Öncesi Piyasası'nda sunulan en az 4 en fazla 24 saati kapsayan
+      ve eşleşen blok satış tekliflerinin toplam miktarıdır.GÖP Blok Satış Miktarı
+      Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  matching-quantity-export:
+    endpoint: /v1/markets/dam/export/clearing-quantity
+    method: POST
+    auth: true
+    short_name: matching-quantity-export
+    short_name_tr: GÖP Eşleşme Miktarı Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Eşleşme Miktarı Dışa Aktarım Servisi
+    description: Gün Öncesi Piyasası'nda eşleşen tekliflerin saatlik toplam miktardır.GÖP
+      Eşleşme Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  day-ahead-market-trade-export:
+    endpoint: /v1/markets/dam/export/day-ahead-market-trade-volume
+    method: POST
+    auth: true
+    short_name: day-ahead-market-trade-export
+    short_name_tr: GÖP İşlem Hacmi Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP İşlem Hacmi Dışa Aktarım Servisi
+    description: Gün Öncesi Piyasası’nda eşleşen alış tekliflerinin saatlik toplam
+      mali değeridir.GÖP İşlem Hacmi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  flexible-offer-buying-quantity-export:
+    endpoint: /v1/markets/dam/export/flexible-offer-buying-quantity
+    method: POST
+    auth: true
+    short_name: flexible-offer-buying-quantity-export
+    short_name_tr: GÖP Esnek Alış Teklif Miktarı Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Esnek Alış Teklif Miktarı Dışa Aktarım Servisi
+    description: Gün öncesi piyasasına katılan piyasa katılımcısının, belirli bir
+      teklif zaman aralığında belirtilen teklif süresi için, lot cinsinden uzlaştırma
+      dönemi bazlı değişebilen alış miktarlarını eşleşen ve eşleşmeyen teklif kırılımında
+      içerir.GÖP Esnek Alış Teklif Miktarı Listesini XLSX, CSV ya da PDF olarak dışa
+      aktarır.
+    response_structure: {}
+  flexible-offer-selling-quantity-export:
+    endpoint: /v1/markets/dam/export/flexible-offer-selling-quantity
+    method: POST
+    auth: true
+    short_name: flexible-offer-selling-quantity-export
+    short_name_tr: GÖP Esnek Satış Teklif Miktarı Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Esnek Satış Teklif Miktarı Dışa Aktarım Servisi
+    description: Gün öncesi piyasasına katılan piyasa katılımcısının, belirli bir
+      teklif zaman aralığında belirtilen teklif süresi için, lot cinsinden uzlaştırma
+      dönemi bazlı değişebilen satış miktarlarını eşleşen ve eşleşmeyen teklif kırılımında
+      içerir.GÖP Esnek Satış Teklif Miktarı Listesini XLSX, CSV ya da PDF olarak dışa
+      aktarır.
+    response_structure: {}
+  interim-mcp-export:
+    endpoint: /v1/markets/dam/export/interim-mcp
+    method: POST
+    auth: true
+    short_name: interim-mcp-export
+    short_name_tr: Kesinleşmemiş Piyasa Takas Fiyatı (K.PTF) Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Kesinleşmemiş Piyasa Takas Fiyatı (K.PTF) Dışa Aktarım Servisi
+    description: Kesinleşmemiş Piyasa Takas Fiyatı , Gün Öncesi Piyasası'na sunulan
+      tekliflerin arz ve talebe göre eşleşmesiyle oluşan itiraz süreci tamamlanmamış
+      saatlik elektrik enerjisi fiyatıdır.İtiraz süreci tamamlanmamış saatlik elektrik
+      enerjisi fiyatıdır.Kesinleşmemiş Piyasa Takas Fiyatı (K.PTF) Listesini XLSX,
+      CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  esnek-teklif-eslesme-miktari-export:
+    endpoint: /v1/markets/dam/export/matched-flexible-offer-quantity
+    method: POST
+    auth: true
+    short_name: esnek-teklif-eslesme-miktari-export
+    short_name_tr: GÖP Esnek Teklif Eşleşme Miktarları Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Esnek Teklif Eşleşme Miktarları Dışa Aktarım Servisi
+    description: Esnek Teklif Eşleşme Miktarları belirli bir teklif zaman aralığı
+      boyunca belirli bir teklif süresi için değişebilen miktarlardan ve bu miktarlar
+      için tek fiyat bilgilerinden oluşan esnek tekliflerin alış ve satış yönlü eşleşme
+      miktarları.GÖP Esnek Teklif Eşleşme Miktarları Listesini XLSX, CSV ya da PDF
+      olarak dışa aktarır.
+    response_structure: {}
+  mcp-export:
+    endpoint: /v1/markets/dam/export/mcp
+    method: POST
+    auth: true
+    short_name: mcp-export
+    short_name_tr: Piyasa Takas Fiyatı (PTF) Listesi Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Piyasa Takas Fiyatı (PTF) Listesi Dışa Aktarım Servisi
+    description: Piyasa Takas Fiyatı, Gün Öncesi Piyasası'na sunulan tekliflerin arz
+      ve talebe göre eşleşmesiyle oluşan saatlik elektrik enerjisi fiyatıdır.Gösterge
+      niteliğindeki Türkiye Cumhuriyet Merkez Bankası döviz alış kuru esas alınmıştır.Piyasa
+      Takas Fiyatı (PTF) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  price-independent-bid-export:
+    endpoint: /v1/markets/dam/export/price-independent-bid
+    method: POST
+    auth: true
+    short_name: price-independent-bid-export
+    short_name_tr: GÖP Fiyattan Bağımsız Alış Teklifi Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Fiyattan Bağımsız Alış Teklifi Dışa Aktarım Servisi
+    description: Gün öncesi piyasasında saatlik olarak fiyat kırılımı oluşturulmadan
+      sunulan alış tekliflerinin toplamıdır.GÖP Fiyattan Bağımsız Alış Teklifi Listesini
+      XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  price-independent-offer-export:
+    endpoint: /v1/markets/dam/export/price-independent-offer
+    method: POST
+    auth: true
+    short_name: price-independent-offer-export
+    short_name_tr: GÖP Fiyattan Bağımsız Satış Teklifi Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Fiyattan Bağımsız Satış Teklifi Dışa Aktarım Servisi
+    description: Gün öncesi piyasasında saatlik olarak fiyat kırılımı oluşturulmadan
+      sunulan satış tekliflerinin toplamıdır.GÖP Fiyattan Bağımsız Satış Teklifi Listesini
+      XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  side-payment-export:
+    endpoint: /v1/markets/dam/export/side-payments
+    method: POST
+    auth: true
+    short_name: side-payment-export
+    short_name_tr: GÖP Fark Tutarı Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Fark Tutarı Dışa Aktarım Servisi
+    description: Alış tekliflerinden kaynaklı fark tutarı alış yönlü blok ve esnek
+      teklif eşleşmelerinden, satış tekliflerinden kaynaklı fark tutarı satış yönlü
+      blok ve esnek teklif eşleşmelerinden kaynaklanmaktadır. Fark tutarı hesaplanması
+      ve dağıtılmasına ilişkin detaylar Fark Tutarı Prosedürü’nde yer almaktadır.GÖP
+      Fark Tutarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  submitted-bid-order-volume-export:
+    endpoint: /v1/markets/dam/export/submitted-bid-order-volume
+    method: POST
+    auth: true
+    short_name: submitted-bid-order-volume-export
+    short_name_tr: GÖP Teklif Edilen Alış Miktarları Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Teklif Edilen Alış Miktarları Dışa Aktarım Servisi
+    description: Gün Öncesi Piyasası’nda 0 TL/MWh fiyat seviyesine sunulan saatlik,
+      blok ve esnek alış teklif miktarlarının toplamıdır.GÖP Teklif Edilen Alış Miktarları
+      Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  submitted-sales-order-volume-export:
+    endpoint: /v1/markets/dam/export/submitted-sales-order-volume
+    method: POST
+    auth: true
+    short_name: submitted-sales-order-volume-export
+    short_name_tr: GÖP Teklif Edilen Satış Miktarları Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Teklif Edilen Satış Miktarları Dışa Aktarım Servisi
+    description: Gün Öncesi Piyasası’nda azami uzlaştırma fiyat seviyesine sunulan
+      saatlik, blok ve esnek satış teklif miktarlarının toplamıdır.Azami Uzlaştırma
+      Fiyatı 01.10.2023 tarihinden itibaren kaldırılmıştır.GÖP Teklif Edilen Satış
+      Miktarları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  supply-demand-export:
+    endpoint: /v1/markets/dam/export/supply-demand
+    method: POST
+    auth: true
+    short_name: supply-demand-export
+    short_name_tr: GÖP Arz-Talep Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: GÖP Arz-Talep Dışa Aktarım Servisi
+    description: 'Her bir fiyat kırılımındaki saatlik teklif miktarına, kabul edilen
+      blok ve esnek teklif miktarlarının ilave edilmesiyle oluşturulmuş teklif setlerinin
+      gösterilmesidir.Arz miktarı: Her bir fiyat kırılımındaki saatlik arz ile kabul
+      edilen blok ve esnek arz miktarının toplamıdır. Talep miktarı: Her bir fiyat
+      kırılımındaki saatlik talep ile kabul edilen blok ve esnek talep miktarının
+      toplamıdır.GÖP Arz-Talep Listesini XLSX, CSV ya da PDF olarak dışa aktarır.'
+    response_structure: {}

@@ -45,6 +45,8 @@ class EndpointManager:
         self.validation_service = ValidationService(self.endpoint_info)
         self._auth_manager: Optional[Authentication] = None
         self._request_builder: Optional[RequestBuilder] = None
+        self._http_client: Optional[HTTPClient] = None
+        self._http_client_timeout: Optional[int] = None
 
     def validate_endpoint_call(self, **kwargs) -> ValidationResult:
         return self.validation_service.validate_endpoint_call(**kwargs)
@@ -98,6 +100,50 @@ class EndpointManager:
                 application_name="epint-client",
             )
         return self._request_builder
+    
+    def get_http_client(self, timeout: Optional[int] = None) -> HTTPClient:
+        """HTTP Client'ı cache'leyerek döndür
+        
+        Args:
+            timeout: İsteğe bağlı timeout değeri (saniye). None ise default kullanılır.
+        
+        Returns:
+            HTTPClient: Cache'lenmiş veya yeni oluşturulmuş HTTPClient instance
+        
+        Note:
+            - Default timeout (None) için client cache'lenir ve session reuse edilir
+            - Custom timeout belirtilirse ve cache'deki timeout ile eşleşirse cache kullanılır
+            - Farklı custom timeout için geçici client oluşturulur (nadiren kullanılır)
+        """
+        # Default timeout için cache kullan
+        if timeout is None:
+            if self._http_client is None:
+                self._http_client = HTTPClient()
+            return self._http_client
+        
+        # Custom timeout - cache'deki ile aynıysa reuse et
+        if timeout == self._http_client_timeout and self._http_client is not None:
+            return self._http_client
+        
+        # Yeni custom timeout - cache'le
+        if self._http_client is not None and self._http_client.session:
+            # Eski session'ı kapat
+            self._http_client.session.close()
+        
+        self._http_client = HTTPClient(timeout=timeout)
+        self._http_client_timeout = timeout
+        return self._http_client
+    
+    def close(self):
+        """HTTP client session'ını kapat"""
+        if self._http_client is not None and self._http_client.session:
+            self._http_client.session.close()
+            self._http_client = None
+            self._http_client_timeout = None
+    
+    def __del__(self):
+        """Destructor - session'ı temizle"""
+        self.close()
 
     def __repr__(self):
         return str(self.endpoint_info)
@@ -246,28 +292,30 @@ class EndpointManager:
             matched_params, auth_mode, self.endpoint_info.category
         )
 
-        # HTTPClient'ı timeout ile oluştur (varsa), yoksa default timeout kullan
-        client = HTTPClient(timeout=timeout) if timeout is not None else HTTPClient()
-        with client:
-            response = client.execute_request(
-                self.endpoint_info.method,
-                self.get_full_url(),
-                header,
-                serialized_params,
+        # Cache'lenmiş HTTP client'ı kullan (session reuse için)
+        client = self.get_http_client(timeout)
+        
+        # Context manager KULLANMA - session'ı açık tut için connection reuse
+        response = client.execute_request(
+            self.endpoint_info.method,
+            self.get_full_url(),
+            header,
+            serialized_params,
+        )
+        
+        if debug:
+            return response
+
+        if not response.ok:
+            self._process_error_response(response)
+
+        response_data = response.json()
+        
+        # response_structure varsa parse et
+        if self.endpoint_info.response_structure:
+            response_data = TypeConverter.parse_response(
+                response_data, 
+                self.endpoint_info.response_structure
             )
-            if debug:
-                return response
-
-            if not response.ok:
-                self._process_error_response(response)
-
-            response_data = response.json()
-            
-            # response_structure varsa parse et
-            if self.endpoint_info.response_structure:
-                response_data = TypeConverter.parse_response(
-                    response_data, 
-                    self.endpoint_info.response_structure
-                )
-            
-            return response_data
+        
+        return response_data

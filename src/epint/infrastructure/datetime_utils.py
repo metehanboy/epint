@@ -48,7 +48,10 @@ class DateTimeUtils:
                 return _dt.datetime.strptime(date_string, fmt).date()
             except ValueError:
                 continue
-        return cls.today()
+        raise ValueError(
+            f"Tarih parse edilemedi: '{date_string}'. "
+            f"Geçerli formatlar: {', '.join(formats)}"
+        )
 
     @classmethod
     def to_string(cls, dt: _dt.datetime, format_string: str = DATETIME_FORMAT) -> str:
@@ -109,7 +112,11 @@ class DateTimeUtils:
         if other_result:
             return other_result
 
-        return cls.now()
+        raise ValueError(
+            f"Datetime parse edilemedi: '{date_string}'. "
+            f"ISO 8601 formatı veya şu formatlardan biri kullanın: "
+            f"'YYYY-MM-DD HH:MM:SS', 'YYYY-MM-DD HH:MM', 'DD/MM/YYYY HH:MM:SS'"
+        )
 
     @classmethod
     def _try_iso_format(cls, date_string: str) -> Optional[_dt.datetime]:

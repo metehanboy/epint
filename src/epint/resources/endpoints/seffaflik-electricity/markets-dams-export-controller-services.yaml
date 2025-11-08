@@ -1,0 +1,144 @@
+endpoints:
+  active-fullness-export:
+    endpoint: /v1/dams/export/active-fullness
+    method: POST
+    auth: true
+    short_name: active-fullness-export
+    short_name_tr: Aktif Doluluk Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Aktif Doluluk Dışa Aktarım Servisi
+    description: 'Bir barajın maksimum ve minimum işletme seviyeleri arasındaki hacimin
+      yüzdesidir. Formül: Aktif Doluluk= [( İlgili Tarihteki Seviyeye Karşılık Gelen
+      Hacim – Minimum Hacim ) / ( Maksimum Hacim – Minimum Hacim )] * 100. Veriler
+      saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük olarak
+      verilmektedir. Geriye dönük veri bulunmamaktadır. Aktif Doluluk Listesini XLSX,
+      CSV ya da PDF olarak dışa aktarır.'
+    response_structure: {}
+  active-volume-export:
+    endpoint: /v1/dams/export/active-volume
+    method: POST
+    auth: true
+    short_name: active-volume-export
+    short_name_tr: Aktif Hacim Dışa Aktarım Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Aktif Hacim Dışa Aktarım Servisi
+    description: Bir barajın ilgili tarihteki seviyeye karşılık gelen hacmi ve minimum
+      işletme seviyeleri arasındaki hacimdir. Veriler saat 17:00 itibariyle nihai
+      halini almaktadır. Baraj verileri günlük olarak verilmektedir. Geriye dönük
+      veri verilmemektedir. Aktif Hacim Listesini XLSX, CSV ya da PDF olarak dışa
+      aktarır.
+    response_structure: {}
+  daily-kot-export:
+    endpoint: /v1/dams/export/daily-kot
+    method: POST
+    auth: true
+    short_name: daily-kot-export
+    short_name_tr: Günlük Kot Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Günlük Kot Dışa Aktarım Servisi
+    description: Barajın ilgili gündeki su yüksekliğini belirtir. Veriler saat 17:00
+      itibariyle nihai halini almaktadır. Baraj verileri günlük olarak verilmektedir.
+      Geriye dönük veri bulunmamaktadır. Günlük Kot Listesini XLSX, CSV ya da PDF
+      olarak dışa aktarır.
+    response_structure: {}
+  daily-volume-export:
+    endpoint: /v1/dams/export/daily-volume
+    method: POST
+    auth: true
+    short_name: daily-volume-export
+    short_name_tr: Günlük Hacim Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Günlük Hacim Dışa Aktarım Servisi
+    description: Bir barajın ilgili tarihteki seviyesine karşılık gelen hacimdir.
+      Veriler saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük
+      olarak verilmektedir. Geriye dönük veri verilmemektedir. Günlük Hacim Listesini
+      XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  dam-kot-export:
+    endpoint: /v1/dams/export/dam-kot
+    method: POST
+    auth: true
+    short_name: dam-kot-export
+    short_name_tr: Kot Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Kot Dışa Aktarım Servisi
+    description: İlgili barajın maximum ve minumum seviyesini gösterir. Kot Listesini
+      XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  dam-volume-export:
+    endpoint: /v1/dams/export/dam-volume
+    method: POST
+    auth: true
+    short_name: dam-volume-export
+    short_name_tr: Hacim Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Hacim Dışa Aktarım Servisi
+    description: İlgili barajın maksimum ve minumum hacim seviyesini gösterir. Hacim
+      Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  flow-rate-and-installed-power-export:
+    endpoint: /v1/dams/export/flow-rate-and-installed-power
+    method: POST
+    auth: true
+    short_name: flow-rate-and-installed-power-export
+    short_name_tr: Debi ve Kurulu Güç Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Debi ve Kurulu Güç Dışa Aktarım Servisi
+    description: İlgili barajda üniteden geçen suyun miktarını ve barajın kurulu gücünü
+      gösterir. Debi ve Kurulu Güç Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}
+  water-energy-provision-export:
+    endpoint: /v1/dams/export/water-energy-provision
+    method: POST
+    auth: true
+    short_name: water-energy-provision-export
+    short_name_tr: Suyun Enerji Karşılığı Dışa Aktarım Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Suyun Enerji Karşılığı Dışa Aktarım Servisi
+    description: Barajda yer alan suyun hesaplanan MWh cinsinden enerji karşılığıdır.
+      Veriler saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük
+      olarak verilmektedir. Geriye dönük veri verilmemektedir. Suyun Enerji Karşılığı
+      Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    response_structure: {}

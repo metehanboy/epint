@@ -1,207 +1,61 @@
 endpoints:
-  meter_count_subject_to_retroactive_adjustment_export:
+  meter-count-subject-to-retroactive-adjustment-export:
     endpoint: /v1/markets/retroactive-adjustment/export/meter-count-subject-to-retroactive-adjustment
     method: POST
     auth: true
-    short_name: meter_count_subject_to_retroactive_adjustment_export
+    short_name: meter-count-subject-to-retroactive-adjustment-export
     short_name_tr: GDDK'ya Konu olan Sayaç Sayısı Dışa Aktarım Servisi
     params:
-    - startDate
-    - endDate
-    - subscriberProfileGroupName
-    - distributionId
-    - page
-    - exportType
+    - body
+    - TGT
     required:
-    - startDate
-    - endDate
-    - exportType
-    response:
-    - view
-    - model
-    - status
-    - empty
-    - reference
-    - viewName
-    - modelMap
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: subscriberProfileGroupName
-      var_type: str
-      description: Profil Abone Grubu
-      required: false
-      example: AYDINLATMA
-    - name: distributionId
-      var_type: int
-      description: Dağıtım Id
-      required: false
-      example: 1
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
-    - name: exportType
-      var_type: str
-      description: XLSX, CSV ya da PDF
-      required: true
-      example: XLSX
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: GDDK'ya Konu olan Sayaç Sayısı Dışa Aktarım Servisi
     description: Geçmiş 12 ay içindeki ilgili ayın tüketiminin eksik ya da fazla faturalandırılması
       nedeniyle faturaya yansıtalan kalem “Geçmişe Dönük Düzeltme Kalemi” olarak adlandırılır.
       Bu veri GDDK ile ilişkilendirilen sayaç sayısını ifade eder.GDDK'ya Konu olan
       Sayaç Sayısı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
-    response_structure:
-      view: str
-      model: object
-      status: str
-      empty: bool
-      reference: bool
-      viewName: str
-      modelMap: object
-  meter_volume_subject_to_retroactive_adjustment_export:
+    response_structure: {}
+  meter-volume-subject-to-retroactive-adjustment-export:
     endpoint: /v1/markets/retroactive-adjustment/export/meter-volume
     method: POST
     auth: true
-    short_name: meter_volume_subject_to_retroactive_adjustment_export
+    short_name: meter-volume-subject-to-retroactive-adjustment-export
     short_name_tr: GDDK'ya Konu olan Sayaç Hacim Verileri Dışa Aktarım Servisi
     params:
-    - periodStartDate
-    - periodEndDate
-    - versionStartDate
-    - versionEndDate
-    - subscriberProfileGroup
-    - meterReadOrgId
-    - page
-    - exportType
+    - body
+    - TGT
     required:
-    - meterReadOrgId
-    - exportType
-    response:
-    - view
-    - model
-    - status
-    - empty
-    - reference
-    - viewName
-    - modelMap
-    var_type:
-    - name: periodStartDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: periodEndDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: versionStartDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: versionEndDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: subscriberProfileGroup
-      var_type: str
-      description: Profil Abone Grubu
-      required: false
-      example: AYDINLATMA
-    - name: meterReadOrgId
-      var_type: int
-      description: Organizasyon Id
-      required: true
-      example: 1005
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
-    - name: exportType
-      var_type: str
-      description: XLSX, CSV ya da PDF
-      required: true
-      example: XLSX
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: GDDK'ya Konu olan Sayaç Hacim Verileri Dışa Aktarım Servisi
     description: Geçmiş 12 ay içindeki ilgili ayın tüketiminin eksik ya da fazla faturalandırılması
       nedeniyle faturaya yansıtılan kalem 'Geçmişe Dönük Düzeltme Kalemi' olarak adlandırılır.
       Bu veri GDDK ile ilişkilendirilen sayaçların hacim verilerini ifade eder.GDDK'ya
       Konu olan Sayaç Hacim Verileri Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
-    response_structure:
-      view: str
-      model: object
-      status: str
-      empty: bool
-      reference: bool
-      viewName: str
-      modelMap: object
-  retroactive_adjustment_sum_export:
+    response_structure: {}
+  retroactive-adjustment-sum-export:
     endpoint: /v1/markets/retroactive-adjustment/export/retroactive-adjustment-sum
     method: POST
     auth: true
-    short_name: retroactive_adjustment_sum_export
+    short_name: retroactive-adjustment-sum-export
     short_name_tr: Gddk Tutarı Dışa Aktarım Servisi
     params:
-    - startDate
-    - endDate
-    - page
-    - exportType
+    - body
+    - TGT
     required:
-    - startDate
-    - endDate
-    - exportType
-    response:
-    - view
-    - model
-    - status
-    - empty
-    - reference
-    - viewName
-    - modelMap
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
-    - name: exportType
-      var_type: str
-      description: XLSX, CSV ya da PDF
-      required: true
-      example: XLSX
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: Gddk Tutarı Dışa Aktarım Servisi
     description: Geçmiş 12 ay içindeki ilgili ayın tüketiminin eksik ya da fazla faturalandırılması
       nedeniyle faturaya yansıtılan kalem 'Geçmişe Dönük Düzeltme Kalemi' olarak adlandırılır.
       Bu veri GDDK ile ilişkilendirilen finansal tutarı ifade eder.GDDK Tutarı Listesini
       XLSX, CSV ya da PDF olarak dışa aktarır.
-    response_structure:
-      view: str
-      model: object
-      status: str
-      empty: bool
-      reference: bool
-      viewName: str
-      modelMap: object
+    response_structure: {}

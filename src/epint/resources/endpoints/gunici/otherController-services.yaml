@@ -1,0 +1,1192 @@
+endpoints:
+  list_avg_price_gap_chart:
+    endpoint: /rest/v1/dashboard/avg-price-gap-chart
+    method: POST
+    auth: true
+    short_name: list_avg_price_gap_chart
+    short_name_tr: 'AOF-Fiyat Farkı Grafiği '
+    params:
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: 'AOF-Fiyat Farkı Grafiği '
+    description: Katılımcı Dashboard Ekranı AOF-Fiyat Farkı Grafiği
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_daily_matches_by_exist:
+    endpoint: /rest/v1/dashboard/daily/reconciliation
+    method: POST
+    auth: true
+    short_name: list_daily_matches_by_exist
+    short_name_tr: Özet Tablo Grafiği
+    params:
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Özet Tablo Grafiği
+    description: Özet Tablo Grafiği
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  get_system_messages:
+    endpoint: /rest/v1/dashboard/get-system-messages
+    method: GET
+    auth: true
+    short_name: get_system_messages
+    short_name_tr: ${SYSTEM_MESSAGES}
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ${SYSTEM_MESSAGES}
+    description: ${SYSTEM_MESSAGES}
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_organization_avg_price_chart:
+    endpoint: /rest/v1/dashboard/organization-avg-price-chart
+    method: POST
+    auth: true
+    short_name: list_organization_avg_price_chart
+    short_name_tr: Organizasyonun AOF-PTF Grafiği
+    params:
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Organizasyonun AOF-PTF Grafiği
+    description: Organizasyonun AOF-PTF grafik verilerinin sağlandığı servis.
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_matches_by_exist:
+    endpoint: /rest/v1/match/by-exist
+    method: POST
+    auth: true
+    short_name: list_matches_by_exist
+    short_name_tr: Organizasyona ait eşleşme listeleme
+    params:
+    - pageInfo
+    - region
+    - effectiveDateStart
+    - effectiveDateEnd
+    - contractTypes
+    - offerId
+    - matchId
+    - contractNames
+    - offerType
+    - matchingStatus
+    - contractStatuses
+    - sortingInfo
+    - username
+    - organizationId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: contractTypes
+      var_type: list
+      description: Kontrat tipi
+      required: false
+      items: str
+    - name: offerId
+      var_type: int
+      description: Teklifin tekil id bilgisi.
+      required: false
+    - name: matchId
+      var_type: int
+      description: Teklifin eşleşme numara bilgisi
+      required: false
+    - name: contractNames
+      var_type: list
+      description: Kontrat ismi
+      required: false
+      items: str
+    - name: offerType
+      var_type: str
+      description: Teklifin yön bilgisi (Alış,Satış)
+      required: false
+    - name: matchingStatus
+      var_type: list
+      description: Eşleşme durum bilgisi
+      required: false
+      items: str
+    - name: contractStatuses
+      var_type: list
+      description: Kontrat durum bilgisi
+      required: false
+      items: str
+    - name: sortingInfo
+      var_type: str
+      description: Sıralama bilgisi
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon id bilgisi
+      required: false
+    summary: Organizasyona ait eşleşme listeleme
+    description: Organizasyona ait eşleşmelerin listelendiği servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_matches_by_organization:
+    endpoint: /rest/v1/match/by-organization
+    method: POST
+    auth: true
+    short_name: list_matches_by_organization
+    short_name_tr: Organizasyona ait eşleşme listeleme
+    params:
+    - pageInfo
+    - region
+    - effectiveDateStart
+    - effectiveDateEnd
+    - contractTypes
+    - offerId
+    - matchId
+    - contractNames
+    - offerType
+    - matchingStatus
+    - contractStatuses
+    - sortingInfo
+    - username
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: contractTypes
+      var_type: list
+      description: Kontrat tipi
+      required: false
+      items: str
+    - name: offerId
+      var_type: int
+      description: Teklifin tekil id bilgisi.
+      required: false
+    - name: matchId
+      var_type: int
+      description: Teklifin eşleşme numara bilgisi
+      required: false
+    - name: contractNames
+      var_type: list
+      description: Kontrat ismi
+      required: false
+      items: str
+    - name: offerType
+      var_type: str
+      description: Teklifin yön bilgisi (Alış,Satış)
+      required: false
+    - name: matchingStatus
+      var_type: list
+      description: Eşleşme durum bilgisi
+      required: false
+      items: str
+    - name: contractStatuses
+      var_type: list
+      description: Kontrat durum bilgisi
+      required: false
+      items: str
+    - name: sortingInfo
+      var_type: str
+      description: Sıralama bilgisi
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    summary: Organizasyona ait eşleşme listeleme
+    description: Organizasyona ait eşleşmelerin listelendiği servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_matches_by_participant:
+    endpoint: /rest/v1/match/by-participant
+    method: POST
+    auth: true
+    short_name: list_matches_by_participant
+    short_name_tr: Organizasyona ait eşleşme listeleme
+    params:
+    - pageInfo
+    - region
+    - effectiveDateStart
+    - effectiveDateEnd
+    - contractTypes
+    - offerId
+    - matchId
+    - contractNames
+    - offerType
+    - matchingStatus
+    - contractStatuses
+    - sortingInfo
+    - username
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: contractTypes
+      var_type: list
+      description: Kontrat tipi
+      required: false
+      items: str
+    - name: offerId
+      var_type: int
+      description: Teklifin tekil id bilgisi.
+      required: false
+    - name: matchId
+      var_type: int
+      description: Teklifin eşleşme numara bilgisi
+      required: false
+    - name: contractNames
+      var_type: list
+      description: Kontrat ismi
+      required: false
+      items: str
+    - name: offerType
+      var_type: str
+      description: Teklifin yön bilgisi (Alış,Satış)
+      required: false
+    - name: matchingStatus
+      var_type: list
+      description: Eşleşme durum bilgisi
+      required: false
+      items: str
+    - name: contractStatuses
+      var_type: list
+      description: Kontrat durum bilgisi
+      required: false
+      items: str
+    - name: sortingInfo
+      var_type: str
+      description: Sıralama bilgisi
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    summary: Organizasyona ait eşleşme listeleme
+    description: Organizasyona ait eşleşmelerin listelendiği servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_recon_hourly:
+    endpoint: /rest/v1/match/hourly/reconciliation
+    method: POST
+    auth: true
+    short_name: list_recon_hourly
+    short_name_tr: GİP Uzlaştırma Raporu
+    params:
+    - pageInfo
+    - deliveryDateStart
+    - deliveryDateEnd
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: deliveryDateStart
+      var_type: datetime
+      description: Başlangıç tarihi
+      required: false
+      example: '2021-06-24 14:00:00'
+    - name: deliveryDateEnd
+      var_type: datetime
+      description: Başlangıç tarihi
+      required: false
+      example: '2021-06-24 14:00:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    summary: GİP Uzlaştırma Raporu
+    description: Saatlik alış-satış tutar ve miktar bilgilerinin verildiği servistir.
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_match_count:
+    endpoint: /rest/v1/match/match-count/list
+    method: POST
+    auth: true
+    short_name: list_match_count
+    short_name_tr: Eşleşme sayısı listesi
+    params:
+    - pageInfo
+    - duration
+    - matchCount
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: duration
+      var_type: int
+      description: Süre
+      required: false
+    - name: matchCount
+      var_type: int
+      description: Eşleşme Sayısı
+      required: false
+    summary: Eşleşme sayısı listesi
+    description: Eşleşme sayısı listesi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_operation_code:
+    endpoint: /rest/v1/operation-history/code/list
+    method: GET
+    auth: true
+    short_name: list_operation_code
+    short_name_tr: İşlem Geçmişi Kategori
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: İşlem Geçmişi Kategori
+    description: İşlem geçmişi kategori listeleme
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_error_messaging:
+    endpoint: /rest/v1/operation-history/error-messaging/list
+    method: POST
+    auth: true
+    short_name: list_error_messaging
+    short_name_tr: Hata mesajı listesi
+    params:
+    - pageInfo
+    - duration
+    - errorCount
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: duration
+      var_type: int
+      description: Süre
+      required: false
+    - name: errorCount
+      var_type: int
+      description: Hata sayısı
+      required: false
+    summary: Hata mesajı listesi
+    description: Hata mesajı listesi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_operation_history:
+    endpoint: /rest/v1/operation-history/list
+    method: POST
+    auth: true
+    short_name: list_operation_history
+    short_name_tr: İşlem Geçmişi Listeleme
+    params:
+    - pageInfo
+    - startDate
+    - endDate
+    - contract
+    - user
+    - region
+    - priority
+    - operationType
+    - operationCode
+    - sortingInfo
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: startDate
+      var_type: datetime
+      description: Başlangıç tarihi
+      required: false
+      example: '2021-06-24 14:00:00'
+    - name: endDate
+      var_type: datetime
+      description: Bitiş tarihi
+      required: false
+      example: '2021-06-24 14:00:00'
+    - name: contract
+      var_type: str
+      description: Kontrat ismi
+      required: false
+    - name: user
+      var_type: str
+      description: Kullanıcı ad bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: priority
+      var_type: str
+      description: Önem bilgisi
+      required: false
+    - name: operationType
+      var_type: str
+      description: İşlem tipi
+      required: false
+    - name: operationCode
+      var_type: str
+      description: Konu bilgisi
+      required: false
+    - name: sortingInfo
+      var_type: str
+      description: Sıralama bilgisi
+      required: false
+    summary: İşlem Geçmişi Listeleme
+    description: Kullanıcı ve sistem hareketlerinin listelendiği servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_intraday_status:
+    endpoint: /rest/v1/organization/intraday-status/list
+    method: POST
+    auth: true
+    short_name: list_intraday_status
+    short_name_tr: GİP Katılım Anlaşması Durumu Listeleme Servisi
+    params:
+    - organizationId
+    - username
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: organizationId
+      var_type: int
+      description: Organizasyon id bilgisi
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    summary: GİP Katılım Anlaşması Durumu Listeleme Servisi
+    description: GİP Katılım Anlaşması Durumu Listeleme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_avg_price_gap_chart_export:
+    endpoint: /rest/v1/dashboard/avg-price-gap-chart/export
+    method: POST
+    auth: true
+    short_name: list_avg_price_gap_chart_export
+    short_name_tr: 'AOF-Fiyat Farkı Grafiği '
+    params:
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: 'AOF-Fiyat Farkı Grafiği '
+    description: Katılımcı Dashboard Ekranı AOF-Fiyat Farkı Grafiği
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_daily_matches_by_exist:
+    endpoint: /rest/v1/dashboard/daily/reconciliation/export
+    method: POST
+    auth: true
+    short_name: export_daily_matches_by_exist
+    short_name_tr: Özet Tablo Grafiği
+    params:
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Özet Tablo Grafiği
+    description: Özet Tablo Grafiği
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  list_organization_avg_price_chart_export:
+    endpoint: /rest/v1/dashboard/organization-avg-price-chart/export
+    method: POST
+    auth: true
+    short_name: list_organization_avg_price_chart_export
+    short_name_tr: Organizasyonun AOF-PTF Export Grafiği
+    params:
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Organizasyonun AOF-PTF Export Grafiği
+    description: Organizasyonun AOF-PTF Export Grafiği
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_matches_by_exist:
+    endpoint: /rest/v1/match/by-exist/export
+    method: POST
+    auth: true
+    short_name: export_matches_by_exist
+    short_name_tr: Organizasyona ait eşleşme listeleme
+    params:
+    - region
+    - effectiveDateStart
+    - effectiveDateEnd
+    - contractTypes
+    - offerId
+    - matchId
+    - contractNames
+    - offerType
+    - matchingStatus
+    - contractStatuses
+    - sortingInfo
+    - username
+    - organizationId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: contractTypes
+      var_type: list
+      description: Kontrat tipi
+      required: false
+      items: str
+    - name: offerId
+      var_type: int
+      description: Teklifin tekil id bilgisi.
+      required: false
+    - name: matchId
+      var_type: int
+      description: Teklifin eşleşme numara bilgisi
+      required: false
+    - name: contractNames
+      var_type: list
+      description: Kontrat ismi
+      required: false
+      items: str
+    - name: offerType
+      var_type: str
+      description: Teklifin yön bilgisi (Alış,Satış)
+      required: false
+    - name: matchingStatus
+      var_type: list
+      description: Eşleşme durum bilgisi
+      required: false
+      items: str
+    - name: contractStatuses
+      var_type: list
+      description: Kontrat durum bilgisi
+      required: false
+      items: str
+    - name: sortingInfo
+      var_type: str
+      description: Sıralama bilgisi
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon id bilgisi
+      required: false
+    summary: Organizasyona ait eşleşme listeleme
+    description: Organizasyona ait eşleşmelerin listelendiği servis
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_matches_by_organization:
+    endpoint: /rest/v1/match/by-organization/export
+    method: POST
+    auth: true
+    short_name: export_matches_by_organization
+    short_name_tr: Organizasyona ait eşleşme listeleme
+    params:
+    - region
+    - effectiveDateStart
+    - effectiveDateEnd
+    - contractTypes
+    - offerId
+    - matchId
+    - contractNames
+    - offerType
+    - matchingStatus
+    - contractStatuses
+    - sortingInfo
+    - username
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: contractTypes
+      var_type: list
+      description: Kontrat tipi
+      required: false
+      items: str
+    - name: offerId
+      var_type: int
+      description: Teklifin tekil id bilgisi.
+      required: false
+    - name: matchId
+      var_type: int
+      description: Teklifin eşleşme numara bilgisi
+      required: false
+    - name: contractNames
+      var_type: list
+      description: Kontrat ismi
+      required: false
+      items: str
+    - name: offerType
+      var_type: str
+      description: Teklifin yön bilgisi (Alış,Satış)
+      required: false
+    - name: matchingStatus
+      var_type: list
+      description: Eşleşme durum bilgisi
+      required: false
+      items: str
+    - name: contractStatuses
+      var_type: list
+      description: Kontrat durum bilgisi
+      required: false
+      items: str
+    - name: sortingInfo
+      var_type: str
+      description: Sıralama bilgisi
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    summary: Organizasyona ait eşleşme listeleme
+    description: Organizasyona ait eşleşmelerin listelendiği servis
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_matches_by_participant:
+    endpoint: /rest/v1/match/by-participant/export
+    method: POST
+    auth: true
+    short_name: export_matches_by_participant
+    short_name_tr: Organizasyona ait eşleşme listeleme
+    params:
+    - region
+    - effectiveDateStart
+    - effectiveDateEnd
+    - contractTypes
+    - offerId
+    - matchId
+    - contractNames
+    - offerType
+    - matchingStatus
+    - contractStatuses
+    - sortingInfo
+    - username
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: contractTypes
+      var_type: list
+      description: Kontrat tipi
+      required: false
+      items: str
+    - name: offerId
+      var_type: int
+      description: Teklifin tekil id bilgisi.
+      required: false
+    - name: matchId
+      var_type: int
+      description: Teklifin eşleşme numara bilgisi
+      required: false
+    - name: contractNames
+      var_type: list
+      description: Kontrat ismi
+      required: false
+      items: str
+    - name: offerType
+      var_type: str
+      description: Teklifin yön bilgisi (Alış,Satış)
+      required: false
+    - name: matchingStatus
+      var_type: list
+      description: Eşleşme durum bilgisi
+      required: false
+      items: str
+    - name: contractStatuses
+      var_type: list
+      description: Kontrat durum bilgisi
+      required: false
+      items: str
+    - name: sortingInfo
+      var_type: str
+      description: Sıralama bilgisi
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    summary: Organizasyona ait eşleşme listeleme
+    description: Organizasyona ait eşleşmelerin listelendiği servis
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  list_recon_hourly_export:
+    endpoint: /rest/v1/match/hourly/reconciliation/export
+    method: POST
+    auth: true
+    short_name: list_recon_hourly_export
+    short_name_tr: GİP Uzlaştırma Raporu Export Servisi
+    params:
+    - deliveryDateStart
+    - deliveryDateEnd
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDateStart
+      var_type: datetime
+      description: Başlangıç tarihi
+      required: false
+      example: '2021-06-24 14:00:00'
+    - name: deliveryDateEnd
+      var_type: datetime
+      description: Başlangıç tarihi
+      required: false
+      example: '2021-06-24 14:00:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    summary: GİP Uzlaştırma Raporu Export Servisi
+    description: Saatlik alış-satış tutar ve miktar bilgilerinin verildiği export
+      servisidir.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict

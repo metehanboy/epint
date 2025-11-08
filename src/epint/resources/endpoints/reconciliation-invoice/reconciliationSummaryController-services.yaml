@@ -1,0 +1,279 @@
+endpoints:
+  get_reconciliation_summary_daily_export:
+    endpoint: /v1/reconciliation/detail/daily/export
+    method: POST
+    auth: true
+    short_name: get_reconciliation_summary_daily_export
+    short_name_tr: 'Aylık Uzlaştırma Bildirimi '
+    params:
+    - period
+    - version
+    - region
+    - effectiveDateStart
+    - effectiveDateEnd
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Fatura Dönemi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: &id001
+      - XLSX
+      - CSV
+      - PDF
+    summary: 'Aylık Uzlaştırma Bildirimi '
+    description: Aylık uzlaştrıma bildirimi listeleme servisi.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  get_reconciliation_summary_hourly_export:
+    endpoint: /v1/reconciliation/detail/hourly/export
+    method: POST
+    auth: true
+    short_name: get_reconciliation_summary_hourly_export
+    short_name_tr: 'Aylık Uzlaştırma Bildirimi '
+    params:
+    - period
+    - version
+    - region
+    - effectiveDateStart
+    - effectiveDateEnd
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Fatura Dönemi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: 'Aylık Uzlaştırma Bildirimi '
+    description: Aylık uzlaştrıma bildirimi listeleme servisi.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  get_reconciliation_summary_daily:
+    endpoint: /v1/reconciliation/detail/daily
+    method: POST
+    auth: true
+    short_name: get_reconciliation_summary_daily
+    short_name_tr: Günlük Uzlaştırma Detayı
+    params:
+    - period
+    - version
+    - region
+    - effectiveDateStart
+    - effectiveDateEnd
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Fatura Dönemi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: &id002
+      - XLSX
+      - CSV
+      - PDF
+    summary: Günlük Uzlaştırma Detayı
+    description: Günlük uzlaştrıma bildirimi listeleme servisi.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  get_reconciliation_summary_hourly:
+    endpoint: /v1/reconciliation/detail/hourly
+    method: POST
+    auth: true
+    short_name: get_reconciliation_summary_hourly
+    short_name_tr: Günlük Uzlaştırma Detayı
+    params:
+    - period
+    - version
+    - region
+    - effectiveDateStart
+    - effectiveDateEnd
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Fatura Dönemi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id002
+    summary: Günlük Uzlaştırma Detayı
+    description: Günlük uzlaştrıma bildirimi listeleme servisi.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

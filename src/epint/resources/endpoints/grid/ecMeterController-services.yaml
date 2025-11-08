@@ -1,0 +1,1987 @@
+endpoints:
+  ec_meter_count:
+    endpoint: /v1/ec-meter/count
+    method: POST
+    auth: true
+    short_name: ec_meter_count
+    short_name_tr: Ölçüm Noktası Kayıt Sayma Servisi
+    params:
+    - balancingRegionId
+    - biddingRegionId
+    - bpmStatus
+    - effectiveDate
+    - effectiveDateStartGreaterThanOrEqual
+    - effectiveDateStartLessThanOrEqual
+    - dspOrganizationId
+    - periodDateStart
+    - periodDateEnd
+    - id
+    - eic
+    - mainMeterId
+    - organizationId
+    - portfolioTypeId
+    - readingOrganizationId
+    - readingTypeId
+    - recordUsageStatusId
+    - settlementPointIds
+    - statusId
+    - substationId
+    - supplierTypeId
+    - uniqueCode
+    - withdrawDeductionSettlementPointId
+    - withdrawSettlementPointId
+    - containsId
+    - containsEic
+    - containsMainMeterId
+    - containsOrganizationId
+    - containsSerial
+    - containsWithdrawDeductionSettlementPointId
+    - containsWithdrawSettlementPointId
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: balancingRegionId
+      var_type: int
+      description: Dengeleme Bölgesi ID
+      required: false
+    - name: biddingRegionId
+      var_type: int
+      description: Teklif Bölgesi ID
+      required: false
+    - name: bpmStatus
+      var_type: bool
+      description: Dengeleme Güç Piyasası Katılım Durumu
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartGreaterThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya İleri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartLessThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya Geri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: dspOrganizationId
+      var_type: int
+      description: Talep Tarafı Katılım Organizasyon ID
+      required: false
+    - name: periodDateStart
+      var_type: str
+      description: Dönem Başlangıç Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: periodDateEnd
+      var_type: str
+      description: Dönem Bitiş Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: id
+      var_type: int
+      description: ID
+      required: false
+    - name: eic
+      var_type: str
+      description: EIC
+      required: false
+    - name: mainMeterId
+      var_type: int
+      description: Ana Sayaç ID
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon ID
+      required: false
+    - name: portfolioTypeId
+      var_type: int
+      description: Portföy Tip ID
+      required: false
+    - name: readingOrganizationId
+      var_type: int
+      description: ''
+      required: false
+    - name: readingTypeId
+      var_type: int
+      description: Sayaç Okuma Tip ID
+      required: false
+    - name: recordUsageStatusId
+      var_type: int
+      description: Kayıt Kullanım Durum ID
+      required: false
+    - name: settlementPointIds
+      var_type: list
+      description: UEVÇB ID leri
+      required: false
+      items: int
+    - name: statusId
+      var_type: int
+      description: Durum ID
+      required: false
+    - name: substationId
+      var_type: int
+      description: Trafo Merkezi ID
+      required: false
+    - name: supplierTypeId
+      var_type: int
+      description: Tedarik Tip ID
+      required: false
+    - name: uniqueCode
+      var_type: str
+      description: Tekil Kod
+      required: false
+    - name: withdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID
+      required: false
+    - name: withdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID
+      required: false
+    - name: containsId
+      var_type: int
+      description: ID İçeren
+      required: false
+    - name: containsEic
+      var_type: str
+      description: EIC İçeren
+      required: false
+    - name: containsMainMeterId
+      var_type: int
+      description: Ana Sayaç ID İçeren
+      required: false
+    - name: containsOrganizationId
+      var_type: int
+      description: Organizasyon ID İçeren
+      required: false
+    - name: containsSerial
+      var_type: str
+      description: Sayaç Seri No İçeren
+      required: false
+    - name: containsWithdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID İçeren
+      required: false
+    - name: containsWithdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID İçeren
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: Ölçüm Noktası Kayıt Sayma Servisi
+    description: Sorgulamak istediğiniz toplam ölçüm noktası kayıt adedini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body:
+        content:
+          count: int
+  ec_meter_distinct_count:
+    endpoint: /v1/ec-meter/count-meter
+    method: POST
+    auth: true
+    short_name: ec_meter_distinct_count
+    short_name_tr: Ölçüm Noktası Sayma Servisi
+    params:
+    - balancingRegionId
+    - biddingRegionId
+    - bpmStatus
+    - effectiveDate
+    - effectiveDateStartGreaterThanOrEqual
+    - effectiveDateStartLessThanOrEqual
+    - dspOrganizationId
+    - periodDateStart
+    - periodDateEnd
+    - id
+    - eic
+    - mainMeterId
+    - organizationId
+    - portfolioTypeId
+    - readingOrganizationId
+    - readingTypeId
+    - recordUsageStatusId
+    - settlementPointIds
+    - statusId
+    - substationId
+    - supplierTypeId
+    - uniqueCode
+    - withdrawDeductionSettlementPointId
+    - withdrawSettlementPointId
+    - containsId
+    - containsEic
+    - containsMainMeterId
+    - containsOrganizationId
+    - containsSerial
+    - containsWithdrawDeductionSettlementPointId
+    - containsWithdrawSettlementPointId
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: balancingRegionId
+      var_type: int
+      description: Dengeleme Bölgesi ID
+      required: false
+    - name: biddingRegionId
+      var_type: int
+      description: Teklif Bölgesi ID
+      required: false
+    - name: bpmStatus
+      var_type: bool
+      description: Dengeleme Güç Piyasası Katılım Durumu
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartGreaterThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya İleri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartLessThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya Geri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: dspOrganizationId
+      var_type: int
+      description: Talep Tarafı Katılım Organizasyon ID
+      required: false
+    - name: periodDateStart
+      var_type: str
+      description: Dönem Başlangıç Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: periodDateEnd
+      var_type: str
+      description: Dönem Bitiş Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: id
+      var_type: int
+      description: ID
+      required: false
+    - name: eic
+      var_type: str
+      description: EIC
+      required: false
+    - name: mainMeterId
+      var_type: int
+      description: Ana Sayaç ID
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon ID
+      required: false
+    - name: portfolioTypeId
+      var_type: int
+      description: Portföy Tip ID
+      required: false
+    - name: readingOrganizationId
+      var_type: int
+      description: ''
+      required: false
+    - name: readingTypeId
+      var_type: int
+      description: Sayaç Okuma Tip ID
+      required: false
+    - name: recordUsageStatusId
+      var_type: int
+      description: Kayıt Kullanım Durum ID
+      required: false
+    - name: settlementPointIds
+      var_type: list
+      description: UEVÇB ID leri
+      required: false
+      items: int
+    - name: statusId
+      var_type: int
+      description: Durum ID
+      required: false
+    - name: substationId
+      var_type: int
+      description: Trafo Merkezi ID
+      required: false
+    - name: supplierTypeId
+      var_type: int
+      description: Tedarik Tip ID
+      required: false
+    - name: uniqueCode
+      var_type: str
+      description: Tekil Kod
+      required: false
+    - name: withdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID
+      required: false
+    - name: withdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID
+      required: false
+    - name: containsId
+      var_type: int
+      description: ID İçeren
+      required: false
+    - name: containsEic
+      var_type: str
+      description: EIC İçeren
+      required: false
+    - name: containsMainMeterId
+      var_type: int
+      description: Ana Sayaç ID İçeren
+      required: false
+    - name: containsOrganizationId
+      var_type: int
+      description: Organizasyon ID İçeren
+      required: false
+    - name: containsSerial
+      var_type: str
+      description: Sayaç Seri No İçeren
+      required: false
+    - name: containsWithdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID İçeren
+      required: false
+    - name: containsWithdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID İçeren
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: Ölçüm Noktası Sayma Servisi
+    description: Sorgulamak istediğiniz toplam ölçüm noktası adedini bu servis ile
+      alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body:
+        content:
+          count: int
+  ec_meter_query:
+    endpoint: /v1/ec-meter/query
+    method: POST
+    auth: true
+    short_name: ec_meter_query
+    short_name_tr: Ölçüm Noktası Sorgulama Servisi
+    params:
+    - balancingRegionId
+    - biddingRegionId
+    - bpmStatus
+    - effectiveDate
+    - effectiveDateStartGreaterThanOrEqual
+    - effectiveDateStartLessThanOrEqual
+    - dspOrganizationId
+    - periodDateStart
+    - periodDateEnd
+    - id
+    - eic
+    - mainMeterId
+    - organizationId
+    - portfolioTypeId
+    - readingOrganizationId
+    - readingTypeId
+    - recordUsageStatusId
+    - settlementPointIds
+    - statusId
+    - substationId
+    - supplierTypeId
+    - uniqueCode
+    - withdrawDeductionSettlementPointId
+    - withdrawSettlementPointId
+    - containsId
+    - containsEic
+    - containsMainMeterId
+    - containsOrganizationId
+    - containsSerial
+    - containsWithdrawDeductionSettlementPointId
+    - containsWithdrawSettlementPointId
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: balancingRegionId
+      var_type: int
+      description: Dengeleme Bölgesi ID
+      required: false
+    - name: biddingRegionId
+      var_type: int
+      description: Teklif Bölgesi ID
+      required: false
+    - name: bpmStatus
+      var_type: bool
+      description: Dengeleme Güç Piyasası Katılım Durumu
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartGreaterThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya İleri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartLessThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya Geri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: dspOrganizationId
+      var_type: int
+      description: Talep Tarafı Katılım Organizasyon ID
+      required: false
+    - name: periodDateStart
+      var_type: str
+      description: Dönem Başlangıç Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: periodDateEnd
+      var_type: str
+      description: Dönem Bitiş Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: id
+      var_type: int
+      description: ID
+      required: false
+    - name: eic
+      var_type: str
+      description: EIC
+      required: false
+    - name: mainMeterId
+      var_type: int
+      description: Ana Sayaç ID
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon ID
+      required: false
+    - name: portfolioTypeId
+      var_type: int
+      description: Portföy Tip ID
+      required: false
+    - name: readingOrganizationId
+      var_type: int
+      description: ''
+      required: false
+    - name: readingTypeId
+      var_type: int
+      description: Sayaç Okuma Tip ID
+      required: false
+    - name: recordUsageStatusId
+      var_type: int
+      description: Kayıt Kullanım Durum ID
+      required: false
+    - name: settlementPointIds
+      var_type: list
+      description: UEVÇB ID leri
+      required: false
+      items: int
+    - name: statusId
+      var_type: int
+      description: Durum ID
+      required: false
+    - name: substationId
+      var_type: int
+      description: Trafo Merkezi ID
+      required: false
+    - name: supplierTypeId
+      var_type: int
+      description: Tedarik Tip ID
+      required: false
+    - name: uniqueCode
+      var_type: str
+      description: Tekil Kod
+      required: false
+    - name: withdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID
+      required: false
+    - name: withdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID
+      required: false
+    - name: containsId
+      var_type: int
+      description: ID İçeren
+      required: false
+    - name: containsEic
+      var_type: str
+      description: EIC İçeren
+      required: false
+    - name: containsMainMeterId
+      var_type: int
+      description: Ana Sayaç ID İçeren
+      required: false
+    - name: containsOrganizationId
+      var_type: int
+      description: Organizasyon ID İçeren
+      required: false
+    - name: containsSerial
+      var_type: str
+      description: Sayaç Seri No İçeren
+      required: false
+    - name: containsWithdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID İçeren
+      required: false
+    - name: containsWithdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID İçeren
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: Ölçüm Noktası Sorgulama Servisi
+    description: Sorgulamak istediğiniz ölçüm noktası bilgilerini bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body:
+        content:
+          content:
+          - id: int
+            eic: str
+            mainMeterId: int
+            organizationId: int
+            organizationName: str
+            portfolioTypeId: int
+            portfolioTypeName: str
+            readingOrganizationId: int
+            readingOrganizationName: str
+            readingTypeId: int
+            readingTypeName: str
+            recordUsageStatusId: int
+            recordUsageStatusName: str
+            settlementPointIds: list
+            statusId: int
+            statusName: str
+            substationId: int
+            substationName: str
+            supplierTypeId: int
+            supplierTypeName: str
+            uniqueCode: str
+            withdrawDeductionSettlementPointId: int
+            withdrawDeductionSettlementPointName: str
+            withdrawSettlementPointId: int
+            withdrawSettlementPointName: str
+            effectiveDate: str
+            effectiveDateEnd: str
+            createDate: str
+            modifyDate: str
+            createUser: str
+            modifyUser: str
+          page: dict
+          totalElements: int
+          totalPages: int
+          size: int
+          number: int
+          numberOfElements: int
+          first: bool
+          last: bool
+          sort: dict
+  ec_meter_save:
+    endpoint: /v1/ec-meter/save
+    method: POST
+    auth: true
+    short_name: ec_meter_save
+    short_name_tr: Ölçüm Noktası Kayıt Servisi
+    params:
+    - effectiveDateStart
+    - descriptions
+    - address
+    - addressCode
+    - annualAverageConsumption
+    - annualEstimatedConsumptionT1
+    - annualEstimatedConsumptionT2
+    - annualEstimatedConsumptionT3
+    - bilateralConsumerGroupId
+    - busbarVoltageTypeId
+    - consumptionPointTypeId
+    - contractPower
+    - districtId
+    - exceptionalSubstationStatus
+    - facilityTypeId
+    - lastResortConsumerGroupId
+    - lineCircuitCountTypeId1
+    - lineCircuitCountTypeId2
+    - lineCircuitCountTypeId3
+    - lineConductorTypeId1
+    - lineConductorTypeId2
+    - lineConductorTypeId3
+    - lineCrossSection1
+    - lineCrossSection2
+    - lineCrossSection3
+    - lineLength1
+    - lineLength2
+    - lineLength3
+    - loadLoss
+    - loadProfileFeature
+    - lossFactorStatus
+    - mainMeterId
+    - mainTariffGroupId
+    - meteringVoltageTypeId
+    - noLoadLoss
+    - profileSubscriptionGroupId
+    - readingDataTypeId
+    - readingOrganizationId
+    - readingPeriod
+    - readingTypeId
+    - remoteReadingStatusId
+    - substationId
+    - substationInputVoltage
+    - substationOutputVoltage
+    - substationPower
+    - tariffClassTypeId
+    - uniqueCode
+    - usageStatusTypeId
+    - withdrawPositionTypeId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: descriptions
+      var_type: list
+      description: Açıklamalar
+      required: false
+      items: str
+    - name: address
+      var_type: str
+      description: Adres
+      required: false
+    - name: addressCode
+      var_type: int
+      description: Adres Kodu
+      required: false
+    - name: annualAverageConsumption
+      var_type: float
+      description: Yıllık Ortalama Tüketim
+      required: false
+    - name: annualEstimatedConsumptionT1
+      var_type: float
+      description: T1 Yıllık Tahmini Tüketim
+      required: false
+    - name: annualEstimatedConsumptionT2
+      var_type: float
+      description: T2 Yıllık Tahmini Tüketim
+      required: false
+    - name: annualEstimatedConsumptionT3
+      var_type: float
+      description: T3 Yıllık Tahmini Tüketim
+      required: false
+    - name: bilateralConsumerGroupId
+      var_type: int
+      description: İkili Anlaşma Tüketici Grubu ID
+      required: false
+    - name: busbarVoltageTypeId
+      var_type: int
+      description: Bara Gerilim ID
+      required: false
+    - name: consumptionPointTypeId
+      var_type: int
+      description: Tüketim Noktası Tip ID
+      required: false
+    - name: contractPower
+      var_type: float
+      description: Sözleşme Gücü
+      required: false
+    - name: districtId
+      var_type: int
+      description: İlçe ID
+      required: false
+    - name: exceptionalSubstationStatus
+      var_type: bool
+      description: Özel Trafo Durumu
+      required: false
+    - name: facilityTypeId
+      var_type: int
+      description: Tesis Tip ID
+      required: false
+    - name: lastResortConsumerGroupId
+      var_type: int
+      description: Son Kaynak Tüketici Grubu ID
+      required: false
+    - name: lineCircuitCountTypeId1
+      var_type: int
+      description: 1. Hat Devre Sayısı ID
+      required: false
+    - name: lineCircuitCountTypeId2
+      var_type: int
+      description: 2. Hat Devre Sayısı ID
+      required: false
+    - name: lineCircuitCountTypeId3
+      var_type: int
+      description: 3. Hat Devre Sayısı ID
+      required: false
+    - name: lineConductorTypeId1
+      var_type: int
+      description: 1. İletken Tipi Özdirenç ID
+      required: false
+    - name: lineConductorTypeId2
+      var_type: int
+      description: 2. İletken Tipi Özdirenç ID
+      required: false
+    - name: lineConductorTypeId3
+      var_type: int
+      description: 3. İletken Tipi Özdirenç ID
+      required: false
+    - name: lineCrossSection1
+      var_type: float
+      description: 1. Hat Kesiti
+      required: false
+    - name: lineCrossSection2
+      var_type: float
+      description: 2. Hat Kesiti
+      required: false
+    - name: lineCrossSection3
+      var_type: float
+      description: 3. Hat Kesiti
+      required: false
+    - name: lineLength1
+      var_type: float
+      description: 1. Hat Uzunluk
+      required: false
+    - name: lineLength2
+      var_type: float
+      description: 2. Hat Uzunluk
+      required: false
+    - name: lineLength3
+      var_type: float
+      description: 3. Hat Uzunluk
+      required: false
+    - name: loadLoss
+      var_type: float
+      description: Yükteki Kayıp
+      required: false
+    - name: loadProfileFeature
+      var_type: bool
+      description: Yük Profil Kayit Özelliği
+      required: false
+    - name: lossFactorStatus
+      var_type: bool
+      description: İSKK Durumu
+      required: false
+    - name: mainMeterId
+      var_type: int
+      description: Ana Sayaç ID
+      required: false
+    - name: mainTariffGroupId
+      var_type: int
+      description: Ana Tarife Grubu ID
+      required: false
+    - name: meteringVoltageTypeId
+      var_type: int
+      description: Bağlantı Noktası Gerilim Tip ID
+      required: false
+    - name: noLoadLoss
+      var_type: float
+      description: Boştaki Kayıp
+      required: false
+    - name: profileSubscriptionGroupId
+      var_type: int
+      description: Profil Abone Grubu ID
+      required: false
+    - name: readingDataTypeId
+      var_type: int
+      description: Uzlaştırma Veri Tip ID
+      required: false
+    - name: readingOrganizationId
+      var_type: int
+      description: Sayac Okuyan Kurum ID
+      required: false
+    - name: readingPeriod
+      var_type: int
+      description: Okuma Periyodu
+      required: false
+    - name: readingTypeId
+      var_type: int
+      description: Sayaç Okuma Tip ID
+      required: false
+    - name: remoteReadingStatusId
+      var_type: int
+      description: Uzaktan Okuma Durum ID
+      required: false
+    - name: substationId
+      var_type: int
+      description: Trafo Merkezi ID
+      required: false
+    - name: substationInputVoltage
+      var_type: float
+      description: Trafo Giriş Gerilimi
+      required: false
+    - name: substationOutputVoltage
+      var_type: float
+      description: Trafo Çıkış Gerilimi
+      required: false
+    - name: substationPower
+      var_type: float
+      description: Trafo Gücü
+      required: false
+    - name: tariffClassTypeId
+      var_type: int
+      description: Tarife Sınıf ID
+      required: false
+    - name: uniqueCode
+      var_type: str
+      description: Tekil Kod
+      required: false
+    - name: usageStatusTypeId
+      var_type: int
+      description: Kullanım Durum ID
+      required: false
+    - name: withdrawPositionTypeId
+      var_type: int
+      description: Çekiş Pozisyon ID
+      required: false
+    summary: Ölçüm Noktası Kayıt Servisi
+    description: Yeni bir ölçüm noktasını bu servis ile kaydedebilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  ec_meter_export:
+    endpoint: /v1/ec-meter/export
+    method: POST
+    auth: true
+    short_name: ec_meter_export
+    short_name_tr: Ölçüm Noktası Dışa Aktarma Servisi
+    params:
+    - balancingRegionId
+    - biddingRegionId
+    - bpmStatus
+    - effectiveDate
+    - effectiveDateStartGreaterThanOrEqual
+    - effectiveDateStartLessThanOrEqual
+    - dspOrganizationId
+    - periodDateStart
+    - periodDateEnd
+    - id
+    - eic
+    - mainMeterId
+    - organizationId
+    - portfolioTypeId
+    - readingOrganizationId
+    - readingTypeId
+    - recordUsageStatusId
+    - settlementPointIds
+    - statusId
+    - substationId
+    - supplierTypeId
+    - uniqueCode
+    - withdrawDeductionSettlementPointId
+    - withdrawSettlementPointId
+    - containsId
+    - containsEic
+    - containsMainMeterId
+    - containsOrganizationId
+    - containsSerial
+    - containsWithdrawDeductionSettlementPointId
+    - containsWithdrawSettlementPointId
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: balancingRegionId
+      var_type: int
+      description: Dengeleme Bölgesi ID
+      required: false
+    - name: biddingRegionId
+      var_type: int
+      description: Teklif Bölgesi ID
+      required: false
+    - name: bpmStatus
+      var_type: bool
+      description: Dengeleme Güç Piyasası Katılım Durumu
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartGreaterThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya İleri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartLessThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya Geri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: dspOrganizationId
+      var_type: int
+      description: Talep Tarafı Katılım Organizasyon ID
+      required: false
+    - name: periodDateStart
+      var_type: str
+      description: Dönem Başlangıç Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: periodDateEnd
+      var_type: str
+      description: Dönem Bitiş Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: id
+      var_type: int
+      description: ID
+      required: false
+    - name: eic
+      var_type: str
+      description: EIC
+      required: false
+    - name: mainMeterId
+      var_type: int
+      description: Ana Sayaç ID
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon ID
+      required: false
+    - name: portfolioTypeId
+      var_type: int
+      description: Portföy Tip ID
+      required: false
+    - name: readingOrganizationId
+      var_type: int
+      description: ''
+      required: false
+    - name: readingTypeId
+      var_type: int
+      description: Sayaç Okuma Tip ID
+      required: false
+    - name: recordUsageStatusId
+      var_type: int
+      description: Kayıt Kullanım Durum ID
+      required: false
+    - name: settlementPointIds
+      var_type: list
+      description: UEVÇB ID leri
+      required: false
+      items: int
+    - name: statusId
+      var_type: int
+      description: Durum ID
+      required: false
+    - name: substationId
+      var_type: int
+      description: Trafo Merkezi ID
+      required: false
+    - name: supplierTypeId
+      var_type: int
+      description: Tedarik Tip ID
+      required: false
+    - name: uniqueCode
+      var_type: str
+      description: Tekil Kod
+      required: false
+    - name: withdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID
+      required: false
+    - name: withdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID
+      required: false
+    - name: containsId
+      var_type: int
+      description: ID İçeren
+      required: false
+    - name: containsEic
+      var_type: str
+      description: EIC İçeren
+      required: false
+    - name: containsMainMeterId
+      var_type: int
+      description: Ana Sayaç ID İçeren
+      required: false
+    - name: containsOrganizationId
+      var_type: int
+      description: Organizasyon ID İçeren
+      required: false
+    - name: containsSerial
+      var_type: str
+      description: Sayaç Seri No İçeren
+      required: false
+    - name: containsWithdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID İçeren
+      required: false
+    - name: containsWithdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID İçeren
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: Ölçüm Noktası Dışa Aktarma Servisi
+    description: Dışa aktarmak istediğiniz ölçüm noktası bilgilerini bu servis ile
+      alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  ec_meter_fetch_export_offset_ids:
+    endpoint: /v1/ec-meter/fetch-export-offset-ids
+    method: POST
+    auth: true
+    short_name: ec_meter_fetch_export_offset_ids
+    short_name_tr: Ölçüm Noktası Dışa Aktar Servisleri Offset ID Listeleme Servisi
+    params:
+    - balancingRegionId
+    - biddingRegionId
+    - bpmStatus
+    - effectiveDate
+    - effectiveDateStartGreaterThanOrEqual
+    - effectiveDateStartLessThanOrEqual
+    - dspOrganizationId
+    - periodDateStart
+    - periodDateEnd
+    - id
+    - eic
+    - mainMeterId
+    - organizationId
+    - portfolioTypeId
+    - readingOrganizationId
+    - readingTypeId
+    - recordUsageStatusId
+    - settlementPointIds
+    - statusId
+    - substationId
+    - supplierTypeId
+    - uniqueCode
+    - withdrawDeductionSettlementPointId
+    - withdrawSettlementPointId
+    - containsId
+    - containsEic
+    - containsMainMeterId
+    - containsOrganizationId
+    - containsSerial
+    - containsWithdrawDeductionSettlementPointId
+    - containsWithdrawSettlementPointId
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: balancingRegionId
+      var_type: int
+      description: Dengeleme Bölgesi ID
+      required: false
+    - name: biddingRegionId
+      var_type: int
+      description: Teklif Bölgesi ID
+      required: false
+    - name: bpmStatus
+      var_type: bool
+      description: Dengeleme Güç Piyasası Katılım Durumu
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartGreaterThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya İleri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartLessThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya Geri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: dspOrganizationId
+      var_type: int
+      description: Talep Tarafı Katılım Organizasyon ID
+      required: false
+    - name: periodDateStart
+      var_type: str
+      description: Dönem Başlangıç Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: periodDateEnd
+      var_type: str
+      description: Dönem Bitiş Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: id
+      var_type: int
+      description: ID
+      required: false
+    - name: eic
+      var_type: str
+      description: EIC
+      required: false
+    - name: mainMeterId
+      var_type: int
+      description: Ana Sayaç ID
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon ID
+      required: false
+    - name: portfolioTypeId
+      var_type: int
+      description: Portföy Tip ID
+      required: false
+    - name: readingOrganizationId
+      var_type: int
+      description: ''
+      required: false
+    - name: readingTypeId
+      var_type: int
+      description: Sayaç Okuma Tip ID
+      required: false
+    - name: recordUsageStatusId
+      var_type: int
+      description: Kayıt Kullanım Durum ID
+      required: false
+    - name: settlementPointIds
+      var_type: list
+      description: UEVÇB ID leri
+      required: false
+      items: int
+    - name: statusId
+      var_type: int
+      description: Durum ID
+      required: false
+    - name: substationId
+      var_type: int
+      description: Trafo Merkezi ID
+      required: false
+    - name: supplierTypeId
+      var_type: int
+      description: Tedarik Tip ID
+      required: false
+    - name: uniqueCode
+      var_type: str
+      description: Tekil Kod
+      required: false
+    - name: withdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID
+      required: false
+    - name: withdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID
+      required: false
+    - name: containsId
+      var_type: int
+      description: ID İçeren
+      required: false
+    - name: containsEic
+      var_type: str
+      description: EIC İçeren
+      required: false
+    - name: containsMainMeterId
+      var_type: int
+      description: Ana Sayaç ID İçeren
+      required: false
+    - name: containsOrganizationId
+      var_type: int
+      description: Organizasyon ID İçeren
+      required: false
+    - name: containsSerial
+      var_type: str
+      description: Sayaç Seri No İçeren
+      required: false
+    - name: containsWithdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID İçeren
+      required: false
+    - name: containsWithdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID İçeren
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: Ölçüm Noktası Dışa Aktar Servisleri Offset ID Listeleme Servisi
+    description: Dışa aktarma servisinin sayfa parametresi olan offsetId listesini
+      bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  ec_meter_plain_export:
+    endpoint: /v1/ec-meter/plain-export
+    method: POST
+    auth: true
+    short_name: ec_meter_plain_export
+    short_name_tr: Ölçüm Noktası Dışa Aktarma Servisi
+    params:
+    - balancingRegionId
+    - biddingRegionId
+    - bpmStatus
+    - effectiveDate
+    - effectiveDateStartGreaterThanOrEqual
+    - effectiveDateStartLessThanOrEqual
+    - dspOrganizationId
+    - periodDateStart
+    - periodDateEnd
+    - id
+    - eic
+    - mainMeterId
+    - organizationId
+    - portfolioTypeId
+    - readingOrganizationId
+    - readingTypeId
+    - recordUsageStatusId
+    - settlementPointIds
+    - statusId
+    - substationId
+    - supplierTypeId
+    - uniqueCode
+    - withdrawDeductionSettlementPointId
+    - withdrawSettlementPointId
+    - containsId
+    - containsEic
+    - containsMainMeterId
+    - containsOrganizationId
+    - containsSerial
+    - containsWithdrawDeductionSettlementPointId
+    - containsWithdrawSettlementPointId
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: balancingRegionId
+      var_type: int
+      description: Dengeleme Bölgesi ID
+      required: false
+    - name: biddingRegionId
+      var_type: int
+      description: Teklif Bölgesi ID
+      required: false
+    - name: bpmStatus
+      var_type: bool
+      description: Dengeleme Güç Piyasası Katılım Durumu
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartGreaterThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya İleri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveDateStartLessThanOrEqual
+      var_type: str
+      description: Geçerlilik Başlangıç Tarihine Eşit veya Geri
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: dspOrganizationId
+      var_type: int
+      description: Talep Tarafı Katılım Organizasyon ID
+      required: false
+    - name: periodDateStart
+      var_type: str
+      description: Dönem Başlangıç Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: periodDateEnd
+      var_type: str
+      description: Dönem Bitiş Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: id
+      var_type: int
+      description: ID
+      required: false
+    - name: eic
+      var_type: str
+      description: EIC
+      required: false
+    - name: mainMeterId
+      var_type: int
+      description: Ana Sayaç ID
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon ID
+      required: false
+    - name: portfolioTypeId
+      var_type: int
+      description: Portföy Tip ID
+      required: false
+    - name: readingOrganizationId
+      var_type: int
+      description: ''
+      required: false
+    - name: readingTypeId
+      var_type: int
+      description: Sayaç Okuma Tip ID
+      required: false
+    - name: recordUsageStatusId
+      var_type: int
+      description: Kayıt Kullanım Durum ID
+      required: false
+    - name: settlementPointIds
+      var_type: list
+      description: UEVÇB ID leri
+      required: false
+      items: int
+    - name: statusId
+      var_type: int
+      description: Durum ID
+      required: false
+    - name: substationId
+      var_type: int
+      description: Trafo Merkezi ID
+      required: false
+    - name: supplierTypeId
+      var_type: int
+      description: Tedarik Tip ID
+      required: false
+    - name: uniqueCode
+      var_type: str
+      description: Tekil Kod
+      required: false
+    - name: withdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID
+      required: false
+    - name: withdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID
+      required: false
+    - name: containsId
+      var_type: int
+      description: ID İçeren
+      required: false
+    - name: containsEic
+      var_type: str
+      description: EIC İçeren
+      required: false
+    - name: containsMainMeterId
+      var_type: int
+      description: Ana Sayaç ID İçeren
+      required: false
+    - name: containsOrganizationId
+      var_type: int
+      description: Organizasyon ID İçeren
+      required: false
+    - name: containsSerial
+      var_type: str
+      description: Sayaç Seri No İçeren
+      required: false
+    - name: containsWithdrawDeductionSettlementPointId
+      var_type: int
+      description: Çekiş Tenzil UEVÇB ID İçeren
+      required: false
+    - name: containsWithdrawSettlementPointId
+      var_type: int
+      description: Çekiş UEVÇB ID İçeren
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: Ölçüm Noktası Dışa Aktarma Servisi
+    description: Dışa aktarmak istediğiniz ölçüm noktası bilgilerini bu servis ile
+      alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  ec_meter_status_update:
+    endpoint: /v1/ec-meter/status-update
+    method: POST
+    auth: true
+    short_name: ec_meter_status_update
+    short_name_tr: Ölçüm Noktası Durum Güncelleme Servisi
+    params:
+    - descriptions
+    - effectiveDate
+    - effectiveId
+    - statusId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: descriptions
+      var_type: list
+      description: Açıklamalar
+      required: false
+      items: str
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: statusId
+      var_type: int
+      description: Durum ID
+      required: false
+    summary: Ölçüm Noktası Durum Güncelleme Servisi
+    description: Mevcut bir ölçüm noktasının durumunu bu servis ile güncelleyebilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  ec_meter_update:
+    endpoint: /v1/ec-meter/update
+    method: POST
+    auth: true
+    short_name: ec_meter_update
+    short_name_tr: Ölçüm Noktası Güncelleme Servisi
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    - descriptions
+    - address
+    - addressCode
+    - annualAverageConsumption
+    - annualEstimatedConsumptionT1
+    - annualEstimatedConsumptionT2
+    - annualEstimatedConsumptionT3
+    - bilateralConsumerGroupId
+    - busbarVoltageTypeId
+    - consumptionPointTypeId
+    - contractPower
+    - deletedFields
+    - districtId
+    - effectiveId
+    - facilityTypeId
+    - lastResortConsumerGroupId
+    - lineCircuitCountTypeId1
+    - lineCircuitCountTypeId2
+    - lineCircuitCountTypeId3
+    - lineConductorTypeId1
+    - lineConductorTypeId2
+    - lineConductorTypeId3
+    - lineCrossSection1
+    - lineCrossSection2
+    - lineCrossSection3
+    - lineLength1
+    - lineLength2
+    - lineLength3
+    - loadLoss
+    - loadProfileFeature
+    - mainMeterId
+    - mainTariffGroupId
+    - meteringVoltageTypeId
+    - noLoadLoss
+    - profileSubscriptionGroupId
+    - readingDataResetConfirmation
+    - readingDataTypeId
+    - readingOrganizationId
+    - readingPeriod
+    - readingTypeId
+    - remoteReadingStatusId
+    - substationId
+    - substationInputVoltage
+    - substationOutputVoltage
+    - substationPower
+    - tariffClassTypeId
+    - uniqueCode
+    - usageStatusTypeId
+    - withdrawPositionTypeId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: descriptions
+      var_type: list
+      description: Açıklamalar
+      required: false
+      items: str
+    - name: address
+      var_type: str
+      description: Adres
+      required: false
+    - name: addressCode
+      var_type: int
+      description: Adres Kodu
+      required: false
+    - name: annualAverageConsumption
+      var_type: float
+      description: Yıllık Ortalama Tüketim
+      required: false
+    - name: annualEstimatedConsumptionT1
+      var_type: float
+      description: T1 Yıllık Tahmini Tüketim
+      required: false
+    - name: annualEstimatedConsumptionT2
+      var_type: float
+      description: T2 Yıllık Tahmini Tüketim
+      required: false
+    - name: annualEstimatedConsumptionT3
+      var_type: float
+      description: T3 Yıllık Tahmini Tüketim
+      required: false
+    - name: bilateralConsumerGroupId
+      var_type: int
+      description: İkili Anlaşma Tüketici Grubu ID
+      required: false
+    - name: busbarVoltageTypeId
+      var_type: int
+      description: Bara Gerilim ID
+      required: false
+    - name: consumptionPointTypeId
+      var_type: int
+      description: Tüketim Noktası Tip ID
+      required: false
+    - name: contractPower
+      var_type: float
+      description: Sözleşme Gücü
+      required: false
+    - name: deletedFields
+      var_type: list
+      description: Silinen Alanlar
+      required: false
+      items: str
+    - name: districtId
+      var_type: int
+      description: İlçe ID
+      required: false
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: facilityTypeId
+      var_type: int
+      description: Tesis Tip ID
+      required: false
+    - name: lastResortConsumerGroupId
+      var_type: int
+      description: Son Kaynak Tüketici Grubu ID
+      required: false
+    - name: lineCircuitCountTypeId1
+      var_type: int
+      description: 1. Hat Devre Sayısı ID
+      required: false
+    - name: lineCircuitCountTypeId2
+      var_type: int
+      description: 2. Hat Devre Sayısı ID
+      required: false
+    - name: lineCircuitCountTypeId3
+      var_type: int
+      description: 3. Hat Devre Sayısı ID
+      required: false
+    - name: lineConductorTypeId1
+      var_type: int
+      description: 1. İletken Tipi Özdirenç ID
+      required: false
+    - name: lineConductorTypeId2
+      var_type: int
+      description: 2. İletken Tipi Özdirenç ID
+      required: false
+    - name: lineConductorTypeId3
+      var_type: int
+      description: 3. İletken Tipi Özdirenç ID
+      required: false
+    - name: lineCrossSection1
+      var_type: float
+      description: 1. Hat Kesiti
+      required: false
+    - name: lineCrossSection2
+      var_type: float
+      description: 2. Hat Kesiti
+      required: false
+    - name: lineCrossSection3
+      var_type: float
+      description: 3. Hat Kesiti
+      required: false
+    - name: lineLength1
+      var_type: float
+      description: 1. Hat Uzunluk
+      required: false
+    - name: lineLength2
+      var_type: float
+      description: 2. Hat Uzunluk
+      required: false
+    - name: lineLength3
+      var_type: float
+      description: 3. Hat Uzunluk
+      required: false
+    - name: loadLoss
+      var_type: float
+      description: Yükteki Kayıp
+      required: false
+    - name: loadProfileFeature
+      var_type: bool
+      description: Yük Profil Kayit Özelliği
+      required: false
+    - name: mainMeterId
+      var_type: int
+      description: Ana Sayaç ID
+      required: false
+    - name: mainTariffGroupId
+      var_type: int
+      description: Ana Tarife Grubu ID
+      required: false
+    - name: meteringVoltageTypeId
+      var_type: int
+      description: Bağlantı Noktası Gerilim Tip ID
+      required: false
+    - name: noLoadLoss
+      var_type: float
+      description: Boştaki Kayıp
+      required: false
+    - name: profileSubscriptionGroupId
+      var_type: int
+      description: Profil Abone Grubu ID
+      required: false
+    - name: readingDataResetConfirmation
+      var_type: bool
+      description: Okuma Verisi Silme Onayı
+      required: false
+    - name: readingDataTypeId
+      var_type: int
+      description: Uzlaştırma Veri Tip ID
+      required: false
+    - name: readingOrganizationId
+      var_type: int
+      description: Sayac Okuyan Kurum ID
+      required: false
+    - name: readingPeriod
+      var_type: int
+      description: Okuma Periyodu
+      required: false
+    - name: readingTypeId
+      var_type: int
+      description: Sayaç Okuma Tip ID
+      required: false
+    - name: remoteReadingStatusId
+      var_type: int
+      description: Uzaktan Okuma Durum ID
+      required: false
+    - name: substationId
+      var_type: int
+      description: Trafo Merkezi ID
+      required: false
+    - name: substationInputVoltage
+      var_type: float
+      description: Trafo Giriş Gerilimi
+      required: false
+    - name: substationOutputVoltage
+      var_type: float
+      description: Trafo Çıkış Gerilimi
+      required: false
+    - name: substationPower
+      var_type: float
+      description: Trafo Gücü
+      required: false
+    - name: tariffClassTypeId
+      var_type: int
+      description: Tarife Sınıf ID
+      required: false
+    - name: uniqueCode
+      var_type: str
+      description: Tekil Kod
+      required: false
+    - name: usageStatusTypeId
+      var_type: int
+      description: Kullanım Durum ID
+      required: false
+    - name: withdrawPositionTypeId
+      var_type: int
+      description: Çekiş Pozisyon ID
+      required: false
+    summary: Ölçüm Noktası Güncelleme Servisi
+    description: Mevcut bir ölçüm noktasını bu servis ile güncelleyebilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

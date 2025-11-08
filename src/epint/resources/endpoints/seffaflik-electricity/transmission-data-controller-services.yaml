@@ -1,46 +1,259 @@
 endpoints:
-  iskk_list:
+  capacity-demand:
+    endpoint: /v1/transmission/data/capacity-demand
+    method: POST
+    auth: true
+    short_name: capacity-demand
+    short_name_tr: Kapasite Talepleri Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Kapasite Talepleri Listeleme Servisi
+    description: Kapasite ihalelerine ait talepleri ve tahsis edilen kapasiteleri
+      gösterir. Kapasite ihalelerine ait talepleri ve tahsis edilen kapasiteleri gösterir.
+    response_structure: {}
+  capacity-demand-direction:
+    endpoint: /v1/transmission/data/capacity-demand-direction
+    method: GET
+    auth: true
+    short_name: capacity-demand-direction
+    short_name_tr: 'Kapasite talepleri yön servisleri '
+    params:
+    - TGT
+    required:
+    - TGT
+    response: ''
+    var_type: dict
+    summary: 'Kapasite talepleri yön servisleri '
+    description: Kapasite talepleri yön servisleri
+    response_structure: {}
+  congestion-cost:
+    endpoint: /v1/transmission/data/congestion-cost
+    method: POST
+    auth: true
+    short_name: congestion-cost
+    short_name_tr: Kısıt Maliyeti Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Kısıt Maliyeti Listeleme Servisi
+    description: 'Şehir bazında 1 kodlu Yük Alma ve Yük Atma Talimatlarının toplam
+      mali değerine ilişkin veri seti. Formül: Kısıt Maliyeti=(YAL talimat Miktarı)*
+      [YAL Teslimat Fiyatı – Seçilen Fiyat] + (YAL Talimat Miktarı)* [Seçilen Fiyat-YAT
+      Talimat Fiyatı].'
+    response_structure: {}
+  entso-w-organization:
+    endpoint: /v1/transmission/data/entso-w-organization
+    method: POST
+    auth: true
+    short_name: entso-w-organization
+    short_name_tr: ENTSO-E (W) Kodları Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: ENTSO-E (W) Kodları Listeleme Servisi
+    description: Avrupa Elektrik İletim Sistemi İşletmecileri Ağı’nın piyasadaki Santral
+      ve UEVÇB’lere, Avrupa standartlarına uygun formatta tanımladığı Enerji Tanımlama
+      Kodu’dur.
+    response_structure: {}
+  entso-w-uevcb:
+    endpoint: /v1/transmission/data/entso-w-uevcb
+    method: POST
+    auth: true
+    short_name: entso-w-uevcb
+    short_name_tr: ENTSO-E (W) UEVCB Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: ENTSO-E (W) UEVCB Listeleme Servisi
+    description: ENTSO-E (W) UEVCB Listeleme Servisi
+    response_structure: {}
+  international-line-events:
+    endpoint: /v1/transmission/data/international-line-events
+    method: POST
+    auth: true
+    short_name: international-line-events
+    short_name_tr: Enterkonneksiyon Arıza Bakım Bildirimleri Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Enterkonneksiyon Arıza Bakım Bildirimleri Listeleme Servisi
+    description: TCAT'ten temin edilen uluslararası hatlarda oluşan kesinti bilgileri
+      sayfasıdır.
+    response_structure: {}
+  iskk-list:
     endpoint: /v1/transmission/data/iskk-list
     method: POST
     auth: true
-    short_name: iskk_list
+    short_name: iskk-list
     short_name_tr: İletim Sistemi Kayıp Katsayısı (ISKK) Listeleme Servisi
     params:
-    - startDate
-    - endDate
-    - region
-    - page
+    - body
+    - TGT
     required:
-    - startDate
-    - endDate
-    response:
-    - items
-    - page
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: region
-      var_type: str
-      description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
-      required: false
-      example: TR1
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: İletim Sistemi Kayıp Katsayısı (ISKK) Listeleme Servisi
     description: Uzlaştırma dönemi bazında iletim sistemi veriş ve çekiş miktarları
       arasındaki farkın veriş miktarına oranlanmasıyla hesaplanan iletim sistemi kayıp
       katsayısına ilişkin veri seti.
-    response_structure:
-      items: list
-      page: str
+    response_structure: {}
+  line-capacities:
+    endpoint: /v1/transmission/data/line-capacities
+    method: POST
+    auth: true
+    short_name: line-capacities
+    short_name_tr: Hat Kapasiteleri listeleme servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Hat Kapasiteleri listeleme servisi
+    description: Enterkonneksiyonlara ait hat toplam kapasite ve Kullanıma açık kapasite
+      değerleri gösterilmektedir. Enterkonneksiyonlara ait hat toplam kapasite ve
+      Kullanıma açık kapasite değerleri gösterilmektedir.
+    response_structure: {}
+  line-capacities-direction:
+    endpoint: /v1/transmission/data/line-capacities-direction
+    method: GET
+    auth: true
+    short_name: line-capacities-direction
+    short_name_tr: Hat kapasiteleri yön listeleme servisi
+    params:
+    - TGT
+    required:
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Hat kapasiteleri yön listeleme servisi
+    description: Hat kapasiteleri yön listeleme servisi
+    response_structure: {}
+  nominal-capacity:
+    endpoint: /v1/transmission/data/nominal-capacity
+    method: POST
+    auth: true
+    short_name: nominal-capacity
+    short_name_tr: Nomine Kapasite Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Nomine Kapasite Listeleme Servisi
+    description: Nomine Kapasite değerleri ithalat (satış miktarları) ve ihracat(alış
+      miktarı) için yapılan ikili anlaşmaları göstermektedir.
+    response_structure: {}
+  entso-organizasyon:
+    endpoint: /v1/transmission/data/organization-list
+    method: POST
+    auth: true
+    short_name: entso-organizasyon
+    short_name_tr: ENTSO-E (X) Kodları Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: ENTSO-E (X) Kodları Listeleme Servisi
+    description: Avrupa Elektrik İletim Sistemi İşletmecileri Ağı’nın piyasadaki organizasyonlara,
+      Avrupa standartlarına uygun formatta tanımladığı Enerji Tanımlama Kodu’dur.
+    response_structure: {}
+  tcat-pre-month-forecast:
+    endpoint: /v1/transmission/data/tcat-pre-month-forecast
+    method: POST
+    auth: true
+    short_name: tcat-pre-month-forecast
+    short_name_tr: Enterkonneksiyon Kapasitesine İlişkin Ay Öncesi Tahminler Listeleme
+      Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Enterkonneksiyon Kapasitesine İlişkin Ay Öncesi Tahminler Listeleme Servisi
+    description: Transfer yönü kapsamında ay öncesi Net Transfer Kapasitesi, Kullanıma
+      Açık Kapasite ve Tahsis Edilmiş Kapasite değerlerinin ay öncesi tahminlerine
+      ilişkin veri seti.
+    response_structure: {}
+  tcat-pre-year-forecast:
+    endpoint: /v1/transmission/data/tcat-pre-year-forecast
+    method: POST
+    auth: true
+    short_name: tcat-pre-year-forecast
+    short_name_tr: Enterkonneksiyon Kapasitesine İlişkin Yıl Öncesi Tahminler Listeleme
+      Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Enterkonneksiyon Kapasitesine İlişkin Yıl Öncesi Tahminler Listeleme
+      Servisi
+    description: Transfer yönü kapsamında yıl öncesi Net Transfer Kapasitesi, Kullanıma
+      Açık Kapasite ve Tahsis Edilmiş Kapasite değerlerinin yıl öncesi tahminlerine
+      ilişkin veri seti.
+    response_structure: {}
+  zero-balance:
+    endpoint: /v1/transmission/data/zero-balance
+    method: POST
+    auth: true
+    short_name: zero-balance
+    short_name_tr: Sıfır Bakiye Düzeltme Tutarı Aylık Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Sıfır Bakiye Düzeltme Tutarı Aylık Listeleme Servisi
+    description: 'Sıfır bakiye düzeltme tutarı ve bileşenlerine ait aylık tutarlara
+      ilişkin veri seti.Bu veriler uzlaştırmaya esas olarak yayınlanmaktadır. Yük
+      Alma Talimatı:YAL, Yük Atma Talimatı: YAT, Yerine Getirilmeyen Yük Alma Talimat
+      Tutarı: YGYALT, Yerine Getirilmeyen Yük Atma Talimat Tutarı: YGYALT, GDDK: Geçmişe
+      Dönük Düzeltme Kalemi, KÜPST: Kesinleşmiş Üretim Planı Sapma Tutarı.'
+    response_structure: {}

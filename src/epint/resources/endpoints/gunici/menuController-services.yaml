@@ -1,0 +1,294 @@
+endpoints:
+  MenuController_getMenuList_POST:
+    endpoint: /rest/v1/menu/get/menu-list
+    method: POST
+    auth: true
+    short_name: MenuController_getMenuList_POST
+    short_name_tr: MenuController_getMenuList_POST
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  MenuController_listMenuLabelById_POST:
+    endpoint: /rest/v1/menu/label-list
+    method: POST
+    auth: true
+    short_name: MenuController_listMenuLabelById_POST
+    short_name_tr: MenuController_listMenuLabelById_POST
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  MenuController_listMenuById_POST:
+    endpoint: /rest/v1/menu/list
+    method: POST
+    auth: true
+    short_name: MenuController_listMenuById_POST
+    short_name_tr: MenuController_listMenuById_POST
+    params:
+    - menuId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: menuId
+      var_type: int
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  MenuController_listAllMenu_POST:
+    endpoint: /rest/v1/menu/list-all-menu
+    method: POST
+    auth: true
+    short_name: MenuController_listAllMenu_POST
+    short_name_tr: MenuController_listAllMenu_POST
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  MenuController_listOrgTypeLabel_POST:
+    endpoint: /rest/v1/menu/org-type/label-list
+    method: POST
+    auth: true
+    short_name: MenuController_listOrgTypeLabel_POST
+    short_name_tr: MenuController_listOrgTypeLabel_POST
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  MenuController_saveOrUpdateMenu_POST:
+    endpoint: /rest/v1/menu/save-or-update
+    method: POST
+    auth: true
+    short_name: MenuController_saveOrUpdateMenu_POST
+    short_name_tr: MenuController_saveOrUpdateMenu_POST
+    params:
+    - menuId
+    - menuNameTr
+    - menuNameEn
+    - rootMenuId
+    - status
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: menuId
+      var_type: int
+      description: ''
+      required: false
+    - name: menuNameTr
+      var_type: str
+      description: ''
+      required: false
+    - name: menuNameEn
+      var_type: str
+      description: ''
+      required: false
+    - name: rootMenuId
+      var_type: int
+      description: ''
+      required: false
+    - name: status
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  MenuController_delete_POST:
+    endpoint: /rest/v1/menu/delete
+    method: POST
+    auth: true
+    short_name: MenuController_delete_POST
+    short_name_tr: MenuController_delete_POST
+    params:
+    - menuId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: menuId
+      var_type: int
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  MenuController_changeOrder_POST:
+    endpoint: /rest/v1/menu/change-order
+    method: POST
+    auth: true
+    short_name: MenuController_changeOrder_POST
+    short_name_tr: MenuController_changeOrder_POST
+    params:
+    - id1
+    - id2
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: id1
+      var_type: int
+      description: ''
+      required: false
+    - name: id2
+      var_type: int
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

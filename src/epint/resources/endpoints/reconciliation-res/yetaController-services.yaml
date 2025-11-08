@@ -1,0 +1,247 @@
+endpoints:
+  importYetaRecords:
+    endpoint: /v1/yeta/import
+    method: POST
+    auth: true
+    short_name: importYetaRecords
+    short_name_tr: importYetaRecords
+    params:
+    - isPreview
+    required:
+    - isPreview
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: isPreview
+      var_type: bool
+      description: ''
+      required: true
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  list_all_yeta_records:
+    endpoint: /v1/yeta/list
+    method: POST
+    auth: true
+    short_name: list_all_yeta_records
+    short_name_tr: ''
+    params:
+    - period
+    - version
+    - page
+    - versions
+    - region
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: ''
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: versions
+      var_type: list
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+      items: str
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum:
+      - XLSX
+      - CSV
+      - PDF
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  export_all_yeta_records:
+    endpoint: /v1/yeta/export
+    method: POST
+    auth: true
+    short_name: export_all_yeta_records
+    short_name_tr: ''
+    params:
+    - period
+    - version
+    - page
+    - versions
+    - region
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: ''
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: versions
+      var_type: list
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+      items: str
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum:
+      - XLSX
+      - CSV
+      - PDF
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  exportTemplateExcel:
+    endpoint: /v1/yeta/exportTemplateFile
+    method: GET
+    auth: true
+    short_name: exportTemplateExcel
+    short_name_tr: exportTemplateExcel
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict

@@ -71,10 +71,20 @@ def _load_all_endpoints():
 
 
 def set_auth(username, password):
-    global _username, _password, _auth_configured
+    global _username, _password, _auth_configured, _endpoint_cache
 
     if not username or not password:
         raise ValueError("Username ve password boş olamaz")
+
+    # Eğer kullanıcı değişiyorsa cache'i temizle
+    if _username != username or _password != password:
+        _endpoint_cache.clear()
+        log_operation(
+            "auth_changed_cache_cleared",
+            old_user=_username,
+            new_user=username,
+            cache_cleared=True,
+        )
 
     _username = username
     _password = password

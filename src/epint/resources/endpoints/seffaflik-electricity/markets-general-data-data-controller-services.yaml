@@ -1,0 +1,55 @@
+endpoints:
+  market-participants:
+    endpoint: /v1/markets/general-data/data/market-participants
+    method: POST
+    auth: true
+    short_name: market-participants
+    short_name_tr: Piyasa Katılımcıları Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Piyasa Katılımcıları Listeleme Servisi
+    description: Piyasa Katılımcıları’nın GÖP, GİP, VEP, YEK-G piyasalarına katılım
+      durumunu belirtir. Ayrıca Tüzel kişilik olarak firmanın aktiflik/pasiflik durumunu
+      bildirir.
+    response_structure: {}
+  market-participants-organization-filter-list:
+    endpoint: /v1/markets/general-data/data/market-participants-organization-filter-list
+    method: GET
+    auth: true
+    short_name: market-participants-organization-filter-list
+    short_name_tr: Piyasa Katılımcıları Organizasyon Filtre Listesi Servisi
+    params:
+    - TGT
+    required:
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Piyasa Katılımcıları Organizasyon Filtre Listesi Servisi
+    description: Piyasa Katılımcıları Organizasyon Filtre Listesi
+    response_structure: {}
+  participant-count-based-upon-license-type:
+    endpoint: /v1/markets/general-data/data/participant-count-based-upon-license-type
+    method: POST
+    auth: true
+    short_name: participant-count-based-upon-license-type
+    short_name_tr: Lisans Türüne Göre Katılımcı Sayısı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Lisans Türüne Göre Katılımcı Sayısı Listeleme Servisi
+    description: Kamu ve Özel Sektör piyasa katılımcılarının Üretim, Tedarik, Dağıtım,
+      OSB Üretim, İletim ve Görevli Tedaril lisansları türlerine göre toplam sayılarını
+      gösterir. Görevli tedarik şirketleri tüketici grupları için K1 (21), K2 (21)
+      ve K3 (21) olacak şekilde kategorize edilmiştir.
+    response_structure: {}

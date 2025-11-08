@@ -1,55 +1,17 @@
 endpoints:
-  market_participant_export:
+  market-participant-export:
     endpoint: /v1/markets/general-data/export/market-participant
     method: POST
     auth: true
-    short_name: market_participant_export
+    short_name: market-participant-export
     short_name_tr: Doğal Gaz Piyasa Katılımcıları Dışa Aktarım Servisi
     params:
-    - organizationId
-    - period
-    - page
-    - exportType
+    - body
     required:
-    - period
-    - exportType
-    response:
-    - view
-    - model
-    - status
-    - empty
-    - reference
-    - viewName
-    - modelMap
-    var_type:
-    - name: organizationId
-      var_type: int
-      description: İstek için kullanılacak organizasyon Id
-      required: false
-      example: 1234
-    - name: period
-      var_type: datetime
-      description: Dönem
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
-    - name: exportType
-      var_type: str
-      description: XLSX, CSV ya da PDF
-      required: true
-      example: XLSX
+    - body
+    response: ''
+    var_type: dict
     summary: Doğal Gaz Piyasa Katılımcıları Dışa Aktarım Servisi
     description: Katılımcıların piyasa (SGP, VGP) kayıt durumlarını gösterir. Doğal
       Gaz Piyasa Katılımcıları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
-    response_structure:
-      view: str
-      model: object
-      status: str
-      empty: bool
-      reference: bool
-      viewName: str
-      modelMap: object
+    response_structure: {}

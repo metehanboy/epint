@@ -1,59 +1,35 @@
 endpoints:
-  renewables_unit_cost_data:
+  renewables-unit-cost-data:
     endpoint: /v1/renewables/data/renewables-unit-cost
     method: POST
     auth: true
-    short_name: renewables_unit_cost_data
+    short_name: renewables-unit-cost-data
     short_name_tr: Yekdem Birim Maliyeti listeleme servisi
     params:
-    - startDate
-    - endDate
+    - body
+    - TGT
     required:
-    - startDate
-    - endDate
-    response:
-    - items
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: Yekdem Birim Maliyeti listeleme servisi
     description: EPDK için, YEKDEM Birim Maliyeti verilerini dönen servistir.
-    response_structure:
-      items: list
-  renewables_unit_cost_mcp_data:
+    response_structure: {}
+  renewables-unit-cost-mcp-data:
     endpoint: /v1/renewables/data/renewables-unit-cost-mcp
     method: POST
     auth: true
-    short_name: renewables_unit_cost_mcp_data
+    short_name: renewables-unit-cost-mcp-data
     short_name_tr: Yekdem Birim Maliyeti PTF listeleme servisi
     params:
-    - startDate
-    - endDate
+    - body
+    - TGT
     required:
-    - startDate
-    - endDate
-    response:
-    - items
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: Yekdem Birim Maliyeti PTF listeleme servisi
     description: EPDK için, YEKDEM Birim Maliyeti PTF verilerini dönen servistir.
-    response_structure:
-      items: list
+    response_structure: {}

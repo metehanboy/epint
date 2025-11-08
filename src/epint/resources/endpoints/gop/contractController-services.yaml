@@ -1,0 +1,550 @@
+endpoints:
+  contract_objection_list:
+    endpoint: /contract-objection/list
+    method: POST
+    auth: true
+    short_name: contract_objection_list
+    short_name_tr: İkili Anlaşmalar Karşılığı Olmayan Satış Kontrolü / İtiraz Listele
+    params:
+    - startDate
+    - endDate
+    - objectionStatus
+    required:
+    - startDate
+    - endDate
+    - objectionStatus
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: true
+    - name: endDate
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: true
+    - name: objectionStatus
+      var_type: string
+      description: İtiraz Durumu
+      required: true
+      enum:
+      - ACTIVE
+      - ACCEPTED
+      - REJECTED
+    summary: İkili Anlaşmalar Karşılığı Olmayan Satış Kontrolü / İtiraz Listele
+    description: İkili Anlaşmalar Karşılığı Olmayan Satış Kontrolü / İtiraz Listele
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_bad_list:
+    endpoint: /contract/bad/list
+    method: POST
+    auth: true
+    short_name: contract_bad_list
+    short_name_tr: '#{BAD_CONTRACT_LIST_VALUE}'
+    params:
+    - deliveryDay
+    - regionCode
+    required:
+    - deliveryDay
+    - regionCode
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: '#{BAD_CONTRACT_QUERY_REQUEST_FIELD_DELIVERYDAY}'
+      required: true
+    - name: regionCode
+      var_type: string
+      description: '#{BAD_CONTRACT_QUERY_REQUEST_FIELD_REGIONCODE}'
+      required: true
+    summary: '#{BAD_CONTRACT_LIST_VALUE}'
+    description: '#{BAD_CONTRACT_LIST_VALUE}'
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_count:
+    endpoint: /contract/count
+    method: POST
+    auth: true
+    short_name: contract_count
+    short_name_tr: '#{CONTRACT_COUNT_VALUE}'
+    params:
+    - startDate
+    - endDate
+    - organizationCode
+    - status
+    required:
+    - startDate
+    - endDate
+    - organizationCode
+    - status
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: ''
+      required: true
+    - name: endDate
+      var_type: datetime
+      description: ''
+      required: true
+    - name: organizationCode
+      var_type: int
+      description: ''
+      required: true
+    - name: status
+      var_type: array
+      description: ''
+      required: true
+      items: dict
+    summary: '#{CONTRACT_COUNT_VALUE}'
+    description: '#{CONTRACT_COUNT_VALUE}'
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_list:
+    endpoint: /contract/list
+    method: POST
+    auth: true
+    short_name: contract_list
+    short_name_tr: Bilateral Agreements / List Service
+    params:
+    - deliveryDay
+    - regionCode
+    - counterRegionCode
+    - eic
+    - counterEic
+    - status
+    - cancellationType
+    required:
+    - deliveryDay
+    - regionCode
+    - counterRegionCode
+    - eic
+    - counterEic
+    - status
+    - cancellationType
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps date. Its format must be ISO8601.
+      required: true
+    - name: regionCode
+      var_type: string
+      description: This field keeps Information of Region.
+      required: true
+    - name: counterRegionCode
+      var_type: string
+      description: This field keeps Information of Counter Region.
+      required: true
+    - name: eic
+      var_type: string
+      description: This field keeps Information of EIC.
+      required: true
+    - name: counterEic
+      var_type: string
+      description: This field keeps Information of Counter Organization' s EIC.
+      required: true
+    - name: status
+      var_type: string
+      description: This field keeps Information of Offer Type.
+      required: true
+      enum: &id001
+      - APPROVED
+      - WAITING_FOR_APPROVAL
+      - INVALID
+    - name: cancellationType
+      var_type: string
+      description: This field keeps cancellation type of contract.
+      required: true
+      enum: &id002
+      - UNILITERAL
+      - BILATERAL
+      - COLLATERAL_SANCTION
+      - BMO_SANCTION
+    summary: Bilateral Agreements / List Service
+    description: Bilateral Agreements / List Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_list_history:
+    endpoint: /contract/list/history
+    method: POST
+    auth: true
+    short_name: contract_list_history
+    short_name_tr: Bilateral Agreements / History / List Service
+    params:
+    - deliveryDay
+    - regionCode
+    - counterRegionCode
+    - eic
+    - counterEic
+    - status
+    - cancellationType
+    required:
+    - deliveryDay
+    - regionCode
+    - counterRegionCode
+    - eic
+    - counterEic
+    - status
+    - cancellationType
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps date. Its format must be ISO8601.
+      required: true
+    - name: regionCode
+      var_type: string
+      description: This field keeps Information of Region.
+      required: true
+    - name: counterRegionCode
+      var_type: string
+      description: This field keeps Information of Counter Region.
+      required: true
+    - name: eic
+      var_type: string
+      description: This field keeps Information of EIC.
+      required: true
+    - name: counterEic
+      var_type: string
+      description: This field keeps Information of Counter Organization' s EIC.
+      required: true
+    - name: status
+      var_type: string
+      description: This field keeps Information of Offer Type.
+      required: true
+      enum: *id001
+    - name: cancellationType
+      var_type: string
+      description: This field keeps cancellation type of contract.
+      required: true
+      enum: *id002
+    summary: Bilateral Agreements / History / List Service
+    description: Bilateral Agreements / History / List Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_listhourblocks:
+    endpoint: /contract/listhourblocks
+    method: POST
+    auth: true
+    short_name: contract_listhourblocks
+    short_name_tr: Bilateral Agreements / Period List Service
+    params:
+    - deliveryDay
+    required:
+    - deliveryDay
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: It keeps the delivery day information of period list that is going
+        to be returned.
+      required: true
+    summary: Bilateral Agreements / Period List Service
+    description: Bilateral Agreements / Period List Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_organization_list:
+    endpoint: /contract/organization/list
+    method: POST
+    auth: true
+    short_name: contract_organization_list
+    short_name_tr: Bilateral Agreements / Organization / List Service
+    params:
+    - deliveryDay
+    required:
+    - deliveryDay
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps Delivery Day.
+      required: true
+    summary: Bilateral Agreements / Organization / List Service
+    description: Bilateral Agreements / Organization / List Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_regions:
+    endpoint: /contract/regions
+    method: POST
+    auth: true
+    short_name: contract_regions
+    short_name_tr: Bilateral Agreements / Region / List Service
+    params:
+    - deliveryDay
+    required:
+    - deliveryDay
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps Delivery Day. This field' s format is ISO8601.
+      required: true
+    summary: Bilateral Agreements / Region / List Service
+    description: Bilateral Agreements / Region / List Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_validatedeliveryday:
+    endpoint: /contract/validatedeliveryday
+    method: POST
+    auth: true
+    short_name: contract_validatedeliveryday
+    short_name_tr: Bilateral Agreements / Delivery Day Validation Service
+    params:
+    - deliveryDay
+    required:
+    - deliveryDay
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps Delivery Date.
+      required: true
+    summary: Bilateral Agreements / Delivery Day Validation Service
+    description: Bilateral Agreements / Delivery Day Validation Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_objection_create:
+    endpoint: /contract-objection/create
+    method: POST
+    auth: true
+    short_name: contract_objection_create
+    short_name_tr: İkili Anlaşmalar Karşılığı Olmayan Satış Kontrolü / İtiraz Et
+    params:
+    - message
+    required:
+    - message
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: message
+      var_type: string
+      description: İtiraz Metni
+      required: true
+    summary: İkili Anlaşmalar Karşılığı Olmayan Satış Kontrolü / İtiraz Et
+    description: İkili Anlaşmalar Karşılığı Olmayan Satış Kontrolü / İtiraz Et
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_create:
+    endpoint: /contract/create
+    method: POST
+    auth: true
+    short_name: contract_create
+    short_name_tr: Bilateral Agreements / Create Service
+    params:
+    - deliveryDay
+    - counterEic
+    - counterRegionCode
+    - offer
+    - cancellationType
+    - explanation
+    required:
+    - deliveryDay
+    - counterEic
+    - counterRegionCode
+    - offer
+    - cancellationType
+    - explanation
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps date. Its format must be ISO8601.
+      required: true
+    - name: counterEic
+      var_type: string
+      description: This field keeps the EIC code information of the participant which
+        will make a counter offer.
+      required: true
+    - name: counterRegionCode
+      var_type: string
+      description: This field keeps the region information of the participant which
+        will make a counter offer.
+      required: true
+    - name: offer
+      var_type: string
+      description: This field keeps the offer information of the participant which
+        will make a counter offer.
+      required: true
+    - name: cancellationType
+      var_type: string
+      description: This field keeps cancellation type of contract.
+      required: true
+      enum:
+      - UNILITERAL
+      - BILATERAL
+      - COLLATERAL_SANCTION
+      - BMO_SANCTION
+    - name: explanation
+      var_type: string
+      description: ''
+      required: true
+    summary: Bilateral Agreements / Create Service
+    description: Bilateral Agreements / Create Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  contract_delete:
+    endpoint: /contract/delete
+    method: POST
+    auth: true
+    short_name: contract_delete
+    short_name_tr: Bilateral Agreements / Cancel Service
+    params:
+    - contracts
+    required:
+    - contracts
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: contracts
+      var_type: array
+      description: This field keeps the counter offer information that is wanted to
+        be deleted.
+      required: true
+      items: dict
+    summary: Bilateral Agreements / Cancel Service
+    description: Bilateral Agreements / Cancel Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str

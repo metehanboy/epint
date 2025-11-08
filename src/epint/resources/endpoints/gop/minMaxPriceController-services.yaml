@@ -1,0 +1,33 @@
+endpoints:
+  minmaxprice_list_effective:
+    endpoint: /minmaxprice/list/effective
+    method: POST
+    auth: true
+    short_name: minmaxprice_list_effective
+    short_name_tr: Mininimum Maximum / Offer Price / Delivery Day / List Service
+    params:
+    - effectiveDate
+    required:
+    - effectiveDate
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: datetime
+      description: ''
+      required: true
+    summary: Mininimum Maximum / Offer Price / Delivery Day / List Service
+    description: Mininimum Maximum / Offer Price / Delivery Day / List Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str

@@ -1,0 +1,217 @@
+endpoints:
+  update_notification:
+    endpoint: /rest/v1/notifications/update
+    method: POST
+    auth: true
+    short_name: update_notification
+    short_name_tr: Sms ve Mail Bildirimi Güncelleme
+    params:
+    - id
+    - name
+    - surname
+    - email
+    - phone
+    - notifications
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: id
+      var_type: int
+      description: ''
+      required: false
+    - name: name
+      var_type: str
+      description: ''
+      required: false
+    - name: surname
+      var_type: str
+      description: ''
+      required: false
+    - name: email
+      var_type: str
+      description: ''
+      required: false
+    - name: phone
+      var_type: str
+      description: ''
+      required: false
+    - name: notifications
+      var_type: list
+      description: ''
+      required: false
+      items: str
+    summary: Sms ve Mail Bildirimi Güncelleme
+    description: Sms ve Mail Bildirimi Güncelleme
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  create_notification:
+    endpoint: /rest/v1/notifications/create
+    method: POST
+    auth: true
+    short_name: create_notification
+    short_name_tr: Sms ve Mail Bildirimi Oluşturma
+    params:
+    - name
+    - surname
+    - email
+    - phone
+    - notifications
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: name
+      var_type: str
+      description: ''
+      required: false
+    - name: surname
+      var_type: str
+      description: ''
+      required: false
+    - name: email
+      var_type: str
+      description: ''
+      required: false
+    - name: phone
+      var_type: str
+      description: ''
+      required: false
+    - name: notifications
+      var_type: list
+      description: ''
+      required: false
+      items: str
+    summary: Sms ve Mail Bildirimi Oluşturma
+    description: Sms ve Mail Bildirimi Oluşturma
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  delete_notification:
+    endpoint: /rest/v1/notifications/delete
+    method: POST
+    auth: true
+    short_name: delete_notification
+    short_name_tr: Sms ve Mail Bildirimi Silme
+    params:
+    - receiverId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: receiverId
+      var_type: int
+      description: ''
+      required: false
+    summary: Sms ve Mail Bildirimi Silme
+    description: Sms ve Mail Bildirimi Silme
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  filter_notification:
+    endpoint: /rest/v1/notifications/filter
+    method: POST
+    auth: true
+    short_name: filter_notification
+    short_name_tr: Sms ve Mail Bildirimleri Filtreleme
+    params:
+    - pageInfo
+    - subject
+    - sms
+    - email
+    - searchQuery
+    - sortingInfo
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: subject
+      var_type: str
+      description: ''
+      required: false
+    - name: sms
+      var_type: bool
+      description: ''
+      required: false
+    - name: email
+      var_type: bool
+      description: ''
+      required: false
+    - name: searchQuery
+      var_type: str
+      description: ''
+      required: false
+    - name: sortingInfo
+      var_type: str
+      description: ''
+      required: false
+    summary: Sms ve Mail Bildirimleri Filtreleme
+    description: Sms ve Mail Bildirimleri Filtreleme
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

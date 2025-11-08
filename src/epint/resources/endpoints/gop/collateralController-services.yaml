@@ -1,0 +1,39 @@
+endpoints:
+  collateral_organization:
+    endpoint: /collateral/organization
+    method: POST
+    auth: true
+    short_name: collateral_organization
+    short_name_tr: List Collateral Rest Service
+    params:
+    - deliveryDay
+    - region
+    required:
+    - deliveryDay
+    - region
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: Deliveryday which collateral will be used in
+      required: true
+    - name: region
+      var_type: string
+      description: Region which collateral will be used in
+      required: true
+    summary: List Collateral Rest Service
+    description: List Collateral Rest Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str

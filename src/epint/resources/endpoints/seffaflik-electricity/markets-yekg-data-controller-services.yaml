@@ -1,0 +1,193 @@
+endpoints:
+  bilateral-contract:
+    endpoint: /v1/markets/yek-g/data/bilateral-contract-list
+    method: POST
+    auth: true
+    short_name: bilateral-contract
+    short_name_tr: YEK-G İkili Anlaşma Miktarları Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: YEK-G İkili Anlaşma Miktarları Listeleme Servisi
+    description: Seçilen tarihte hesaplar arası transfer edilen YEK-G Belgelerinin
+      sayısı kaynak ve adet bazlı gösterilir. İkili Anlaşma Piyasasında veriler takip
+      eden iş günü 15:00'dan sonra yayımlanır.
+    response_structure: {}
+  cancelation-quantity:
+    endpoint: /v1/markets/yek-g/data/cancelation-quantity
+    method: POST
+    auth: true
+    short_name: cancelation-quantity
+    short_name_tr: YEK-G İtfa İşlem Miktarları Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: YEK-G İtfa İşlem Miktarları Listeleme Servisi
+    description: Seçilen tarihte YEK-G Belgesinin ifşa amacıyla kullanılmak üzere
+      itfa edilme sayısını göstermektedir. Veriler Organize YEK-G ve YEK-G İkili Anlaşmalar
+      Piyasasının aynı iş günü 15:00'dan sonra yayımlanır.
+    response_structure: {}
+  expiry-quantity:
+    endpoint: /v1/markets/yek-g/data/expiry-quantity
+    method: POST
+    auth: true
+    short_name: expiry-quantity
+    short_name_tr: İlga edilen YEK-G Belge Miktarı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: İlga edilen YEK-G Belge Miktarı Listeleme Servisi
+    description: Seçilen tarihte üretim tarihinden itibaren 12 ay geçmesine rağmen
+      itfa edilmemiş olması sebebiyle İlga edilen YEK-G Belgelerinin sayısını kaynak
+      ve adet bazlı gösterir. İkili Anlaşma Piyasasında veriler takip eden iş günü
+      15:00'dan sonra, Organize Piyasada ise seans sonrası sürecinden sonra yayımlanır.
+    response_structure: {}
+  exported-document-quantity:
+    endpoint: /v1/markets/yek-g/data/exported-document-quantity
+    method: POST
+    auth: true
+    short_name: exported-document-quantity
+    short_name_tr: İhraç edilen YEK-G Belge Miktarı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: İhraç edilen YEK-G Belge Miktarı Listeleme Servisi
+    description: Seçilen tarihte kaynak bazında kullanıcı hesaplarına ihraç edilen
+      toplam YEK-G Belgesi sayısını gösterir. Veriler Organize YEK-G ve YEK-G İkili
+      Anlaşmalar Piyasasının takip eden iş günü 15:00'dan sonra yayımlanır.
+    response_structure: {}
+  yekg-market-bid-ask-quantity:
+    endpoint: /v1/markets/yek-g/data/market-bid-ask-quantity
+    method: POST
+    auth: true
+    short_name: yekg-market-bid-ask-quantity
+    short_name_tr: YEK-G Org. Piyasa Alış/Satış Teklif Miktarı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: YEK-G Org. Piyasa Alış/Satış Teklif Miktarı Listeleme Servisi
+    description: Kaynak bazlı açılan her bir kontrata ilişkin verilmiş olan alış ve
+      satış teklif miktarlarını göstermektedir.
+    response_structure: {}
+  yekg-min-max-match-amount:
+    endpoint: /v1/markets/yek-g/data/min-max-match-amount-list
+    method: POST
+    auth: true
+    short_name: yekg-min-max-match-amount
+    short_name_tr: YEK-G Min-Max Eşleşme Fiyatları Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: YEK-G Min-Max Eşleşme Fiyatları Listeleme Servisi
+    description: Seçilen Tarihte YEK-G Belgelerinin kaynak bazında minimum ve maksimum
+      eşleşme fiyatlarını gösterir. Veriler Organize YEK-G Piyasasında seans süresince
+      yayımlanır.
+    response_structure: {}
+  trading-volume:
+    endpoint: /v1/markets/yek-g/data/trading-volume
+    method: POST
+    auth: true
+    short_name: trading-volume
+    short_name_tr: YEK-G Org. Piyasa İşlem Hacmi Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: YEK-G Org. Piyasa İşlem Hacmi Listeleme Servisi
+    description: Her bir kaynakta açılan kontratlara verilmiş olan tekliflerin eşleşmesi
+      ile oluşan işlem hacminin gösterilmesi.
+    response_structure: {}
+  yekg-weighted-average-price:
+    endpoint: /v1/markets/yek-g/data/weighted-average-price
+    method: POST
+    auth: true
+    short_name: yekg-weighted-average-price
+    short_name_tr: Org. YEK-G Piyasa Ağırlıklı Ortalama Fiyat Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Org. YEK-G Piyasa Ağırlıklı Ortalama Fiyat Listeleme Servisi
+    description: Seçilen Tarihte Organize YEK-G Piyasasında belirli bir enerji kaynağına
+      ilişkin YEK-G Belgelesinin eşleştiği fiyatlara göre Ağırlıklı Ortalama Fiyat
+      olarak gösterir.
+    response_structure: {}
+  withdrawal-quantity:
+    endpoint: /v1/markets/yek-g/data/withdrawal-quantity
+    method: POST
+    auth: true
+    short_name: withdrawal-quantity
+    short_name_tr: İptal edilen YEK-G Belge Miktarı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: İptal edilen YEK-G Belge Miktarı Listeleme Servisi
+    description: Seçilen tarihte ihraç ve transfer süresinde oluşabilecek hatalar
+      sebebiyle iptal edilen YEK-G Belgelerinin sayısını kaynak ve adet bazlı gösterir.
+      İkili Anlaşma Piyasası’nda veriler takip eden iş günü 15:00’dan sonra, Organize
+      Piyasa’da ise sean sonrası sürecinden sonra yayımlanır. İkili Anlaşma Piyasası’nda
+      veriler takip eden iş günü 15:00’dan sonra, Organize Piyasa’da ise seans sonrası
+      sürecinden sonra yayımlanır.
+    response_structure: {}
+  matching-quantity:
+    endpoint: /v1/markets/yek-g/data/yekg-matching-quantity
+    method: POST
+    auth: true
+    short_name: matching-quantity
+    short_name_tr: Org. YEK-G Piyasa Eşleşme Miktarları Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Org. YEK-G Piyasa Eşleşme Miktarları Listeleme Servisi
+    description: Seçilen tarihte YEK-G Belgelerinin kaynak bazında gerçekleşen son
+      eşleşme miktarı ve işlem miktarlarını gösterir. Veriler Organize YEK-G Piyasası’nda
+      seans süresince yayımlanır.
+    response_structure: {}

@@ -1,0 +1,177 @@
+endpoints:
+  tradeIncrease_update:
+    endpoint: /tradeIncrease/update
+    method: POST
+    auth: true
+    short_name: tradeIncrease_update
+    short_name_tr: Ticaret Artış Bildirimi Güncelle
+    params:
+    - id
+    - regionCode
+    - deliveryStartDay
+    - deliveryEndDay
+    - user
+    required:
+    - id
+    - regionCode
+    - deliveryStartDay
+    - deliveryEndDay
+    - user
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: id
+      var_type: int
+      description: '#{TRADEINCREASE_REQUEST_FIELD_ID}'
+      required: true
+    - name: regionCode
+      var_type: string
+      description: '#{TRADEINCREASE_REQUEST_FIELD_REGION_CODE}'
+      required: true
+    - name: deliveryStartDay
+      var_type: datetime
+      description: '#{TRADEINCREASE_REQUEST_FIELD_DELIVERYSTARTDAY}'
+      required: true
+    - name: deliveryEndDay
+      var_type: datetime
+      description: '#{TRADEINCREASE_REQUEST_FIELD_DELIVERYENDDAY}'
+      required: true
+    - name: user
+      var_type: string
+      description: '#{TRADEINCREASE_REQUEST_FIELD_USER}'
+      required: true
+    summary: Ticaret Artış Bildirimi Güncelle
+    description: Ticaret Artış Bildirimi Güncelle
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  tradeIncrease_list:
+    endpoint: /tradeIncrease/list
+    method: POST
+    auth: true
+    short_name: tradeIncrease_list
+    short_name_tr: Ticaret Artış Bildirimi Listele
+    params:
+    - deliveryStartDay
+    - deliveryEndDay
+    - regionCode
+    required:
+    - deliveryStartDay
+    - deliveryEndDay
+    - regionCode
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryStartDay
+      var_type: datetime
+      description: '#{TRADEINCREASE_REQUEST_FIELD_DELIVERYSTARTDAY}'
+      required: true
+    - name: deliveryEndDay
+      var_type: datetime
+      description: '#{TRADEINCREASE_REQUEST_FIELD_DELIVERYENDDAY}'
+      required: true
+    - name: regionCode
+      var_type: string
+      description: '#{TRADEINCREASE_REQUEST_FIELD_REGION_CODE}'
+      required: true
+    summary: Ticaret Artış Bildirimi Listele
+    description: Ticaret Artış Bildirimi Listele
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  tradeIncrease_create:
+    endpoint: /tradeIncrease/create
+    method: POST
+    auth: true
+    short_name: tradeIncrease_create
+    short_name_tr: Ticaret Artış Bildirimi Oluştur
+    params:
+    - deliveryStartDay
+    - deliveryEndDay
+    - regionCode
+    required:
+    - deliveryStartDay
+    - deliveryEndDay
+    - regionCode
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryStartDay
+      var_type: datetime
+      description: '#{TRADEINCREASE_REQUEST_FIELD_DELIVERYSTARTDAY}'
+      required: true
+    - name: deliveryEndDay
+      var_type: datetime
+      description: '#{TRADEINCREASE_REQUEST_FIELD_DELIVERYSTARTDAY}'
+      required: true
+    - name: regionCode
+      var_type: string
+      description: '#{TRADEINCREASE_REQUEST_FIELD_REGION_CODE}'
+      required: true
+    summary: Ticaret Artış Bildirimi Oluştur
+    description: Ticaret Artış Bildirimi Oluştur
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  tradeIncrease_delete:
+    endpoint: /tradeIncrease/delete
+    method: POST
+    auth: true
+    short_name: tradeIncrease_delete
+    short_name_tr: Ticaret Artış Bildirimi Sil
+    params:
+    - id
+    required:
+    - id
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: id
+      var_type: int
+      description: '#{TRADEINCREASE_REQUEST_FIELD_ID}'
+      required: true
+    summary: Ticaret Artış Bildirimi Sil
+    description: Ticaret Artış Bildirimi Sil
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str

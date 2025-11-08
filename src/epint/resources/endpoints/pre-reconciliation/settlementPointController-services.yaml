@@ -1,0 +1,435 @@
+endpoints:
+  export_settlement_point_data:
+    endpoint: /v1/settlement-point/oiz/data/export
+    method: POST
+    auth: true
+    short_name: export_settlement_point_data
+    short_name_tr: UEVÇB Verileri Export Servisi
+    params:
+    - period
+    - version
+    - effectiveDateStart
+    - effectiveDateEnd
+    - region
+    - settlementPointId
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: &id001
+      - XLSX
+      - CSV
+      - PDF
+    summary: UEVÇB Verileri Export Servisi
+    description: UEVÇB verileri export servisi.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_settlement_point_meter_details:
+    endpoint: /v1/settlement-point/meter-data/export
+    method: POST
+    auth: true
+    short_name: export_settlement_point_meter_details
+    short_name_tr: UEVÇB'ye Bağlı Sayaçların Bilgilerini Listeleme Servisi
+    params:
+    - period
+    - version
+    - region
+    - settlementPointId
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: UEVÇB'ye Bağlı Sayaçların Bilgilerini Listeleme Servisi
+    description: UEVÇB'ye Bağlı Sayaçların Bilgilerini Listeler.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_overproduction_data:
+    endpoint: /v1/settlement-point/overproduction-data/export
+    method: POST
+    auth: true
+    short_name: export_overproduction_data
+    short_name_tr: Kırpma Miktarı Dışarı Aktarma Servisi
+    params:
+    - period
+    - version
+    - region
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: Kırpma Miktarı Dışarı Aktarma Servisi
+    description: Organizasyonların UEVCB'lerine uygulanan kırpma miktarları bilgisini
+      döner.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  list_settlement_point_data:
+    endpoint: /v1/settlement-point/oiz/data
+    method: POST
+    auth: true
+    short_name: list_settlement_point_data
+    short_name_tr: UEVÇB Verileri Listeleme Servisi
+    params:
+    - period
+    - version
+    - effectiveDateStart
+    - effectiveDateEnd
+    - region
+    - settlementPointId
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: UEVÇB Verileri Listeleme Servisi
+    description: UEVÇB verilerini listeler.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  list_settlement_point_meter_details:
+    endpoint: /v1/settlement-point/meter-data/list
+    method: POST
+    auth: true
+    short_name: list_settlement_point_meter_details
+    short_name_tr: UEVÇB'ye Bağlı Sayaçların Veriş-Çekiş Değerlerini Listeleme Servisi
+    params:
+    - period
+    - version
+    - region
+    - settlementPointId
+    - isDeduction
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: isDeduction
+      var_type: bool
+      description: Tenzil mi?
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: UEVÇB'ye Bağlı Sayaçların Veriş-Çekiş Değerlerini Listeleme Servisi
+    description: UEVÇB'ye Bağlı Sayaçların Veriş-Çekiş Değerlerini Listeler.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  list_overproduction_data:
+    endpoint: /v1/settlement-point/overproduction-data/list
+    method: POST
+    auth: true
+    short_name: list_overproduction_data
+    short_name_tr: Kırpma Miktarı Servisi
+    params:
+    - period
+    - version
+    - region
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      example: TR1
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: Kırpma Miktarı Servisi
+    description: Organizasyonların UEVCB'lerine uygulanan kırpma miktarları bilgisini
+      döner.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

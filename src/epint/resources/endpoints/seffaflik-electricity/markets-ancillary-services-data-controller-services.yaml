@@ -1,0 +1,70 @@
+endpoints:
+  primary-frequency-capacity-amount:
+    endpoint: /v1/markets/ancillary-services/data/primary-frequency-capacity-amount
+    method: POST
+    auth: true
+    short_name: primary-frequency-capacity-amount
+    short_name_tr: Primer Frekans Rezerv Miktarı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Primer Frekans Rezerv Miktarı Listeleme Servisi
+    description: Katılımcıların gerçek zamanlı frekans dengeleme için ayırması gereken
+      saatlik toplam birincil frekans kapasite hacimleridir.
+    response_structure: {}
+  primary-frequency-capacity-price:
+    endpoint: /v1/markets/ancillary-services/data/primary-frequency-capacity-price
+    method: POST
+    auth: true
+    short_name: primary-frequency-capacity-price
+    short_name_tr: Primer Frekans Kontrolü (PFK) Fiyat Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Primer Frekans Kontrolü (PFK) Fiyat Listeleme Servisi
+    description: Saatlik bazda ihale ile belirlenen PFK kapasite bedelidir.
+    response_structure: {}
+  secondary-frequency-capacity-amount:
+    endpoint: /v1/markets/ancillary-services/data/secondary-frequency-capacity-amount
+    method: POST
+    auth: true
+    short_name: secondary-frequency-capacity-amount
+    short_name_tr: Sekonder Frekans Rezerv Miktarı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Sekonder Frekans Rezerv Miktarı Listeleme Servisi
+    description: Saatlik toplam belirlenen rezerv miktarlarıdır.
+    response_structure: {}
+  secondary-frequency-capacity-price:
+    endpoint: /v1/markets/ancillary-services/data/secondary-frequency-capacity-price
+    method: POST
+    auth: true
+    short_name: secondary-frequency-capacity-price
+    short_name_tr: Sekonder Frekans Kontrolü (SFK) Fiyat Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Sekonder Frekans Kontrolü (SFK) Fiyat Listeleme Servisi
+    description: Saatlik bazda ihale ile belirlenen SFK kapasite bedelidir.
+    response_structure: {}

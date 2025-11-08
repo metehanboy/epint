@@ -1,0 +1,678 @@
+endpoints:
+  organization_cascade_detail:
+    endpoint: /v1/organization/cascade/{effectiveId}
+    method: GET
+    auth: true
+    short_name: organization_cascade_detail
+    short_name_tr: Organizasyon Tüm Detay Sorgulama Servisi
+    params:
+    - effectiveId
+    required:
+    - effectiveId
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: Organizasyonun ID bilgisi
+      required: true
+    summary: Organizasyon Tüm Detay Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz organizasyon tüm detay bilgilerini bu
+      servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_detail:
+    endpoint: /v1/organization/{effectiveId}
+    method: GET
+    auth: true
+    short_name: organization_detail
+    short_name_tr: Organizasyon Detay Sorgulama Servisi
+    params:
+    - effectiveId
+    required:
+    - effectiveId
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: Organizasyonun ID bilgisi
+      required: true
+    summary: Organizasyon Detay Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz organizasyon detay bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_fetch_active_organizations:
+    endpoint: /v1/organization/fetch-active-organizations
+    method: POST
+    auth: true
+    short_name: organization_fetch_active_organizations
+    short_name_tr: Aktif Organizasyonlar Sorgulama Servisi
+    params:
+    - effectiveDate
+    - types
+    - subTypes
+    - states
+    - exclusions
+    - effectiveIds
+    - isAggregator
+    - excludeNonAggregatorRetail
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: types
+      var_type: list
+      description: Tipler
+      required: false
+      items: int
+    - name: subTypes
+      var_type: list
+      description: Alt Tipler
+      required: false
+      items: int
+    - name: states
+      var_type: list
+      description: Durumlar
+      required: false
+      items: int
+    - name: exclusions
+      var_type: list
+      description: İstisnalar
+      required: false
+      items: int
+    - name: effectiveIds
+      var_type: list
+      description: ID'ler
+      required: false
+      items: int
+    - name: isAggregator
+      var_type: bool
+      description: Toplayıcı
+      required: false
+    - name: excludeNonAggregatorRetail
+      var_type: bool
+      description: ${EXCLUDE_NON_AGGREGATOR_RETAIL}
+      required: false
+    summary: Aktif Organizasyonlar Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz aktif organizasyon bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_fetch_main_organizations:
+    endpoint: /v1/organization/fetch-main-organizations
+    method: GET
+    auth: true
+    short_name: organization_fetch_main_organizations
+    short_name_tr: Ana Organizasyonlar Sorgulama Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Ana Organizasyonlar Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz ana organizasyon bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_fetch_organization_with_dam_participation:
+    endpoint: /v1/organization/fetch-organizations-with-dam-participation
+    method: POST
+    auth: true
+    short_name: organization_fetch_organization_with_dam_participation
+    short_name_tr: Organizasyon GÖP Katılımı Sorgulama Servisi
+    params:
+    - effectiveId
+    - eic
+    - stateIds
+    - typeIds
+    - isParticipating
+    - effectiveDate
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: eic
+      var_type: str
+      description: ETSO Kodu
+      required: false
+    - name: stateIds
+      var_type: list
+      description: Durum ID'leri
+      required: false
+      items: int
+    - name: typeIds
+      var_type: list
+      description: Tip ID'leri
+      required: false
+      items: int
+    - name: isParticipating
+      var_type: bool
+      description: Katılıyor
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    summary: Organizasyon GÖP Katılımı Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz organizasyon piyasa katılımı bilgilerini
+      bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  OrganizationController_fetchOrganizationsWithLicenses_POST:
+    endpoint: /v1/organization/fetch-organizations-with-licenses
+    method: POST
+    auth: true
+    short_name: OrganizationController_fetchOrganizationsWithLicenses_POST
+    short_name_tr: OrganizationController_fetchOrganizationsWithLicenses_POST
+    params:
+    - effectiveDate
+    - types
+    - subTypes
+    - states
+    - exclusions
+    - effectiveIds
+    - isAggregator
+    - excludeNonAggregatorRetail
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: types
+      var_type: list
+      description: Tipler
+      required: false
+      items: int
+    - name: subTypes
+      var_type: list
+      description: Alt Tipler
+      required: false
+      items: int
+    - name: states
+      var_type: list
+      description: Durumlar
+      required: false
+      items: int
+    - name: exclusions
+      var_type: list
+      description: İstisnalar
+      required: false
+      items: int
+    - name: effectiveIds
+      var_type: list
+      description: ID'ler
+      required: false
+      items: int
+    - name: isAggregator
+      var_type: bool
+      description: Toplayıcı
+      required: false
+    - name: excludeNonAggregatorRetail
+      var_type: bool
+      description: ${EXCLUDE_NON_AGGREGATOR_RETAIL}
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_fetch_single_organization:
+    endpoint: /v1/organization/fetch-single-organization
+    method: POST
+    auth: true
+    short_name: organization_fetch_single_organization
+    short_name_tr: Tekil Organizasyon Sorgulama Servisi
+    params:
+    - effectiveId
+    - effectiveDate
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    summary: Tekil Organizasyon Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz tekil organizasyon bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_fetch_summary:
+    endpoint: /v1/organization/fetch-summary
+    method: POST
+    auth: true
+    short_name: organization_fetch_summary
+    short_name_tr: Organizasyon Özet Sorgulama Servisi
+    params:
+    - effectiveId
+    - effectiveDate
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    summary: Organizasyon Özet Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz organizasyon özet bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_query:
+    endpoint: /v1/organization/query
+    method: POST
+    auth: true
+    short_name: organization_query
+    short_name_tr: Organizasyon Sorgulama Servisi
+    params:
+    - page
+    - effectiveId
+    - effectiveIdContains
+    - name
+    - eic
+    - shortName
+    - code
+    - isCategory
+    - licenseTypeIds
+    - stateIds
+    - typeIds
+    - subTypeIds
+    - mainOrganizationId
+    - recordStatusIds
+    - provinceId
+    - effectiveDate
+    - effectiveDateStart
+    - effectiveDateEnd
+    - taxNo
+    - isAggregator
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: effectiveIdContains
+      var_type: str
+      description: ID içerir
+      required: false
+    - name: name
+      var_type: str
+      description: Ad
+      required: false
+    - name: eic
+      var_type: str
+      description: ETSO Kodu
+      required: false
+    - name: shortName
+      var_type: str
+      description: Kısa Ad
+      required: false
+    - name: code
+      var_type: str
+      description: Kod
+      required: false
+    - name: isCategory
+      var_type: bool
+      description: Kategori
+      required: false
+    - name: licenseTypeIds
+      var_type: list
+      description: Lisans Tipi ID'leri
+      required: false
+      items: int
+    - name: stateIds
+      var_type: list
+      description: Durum ID'leri
+      required: false
+      items: int
+    - name: typeIds
+      var_type: list
+      description: Tip ID'leri
+      required: false
+      items: int
+    - name: subTypeIds
+      var_type: list
+      description: Alt Tip ID'leri
+      required: false
+      items: int
+    - name: mainOrganizationId
+      var_type: int
+      description: Ana Organizasyon ID
+      required: false
+    - name: recordStatusIds
+      var_type: list
+      description: Kayıt Durumu ID'leri
+      required: false
+      items: int
+    - name: provinceId
+      var_type: int
+      description: İl ID
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: taxNo
+      var_type: str
+      description: Vergi No
+      required: false
+    - name: isAggregator
+      var_type: bool
+      description: Toplayıcı
+      required: false
+    summary: Organizasyon Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz organizasyon bilgilerini bu servis ile
+      alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  OrganizationController_getDistributionAreaWithProvinces_GET:
+    endpoint: /v1/organization/get-distribution-area-with-provinces
+    method: GET
+    auth: true
+    short_name: OrganizationController_getDistributionAreaWithProvinces_GET
+    short_name_tr: OrganizationController_getDistributionAreaWithProvinces_GET
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_get_organization_provinces:
+    endpoint: /v1/organization/provinces/{effectiveId}
+    method: GET
+    auth: true
+    short_name: organization_get_organization_provinces
+    short_name_tr: Organizasyonun Bulunduğu İller Sorgulama Servisi
+    params:
+    - effectiveId
+    required:
+    - effectiveId
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: Organizasyonun ID bilgisi
+      required: true
+    summary: Organizasyonun Bulunduğu İller Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz organizasyonun bulunduğu İller bilgilerini
+      bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

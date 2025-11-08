@@ -1,0 +1,75 @@
+endpoints:
+  dgp-yat:
+    endpoint: /v1/markets/bpm/data/order-summary-down
+    method: POST
+    auth: true
+    short_name: dgp-yat
+    short_name_tr: Yük Atma (YAT) Talimat Miktarı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Yük Atma (YAT) Talimat Miktarı Listeleme Servisi
+    description: 0, 1, 2 kodlu Alma Talimat Miktarı (YAT), sistem yönünde elektrik
+      fazlası durumlarda sistemi dengelemek için verilen talimat miktarıdır. Veriler
+      4 saat önceki talimatları yansıtmaktadır.
+    response_structure: {}
+  dgp-yal:
+    endpoint: /v1/markets/bpm/data/order-summary-up
+    method: POST
+    auth: true
+    short_name: dgp-yal
+    short_name_tr: Yük Alma (YAL) Talimat Miktarları Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Yük Alma (YAL) Talimat Miktarları Listeleme Servisi
+    description: 0, 1, 2 kodlu Alma Talimat Miktarı (YAL), sistem yönünde elektrik
+      açığı durumlarda sistemi dengelemek için verilen talimat miktarıdır. Veriler
+      4 saat önceki talimatları yansıtmaktadır.
+    response_structure: {}
+  system-direction-data:
+    endpoint: /v1/markets/bpm/data/system-direction
+    method: POST
+    auth: true
+    short_name: system-direction-data
+    short_name_tr: Sistem Yönü Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Sistem Yönü Listeleme Servisi
+    description: Sistemde elektrik fazlası veya elektrik açığı olduğunu gösterir.
+      Veriler 4 saat önceki talimatları yansıtmaktadır.
+    response_structure: {}
+  system-marginal-price:
+    endpoint: /v1/markets/bpm/data/system-marginal-price
+    method: POST
+    auth: true
+    short_name: system-marginal-price
+    short_name_tr: Sistem Marjinal Fiyatı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Sistem Marjinal Fiyatı Listeleme Servisi
+    description: Sistem Marjinal Fiyatı, Dengeleme Güç Piyasasında net talimat hacmine
+      karşılık gelen teklifin fiyatıdır. Veriler 4 saat önceki talimatları yansıtmaktadır.
+    response_structure: {}

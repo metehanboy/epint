@@ -1,0 +1,444 @@
+endpoints:
+  update_retrospective_hourly_meter_data_status:
+    endpoint: /v1/retrospective-meter-data/hourly/status/update
+    method: POST
+    auth: true
+    short_name: update_retrospective_hourly_meter_data_status
+    short_name_tr: GDDK Saatlik Sayaç Bilgilerinin Durum Güncelleme Servisi
+    params:
+    - items
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: items
+      var_type: list
+      description: Sayaç Veri Güncelleme Listesi
+      required: false
+      items: str
+    summary: GDDK Saatlik Sayaç Bilgilerinin Durum Güncelleme Servisi
+    description: GDDK Saatlik Sayaç Bilgilerinin Durum Güncellemesi Yapar.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  update_retrospective_profile_meter_data_status:
+    endpoint: /v1/retrospective-meter-data/profile/status/update
+    method: POST
+    auth: true
+    short_name: update_retrospective_profile_meter_data_status
+    short_name_tr: GDDK Profil Sayac Durum Bilgisi Güncelleme Servisi
+    params:
+    - items
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: items
+      var_type: list
+      description: Sayaç Veri Güncelleme Listesi
+      required: false
+      items: str
+    summary: GDDK Profil Sayac Durum Bilgisi Güncelleme Servisi
+    description: GDDK Profil Sayac Bilgilerinin Durum Bilgisini Günceller.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  export_retrospective_hourly_meter_data:
+    endpoint: /v1/retrospective-meter-data/hourly/export
+    method: POST
+    auth: true
+    short_name: export_retrospective_hourly_meter_data
+    short_name_tr: GDDK Saatlik Sayaç Bilgileri Export Servisi
+    params:
+    - period
+    - version
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: &id001
+      - XLSX
+      - CSV
+      - PDF
+    summary: GDDK Saatlik Sayaç Bilgileri Export Servisi
+    description: GDDK Saatlik sayac bilgilerini dışa aktarır.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_retrospective_profile_meter_data:
+    endpoint: /v1/retrospective-meter-data/profile/export
+    method: POST
+    auth: true
+    short_name: export_retrospective_profile_meter_data
+    short_name_tr: GDDK Profil Sayaç Bilgileri Export Servisi
+    params:
+    - period
+    - version
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: GDDK Profil Sayaç Bilgileri Export Servisi
+    description: GDDK Profil Sayaç Bilgileri Export
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  list_retrospective_hourly_meter_data:
+    endpoint: /v1/retrospective-meter-data/hourly/list
+    method: POST
+    auth: true
+    short_name: list_retrospective_hourly_meter_data
+    short_name_tr: GDDK Saatlik Sayaç Bilgileri Listeleme Servisi
+    params:
+    - period
+    - version
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: GDDK Saatlik Sayaç Bilgileri Listeleme Servisi
+    description: GDDK Saatlik sayaç bilgilerini listeler.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  list_retrospective_profile_meter_data:
+    endpoint: /v1/retrospective-meter-data/profile/list
+    method: POST
+    auth: true
+    short_name: list_retrospective_profile_meter_data
+    short_name_tr: GDDK Profil Sayaç Bilgileri Listeleme Servisi
+    params:
+    - period
+    - version
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: GDDK Profil Sayaç Bilgileri Listeleme Servisi
+    description: GDDK profil sayaç bilgilerini listeler.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  list_correction_data_report_export:
+    endpoint: /v1/retrospective-meter-data/correction-data-report/export
+    method: POST
+    auth: true
+    short_name: list_correction_data_report_export
+    short_name_tr: GDDK Veri Değişim Dışarı Aktarma Servisi
+    params:
+    - period
+    - version
+    - region
+    - meterReadingCompanyId
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: ''
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: meterReadingCompanyId
+      var_type: int
+      description: ''
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum:
+      - XLSX
+      - CSV
+      - PDF
+    summary: GDDK Veri Değişim Dışarı Aktarma Servisi
+    description: Sayaç okuyan kurumlar tarafından yüklenen GDDK sayaç verilerine ait
+      aylık değişim raporu servisidir.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  list_correction_data_report:
+    endpoint: /v1/retrospective-meter-data/correction-data-report/list
+    method: POST
+    auth: true
+    short_name: list_correction_data_report
+    short_name_tr: GDDK Veri Değişim Servisi
+    params:
+    - period
+    - version
+    - region
+    - meterReadingCompanyId
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: ''
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: meterReadingCompanyId
+      var_type: int
+      description: ''
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum:
+      - XLSX
+      - CSV
+      - PDF
+    summary: GDDK Veri Değişim Servisi
+    description: Sayaç okuyan kurumlar tarafından yüklenen GDDK sayaç verilerine ait
+      aylık değişim raporu servisidir.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

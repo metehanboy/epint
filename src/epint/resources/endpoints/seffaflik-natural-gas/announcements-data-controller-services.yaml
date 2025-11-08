@@ -6,33 +6,13 @@ endpoints:
     short_name: announcements
     short_name_tr: BOTAŞ Duyuruları Listeleme Servisi
     params:
-    - startDate
-    - endDate
-    - page
+    - body
+    - TGT
     required:
-    - startDate
-    - endDate
-    response:
-    - items
-    - page
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: BOTAŞ Duyuruları Listeleme Servisi
     description: BOTAŞ Duyuruları Listeleme Servisi
-    response_structure:
-      items: list
-      page: str
+    response_structure: {}

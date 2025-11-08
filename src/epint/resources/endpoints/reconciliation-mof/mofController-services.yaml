@@ -1,0 +1,89 @@
+endpoints:
+  export_organization_mof_details:
+    endpoint: /v1/reconciliation/mof/organization/export
+    method: POST
+    auth: true
+    short_name: export_organization_mof_details
+    short_name_tr: Dönemlik organizasyon piu detayı
+    params:
+    - period
+    - version
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    summary: Dönemlik organizasyon piu detayı
+    description: Dönemlik organizasyon piu detayını döner.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  get_organization_mof_details:
+    endpoint: /v1/reconciliation/mof/organization/list
+    method: POST
+    auth: true
+    short_name: get_organization_mof_details
+    short_name_tr: Dönemlik organizasyon piu detayı
+    params:
+    - period
+    - version
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    summary: Dönemlik organizasyon piu detayı
+    description: Dönemlik organizasyon piu detayını döner.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

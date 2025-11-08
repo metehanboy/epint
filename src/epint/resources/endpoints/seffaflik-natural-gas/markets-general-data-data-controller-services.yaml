@@ -1,54 +1,33 @@
 endpoints:
-  market_participant:
+  market-participant:
     endpoint: /v1/markets/general-data/data/market-participant
     method: POST
     auth: true
-    short_name: market_participant
+    short_name: market-participant
     short_name_tr: Doğal Gaz Piyasa Katılımcıları Listeleme Servisi
     params:
-    - organizationId
-    - period
-    - page
+    - body
+    - TGT
     required:
-    - period
-    response:
-    - items
-    - page
-    var_type:
-    - name: organizationId
-      var_type: int
-      description: İstek için kullanılacak organizasyon Id
-      required: false
-      example: 1234
-    - name: period
-      var_type: datetime
-      description: Dönem
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: Doğal Gaz Piyasa Katılımcıları Listeleme Servisi
     description: Katılımcıların piyasa (SGP, VGP) kayıt durumlarını gösterir.
-    response_structure:
-      items: list
-      page: str
-  participant_list:
+    response_structure: {}
+  participant-list:
     endpoint: /v1/markets/general-data/data/participant-list
     method: GET
     auth: true
-    short_name: participant_list
+    short_name: participant-list
     short_name_tr: Katılımcı Listesi Servisi
-    params: []
-    required: null
-    response:
-    - items
-    - page
-    var_type: []
+    params:
+    - TGT
+    required:
+    - TGT
+    response: ''
+    var_type: dict
     summary: Katılımcı Listesi Servisi
     description: Katılımcı Listesi Servisi
-    response_structure:
-      items: list
-      page: str
+    response_structure: {}

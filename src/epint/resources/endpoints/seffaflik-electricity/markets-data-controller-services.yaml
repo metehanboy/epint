@@ -1,0 +1,101 @@
+endpoints:
+  market-message-system:
+    endpoint: /v1/markets/data/market-message-system
+    method: POST
+    auth: true
+    short_name: market-message-system
+    short_name_tr: Piyasa Mesaj Sistemi Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Piyasa Mesaj Sistemi Listeleme Servisi
+    description: İlgili santralin arıza veya bakım bilgileridir.
+    response_structure: {}
+  maximum-settlement-price:
+    endpoint: /v1/markets/data/maximum-settlement-price
+    method: POST
+    auth: true
+    short_name: maximum-settlement-price
+    short_name_tr: Azami Uzlaştırma Fiyatı (AUF) Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Azami Uzlaştırma Fiyatı (AUF) Listeleme Servisi
+    description: Kaynak Bazında Destekleme Bedelinin hesaplanmasında kullanılan “Azami
+      Uzlaştırma Fiyat” değerleridir. AUF uygulaması Ekim 2023 tarihi ile birlikte
+      yürürlükten kalkmıştır.
+    response_structure: {}
+  power-plant-list-by-organization-id:
+    endpoint: /v1/markets/data/power-plant-list-by-organization-id
+    method: POST
+    auth: true
+    short_name: power-plant-list-by-organization-id
+    short_name_tr: Piyasa Mesaj Sistemi Santral Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Piyasa Mesaj Sistemi Santral Listeleme Servisi
+    description: Verilen organizasyon id'ye ait santral'lerin listesini döner.
+    response_structure: {}
+  /uevcb-list-by-power-plant-id:
+    endpoint: /v1/markets/data/uevcb-list-by-power-plant-id
+    method: POST
+    auth: true
+    short_name: /uevcb-list-by-power-plant-id
+    short_name_tr: Piyasa Mesaj Sistemi Uevçb Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Piyasa Mesaj Sistemi Uevçb Listeleme Servisi
+    description: Verilen santral id'ye ait UEVÇB'lerin listesini döner.
+    response_structure: {}
+  umm-message-type-list:
+    endpoint: /v1/markets/data/umm-message-type-list
+    method: GET
+    auth: true
+    short_name: umm-message-type-list
+    short_name_tr: Piyasa Mesaj Sistemi Mesaj Tipi Listeleme Servisi
+    params:
+    - TGT
+    required:
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Piyasa Mesaj Sistemi Mesaj Tipi Listeleme Servisi
+    description: Mesaj Tipi Listeleme Servisi
+    response_structure: {}
+  umm-region-list:
+    endpoint: /v1/markets/data/umm-region-list
+    method: GET
+    auth: true
+    short_name: umm-region-list
+    short_name_tr: Piyasa Mesaj Sistemi Bölge Listeleme Servisi
+    params:
+    - TGT
+    required:
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Piyasa Mesaj Sistemi Bölge Listeleme Servisi
+    description: Piyasa Mesaj Sistemi Sayfası Bölge Listeleme Servisi
+    response_structure: {}

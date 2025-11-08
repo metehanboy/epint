@@ -1,0 +1,873 @@
+endpoints:
+  offer_advance:
+    endpoint: /offer/advance
+    method: POST
+    auth: true
+    short_name: offer_advance
+    short_name_tr: Offer / Advance Service
+    params:
+    - deliveryDay
+    - region
+    required:
+    - deliveryDay
+    - region
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps Delivery Date.
+      required: true
+    - name: region
+      var_type: string
+      description: This field keeps Region Information.
+      required: true
+    summary: Offer / Advance Service
+    description: Offer / Advance Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_currencies:
+    endpoint: /offer/currencies
+    method: POST
+    auth: true
+    short_name: offer_currencies
+    short_name_tr: Offer / Currency Service
+    params:
+    - deliveryDay
+    required:
+    - deliveryDay
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps Delivery Day. This field' s format is ISO8601.
+      required: true
+    summary: Offer / Currency Service
+    description: Offer / Currency Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_list_block:
+    endpoint: /offer/list/block
+    method: POST
+    auth: true
+    short_name: offer_list_block
+    short_name_tr: Offer / List / Block Service
+    params:
+    - start
+    - end
+    - offerType
+    - regionCode
+    - version
+    required:
+    - start
+    - end
+    - offerType
+    - regionCode
+    - version
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: start
+      var_type: datetime
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    - name: end
+      var_type: datetime
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    - name: offerType
+      var_type: string
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+      enum: &id001
+      - HOURLY
+      - BLOCK
+      - FLEXIBLE
+    - name: regionCode
+      var_type: string
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    - name: version
+      var_type: int
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    summary: Offer / List / Block Service
+    description: Offer / List / Block Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_list_flexible:
+    endpoint: /offer/list/flexible
+    method: POST
+    auth: true
+    short_name: offer_list_flexible
+    short_name_tr: Offer / List / Flexible Service
+    params:
+    - start
+    - end
+    - offerType
+    - regionCode
+    - version
+    required:
+    - start
+    - end
+    - offerType
+    - regionCode
+    - version
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: start
+      var_type: datetime
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    - name: end
+      var_type: datetime
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    - name: offerType
+      var_type: string
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+      enum: *id001
+    - name: regionCode
+      var_type: string
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    - name: version
+      var_type: int
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    summary: Offer / List / Flexible Service
+    description: Offer / List / Flexible Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_list_history_block:
+    endpoint: /offer/list/history/block
+    method: POST
+    auth: true
+    short_name: offer_list_history_block
+    short_name_tr: Offer / List / History / Block Service
+    params:
+    - deliveryDay
+    - offerType
+    - regionCode
+    required:
+    - deliveryDay
+    - offerType
+    - regionCode
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: Delivery Day
+      required: true
+    - name: offerType
+      var_type: string
+      description: Offer Type
+      required: true
+      enum: &id002
+      - HOURLY
+      - BLOCK
+      - FLEXIBLE
+    - name: regionCode
+      var_type: string
+      description: Region Code
+      required: true
+    summary: Offer / List / History / Block Service
+    description: Offer / List / History / Block Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_list_history_flexible:
+    endpoint: /offer/list/history/flexible
+    method: POST
+    auth: true
+    short_name: offer_list_history_flexible
+    short_name_tr: Offer / List / History / Flexible Service
+    params:
+    - deliveryDay
+    - offerType
+    - regionCode
+    required:
+    - deliveryDay
+    - offerType
+    - regionCode
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: Delivery Day
+      required: true
+    - name: offerType
+      var_type: string
+      description: Offer Type
+      required: true
+      enum: *id002
+    - name: regionCode
+      var_type: string
+      description: Region Code
+      required: true
+    summary: Offer / List / History / Flexible Service
+    description: Offer / List / History / Flexible Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_list_history_hourly:
+    endpoint: /offer/list/history/hourly
+    method: POST
+    auth: true
+    short_name: offer_list_history_hourly
+    short_name_tr: Offer / List / History / Hourly Service
+    params:
+    - deliveryDay
+    - offerType
+    - regionCode
+    required:
+    - deliveryDay
+    - offerType
+    - regionCode
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: Delivery Day
+      required: true
+    - name: offerType
+      var_type: string
+      description: Offer Type
+      required: true
+      enum: *id002
+    - name: regionCode
+      var_type: string
+      description: Region Code
+      required: true
+    summary: Offer / List / History / Hourly Service
+    description: Offer / List / History / Hourly Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_list_hourly:
+    endpoint: /offer/list/hourly
+    method: POST
+    auth: true
+    short_name: offer_list_hourly
+    short_name_tr: Offer / List / Hourly Service
+    params:
+    - start
+    - end
+    - offerType
+    - regionCode
+    - version
+    required:
+    - start
+    - end
+    - offerType
+    - regionCode
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: start
+      var_type: datetime
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    - name: end
+      var_type: datetime
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    - name: offerType
+      var_type: string
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      example: HOURLY
+      required: true
+      enum: *id001
+    - name: regionCode
+      var_type: string
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    - name: version
+      var_type: int
+      description: This model is used to list Offers. If version field isn't set,
+        service only fetches active Offer List. If version field is set, service fetches
+        active or pasive Offer belonging given version.
+      required: true
+    summary: Offer / List / Hourly Service
+    description: Offer / List / Hourly Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_listhourblocks:
+    endpoint: /offer/listhourblocks
+    method: POST
+    auth: true
+    short_name: offer_listhourblocks
+    short_name_tr: Offer / Period Hours List Service
+    params:
+    - date
+    - offerType
+    required:
+    - date
+    - offerType
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: date
+      var_type: datetime
+      description: This field keeps the date information of periods that are wanted
+        to be listed.
+      required: true
+    - name: offerType
+      var_type: string
+      description: This field keeps Offer Type.
+      required: true
+      enum:
+      - HOURLY
+      - BLOCK
+      - FLEXIBLE
+    summary: Offer / Period Hours List Service
+    description: Offer / Period Hours List Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_offerresult:
+    endpoint: /offer/offerresult
+    method: POST
+    auth: true
+    short_name: offer_offerresult
+    short_name_tr: Offer / Market Result Service
+    params:
+    - deliveryDay
+    - region
+    required:
+    - deliveryDay
+    - region
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps Delivery Date.
+      required: true
+    - name: region
+      var_type: string
+      description: This field keeps Region Information.
+      required: true
+    summary: Offer / Market Result Service
+    description: Offer / Market Result Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_regions:
+    endpoint: /offer/regions
+    method: POST
+    auth: true
+    short_name: offer_regions
+    short_name_tr: Offer / Region Service
+    params:
+    - deliveryDay
+    required:
+    - deliveryDay
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps Delivery Day. This field' s format is ISO8601.
+      required: true
+    summary: Offer / Region Service
+    description: Offer / Region Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_validatedeliveryday:
+    endpoint: /offer/validatedeliveryday
+    method: POST
+    auth: true
+    short_name: offer_validatedeliveryday
+    short_name_tr: Offer / Delivery Day Val?dation Service
+    params:
+    - deliveryDay
+    required:
+    - deliveryDay
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This field keeps Delivery Date.
+      required: true
+    summary: Offer / Delivery Day Val?dation Service
+    description: Offer / Delivery Day Val?dation Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_create_block:
+    endpoint: /offer/create/block
+    method: POST
+    auth: true
+    short_name: offer_create_block
+    short_name_tr: Offer / Create / Block Service
+    params:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    required:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This model keeps Information of Offer.
+      required: true
+    - name: offerType
+      var_type: string
+      description: This field keeps Offer Type.
+      required: true
+      enum: &id003
+      - HOURLY
+      - BLOCK
+      - FLEXIBLE
+    - name: regionCode
+      var_type: string
+      description: This field keeps Region Code of Offer.
+      required: true
+    - name: currencyCode
+      var_type: string
+      description: This field keeps Currency Code of Offer.
+      required: true
+    - name: offerDetails
+      var_type: array
+      description: This field keeps Model of Offer Detail.
+      required: true
+      items: dict
+    summary: Offer / Create / Block Service
+    description: Offer / Create / Block Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_create_flexible:
+    endpoint: /offer/create/flexible
+    method: POST
+    auth: true
+    short_name: offer_create_flexible
+    short_name_tr: Offer / Create / Flexible Service
+    params:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    required:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This model keeps Information of Offer.
+      required: true
+    - name: offerType
+      var_type: string
+      description: This field keeps Offer Type.
+      required: true
+      enum: *id003
+    - name: regionCode
+      var_type: string
+      description: This field keeps Region Code of Offer.
+      required: true
+    - name: currencyCode
+      var_type: string
+      description: This field keeps Currency Code of Offer.
+      required: true
+    - name: offerDetails
+      var_type: array
+      description: This field keeps Model of Offer Detail.
+      required: true
+      items: dict
+    summary: Offer / Create / Flexible Service
+    description: Offer / Create / Flexible Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_create_hourly:
+    endpoint: /offer/create/hourly
+    method: POST
+    auth: true
+    short_name: offer_create_hourly
+    short_name_tr: Offer / Create / Hourly Service
+    params:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    required:
+    - deliveryDay
+    - offerType
+    - regionCode
+    - currencyCode
+    - offerDetails
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: This model keeps Information of Offer.
+      required: true
+    - name: offerType
+      var_type: string
+      description: This field keeps Offer Type.
+      required: true
+      enum: *id003
+    - name: regionCode
+      var_type: string
+      description: This field keeps Region Code of Offer.
+      required: true
+    - name: currencyCode
+      var_type: string
+      description: This field keeps Currency Code of Offer.
+      required: true
+    - name: offerDetails
+      var_type: array
+      description: This field keeps Model of Offer Detail.
+      required: true
+      items: dict
+    summary: Offer / Create / Hourly Service
+    description: Offer / Create / Hourly Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_delete_block:
+    endpoint: /offer/delete/block
+    method: POST
+    auth: true
+    short_name: offer_delete_block
+    short_name_tr: Offer / Cancel / Block Service
+    params:
+    - deliveryDay
+    - offerType
+    - region
+    required:
+    - deliveryDay
+    - offerType
+    - region
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: Delivery Day
+      required: true
+    - name: offerType
+      var_type: string
+      description: Offer Type
+      required: true
+      enum: &id004
+      - HOURLY
+      - BLOCK
+      - FLEXIBLE
+    - name: region
+      var_type: string
+      description: Offer / Region Service
+      required: true
+    summary: Offer / Cancel / Block Service
+    description: Offer / Cancel / Block Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_delete_flexible:
+    endpoint: /offer/delete/flexible
+    method: POST
+    auth: true
+    short_name: offer_delete_flexible
+    short_name_tr: Offer / Cancel / Flexible Service
+    params:
+    - deliveryDay
+    - offerType
+    - region
+    required:
+    - deliveryDay
+    - offerType
+    - region
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: Delivery Day
+      required: true
+    - name: offerType
+      var_type: string
+      description: Offer Type
+      required: true
+      enum: *id004
+    - name: region
+      var_type: string
+      description: Offer / Region Service
+      required: true
+    summary: Offer / Cancel / Flexible Service
+    description: Offer / Cancel / Flexible Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str
+  offer_delete_hourly:
+    endpoint: /offer/delete/hourly
+    method: POST
+    auth: true
+    short_name: offer_delete_hourly
+    short_name_tr: Offer / Cancel / Hourly Service
+    params:
+    - deliveryDay
+    - offerType
+    - region
+    required:
+    - deliveryDay
+    - offerType
+    - region
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDay
+      var_type: datetime
+      description: Delivery Day
+      required: true
+    - name: offerType
+      var_type: string
+      description: Offer Type
+      required: true
+      enum: *id004
+    - name: region
+      var_type: string
+      description: Offer / Region Service
+      required: true
+    summary: Offer / Cancel / Hourly Service
+    description: Offer / Cancel / Hourly Service
+    response_structure:
+      resultCode: str
+      resultDescription: str
+      body: str
+      resultType: str

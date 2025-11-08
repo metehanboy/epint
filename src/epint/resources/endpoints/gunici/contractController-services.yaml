@@ -1,0 +1,581 @@
+endpoints:
+  list_all_active_contracts_lookup:
+    endpoint: /rest/v1/contract/actives
+    method: POST
+    auth: true
+    short_name: list_all_active_contracts_lookup
+    short_name_tr: Aktif Kontrat Listeleme
+    params:
+    - region
+    required: []
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Aktif Kontrat Listeleme
+    description: Aktif Kontrat Listeleme
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_contracts:
+    endpoint: /rest/v1/contract/list
+    method: POST
+    auth: true
+    short_name: list_contracts
+    short_name_tr: Kontrat Listeleme
+    params:
+    - pageInfo
+    - startDate
+    - endDate
+    - statuses
+    - contractType
+    - region
+    required:
+    - endDate
+    - pageInfo
+    - startDate
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: true
+    - name: startDate
+      var_type: datetime
+      description: Başlangıç tarihi
+      required: true
+      example: '2021-06-24 14:00:00'
+    - name: endDate
+      var_type: datetime
+      description: Bitiş tarihi
+      required: true
+      example: '2021-06-24 14:00:00'
+    - name: statuses
+      var_type: list
+      description: Kontrat durum bilgisi
+      required: false
+      items: str
+    - name: contractType
+      var_type: str
+      description: Kontrat tipi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Kontrat Listeleme
+    description: Sistemde bulunan kontrat listesini döner.
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_contracts_lookup:
+    endpoint: /rest/v1/contract/lookup
+    method: POST
+    auth: true
+    short_name: list_contracts_lookup
+    short_name_tr: Kontrat Listeleme
+    params:
+    - startDate
+    - endDate
+    - statuses
+    - contractType
+    - region
+    required:
+    - endDate
+    - startDate
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: startDate
+      var_type: datetime
+      description: Başlangıç tarihi
+      required: true
+      example: '2021-06-24 14:00:00'
+    - name: endDate
+      var_type: datetime
+      description: Bitiş tarihi
+      required: true
+      example: '2021-06-24 14:00:00'
+    - name: statuses
+      var_type: list
+      description: Kontrat durum bilgisi
+      required: false
+      items: str
+    - name: contractType
+      var_type: str
+      description: Kontrat tipi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Kontrat Listeleme
+    description: Sistemde bulunan kontrat listesini döner.
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_active_contracts_lookup:
+    endpoint: /rest/v1/contract/offer-contract/list
+    method: POST
+    auth: true
+    short_name: list_active_contracts_lookup
+    short_name_tr: Kontrat Listeleme
+    params:
+    - region
+    required:
+    - contractType
+    - region
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: true
+    summary: Kontrat Listeleme
+    description: Sistemde bulunan kontrat listesini döner.
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_active_contracts_lookup_buy_offer:
+    endpoint: /rest/v1/contract/offer-contract/lookup
+    method: POST
+    auth: true
+    short_name: list_active_contracts_lookup_buy_offer
+    short_name_tr: Güncellenbilir Kontrat Listesi
+    params:
+    - contractType
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: contractType
+      var_type: str
+      description: Kontrat tipi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Güncellenbilir Kontrat Listesi
+    description: Aktif veya pasif tekliflerinizin olduğu kontratların listelendiği
+      servis.
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_exist_contracts_lookup:
+    endpoint: /rest/v1/contract/offer-exist/lookup
+    method: POST
+    auth: true
+    short_name: list_exist_contracts_lookup
+    short_name_tr: Kontrat Listeleme
+    params:
+    - contractType
+    - region
+    - deliveryDateStart
+    - deliveryDateEnd
+    required:
+    - deliveryDateEnd
+    - deliveryDateStart
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: contractType
+      var_type: str
+      description: Kontrat tipi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: deliveryDateStart
+      var_type: datetime
+      description: Başlangıç tarihi
+      required: true
+      example: '2021-06-24 14:00:00'
+    - name: deliveryDateEnd
+      var_type: datetime
+      description: Bitiş tarihi
+      required: true
+      example: '2021-06-24 14:00:00'
+    summary: Kontrat Listeleme
+    description: Sistemde bulunan kontrat listesini döner.
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_trade_history:
+    endpoint: /rest/v1/contract/trade-history/list
+    method: POST
+    auth: true
+    short_name: list_trade_history
+    short_name_tr: İşlem Akışı
+    params:
+    - pageInfo
+    - contractName
+    - effectiveDateStart
+    - effectiveDateEnd
+    - region
+    - sortingInfo
+    - contractType
+    required:
+    - effectiveDateEnd
+    - effectiveDateStart
+    - pageInfo
+    - region
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: true
+    - name: contractName
+      var_type: str
+      description: Kontrat ismi
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: true
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: true
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: true
+    - name: sortingInfo
+      var_type: str
+      description: Sıralama bilgisi
+      required: false
+    - name: contractType
+      var_type: str
+      description: Kontrat tipi
+      required: false
+    summary: İşlem Akışı
+    description: İşlem akışının listelendiği servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_contract_top_ten_otr_dashboard:
+    endpoint: /rest/v1/dashboard/contract-otr/top-ten
+    method: POST
+    auth: true
+    short_name: list_contract_top_ten_otr_dashboard
+    short_name_tr: ${CONTRACT_TOP_TEN_TEO_DASHBOARD}
+    params:
+    - contractName
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: contractName
+      var_type: str
+      description: Kontrat ismi
+      required: false
+    summary: ${CONTRACT_TOP_TEN_TEO_DASHBOARD}
+    description: ${CONTRACT_TOP_TEN_TEO_DASHBOARD_NOTE}
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  contract_table_config_update:
+    endpoint: /rest/v1/configs/contract-table/update
+    method: POST
+    auth: true
+    short_name: contract_table_config_update
+    short_name_tr: Saatlik defter konfigürasyon güncelleme
+    params:
+    - configs
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: configs
+      var_type: str
+      description: ''
+      required: false
+    summary: Saatlik defter konfigürasyon güncelleme
+    description: Saatlik defter konfigürasyon güncelleme
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  contract_indicators_export:
+    endpoint: /rest/v1/dashboard/contract-indicators/export
+    method: POST
+    auth: true
+    short_name: contract_indicators_export
+    short_name_tr: Kontrat Göstergeleri Export Servisi
+    params:
+    - region
+    - isMarket
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: isMarket
+      var_type: bool
+      description: ''
+      required: false
+    summary: Kontrat Göstergeleri Export Servisi
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  contracts_freeze_filter:
+    endpoint: /rest/v1/contract/filter
+    method: POST
+    auth: true
+    short_name: contracts_freeze_filter
+    short_name_tr: İleri tarihli kontrat dondurma arama
+    params:
+    - regions
+    - contractType
+    - startDate
+    - endDate
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: regions
+      var_type: list
+      description: Bölge bilgisi
+      required: false
+      example: '[''TR1'']'
+      items: str
+    - name: contractType
+      var_type: list
+      description: Kontrat tipi
+      required: false
+      example: '[''HOURLY'']'
+      items: str
+    - name: startDate
+      var_type: datetime
+      description: Fiziksel Teslimat Başlangıç Zamanı
+      required: false
+      example: '2023-01-01 12:00:00'
+    - name: endDate
+      var_type: datetime
+      description: Fiziksel Teslimat Bitiş Zamanı
+      required: false
+      example: '2023-01-01 14:00:00'
+    summary: İleri tarihli kontrat dondurma arama
+    description: İleri tarihli kontrat dondurma için aranan kontratları döner.
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  contract_indicators:
+    endpoint: /rest/v1/dashboard/contract-indicators
+    method: POST
+    auth: true
+    short_name: contract_indicators
+    short_name_tr: Kontrat Göstergeleri
+    params:
+    - region
+    - isMarket
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: isMarket
+      var_type: bool
+      description: ''
+      required: false
+    summary: Kontrat Göstergeleri
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

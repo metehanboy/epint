@@ -1,0 +1,293 @@
+endpoints:
+  exceptional_meter_portfolio_query:
+    endpoint: /v1/exceptional-meter-portfolio/query
+    method: POST
+    auth: true
+    short_name: exceptional_meter_portfolio_query
+    short_name_tr: Talep Edilebilir Yaptırım Sayaçları Sorgulama Servisi
+    params:
+    - page
+    - periodDate
+    - meterEic
+    - meterId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: periodDate
+      var_type: str
+      description: Dönem Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: meterEic
+      var_type: str
+      description: EIC
+      required: false
+    - name: meterId
+      var_type: int
+      description: ID
+      required: false
+    summary: Talep Edilebilir Yaptırım Sayaçları Sorgulama Servisi
+    description: Talep edilebilir yaptırım sayaç bilgilerini bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  portfolio_query:
+    endpoint: /v1/portfolio/query
+    method: POST
+    auth: true
+    short_name: portfolio_query
+    short_name_tr: Portföy Sorgulama Servisi
+    params:
+    - page
+    - balancingRegionId
+    - entryDateEnd
+    - entryDateStart
+    - gridTypeId
+    - meterEic
+    - meterId
+    - periodDate
+    - portfolioMovementReasonTypeIds
+    - portfolioMovementTypeId
+    - portfolioParticipationTypeId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: balancingRegionId
+      var_type: int
+      description: Dengeleme Bölgesi ID
+      required: false
+    - name: entryDateEnd
+      var_type: str
+      description: Portföyden Çıkış Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: entryDateStart
+      var_type: str
+      description: Portföye Giriş Başlangıç Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: gridTypeId
+      var_type: int
+      description: Şebeke Tip ID
+      required: false
+    - name: meterEic
+      var_type: str
+      description: EIC
+      required: false
+    - name: meterId
+      var_type: int
+      description: ID
+      required: false
+    - name: periodDate
+      var_type: str
+      description: Dönem Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: portfolioMovementReasonTypeIds
+      var_type: list
+      description: Portföy Hareketi Sebep Tip ID leri
+      required: false
+      items: int
+    - name: portfolioMovementTypeId
+      var_type: int
+      description: Portföy Hareket Tip ID
+      required: false
+    - name: portfolioParticipationTypeId
+      var_type: int
+      description: Portföy Katılım Tip ID
+      required: false
+    summary: Portföy Sorgulama Servisi
+    description: Portföyünüzdeki sayaçları bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  reading_portfolio_query:
+    endpoint: /v1/reading-portfolio/query
+    method: POST
+    auth: true
+    short_name: reading_portfolio_query
+    short_name_tr: Sayaç Verisi Yükleme Yükümlülüğü Sorgulama Servisi
+    params:
+    - page
+    - currentOrganizationId
+    - entryDateEnd
+    - entryDateStart
+    - meterEic
+    - meterId
+    - periodDate
+    - portfolioMovementReasonTypeIds
+    - portfolioMovementTypeId
+    - previousOrganizationId
+    - readingOrganizationId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: currentOrganizationId
+      var_type: int
+      description: Mevcut Organizasyon ID
+      required: false
+    - name: entryDateEnd
+      var_type: str
+      description: Portföyden Çıkış Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: entryDateStart
+      var_type: str
+      description: Portföye Giriş Başlangıç Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: meterEic
+      var_type: str
+      description: EIC
+      required: false
+    - name: meterId
+      var_type: int
+      description: ID
+      required: false
+    - name: periodDate
+      var_type: str
+      description: Dönem Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: portfolioMovementReasonTypeIds
+      var_type: list
+      description: Portföy Hareketi Sebep Tip ID leri
+      required: false
+      items: int
+    - name: portfolioMovementTypeId
+      var_type: int
+      description: Portföy Hareket Tip ID
+      required: false
+    - name: previousOrganizationId
+      var_type: int
+      description: Önceki Organizasyon ID
+      required: false
+    - name: readingOrganizationId
+      var_type: int
+      description: Sayac Okuyan Kurum ID
+      required: false
+    summary: Sayaç Verisi Yükleme Yükümlülüğü Sorgulama Servisi
+    description: Sayaç Verisi Yükleme Yükümlülüğünüzdeki sayaçları bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

@@ -1,0 +1,192 @@
+endpoints:
+  list_user:
+    endpoint: /rest/v1/operation-history/user/list
+    method: GET
+    auth: true
+    short_name: list_user
+    short_name_tr: Kullanıcı Listesi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Kullanıcı Listesi
+    description: Kullanıcılarının listesini dönen servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  get_user_info:
+    endpoint: /rest/v1/user/info
+    method: GET
+    auth: true
+    short_name: get_user_info
+    short_name_tr: Kullancıcı Bilgileri
+    params: []
+    required: []
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Kullancıcı Bilgileri
+    description: Kullanıcı bilgileri , limitleri ve yetkilerinin alındığı servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_user_by_organization:
+    endpoint: /rest/v1/user/list/by-organization
+    method: POST
+    auth: true
+    short_name: list_user_by_organization
+    short_name_tr: Kullancıcı Bilgileri
+    params: []
+    required: []
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Kullancıcı Bilgileri
+    description: Kullanıcı bilgileri , limitleri ve yetkilerinin alındığı servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  find_user_info:
+    endpoint: /rest/v1/user/info/detail
+    method: POST
+    auth: true
+    short_name: find_user_info
+    short_name_tr: Kullancıcı Bilgileri
+    params:
+    - userName
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: userName
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    summary: Kullancıcı Bilgileri
+    description: Kullanıcı bilgileri , limitleri ve yetkilerinin alındığı servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  logout:
+    endpoint: /rest/v1/user/logout
+    method: GET
+    auth: true
+    short_name: logout
+    short_name_tr: Kullancıcı Bilgileri
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Kullancıcı Bilgileri
+    description: Kullanıcı bilgileri , limitleri ve yetkilerinin alındığı servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  UserController_webSocketModels_POST:
+    endpoint: /rest/v1/user/websocket-models
+    method: POST
+    auth: true
+    short_name: UserController_webSocketModels_POST
+    short_name_tr: UserController_webSocketModels_POST
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

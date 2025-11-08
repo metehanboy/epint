@@ -1,0 +1,163 @@
+endpoints:
+  substation_field_fetch:
+    endpoint: /v1/substation-field/fetch
+    method: GET
+    auth: true
+    short_name: substation_field_fetch
+    short_name_tr: Trafo Merkezi Alan İsimleri Çekme Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Trafo Merkezi Alan İsimleri Çekme Servisi
+    description: Trafo merkezi alan isim bilgilerini bu servis ile çekebilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  substation_query:
+    endpoint: /v1/substation/query
+    method: POST
+    auth: true
+    short_name: substation_query
+    short_name_tr: Trafo Merkezi Sorgulama Servisi
+    params:
+    - page
+    - effectiveId
+    - effectiveDate
+    - eic
+    - name
+    - balancingRegionId
+    - biddingRegionId
+    - cityId
+    - statusId
+    - recordUsageStatusId
+    - relatedCityId
+    - containsEffectiveId
+    - containsEic
+    - containsName
+    - containsRelatedCityId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: effectiveId
+      var_type: int
+      description: Trafo Merkezi ID
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+      example: '2023-01-01T00:00:00+03:00'
+    - name: eic
+      var_type: str
+      description: Trafo EIC
+      required: false
+    - name: name
+      var_type: str
+      description: Trafo Ad
+      required: false
+    - name: balancingRegionId
+      var_type: int
+      description: Trafo Dengeleme Bölge ID
+      required: false
+    - name: biddingRegionId
+      var_type: int
+      description: Trafo Teklif Bölge ID
+      required: false
+    - name: cityId
+      var_type: int
+      description: Trafo Şehir ID
+      required: false
+    - name: statusId
+      var_type: int
+      description: Durum ID
+      required: false
+    - name: recordUsageStatusId
+      var_type: int
+      description: Kayıt Kullanım Durum ID
+      required: false
+    - name: relatedCityId
+      var_type: int
+      description: Trafo İlgili Şehir ID
+      required: false
+    - name: containsEffectiveId
+      var_type: int
+      description: Trafo ID İçeren
+      required: false
+    - name: containsEic
+      var_type: str
+      description: Trafo EIC İçeren
+      required: false
+    - name: containsName
+      var_type: str
+      description: Trafo Ad İçeren
+      required: false
+    - name: containsRelatedCityId
+      var_type: int
+      description: Trafo İlgili Şehir ID İçeren
+      required: false
+    summary: Trafo Merkezi Sorgulama Servisi
+    description: Sorgulamak istediğiniz trafo merkezi bilgilerini bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

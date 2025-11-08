@@ -1,0 +1,303 @@
+endpoints:
+  export_transmission_meter_data:
+    endpoint: /v1/meter-data/transmission-meter-data/export
+    method: POST
+    auth: true
+    short_name: export_transmission_meter_data
+    short_name_tr: İletim Bölgelerinin Okuma Yükümlü Sayaç Verilerinin Export Servisi
+    params:
+    - period
+    - version
+    - isRetrospective
+    - region
+    - lossFactorStatus
+    - readStatus
+    - meterReadingCompany
+    - meterReadingType
+    - meterIds
+    - usageType
+    - isLastVersion
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: isRetrospective
+      var_type: bool
+      description: GDDK mı?
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: lossFactorStatus
+      var_type: bool
+      description: ISKK
+      required: false
+    - name: readStatus
+      var_type: bool
+      description: Okuma Durumu
+      required: false
+    - name: meterReadingCompany
+      var_type: int
+      description: Sayaç Okuyucu Şirket
+      required: false
+    - name: meterReadingType
+      var_type: str
+      description: Sayaç Okuma Tipi
+      required: false
+    - name: meterIds
+      var_type: list
+      description: Sayaç Id
+      required: false
+      items: int
+    - name: usageType
+      var_type: int
+      description: Kullanım Tipi
+      required: false
+    - name: isLastVersion
+      var_type: bool
+      description: Son Versiyon mu?
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum:
+      - XLSX
+      - CSV
+      - PDF
+    summary: İletim Bölgelerinin Okuma Yükümlü Sayaç Verilerinin Export Servisi
+    description: İletim bölgelerinin okuma yükümlü olduğu sayaç verilerinin excel
+      yada csv olarak indirilmesini sağlar.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  list_transmission_meter_datas:
+    endpoint: /v1/meter-data/transmission-meter-data/list
+    method: POST
+    auth: true
+    short_name: list_transmission_meter_datas
+    short_name_tr: İletim Bölgelerinin Okumakla Yükümlü Olduğu Sayaç Verileri Servisi
+    params:
+    - period
+    - version
+    - isRetrospective
+    - region
+    - lossFactorStatus
+    - readStatus
+    - meterReadingCompany
+    - meterReadingType
+    - meterIds
+    - usageType
+    - isLastVersion
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: isRetrospective
+      var_type: bool
+      description: GDDK mı?
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: lossFactorStatus
+      var_type: bool
+      description: ISKK
+      required: false
+    - name: readStatus
+      var_type: bool
+      description: Okuma Durumu
+      required: false
+    - name: meterReadingCompany
+      var_type: int
+      description: Sayaç Okuyucu Şirket
+      required: false
+    - name: meterReadingType
+      var_type: str
+      description: Sayaç Okuma Tipi
+      required: false
+    - name: meterIds
+      var_type: list
+      description: Sayaç Id
+      required: false
+      items: int
+    - name: usageType
+      var_type: int
+      description: Kullanım Tipi
+      required: false
+    - name: isLastVersion
+      var_type: bool
+      description: Son Versiyon mu?
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: İletim Bölgelerinin Okumakla Yükümlü Olduğu Sayaç Verileri Servisi
+    description: İletim bölgelerinin okumakla yükümlü olduğu sayaçların verilerinin
+      listelenmesi
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  list_records:
+    endpoint: /v1/transmission-loss-coefficient/list
+    method: POST
+    auth: true
+    short_name: list_records
+    short_name_tr: ISKK Veri Listeleme Servisi
+    params:
+    - page
+    - effectiveDateStart
+    - effectiveDateEnd
+    - version
+    - region
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Versiyon
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum:
+      - XLSX
+      - CSV
+      - PDF
+    summary: ISKK Veri Listeleme Servisi
+    description: ISKK verileri listeleme servisi.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

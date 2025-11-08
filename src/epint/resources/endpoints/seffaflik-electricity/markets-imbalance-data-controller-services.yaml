@@ -1,30 +1,75 @@
 endpoints:
-  dsg_organization_list:
+  dsg-imbalance-quantity:
+    endpoint: /v1/markets/imbalance/data/dsg-imbalance-quantity
+    method: POST
+    auth: true
+    short_name: dsg-imbalance-quantity
+    short_name_tr: Dengeden Sorumlu Grup (DSG) Dengesizlik Miktarı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Dengeden Sorumlu Grup (DSG) Dengesizlik Miktarı Listeleme Servisi
+    description: Dengeden sorumlu taraflar dengeleme yükümlülükleri kapsamında bir
+      araya gelerek dengeden sorumlu grup oluşturabilirler. Dengeden sorumlu grup
+      adına grup içinden bir dengeden sorumlu taraf, dengeden sorumlu grubun enerji
+      dengesizliğine ilişkin Piyasa İşletmecisine karşı mali sorumluluğunu üstlenir.
+      Dengeden sorumlu taraflarının portföyünde yer alan organizasyonların piyasa
+      işlemleri neticesinde gerçekleşen üretim/tüketim değerlerinden ne kadar saptığını
+      gösteren miktardır.
+    response_structure: {}
+  dsg-organization-list:
     endpoint: /v1/markets/imbalance/data/dsg-organization-list
     method: POST
     auth: true
-    short_name: dsg_organization_list
+    short_name: dsg-organization-list
     short_name_tr: DSG Organizasyon Listesi Servisi
     params:
-    - startDate
-    - endDate
+    - body
+    - TGT
     required:
-    - startDate
-    - endDate
-    response:
-    - items
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: DSG Organizasyon Listesi Servisi
     description: Dengeden Sorumlu Grup servisinde kullanılan Organizasyon Listesi
-    response_structure:
-      items: list
+    response_structure: {}
+  imbalance-amount:
+    endpoint: /v1/markets/imbalance/data/imbalance-amount
+    method: POST
+    auth: true
+    short_name: imbalance-amount
+    short_name_tr: Dengesizlik Tutarı Listeleme Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Dengesizlik Tutarı Listeleme Servisi
+    description: Piyasa katılımcılarının Gün Öncesi Piyasasındaki Gün İçi Piyasası,
+      Dengeleme Güç Piyasası ve ikili Anlaşma işlemleri neticesinde gerçekleşen üretim/tüketim
+      değerlerinden sapmaları durumunda alacaklı/borçlu olduğu tutardır.
+    response_structure: {}
+  imbalance-quantity:
+    endpoint: /v1/markets/imbalance/data/imbalance-quantity
+    method: POST
+    auth: true
+    short_name: imbalance-quantity
+    short_name_tr: Dengesizlik Miktarı Listeleme Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Dengesizlik Miktarı Listeleme Servisi
+    description: Piyasa katılımcılarının Gün Öncesi Piyasasındaki Gün İçi Piyasası,
+      Dengeleme Güç Piyasası ve ikili Anlaşma işlemleri neticesinde gerçekleşen üretim/tüketim
+      değerlerinden ne kadar saptığını gösteren miktardır.
+    response_structure: {}

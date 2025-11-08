@@ -1,0 +1,36 @@
+endpoints:
+  file_template:
+    endpoint: /v1/meter-data/file/template
+    method: GET
+    auth: true
+    short_name: file_template
+    short_name_tr: OSF,PSF ve SVL Şablon Dosyaları Servisi
+    params:
+    - file
+    required:
+    - file
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: file
+      var_type: str
+      description: ''
+      required: true
+    summary: OSF,PSF ve SVL Şablon Dosyaları Servisi
+    description: OSF,PSF ve SVL şablon dosyalarını indirir.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict

@@ -1,0 +1,407 @@
+endpoints:
+  get_final_daily_consumption_program_details:
+    endpoint: /v1/fdcp/list
+    method: POST
+    auth: true
+    short_name: get_final_daily_consumption_program_details
+    short_name_tr: KGÜP Tüketim Detaylarını Görüntüleme
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    - settlementAggregationTypeIdList
+    - region
+    - settlementPointId
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: settlementAggregationTypeIdList
+      var_type: list
+      description: UEVCB Tipi
+      required: false
+      items: int
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: KGÜP Tüketim Detaylarını Görüntüleme
+    description: SBFGP_RECONCILIATION_DETAIL_DTO_FAULT_COUNT=Arıza Adedi
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  get_final_daily_production_program_details:
+    endpoint: /v1/fddp/list
+    method: POST
+    auth: true
+    short_name: get_final_daily_production_program_details
+    short_name_tr: KGÜP Detaylarını Görüntüleme
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    - powerPlantId
+    - settlementPointId
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: powerPlantId
+      var_type: int
+      description: Enerji Santrali İsmi
+      required: false
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: KGÜP Detaylarını Görüntüleme
+    description: Yetkili kullanıcıların KGÜP Detaylarının Listelendiği Ekranı Görüntüleme
+      işlemidir.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  get_final_daily_production_program_versions:
+    endpoint: /v1/fddp/version/list
+    method: POST
+    auth: true
+    short_name: get_final_daily_production_program_versions
+    short_name_tr: KGÜP Detaylarını Görüntüleme
+    params:
+    - effectiveDate
+    - settlementPointId
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: Tarih
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: KGÜP Detaylarını Görüntüleme
+    description: Yetkili kullanıcıların KGÜP Detaylarının Listelendiği Ekranı Görüntüleme
+      işlemidir.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  export_final_daily_consumption_program_details:
+    endpoint: /v1/fdcp/export
+    method: POST
+    auth: true
+    short_name: export_final_daily_consumption_program_details
+    short_name_tr: KGÜP Tüketim Detaylarını Görüntüleme
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    - settlementAggregationTypeIdList
+    - region
+    - settlementPointId
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: settlementAggregationTypeIdList
+      var_type: list
+      description: UEVCB Tipi
+      required: false
+      items: int
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: &id001
+      - XLSX
+      - CSV
+      - PDF
+    summary: KGÜP Tüketim Detaylarını Görüntüleme
+    description: Yetkili kullanıcıların KGÜP Tüketim Detaylarının Listelendiği Ekranı
+      Görüntüleme işlemidir.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_final_daily_production_program_details:
+    endpoint: /v1/fddp/export
+    method: POST
+    auth: true
+    short_name: export_final_daily_production_program_details
+    short_name_tr: KGÜP Detaylarını Görüntüleme
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    - powerPlantId
+    - settlementPointId
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: powerPlantId
+      var_type: int
+      description: Enerji Santrali İsmi
+      required: false
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: KGÜP Detaylarını Görüntüleme
+    description: Yetkili kullanıcıların KGÜP Detaylarının Listelendiği Ekranı Görüntüleme
+      işlemidir.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_final_daily_production_program_version_details:
+    endpoint: /v1/fddp/version/export
+    method: POST
+    auth: true
+    short_name: export_final_daily_production_program_version_details
+    short_name_tr: KGÜP Detaylarını Görüntüleme
+    params:
+    - effectiveDate
+    - settlementPointId
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: Tarih
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: KGÜP Detaylarını Görüntüleme
+    description: Yetkili kullanıcıların KGÜP Detaylarının Listelendiği Ekranı Görüntüleme
+      işlemidir.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict

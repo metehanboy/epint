@@ -1,0 +1,1139 @@
+endpoints:
+  list_exist_organization_limit_demands:
+    endpoint: /rest/v1/limit/organization-demand/exist/list
+    method: POST
+    auth: true
+    short_name: list_exist_organization_limit_demands
+    short_name_tr: Organizasyon Limit Talepleri Listeleme EPİAŞ
+    params:
+    - organizationId
+    - demandCreateDate
+    - demandStatus
+    - region
+    - sortingInfoDto
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: organizationId
+      var_type: int
+      description: Organizasyon id bilgisi
+      required: false
+    - name: demandCreateDate
+      var_type: str
+      description: Teslim saati başlangıç saati
+      required: false
+      example: '1994-01-01'
+    - name: demandStatus
+      var_type: str
+      description: Limit Talep Durumu
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: sortingInfoDto
+      var_type: str
+      description: Sıralama bilgisi
+      required: false
+    summary: Organizasyon Limit Talepleri Listeleme EPİAŞ
+    description: Organizasyon Limit Talepleri Listeleme EPİAŞ
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_organization_limit_demand_history:
+    endpoint: /rest/v1/limit/organization-demand/history/list
+    method: POST
+    auth: true
+    short_name: list_organization_limit_demand_history
+    short_name_tr: Organizasyon Limit Taleplerinin Geçmişini Listeleyen Servis
+    params:
+    - pageInfo
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Organizasyon Limit Taleplerinin Geçmişini Listeleyen Servis
+    description: Organizasyon Limit Taleplerinin Geçmişini Listeleyen Servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_organization_limit_demands:
+    endpoint: /rest/v1/limit/organization-demand/list
+    method: POST
+    auth: true
+    short_name: list_organization_limit_demands
+    short_name_tr: Organizasyon Limit Talepleri Listeleme
+    params:
+    - demandCreateDate
+    - demandStatus
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: demandCreateDate
+      var_type: str
+      description: Teslim saati başlangıç saati
+      required: false
+      example: '2021-06-24 14:00:00'
+    - name: demandStatus
+      var_type: str
+      description: Durum
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Organizasyon Limit Talepleri Listeleme
+    description: Organizasyon Limit Talepleri Listeleme
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_organization_demand_status:
+    endpoint: /rest/v1/limit/organization-demand/status/list
+    method: POST
+    auth: true
+    short_name: list_organization_demand_status
+    short_name_tr: Limit Değişiklik Talep Durumu Listeleme Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Limit Değişiklik Talep Durumu Listeleme Servisi
+    description: Limit Değişiklik Talep Durumu Listeleme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_organization_upper_limit_history:
+    endpoint: /rest/v1/limit/organization-upper/history/list
+    method: POST
+    auth: true
+    short_name: list_organization_upper_limit_history
+    short_name_tr: Organizasyon Üst Limit Geçmişi Servisi
+    params:
+    - pageInfo
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Organizasyon Üst Limit Geçmişi Servisi
+    description: Organizasyon Üst Limit Geçmişi Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  get_organization_upper_limits:
+    endpoint: /rest/v1/limit/organization-upper/list
+    method: POST
+    auth: true
+    short_name: get_organization_upper_limits
+    short_name_tr: Organizasyon Üst Limitleri Listeleme Servisi
+    params:
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Organizasyon Üst Limitleri Listeleme Servisi
+    description: Organizasyon Üst Limitleri Listeleme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  get_organization_limit:
+    endpoint: /rest/v1/limit/organization/list
+    method: POST
+    auth: true
+    short_name: get_organization_limit
+    short_name_tr: Organizasyon Limitlerini Listeleyen Servis
+    params:
+    - organizationId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: organizationId
+      var_type: int
+      description: Organizasyon id bilgisi
+      required: false
+    summary: Organizasyon Limitlerini Listeleyen Servis
+    description: Organizasyon Limitlerini Listeleyen Servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_user_upper_limit_history:
+    endpoint: /rest/v1/limit/user-upper/history/list
+    method: POST
+    auth: true
+    short_name: list_user_upper_limit_history
+    short_name_tr: Kullanıcı Üst Limit Geçmişi Servisi
+    params:
+    - pageInfo
+    - username
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Kullanıcı Üst Limit Geçmişi Servisi
+    description: Kullanıcı Üst Limit Geçmişi Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_user_upper_limits:
+    endpoint: /rest/v1/limit/user-upper/list
+    method: POST
+    auth: true
+    short_name: list_user_upper_limits
+    short_name_tr: Kullanıcı Üst Limitleri Listeleme Servisi
+    params:
+    - organizationId
+    - username
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: organizationId
+      var_type: int
+      description: Organizasyon id bilgisi
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Kullanıcı Üst Limitleri Listeleme Servisi
+    description: Kullanıcı Üst Limitleri Listeleme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_user_limit_history:
+    endpoint: /rest/v1/limit/user/history/list
+    method: POST
+    auth: true
+    short_name: list_user_limit_history
+    short_name_tr: Kullanıcı Limit Geçmişi Servisi
+    params:
+    - pageInfo
+    - region
+    - username
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    summary: Kullanıcı Limit Geçmişi Servisi
+    description: Kullanıcı Limit Geçmişi Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_user_limits:
+    endpoint: /rest/v1/limit/user/list
+    method: POST
+    auth: true
+    short_name: list_user_limits
+    short_name_tr: Kullanıcı Limitleri Listeleme Servisi
+    params:
+    - organizationId
+    - username
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: organizationId
+      var_type: int
+      description: Organizasyon id bilgisi
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Kullanıcı Limitleri Listeleme Servisi
+    description: Kullanıcı Limitleri Listeleme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  approve_organization_limit_demand:
+    endpoint: /rest/v1/limit/organization-demand/approve
+    method: POST
+    auth: true
+    short_name: approve_organization_limit_demand
+    short_name_tr: Limit Değişiklik Talebi Onaylama Servisi
+    params:
+    - demandId
+    - approvedMaxTotalBuyUpperBound
+    - approvedMaxTotalSellUpperBound
+    - existDescription
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: demandId
+      var_type: int
+      description: Organizasyon Limit Değişlik Talebi Id Bilgisi
+      required: false
+    - name: approvedMaxTotalBuyUpperBound
+      var_type: int
+      description: Onaylanan Maksimum Toplam Alış Miktarı
+      required: false
+    - name: approvedMaxTotalSellUpperBound
+      var_type: int
+      description: Onaylanan Maksimum Toplam Satış Miktarı
+      required: false
+    - name: existDescription
+      var_type: str
+      description: EPİAŞ Açıklama
+      required: false
+    summary: Limit Değişiklik Talebi Onaylama Servisi
+    description: Limit Değişiklik Talebi Onaylama Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  save_and_approve_organization_limit_demand:
+    endpoint: /rest/v1/limit/organization-demand/save-approve
+    method: POST
+    auth: true
+    short_name: save_and_approve_organization_limit_demand
+    short_name_tr: Limit Değişiklik Gerçekleştirme Servisi
+    params:
+    - maxTotalBuyUpperBoundNewValue
+    - maxTotalSellUpperBoundNewValue
+    - existDescription
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: maxTotalBuyUpperBoundNewValue
+      var_type: int
+      description: Maksimum Toplam Alış Miktarı Yeni Değer
+      required: false
+    - name: maxTotalSellUpperBoundNewValue
+      var_type: int
+      description: Maksimum Toplam Satış Miktarı Yeni Değer
+      required: false
+    - name: existDescription
+      var_type: str
+      description: EPİAŞ Açıklama
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Limit Değişiklik Gerçekleştirme Servisi
+    description: Limit Değişiklik Gerçekleştirme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_exist_organization_limit_demands_export:
+    endpoint: /rest/v1/limit/organization-demand/exist/export
+    method: POST
+    auth: true
+    short_name: list_exist_organization_limit_demands_export
+    short_name_tr: Organizasyon Limit Talepleri Dışarı Aktarma EPİAŞ
+    params:
+    - organizationId
+    - demandCreateDate
+    - demandStatus
+    - region
+    - sortingInfoDto
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: organizationId
+      var_type: int
+      description: Organizasyon id bilgisi
+      required: false
+    - name: demandCreateDate
+      var_type: str
+      description: Teslim saati başlangıç saati
+      required: false
+      example: '1994-01-01'
+    - name: demandStatus
+      var_type: str
+      description: Limit Talep Durumu
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: sortingInfoDto
+      var_type: str
+      description: Sıralama bilgisi
+      required: false
+    summary: Organizasyon Limit Talepleri Dışarı Aktarma EPİAŞ
+    description: Organizasyon Limit Talepleri Dışarı Aktarma EPİAŞ
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_organization_limit_history:
+    endpoint: /rest/v1/limit/organization-demand/history/export
+    method: POST
+    auth: true
+    short_name: export_organization_limit_history
+    short_name_tr: Organizasyon Limit Taleplerinin Geçmişini Export Eden Servis
+    params:
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Organizasyon Limit Taleplerinin Geçmişini Export Eden Servis
+    description: Organizasyon Limit Taleplerinin Geçmişini Export Eden Servis
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_organization_upper_limit_history:
+    endpoint: /rest/v1/limit/organization-upper/history/export
+    method: POST
+    auth: true
+    short_name: export_organization_upper_limit_history
+    short_name_tr: Organizasyon Üst Limit Geçmişi Export Servisi
+    params:
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Organizasyon Üst Limit Geçmişi Export Servisi
+    description: Organizasyon Üst Limit Geçmişi Export Servisi
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_user_upper_limit_history:
+    endpoint: /rest/v1/limit/user-upper/history/export
+    method: POST
+    auth: true
+    short_name: export_user_upper_limit_history
+    short_name_tr: Kullanıcı Üst Limit Geçmişi Export Servisi
+    params:
+    - username
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Kullanıcı Üst Limit Geçmişi Export Servisi
+    description: Kullanıcı Üst Limit Geçmişi Export Servisi
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_user_limit_history:
+    endpoint: /rest/v1/limit/user/history/export
+    method: POST
+    auth: true
+    short_name: export_user_limit_history
+    short_name_tr: Kullanıcı Limit Geçmişi Export Servisi
+    params:
+    - region
+    - username
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: username
+      var_type: str
+      description: Kullanıcı gerçek ad bilgisi
+      required: false
+    summary: Kullanıcı Limit Geçmişi Export Servisi
+    description: Kullanıcı Limit Geçmişi Export Servisi
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  cancel_organization_limit_demand:
+    endpoint: /rest/v1/limit/organization-demand/cancel
+    method: POST
+    auth: true
+    short_name: cancel_organization_limit_demand
+    short_name_tr: Limit Değişiklik Talebi İptal Etme Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Limit Değişiklik Talebi İptal Etme Servisi
+    description: Limit Değişiklik Talebi İptal Etme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  check_organization_waiting_demands:
+    endpoint: /rest/v1/limit/organization-demand/check-waiting
+    method: POST
+    auth: true
+    short_name: check_organization_waiting_demands
+    short_name_tr: Organizasyonun Onayda Bekleyen Talebi Olup Olmadığını Dönen Servis
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Organizasyonun Onayda Bekleyen Talebi Olup Olmadığını Dönen Servis
+    description: Organizasyonun Onayda Bekleyen Talebi Olup Olmadığını Dönen Servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  save_organization_limit_demands:
+    endpoint: /rest/v1/limit/organization-demand/save
+    method: POST
+    auth: true
+    short_name: save_organization_limit_demands
+    short_name_tr: Limit Değişiklik Talebi Kaydetme Servisi
+    params:
+    - demandedMaxTotalBuyUpperBound
+    - demandedMaxTotalSellUpperBound
+    - participantDescription
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: demandedMaxTotalBuyUpperBound
+      var_type: int
+      description: Talep Edilen Maksimum Toplam Alış Miktarı
+      required: false
+    - name: demandedMaxTotalSellUpperBound
+      var_type: int
+      description: Talep Edilen Maksimum Toplam Satış Miktarı
+      required: false
+    - name: participantDescription
+      var_type: str
+      description: PK Açıklama
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Limit Değişiklik Talebi Kaydetme Servisi
+    description: Limit Değişiklik Talebi Kaydetme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  save_organization_upper_limits:
+    endpoint: /rest/v1/limit/organization-upper/save
+    method: POST
+    auth: true
+    short_name: save_organization_upper_limits
+    short_name_tr: Organizasyon Üst Limitleri Kaydetme Servisi
+    params:
+    - maxTotalBuy
+    - maxTotalSell
+    - netStatusBuy
+    - netStatusSell
+    - maxBuyQuantity
+    - maxSellQuantity
+    - maxBuyPrice
+    - minSellPrice
+    - isCheckMcp
+    - deviationAmount
+    - deviationType
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: maxTotalBuy
+      var_type: int
+      description: Maksimum toplam alış
+      required: false
+    - name: maxTotalSell
+      var_type: int
+      description: Maksimum toplam satış
+      required: false
+    - name: netStatusBuy
+      var_type: int
+      description: Net durum alış
+      required: false
+    - name: netStatusSell
+      var_type: int
+      description: Net durum satış
+      required: false
+    - name: maxBuyQuantity
+      var_type: int
+      description: Maksimum alış teklif miktarı
+      required: false
+    - name: maxSellQuantity
+      var_type: int
+      description: Maksimum satış teklif miktarı
+      required: false
+    - name: maxBuyPrice
+      var_type: float
+      description: Maksimum alış teklif fiyatı
+      required: false
+    - name: minSellPrice
+      var_type: float
+      description: Minimum satış teklif fiyatı
+      required: false
+    - name: isCheckMcp
+      var_type: bool
+      description: PTF'ye göre teklif kontrolu yap
+      required: false
+    - name: deviationAmount
+      var_type: float
+      description: PTF'ye göre sapma
+      required: false
+    - name: deviationType
+      var_type: str
+      description: PTF'ye göre sapma tipi
+      required: false
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    summary: Organizasyon Üst Limitleri Kaydetme Servisi
+    description: Organizasyon Üst Limitleri Kaydetme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  save_user_upper_limits:
+    endpoint: /rest/v1/limit/user-upper/save
+    method: POST
+    auth: true
+    short_name: save_user_upper_limits
+    short_name_tr: Kullanıcı Üst Limitleri Kaydetme Servisi
+    params:
+    - usernames
+    - region
+    - maxBuyQuantity
+    - maxSellQuantity
+    - maxBuyPrice
+    - minSellPrice
+    - isCheckMcp
+    - deviationAmount
+    - deviationType
+    - isImplementedToAllUsers
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: usernames
+      var_type: list
+      description: Limit bilgileri kaydedilecek kullanıcılar.
+      required: false
+      items: str
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: maxBuyQuantity
+      var_type: int
+      description: Maksimum alış teklif miktar bilgisi
+      required: false
+    - name: maxSellQuantity
+      var_type: int
+      description: Maksimum satış teklif miktar bilgisi
+      required: false
+    - name: maxBuyPrice
+      var_type: float
+      description: Maksimum alış teklif fiyat bilgisi
+      required: false
+    - name: minSellPrice
+      var_type: float
+      description: Minimum satış teklif fiyat bilgisi
+      required: false
+    - name: isCheckMcp
+      var_type: bool
+      description: PTF'ye göre sapma kontrolu
+      required: false
+    - name: deviationAmount
+      var_type: float
+      description: PTF'ye göre sapma
+      required: false
+    - name: deviationType
+      var_type: str
+      description: PTF'ye göre sapma tipi
+      required: false
+    - name: isImplementedToAllUsers
+      var_type: bool
+      description: '*true* gönderilmesi durumunda sistemdeki tüm kullanıcılara uygular.'
+      required: false
+    summary: Kullanıcı Üst Limitleri Kaydetme Servisi
+    description: Kullanıcı Üst Limitleri Kaydetme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  save_user_limits:
+    endpoint: /rest/v1/limit/user/save
+    method: POST
+    auth: true
+    short_name: save_user_limits
+    short_name_tr: Kullanıcı Limitleri Kaydetme Servisi
+    params:
+    - region
+    - maxBuyQuantity
+    - maxSellQuantity
+    - maxBuyPrice
+    - minSellPrice
+    - isCheckMcp
+    - deviationAmount
+    - deviationType
+    - isCheckedPreventOffer
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: maxBuyQuantity
+      var_type: int
+      description: Maksimum alış teklif miktar bilgisi
+      required: false
+    - name: maxSellQuantity
+      var_type: int
+      description: Maksimum satış teklif miktar bilgisi
+      required: false
+    - name: maxBuyPrice
+      var_type: float
+      description: Maksimum alış teklif fiyat bilgisi
+      required: false
+    - name: minSellPrice
+      var_type: float
+      description: Minimum satış teklif fiyat bilgisi
+      required: false
+    - name: isCheckMcp
+      var_type: bool
+      description: PTF'ye göre sapma kontrolu
+      required: false
+    - name: deviationAmount
+      var_type: float
+      description: PTF'ye göre sapma
+      required: false
+    - name: deviationType
+      var_type: str
+      description: PTF'ye göre sapma tipi
+      required: false
+    - name: isCheckedPreventOffer
+      var_type: bool
+      description: Limit aşımında teklif kaydını engelle
+      required: false
+    summary: Kullanıcı Limitleri Kaydetme Servisi
+    description: Kullanıcı Limitleri Kaydetme Servisi
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

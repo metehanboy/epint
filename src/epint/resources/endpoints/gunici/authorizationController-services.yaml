@@ -1,0 +1,32 @@
+endpoints:
+  AuthorizationController_getEpysAuthListLabel_POST:
+    endpoint: /rest/v1/authorization/auth-info-label
+    method: POST
+    auth: true
+    short_name: AuthorizationController_getEpysAuthListLabel_POST
+    short_name_tr: AuthorizationController_getEpysAuthListLabel_POST
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

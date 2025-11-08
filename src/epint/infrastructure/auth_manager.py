@@ -65,8 +65,12 @@ class Authentication:
         temp_dir = os.path.join(tempfile.gettempdir(), "epint")
         os.makedirs(temp_dir, exist_ok=True)
 
-        self.tgt_dir = os.path.join(temp_dir, "tgt.dat")
-        self.st_dir = os.path.join(temp_dir, "st.dat")
+        # Kullanıcı bazlı ticket dosyaları - farklı kullanıcılar için ticket karışmasını önle
+        import hashlib
+        user_hash = hashlib.md5(self.username.encode()).hexdigest()[:8]
+        
+        self.tgt_dir = os.path.join(temp_dir, f"tgt_{user_hash}.dat")
+        self.st_dir = os.path.join(temp_dir, f"st_{user_hash}.dat")
 
     def _get_base_headers(self) -> Dict[str, str]:
         return {
@@ -80,12 +84,42 @@ class Authentication:
         self, ticket_type: str, code: str, expire_date: str, **kwargs
     ) -> None:
         file_path = self.tgt_dir if ticket_type == "tgt" else self.st_dir
+        
+        # Expired ticket'ları temizle
+        self._cleanup_expired_tickets(file_path, ticket_type)
+        
         with open(file_path, "a", encoding="utf-8") as f:
             if ticket_type == "tgt":
                 f.write(f"{code}|{expire_date}|{self.username}|{self.root}\n")
             else:
                 service = kwargs.get("service", "")
                 f.write(f"{code}|{service}|{expire_date}|{self.username}|{self.root}\n")
+    
+    def _cleanup_expired_tickets(self, file_path: str, ticket_type: str) -> None:
+        """Expired ticket'ları dosyadan temizle"""
+        if not os.path.exists(file_path):
+            return
+        
+        valid_lines = []
+        with open(file_path, "r", encoding="utf-8") as f:
+            for line in f:
+                parts = line.strip().split("|")
+                
+                if ticket_type == "tgt" and len(parts) == 4:
+                    _, expire_date, _, _ = parts
+                    if not DateTimeUtils.is_expired(expire_date):
+                        valid_lines.append(line)
+                elif ticket_type == "st" and len(parts) == 5:
+                    _, _, expire_date, _, _ = parts
+                    if not DateTimeUtils.is_expired(expire_date):
+                        valid_lines.append(line)
+                else:
+                    # Format bozuksa da sakla (geriye dönük uyumluluk)
+                    valid_lines.append(line)
+        
+        # Sadece geçerli ticket'ları yaz
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.writelines(valid_lines)
 
     def _generate_tgt(self) -> str:
         start_time = time.time()

@@ -1,0 +1,48 @@
+endpoints:
+  ParticipationStatusController_updateOrganizationParticipationStatus_POST:
+    endpoint: /rest/v1/participation/update
+    method: POST
+    auth: true
+    short_name: ParticipationStatusController_updateOrganizationParticipationStatus_POST
+    short_name_tr: ParticipationStatusController_updateOrganizationParticipationStatus_POST
+    params:
+    - effectiveDate
+    - organizationId
+    - isActive
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: ''
+      required: false
+      example: '2021-06-24 14:00:00'
+    - name: organizationId
+      var_type: int
+      description: ''
+      required: false
+    - name: isActive
+      var_type: bool
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

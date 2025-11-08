@@ -1,0 +1,273 @@
+endpoints:
+  get_organization_daily_idm_transactions:
+    endpoint: /v1/market/intraday-market/daily/list
+    method: POST
+    auth: true
+    short_name: get_organization_daily_idm_transactions
+    short_name_tr: Organizasyonun güniçi piyasasındaki eşleşme sonuçları
+    params:
+    - period
+    - deliveryDayStart
+    - deliveryDayEnd
+    - region
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: deliveryDayStart
+      var_type: str
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: deliveryDayEnd
+      var_type: str
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: Organizasyonun güniçi piyasasındaki eşleşme sonuçları
+    description: Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını döner.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  get_organization_idm_transactions:
+    endpoint: /v1/market/intraday-market/list
+    method: POST
+    auth: true
+    short_name: get_organization_idm_transactions
+    short_name_tr: Organizasyonun güniçi piyasasındaki eşleşme sonuçları
+    params:
+    - period
+    - deliveryDayStart
+    - deliveryDayEnd
+    - region
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: deliveryDayStart
+      var_type: str
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: deliveryDayEnd
+      var_type: str
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: Organizasyonun güniçi piyasasındaki eşleşme sonuçları
+    description: Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını döner.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  export_organization_daily_idm_transactions:
+    endpoint: /v1/market/intraday-market/daily/export
+    method: POST
+    auth: true
+    short_name: export_organization_daily_idm_transactions
+    short_name_tr: Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını excel export
+      servisi.
+    params:
+    - period
+    - deliveryDayStart
+    - deliveryDayEnd
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: deliveryDayStart
+      var_type: str
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: deliveryDayEnd
+      var_type: str
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    summary: Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını excel export
+      servisi.
+    description: Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını excel export
+      servisi.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_organization_idm_transactions:
+    endpoint: /v1/market/intraday-market/export
+    method: POST
+    auth: true
+    short_name: export_organization_idm_transactions
+    short_name_tr: Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını excel export
+      servisi.
+    params:
+    - period
+    - deliveryDayStart
+    - deliveryDayEnd
+    - region
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: deliveryDayStart
+      var_type: str
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: deliveryDayEnd
+      var_type: str
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    summary: Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını excel export
+      servisi.
+    description: Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını excel export
+      servisi.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict

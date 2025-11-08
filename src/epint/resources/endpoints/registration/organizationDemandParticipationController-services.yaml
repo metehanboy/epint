@@ -1,0 +1,113 @@
+endpoints:
+  organization_demand_participation_update:
+    endpoint: /v1/organization-demand-participation/update
+    method: POST
+    auth: true
+    short_name: organization_demand_participation_update
+    short_name_tr: ${ORGANIZATION_DEMAND_PARTICIPATION_UPDATE_VALUE}
+    params:
+    - descriptions
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: descriptions
+      var_type: list
+      description: ''
+      required: false
+      items: str
+    summary: ${ORGANIZATION_DEMAND_PARTICIPATION_UPDATE_VALUE}
+    description: ${ORGANIZATION_DEMAND_PARTICIPATION_UPDATE_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  organization_demand_participation_fetch:
+    endpoint: /v1/organization-demand-participation/fetch
+    method: POST
+    auth: true
+    short_name: organization_demand_participation_fetch
+    short_name_tr: ${ORGANIZATION_DEMAND_PARTICIPATION_FETCH_VALUE}
+    params:
+    - page
+    - demandParticipationServiceType
+    - effectiveDate
+    - organizationId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: demandParticipationServiceType
+      var_type: int
+      description: ${DEMANDPARTICIPATIONSERVICETYPE}
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon ID'si
+      required: false
+    summary: ${ORGANIZATION_DEMAND_PARTICIPATION_FETCH_VALUE}
+    description: ${ORGANIZATION_DEMAND_PARTICIPATION_FETCH_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

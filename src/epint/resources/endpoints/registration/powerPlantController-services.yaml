@@ -1,0 +1,294 @@
+endpoints:
+  power_plant_regions:
+    endpoint: /v1/power-plant/fetch-regions
+    method: POST
+    auth: true
+    short_name: power_plant_regions
+    short_name_tr: Santral Bölge Sorgulama Servisi
+    params:
+    - effectiveId
+    - regionTypeId
+    - effectiveDateEnd
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveId
+      var_type: int
+      description: ID
+      required: false
+    - name: regionTypeId
+      var_type: int
+      description: ${REGIONTYPEID}
+      required: false
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    summary: Santral Bölge Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz santral bölge bilgilerini bu servis
+      ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  power_plant_query:
+    endpoint: /v1/power-plant/query
+    method: POST
+    auth: true
+    short_name: power_plant_query
+    short_name_tr: Santral Sorgulama Servisi
+    params:
+    - page
+    - id
+    - ids
+    - idContains
+    - name
+    - eic
+    - licenseNumber
+    - organizationId
+    - organizationOrLicenseOwnerId
+    - organizationIdContains
+    - organizationName
+    - licenseTypeIds
+    - sourceGroupIds
+    - sourceTypeIds
+    - statusIds
+    - rsmStatusIds
+    - recordStatusIds
+    - installedPowerMin
+    - installedPowerMax
+    - effectiveDate
+    - effectiveDateStart
+    - effectiveDateEnd
+    - observerDate
+    - trimmingStatusIds
+    - licenseOwnerEid
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    - name: id
+      var_type: int
+      description: ID
+      required: false
+    - name: ids
+      var_type: list
+      description: ID'ler
+      required: false
+      items: int
+    - name: idContains
+      var_type: str
+      description: ID içerir
+      required: false
+    - name: name
+      var_type: str
+      description: Ad
+      required: false
+    - name: eic
+      var_type: str
+      description: ETSO Kodu
+      required: false
+    - name: licenseNumber
+      var_type: str
+      description: Lisans No
+      required: false
+    - name: organizationId
+      var_type: int
+      description: Organizasyon ID
+      required: false
+    - name: organizationOrLicenseOwnerId
+      var_type: int
+      description: ${ORGANIZATIONORLICENSEOWNERID}
+      required: false
+    - name: organizationIdContains
+      var_type: str
+      description: Organizasyon ID içerir
+      required: false
+    - name: organizationName
+      var_type: str
+      description: Organizasyon Adı
+      required: false
+    - name: licenseTypeIds
+      var_type: list
+      description: Lisans Tipi ID'leri
+      required: false
+      items: int
+    - name: sourceGroupIds
+      var_type: list
+      description: Kaynak Grubu ID'leri
+      required: false
+      items: int
+    - name: sourceTypeIds
+      var_type: list
+      description: Kaynak Tipi ID'leri
+      required: false
+      items: int
+    - name: statusIds
+      var_type: list
+      description: Durum ID'leri
+      required: false
+      items: int
+    - name: rsmStatusIds
+      var_type: list
+      description: Yekdem Durumu ID'leri
+      required: false
+      items: int
+    - name: recordStatusIds
+      var_type: list
+      description: Kayıt Durumu ID'leri
+      required: false
+      items: int
+    - name: installedPowerMin
+      var_type: float
+      description: En Az Kurulu Güç
+      required: false
+    - name: installedPowerMax
+      var_type: float
+      description: En Fazla Kurulu Güç
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: observerDate
+      var_type: str
+      description: Gözlem Tarihi
+      required: false
+    - name: trimmingStatusIds
+      var_type: list
+      description: Kırpma Durumu
+      required: false
+      items: int
+    - name: licenseOwnerEid
+      var_type: int
+      description: ${LICENSE_OWNER_EID}
+      required: false
+    summary: Santral Sorgulama Servisi
+    description: Sorgulama yapmak istediğiniz santral bilgilerini bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  power_plant_query_lookup:
+    endpoint: /v1/power-plant/fetch-power-plants
+    method: POST
+    auth: true
+    short_name: power_plant_query_lookup
+    short_name_tr: ${POWER_PLANT_QUERY_LOOKUP_VALUE}
+    params:
+    - organizationEid
+    - statusId
+    - effectiveDate
+    - observerDate
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: organizationEid
+      var_type: int
+      description: Organizasyon ID'si
+      required: false
+    - name: statusId
+      var_type: int
+      description: Durum
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: false
+    - name: observerDate
+      var_type: str
+      description: Gözlem Tarihi
+      required: false
+    summary: ${POWER_PLANT_QUERY_LOOKUP_VALUE}
+    description: ${POWER_PLANT_QUERY_LOOKUP_NOTES}
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

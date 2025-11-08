@@ -1,103 +1,437 @@
 endpoints:
-  consumer_quantity:
+  consumer-quantity:
     endpoint: /v1/consumption/data/consumer-quantity
     method: POST
     auth: true
-    short_name: consumer_quantity
+    short_name: consumer-quantity
     short_name_tr: Tüketici Sayısı Listeleme Servisi
     params:
-    - period
-    - provinceId
-    - profileGroupId
-    - page
+    - body
+    - TGT
     required:
-    - period
-    response:
-    - items
-    - page
-    var_type:
-    - name: period
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: provinceId
-      var_type: int
-      description: Şehir Id bilgisi(bkz.Şehir Listesi Getirme Servisi)
-      required: false
-      example: 160
-    - name: profileGroupId
-      var_type: int
-      description: Profil grup Id bilgisi(bkz.Profil Group Listesi Getirme Servisi)
-      required: false
-      example: 1234
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: Tüketici Sayısı Listeleme Servisi
     description: İl bazında tüketici sayılarının tüketici türüne ve tüketici profil
       gruplarına göre ayrımı aylık olarak gösterilmektedir.
-    response_structure:
-      items: list
-      page: str
-  consumer_sector_list:
+    response_structure: {}
+  consumer-sector-list:
     endpoint: /v1/consumption/data/consumer-sector-list
     method: GET
     auth: true
-    short_name: consumer_sector_list
+    short_name: consumer-sector-list
     short_name_tr: Profil Grubu Listeleme Servisi
-    params: []
-    required: null
-    response: []
-    var_type: []
+    params:
+    - TGT
+    required:
+    - TGT
+    response: ''
+    var_type: dict
     summary: Profil Grubu Listeleme Servisi
     description: Tüketici bilgisi sayfalarının filtreleme alanları için Profil Grubu
       Listeleme servisidir.
     response_structure: {}
-  main_tariff_group_list:
+  consumption-quantity:
+    endpoint: /v1/consumption/data/consumption-quantity
+    method: POST
+    auth: true
+    short_name: consumption-quantity
+    short_name_tr: Tüketim Miktarları Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Tüketim Miktarları Listeleme Servisi
+    description: İl bazında tüketici miktarlarının tüketici türüne ve tüketici profil
+      gruplarına göre ayrımı aylık olarak gösterilmektedir.
+    response_structure: {}
+  demand-forecast:
+    endpoint: /v1/consumption/data/demand-forecast
+    method: POST
+    auth: true
+    short_name: demand-forecast
+    short_name_tr: Talep Tahmini Listeleme Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Talep Tahmini Listeleme Servisi
+    description: İlgili dağıtım bölgesinde dağıtım şirketine ait 2018-2027 arası tüketicilerin
+      yıllık brüt tahmin değerleridir. Veriler TEAİŞ Raporlarından temin edilmektedir.
+    response_structure: {}
+  distribution-region:
+    endpoint: /v1/consumption/data/distribution-region
+    method: GET
+    auth: true
+    short_name: distribution-region
+    short_name_tr: Dağıtım Bölgesi Servisi
+    params: []
+    required: []
+    response: ''
+    var_type: dict
+    summary: Dağıtım Bölgesi Servisi
+    description: Dağıtım Bölgesi Servisi
+    response_structure: {}
+  eligible-consumer-count:
+    endpoint: /v1/consumption/data/eligible-consumer-count
+    method: POST
+    auth: true
+    short_name: eligible-consumer-count
+    short_name_tr: İl, İlçe ST Adedi Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: İl, İlçe ST Adedi Listeleme Servisi
+    description: Sayaç kullanım tipi serbest tüketici olan sayaçların ilçe ve profil
+      abone grubu bazındaki sayısıdır. Paylaşılan ilçe bilgilerinde geçmiş ilçe isimleri
+      yer alabilmektedir. Analiz yapılırken bu hususa dikkat edilmesi önemle rica
+      olunur.
+    response_structure: {}
+  eligible-consumer-quantity:
+    endpoint: /v1/consumption/data/eligible-consumer-quantity
+    method: POST
+    auth: true
+    short_name: eligible-consumer-quantity
+    short_name_tr: Serbest Tüketici Tüketim Miktarı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Serbest Tüketici Tüketim Miktarı Listeleme Servisi
+    description: Sayaç kullanım tipi serbest tüketici olan sayaçların uzlaştırmaya
+      esas çekiş miktarı toplamıdır.
+    response_structure: {}
+  distribution-company-data:
+    endpoint: /v1/consumption/data/get-distribution-companies
+    method: GET
+    auth: true
+    short_name: distribution-company-data
+    short_name_tr: Dağıtım Şirketlerinin Alındığı Servis
+    params:
+    - TGT
+    required:
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Dağıtım Şirketlerinin Alındığı Servis
+    description: Dağıtım Şirketlerinin Alındığı Servis
+    response_structure: {}
+  load-estimation-plan:
+    endpoint: /v1/consumption/data/load-estimation-plan
+    method: POST
+    auth: true
+    short_name: load-estimation-plan
+    short_name_tr: Yük Tahmin Planı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Yük Tahmin Planı Listeleme Servisi
+    description: Bir sonraki gün için yapılan saatlik talep miktarıdır.
+    response_structure: {}
+  main-tariff-group-list:
     endpoint: /v1/consumption/data/main-tariff-group-list
     method: GET
     auth: true
-    short_name: main_tariff_group_list
+    short_name: main-tariff-group-list
     short_name_tr: Ana Tarife Grubu
-    params: []
-    required: null
-    response: []
-    var_type: []
+    params:
+    - TGT
+    required:
+    - TGT
+    response: ''
+    var_type: dict
     summary: Ana Tarife Grubu
     description: Ana Tarife gruplarını dönen servis.
     response_structure: {}
-  profile_subscription_group_list:
+  meter-count:
+    endpoint: /v1/consumption/data/meter-count
+    method: POST
+    auth: true
+    short_name: meter-count
+    short_name_tr: Sayaç Adedi Listeleme Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Sayaç Adedi Listeleme Servisi
+    description: İçerisinde bulunana dönemden bir sonraki dönem için açıklanan sayaç
+      adedi verisidir.
+    response_structure: {}
+  monthly-index:
+    endpoint: /v1/consumption/data/monthly-index
+    method: POST
+    auth: true
+    short_name: monthly-index
+    short_name_tr: Aylık Endeks Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Aylık Endeks Listeleme Servisi
+    description: Piyasa Takas Fiyatı (PTF), Negatif Sistem Dengesizlik Fiyatı, YEKDEM
+      Birim Fiyat, Ulusal Tarife Birim Fiyatları ve Piyasa Yönetim Sistemine kayıtlı
+      tüketicilere ait uzlaştırma dönemi bazındaki çekiş miktarları kullanılarak hesaplanan
+      değere ilişkin veri seti. Referans endeks 100 olarak alınacaktır.
+    response_structure: {}
+  multiple-factor:
+    endpoint: /v1/consumption/data/multiple-factor
+    method: POST
+    auth: true
+    short_name: multiple-factor
+    short_name_tr: Çarpan Değeri Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Çarpan Değeri Listeleme Servisi
+    description: Uzlaştırma dönemi bazında ölçüm yapılamayan sayaçlar için uygulanan
+      profilleme işleminde kullanılan değerlere ilişkin veri seti.
+    response_structure: {}
+  multiple-factor-distribution:
+    endpoint: /v1/consumption/data/multiple-factor-distribution
+    method: POST
+    auth: true
+    short_name: multiple-factor-distribution
+    short_name_tr: Dağıtım Firmaları Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Dağıtım Firmaları Listeleme Servisi
+    description: Dağıtım Firmaları Listeleme Servisi
+    response_structure: {}
+  multiple-factor-meter-reading-type:
+    endpoint: /v1/consumption/data/multiple-factor-meter-reading-type
+    method: GET
+    auth: true
+    short_name: multiple-factor-meter-reading-type
+    short_name_tr: Sayaç Okuma Tipi Listeleme Servisi
+    params:
+    - TGT
+    required:
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Sayaç Okuma Tipi Listeleme Servisi
+    description: Sayaç Okuma Tipi Listeleme Servisi
+    response_structure: {}
+  multiple-factor-profile-group:
+    endpoint: /v1/consumption/data/multiple-factor-profile-group
+    method: POST
+    auth: true
+    short_name: multiple-factor-profile-group
+    short_name_tr: Profil Abone Grubu Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Profil Abone Grubu Listeleme Servisi
+    description: Profil Abone Grubu Listeleme Servisi,distributionId alanı verilirse
+      verilen dönemdeki ilgili dağıtım firma/organizasyon id bilgisine göre ilgili
+      dönemdeki geçerli abone grupları,boş gönderilirse tüm abone grupları listelenmektedir.
+    response_structure: {}
+  percentage-consumption-info:
+    endpoint: /v1/consumption/data/percentage-consumption-info
+    method: POST
+    auth: true
+    short_name: percentage-consumption-info
+    short_name_tr: Yüzdesel Tüketim Bilgileri Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Yüzdesel Tüketim Bilgileri Listeleme Servisi
+    description: Fiili tüketimin il bazında ve profil abone grubu bazında yüzdesel
+      kırılımına ilişkin veri seti.
+    response_structure: {}
+  planned-power-outage-data:
+    endpoint: /v1/consumption/data/planned-power-outage-info
+    method: POST
+    auth: true
+    short_name: planned-power-outage-data
+    short_name_tr: Planlı Kesinti Bilgisi Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Planlı Kesinti Bilgisi Listeleme Servisi
+    description: Yapılması planlanan kesinti bilgilerinin sunulduğu ekrandır.
+    response_structure: {}
+  profile-subscription-group-list:
     endpoint: /v1/consumption/data/profile-subscription-group-list
     method: POST
     auth: true
-    short_name: profile_subscription_group_list
+    short_name: profile-subscription-group-list
     short_name_tr: Profil Abone Grubu Listeleme Servisi
     params:
-    - period
-    - provinceId
-    - districtName
+    - body
+    - TGT
     required:
-    - period
-    response: []
-    var_type:
-    - name: period
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: provinceId
-      var_type: int
-      description: Şehir Id bilgisi(bkz.Şehir Listesi Getirme Servisi)
-      required: false
-      example: 160
-    - name: districtName
-      var_type: str
-      description: İlçe Adı
-      required: false
-      example: ''
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: Profil Abone Grubu Listeleme Servisi
     description: İl ilçe st adedi sayfası için profil abone grubu listesi döner
+    response_structure: {}
+  realtime-consumption:
+    endpoint: /v1/consumption/data/realtime-consumption
+    method: POST
+    auth: true
+    short_name: realtime-consumption
+    short_name_tr: Gerçek Zamanlı Tüketim Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Gerçek Zamanlı Tüketim Listeleme Servisi
+    description: Anlık olarak gerçekleşen tüketim değerinin saatlik bazda gösterildiği
+      veridir. Gerçek Zamanlı Tüketim verisi 2 saat geriden gelecek sekilde yayınlanmaktadır.
+    response_structure: {}
+  st-adedi:
+    endpoint: /v1/consumption/data/st-adedi
+    method: POST
+    auth: true
+    short_name: st-adedi
+    short_name_tr: Serbest Tüketici Adedi Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Serbest Tüketici Adedi Listeleme Servisi
+    description: Sayaç kullanım tipi serbest tüketici olan sayaçların sayısıdır.
+    response_structure: {}
+  st-uecm:
+    endpoint: /v1/consumption/data/st-uecm
+    method: POST
+    auth: true
+    short_name: st-uecm
+    short_name_tr: Serbest Tüketici Uzlaştırmaya Esas Çekiş Miktarı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Serbest Tüketici Uzlaştırmaya Esas Çekiş Miktarı Listeleme Servisi
+    description: Serbest tüketici hakkını kullananların, bir uzlaştırma dönemi içinde
+      saatlik olarak sistemden aldığı enerji miktarlarının toplam değerine ilişkin
+      veri seti.
+    response_structure: {}
+  uecm:
+    endpoint: /v1/consumption/data/uecm
+    method: POST
+    auth: true
+    short_name: uecm
+    short_name_tr: Uzlaştırmaya Esas Çekiş Miktarı (UEÇM) Listeleme Servisi
+    params:
+    - body
+    required:
+    - body
+    response: ''
+    var_type: dict
+    summary: Uzlaştırmaya Esas Çekiş Miktarı (UEÇM) Listeleme Servisi
+    description: Uzlaştırmaya esas çekiş birimlerinin, bir uzlaştırma dönemi içinde
+      saatlik olarak sistemden aldığı enerji miktarlarının toplam değerine ilişkin
+      veri seti
+    response_structure: {}
+  unplanned-power-outage-data:
+    endpoint: /v1/consumption/data/unplanned-power-outage-info
+    method: POST
+    auth: true
+    short_name: unplanned-power-outage-data
+    short_name_tr: Plansız Kesinti Bilgisi Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Plansız Kesinti Bilgisi Listeleme Servisi
+    description: Plansız kesintilerin sunulduğu ekrandır.
+    response_structure: {}
+  withdrawal-quantity-under-supply-liability:
+    endpoint: /v1/consumption/data/withdrawal-quantity-under-supply-liability
+    method: POST
+    auth: true
+    short_name: withdrawal-quantity-under-supply-liability
+    short_name_tr: Tedarik Yükümlülüğü Kapsamındaki Uzlaştırmaya Esas Çekiş Miktarı
+      (UEÇM) Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: Tedarik Yükümlülüğü Kapsamındaki Uzlaştırmaya Esas Çekiş Miktarı (UEÇM)
+      Listeleme Servisi
+    description: Uzlaştırmaya esas çekiş birimlerinin, tedarik yükümlülüğü kapsamında
+      sistemden aldığı enerji miktarlarının toplam değerine ilişkin veri seti. Bir
+      fatura döneminde YEKDEM gelirinin YEK toplam bedelinden fazla olması durumunda,
+      Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin
+      Yönetmeliğin 13 üncü maddesinin dördüncü fıkrası uyarınca hesaplama yapılmakta
+      olup, Görevli Tedarik Şirketlerinin K1 kapsamındaki satışları hariç tüm satışlar
+      için tedarikçilere uygulanan birim fiyat 0 TL/MWh olmaktadır.
     response_structure: {}

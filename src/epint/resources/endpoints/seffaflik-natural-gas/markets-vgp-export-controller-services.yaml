@@ -1,65 +1,16 @@
 endpoints:
-  contract_price_summary_export:
+  contract-price-summary-export:
     endpoint: /v1/markets/vgp/export/contract-price-summary
     method: POST
     auth: true
-    short_name: contract_price_summary_export
+    short_name: contract-price-summary-export
     short_name_tr: VGP Kontrat Fiyatları Özeti Dışa Aktarım Servisi
     params:
-    - startDate
-    - endDate
-    - isTransactionPeriod
-    - deliveryYear
-    - deliveryPeriod
-    - page
-    - exportType
+    - body
     required:
-    - isTransactionPeriod
-    - exportType
-    response:
-    - view
-    - model
-    - status
-    - empty
-    - reference
-    - viewName
-    - modelMap
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: isTransactionPeriod
-      var_type: bool
-      description: İşlem Döneminin Boolean Bilgisi
-      required: true
-      example: true
-    - name: deliveryYear
-      var_type: str
-      description: Yıl Bilgisi
-      required: false
-      example: '2001'
-    - name: deliveryPeriod
-      var_type: str
-      description: Teslimat Tarihi Bilgisi
-      required: false
-      example: Q1
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
-    - name: exportType
-      var_type: str
-      description: XLSX, CSV ya da PDF
-      required: true
-      example: XLSX
+    - body
+    response: ''
+    var_type: dict
     summary: VGP Kontrat Fiyatları Özeti Dışa Aktarım Servisi
     description: 'Vadeli kontratların Eşleşme Fiyatı İstatistiklerini gösterir.İlk
       Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen
@@ -69,418 +20,106 @@ endpoints:
       en düşük eşleşme fiyatını gösterir.Son Eşleşme Fiyatı (TL/1000.Sm3): İlgili
       günde her vadeli kontratta gerçekleşen son işlem fiyatını gösterir.VGP Kontrat
       Fiyatları Özeti Listesini XLSX, CSV ya da PDF olarak dışa aktarır.'
-    response_structure:
-      view: str
-      model: object
-      status: str
-      empty: bool
-      reference: bool
-      viewName: str
-      modelMap: object
-  ggf_export:
+    response_structure: {}
+  ggf-export:
     endpoint: /v1/markets/vgp/export/ggf
     method: POST
     auth: true
-    short_name: ggf_export
+    short_name: ggf-export
     short_name_tr: VGP Günlük Gösterge Fiyatı Dışa Aktarım Servisi
     params:
-    - startDate
-    - endDate
-    - isTransactionPeriod
-    - deliveryYear
-    - deliveryPeriod
-    - page
-    - exportType
+    - body
     required:
-    - isTransactionPeriod
-    - exportType
-    response:
-    - view
-    - model
-    - status
-    - empty
-    - reference
-    - viewName
-    - modelMap
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: isTransactionPeriod
-      var_type: bool
-      description: İşlem Döneminin Boolean Bilgisi
-      required: true
-      example: true
-    - name: deliveryYear
-      var_type: str
-      description: Yıl Bilgisi
-      required: false
-      example: '2001'
-    - name: deliveryPeriod
-      var_type: str
-      description: Teslimat Tarihi Bilgisi
-      required: false
-      example: Q1
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
-    - name: exportType
-      var_type: str
-      description: XLSX, CSV ya da PDF
-      required: true
-      example: XLSX
+    - body
+    response: ''
+    var_type: dict
     summary: VGP Günlük Gösterge Fiyatı Dışa Aktarım Servisi
     description: Vadeli Doğal Gaz Piyasasında (VGP) gün öncesi ve gün içi eşleşmelerinin
       Ağırlıklı Ortalama Fiyatını gösterir.VGP Günlük Gösterge Fiyatı Listesini XLSX,
       CSV ya da PDF olarak dışa aktarır.
-    response_structure:
-      view: str
-      model: object
-      status: str
-      empty: bool
-      reference: bool
-      viewName: str
-      modelMap: object
-  matching_quantity_export:
+    response_structure: {}
+  matching-quantity-export:
     endpoint: /v1/markets/vgp/export/matching-quantity
     method: POST
     auth: true
-    short_name: matching_quantity_export
+    short_name: matching-quantity-export
     short_name_tr: VGP Piyasa Eşleşme Miktarı (1000.Sm³/gün) Dışa Aktarım Servisi
     params:
-    - startDate
-    - endDate
-    - isTransactionPeriod
-    - deliveryYear
-    - deliveryPeriod
-    - page
-    - exportType
+    - body
     required:
-    - isTransactionPeriod
-    - exportType
-    response:
-    - view
-    - model
-    - status
-    - empty
-    - reference
-    - viewName
-    - modelMap
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: isTransactionPeriod
-      var_type: bool
-      description: İşlem Döneminin Boolean Bilgisi
-      required: true
-      example: true
-    - name: deliveryYear
-      var_type: str
-      description: Yıl Bilgisi
-      required: false
-      example: '2001'
-    - name: deliveryPeriod
-      var_type: str
-      description: Teslimat Tarihi Bilgisi
-      required: false
-      example: Q1
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
-    - name: exportType
-      var_type: str
-      description: XLSX, CSV ya da PDF
-      required: true
-      example: XLSX
+    - body
+    response: ''
+    var_type: dict
     summary: VGP Piyasa Eşleşme Miktarı (1000.Sm³/gün) Dışa Aktarım Servisi
     description: Vadeli kontratların Teklif ve/veya Eşleşmelerinin Ağırlıklı Ortalama
       Fiyatlarını gösterir.VGP Piyasa Eşleşme Miktarı (1000.Sm³/gün) Listesini XLSX,
       CSV ya da PDF olarak dışa aktarır.
-    response_structure:
-      view: str
-      model: object
-      status: str
-      empty: bool
-      reference: bool
-      viewName: str
-      modelMap: object
-  open_position_export:
+    response_structure: {}
+  open-position-export:
     endpoint: /v1/markets/vgp/export/open-position
     method: POST
     auth: true
-    short_name: open_position_export
+    short_name: open-position-export
     short_name_tr: VGP Açık Pozisyon Miktarı (1000.Sm³/gün) Dışa Aktarım Servisi
     params:
-    - startDate
-    - endDate
-    - isTransactionPeriod
-    - deliveryYear
-    - deliveryPeriod
-    - page
-    - exportType
+    - body
     required:
-    - isTransactionPeriod
-    - exportType
-    response:
-    - view
-    - model
-    - status
-    - empty
-    - reference
-    - viewName
-    - modelMap
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: isTransactionPeriod
-      var_type: bool
-      description: İşlem Döneminin Boolean Bilgisi
-      required: true
-      example: true
-    - name: deliveryYear
-      var_type: str
-      description: Yıl Bilgisi
-      required: false
-      example: '2001'
-    - name: deliveryPeriod
-      var_type: str
-      description: Teslimat Tarihi Bilgisi
-      required: false
-      example: Q1
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
-    - name: exportType
-      var_type: str
-      description: XLSX, CSV ya da PDF
-      required: true
-      example: XLSX
+    - body
+    response: ''
+    var_type: dict
     summary: VGP Açık Pozisyon Miktarı (1000.Sm³/gün) Dışa Aktarım Servisi
     description: Vadeli kontratların Alış ve Satış Eşleşmeleri Fark Miktarını gösterir.VGP
       Açık Pozisyon Miktarı (1000.Sm³/gün) Listesini XLSX, CSV ya da PDF olarak dışa
       aktarır.
-    response_structure:
-      view: str
-      model: object
-      status: str
-      empty: bool
-      reference: bool
-      viewName: str
-      modelMap: object
-  vgp_offer_price_export:
+    response_structure: {}
+  vgp-offer-price-export:
     endpoint: /v1/markets/vgp/export/vgp-offer-price
     method: POST
     auth: true
-    short_name: vgp_offer_price_export
+    short_name: vgp-offer-price-export
     short_name_tr: VGP Teklif Fiyatları Dışa Aktarım Servisi
     params:
-    - page
-    - exportType
+    - body
     required:
-    - exportType
-    response:
-    - view
-    - model
-    - status
-    - empty
-    - reference
-    - viewName
-    - modelMap
-    var_type:
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
-    - name: exportType
-      var_type: str
-      description: XLSX, CSV ya da PDF
-      required: true
-      example: XLSX
+    - body
+    response: ''
+    var_type: dict
     summary: VGP Teklif Fiyatları Dışa Aktarım Servisi
     description: Vadeli kontratların Teklif Fiyatı İstatistiklerini gösterir.VGP Teklif
       Fiyatları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
-    response_structure:
-      view: str
-      model: object
-      status: str
-      empty: bool
-      reference: bool
-      viewName: str
-      modelMap: object
-  vgp_transaction_history_export:
+    response_structure: {}
+  vgp-transaction-history-export:
     endpoint: /v1/markets/vgp/export/vgp-transaction-history
     method: POST
     auth: true
-    short_name: vgp_transaction_history_export
+    short_name: vgp-transaction-history-export
     short_name_tr: VGP İşlem Akışı Dışa Aktarım Servisi
     params:
-    - startDate
-    - endDate
-    - isTransactionPeriod
-    - deliveryYear
-    - deliveryPeriod
-    - page
-    - exportType
+    - body
     required:
-    - isTransactionPeriod
-    - exportType
-    response:
-    - view
-    - model
-    - status
-    - empty
-    - reference
-    - viewName
-    - modelMap
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: isTransactionPeriod
-      var_type: bool
-      description: İşlem Döneminin Boolean Bilgisi
-      required: true
-      example: true
-    - name: deliveryYear
-      var_type: str
-      description: Yıl Bilgisi
-      required: false
-      example: '2001'
-    - name: deliveryPeriod
-      var_type: str
-      description: Teslimat Tarihi Bilgisi
-      required: false
-      example: Q1
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
-    - name: exportType
-      var_type: str
-      description: XLSX, CSV ya da PDF
-      required: true
-      example: XLSX
+    - body
+    response: ''
+    var_type: dict
     summary: VGP İşlem Akışı Dışa Aktarım Servisi
     description: 'Vadeli kontratların Eşleşme Zamanlarını gösterir.Eşleşme Fiyatı
       (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen işlemin eşleşme
       fiyatını gösterir. Eşleşme Miktarı (1000.Sm3): İlgili günde her vadeli kontratta
       gerçekleşen işlemin eşleşme miktarını gösterir.GP İşlem Akışı Listesini XLSX,
       CSV ya da PDF olarak dışa aktarır.'
-    response_structure:
-      view: str
-      model: object
-      status: str
-      empty: bool
-      reference: bool
-      viewName: str
-      modelMap: object
-  vgp_volume_export:
+    response_structure: {}
+  vgp-volume-export:
     endpoint: /v1/markets/vgp/export/vgp-volume
     method: POST
     auth: true
-    short_name: vgp_volume_export
+    short_name: vgp-volume-export
     short_name_tr: VGP İşlem Hacmi Dışa Aktarım Servisi
     params:
-    - startDate
-    - endDate
-    - isTransactionPeriod
-    - deliveryYear
-    - deliveryPeriod
-    - page
-    - exportType
+    - body
     required:
-    - isTransactionPeriod
-    - exportType
-    response:
-    - view
-    - model
-    - status
-    - empty
-    - reference
-    - viewName
-    - modelMap
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
-      required: false
-      example: '2021-01-01T00:00:00+03:00'
-    - name: isTransactionPeriod
-      var_type: bool
-      description: İşlem Döneminin Boolean Bilgisi
-      required: true
-      example: true
-    - name: deliveryYear
-      var_type: str
-      description: Yıl Bilgisi
-      required: false
-      example: '2001'
-    - name: deliveryPeriod
-      var_type: str
-      description: Teslimat Tarihi Bilgisi
-      required: false
-      example: Q1
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
-    - name: exportType
-      var_type: str
-      description: XLSX, CSV ya da PDF
-      required: true
-      example: XLSX
+    - body
+    response: ''
+    var_type: dict
     summary: VGP İşlem Hacmi Dışa Aktarım Servisi
     description: Vadeli kontratların Eşleşme Tutarını gösterir.VGP İşlem Hacmi Listesini
       XLSX, CSV ya da PDF olarak dışa aktarır.
-    response_structure:
-      view: str
-      model: object
-      status: str
-      empty: bool
-      reference: bool
-      viewName: str
-      modelMap: object
+    response_structure: {}

@@ -1,0 +1,97 @@
+endpoints:
+  list_recon_green_tariffs:
+    endpoint: /v1/green-tariff/details/list
+    method: POST
+    auth: true
+    short_name: list_recon_green_tariffs
+    short_name_tr: ''
+    params:
+    - effectiveDate
+    - version
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: Fatura tutarının değişiklik zamanı
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  export_recon_green_tariffs:
+    endpoint: /v1/green-tariff/details/export
+    method: POST
+    auth: true
+    short_name: export_recon_green_tariffs
+    short_name_tr: ''
+    params:
+    - effectiveDate
+    - version
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDate
+      var_type: str
+      description: Fatura tutarının değişiklik zamanı
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum:
+      - XLSX
+      - CSV
+      - PDF
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict

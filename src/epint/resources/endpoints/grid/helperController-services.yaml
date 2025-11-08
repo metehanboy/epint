@@ -1,0 +1,129 @@
+endpoints:
+  profile_subscription_group_fetch:
+    endpoint: /v1/profile-subscription-group/fetch
+    method: GET
+    auth: true
+    short_name: profile_subscription_group_fetch
+    short_name_tr: Profil Abone Grubu Sorgulama Servisi
+    params:
+    - cityId
+    - effectiveDate
+    - readingTypeId
+    required:
+    - cityId
+    - effectiveDate
+    - readingTypeId
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: cityId
+      var_type: int
+      description: Şehir ID Bilgisi
+      required: true
+    - name: effectiveDate
+      var_type: str
+      description: Geçerlilik Tarihi
+      required: true
+    - name: readingTypeId
+      var_type: int
+      description: Okuma Tipi ID Bilgisi
+      required: true
+    summary: Profil Abone Grubu Sorgulama Servisi
+    description: Şeçilen şehre göre profil abone gruplarını bu servis ile alabilirsiniz.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  available_lookups:
+    endpoint: /v1/lookup
+    method: GET
+    auth: true
+    short_name: available_lookups
+    short_name_tr: Mevcut Çoklu Seçim Anahtar Sorgulama Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Mevcut Çoklu Seçim Anahtar Sorgulama Servisi
+    description: Mevcut çoklu seçim anahtar verilerini sorgular.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  lookup_query:
+    endpoint: /v1/lookup/query
+    method: POST
+    auth: true
+    short_name: lookup_query
+    short_name_tr: Çoklu Seçim Detay Sorgulama Servisi
+    params:
+    - lookupType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: lookupType
+      var_type: str
+      description: Çoklu Seçim Anahtarı
+      required: false
+    summary: Çoklu Seçim Detay Sorgulama Servisi
+    description: Çoklu seçim detay verilerini sorgular.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

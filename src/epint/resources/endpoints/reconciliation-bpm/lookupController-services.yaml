@@ -1,0 +1,37 @@
+endpoints:
+  bpm_look_up_value:
+    endpoint: /v1/lookup/list
+    method: GET
+    auth: true
+    short_name: bpm_look_up_value
+    short_name_tr: Onaylı Sayaçlar ve Veriler Sayfasında Kullanılan Lookup Değerleri
+      Servisi
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Onaylı Sayaçlar ve Veriler Sayfasında Kullanılan Lookup Değerleri Servisi
+    description: Onaylı sayaçlar ve veriler sayfasında kullanılan lookup değerleri
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

@@ -1,0 +1,190 @@
+endpoints:
+  list_lookup:
+    endpoint: /rest/v1/lookup/list
+    method: POST
+    auth: true
+    short_name: list_lookup
+    short_name_tr: Tanım Parametre Listeleme
+    params:
+    - key
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: key
+      var_type: str
+      description: Listenecek tanım tablosunun anahtar değeri
+      required: false
+    summary: Tanım Parametre Listeleme
+    description: Tanım parametrelerinin listeleneceği servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_exist_organizations:
+    endpoint: /rest/v1/lookup/organization/exist/list
+    method: POST
+    auth: true
+    short_name: list_exist_organizations
+    short_name_tr: Tanım Parametre Listeleme
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    summary: Tanım Parametre Listeleme
+    description: Tanım parametrelerinin listeleneceği servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_organizations:
+    endpoint: /rest/v1/lookup/organization/list
+    method: POST
+    auth: true
+    short_name: list_organizations
+    short_name_tr: Tanım Parametre Listeleme
+    params:
+    - effectiveDateStart
+    - effectiveDateEnd
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: effectiveDateStart
+      var_type: datetime
+      description: Başlangıç Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: effectiveDateEnd
+      var_type: datetime
+      description: Bitiş Tarihi
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    summary: Tanım Parametre Listeleme
+    description: Tanım parametrelerinin listeleneceği servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_regions:
+    endpoint: /rest/v1/lookup/region/list
+    method: POST
+    auth: true
+    short_name: list_regions
+    short_name_tr: Tanım Parametre Listeleme
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: Tanım Parametre Listeleme
+    description: Tanım parametrelerinin listeleneceği servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  list_user_lookup:
+    endpoint: /rest/v1/user/lookup
+    method: POST
+    auth: true
+    short_name: list_user_lookup
+    short_name_tr: Kullancıcı Bilgileri
+    params:
+    - organizationId
+    required: []
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: organizationId
+      var_type: int
+      description: Organizasyon id bilgisi
+      required: false
+    summary: Kullancıcı Bilgileri
+    description: Kullanıcı bilgileri , limitleri ve yetkilerinin alındığı servis
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

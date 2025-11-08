@@ -1,0 +1,307 @@
+endpoints:
+  IntegrationController_listIntegrationSystemLogs_POST:
+    endpoint: /rest/v1/integration/log
+    method: POST
+    auth: true
+    short_name: IntegrationController_listIntegrationSystemLogs_POST
+    short_name_tr: IntegrationController_listIntegrationSystemLogs_POST
+    params:
+    - pageInfo
+    - effectiveDate
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    - name: effectiveDate
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  IntegrationController_listIntegrationSystemFetchLogs_POST:
+    endpoint: /rest/v1/integration/log/fetch-data
+    method: POST
+    auth: true
+    short_name: IntegrationController_listIntegrationSystemFetchLogs_POST
+    short_name_tr: IntegrationController_listIntegrationSystemFetchLogs_POST
+    params:
+    - pageInfo
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: pageInfo
+      var_type: str
+      description: Sayfalama bilgisi
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  IntegrationController_listTpysFutureOperations_GET:
+    endpoint: /rest/v1/integration/operation/list
+    method: GET
+    auth: true
+    short_name: IntegrationController_listTpysFutureOperations_GET
+    short_name_tr: IntegrationController_listTpysFutureOperations_GET
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  IntegrationController_exportMatchDetailSendData_POST:
+    endpoint: /rest/v1/integration/send-data/export
+    method: POST
+    auth: true
+    short_name: IntegrationController_exportMatchDetailSendData_POST
+    short_name_tr: IntegrationController_exportMatchDetailSendData_POST
+    params:
+    - deliveryDateTime
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDateTime
+      var_type: datetime
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  IntegrationController_cancelFutureIntegrationSystemProcess_POST:
+    endpoint: /rest/v1/integration/cancel
+    method: POST
+    auth: true
+    short_name: IntegrationController_cancelFutureIntegrationSystemProcess_POST
+    short_name_tr: IntegrationController_cancelFutureIntegrationSystemProcess_POST
+    params:
+    - deliveryDateTime
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDateTime
+      var_type: datetime
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  IntegrationController_fetchDataToIntegrationSystem_POST:
+    endpoint: /rest/v1/integration/fetch
+    method: POST
+    auth: true
+    short_name: IntegrationController_fetchDataToIntegrationSystem_POST
+    short_name_tr: IntegrationController_fetchDataToIntegrationSystem_POST
+    params:
+    - integrationType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: integrationType
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  IntegrationController_saveFutureIntegrationSystemProcess_POST:
+    endpoint: /rest/v1/integration/save
+    method: POST
+    auth: true
+    short_name: IntegrationController_saveFutureIntegrationSystemProcess_POST
+    short_name_tr: IntegrationController_saveFutureIntegrationSystemProcess_POST
+    params:
+    - processTime
+    - deliveryDateTime
+    - description
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: processTime
+      var_type: str
+      description: ''
+      required: false
+    - name: deliveryDateTime
+      var_type: datetime
+      description: ''
+      required: false
+    - name: description
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str
+  IntegrationController_sendDataToIntegrationSystem_POST:
+    endpoint: /rest/v1/integration/send
+    method: POST
+    auth: true
+    short_name: IntegrationController_sendDataToIntegrationSystem_POST
+    short_name_tr: IntegrationController_sendDataToIntegrationSystem_POST
+    params:
+    - deliveryDateTime
+    - description
+    - integrationType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: deliveryDateTime
+      var_type: datetime
+      description: ''
+      required: false
+    - name: description
+      var_type: str
+      description: ''
+      required: false
+    - name: integrationType
+      var_type: str
+      description: ''
+      required: false
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      txId: str
+      hostName: str
+      clientIp: str
+      userName: str
+      errors:
+      - str
+      body: str
+      dispatch: str

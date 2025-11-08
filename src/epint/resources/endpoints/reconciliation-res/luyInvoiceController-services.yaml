@@ -1,0 +1,647 @@
+endpoints:
+  get_luy_invoice_history:
+    endpoint: /v1/luy-invoice/invoice/history/list
+    method: POST
+    auth: true
+    short_name: get_luy_invoice_history
+    short_name_tr: LUY Fatura Geçmiş Listeleme
+    params:
+    - period
+    - version
+    - region
+    - settlementPointId
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+      example: 40W000000000001V
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: LUY Fatura Geçmiş Listeleme
+    description: Lisanssız üretim yapan UEVCB'lere ait faturaların versiyon geçmişini
+      listeler.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  get_luy_invoices:
+    endpoint: /v1/luy-invoice/invoice/list
+    method: POST
+    auth: true
+    short_name: get_luy_invoices
+    short_name_tr: LUY Fatura Listeleme
+    params:
+    - period
+    - version
+    - region
+    - settlementPointId
+    - statuses
+    - isLastVersion
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: statuses
+      var_type: list
+      description: ''
+      required: false
+      items: int
+    - name: isLastVersion
+      var_type: bool
+      description: ''
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: LUY Fatura Listeleme
+    description: Lisansız üretim yapan UEVCB'lere ait faturaları listeler.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  listUprRetroCorrection:
+    endpoint: /v1/luy-invoice/list/upr/retro/correction
+    method: POST
+    auth: true
+    short_name: listUprRetroCorrection
+    short_name_tr: LUY GDDK Değişim Raporu Listeleme
+    params:
+    - period
+    - version
+    - region
+    - page
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: ''
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: page
+      var_type: object
+      description: Sayfa
+      required: false
+      properties:
+        number:
+          type: int
+          description: İlgili sayfanın numarası
+          example: 1
+        size:
+          type: int
+          description: Her bir sayfada bulunacak eleman sayısı
+          example: 20
+        total:
+          type: int
+          description: Toplam satır sayısı
+          example: 100
+        sort:
+          type: object
+          description: Sıralama ayarlaması
+    summary: LUY GDDK Değişim Raporu Listeleme
+    description: LUY GDDK değişim raporunu listeler.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  getLuyInvoiceStatuses:
+    endpoint: /v1/luy-invoice/lkp-invoice-status
+    method: GET
+    auth: true
+    short_name: getLuyInvoiceStatuses
+    short_name_tr: getLuyInvoiceStatuses
+    params: []
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type: []
+    summary: ''
+    description: ''
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  approve_luy_invoice:
+    endpoint: /v1/luy-invoice/invoice/approve
+    method: POST
+    auth: true
+    short_name: approve_luy_invoice
+    short_name_tr: LUY Fatura Onaylama
+    params:
+    - period
+    - version
+    - region
+    - settlementPointId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+      example: 40W000000000001V
+    summary: LUY Fatura Onaylama
+    description: Lisansız üretim yapan UEVCB'lere ait faturaları onaylar.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  update_or_create_new_luy_invoice:
+    endpoint: /v1/luy-invoice/invoice/save
+    method: POST
+    auth: true
+    short_name: update_or_create_new_luy_invoice
+    short_name_tr: LUY Fatura Kaydetme/Güncelleme
+    params:
+    - period
+    - version
+    - region
+    - settlementPointId
+    - amount
+    - description
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+      example: 40W000000000001V
+    - name: amount
+      var_type: float
+      description: Fatura Tutarı (TL)
+      required: false
+    - name: description
+      var_type: str
+      description: Fatura açıklaması
+      required: false
+    summary: LUY Fatura Kaydetme/Güncelleme
+    description: Lisansız üretim yapan UEVCB'lere ait fatura bilgilerini günceller/kaydeder.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str
+  exportUprRetroCorrection:
+    endpoint: /v1/luy-invoice/export/upr/retro/correction
+    method: POST
+    auth: true
+    short_name: exportUprRetroCorrection
+    short_name_tr: LUY GDDK Değişim Raporu Listeleme
+    params:
+    - period
+    - version
+    - region
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: ''
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: &id001
+      - XLSX
+      - CSV
+      - PDF
+    summary: LUY GDDK Değişim Raporu Listeleme
+    description: LUY GDDK değişim raporunu listeler.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_luy_invoices:
+    endpoint: /v1/luy-invoice/invoice/export
+    method: POST
+    auth: true
+    short_name: export_luy_invoices
+    short_name_tr: LUY Fatura Listeleme
+    params:
+    - period
+    - version
+    - region
+    - settlementPointId
+    - statuses
+    - isLastVersion
+    - exportType
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+    - name: statuses
+      var_type: list
+      description: ''
+      required: false
+      items: int
+    - name: isLastVersion
+      var_type: bool
+      description: ''
+      required: false
+    - name: exportType
+      var_type: str
+      description: Dışa Aktarım Tipi
+      required: false
+      example: XLSX, CSV or PDF
+      enum: *id001
+    summary: LUY Fatura Listeleme
+    description: Lisansız üretim yapan UEVCB'lere ait faturaları listeler.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  export_luy_invoice_history:
+    endpoint: /v1/luy-invoice/invoice/history/export
+    method: POST
+    auth: true
+    short_name: export_luy_invoice_history
+    short_name_tr: LUY Fatura Geçmiş Listeleme
+    params:
+    - period
+    - version
+    - region
+    - settlementPointId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+      example: 40W000000000001V
+    summary: LUY Fatura Geçmiş Listeleme
+    description: Lisanssız üretim yapan UEVCB'lere ait faturaların versiyon geçmişini
+      listeler.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  luy_invoice_cancelled:
+    endpoint: /v1/luy-invoice/invoice/cancel
+    method: POST
+    auth: true
+    short_name: luy_invoice_cancelled
+    short_name_tr: LUY Fatura iptal Etme
+    params:
+    - period
+    - version
+    - region
+    - settlementPointId
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: version
+      var_type: str
+      description: Faturanın ait olduğu versiyon bilgisi.
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    - name: region
+      var_type: str
+      description: Bölge
+      required: false
+      example: TR1
+    - name: settlementPointId
+      var_type: int
+      description: Anlaşma Id
+      required: false
+      example: 40W000000000001V
+    summary: LUY Fatura iptal Etme
+    description: Lisansız üretim yapan UEVCB'lere ait faturaları iptal eder.
+    response_structure:
+      status: str
+      correlationId: str
+      spanIds: str
+      hostName: str
+      clientIp: str
+      userName: str
+      successMessage: str
+      errors:
+      - str
+      unsuccessfulList:
+      - str
+      dispatch: str
+      body: str

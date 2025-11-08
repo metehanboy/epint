@@ -1,38 +1,144 @@
 endpoints:
-  transaction_history:
+  bid-offer-quantities:
+    endpoint: /v1/markets/idm/data/bid-offer-quantities
+    method: POST
+    auth: true
+    short_name: bid-offer-quantities
+    short_name_tr: GİP Teklif Edilen Alış Satış Miktarları Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: GİP Teklif Edilen Alış Satış Miktarları Listeleme Servisi
+    description: Gün İçi Piyasasında sunulan tekliflerin alış ve satış tekliflerinin
+      toplam miktarlarıdır.
+    response_structure: {}
+  gip-matching-quantity:
+    endpoint: /v1/markets/idm/data/matching-quantity
+    method: POST
+    auth: true
+    short_name: gip-matching-quantity
+    short_name_tr: GİP Eşleşme Miktarı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: GİP Eşleşme Miktarı Listeleme Servisi
+    description: Gün İçi Piyasası’nda kontrat türüne göre saatlik veya blok olarak
+      gösterilen toplam eşleşme miktarıdır.
+    response_structure: {}
+  min-max-bid-price:
+    endpoint: /v1/markets/idm/data/min-max-bid-price
+    method: POST
+    auth: true
+    short_name: min-max-bid-price
+    short_name_tr: GİP Min - Maks Alış Teklif Fiyatı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: GİP Min - Maks Alış Teklif Fiyatı Listeleme Servisi
+    description: Gün İçi Piyasası'nda kontrat türüne göre saatlik veya blok olarak
+      gösterilen en yüksek ve en düşük alış teklif fiyatıdır.
+    response_structure: {}
+  min-max-matching-price:
+    endpoint: /v1/markets/idm/data/min-max-matching-price
+    method: POST
+    auth: true
+    short_name: min-max-matching-price
+    short_name_tr: GİP Min - Maks Eşleşme Fiyat Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: GİP Min - Maks Eşleşme Fiyat Listeleme Servisi
+    description: Gün İçi Piyasası'nda kontrat türüne göre saatlik veya blok olarak
+      gösterilen en yüksek ve en düşük eşleşme fiyatıdır.
+    response_structure: {}
+  min-max-sales-offer-price:
+    endpoint: /v1/markets/idm/data/min-max-sales-offer-price
+    method: POST
+    auth: true
+    short_name: min-max-sales-offer-price
+    short_name_tr: GİP Min - Maks Satış Teklif Fiyatı Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: GİP Min - Maks Satış Teklif Fiyatı Listeleme Servisi
+    description: Gün İçi Piyasası'nda kontrat türüne göre saatlik veya blok olarak
+      gösterilen en yüksek ve en düşük satış teklif fiyatıdır.
+    response_structure: {}
+  trade-value:
+    endpoint: /v1/markets/idm/data/trade-value
+    method: POST
+    auth: true
+    short_name: trade-value
+    short_name_tr: GİP İşlem Hacmi Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: GİP İşlem Hacmi Listeleme Servisi
+    description: Gün İçi Piyasası’nda eşleşen alış-satış tekliflerinin saatlik toplam
+      mali değeridir.
+    response_structure: {}
+  transaction-history:
     endpoint: /v1/markets/idm/data/transaction-history
     method: POST
     auth: true
-    short_name: transaction_history
+    short_name: transaction-history
     short_name_tr: GİP İşlem Akışı Listeleme Servisi
     params:
-    - startDate
-    - endDate
-    - page
+    - body
+    - TGT
     required:
-    - startDate
-    - endDate
-    response:
-    - items
-    - page
-    var_type:
-    - name: startDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: endDate
-      var_type: datetime
-      description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
-      required: true
-      example: '2021-01-01T00:00:00+03:00'
-    - name: page
-      var_type: str
-      description: Sayfalama bilgisi.
-      required: false
-      example: ''
+    - body
+    - TGT
+    response: ''
+    var_type: dict
     summary: GİP İşlem Akışı Listeleme Servisi
     description: Gün İçi Piyasası’nda gerçekleşen anlık işlemlerin fiyat ve miktarlarıdır.
-    response_structure:
-      items: list
-      page: str
+    response_structure: {}
+  weighted-average-price:
+    endpoint: /v1/markets/idm/data/weighted-average-price
+    method: POST
+    auth: true
+    short_name: weighted-average-price
+    short_name_tr: GİP Ağırlıklı Ortalama Fiyat Listeleme Servisi
+    params:
+    - body
+    - TGT
+    required:
+    - body
+    - TGT
+    response: ''
+    var_type: dict
+    summary: GİP Ağırlıklı Ortalama Fiyat Listeleme Servisi
+    description: Gün İçi Piyasası'ndaki her bir kontrata ilişkin işlemlerin saatlik
+      bazda hacimsel ağırlıklı ortalama fiyatıdır.
+    response_structure: {}

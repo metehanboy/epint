@@ -1,0 +1,71 @@
+endpoints:
+  arp_balance_export:
+    endpoint: /v1/invoice-notice/arp-balance/export
+    method: POST
+    auth: true
+    short_name: arp_balance_export
+    short_name_tr: Cari Bakiye Servisi
+    params:
+    - period
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    summary: Cari Bakiye Servisi
+    description: Cari bakiye bilgilerinin alındığı servis.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
+  arp_extract_export:
+    endpoint: /v1/invoice-notice/arp-extract/export
+    method: POST
+    auth: true
+    short_name: arp_extract_export
+    short_name_tr: Cari Ekstre Servisi
+    params:
+    - period
+    required: null
+    response:
+    - status
+    - correlationId
+    - spanIds
+    - hostName
+    - clientIp
+    - userName
+    - successMessage
+    - errors
+    - body
+    var_type:
+    - name: period
+      var_type: datetime
+      description: Periyot
+      required: false
+      example: '2020-01-01T00:00:00+03:00'
+    summary: Cari Ekstre Servisi
+    description: Cari ekstre bilgilerinin alındığı servis.
+    response_structure:
+      view: str
+      model: dict
+      status: str
+      empty: bool
+      reference: bool
+      viewName: str
+      modelMap: dict
