@@ -15,7 +15,73 @@ endpoints:
     - sanctionStatusIds
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        page:
+          type: str
+          properties:
+            number:
+              type: int
+              description: ${VALUE_PAGE_NUMBER}
+              example: ${EXAMPLE_PAGE_NUMBER}
+            size:
+              type: int
+              description: ${VALUE_PAGE_SIZE}
+              example: ${EXAMPLE_PAGE_SIZE}
+            total:
+              type: int
+              description: ${VALUE_PAGE_TOTAL}
+              example: ${EXAMPLE_PAGE_TOTAL}
+            sort:
+              type: str
+              description: ${VALUE_PAGE_SORT}
+              properties:
+                field:
+                  type: str
+                  description: ${VALUE_SORT_FIELD}
+                  example: ${EXAMPLE_SORT_FIELD}
+                direction:
+                  type: str
+                  description: ${VALUE_SORT_DIRECTION}
+                  example: ASC
+        sanctionTypeId:
+          type: int
+          description: Yaptırım tipi
+        sanctionId:
+          type: int
+          description: Yaptırım id
+        processDateTime:
+          type: str
+          description: Yaptırım kaydedilme tarihi
+          properties:
+            start:
+              type: datetime
+            end:
+              type: datetime
+        startDateTime:
+          type: str
+          description: Yaptırım başlangıç tarihi
+          properties:
+            start:
+              type: datetime
+            end:
+              type: datetime
+        endDateTime:
+          type: str
+          description: Yaptırım bitiş tarihi
+          properties:
+            start:
+              type: datetime
+            end:
+              type: datetime
+        sanctionStatusIds:
+          type: list
+          description: Yaptırım durumu
+          items: int
     summary: Yaptırım Listele
     description: Katılımcının yaptırımlarını listeleyebileceği servistir.
     response_structure:

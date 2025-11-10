@@ -25,8 +25,7 @@ endpoints:
       description: Organizasyonun ID bilgisi
       required: true
     summary: Organizasyon Tüm Detay Sorgulama Servisi
-    description: Sorgulama yapmak istediğiniz organizasyon tüm detay bilgilerini bu
-      servis ile alabilirsiniz.
+    description: Sorgulama yapmak istediğiniz organizasyon tüm detay bilgilerini bu servis ile alabilirsiniz.
     response_structure:
       status: str
       correlationId: str
@@ -67,8 +66,7 @@ endpoints:
       description: Organizasyonun ID bilgisi
       required: true
     summary: Organizasyon Detay Sorgulama Servisi
-    description: Sorgulama yapmak istediğiniz organizasyon detay bilgilerini bu servis
-      ile alabilirsiniz.
+    description: Sorgulama yapmak istediğiniz organizasyon detay bilgilerini bu servis ile alabilirsiniz.
     response_structure:
       status: str
       correlationId: str
@@ -148,8 +146,7 @@ endpoints:
       description: ${EXCLUDE_NON_AGGREGATOR_RETAIL}
       required: false
     summary: Aktif Organizasyonlar Sorgulama Servisi
-    description: Sorgulama yapmak istediğiniz aktif organizasyon bilgilerini bu servis
-      ile alabilirsiniz.
+    description: Sorgulama yapmak istediğiniz aktif organizasyon bilgilerini bu servis ile alabilirsiniz.
     response_structure:
       status: str
       correlationId: str
@@ -184,8 +181,7 @@ endpoints:
     - body
     var_type: []
     summary: Ana Organizasyonlar Sorgulama Servisi
-    description: Sorgulama yapmak istediğiniz ana organizasyon bilgilerini bu servis
-      ile alabilirsiniz.
+    description: Sorgulama yapmak istediğiniz ana organizasyon bilgilerini bu servis ile alabilirsiniz.
     response_structure:
       status: str
       correlationId: str
@@ -252,8 +248,7 @@ endpoints:
       description: Geçerlilik Tarihi
       required: false
     summary: Organizasyon GÖP Katılımı Sorgulama Servisi
-    description: Sorgulama yapmak istediğiniz organizasyon piyasa katılımı bilgilerini
-      bu servis ile alabilirsiniz.
+    description: Sorgulama yapmak istediğiniz organizasyon piyasa katılımı bilgilerini bu servis ile alabilirsiniz.
     response_structure:
       status: str
       correlationId: str
@@ -378,8 +373,7 @@ endpoints:
       description: Geçerlilik Tarihi
       required: false
     summary: Tekil Organizasyon Sorgulama Servisi
-    description: Sorgulama yapmak istediğiniz tekil organizasyon bilgilerini bu servis
-      ile alabilirsiniz.
+    description: Sorgulama yapmak istediğiniz tekil organizasyon bilgilerini bu servis ile alabilirsiniz.
     response_structure:
       status: str
       correlationId: str
@@ -424,8 +418,7 @@ endpoints:
       description: Geçerlilik Tarihi
       required: false
     summary: Organizasyon Özet Sorgulama Servisi
-    description: Sorgulama yapmak istediğiniz organizasyon özet bilgilerini bu servis
-      ile alabilirsiniz.
+    description: Sorgulama yapmak istediğiniz organizasyon özet bilgilerini bu servis ile alabilirsiniz.
     response_structure:
       status: str
       correlationId: str
@@ -583,8 +576,7 @@ endpoints:
       description: Toplayıcı
       required: false
     summary: Organizasyon Sorgulama Servisi
-    description: Sorgulama yapmak istediğiniz organizasyon bilgilerini bu servis ile
-      alabilirsiniz.
+    description: Sorgulama yapmak istediğiniz organizasyon bilgilerini bu servis ile alabilirsiniz.
     response_structure:
       status: str
       correlationId: str
@@ -660,8 +652,7 @@ endpoints:
       description: Organizasyonun ID bilgisi
       required: true
     summary: Organizasyonun Bulunduğu İller Sorgulama Servisi
-    description: Sorgulama yapmak istediğiniz organizasyonun bulunduğu İller bilgilerini
-      bu servis ile alabilirsiniz.
+    description: Sorgulama yapmak istediğiniz organizasyonun bulunduğu İller bilgilerini bu servis ile alabilirsiniz.
     response_structure:
       status: str
       correlationId: str

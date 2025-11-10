@@ -94,7 +94,11 @@ endpoints:
     - successMessage
     - errors
     - body
-    var_type: []
+    var_type:
+    - name: file
+      var_type: str
+      description: ''
+      required: true
     summary: ''
     description: ''
     response_structure:

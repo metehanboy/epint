@@ -20,7 +20,72 @@ endpoints:
     - electricSupplyParticipation
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        page:
+          type: str
+          properties:
+            number:
+              type: int
+              description: ${VALUE_PAGE_NUMBER}
+              example: ${EXAMPLE_PAGE_NUMBER}
+            size:
+              type: int
+              description: ${VALUE_PAGE_SIZE}
+              example: ${EXAMPLE_PAGE_SIZE}
+            total:
+              type: int
+              description: ${VALUE_PAGE_TOTAL}
+              example: ${EXAMPLE_PAGE_TOTAL}
+            sort:
+              type: str
+              description: ${VALUE_PAGE_SORT}
+              properties:
+                field:
+                  type: str
+                  description: ${VALUE_SORT_FIELD}
+                  example: ${EXAMPLE_SORT_FIELD}
+                direction:
+                  type: str
+                  description: ${VALUE_SORT_DIRECTION}
+                  example: ASC
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        periodDate:
+          type: datetime
+          description: Dönem bilgisi
+          example: '["2020-01-01T00:00:00+03:00"]'
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        balancingRegionId:
+          type: int
+          description: Dengeleme Bölgesi ID
+        gridTypeId:
+          type: int
+          description: Şebeke tipi id
+        demandDirections:
+          type: list
+          description: Talep yönü
+          items: int
+        demandSideParticipation:
+          type: bool
+        balancingMarketParticipation:
+          type: bool
+        electricSupplyParticipation:
+          type: bool
     summary: Ön Bildirim Listesi Sorgula (Toplayıcılık)
     description: Toplayıcılık ön bildirim listelerini sorgulama servisidir
     response_structure:
@@ -186,7 +251,63 @@ endpoints:
     - demandDirections
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        page:
+          type: str
+          properties:
+            number:
+              type: int
+              description: ${VALUE_PAGE_NUMBER}
+              example: ${EXAMPLE_PAGE_NUMBER}
+            size:
+              type: int
+              description: ${VALUE_PAGE_SIZE}
+              example: ${EXAMPLE_PAGE_SIZE}
+            total:
+              type: int
+              description: ${VALUE_PAGE_TOTAL}
+              example: ${EXAMPLE_PAGE_TOTAL}
+            sort:
+              type: str
+              description: ${VALUE_PAGE_SORT}
+              properties:
+                field:
+                  type: str
+                  description: ${VALUE_SORT_FIELD}
+                  example: ${EXAMPLE_SORT_FIELD}
+                direction:
+                  type: str
+                  description: ${VALUE_SORT_DIRECTION}
+                  example: ASC
+        readingOrganization:
+          type: int
+          description: Sayaç okuyan kurum id
+        oldOrganization:
+          type: int
+          description: Eski organizasyon
+        newOrganization:
+          type: int
+          description: Yeni organizasyon
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        periodDate:
+          type: datetime
+          description: Dönem bilgisi
+          example: '["2020-01-01T00:00:00+03:00"]'
+        demandDirections:
+          type: list
+          description: Talep yönü
+          items: int
     summary: Ön Bildirim Listesi Sorgula (Dağıtım)
     description: Dağıtım firmalarının ön bildirim listelerini sorgulama servisidir
     response_structure:
@@ -350,7 +471,57 @@ endpoints:
     - demandDirections
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        page:
+          type: str
+          properties:
+            number:
+              type: int
+              description: ${VALUE_PAGE_NUMBER}
+              example: ${EXAMPLE_PAGE_NUMBER}
+            size:
+              type: int
+              description: ${VALUE_PAGE_SIZE}
+              example: ${EXAMPLE_PAGE_SIZE}
+            total:
+              type: int
+              description: ${VALUE_PAGE_TOTAL}
+              example: ${EXAMPLE_PAGE_TOTAL}
+            sort:
+              type: str
+              description: ${VALUE_PAGE_SORT}
+              properties:
+                field:
+                  type: str
+                  description: ${VALUE_SORT_FIELD}
+                  example: ${EXAMPLE_SORT_FIELD}
+                direction:
+                  type: str
+                  description: ${VALUE_SORT_DIRECTION}
+                  example: ASC
+        organizationId:
+          type: int
+          description: Organizasyon id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        periodDate:
+          type: datetime
+          description: Dönem bilgisi
+          example: '["2020-01-01T00:00:00+03:00"]'
+        demandDirections:
+          type: list
+          description: Talep yönü
+          items: int
     summary: Ön Bildirim Listesi Sorgula (Tedarik)
     description: Tedarik firmalarının ön bildirim listelerini sorgulama servisidir
     response_structure:

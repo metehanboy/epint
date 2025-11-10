@@ -4,8 +4,7 @@ endpoints:
     method: GET
     auth: true
     short_name: bpm_look_up_value
-    short_name_tr: Onaylı Sayaçlar ve Veriler Sayfasında Kullanılan Lookup Değerleri
-      Servisi
+    short_name_tr: Onaylı Sayaçlar ve Veriler Sayfasında Kullanılan Lookup Değerleri Servisi
     params: []
     required: null
     response:

@@ -10,7 +10,27 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        pointType:
+          type: str
+          description: INPUT
+          example: INPUT
+          required: true
     summary: Kapasite Nokta Servisi
     description: Kapasite Nokta Servisi
     response_structure: {}
@@ -25,7 +45,54 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        storageFacilityId:
+          type: int
+          description: Depolama Tesisi Id Bilgisi.
+          example: 1234
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Günlük Gerçekleşme Miktarı Listeleme Servisi
     description: Şebekeden doğal gaz depolama tesislerine aktarılan doğal gaz miktarını gösterir.
     response_structure: {}
@@ -40,7 +107,50 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Gün Öncesi (UDN) Listeleme Servisi
     description: 'İkili anlaşma miktar bildirimini ifade eder. '
     response_structure: {}
@@ -55,7 +165,50 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Gün Sonu (UDN) Listeleme Servisi
     description: Gün Sonu (UDN)
     response_structure: {}
@@ -70,7 +223,50 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Taşıma Giriş Miktarı Bildirimi (TMB) Listeleme Servisi
     description: Fiziki Nokta bazlı giriş miktar bildirimini ifade eder.
     response_structure: {}
@@ -85,7 +281,50 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Taşıma Çıkış Miktarı Bildirimi (TMB) Listeleme Servisi
     description: Fiziki Nokta bazlı çıkış miktar bildirimini ifade eder.
     response_structure: {}
@@ -100,7 +339,54 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        pointId:
+          type: int
+          description: Nokta adı için kullanılan nokta id bilgisi.
+          example: 12
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Maks Giriş Kapasite Miktarı Listeleme Servisi
     description: İletim Şirketi kapasite planına göre iletim şebekesine eklenmesi beklenen doğal gaz miktarını gösterir.
     response_structure: {}
@@ -115,7 +401,54 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        pointId:
+          type: int
+          description: Nokta adı için kullanılan nokta id bilgisi.
+          example: 12
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Maks Çıkış Kapasite Miktarı Listeleme Servisi
     description: İletim Şirketi kapasite planına göre iletim şebekesinden çıkması beklenen doğal gaz miktarını gösterir.
     response_structure: {}
@@ -130,7 +463,50 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Fiili Gerçekleşme Giriş Miktarı Listeleme Servisi
     description: Taşıtanların Alış işlemi sonucu, sisteme eklenen fiili doğal gaz miktarını gösterir.
     response_structure: {}
@@ -145,7 +521,50 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Fiili Gerçekleşme Çıkış Miktarı Listeleme Servisi
     description: Taşıtanların Satış işlemi sonucu, sistemden çıkan fiili doğal gaz miktarını gösterir.
     response_structure: {}
@@ -160,7 +579,54 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        pointId:
+          type: int
+          description: Nokta adı için kullanılan nokta id bilgisi.
+          example: 12
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Rezerve Giriş Kapasite Miktarı Listeleme Servisi
     description: İletim Şirketi rezervasyon programına göre iletim şebekesine eklenmesi beklenen doğal gaz miktarını gösterir.
     response_structure: {}
@@ -175,7 +641,54 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        pointId:
+          type: int
+          description: Nokta adı için kullanılan nokta id bilgisi.
+          example: 12
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Rezerve Çıkış Kapasite Miktarı Listeleme Servisi
     description: İletim Şirketi rezervasyon programına göre iletim şebekesinden çıkması beklenen doğal gaz miktarını gösterir.
     response_structure: {}
@@ -190,7 +703,50 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Stok Miktarı Listeleme Servisi
     description: İletim Şebekesinde sıkışmış durumdaki günlük doğal gaz miktarını gösterir.
     response_structure: {}
@@ -200,8 +756,8 @@ endpoints:
     auth: true
     short_name: storage-facility
     short_name_tr: Depolama Tesisi Listeleme Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Depolama Tesisi Listeleme Servisi
@@ -218,7 +774,50 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Transfer Listeleme Servisi
     description: Fiziki Nokta bazlı İkili anlaşma miktar bildirimini ifade eder.
     response_structure: {}

@@ -5,8 +5,8 @@ endpoints:
     auth: true
     short_name: dashboard-balancing-power-market
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Dengeleme Güç Piyasası Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Dengeleme Güç Piyasası Servisi
@@ -18,8 +18,8 @@ endpoints:
     auth: true
     short_name: dashboard-day-ahead-market
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gün Öncesi Piyasası Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Gün Öncesi Piyasası Servisi
@@ -31,8 +31,8 @@ endpoints:
     auth: true
     short_name: intra-day-market
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gün İçi Piyasası Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Gün İçi Piyasası Servisi
@@ -44,8 +44,8 @@ endpoints:
     auth: true
     short_name: dashboard-market-message-system
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Piyasa Mesaj Sistemi Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Piyasa Mesaj Sistemi Servisi
@@ -57,8 +57,8 @@ endpoints:
     auth: true
     short_name: dashboard-realtime-consumption
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Tüketim Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Tüketim Servisi
@@ -70,8 +70,8 @@ endpoints:
     auth: true
     short_name: dashboard-realtime-generation
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Üretim Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Üretim Servisi
@@ -83,8 +83,8 @@ endpoints:
     auth: true
     short_name: dashboard-spot-gas-market
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Spot Gaz Piyasası Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Spot Gaz Piyasası Servisi
@@ -96,8 +96,8 @@ endpoints:
     auth: true
     short_name: dashboard-weighted-average-price
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Ağırlıklı Ortalama Fiyat Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Ağırlıklı Ortalama Fiyat Servisi

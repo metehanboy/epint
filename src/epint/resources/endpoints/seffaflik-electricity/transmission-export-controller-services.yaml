@@ -10,7 +10,60 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        direction:
+          type: str
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '1234'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Kapasite Talepleri Dışa Aktarım Servisi
     description: Kapasite ihalelerine ait talepleri ve tahsis edilen kapasiteleri gösterir. Kapasite ihalelerine ait talepleri ve tahsis edilen kapasiteleri gösterir. Kapasite Talepleri Listeleme Servisi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -25,7 +78,69 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        region:
+          type: str
+          description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+          example: TR1
+        orderType:
+          type: str
+          description: Kısıt maliyeti için talimat tipi YAL, YAT ya da YAL&YAT dğerleri
+          example: UP_REGULATION
+          required: true
+        priceType:
+          type: str
+          description: Fiyat tipi
+          example: MCP
+          required: true
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Kısıt Maliyeti Dışa Aktarım Servisi
     description: 'Şehir bazında 1 kodlu Yük Alma ve Yük Atma Talimatlarının toplam mali değerine ilişkin veri seti. Formül: Kısıt Maliyeti=(YAL talimat Miktarı)* [YAL Teslimat Fiyatı – Seçilen Fiyat] + (YAL Talimat Miktarı)* [Seçilen Fiyat-YAT Talimat Fiyatı]. Kısıt Maliyeti Listesini XLSX, CSV ya da PDF olarak dışa aktarır.'
     response_structure: {}
@@ -40,7 +155,54 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        period:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        organizationId:
+          type: int
+          description: Organizasyon Id bilgisi(bkz.Organizasyon Listesi Getirme Servisi)
+          example: 1234
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: ENTSO-E (W) Kodları Dışa Aktarım Servisi
     description: Avrupa Elektrik İletim Sistemi İşletmecileri Ağı’nın piyasadaki Santral ve UEVÇB’lere, Avrupa standartlarına uygun formatta tanımladığı Enerji Tanımlama Kodu’dur.  ENTSO-E (W) Kodları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -55,7 +217,57 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        period:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        provinceId:
+          type: int
+          description: Şehir Id bilgisi(bkz.Şehir Listesi Getirme Servisi)
+          example: 160
+        uevcbName:
+          type: str
+          description: UEVÇB Adı
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: ENTSO-E (W) UEVCB Listesi Dışa Aktarım Servisi
     description: ENTSO-E (W) UEVCB Listesi Dışa Aktarım Servisi
     response_structure: {}
@@ -70,7 +282,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Enterkonneksiyon Arıza Bakım Bildirimleri Dışa Aktarım Servisi
     description: TCAT'ten temin edilen uluslararası hatlarda oluşan kesinti bilgileri sayfasıdır. Enterkonneksiyon Arıza Bakım Bildirimleri Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -85,7 +345,59 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        region:
+          type: str
+          description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+          example: TR1
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: İletim Sistemi Kayıp Katsayısı (ISKK) Dışa Aktarım Servisi
     description: Uzlaştırma dönemi bazında iletim sistemi veriş ve çekiş miktarları arasındaki farkın veriş miktarına oranlanmasıyla hesaplanan iletim sistemi kayıp katsayısına ilişkin veri seti. İletim Sistemi Kayıp Katsayısı (ISKK) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -100,7 +412,60 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        direction:
+          type: str
+          description: Yön
+          example: TRBG
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Hat Kapasiteleri Dışa Aktarım Servisi
     description: Enterkonneksiyonlara ait hat toplam kapasite ve Kullanıma açık kapasite değerleri gösterilmektedir. Enterkonneksiyonlara ait hat toplam kapasite ve Kullanıma açık kapasite değerleri gösterilmektedir. Hat Kapasiteleri Listeleme Servisi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -115,7 +480,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Nomine Kapasite Dışa Aktarım Servisi
     description: Nomine Kapasite değerleri ithalat (satış miktarları) ve ihracat(alış miktarı) için yapılan ikili anlaşmaları göstermektedir. Nomine Kapasite Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -130,7 +543,54 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        period:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        organizationId:
+          type: int
+          description: Organizasyon Id bilgisi(bkz.Organizasyon Listesi Getirme Servisi)
+          example: 1234
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: ENTSO-E (X) Kodları Dışa Aktarım Servisi
     description: Avrupa Elektrik İletim Sistemi İşletmecileri Ağı’nın piyasadaki organizasyonlara, Avrupa standartlarına uygun formatta tanımladığı Enerji Tanımlama Kodu’dur. ENTSO-E (X) Kodları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -145,7 +605,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Enterkonneksiyon Kapasitesine İlişkin Ay Öncesi Tahminler Dışa Aktarım Servisi
     description: Transfer yönü kapsamında ay öncesi Net Transfer Kapasitesi, Kullanıma Açık Kapasite ve Tahsis Edilmiş Kapasite değerlerinin ay öncesi tahminlerine ilişkin veri seti Enterkonneksiyon Kapasitesine İlişkin Ay Öncesi Tahminler Listeleme Servisi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -160,7 +668,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Enterkonneksiyon Kapasitesine İlişkin Yıl Öncesi Tahminler Dışa Aktarım Servisi
     description: Transfer yönü kapsamında yıl öncesi Net Transfer Kapasitesi, Kullanıma Açık Kapasite ve Tahsis Edilmiş Kapasite değerlerinin yıl öncesi tahminlerine ilişkin veri seti. Enterkonneksiyon Kapasitesine İlişkin Yıl Öncesi Tahminler Listeleme Servisi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -175,7 +731,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Sıfır Bakiye Düzeltme Tutarı Aylık Dışa Aktarım Servisi
     description: 'Sıfır bakiye düzeltme tutarı ve bileşenlerine ait aylık tutarlara ilişkin veri seti.Bu veriler uzlaştırmaya esas olarak yayınlanmaktadır. Yük Alma Talimatı:YAL, Yük Atma Talimatı: YAT, Yerine Getirilmeyen Yük Alma Talimat Tutarı: YGYALT, Yerine Getirilmeyen Yük Atma Talimat Tutarı: YGYALT, GDDK: Geçmişe Dönük Düzeltme Kalemi, KÜPST: Kesinleşmiş Üretim Planı Sapma Tutarı. Sıfır Bakiye Düzeltme Tutarı Aylık Listesini XLSX, CSV ya da PDF olarak dışa aktarır.'
     response_structure: {}

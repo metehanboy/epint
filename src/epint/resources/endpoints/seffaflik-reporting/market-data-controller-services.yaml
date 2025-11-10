@@ -12,7 +12,22 @@ endpoints:
     - endDate
     - startDate
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
     summary: AOPTF ve YEKDEM birim maliyeti listeleme servisi.
     description: EPDK için, AOPTF ve YEKDEM birim maliyeti dönen servistir.
     response_structure:

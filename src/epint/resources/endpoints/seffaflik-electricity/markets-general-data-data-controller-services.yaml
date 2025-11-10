@@ -10,7 +10,44 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        organizationId:
+          type: int
+          description: Organizasyon Id bilgisi(bkz.Organizasyon Listesi Getirme Servisi)
+          example: 1234
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Piyasa Katılımcıları Listeleme Servisi
     description: Piyasa Katılımcıları’nın GÖP, GİP, VEP, YEK-G piyasalarına katılım durumunu belirtir. Ayrıca Tüzel kişilik olarak firmanın aktiflik/pasiflik durumunu bildirir.
     response_structure: {}
@@ -20,8 +57,8 @@ endpoints:
     auth: true
     short_name: market-participants-organization-filter-list
     short_name_tr: Piyasa Katılımcıları Organizasyon Filtre Listesi Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Piyasa Katılımcıları Organizasyon Filtre Listesi Servisi
@@ -38,7 +75,45 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
     summary: Lisans Türüne Göre Katılımcı Sayısı Listeleme Servisi
     description: Kamu ve Özel Sektör piyasa katılımcılarının Üretim, Tedarik, Dağıtım, OSB Üretim, İletim ve Görevli Tedaril lisansları türlerine göre toplam sayılarını gösterir. Görevli tedarik şirketleri tüketici grupları için K1 (21), K2 (21) ve K3 (21) olacak şekilde kategorize edilmiştir.
     response_structure: {}

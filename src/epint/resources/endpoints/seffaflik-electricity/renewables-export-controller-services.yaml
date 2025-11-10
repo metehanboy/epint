@@ -10,7 +10,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Üretim Tahmini Dışa Aktarım Servisi
     description: YEKDEM kapsamındaki santrallerin, Milli Yük Tevzi Merkezi’ne bildirdikleri tahmini üretimleridir.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.' Bilgisi görüntülenecektir. Kullanıcı bu bilgilendirmeyi kapatmadan ekranda işlem yapamaz.Üretim Tahmini Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -25,7 +73,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Dengesizlik Maliyeti Dışa Aktarım Servisi
     description: YEKDEM kapsamındaki portföyün uzlaştırmaya esas veriş değerine göre oluşturduğu dengesizlikdir.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.Dengesizlik Maliyeti Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -40,7 +136,59 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        region:
+          type: str
+          description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+          example: TR1
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Dengesizlik  Miktarı Dışa Aktarım Servisi
     description: YEKDEM kapsamındaki portföyün uzlaştırmaya esas veriş değerine göre oluşturduğu dengesizlik miktarıdır.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.Dengesizlik Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -55,7 +203,59 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        region:
+          type: str
+          description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+          example: TR1
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: YEK Bedeli (YEKBED) Dışa Aktarım Servisi
     description: İlgili fatura dönemi için YEKDEM kapsamındaki lisanslı üretim santraline sahip katılımcılara ödenecek YEK bedelini (TL) ifade etmektedir. https://www.epias.com.tr/wp-content/uploads/2023/10/z27csrjmDz4qqJ6b9mj2.jpg https://www.epias.com.tr/wp-content/uploads/2023/10/DPgcwzhsEjfRWWcEzsKx.png YEK Bedeli (YEKBED) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -70,7 +270,59 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        powerPlantId:
+          type: int
+          description: Santral id değeri
+          example: 15909
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: YEKDEM Gerçek Zamanlı Üretim Dışa Aktarım Servisi
     description: Lisanslı YEKDEM santrallerine ait elektrik üretiminin kaynak bazında saatlik gösterimine ilişkin veri seti.Gerçek Zamanlı Üretim Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -85,7 +337,22 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        period:
+          type: datetime
+          description: Dönem
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Kurulu Güç YEKDEM Son Tarih Sonrası Veri İçin Dışa Aktarım Servisi
     description: YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır. Lisanslı kurulu güç bilgileri EPİAŞ’a kayıtlı santraller olup, lisanssız kurulu güç bilgisi dağıtım şirketlerinden temin edilmektedir.YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır.Kurulu Güç Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -100,7 +367,22 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        period:
+          type: datetime
+          description: Dönem
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Kurulu Güç YEKDEM Son Tarih ve Öncesi Verisi İçin Dışa Aktarım Servisi
     description: YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır. Lisanslı kurulu güç bilgileri EPİAŞ'a kayıtlı santraller olup, lisanssız kurulu güç bilgisi dağıtım şirketlerinden temin edilmektedir.YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır.Kurulu Güç Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -115,7 +397,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Yekdem Portföy Geliri Dışa Aktarım Servisi
     description: YEKDEM kapsamındaki portföyün saatlik toplam geliridir.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.YEKDEM Portföy Geliri Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -130,7 +460,59 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        region:
+          type: str
+          description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+          example: TR1
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Uzlaştırma Esas Veriş Miktarı (UEVM) Dışa Aktarım Servisi
     description: YEKDEM kapsamındaki lisanslı santrallerin kaynak bazında saatlik olarak uzlaştırmaya esas veriş değerlerine ilişkin veri seti.Uzlaştırma Esas Veriş Miktarı (UEVM) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -145,7 +527,50 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        year:
+          type: float
+          description: Yıl Bilgisi
+          example: 2021.0
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: YEKDEM Katılımcı Listesi Dışa Aktarım Servisi
     description: İlgili yıl içerisinde Yenilenebilir Enerji Destekleme Mekanizmasına dahil olan lisanslı üretim santraline sahip tüzel kişilerin listesidir. 2020 yılından itibaren “Önceki Yıl gerçekleştirilen Üretim (MWh)” yayınlanmamaktadır.YEKDEM Katılımcı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -160,7 +585,59 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        region:
+          type: str
+          description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+          example: TR1
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: YEK Geliri (YG) Dışa Aktarım Servisi
     description: YEKDEM gelirine ilişkin veri setidir.YEK Geliri (YG) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -175,7 +652,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: RES Üretim ve Tahmin Dışa Aktarım Servisi
     description: Türkiye Geneli İzlenebilen RES'lerin Toplam Güç Üretimi ve Tahminidir. Veriler Rüzgar Gücü İzleme ve Tahmin Merkezi'nden temin edilmektedir. Veriler 10dk aralıklarla güncellenmektedir. Q5,Q25,Q75,Q95 tahmin aralıklarını ifade etmektedir. Band tahmin aralıkları minimum ve maksimum risk senaryolarına göre oluşturulmuştur.Türkiye geneli izlenebilen RES’lerin toplam güç üretimi ve tahiminidir.RES Üretim ve Tahmin Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -190,7 +715,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Spot Teklifi Dışa Aktarım Servisi
     description: Milli Yük Tevzi Merkezi’nin spot piyasaya sunduğu YEKDEM portföyü teklif miktarıdır.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Spot Teklifleri raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.' Bilgisi görüntülenecektir. Kullanıcı bu bilgilendirmeyi kapatmadan ekranda işlem yapamaz.Spot Teklifi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -205,7 +778,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Toplam Gider (YEKTOB) Dışa Aktarım Servisi
     description: İlgili fatura dönemi için YEKDEM kapsamındaki hem lisanslı hem de lisanssız üretim santraline sahip katılımcılara ödenecek toplam YEK bedelini (TL) ifade eder.Toplam Gider (YEKTOB) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -220,7 +841,55 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Birim Maliyeti Dışa Aktarım Servisi
     description: Tedarik edilen birim enerji miktarı başına, hesaplanan YEKDEM maliyetidir. YEKDEM birim maliyeti ilgili aylar için versiyonlu olarak yayımlanmaktadır. Bir fatura döneminde, YEKDEM gelirinin YEK toplam bedelinden fazla olması durumunda, Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmenliğin 13üncü maddesinin dördüncü fıkrası uyarınca hesaplama yapılmaktadır.Bir fatura döneminde YEKDEM gelirinin YEK toplam bedelinden fazla olması durumunda, Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmeliğin 13 üncü maddesinin dördüncü fıkrası uyarınca hesaplama yapılmakta olup, Görevli Tedarik Şirketlerinin K1 kapsamındaki satışları hariç tüm satışlar için tedarikçilere uygulanan birim fiyat 0 TL/MWh olmaktadır.Birim Maliyeti Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -235,7 +904,59 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        region:
+          type: str
+          description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+          example: TR1
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Lisanssız Üretim Miktarı Dışa Aktarım Servisi
     description: YEKDEM kapsamındaki lisanssız santrallerin kaynak bazında saatlik olarak uzlaştırmaya esas lisanssız veriş değerleridir.YEKDEM kapsamındaki lisanssız santraller.Lisanssız Üretim Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -250,7 +971,59 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        region:
+          type: str
+          description: 'Bölge kısa adı (Ör: TR1 bkz.Bölge Listesi Getirme Servisi)'
+          example: TR1
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: Lisanssız Üretim Bedeli Dışa Aktarım Servisi
     description: İlgili fatura dönemi için YEKDEM kapsamındaki lisanssız üretim santrallerine sahip katılımcılara ödenecek YEK bedelini (TL) ifade etmektedir.Lisanssız Üretim Bedeli Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}

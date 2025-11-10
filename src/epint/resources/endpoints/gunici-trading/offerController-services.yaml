@@ -82,8 +82,7 @@ endpoints:
       example: '2021-06-24 14:00:00'
     - name: isConfirmed
       var_type: bool
-      description: Bu alan *true* gönderilmesi durumunda kullanıcı limitleri aşmanıza
-        izin verir.
+      description: Bu alan *true* gönderilmesi durumunda kullanıcı limitleri aşmanıza izin verir.
       required: false
       example: ''
     - name: clientOrderId
@@ -199,8 +198,7 @@ endpoints:
       required: true
       example: ''
     summary: Kontrat Bazında Teklif İptal Etme
-    description: Kontratta bulunan güncellenebilir durumdaki tüm teklifleri iptal
-      eder.
+    description: Kontratta bulunan güncellenebilir durumdaki tüm teklifleri iptal eder.
     response_structure:
       status: str
       txId: str
@@ -296,8 +294,7 @@ endpoints:
       example: '2021-06-24 14:00:00'
     - name: isConfirmed
       var_type: bool
-      description: Bu alan *true* gönderilmesi durumunda kullanıcı limitleri aşmanıza
-        izin verir.
+      description: Bu alan *true* gönderilmesi durumunda kullanıcı limitleri aşmanıza izin verir.
       required: false
       example: ''
     - name: clientOrderId
@@ -307,14 +304,12 @@ endpoints:
       example: ''
     - name: timeLeveledOfferDetails
       var_type: list
-      description: Zaman seviyeli teklif opsiyonunda gönderilmesi zorunldur.Diğer
-        teklif opsiyonlarında gönderilmemesi gerekmektedir.
+      description: Zaman seviyeli teklif opsiyonunda gönderilmesi zorunldur.Diğer teklif opsiyonlarında gönderilmemesi gerekmektedir.
       required: false
       example: ''
     - name: priceLeveledOfferDetails
       var_type: list
-      description: Fiyat seviyeli teklif opsiyonunda gönderilmesi zorunldur.Diğer
-        teklif opsiyonlarında gönderilmemesi gerekmektedir.
+      description: Fiyat seviyeli teklif opsiyonunda gönderilmesi zorunldur.Diğer teklif opsiyonlarında gönderilmemesi gerekmektedir.
       required: false
       example: ''
     - name: levelQuantity
@@ -356,8 +351,7 @@ endpoints:
     - dispatch
     var_type: []
     summary: Aktif Teklif Listeleme
-    description: Sistemde aktif olarak eşleşmeyi bekleyen tekliflerin listelendiği
-      servis
+    description: Sistemde aktif olarak eşleşmeyi bekleyen tekliflerin listelendiği servis
     response_structure:
       status: str
       txId: str
@@ -464,8 +458,7 @@ endpoints:
       example: ''
     - name: isConfirmed
       var_type: bool
-      description: Bu alan *true* gönderilmesi durumunda kullanıcı limitleri aşmanıza
-        izin verir.
+      description: Bu alan *true* gönderilmesi durumunda kullanıcı limitleri aşmanıza izin verir.
       required: false
       example: ''
     summary: Teklif Güncelleme

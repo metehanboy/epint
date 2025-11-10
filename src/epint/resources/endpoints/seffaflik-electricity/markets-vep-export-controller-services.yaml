@@ -10,7 +10,67 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        year:
+          type: int
+          description: Yıl
+          example: 2001
+        deliveryPeriod:
+          type: str
+          description: Teslimat Dönemi
+          example: Ocak
+        loadType:
+          type: str
+          description: Yük Tipi
+          example: Baz
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: VEP Kontrat Fiyatları Özet Dışa Aktarım Servisi
     description: Seçilen tarihte işleme açık + işlem yapılan kontratların seans içinde ilk, son, en düşük, en yüksek eşleşme fiyatlarını ve GGF’yi göstermektedir. VEP Kontrat Fiyatları Özet Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -25,7 +85,67 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        year:
+          type: int
+          description: Yıl
+          example: 2001
+        deliveryPeriod:
+          type: str
+          description: Teslimat Dönemi
+          example: Ocak
+        loadType:
+          type: str
+          description: Yük Tipi
+          example: Baz
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: VEP Günlük Gösterge Fiyatı Dışa Aktarım Servisi
     description: Seçilen tarihte işleme açık kontratların Günlük Gösterge Fiyatını göstermektedir. Seansın açık olduğu her gün işleme açık kontratların ilgili gün için Günlük Gösterge fiyatı saat 16:45'te yayımlanır. Dolar ve Euro kuru olarak fiyatın ait olduğu günden önceki ikinci iş gününe ait Türkiye Cumhuriyet Merkez Bankası efektif alış kuru dikkate alınmaktadır. VEP Günlük Gösterge Fiyatı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -40,7 +160,45 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: VEP Teklif Fiyatları Dışa Aktarım Servisi
     description: VEP'teki her bir kontrata ait en iyi alış ve satış tekliflerine sait fiyat bilgisi, son eşleşme fiyatı ve bir önceki eşleşmeye göre değişimi. VEP Teklif Fiyatları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -55,7 +213,67 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        year:
+          type: int
+          description: Yıl
+          example: 2001
+        deliveryPeriod:
+          type: str
+          description: Teslimat Dönemi
+          example: Ocak
+        loadType:
+          type: str
+          description: Yük Tipi
+          example: Baz
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: VEP Açık Pozisyon Dışa Aktarım Servisi
     description: Seçilen tarihte işleme açık + işlem yapılan kontratların açık pozisyon miktarını göstermektedir. VEP Açık Pozisyon Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -70,7 +288,67 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        year:
+          type: int
+          description: Yıl
+          example: 2001
+        deliveryPeriod:
+          type: str
+          description: Teslimat Dönemi
+          example: Ocak
+        loadType:
+          type: str
+          description: Yük Tipi
+          example: Baz
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: VEP İşlem Hacmi Dışa Aktarım Servisi
     description: Seçilen tarihte işleme açık + işlem yapılan kontratların işlem hacmini göstermektedir. VEP İşlem Hacmi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -85,7 +363,67 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        year:
+          type: str
+          description: Yıl
+          example: '2001'
+        deliveryPeriod:
+          type: str
+          description: Teslimat Dönemi
+          example: Ocak
+        loadType:
+          type: str
+          description: Yük Tipi
+          example: Baz
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: VEP İşlem Akışı Dışa Aktarım Servisi
     description: Seçilen tarihte işleme açık + işlem yapılan kontratların işlem akışını göstermektedir. VEP İşlem Akışı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
@@ -100,7 +438,67 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında tarih bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        year:
+          type: int
+          description: Yıl
+          example: 2001
+        deliveryPeriod:
+          type: str
+          description: Teslimat Dönemi
+          example: Ocak
+        loadType:
+          type: str
+          description: Yük Tipi
+          example: Baz
+        page:
+          type: str
+          description: Sayfalama bilgisi.
+          properties:
+            number:
+              type: int
+              description: 'İlgili sayfanın numarası. Ör: 1,2. '
+              example: '1'
+            size:
+              type: int
+              description: 'Her bir sayfada bulunacak eleman sayısı.Ör: 10,20,24,50,100.'
+              example: '20'
+            total:
+              type: int
+              description: Sunucu taraflı hesaplanıp, önyüzde kullanılmak üzere dönülecek toplam satır sayısı.
+              example: '100'
+            sort:
+              type: str
+              description: Özel sıralama yapılmak istenilirse gönderilecek sıralama ayarlaması.
+              properties:
+                field:
+                  type: str
+                  description: Sıralama yapılacak alanın adı.
+                  example: date
+                direction:
+                  type: str
+                  description: Sıralama tipi bilgisi.
+                  example: ASC
+        exportType:
+          type: str
+          description: XLSX, CSV ya da PDF
+          example: XLSX
+          required: true
     summary: VEP Eşleşme Miktarı Dışa Aktarım Servisi
     description: Seçilen tarihte işleme açık + işlem yapılan kontratların eşleşme miktarını göstermektedir. VEP Eşleşme Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}

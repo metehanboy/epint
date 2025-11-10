@@ -1749,8 +1749,7 @@ endpoints:
           type: object
           description: Sıralama ayarlaması
     summary: Sayaç Dışa Aktar Servisleri Offset ID Listeleme Servisi
-    description: Dışa aktarma servisinin sayfa parametresi olan offsetId listesini
-      bu servis ile alabilirsiniz.
+    description: Dışa aktarma servisinin sayfa parametresi olan offsetId listesini bu servis ile alabilirsiniz.
     response_structure:
       status: str
       correlationId: str

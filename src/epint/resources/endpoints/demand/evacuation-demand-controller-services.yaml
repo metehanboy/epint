@@ -12,7 +12,25 @@ endpoints:
     - uniqueCode
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        readingOrganizationId:
+          type: int
+          description: Sayaç okuyan kurum id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        eic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        uniqueCode:
+          type: str
+          description: Tekil kod
     summary: Tahliye Talebi Pasife Al
     description: Tahliye talebini pasife alma servisidir
     response_structure:
@@ -41,7 +59,23 @@ endpoints:
     params: []
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: list
+      description: ''
+      required: false
+      items: object
+      properties:
+        readingOrganizationId:
+          type: int
+          description: Sayaç okuyan kurum id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        eic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
     summary: Toplu Tahliye Talebi Pasife Al
     description: Toplu Tahliye Talebi Pasife Al
     response_structure:
@@ -82,7 +116,72 @@ endpoints:
     - organization
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        page:
+          type: str
+          properties:
+            number:
+              type: int
+              description: ${VALUE_PAGE_NUMBER}
+              example: ${EXAMPLE_PAGE_NUMBER}
+            size:
+              type: int
+              description: ${VALUE_PAGE_SIZE}
+              example: ${EXAMPLE_PAGE_SIZE}
+            total:
+              type: int
+              description: ${VALUE_PAGE_TOTAL}
+              example: ${EXAMPLE_PAGE_TOTAL}
+            sort:
+              type: str
+              description: ${VALUE_PAGE_SORT}
+              properties:
+                field:
+                  type: str
+                  description: ${VALUE_SORT_FIELD}
+                  example: ${EXAMPLE_SORT_FIELD}
+                direction:
+                  type: str
+                  description: ${VALUE_SORT_DIRECTION}
+                  example: ASC
+        periodDates:
+          type: list
+          description: Dönem bilgisi
+          example: '["2020-01-01T00:00:00+03:00"]'
+          items: datetime
+        evacuationDemandDateStart:
+          type: datetime
+          description: Sorgu başlangıç tarihi
+          example: '["2020-01-01T00:00:00+03:00"]'
+        evacuationDemandDateEnd:
+          type: datetime
+          description: Sorgu bitiş tarihi
+          example: '["2020-01-01T00:00:00+03:00"]'
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        eic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        statuses:
+          type: list
+          description: Tahliye talebi durum lookup değeridir
+          items: int
+        readingOrganization:
+          type: int
+          description: Sayaç okuyan kurum id
+        organization:
+          type: int
+          description: Talebi sahibi organizasyon id
     summary: Tahliye Taleplerimi Sorgula
     description: Yapmış olduğunuz veya size bağlı olan organizasyonların yapmış olduğu tahliye taleplerini listeleme servisidir
     response_structure:
@@ -157,7 +256,28 @@ endpoints:
     - meterOwnerOrganizationId
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        readingOrganizationId:
+          type: int
+          description: Sayaç okuyan kurum id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        eic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        meterOwnerOrganizationId:
+          type: int
+          description: Sayaç sahibi organizasyon id
     summary: Tahliye Talebi Reddi Geri Çek
     description: Tahliye talebini reddi geri çek servisidir
     response_structure:
@@ -193,7 +313,32 @@ endpoints:
     required:
     - rejectReason
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        readingOrganizationId:
+          type: int
+          description: Sayaç okuyan kurum id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        eic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        meterOwnerOrganizationId:
+          type: int
+          description: Sayaç sahibi organizasyon id
+        rejectReason:
+          type: int
+          description: Tahliye reddetme nedeni lookup değeridir
+          required: true
     summary: Tahliye Talebini Reddet
     description: Tahliye talebini reddetme servisidir
     response_structure:
@@ -229,7 +374,32 @@ endpoints:
     required:
     - evacuationType
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        readingOrganizationId:
+          type: int
+          description: Sayaç okuyan kurum id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        eic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        evacuationType:
+          type: int
+          description: Tahliye tipi lookup değeridir
+          required: true
+        explanation:
+          type: str
+          description: Tahliye açıklama
     summary: Tahliye Talebi Kaydet
     description: Tahliye edilmek istenen tüketim noktasının talebinin kaydedildiği servistir
     response_structure:
@@ -258,7 +428,30 @@ endpoints:
     params: []
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: list
+      description: ''
+      required: false
+      items: object
+      properties:
+        readingOrganizationId:
+          type: int
+          description: Sayaç okuyan kurum id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        eic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        evacuationType:
+          type: int
+          description: Tahliye tipi lookup değeridir
+          required: true
+        explanation:
+          type: str
+          description: Tahliye açıklama
     summary: Toplu Tahliye Talebi Kaydet
     description: Tahliye edilmek istenen tüketim noktalarının taleplerinin toplu olarak kaydedildiği servistir.
     response_structure:
@@ -293,7 +486,23 @@ endpoints:
     required:
     - evacuationType
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        eic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        evacuationType:
+          type: int
+          description: Tahliye tipi lookup değeridir
+          required: true
+        explanation:
+          type: str
+          description: Tahliye açıklama
     summary: Tahliye Talebi Güncelle
     description: Tahliye taleplerini güncelleme servisidir
     response_structure:

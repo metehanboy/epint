@@ -13,7 +13,26 @@ endpoints:
     required:
     - isPreCheckOperation
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        isPreCheckOperation:
+          type: bool
+          description: Önyüz kullanımı için hazırlanmış istek sonucunda oluşacak durumlarla alakalı kayıt oluşmadan önce geri dönüş alabilmek için konulan ön kontrol değeridir
+          required: true
     summary: Otoprodüktör Sayacı Portföye Ekleme Talebi Kaydet
     description: Portföye eklenmek istenen otoprodüktör sayacının talebinin kaydedildiği servistir
     response_structure:
@@ -50,7 +69,23 @@ endpoints:
     - demandId
     - demandStatusId
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        demandId:
+          type: int
+          description: Talep id
+          required: true
+        demandStatusId:
+          type: int
+          description: Talep durumu lookup değeridir
+          required: true
     summary: Otoprodüktör Sayacı Portföye Ekleme Talebi Durum Güncelle
     description: Portföye eklenmek istenen otoprodüktör sayacının talebinin durumunun güncellendiği servistir
     response_structure:
@@ -84,7 +119,25 @@ endpoints:
     - isPreCheckOperation
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        isPreCheckOperation:
+          type: bool
+          description: Önyüz kullanımı için hazırlanmış istek sonucunda oluşacak durumlarla alakalı kayıt oluşmadan önce geri dönüş alabilmek için konulan ön kontrol değeridir
     summary: Otoprodüktör Sayacı Portföyden Çıkarma Talebi Kaydet
     description: Portföyden çıkarılmak istenen otoprodüktör sayacının talebinin kaydedildiği servistir
     response_structure:
@@ -121,7 +174,23 @@ endpoints:
     - demandId
     - demandStatusId
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        demandId:
+          type: int
+          description: Talep id
+          required: true
+        demandStatusId:
+          type: int
+          description: Talep durumu lookup değeridir
+          required: true
     summary: Otoprodüktör Sayacı Portföyden Çıkarma Talebi Durum Güncelle
     description: Portföyden çıkarılmak istenen otoprodüktör sayacının talebinin durumunun güncellendiği servistir
     response_structure:
@@ -156,7 +225,23 @@ endpoints:
     - demandId
     - isSendToLastSupplier
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        demandId:
+          type: int
+          description: Talep id
+          required: true
+        isSendToLastSupplier:
+          type: bool
+          description: Son tedarikçiye düşürülüp düşürülmeyeceği bilgisidir
+          required: true
     summary: Otoprodüktör Sayacı Portföyden Çıkarma Son Kaynak Tedarikçi Durumu Güncelle
     description: Portföyden çıkarılmak istenen otoprodüktör sayacının portföyden çıktıktan sonra son kaynak tedariğine düşme durumunu güncelleyen servistir
     response_structure:
@@ -195,7 +280,67 @@ endpoints:
     - demandStatus
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        page:
+          type: str
+          properties:
+            number:
+              type: int
+              description: ${VALUE_PAGE_NUMBER}
+              example: ${EXAMPLE_PAGE_NUMBER}
+            size:
+              type: int
+              description: ${VALUE_PAGE_SIZE}
+              example: ${EXAMPLE_PAGE_SIZE}
+            total:
+              type: int
+              description: ${VALUE_PAGE_TOTAL}
+              example: ${EXAMPLE_PAGE_TOTAL}
+            sort:
+              type: str
+              description: ${VALUE_PAGE_SORT}
+              properties:
+                field:
+                  type: str
+                  description: ${VALUE_SORT_FIELD}
+                  example: ${EXAMPLE_SORT_FIELD}
+                direction:
+                  type: str
+                  description: ${VALUE_SORT_DIRECTION}
+                  example: ASC
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        periodDates:
+          type: list
+          description: Dönem bilgisi
+          example: '["2020-01-01T00:00:00+03:00"]'
+          items: datetime
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        demandTypes:
+          type: list
+          description: Talep tipi lookup değeridir
+          items: int
+        demandStatus:
+          type: int
+          description: Talep durumu lookup değeridir
     summary: Karşı Taleplerimi Sorgula
     description: Portföyümüzde bulunan sayaçları etkileyecek olan diğer organizasyonların yaptığı talepleri listeleme servisidir
     response_structure:
@@ -303,7 +448,52 @@ endpoints:
     - demandStatus
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        page:
+          type: str
+          properties:
+            number:
+              type: int
+              description: ${VALUE_PAGE_NUMBER}
+              example: ${EXAMPLE_PAGE_NUMBER}
+            size:
+              type: int
+              description: ${VALUE_PAGE_SIZE}
+              example: ${EXAMPLE_PAGE_SIZE}
+            total:
+              type: int
+              description: ${VALUE_PAGE_TOTAL}
+              example: ${EXAMPLE_PAGE_TOTAL}
+            sort:
+              type: str
+              description: ${VALUE_PAGE_SORT}
+              properties:
+                field:
+                  type: str
+                  description: ${VALUE_SORT_FIELD}
+                  example: ${EXAMPLE_SORT_FIELD}
+                direction:
+                  type: str
+                  description: ${VALUE_SORT_DIRECTION}
+                  example: ASC
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        demandStatus:
+          type: int
+          description: Talep durumu lookup değeridir
     summary: Karşı Taleplerimi Sorgula (Dağıtım)
     description: Portföyümüzde bulunan sayaçları etkileyecek olan diğer organizasyonların yaptığı talepleri listeleme servisidir
     response_structure:
@@ -408,7 +598,11 @@ endpoints:
     required:
     - demandId
     response: Response
-    var_type: []
+    var_type:
+    - name: demandId
+      var_type: int
+      description: Talep id
+      required: true
     summary: Talep Tarihçesini Sorgula
     description: İlgili talebin hangi aşamalardan geçtiğinin ve nihai statüsünün verildiği servistir
     response_structure:
@@ -463,7 +657,11 @@ endpoints:
     required:
     - demandId
     response: Response
-    var_type: []
+    var_type:
+    - name: demandId
+      var_type: int
+      description: Talep id
+      required: true
     summary: OSB Ana Sayaç Talebi Bağlı Talepleri Sorgulama
     description: Osb ana sayaç talebine bağlı oluşmuş talepleri listeler.
     response_structure:
@@ -514,7 +712,53 @@ endpoints:
     required:
     - isCustomerInformationChange
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        isCustomerInformationChange:
+          type: bool
+          description: Kayıtlı bir abone bilgisi var ise abone bilgisinin değiştirilme durumudur
+          required: true
+        categoryTypeId:
+          type: int
+          description: Abone kategori tipi lookup değeridir
+        title:
+          type: str
+          description: Tüketici ad/soyad veya ünvan bilgisi
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        authorizedPerson1Name:
+          type: str
+          description: Birinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson1No:
+          type: str
+          description: Birinci yetkili kişi tckn bilgisi
+        authorizedPerson2Name:
+          type: str
+          description: İkinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson2No:
+          type: str
+          description: İkinci yetkili kişi tckn bilgisi
+        isAgreementChecked:
+          type: bool
+          description: Abone ile yapılmış ikili anlaşma durumu
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        oizOrganizationId:
+          type: int
+          description: OSB organizasyon id
     summary: OSB Ana Sayaç Ekleme Talebi Kaydetme
     description: Ekleme talebi kaydetme servisidir.
     response_structure:
@@ -576,7 +820,25 @@ endpoints:
     - oizOrganizationId
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        oizOrganizationId:
+          type: int
+          description: OSB organizasyon id
     summary: OSB Ana Sayaç Ekleme Talebi Ön Sorgulama
     description: Ekleme talebi oluşturmadan önce osb organizasyon bilgileriyle veya sayaç bilgileriyle sorgulama yapma servisidir.
     response_structure:
@@ -647,7 +909,47 @@ endpoints:
     - demandId
     - isCustomerInformationChange
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        isCustomerInformationChange:
+          type: bool
+          description: Kayıtlı bir abone bilgisi var ise abone bilgisinin değiştirilme durumudur
+          required: true
+        categoryTypeId:
+          type: int
+          description: Abone kategori tipi lookup değeridir
+        title:
+          type: str
+          description: Tüketici ad/soyad veya ünvan bilgisi
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        authorizedPerson1Name:
+          type: str
+          description: Birinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson1No:
+          type: str
+          description: Birinci yetkili kişi tckn bilgisi
+        authorizedPerson2Name:
+          type: str
+          description: İkinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson2No:
+          type: str
+          description: İkinci yetkili kişi tckn bilgisi
+        isAgreementChecked:
+          type: bool
+          description: Abone ile yapılmış ikili anlaşma durumu
+        demandId:
+          type: int
+          description: Talep id
+          required: true
     summary: OSB Ana Sayaç Ekleme Talebi Abone Bilgileri Güncelleme
     description: Ekleme talebi abone bilgileri güncelleme servisidir.
     response_structure:
@@ -684,7 +986,30 @@ endpoints:
     - demandStatusId
     - isPreCheckOperation
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        demandId:
+          type: int
+          description: Talep id
+          required: true
+        demandStatusId:
+          type: int
+          description: Talep durumu lookup değeridir
+          required: true
+        isAgreementChecked:
+          type: bool
+          description: Abone ile yapılmış ikili anlaşma durumu
+        isPreCheckOperation:
+          type: bool
+          description: Önyüz kullanımı için hazırlanmış istek sonucunda oluşacak durumlarla alakalı kayıt oluşmadan önce geri dönüş alabilmek için konulan ön kontrol değeridir
+          required: true
     summary: OSB Ana Sayaç Ekleme Talebi Durum Güncelleme
     description: Ekleme talebi durum güncelleme servisidir.
     response_structure:
@@ -717,7 +1042,25 @@ endpoints:
     - oizOrganizationId
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        oizOrganizationId:
+          type: int
+          description: OSB organizasyon id
     summary: OSB Ana Sayaç Çıkarma Talebi Kaydetme
     description: Çıkarma talebi kaydetme servisidir.
     response_structure:
@@ -765,7 +1108,25 @@ endpoints:
     - oizOrganizationId
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        oizOrganizationId:
+          type: int
+          description: OSB organizasyon id
     summary: OSB Ana Sayaç Çıkarma Talebi Ön Sorgulama
     description: Çıkarma talebi oluşturmadan önce osb organizasyon bilgileriyle veya sayaç bilgileriyle sorgulama yapma servisidir.
     response_structure:
@@ -814,7 +1175,23 @@ endpoints:
     - demandId
     - demandStatusId
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        demandId:
+          type: int
+          description: Talep id
+          required: true
+        demandStatusId:
+          type: int
+          description: Talep durumu lookup değeridir
+          required: true
     summary: OSB Ana Sayaç Çıkarma Talebi Durum Güncelleme
     description: Çıkarma talebi durum güncelleme servisidir.
     response_structure:
@@ -860,7 +1237,60 @@ endpoints:
     - isCustomerInformationChange
     - isPreCheckOperation
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        isCustomerInformationChange:
+          type: bool
+          description: Kayıtlı bir abone bilgisi var ise abone bilgisinin değiştirilme durumudur
+          required: true
+        categoryTypeId:
+          type: int
+          description: Abone kategori tipi lookup değeridir
+        title:
+          type: str
+          description: Tüketici ad/soyad veya ünvan bilgisi
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        authorizedPerson1Name:
+          type: str
+          description: Birinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson1No:
+          type: str
+          description: Birinci yetkili kişi tckn bilgisi
+        authorizedPerson2Name:
+          type: str
+          description: İkinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson2No:
+          type: str
+          description: İkinci yetkili kişi tckn bilgisi
+        isAgreementChecked:
+          type: bool
+          description: Abone ile yapılmış ikili anlaşma durumu
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        meterReadingOrganizationId:
+          type: int
+          description: Sayaç okuyan kurum id
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        isPreCheckOperation:
+          type: bool
+          description: Önyüz kullanımı için hazırlanmış istek sonucunda oluşacak durumlarla alakalı kayıt oluşmadan önce geri dönüş alabilmek için konulan ön kontrol değeridir
+          required: true
     summary: Portföye Ekleme Talebi Kaydet
     description: Portföye eklenmek istenen tüketim noktasının talebinin kaydedildiği servistir
     response_structure:
@@ -910,7 +1340,55 @@ endpoints:
     - isCustomerInformationChange
     - isPreCheckOperation
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        isCustomerInformationChange:
+          type: bool
+          description: Kayıtlı bir abone bilgisi var ise abone bilgisinin değiştirilme durumudur
+          required: true
+        categoryTypeId:
+          type: int
+          description: Abone kategori tipi lookup değeridir
+        title:
+          type: str
+          description: Tüketici ad/soyad veya ünvan bilgisi
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        authorizedPerson1Name:
+          type: str
+          description: Birinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson1No:
+          type: str
+          description: Birinci yetkili kişi tckn bilgisi
+        authorizedPerson2Name:
+          type: str
+          description: İkinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson2No:
+          type: str
+          description: İkinci yetkili kişi tckn bilgisi
+        isAgreementChecked:
+          type: bool
+          description: Abone ile yapılmış ikili anlaşma durumu
+        demandId:
+          type: int
+          description: Talep id
+          required: true
+        demandStatusId:
+          type: int
+          description: Talep durumu lookup değeridir
+          required: true
+        isPreCheckOperation:
+          type: bool
+          description: Önyüz kullanımı için hazırlanmış istek sonucunda oluşacak durumlarla alakalı kayıt oluşmadan önce geri dönüş alabilmek için konulan ön kontrol değeridir
+          required: true
     summary: Portföye Ekleme Talebi Güncelle
     description: Portföye ekleme taleplerini güncelleme servisidir
     response_structure:
@@ -946,7 +1424,20 @@ endpoints:
     required:
     - consumptionPointIds
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        consumptionPointIds:
+          type: list
+          description: Sayaca ait tüketim noktası id
+          required: true
+          items: int
     summary: Portföyden Çıkarma Talebi Kaydet
     description: Portföyden çıkarılmak istenen tüketim noktasının talebinin kaydedildiği servistir
     response_structure:
@@ -982,7 +1473,23 @@ endpoints:
     - demandId
     - demandStatusId
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        demandId:
+          type: int
+          description: Talep id
+          required: true
+        demandStatusId:
+          type: int
+          description: Talep durumu lookup değeridir
+          required: true
     summary: Portföyden Çıkarma Talebi Güncelle
     description: Portföyden çıkarma taleplerini güncelleme servisidir
     response_structure:
@@ -1029,7 +1536,60 @@ endpoints:
     - isCustomerInformationChange
     - isPreCheckOperation
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        isCustomerInformationChange:
+          type: bool
+          description: Kayıtlı bir abone bilgisi var ise abone bilgisinin değiştirilme durumudur
+          required: true
+        categoryTypeId:
+          type: int
+          description: Abone kategori tipi lookup değeridir
+        title:
+          type: str
+          description: Tüketici ad/soyad veya ünvan bilgisi
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        authorizedPerson1Name:
+          type: str
+          description: Birinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson1No:
+          type: str
+          description: Birinci yetkili kişi tckn bilgisi
+        authorizedPerson2Name:
+          type: str
+          description: İkinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson2No:
+          type: str
+          description: İkinci yetkili kişi tckn bilgisi
+        isAgreementChecked:
+          type: bool
+          description: Abone ile yapılmış ikili anlaşma durumu
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        meterReadingOrganizationId:
+          type: int
+          description: Sayaç okuyan kurum id
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        isPreCheckOperation:
+          type: bool
+          description: Önyüz kullanımı için hazırlanmış istek sonucunda oluşacak durumlarla alakalı kayıt oluşmadan önce geri dönüş alabilmek için konulan ön kontrol değeridir
+          required: true
     summary: Yeniden Enerjilendirme Talebi Kaydet
     description: Yeniden enerjilendirme talebinin kaydedildiği servistir
     response_structure:
@@ -1069,7 +1629,67 @@ endpoints:
     - demandStatus
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        page:
+          type: str
+          properties:
+            number:
+              type: int
+              description: ${VALUE_PAGE_NUMBER}
+              example: ${EXAMPLE_PAGE_NUMBER}
+            size:
+              type: int
+              description: ${VALUE_PAGE_SIZE}
+              example: ${EXAMPLE_PAGE_SIZE}
+            total:
+              type: int
+              description: ${VALUE_PAGE_TOTAL}
+              example: ${EXAMPLE_PAGE_TOTAL}
+            sort:
+              type: str
+              description: ${VALUE_PAGE_SORT}
+              properties:
+                field:
+                  type: str
+                  description: ${VALUE_SORT_FIELD}
+                  example: ${EXAMPLE_SORT_FIELD}
+                direction:
+                  type: str
+                  description: ${VALUE_SORT_DIRECTION}
+                  example: ASC
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        periodDates:
+          type: list
+          description: Dönem bilgisi
+          example: '["2020-01-01T00:00:00+03:00"]'
+          items: datetime
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        demandTypes:
+          type: list
+          description: Talep tipi lookup değeridir
+          items: int
+        demandStatus:
+          type: int
+          description: Talep durumu lookup değeridir
     summary: Taleplerimi Sorgula
     description: Yapmış olduğunuz veya size bağlı olan organizasyonların yapmış olduğu talepleri listeleme servisidir
     response_structure:

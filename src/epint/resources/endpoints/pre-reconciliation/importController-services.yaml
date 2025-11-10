@@ -19,8 +19,7 @@ endpoints:
     - body
     var_type: []
     summary: Saatlik Sayaç Verilerini OSF Excel İle Yükleme Servisi
-    description: Saatlik sayaç verilerini OSF excel formatında sisteme kaydedilmesini
-      sağlar.
+    description: Saatlik sayaç verilerini OSF excel formatında sisteme kaydedilmesini sağlar.
     response_structure:
       status: str
       correlationId: str
@@ -40,8 +39,7 @@ endpoints:
     method: POST
     auth: true
     short_name: psf_import
-    short_name_tr: Üç ve Tek Zamanlı Sayaç Verilerini PSF Excel Formatı İle Yükleme
-      Servisi
+    short_name_tr: Üç ve Tek Zamanlı Sayaç Verilerini PSF Excel Formatı İle Yükleme Servisi
     params: []
     required: null
     response:
@@ -56,8 +54,7 @@ endpoints:
     - body
     var_type: []
     summary: Üç ve Tek Zamanlı Sayaç Verilerini PSF Excel Formatı İle Yükleme Servisi
-    description: Üç ve tek zamanlı sayaçların PSF excel formatında topluca sisteme
-      kaydedilmesini sağlar.
+    description: Üç ve tek zamanlı sayaçların PSF excel formatında topluca sisteme kaydedilmesini sağlar.
     response_structure:
       status: str
       correlationId: str
@@ -92,8 +89,7 @@ endpoints:
     - body
     var_type: []
     summary: Üç ve Tek Zamanlı Sayaç Verilerini SVL Formatı İle Yükleme Servisi
-    description: Üç ve tek zamanlı sayaçların SVL formatında topluca sisteme kaydedilmesini
-      sağlar.
+    description: Üç ve tek zamanlı sayaçların SVL formatında topluca sisteme kaydedilmesini sağlar.
     response_structure:
       status: str
       correlationId: str
@@ -113,8 +109,7 @@ endpoints:
     method: POST
     auth: true
     short_name: retro_import_osf_form
-    short_name_tr: GDDK Saatlik Sayaç Verilerini OSF Excel Formatı İle Sisteme Yükleme
-      Servisi
+    short_name_tr: GDDK Saatlik Sayaç Verilerini OSF Excel Formatı İle Sisteme Yükleme Servisi
     params: []
     required: null
     response:
@@ -129,8 +124,7 @@ endpoints:
     - body
     var_type: []
     summary: GDDK Saatlik Sayaç Verilerini OSF Excel Formatı İle Sisteme Yükleme Servisi
-    description: GDDK Saatlik sayaç verilerinin OSF excel formatında sisteme kaydedilmesini
-      sağlar.
+    description: GDDK Saatlik sayaç verilerinin OSF excel formatında sisteme kaydedilmesini sağlar.
     response_structure:
       status: str
       correlationId: str
@@ -150,8 +144,7 @@ endpoints:
     method: POST
     auth: true
     short_name: import_psf_form
-    short_name_tr: GDDK Üç ve Tek Zamanlı Sayaç Verilerini PSF Excel Formatı İle Sisteme
-      Yükleme Servisi
+    short_name_tr: GDDK Üç ve Tek Zamanlı Sayaç Verilerini PSF Excel Formatı İle Sisteme Yükleme Servisi
     params: []
     required: null
     response:
@@ -165,10 +158,8 @@ endpoints:
     - errors
     - body
     var_type: []
-    summary: GDDK Üç ve Tek Zamanlı Sayaç Verilerini PSF Excel Formatı İle Sisteme
-      Yükleme Servisi
-    description: GDDK Üç ve tek zamanlı sayaç verilerinin PSF excel formatında topluca
-      sisteme kaydedilmesini sağlar.
+    summary: GDDK Üç ve Tek Zamanlı Sayaç Verilerini PSF Excel Formatı İle Sisteme Yükleme Servisi
+    description: GDDK Üç ve tek zamanlı sayaç verilerinin PSF excel formatında topluca sisteme kaydedilmesini sağlar.
     response_structure:
       status: str
       correlationId: str
@@ -203,8 +194,7 @@ endpoints:
     - body
     var_type: []
     summary: GDDK Saatlik Sayaç Verilerini SVL Formatı İle Sisteme Yükleme Servisi
-    description: GDDK Saatlik sayaç verilerinin SVL formatında sisteme kaydedilmesini
-      sağlar.
+    description: GDDK Saatlik sayaç verilerinin SVL formatında sisteme kaydedilmesini sağlar.
     response_structure:
       status: str
       correlationId: str

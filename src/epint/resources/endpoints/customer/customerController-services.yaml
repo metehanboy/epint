@@ -29,8 +29,7 @@ endpoints:
       description: Abone tüketici no bilgisi.
       required: false
     summary: Portföyde önceden Tanımlanmış Abone Durumunu Getir
-    description: Tüketicinin bu kayıttan etkilenerek güncellenecek başka aboneliğinin
-      olup olmadığının kontrol edildiği servistir.
+    description: Tüketicinin bu kayıttan etkilenerek güncellenecek başka aboneliğinin olup olmadığının kontrol edildiği servistir.
     response_structure:
       status: str
       correlationId: str
@@ -155,8 +154,7 @@ endpoints:
       required: false
     - name: authorizedPerson1Name
       var_type: str
-      description: Birinci yetkili kişi ad/soyad bilgisi. Abone tipine göre zorunluluk
-        arz edebilir.
+      description: Birinci yetkili kişi ad/soyad bilgisi. Abone tipine göre zorunluluk arz edebilir.
       required: false
     - name: authorizedPerson2Name
       var_type: str
@@ -164,8 +162,7 @@ endpoints:
       required: false
     - name: authorizedPerson1No
       var_type: str
-      description: Birinci yetkili kişi tckn bilgisi. Abone tipine göre zorunluluk
-        arz edebilir.
+      description: Birinci yetkili kişi tckn bilgisi. Abone tipine göre zorunluluk arz edebilir.
       required: false
     - name: authorizedPerson2No
       var_type: str
@@ -329,8 +326,7 @@ endpoints:
       description: Portföyünde bulunma durumu lookup değeri.
       required: false
     summary: Kayıt Geçerlilik Ön Kontrolü
-    description: Önyüz kullanımı için abonenin kaydını yapılıp yapılamacağının bilgisinin
-      aldığı servistir. Kayıt servisi ön kontrol olarak bu validasyonaları yapmaktadır.
+    description: Önyüz kullanımı için abonenin kaydını yapılıp yapılamacağının bilgisinin aldığı servistir. Kayıt servisi ön kontrol olarak bu validasyonaları yapmaktadır.
     response_structure:
       status: str
       correlationId: str
@@ -411,8 +407,7 @@ endpoints:
       required: false
     - name: consumptionPointEicCode
       var_type: str
-      description: Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği
-        durumda gönderilmemelidir.
+      description: Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği durumda gönderilmemelidir.
       required: false
       example: 40X000000000002C
     - name: consumptionPointId
@@ -469,8 +464,7 @@ endpoints:
           type: object
           description: Sıralama ayarlaması
     summary: Abone Sorgula
-    description: Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin sorgulandığı
-      servistir.
+    description: Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin sorgulandığı servistir.
     response_structure:
       status: str
       correlationId: str
@@ -566,8 +560,7 @@ endpoints:
       required: false
     - name: consumptionPointEicCode
       var_type: str
-      description: Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği
-        durumda gönderilmemelidir.
+      description: Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği durumda gönderilmemelidir.
       required: false
       example: 40X000000000002C
     - name: consumptionPointId
@@ -604,8 +597,7 @@ endpoints:
       required: false
       items: int
     summary: Abone Sorgulama Kayıt Sayısı
-    description: Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin kayıt
-      sayılarının sorgulandığı servistir.
+    description: Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin kayıt sayılarının sorgulandığı servistir.
     response_structure:
       status: str
       correlationId: str
@@ -657,8 +649,7 @@ endpoints:
       required: false
     - name: consumptionPointEicCode
       var_type: str
-      description: Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği
-        durumda gönderilmemelidir.
+      description: Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği durumda gönderilmemelidir.
       required: false
       example: 40X000000000002C
     - name: consumptionPointId
@@ -715,8 +706,7 @@ endpoints:
           type: object
           description: Sıralama ayarlaması
     summary: Kayıt Sayısı Olmadan Abone Sorgulama
-    description: Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin kayıt
-      sayısı olmadan sorgulandığı servistir.
+    description: Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin kayıt sayısı olmadan sorgulandığı servistir.
     response_structure:
       status: str
       correlationId: str
@@ -813,8 +803,7 @@ endpoints:
     var_type:
     - name: consumptionPointEicCode
       var_type: str
-      description: Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği
-        durumda gönderilmemelidir.
+      description: Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği durumda gönderilmemelidir.
       required: false
       example: 40X000000000002C
     - name: consumptionPointId
@@ -845,8 +834,7 @@ endpoints:
       required: false
     - name: authorizedPerson1Name
       var_type: str
-      description: Birinci yetkili kişi ad/soyad bilgisi. Abone tipine göre zorunluluk
-        arz edebilir.
+      description: Birinci yetkili kişi ad/soyad bilgisi. Abone tipine göre zorunluluk arz edebilir.
       required: false
     - name: authorizedPerson2Name
       var_type: str
@@ -854,8 +842,7 @@ endpoints:
       required: false
     - name: authorizedPerson1No
       var_type: str
-      description: Birinci yetkili kişi tckn bilgisi. Abone tipine göre zorunluluk
-        arz edebilir.
+      description: Birinci yetkili kişi tckn bilgisi. Abone tipine göre zorunluluk arz edebilir.
       required: false
     - name: authorizedPerson2No
       var_type: str

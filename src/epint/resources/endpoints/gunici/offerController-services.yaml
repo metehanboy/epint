@@ -370,8 +370,7 @@ endpoints:
       description: ''
       required: false
     summary: Teklif Geçmiş Listeleme
-    description: Tekliflerin üzerindeki değişimlerinin tarihsel olarak listelendiği
-      servis
+    description: Tekliflerin üzerindeki değişimlerinin tarihsel olarak listelendiği servis
     response_structure:
       status: str
       txId: str
@@ -785,8 +784,7 @@ endpoints:
       description: Bölge
       required: false
     summary: Teklifler Geçmiş Listeleme
-    description: Tekliflerin üzerindeki değişimlerinin tarihsel olarak listelendiği
-      servis
+    description: Tekliflerin üzerindeki değişimlerinin tarihsel olarak listelendiği servis
     response_structure:
       status: str
       txId: str

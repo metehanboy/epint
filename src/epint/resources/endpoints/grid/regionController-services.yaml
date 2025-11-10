@@ -19,8 +19,7 @@ endpoints:
     - body
     var_type: []
     summary: Teklif Bölgesi Konfigürasyon Alan İsimleri Çekme Servisi
-    description: Teklif bölgesi konfigürasyon alan isim bilgilerini bu servis ile
-      çekebilirsiniz.
+    description: Teklif bölgesi konfigürasyon alan isim bilgilerini bu servis ile çekebilirsiniz.
     response_structure:
       status: str
       correlationId: str

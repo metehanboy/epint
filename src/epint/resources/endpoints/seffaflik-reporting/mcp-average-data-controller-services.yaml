@@ -12,7 +12,22 @@ endpoints:
     - endDate
     - startDate
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
     summary: Epiaş Web Sitesi İçin GÖP Takas Fiyatı Günlük Aritmetik Ortalama Listeleme Servisi
     description: Epiaş web sitesinde gösterilmek üzere piyasa takas fiyatının seçilen tarihlere göre günlük aritmetik ortalamasını dönen servistir.
     response_structure:
@@ -41,7 +56,22 @@ endpoints:
     - endDate
     - startDate
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
     summary: GÖP Piyasa Takas Fiyatı Aritmetik Ortalama Listeleme Servisi
     description: Piyasa takas fiyatının seçilen tarihlere göre çeyreklik(QUARTERLY), yarı-yıl(HALF-YEAR) ve yıllık(YEARLY) aritmetik ortalamasını dönen servistir.
     response_structure:
@@ -70,7 +100,22 @@ endpoints:
     - endDate
     - startDate
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
     summary: GÖP Piyasa Takas Fiyatı Aylık Aritmetik Ortalama Listeleme Servisi
     description: Piyasa takas fiyatının seçilen tarihlere göre aylık aritmetik ortalamasını dönen servistir.
     response_structure:
@@ -99,7 +144,22 @@ endpoints:
     - endDate
     - startDate
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        startDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
+        endDate:
+          type: datetime
+          description: '`2023-01-01T00:00:00+03:00` formatında başlangıç tarihi bilgisi.'
+          example: '2021-01-01T00:00:00+03:00'
+          required: true
     summary: GÖP Piyasa Takas Fiyatı Haftalık Aritmetik Ortalama Listeleme Servisi
     description: Piyasa takas fiyatının seçilen tarihlere göre haftalık aritmetik ortalamasını dönen servistir.
     response_structure:

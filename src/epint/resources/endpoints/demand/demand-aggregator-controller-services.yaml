@@ -22,7 +22,79 @@ endpoints:
     - electricSupplyParticipation
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        page:
+          type: str
+          properties:
+            number:
+              type: int
+              description: ${VALUE_PAGE_NUMBER}
+              example: ${EXAMPLE_PAGE_NUMBER}
+            size:
+              type: int
+              description: ${VALUE_PAGE_SIZE}
+              example: ${EXAMPLE_PAGE_SIZE}
+            total:
+              type: int
+              description: ${VALUE_PAGE_TOTAL}
+              example: ${EXAMPLE_PAGE_TOTAL}
+            sort:
+              type: str
+              description: ${VALUE_PAGE_SORT}
+              properties:
+                field:
+                  type: str
+                  description: ${VALUE_SORT_FIELD}
+                  example: ${EXAMPLE_SORT_FIELD}
+                direction:
+                  type: str
+                  description: ${VALUE_SORT_DIRECTION}
+                  example: ASC
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        periodDates:
+          type: list
+          description: Dönem bilgisi
+          example: '["2020-01-01T00:00:00+03:00"]'
+          items: datetime
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        demandTypes:
+          type: list
+          description: Talep tipi lookup değeridir
+          items: int
+        demandStatus:
+          type: int
+          description: Talep durumu lookup değeridir
+        gridTypeId:
+          type: int
+          description: Şebeke tipi id
+        balancingRegionId:
+          type: int
+          description: Dengeleme Bölgesi ID
+        demandSideParticipation:
+          type: bool
+        balancingMarketParticipation:
+          type: bool
+        electricSupplyParticipation:
+          type: bool
     summary: Talep Toplayıcı Karşı Taleplerimi Sorgula
     description: Talep Toplayıcı Portföyünde bulunan sayaçları etkileyecek olan diğer organizasyonların yaptığı talepleri listeleme servisidir
     response_structure:
@@ -132,7 +204,11 @@ endpoints:
     required:
     - demandId
     response: Response
-    var_type: []
+    var_type:
+    - name: demandId
+      var_type: int
+      description: Talep id
+      required: true
     summary: Talep Toplayıcı Tarihçesini Sorgula
     description: İlgili talebin hangi aşamalardan geçtiğinin ve nihai statüsünün verildiği servistir
     response_structure:
@@ -198,7 +274,58 @@ endpoints:
     required:
     - isCustomerInformationChange
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        isCustomerInformationChange:
+          type: bool
+          description: Kayıtlı bir abone bilgisi var ise abone bilgisinin değiştirilme durumudur
+          required: true
+        categoryTypeId:
+          type: int
+          description: Abone kategori tipi lookup değeridir
+        title:
+          type: str
+          description: Tüketici ad/soyad veya ünvan bilgisi
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        authorizedPerson1Name:
+          type: str
+          description: Birinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson1No:
+          type: str
+          description: Birinci yetkili kişi tckn bilgisi
+        authorizedPerson2Name:
+          type: str
+          description: İkinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson2No:
+          type: str
+          description: İkinci yetkili kişi tckn bilgisi
+        isAgreementChecked:
+          type: bool
+          description: Abone ile yapılmış ikili anlaşma durumu
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+        isDemandSideParticipation:
+          type: bool
+          description: Toplayıcılık talep tarafı katılım bilgisi
+        isBalancingMarketParticipation:
+          type: bool
+          description: Toplayıcılık dengeleme güç piyasası katılım bilgisi
+        warningConfirmation:
+          type: bool
+          description: Talep kaydı uyarı mesajı onaylama bilgisi.
     summary: Talep Toplayıcı Ekleme Talebi kaydet
     description: Talep toplayıcı Ekleme Talebi Servisidir
     response_structure:
@@ -333,7 +460,27 @@ endpoints:
     - isBalancingMarketParticipation
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+        isDemandSideParticipation:
+          type: bool
+          description: Toplayıcılık talep tarafı katılım bilgisi
+        isBalancingMarketParticipation:
+          type: bool
+          description: Toplayıcılık dengeleme güç piyasası katılım bilgisi
     summary: Talep Toplayıcı Ekleme Talebi Ön Sorgu
     description: Önyüz kullanımı için hazırlanmış ilgili tüketim noktası için ekleme talep yapmadan önce sorgulama yapılabilecek servistir
     response_structure:
@@ -398,7 +545,55 @@ endpoints:
     required:
     - isCustomerInformationChange
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        isCustomerInformationChange:
+          type: bool
+          description: Kayıtlı bir abone bilgisi var ise abone bilgisinin değiştirilme durumudur
+          required: true
+        categoryTypeId:
+          type: int
+          description: Abone kategori tipi lookup değeridir
+        title:
+          type: str
+          description: Tüketici ad/soyad veya ünvan bilgisi
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        authorizedPerson1Name:
+          type: str
+          description: Birinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson1No:
+          type: str
+          description: Birinci yetkili kişi tckn bilgisi
+        authorizedPerson2Name:
+          type: str
+          description: İkinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson2No:
+          type: str
+          description: İkinci yetkili kişi tckn bilgisi
+        isAgreementChecked:
+          type: bool
+          description: Abone ile yapılmış ikili anlaşma durumu
+        demandId:
+          type: int
+          description: Talep id
+        isDemandSideParticipation:
+          type: bool
+          description: Toplayıcılık talep tarafı katılım bilgisi
+        isBalancingMarketParticipation:
+          type: bool
+          description: Toplayıcılık dengeleme güç piyasası katılım bilgisi
+        warningConfirmation:
+          type: bool
+          description: Talep kaydı uyarı mesajı onaylama bilgisi.
     summary: Talep Toplayıcı Ekleme Talebi Güncelleme
     description: Talep Toplayıcı Ekleme Talebi Güncelleme Servisidir
     response_structure:
@@ -542,7 +737,52 @@ endpoints:
     required:
     - isCustomerInformationChange
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        isCustomerInformationChange:
+          type: bool
+          description: Kayıtlı bir abone bilgisi var ise abone bilgisinin değiştirilme durumudur
+          required: true
+        categoryTypeId:
+          type: int
+          description: Abone kategori tipi lookup değeridir
+        title:
+          type: str
+          description: Tüketici ad/soyad veya ünvan bilgisi
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        authorizedPerson1Name:
+          type: str
+          description: Birinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson1No:
+          type: str
+          description: Birinci yetkili kişi tckn bilgisi
+        authorizedPerson2Name:
+          type: str
+          description: İkinci yetkili kişi ad/soyad bilgisi
+        authorizedPerson2No:
+          type: str
+          description: İkinci yetkili kişi tckn bilgisi
+        isAgreementChecked:
+          type: bool
+          description: Abone ile yapılmış ikili anlaşma durumu
+        demandId:
+          type: int
+          description: Talep id
+        isDemandSideParticipation:
+          type: bool
+          description: Toplayıcılık talep tarafı katılım bilgisi
+        isBalancingMarketParticipation:
+          type: bool
+          description: Toplayıcılık dengeleme güç piyasası katılım bilgisi
     summary: Talep Toplayıcı Ekleme Talebi Güncelleme Ön Sorgu
     description: Talep Toplayıcı Ekleme talebi güncelleme Ön Sorgu servisi
     response_structure:
@@ -597,7 +837,27 @@ endpoints:
     - isBalancingMarketParticipation
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+        isDemandSideParticipation:
+          type: bool
+          description: Toplayıcılık talep tarafı katılım bilgisi
+        isBalancingMarketParticipation:
+          type: bool
+          description: Toplayıcılık dengeleme güç piyasası katılım bilgisi
     summary: Talep Toplayıcı Portföyden Çıkarma Talebi Kaydet
     description: Talep Toplayıcı Portföyden çıkarılmak istenen tüketim noktasının talebinin kaydedildiği servistir
     response_structure:
@@ -732,7 +992,27 @@ endpoints:
     - isBalancingMarketParticipation
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+        isDemandSideParticipation:
+          type: bool
+          description: Toplayıcılık talep tarafı katılım bilgisi
+        isBalancingMarketParticipation:
+          type: bool
+          description: Toplayıcılık dengeleme güç piyasası katılım bilgisi
     summary: Talep Toplacıyı portföy Çıkarma Talebi Ön Sorgu
     description: Talep Toplacıyı için çıkarma talep yapmadan önce abone bilgileriyle sorgulama yapılabilecek servistir
     response_structure:
@@ -785,7 +1065,21 @@ endpoints:
     - isBalancingMarketParticipation
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        demandId:
+          type: int
+          description: Talep id
+        isDemandSideParticipation:
+          type: bool
+          description: Toplayıcılık talep tarafı katılım bilgisi
+        isBalancingMarketParticipation:
+          type: bool
+          description: Toplayıcılık dengeleme güç piyasası katılım bilgisi
     summary: Portföyden Çıkarma Talebi Güncelle
     description: Portföyden çıkarma taleplerini güncelleme servisidir
     response_structure:
@@ -929,7 +1223,79 @@ endpoints:
     - electricSupplyParticipation
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        page:
+          type: str
+          properties:
+            number:
+              type: int
+              description: ${VALUE_PAGE_NUMBER}
+              example: ${EXAMPLE_PAGE_NUMBER}
+            size:
+              type: int
+              description: ${VALUE_PAGE_SIZE}
+              example: ${EXAMPLE_PAGE_SIZE}
+            total:
+              type: int
+              description: ${VALUE_PAGE_TOTAL}
+              example: ${EXAMPLE_PAGE_TOTAL}
+            sort:
+              type: str
+              description: ${VALUE_PAGE_SORT}
+              properties:
+                field:
+                  type: str
+                  description: ${VALUE_SORT_FIELD}
+                  example: ${EXAMPLE_SORT_FIELD}
+                direction:
+                  type: str
+                  description: ${VALUE_SORT_DIRECTION}
+                  example: ASC
+        selectedOrganizationId:
+          type: int
+          description: Talebi sahibi organizasyon id
+        periodDates:
+          type: list
+          description: Dönem bilgisi
+          example: '["2020-01-01T00:00:00+03:00"]'
+          items: datetime
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        customerNo:
+          type: str
+          description: Abone tüketici no bilgisi
+        demandTypes:
+          type: list
+          description: Talep tipi lookup değeridir
+          items: int
+        demandStatus:
+          type: int
+          description: Talep durumu lookup değeridir
+        gridTypeId:
+          type: int
+          description: Şebeke tipi id
+        balancingRegionId:
+          type: int
+          description: Dengeleme Bölgesi ID
+        demandSideParticipation:
+          type: bool
+        balancingMarketParticipation:
+          type: bool
+        electricSupplyParticipation:
+          type: bool
     summary: Talep Toplayıcı Sorgusu Oluştur
     description: Talep Toplayıcı Sorgusu Oluşturma
     response_structure:
@@ -1040,7 +1406,19 @@ endpoints:
     required:
     - demandStatusId
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        demandId:
+          type: int
+          description: Talep id
+        demandStatusId:
+          type: int
+          description: Talep durumu lookup değeridir
+          required: true
     summary: Talep Toplayıcı Taleblerin Durum Gümcelleme
     description: Talep Toplayıcı Taleblerin Durum Gümcellemesi
     response_structure:

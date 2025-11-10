@@ -13,7 +13,28 @@ endpoints:
     - serial
     required: []
     response: Response
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: ''
+      required: false
+      properties:
+        consumptionPointEic:
+          type: str
+          description: Sayaca ait enerji tanımlama kodu (EIC)
+          example: 40X000000000002C
+        consumptionPointId:
+          type: int
+          description: Sayaca ait tüketim noktası id
+        meterReadingOrganizationId:
+          type: int
+          description: Sayaç okuyan kurum id
+        uniqueCode:
+          type: str
+          description: Tekil kod
+        serial:
+          type: str
+          description: Seri kod
     summary: Serbest Tüketici Sorgulama
     description: Tüketim noktası bilgileriyle serbest tüketici bilgilerinin sorgulanabileceği servistir
     response_structure:

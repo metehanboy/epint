@@ -64,8 +64,7 @@ endpoints:
           type: object
           description: Sıralama ayarlaması
     summary: LUY Fatura Geçmiş Listeleme
-    description: Lisanssız üretim yapan UEVCB'lere ait faturaların versiyon geçmişini
-      listeler.
+    description: Lisanssız üretim yapan UEVCB'lere ait faturaların versiyon geçmişini listeler.
     response_structure:
       status: str
       correlationId: str
@@ -576,8 +575,7 @@ endpoints:
       required: false
       example: 40W000000000001V
     summary: LUY Fatura Geçmiş Listeleme
-    description: Lisanssız üretim yapan UEVCB'lere ait faturaların versiyon geçmişini
-      listeler.
+    description: Lisanssız üretim yapan UEVCB'lere ait faturaların versiyon geçmişini listeler.
     response_structure:
       view: str
       model: dict

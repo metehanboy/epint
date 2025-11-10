@@ -5,8 +5,8 @@ endpoints:
     auth: true
     short_name: MenuController_getMenuTree_GET
     short_name_tr: MenuController_getMenuTree_GET
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: ''
@@ -23,7 +23,14 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        menuId:
+          type: int
     summary: Sayfa Ayarları
     description: Sayfa metin açıklamaları ve sayfa ayalarını içeren servis
     response_structure: {}
@@ -38,7 +45,14 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        menuId:
+          type: int
     summary: Sayfa Son Güncelleme Zamanı
     description: Sayfada gösterilen verilerin son güncelleme zamanını döner.
     response_structure: {}

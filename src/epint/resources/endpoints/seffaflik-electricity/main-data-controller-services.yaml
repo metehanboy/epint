@@ -5,8 +5,8 @@ endpoints:
     auth: true
     short_name: date-init
     short_name_tr: Ana Tarih Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Ana Tarih Servisi
@@ -23,7 +23,16 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: []
+    var_type:
+    - name: body
+      var_type: object
+      description: Yapılacak isteğin içeriği.
+      required: true
+      properties:
+        provinceId:
+          type: int
+          description: Şehir Id bilgisi(bkz.Şehir Listesi Getirme Servisi)
+          required: true
     summary: İlçe Listeleme Servisi
     description: Şehir bilgisine göre ilçe listelesini dönen servistir.
     response_structure: {}
@@ -33,8 +42,8 @@ endpoints:
     auth: true
     short_name: province-list
     short_name_tr: Şehir Listeleme Servisi
-    params:
-    required:
+    params: null
+    required: null
     response: ''
     var_type: []
     summary: Şehir Listeleme Servisi

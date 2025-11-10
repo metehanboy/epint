@@ -1180,8 +1180,7 @@ endpoints:
       required: false
       example: TR1
     summary: GİP Uzlaştırma Raporu Export Servisi
-    description: Saatlik alış-satış tutar ve miktar bilgilerinin verildiği export
-      servisidir.
+    description: Saatlik alış-satış tutar ve miktar bilgilerinin verildiği export servisidir.
     response_structure:
       view: str
       model: dict
