@@ -7,15 +7,12 @@ endpoints:
     short_name_tr: Piyasa Mesaj Sistemi Dışa Aktarım Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Piyasa Mesaj Sistemi Dışa Aktarım Servisi
-    description: İlgili santralin arıza veya bakım bilgileridir.Piyasa Mesaj Sistemi
-      Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: İlgili santralin arıza veya bakım bilgileridir.Piyasa Mesaj Sistemi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   maximum-settlement-price-export:
     endpoint: /v1/markets/export/maximum-settlement-price
@@ -25,15 +22,10 @@ endpoints:
     short_name_tr: Azami Uzlaştırma Fiyatı (AUF) Dışa Aktarım Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Azami Uzlaştırma Fiyatı (AUF) Dışa Aktarım Servisi
-    description: Kaynak Bazında Destekleme Bedelinin hesaplanmasında kullanılan “Azami
-      Uzlaştırma Fiyat” değerleridir. AUF uygulaması Ekim 2023 tarihi ile birlikte
-      yürürlükten kalkmıştır. Azami Uzlaştırma Fiyatı (AUF) Listesini XLSX, CSV ya
-      da PDF olarak dışa aktarır.
+    description: Kaynak Bazında Destekleme Bedelinin hesaplanmasında kullanılan “Azami Uzlaştırma Fiyat” değerleridir. AUF uygulaması Ekim 2023 tarihi ile birlikte yürürlükten kalkmıştır. Azami Uzlaştırma Fiyatı (AUF) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}

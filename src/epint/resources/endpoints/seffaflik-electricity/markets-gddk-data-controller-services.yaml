@@ -6,11 +6,9 @@ endpoints:
     short_name: distribution-list
     short_name_tr: Dağıtım Liste Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Dağıtım Liste Servisi
     description: GDDK Dağıtım Liste
     response_structure: {}
@@ -22,16 +20,12 @@ endpoints:
     short_name_tr: GDDK'ya Konu olan Sayaç Sayısı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GDDK'ya Konu olan Sayaç Sayısı Listeleme Servisi
-    description: Geçmiş 12 ay içindeki ilgili ayın tüketiminin eksik ya da fazla faturalandırılması
-      nedeniyle faturaya yansıtalan kalem “Geçmişe Dönük Düzeltme Kalemi” olarak adlandırılır.
-      Bu veri GDDK ile ilişkilendirilen sayaç sayısını ifade eder.
+    description: Geçmiş 12 ay içindeki ilgili ayın tüketiminin eksik ya da fazla faturalandırılması nedeniyle faturaya yansıtalan kalem “Geçmişe Dönük Düzeltme Kalemi” olarak adlandırılır. Bu veri GDDK ile ilişkilendirilen sayaç sayısını ifade eder.
     response_structure: {}
   meter-volume-subject-to-retroactive-adjustment:
     endpoint: /v1/markets/retroactive-adjustment/data/meter-volume
@@ -41,16 +35,12 @@ endpoints:
     short_name_tr: GDDK'ya Konu olan Sayaç Hacim Verileri Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GDDK'ya Konu olan Sayaç Hacim Verileri Listeleme Servisi
-    description: Geçmiş 12 ay içindeki ilgili ayın tüketiminin eksik ya da fazla faturalandırılması
-      nedeniyle faturaya yansıtılan kalem 'Geçmişe Dönük Düzeltme Kalemi' olarak adlandırılır.
-      Bu veri GDDK ile ilişkilendirilen sayaçların hacim verilerini ifade eder.
+    description: Geçmiş 12 ay içindeki ilgili ayın tüketiminin eksik ya da fazla faturalandırılması nedeniyle faturaya yansıtılan kalem 'Geçmişe Dönük Düzeltme Kalemi' olarak adlandırılır. Bu veri GDDK ile ilişkilendirilen sayaçların hacim verilerini ifade eder.
     response_structure: {}
   gddk-organization-list:
     endpoint: /v1/markets/retroactive-adjustment/data/organization-list
@@ -59,11 +49,9 @@ endpoints:
     short_name: gddk-organization-list
     short_name_tr: Sayaç Okuyan Kurum Liste Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Sayaç Okuyan Kurum Liste Servisi
     description: GDDK Sayaç Okuyan Kurum Liste
     response_structure: {}
@@ -75,16 +63,12 @@ endpoints:
     short_name_tr: Gddk Tutarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Gddk Tutarı Listeleme Servisi
-    description: Geçmiş 12 ay içindeki ilgili ayın tüketiminin eksik ya da fazla faturalandırılması
-      nedeniyle faturaya yansıtılan kalem 'Geçmişe Dönük Düzeltme Kalemi' olarak adlandırılır.
-      Bu veri GDDK ile ilişkilendirilen finansal tutarı ifade eder.
+    description: Geçmiş 12 ay içindeki ilgili ayın tüketiminin eksik ya da fazla faturalandırılması nedeniyle faturaya yansıtılan kalem 'Geçmişe Dönük Düzeltme Kalemi' olarak adlandırılır. Bu veri GDDK ile ilişkilendirilen finansal tutarı ifade eder.
     response_structure: {}
   subscriber-profile-group-list:
     endpoint: /v1/markets/retroactive-adjustment/data/subscriber-profile-group-list
@@ -93,11 +77,9 @@ endpoints:
     short_name: subscriber-profile-group-list
     short_name_tr: Profil Abone Grubu Liste Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Profil Abone Grubu Liste Servisi
     description: GDDK Profil Abone Grubu Liste
     response_structure: {}
@@ -108,11 +90,9 @@ endpoints:
     short_name: volume-subscriber-profile-group-list
     short_name_tr: GDDK Hacim Profil Abone Grubu Liste Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GDDK Hacim Profil Abone Grubu Liste Servisi
     description: GDDK Hacim Profil Abone Grubu Liste
     response_structure: {}

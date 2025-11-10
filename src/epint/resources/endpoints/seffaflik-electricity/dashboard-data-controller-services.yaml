@@ -6,14 +6,11 @@ endpoints:
     short_name: dashboard-balancing-power-market
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Dengeleme Güç Piyasası Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Dengeleme Güç Piyasası Servisi
-    description: Şeffaflık Ana Sayfasında gösterilmek üzere,dengeleme güç piyasası
-      verilerini getirir.
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere,dengeleme güç piyasası verilerini getirir.
     response_structure: {}
   dashboard-day-ahead-market:
     endpoint: /v1/dashboard/day-ahead-market
@@ -22,11 +19,9 @@ endpoints:
     short_name: dashboard-day-ahead-market
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gün Öncesi Piyasası Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Gün Öncesi Piyasası Servisi
     description: Şeffaflık Ana Sayfası(Dashboard) Gün Öncesi Piyasası Servisi
     response_structure: {}
@@ -37,14 +32,11 @@ endpoints:
     short_name: intra-day-market
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gün İçi Piyasası Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Gün İçi Piyasası Servisi
-    description: Şeffaflık Ana Sayfasında gösterilmek üzere, Gün İçi Piyasası verilerini
-      getirir.
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere, Gün İçi Piyasası verilerini getirir.
     response_structure: {}
   dashboard-market-message-system:
     endpoint: /v1/dashboard/market-message-system
@@ -53,14 +45,11 @@ endpoints:
     short_name: dashboard-market-message-system
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Piyasa Mesaj Sistemi Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Piyasa Mesaj Sistemi Servisi
-    description: Şeffaflık Ana Sayfasında gösterilmek üzere, piyasa mesaj sistemi
-      verilerini getirir.
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere, piyasa mesaj sistemi verilerini getirir.
     response_structure: {}
   dashboard-realtime-consumption:
     endpoint: /v1/dashboard/realtime-consumption
@@ -69,14 +58,11 @@ endpoints:
     short_name: dashboard-realtime-consumption
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Tüketim Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Tüketim Servisi
-    description: Şeffaflık Ana Sayfasında gösterilmek üzere, gerçek zamanlı Tüketim
-      verilerini getirir.
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere, gerçek zamanlı Tüketim verilerini getirir.
     response_structure: {}
   dashboard-realtime-generation:
     endpoint: /v1/dashboard/realtime-generation
@@ -85,14 +71,11 @@ endpoints:
     short_name: dashboard-realtime-generation
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Üretim Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Gerçek Zamanlı Üretim Servisi
-    description: Şeffaflık Ana Sayfasında gösterilmek üzere, gerçek zamanlı üretim
-      verilerini getirir.
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere, gerçek zamanlı üretim verilerini getirir.
     response_structure: {}
   dashboard-spot-gas-market:
     endpoint: /v1/dashboard/spot-gas-market
@@ -101,14 +84,11 @@ endpoints:
     short_name: dashboard-spot-gas-market
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Spot Gaz Piyasası Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Spot Gaz Piyasası Servisi
-    description: Şeffaflık Ana Sayfasında gösterilmek üzere,spot gaz piyasası verilerini
-      getirir.
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere,spot gaz piyasası verilerini getirir.
     response_structure: {}
   dashboard-weighted-average-price:
     endpoint: /v1/dashboard/weighted-average-price
@@ -117,12 +97,9 @@ endpoints:
     short_name: dashboard-weighted-average-price
     short_name_tr: Şeffaflık Ana Sayfası(Dashboard) Ağırlıklı Ortalama Fiyat Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Şeffaflık Ana Sayfası(Dashboard) Ağırlıklı Ortalama Fiyat Servisi
-    description: Şeffaflık Ana Sayfasında gösterilmek üzere, Ağırlıklı Ortalama Fiyat
-      verilerini getirir.
+    description: Şeffaflık Ana Sayfasında gösterilmek üzere, Ağırlıklı Ortalama Fiyat verilerini getirir.
     response_structure: {}

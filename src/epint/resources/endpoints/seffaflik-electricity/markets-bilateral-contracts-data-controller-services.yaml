@@ -7,15 +7,12 @@ endpoints:
     short_name_tr: EÜAŞ - GTŞ İkili Anlaşmalar Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: EÜAŞ - GTŞ İkili Anlaşmalar Listeleme Servisi
-    description: Düzenlemeye tabi tarife kapsamına göre EÜAŞ ile GTŞ’lerin arasında
-      yapılan ikili anlaşmaların aylık toplamlarını göstermektedir.
+    description: Düzenlemeye tabi tarife kapsamına göre EÜAŞ ile GTŞ’lerin arasında yapılan ikili anlaşmaların aylık toplamlarını göstermektedir.
     response_structure: {}
   bilateral-contracts-bid-quantity:
     endpoint: /v1/markets/bilateral-contracts/data/bilateral-contracts-bid-quantity
@@ -25,12 +22,10 @@ endpoints:
     short_name_tr: İkili Anlaşma (İA) Alış Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: İkili Anlaşma (İA) Alış Miktarı Listeleme Servisi
     description: İkili anlaşmalara ait alış miktarları verisidir.
     response_structure: {}
@@ -42,12 +37,10 @@ endpoints:
     short_name_tr: İkili Anlaşma (İA) Satış Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: İkili Anlaşma (İA) Satış Miktarı Listeleme Servisi
     description: İkili anlaşmalara ait satış miktarı verisidir.
     response_structure: {}

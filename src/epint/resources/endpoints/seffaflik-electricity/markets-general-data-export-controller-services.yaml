@@ -7,16 +7,12 @@ endpoints:
     short_name_tr: Piyasa Katılımcıları Dışa Aktarım Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Piyasa Katılımcıları Dışa Aktarım Servisi
-    description: Piyasa Katılımcıları’nın GÖP, GİP, VEP, YEK-G piyasalarına katılım
-      durumunu belirtir. Ayrıca Tüzel kişilik olarak firmanın aktiflik/pasiflik durumunu
-      bildirir. Piyasa Katılımcıları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Piyasa Katılımcıları’nın GÖP, GİP, VEP, YEK-G piyasalarına katılım durumunu belirtir. Ayrıca Tüzel kişilik olarak firmanın aktiflik/pasiflik durumunu bildirir. Piyasa Katılımcıları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   participant-count-based-upon-license-type-export:
     endpoint: /v1/markets/general-data/export/participant-count-based-upon-license-type
@@ -26,16 +22,10 @@ endpoints:
     short_name_tr: Lisans Türüne Göre Katılımcı Sayısı Dışa Aktarım Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Lisans Türüne Göre Katılımcı Sayısı Dışa Aktarım Servisi
-    description: Kamu ve Özel Sektör piyasa katılımcılarının Üretim, Tedarik, Dağıtım,
-      OSB Üretim, İletim ve Görevli Tedaril lisansları türlerine göre toplam sayılarını
-      gösterir. Görevli tedarik şirketleri tüketici grupları için K1 (21), K2 (21)
-      ve K3 (21) olacak şekilde kategorize edilmiştir. Lisans Türüne Göre Katılımcı
-      Sayısı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Kamu ve Özel Sektör piyasa katılımcılarının Üretim, Tedarik, Dağıtım, OSB Üretim, İletim ve Görevli Tedaril lisansları türlerine göre toplam sayılarını gösterir. Görevli tedarik şirketleri tüketici grupları için K1 (21), K2 (21) ve K3 (21) olacak şekilde kategorize edilmiştir. Lisans Türüne Göre Katılımcı Sayısı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}

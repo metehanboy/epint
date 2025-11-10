@@ -7,20 +7,12 @@ endpoints:
     short_name_tr: VGP Kontrat Fiyatları Özeti Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VGP Kontrat Fiyatları Özeti Listeleme Servisi
-    description: 'Vadeli kontratların Eşleşme Fiyatı İstatistiklerini gösterir.İlk
-      Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen
-      ilk işlem fiyatını gösterir.En Yüksek Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde
-      her vadeli kontratta gerçekleşen en yüksek eşleşme fiyatını gösterir.En Düşük
-      Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen
-      en düşük eşleşme fiyatını gösterir.Son Eşleşme Fiyatı (TL/1000.Sm3): İlgili
-      günde her vadeli kontratta gerçekleşen son işlem fiyatını gösterir.'
+    description: 'Vadeli kontratların Eşleşme Fiyatı İstatistiklerini gösterir.İlk Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen ilk işlem fiyatını gösterir.En Yüksek Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen en yüksek eşleşme fiyatını gösterir.En Düşük Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen en düşük eşleşme fiyatını gösterir.Son Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen son işlem fiyatını gösterir.'
     response_structure: {}
   delivery-period:
     endpoint: /v1/markets/vgp/data/delivery-period
@@ -29,11 +21,9 @@ endpoints:
     short_name: delivery-period
     short_name_tr: Teslimat Dönemi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Teslimat Dönemi
     description: Teslimat Dönemi
     response_structure: {}
@@ -44,11 +34,9 @@ endpoints:
     short_name: delivery-year
     short_name_tr: Teslimat Yılı
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Teslimat Yılı
     description: Teslimat Yılı
     response_structure: {}
@@ -60,15 +48,12 @@ endpoints:
     short_name_tr: VGP Günlük Gösterge Fiyatı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VGP Günlük Gösterge Fiyatı Listeleme Servisi
-    description: Vadeli Doğal Gaz Piyasasında (VGP) gün öncesi ve gün içi eşleşmelerinin
-      Ağırlıklı Ortalama Fiyatını gösterir.
+    description: Vadeli Doğal Gaz Piyasasında (VGP) gün öncesi ve gün içi eşleşmelerinin Ağırlıklı Ortalama Fiyatını gösterir.
     response_structure: {}
   matching-quantity:
     endpoint: /v1/markets/vgp/data/matching-quantity
@@ -78,15 +63,12 @@ endpoints:
     short_name_tr: VGP Piyasa Eşleşme Miktarı (1000.Sm³/gün) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VGP Piyasa Eşleşme Miktarı (1000.Sm³/gün) Listeleme Servisi
-    description: Vadeli kontratların Teklif ve/veya Eşleşmelerinin Ağırlıklı Ortalama
-      Fiyatlarını gösterir.
+    description: Vadeli kontratların Teklif ve/veya Eşleşmelerinin Ağırlıklı Ortalama Fiyatlarını gösterir.
     response_structure: {}
   open-position:
     endpoint: /v1/markets/vgp/data/open-position
@@ -96,12 +78,10 @@ endpoints:
     short_name_tr: VGP Açık Pozisyon Miktarı (1000.Sm³/gün) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VGP Açık Pozisyon Miktarı (1000.Sm³/gün) Listeleme Servisi
     description: Vadeli kontratların Alış ve Satış Eşleşmeleri Fark Miktarını gösterir.
     response_structure: {}
@@ -113,12 +93,10 @@ endpoints:
     short_name_tr: VGP Teklif Fiyatları Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VGP Teklif Fiyatları Listeleme Servisi
     description: Vadeli kontratların Teklif Fiyatı İstatistiklerini gösterir.
     response_structure: {}
@@ -130,17 +108,12 @@ endpoints:
     short_name_tr: VGP İşlem Akışı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VGP İşlem Akışı Listeleme Servisi
-    description: 'Vadeli kontratların Eşleşme Zamanlarını gösterir.Eşleşme Fiyatı
-      (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen işlemin eşleşme
-      fiyatını gösterir. Eşleşme Miktarı (1000.Sm3): İlgili günde her vadeli kontratta
-      gerçekleşen işlemin eşleşme miktarını gösterir.'
+    description: 'Vadeli kontratların Eşleşme Zamanlarını gösterir.Eşleşme Fiyatı (TL/1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen işlemin eşleşme fiyatını gösterir. Eşleşme Miktarı (1000.Sm3): İlgili günde her vadeli kontratta gerçekleşen işlemin eşleşme miktarını gösterir.'
     response_structure: {}
   vgp-volume:
     endpoint: /v1/markets/vgp/data/vgp-volume
@@ -150,12 +123,10 @@ endpoints:
     short_name_tr: VGP İşlem Hacmi Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VGP İşlem Hacmi Listeleme Servisi
     description: Vadeli kontratların Eşleşme Tutarını gösterir.
     response_structure: {}

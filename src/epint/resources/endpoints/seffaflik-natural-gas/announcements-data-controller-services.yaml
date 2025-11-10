@@ -7,12 +7,10 @@ endpoints:
     short_name_tr: BOTAŞ Duyuruları Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: BOTAŞ Duyuruları Listeleme Servisi
     description: BOTAŞ Duyuruları Listeleme Servisi
     response_structure: {}

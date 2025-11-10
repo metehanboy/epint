@@ -11,8 +11,8 @@ endpoints:
     - eic
     - uniqueCode
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tahliye Talebi Pasife Al
     description: Tahliye talebini pasife alma servisidir
     response_structure:
@@ -40,8 +40,8 @@ endpoints:
     short_name_tr: Toplu Tahliye Talebi Pasife Al
     params: []
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Toplu Tahliye Talebi Pasife Al
     description: Toplu Tahliye Talebi Pasife Al
     response_structure:
@@ -81,8 +81,8 @@ endpoints:
     - readingOrganization
     - organization
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tahliye Taleplerimi Sorgula
     description: Yapmış olduğunuz veya size bağlı olan organizasyonların yapmış olduğu tahliye taleplerini listeleme servisidir
     response_structure:
@@ -156,8 +156,8 @@ endpoints:
     - uniqueCode
     - meterOwnerOrganizationId
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tahliye Talebi Reddi Geri Çek
     description: Tahliye talebini reddi geri çek servisidir
     response_structure:
@@ -192,8 +192,8 @@ endpoints:
     - rejectReason
     required:
     - rejectReason
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tahliye Talebini Reddet
     description: Tahliye talebini reddetme servisidir
     response_structure:
@@ -228,8 +228,8 @@ endpoints:
     - explanation
     required:
     - evacuationType
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tahliye Talebi Kaydet
     description: Tahliye edilmek istenen tüketim noktasının talebinin kaydedildiği servistir
     response_structure:
@@ -257,8 +257,8 @@ endpoints:
     short_name_tr: Toplu Tahliye Talebi Kaydet
     params: []
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Toplu Tahliye Talebi Kaydet
     description: Tahliye edilmek istenen tüketim noktalarının taleplerinin toplu olarak kaydedildiği servistir.
     response_structure:
@@ -292,8 +292,8 @@ endpoints:
     - explanation
     required:
     - evacuationType
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tahliye Talebi Güncelle
     description: Tahliye taleplerini güncelleme servisidir
     response_structure:

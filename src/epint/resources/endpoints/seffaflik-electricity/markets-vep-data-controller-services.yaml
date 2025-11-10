@@ -7,15 +7,12 @@ endpoints:
     short_name_tr: VEP Kontrat Fiyatları Özet Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VEP Kontrat Fiyatları Özet Listeleme Servisi
-    description: Seçilen tarihte işleme açık + işlem yapılan kontratların seans içinde
-      ilk, son, en düşük, en yüksek eşleşme fiyatlarını ve GGF’yi göstermektedir.
+    description: Seçilen tarihte işleme açık + işlem yapılan kontratların seans içinde ilk, son, en düşük, en yüksek eşleşme fiyatlarını ve GGF’yi göstermektedir.
     response_structure: {}
   delivery-period-list:
     endpoint: /v1/markets/pfm/data/delivery-period-list
@@ -25,12 +22,10 @@ endpoints:
     short_name_tr: Teslimat Dönemi Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Teslimat Dönemi Listeleme Servisi
     description: VEP sayfaları için Teslimat Dönemi Listesi verir
     response_structure: {}
@@ -42,12 +37,10 @@ endpoints:
     short_name_tr: Teslimat Yılı Listeme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Teslimat Yılı Listeme Servisi
     description: VEP sayfaları için Teslimat Yılı Listesini verir.
     response_structure: {}
@@ -59,18 +52,12 @@ endpoints:
     short_name_tr: VEP Günlük Gösterge Fiyatı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VEP Günlük Gösterge Fiyatı Listeleme Servisi
-    description: Seçilen tarihte işleme açık kontratların Günlük Gösterge Fiyatını
-      göstermektedir. Seansın açık olduğu her gün işleme açık kontratların ilgili
-      gün için Günlük Gösterge fiyatı saat 16:45'te yayımlanır. Dolar ve Euro kuru
-      olarak fiyatın ait olduğu günden önceki ikinci iş gününe ait Türkiye Cumhuriyet
-      Merkez Bankası efektif alış kuru dikkate alınmaktadır.
+    description: Seçilen tarihte işleme açık kontratların Günlük Gösterge Fiyatını göstermektedir. Seansın açık olduğu her gün işleme açık kontratların ilgili gün için Günlük Gösterge fiyatı saat 16:45'te yayımlanır. Dolar ve Euro kuru olarak fiyatın ait olduğu günden önceki ikinci iş gününe ait Türkiye Cumhuriyet Merkez Bankası efektif alış kuru dikkate alınmaktadır.
     response_structure: {}
   ggf-delivery-period-list:
     endpoint: /v1/markets/pfm/data/ggf-delivery-period-list
@@ -80,12 +67,10 @@ endpoints:
     short_name_tr: GGF Teslimat Dönemi Listesi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GGF Teslimat Dönemi Listesi
     description: GGF Teslimat Dönemi Listesi
     response_structure: {}
@@ -97,12 +82,10 @@ endpoints:
     short_name_tr: Yük Tipi Listeme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Yük Tipi Listeme Servisi
     description: VEP sayfaları için Yük Tipi listesini verir.
     response_structure: {}
@@ -114,15 +97,12 @@ endpoints:
     short_name_tr: VEP Teklif Fiyatları Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VEP Teklif Fiyatları Listeleme Servisi
-    description: VEP'teki her bir kontrata ait en iyi alış ve satış tekliflerine sait
-      fiyat bilgisi, son eşleşme fiyatı ve bir önceki eşleşmeye göre değişimi.
+    description: VEP'teki her bir kontrata ait en iyi alış ve satış tekliflerine sait fiyat bilgisi, son eşleşme fiyatı ve bir önceki eşleşmeye göre değişimi.
     response_structure: {}
   open-position:
     endpoint: /v1/markets/pfm/data/open-position
@@ -132,15 +112,12 @@ endpoints:
     short_name_tr: VEP Açık Pozisyon Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VEP Açık Pozisyon Listeleme Servisi
-    description: Seçilen tarihte işleme açık + işlem yapılan kontratların açık pozisyon
-      miktarını göstermektedir.
+    description: Seçilen tarihte işleme açık + işlem yapılan kontratların açık pozisyon miktarını göstermektedir.
     response_structure: {}
   pfm-trade-value-data:
     endpoint: /v1/markets/pfm/data/pfm-trade-value
@@ -150,15 +127,12 @@ endpoints:
     short_name_tr: VEP İşlem Hacmi Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VEP İşlem Hacmi Listeleme Servisi
-    description: Seçilen tarihte işleme açık + işlem yapılan kontratların işlem hacmini
-      göstermektedir.
+    description: Seçilen tarihte işleme açık + işlem yapılan kontratların işlem hacmini göstermektedir.
     response_structure: {}
   pfm-transaction-history-data:
     endpoint: /v1/markets/pfm/data/pfm-transaction-history
@@ -168,15 +142,12 @@ endpoints:
     short_name_tr: VEP İşlem Akışı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VEP İşlem Akışı Listeleme Servisi
-    description: Seçilen tarihte işleme açık + işlem yapılan kontratların işlem akışını
-      göstermektedir.
+    description: Seçilen tarihte işleme açık + işlem yapılan kontratların işlem akışını göstermektedir.
     response_structure: {}
   th-delivery-period-list:
     endpoint: /v1/markets/pfm/data/th-delivery-period-list
@@ -186,12 +157,10 @@ endpoints:
     short_name_tr: VEP İşlem Akışı Teslimat Dönemi Listesi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VEP İşlem Akışı Teslimat Dönemi Listesi
     description: VEP İşlem Akışı Teslimat Dönemi Listesi
     response_structure: {}
@@ -203,13 +172,10 @@ endpoints:
     short_name_tr: VEP Eşleşme Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: VEP Eşleşme Miktarı Listeleme Servisi
-    description: Seçilen tarihte işleme açık + işlem yapılan kontratların eşleşme
-      miktarını göstermektedir.
+    description: Seçilen tarihte işleme açık + işlem yapılan kontratların eşleşme miktarını göstermektedir.
     response_structure: {}

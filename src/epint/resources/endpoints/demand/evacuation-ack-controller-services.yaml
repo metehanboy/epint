@@ -14,8 +14,8 @@ endpoints:
     required:
     - consumptionPointId
     - evacuationType
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tahliye Bilgilendirme Onaylama
     description: Tahliye bilgilendirme kayıtlarını onaylama servisidir.
     response_structure:
@@ -45,8 +45,8 @@ endpoints:
     - meterOwnerOrganizationId
     - consumptionPointId
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tahliye Bilgilendirme Pasife Alma
     description: Tahliye bilgilendirme kayıtlarını pasife alma servisidir.
     response_structure:
@@ -83,8 +83,8 @@ endpoints:
     - readingOrganization
     - meterOwnerOrganizationId
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tahliye Bilgilendirme Sorgula
     description: Tahliye bilgilendirme kayıtlarını listeleme servisidir.
     response_structure:
@@ -146,8 +146,8 @@ endpoints:
     - meterOwnerOrganizationId
     - rejectExplanation
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tahliye Bilgilendirme Reddetme
     description: Tahliye bilgilendirme kayıtlarını reddetme servisidir.
     response_structure:
@@ -178,8 +178,8 @@ endpoints:
     - consumptionPointId
     - explanation
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tahliye Bilgilendirme Kaydet
     description: Tahliye edilmek istenen tüketim noktasının bilgilendirmesinin kaydedildiği servistir.
     response_structure:

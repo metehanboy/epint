@@ -6,11 +6,9 @@ endpoints:
     short_name: MenuController_getMenuTree_GET
     short_name_tr: MenuController_getMenuTree_GET
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: ''
     description: ''
     response_structure: {}
@@ -22,12 +20,10 @@ endpoints:
     short_name_tr: Sayfa Ayarları
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Sayfa Ayarları
     description: Sayfa metin açıklamaları ve sayfa ayalarını içeren servis
     response_structure: {}
@@ -39,12 +35,10 @@ endpoints:
     short_name_tr: Sayfa Son Güncelleme Zamanı
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Sayfa Son Güncelleme Zamanı
     description: Sayfada gösterilen verilerin son güncelleme zamanını döner.
     response_structure: {}

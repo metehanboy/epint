@@ -6,16 +6,20 @@ endpoints:
     short_name: renewables-unit-cost-data
     short_name_tr: Yekdem Birim Maliyeti listeleme servisi
     params:
-    - body
-    - TGT
+    - startDate
+    - endDate
     required:
-    - body
-    - TGT
-    response: ''
-    var_type: dict
+    - endDate
+    - startDate
+    response: Response
+    var_type: []
     summary: Yekdem Birim Maliyeti listeleme servisi
     description: EPDK için, YEKDEM Birim Maliyeti verilerini dönen servistir.
-    response_structure: {}
+    response_structure:
+      items:
+      - period: string
+        version: string
+        unitCost: number
   renewables-unit-cost-mcp-data:
     endpoint: /v1/renewables/data/renewables-unit-cost-mcp
     method: POST
@@ -23,13 +27,16 @@ endpoints:
     short_name: renewables-unit-cost-mcp-data
     short_name_tr: Yekdem Birim Maliyeti PTF listeleme servisi
     params:
-    - body
-    - TGT
+    - startDate
+    - endDate
     required:
-    - body
-    - TGT
-    response: ''
-    var_type: dict
+    - endDate
+    - startDate
+    response: Response
+    var_type: []
     summary: Yekdem Birim Maliyeti PTF listeleme servisi
     description: EPDK için, YEKDEM Birim Maliyeti PTF verilerini dönen servistir.
-    response_structure: {}
+    response_structure:
+      items:
+      - period: string
+        unitCostMcp: number

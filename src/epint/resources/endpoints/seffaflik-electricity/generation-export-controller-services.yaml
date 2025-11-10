@@ -10,11 +10,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Emre Amade Kapasite (EAK) Dışa Aktarım Servisi
-    description: 'Emre Amade Kapasite: Bir üretim biriminin sisteme sağlayabileceği
-      aktif güç kapasitesidir. Emre Amade Kapasite (EAK) Listesini XLSX, CSV ya da
-      PDF olarak dışa aktarır.'
+    description: 'Emre Amade Kapasite: Bir üretim biriminin sisteme sağlayabileceği aktif güç kapasitesidir. Emre Amade Kapasite (EAK) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.'
     response_structure: {}
   dpp-export:
     endpoint: /v1/generation/export/dpp
@@ -27,12 +25,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kesinleşmiş Günlük Üretim Planı (KGÜP) Dışa Aktarım Servisi
-    description: Kesinleşmiş Gün Öncesi Üretim Programı, katılımcının bir sonraki
-      güne ilişkin gerçekleştirmeyi öngördüğü ve sistem işletmecisine dengeleme güç
-      piyasasının başlangıcında bildirdiği üretim değeridir. Kesinleşmiş Günlük Üretim
-      Planı (KGÜP) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Kesinleşmiş Gün Öncesi Üretim Programı, katılımcının bir sonraki güne ilişkin gerçekleştirmeyi öngördüğü ve sistem işletmecisine dengeleme güç piyasasının başlangıcında bildirdiği üretim değeridir. Kesinleşmiş Günlük Üretim Planı (KGÜP) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   dpp-first-version-export:
     endpoint: /v1/generation/export/dpp-first-version
@@ -45,12 +40,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kesinleşmiş Günlük Üretim Planı (KGÜP) Dışa Aktarım Servisi
-    description: Kesinleşmiş Gün Öncesi Üretim Programı, katılımcının bir sonraki
-      güne ilişkin gerçekleştirmeyi öngördüğü ve sistem işletmecisine dengeleme güç
-      piyasasının başlangıcında bildirdiği üretim değeridir. Kesinleşmiş Günlük Üretim
-      Planı (KGÜP) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Kesinleşmiş Gün Öncesi Üretim Programı, katılımcının bir sonraki güne ilişkin gerçekleştirmeyi öngördüğü ve sistem işletmecisine dengeleme güç piyasasının başlangıcında bildirdiği üretim değeridir. Kesinleşmiş Günlük Üretim Planı (KGÜP) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   injection-quantity-export:
     endpoint: /v1/generation/export/injection-quantity
@@ -63,7 +55,7 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Uzlaştırma Esas Veriş Miktarı (UEVM) Dışarı Aktarım Servisi
     description: Uzlaştırma Esas Veriş Miktarı (UEVM) Dışarı Aktarım Servisi
     response_structure: {}
@@ -78,12 +70,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Lisanslı Santral Yatırımları Dışa Aktarım Servisi
-    description: Enerji İşleri Genel Müdürlüğü tarafından ön kabulü tamamlanmış ve
-      devreye alınmış elektrik üretim tesislerinin aylık listesidir. Elektrik üretim
-      tesislerinin aylık listesidir. Lisanslı Santral Yatırımları Listesini XLSX,
-      CSV ya da PDF olarak dışa aktarır.
+    description: Enerji İşleri Genel Müdürlüğü tarafından ön kabulü tamamlanmış ve devreye alınmış elektrik üretim tesislerinin aylık listesidir. Elektrik üretim tesislerinin aylık listesidir. Lisanslı Santral Yatırımları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   realtime-generation-export:
     endpoint: /v1/generation/export/realtime-generation
@@ -96,7 +85,7 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Gerçek Zamanlı Üretim Dışa Aktarım Servisi
     description: Gerçek Zamanlı Üretim Dışa Aktarım Servisi
     response_structure: {}
@@ -105,19 +94,13 @@ endpoints:
     method: POST
     auth: true
     short_name: sbfgp-export
-    short_name_tr: Kesinleştirilmiş Uzlaştırma Dönemi Üretim Planı (KUDÜP) Dışa Aktarım
-      Servisi
+    short_name_tr: Kesinleştirilmiş Uzlaştırma Dönemi Üretim Planı (KUDÜP) Dışa Aktarım Servisi
     params:
     - body
     required:
     - body
     response: ''
-    var_type: dict
-    summary: Kesinleştirilmiş Uzlaştırma Dönemi Üretim Planı (KUDÜP) Dışa Aktarım
-      Servisi
-    description: Gün öncesinde bildirilen UEVÇB bazında kaynaklara göre kesinleşmiş
-      günlük üretim planlarının gün içi piyasasının kapanışından sonra DUY 69. madde
-      kapsamında güncellenmesiyle oluşan kesinleşmiş günlük üretim planları. Kesinleştirilmiş
-      Uzlaştırma Dönemi Üretim Planı (KUDÜP) Listesini XLSX, CSV ya da PDF olarak
-      dışa aktarır.
+    var_type: []
+    summary: Kesinleştirilmiş Uzlaştırma Dönemi Üretim Planı (KUDÜP) Dışa Aktarım Servisi
+    description: Gün öncesinde bildirilen UEVÇB bazında kaynaklara göre kesinleşmiş günlük üretim planlarının gün içi piyasasının kapanışından sonra DUY 69. madde kapsamında güncellenmesiyle oluşan kesinleşmiş günlük üretim planları. Kesinleştirilmiş Uzlaştırma Dönemi Üretim Planı (KUDÜP) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}

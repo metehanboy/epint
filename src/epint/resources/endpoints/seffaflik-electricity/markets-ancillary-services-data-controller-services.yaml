@@ -7,15 +7,12 @@ endpoints:
     short_name_tr: Primer Frekans Rezerv Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Primer Frekans Rezerv Miktarı Listeleme Servisi
-    description: Katılımcıların gerçek zamanlı frekans dengeleme için ayırması gereken
-      saatlik toplam birincil frekans kapasite hacimleridir.
+    description: Katılımcıların gerçek zamanlı frekans dengeleme için ayırması gereken saatlik toplam birincil frekans kapasite hacimleridir.
     response_structure: {}
   primary-frequency-capacity-price:
     endpoint: /v1/markets/ancillary-services/data/primary-frequency-capacity-price
@@ -25,12 +22,10 @@ endpoints:
     short_name_tr: Primer Frekans Kontrolü (PFK) Fiyat Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Primer Frekans Kontrolü (PFK) Fiyat Listeleme Servisi
     description: Saatlik bazda ihale ile belirlenen PFK kapasite bedelidir.
     response_structure: {}
@@ -42,12 +37,10 @@ endpoints:
     short_name_tr: Sekonder Frekans Rezerv Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Sekonder Frekans Rezerv Miktarı Listeleme Servisi
     description: Saatlik toplam belirlenen rezerv miktarlarıdır.
     response_structure: {}
@@ -59,12 +52,10 @@ endpoints:
     short_name_tr: Sekonder Frekans Kontrolü (SFK) Fiyat Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Sekonder Frekans Kontrolü (SFK) Fiyat Listeleme Servisi
     description: Saatlik bazda ihale ile belirlenen SFK kapasite bedelidir.
     response_structure: {}

@@ -7,20 +7,12 @@ endpoints:
     short_name_tr: Üretim Tahmini Data Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Üretim Tahmini Data Listeleme Servisi
-    description: YEKDEM kapsamındaki santrallerin, Milli Yük Tevzi Merkezi’ne bildirdikleri
-      tahmini üretimleridir.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji
-      Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik
-      Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Üretim
-      Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.'
-      Bilgisi görüntülenecektir. Kullanıcı bu bilgilendirmeyi kapatmadan ekranda işlem
-      yapamaz.
+    description: YEKDEM kapsamındaki santrallerin, Milli Yük Tevzi Merkezi’ne bildirdikleri tahmini üretimleridir.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.' Bilgisi görüntülenecektir. Kullanıcı bu bilgilendirmeyi kapatmadan ekranda işlem yapamaz.
     response_structure: {}
   imbalance-cost:
     endpoint: /v1/renewables/data/imbalance-cost
@@ -33,13 +25,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Dengesizlik Maliyeti Listeleme Servisi
-    description: YEKDEM kapsamındaki portföyün uzlaştırmaya esas veriş değerine göre
-      oluşturduğu dengesizlikdir.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir
-      Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte
-      Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını
-      takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.
+    description: YEKDEM kapsamındaki portföyün uzlaştırmaya esas veriş değerine göre oluşturduğu dengesizlikdir.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.
     response_structure: {}
   renewables-imbalance-quantity:
     endpoint: /v1/renewables/data/imbalance-quantity
@@ -52,13 +40,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Dengesizlik Miktarı Listeleme Servisi
-    description: YEKDEM kapsamındaki portföyün uzlaştırmaya esas veriş değerine göre
-      oluşturduğu dengesizlik miktarıdır.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir
-      Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte
-      Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını
-      takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.
+    description: YEKDEM kapsamındaki portföyün uzlaştırmaya esas veriş değerine göre oluşturduğu dengesizlik miktarıdır.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.
     response_structure: {}
   licensed-generation-cost:
     endpoint: /v1/renewables/data/licensed-generation-cost
@@ -68,16 +52,12 @@ endpoints:
     short_name_tr: YEK Bedeli (YEKBED) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: YEK Bedeli (YEKBED) Listeleme Servisi
-    description: İlgili fatura dönemi için YEKDEM kapsamındaki lisanssız üretim santrallerine
-      sahip katılımcılara ödenecek YEK bedelini (TL) ifade etmektedir. https://www.epias.com.tr/wp-content/uploads/2023/10/z27csrjmDz4qqJ6b9mj2.jpg
-      https://www.epias.com.tr/wp-content/uploads/2023/10/DPgcwzhsEjfRWWcEzsKx.png
+    description: İlgili fatura dönemi için YEKDEM kapsamındaki lisanssız üretim santrallerine sahip katılımcılara ödenecek YEK bedelini (TL) ifade etmektedir. https://www.epias.com.tr/wp-content/uploads/2023/10/z27csrjmDz4qqJ6b9mj2.jpg https://www.epias.com.tr/wp-content/uploads/2023/10/DPgcwzhsEjfRWWcEzsKx.png
     response_structure: {}
   licensed-powerplant-list:
     endpoint: /v1/renewables/data/licensed-powerplant-list
@@ -87,12 +67,10 @@ endpoints:
     short_name_tr: Lisanslı Santral Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Lisanslı Santral Listeleme Servisi
     description: Lisanslı Santral Listeleme Servisi
     response_structure: {}
@@ -104,15 +82,12 @@ endpoints:
     short_name_tr: YEKDEM Gerçek Zamanlı Üretim Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: YEKDEM Gerçek Zamanlı Üretim Listeleme Servisi
-    description: Lisanslı YEKDEM santrallerine ait elektrik üretiminin kaynak bazında
-      saatlik gösterimine ilişkin veri seti.
+    description: Lisanslı YEKDEM santrallerine ait elektrik üretiminin kaynak bazında saatlik gösterimine ilişkin veri seti.
     response_structure: {}
   new-installed-capacity:
     endpoint: /v1/renewables/data/new-installed-capacity
@@ -122,17 +97,12 @@ endpoints:
     short_name_tr: Kurulu Güç YEKDEM Son Tarih Sonrası Veri Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kurulu Güç YEKDEM Son Tarih Sonrası Veri Listeleme Servisi
-    description: YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır. Lisanslı
-      kurulu güç bilgileri EPİAŞ'a kayıtlı santraller olup, lisanssız kurulu güç bilgisi
-      dağıtım şirketlerinden temin edilmektedir.YEKDEM kapsamındaki üretim tesislerinin
-      kurulu güç miktarıdır.
+    description: YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır. Lisanslı kurulu güç bilgileri EPİAŞ'a kayıtlı santraller olup, lisanssız kurulu güç bilgisi dağıtım şirketlerinden temin edilmektedir.YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır.
     response_structure: {}
   old-installed-capacity:
     endpoint: /v1/renewables/data/old-installed-capacity
@@ -142,17 +112,12 @@ endpoints:
     short_name_tr: Kurulu Güç YEKDEM Son Tarih ve Öncesi Veri Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kurulu Güç YEKDEM Son Tarih ve Öncesi Veri Listeleme Servisi
-    description: YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır. Lisanslı
-      kurulu güç bilgileri EPİAŞ'a kayıtlı santraller olup, lisanssız kurulu güç bilgisi
-      dağıtım şirketlerinden temin edilmektedir.YEKDEM kapsamındaki üretim tesislerinin
-      kurulu güç miktarıdır.
+    description: YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır. Lisanslı kurulu güç bilgileri EPİAŞ'a kayıtlı santraller olup, lisanssız kurulu güç bilgisi dağıtım şirketlerinden temin edilmektedir.YEKDEM kapsamındaki üretim tesislerinin kurulu güç miktarıdır.
     response_structure: {}
   portfolio-income:
     endpoint: /v1/renewables/data/portfolio-income
@@ -162,18 +127,12 @@ endpoints:
     short_name_tr: Yekdem Portföy Geliri Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Yekdem Portföy Geliri Listeleme Servisi
-    description: YEKDEM kapsamındaki portföyün saatlik toplam geliridir.29 Nisan 2016
-      tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi
-      ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin,
-      Resmi Gazete'de yayımlanmasını takiben Üretim Tahmini raporunun en son 30 Nisan
-      2016 tarihli verisi görüntülenebilecektir.
+    description: YEKDEM kapsamındaki portföyün saatlik toplam geliridir.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Üretim Tahmini raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.
     response_structure: {}
   renewable-sm-licensed-injection-quantity:
     endpoint: /v1/renewables/data/renewable-sm-licensed-injection-quantity
@@ -183,16 +142,12 @@ endpoints:
     short_name_tr: Uzlaştırma Esas Veriş Miktarı (UEVM) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Uzlaştırma Esas Veriş Miktarı (UEVM) Listeleme Servisi
-    description: Elektrik üretiminin kaynak bazında saatlik gösterimidir. Santrallere
-      ait üretim verileri için, en son bir önceki günün verileri gelmekte, ilgili
-      güne ait santral verileri çekilmek istendiğinde hatalı istek bilgisi dönmektedir.
+    description: Elektrik üretiminin kaynak bazında saatlik gösterimidir. Santrallere ait üretim verileri için, en son bir önceki günün verileri gelmekte, ilgili güne ait santral verileri çekilmek istendiğinde hatalı istek bilgisi dönmektedir.
     response_structure: {}
   renewables-participant:
     endpoint: /v1/renewables/data/renewables-participant
@@ -202,16 +157,12 @@ endpoints:
     short_name_tr: YEKDEM Katılımcı Listesi Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: YEKDEM Katılımcı Listesi Listeleme Servisi
-    description: İlgili yıl içerisinde Yenilenebilir Enerji Destekleme Mekanizmasına
-      dahil olan lisanslı üretim santraline sahip tüzel kişilerin listesidir. 2020
-      yılından itibaren “Önceki Yıl gerçekleştirilen Üretim (MWh)” yayınlanmamaktadır
+    description: İlgili yıl içerisinde Yenilenebilir Enerji Destekleme Mekanizmasına dahil olan lisanslı üretim santraline sahip tüzel kişilerin listesidir. 2020 yılından itibaren “Önceki Yıl gerçekleştirilen Üretim (MWh)” yayınlanmamaktadır
     response_structure: {}
   renewables-participant-year-list:
     endpoint: /v1/renewables/data/renewables-participant-year-list
@@ -220,11 +171,9 @@ endpoints:
     short_name: renewables-participant-year-list
     short_name_tr: YEKDEM Katılımcı Listesi Yıl Listesi Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: YEKDEM Katılımcı Listesi Yıl Listesi Servisi
     description: YEKDEM Katılımcı Listesi Yıl Listesi Servisi
     response_structure: {}
@@ -236,12 +185,10 @@ endpoints:
     short_name_tr: YEK Geliri (YG) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: YEK Geliri (YG) Listeleme Servisi
     description: YEKDEM gelirine ilişkin veri setidir.
     response_structure: {}
@@ -253,18 +200,12 @@ endpoints:
     short_name_tr: RES Üretim ve Tahmin Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: RES Üretim ve Tahmin Listeleme Servisi
-    description: Türkiye geneli izlenebilen RES’lerin toplam güç üretimi ve tahiminidir.Veriler
-      rüzgar gücü izleme ve tahmin merkezinden temin edilmektedir. Veriler 10 dk arayla
-      güncellenmektedir. Q5, Q25,Q75,Q95 tahmin aralıklarını ifade etmektedir. Band
-      tahmin aralıkları minimum ve maksimum risk senaryolarına göre oluşturulmuştur.Türkiye
-      geneli izlenebilen RES’lerin toplam güç üretimi ve tahiminidir.
+    description: Türkiye geneli izlenebilen RES’lerin toplam güç üretimi ve tahiminidir.Veriler rüzgar gücü izleme ve tahmin merkezinden temin edilmektedir. Veriler 10 dk arayla güncellenmektedir. Q5, Q25,Q75,Q95 tahmin aralıklarını ifade etmektedir. Band tahmin aralıkları minimum ve maksimum risk senaryolarına göre oluşturulmuştur.Türkiye geneli izlenebilen RES’lerin toplam güç üretimi ve tahiminidir.
     response_structure: {}
   spot-order:
     endpoint: /v1/renewables/data/spot-order
@@ -274,20 +215,12 @@ endpoints:
     short_name_tr: Spot Teklifi Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Spot Teklifi Listeleme Servisi
-    description: Milli Yük Tevzi Merkezi’nin spot piyasaya sunduğu YEKDEM portföyü
-      teklif miktarıdır.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji
-      Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik
-      Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Spot
-      Teklifleri raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.'
-      Bilgisi görüntülenecektir. Kullanıcı bu bilgilendirmeyi kapatmadan ekranda işlem
-      yapamaz.
+    description: Milli Yük Tevzi Merkezi’nin spot piyasaya sunduğu YEKDEM portföyü teklif miktarıdır.29 Nisan 2016 tarihli ve 29698 sayılı Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmelikte Değişiklik Yapılmasına İlişkin yönetmeliğin, Resmi Gazete'de yayımlanmasını takiben Spot Teklifleri raporunun en son 30 Nisan 2016 tarihli verisi görüntülenebilecektir.' Bilgisi görüntülenecektir. Kullanıcı bu bilgilendirmeyi kapatmadan ekranda işlem yapamaz.
     response_structure: {}
   total-cost:
     endpoint: /v1/renewables/data/total-cost
@@ -297,16 +230,12 @@ endpoints:
     short_name_tr: Toplam Gider (YEKTOB) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Toplam Gider (YEKTOB) Listeleme Servisi
-    description: İlgili fatura dönemi için YEKDEM kapsamındaki hem lisanslı hem de
-      lisanssız üretim santraline sahip katılımcılara ödenecek toplam YEK bedelini
-      (TL) ifade eder.
+    description: İlgili fatura dönemi için YEKDEM kapsamındaki hem lisanslı hem de lisanssız üretim santraline sahip katılımcılara ödenecek toplam YEK bedelini (TL) ifade eder.
     response_structure: {}
   unit-cost:
     endpoint: /v1/renewables/data/unit-cost
@@ -316,23 +245,12 @@ endpoints:
     short_name_tr: Birim Maliyeti Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Birim Maliyeti Listeleme Servisi
-    description: Tedarik edilen birim enerji miktarı başına, hesaplanan YEKDEM maliyetidir.
-      YEKDEM birim maliyeti ilgili aylar için versiyonlu olarak yayımlanmaktadır.
-      Bir fatura döneminde, YEKDEM gelirinin YEK toplam bedelinden fazla olması durumunda,
-      Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin
-      Yönetmenliğin 13üncü maddesinin dördüncü fıkrası uyarınca hesaplama yapılmaktadır.Bir
-      fatura döneminde YEKDEM gelirinin YEK toplam bedelinden fazla olması durumunda,
-      Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin
-      Yönetmeliğin 13 üncü maddesinin dördüncü fıkrası uyarınca hesaplama yapılmakta
-      olup, Görevli Tedarik Şirketlerinin K1 kapsamındaki satışları hariç tüm satışlar
-      için tedarikçilere uygulanan birim fiyat 0 TL/MWh olmaktadır.
+    description: Tedarik edilen birim enerji miktarı başına, hesaplanan YEKDEM maliyetidir. YEKDEM birim maliyeti ilgili aylar için versiyonlu olarak yayımlanmaktadır. Bir fatura döneminde, YEKDEM gelirinin YEK toplam bedelinden fazla olması durumunda, Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmenliğin 13üncü maddesinin dördüncü fıkrası uyarınca hesaplama yapılmaktadır.Bir fatura döneminde YEKDEM gelirinin YEK toplam bedelinden fazla olması durumunda, Yenilenebilir Enerji Kaynaklarının Belgelendirilmesi ve Desteklenmesine İlişkin Yönetmeliğin 13 üncü maddesinin dördüncü fıkrası uyarınca hesaplama yapılmakta olup, Görevli Tedarik Şirketlerinin K1 kapsamındaki satışları hariç tüm satışlar için tedarikçilere uygulanan birim fiyat 0 TL/MWh olmaktadır.
     response_structure: {}
   unlicensed-generation-amount:
     endpoint: /v1/renewables/data/unlicensed-generation-amount
@@ -342,16 +260,12 @@ endpoints:
     short_name_tr: Lisanssız Üretim Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Lisanssız Üretim Miktarı Listeleme Servisi
-    description: YEKDEM kapsamındaki lisanssız santrallerin kaynak bazında saatlik
-      olarak uzlaştırmaya esas lisanssız veriş değerleridir.YEKDEM kapsamındaki lisanssız
-      santraller
+    description: YEKDEM kapsamındaki lisanssız santrallerin kaynak bazında saatlik olarak uzlaştırmaya esas lisanssız veriş değerleridir.YEKDEM kapsamındaki lisanssız santraller
     response_structure: {}
   unlicensed-generation-cost:
     endpoint: /v1/renewables/data/unlicensed-generation-cost
@@ -361,13 +275,10 @@ endpoints:
     short_name_tr: Lisanssız Üretim Bedeli Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Lisanssız Üretim Bedeli Listeleme Servisi
-    description: İlgili fatura dönemi için YEKDEM kapsamındaki lisanssız üretim santrallerine
-      sahip katılımcılara ödenecek YEK bedelini (TL) ifade etmektedir.
+    description: İlgili fatura dönemi için YEKDEM kapsamındaki lisanssız üretim santrallerine sahip katılımcılara ödenecek YEK bedelini (TL) ifade etmektedir.
     response_structure: {}

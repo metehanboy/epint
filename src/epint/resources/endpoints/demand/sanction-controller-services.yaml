@@ -14,8 +14,8 @@ endpoints:
     - endDateTime
     - sanctionStatusIds
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Yaptırım Listele
     description: Katılımcının yaptırımlarını listeleyebileceği servistir.
     response_structure:

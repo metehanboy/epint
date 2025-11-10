@@ -19,8 +19,8 @@ endpoints:
     - balancingMarketParticipation
     - electricSupplyParticipation
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Ön Bildirim Listesi Sorgula (Toplayıcılık)
     description: Toplayıcılık ön bildirim listelerini sorgulama servisidir
     response_structure:
@@ -185,8 +185,8 @@ endpoints:
     - periodDate
     - demandDirections
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Ön Bildirim Listesi Sorgula (Dağıtım)
     description: Dağıtım firmalarının ön bildirim listelerini sorgulama servisidir
     response_structure:
@@ -349,8 +349,8 @@ endpoints:
     - periodDate
     - demandDirections
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Ön Bildirim Listesi Sorgula (Tedarik)
     description: Tedarik firmalarının ön bildirim listelerini sorgulama servisidir
     response_structure:

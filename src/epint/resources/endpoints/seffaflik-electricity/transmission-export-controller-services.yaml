@@ -10,12 +10,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kapasite Talepleri Dışa Aktarım Servisi
-    description: Kapasite ihalelerine ait talepleri ve tahsis edilen kapasiteleri
-      gösterir. Kapasite ihalelerine ait talepleri ve tahsis edilen kapasiteleri gösterir.
-      Kapasite Talepleri Listeleme Servisi Listesini XLSX, CSV ya da PDF olarak dışa
-      aktarır.
+    description: Kapasite ihalelerine ait talepleri ve tahsis edilen kapasiteleri gösterir. Kapasite ihalelerine ait talepleri ve tahsis edilen kapasiteleri gösterir. Kapasite Talepleri Listeleme Servisi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   congestion-cost-export:
     endpoint: /v1/transmission/export/congestion-cost
@@ -25,17 +22,12 @@ endpoints:
     short_name_tr: Kısıt Maliyeti Dışa Aktarım Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kısıt Maliyeti Dışa Aktarım Servisi
-    description: 'Şehir bazında 1 kodlu Yük Alma ve Yük Atma Talimatlarının toplam
-      mali değerine ilişkin veri seti. Formül: Kısıt Maliyeti=(YAL talimat Miktarı)*
-      [YAL Teslimat Fiyatı – Seçilen Fiyat] + (YAL Talimat Miktarı)* [Seçilen Fiyat-YAT
-      Talimat Fiyatı]. Kısıt Maliyeti Listesini XLSX, CSV ya da PDF olarak dışa aktarır.'
+    description: 'Şehir bazında 1 kodlu Yük Alma ve Yük Atma Talimatlarının toplam mali değerine ilişkin veri seti. Formül: Kısıt Maliyeti=(YAL talimat Miktarı)* [YAL Teslimat Fiyatı – Seçilen Fiyat] + (YAL Talimat Miktarı)* [Seçilen Fiyat-YAT Talimat Fiyatı]. Kısıt Maliyeti Listesini XLSX, CSV ya da PDF olarak dışa aktarır.'
     response_structure: {}
   entso-w-organization-export:
     endpoint: /v1/transmission/export/entso-w-organization
@@ -48,11 +40,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: ENTSO-E (W) Kodları Dışa Aktarım Servisi
-    description: Avrupa Elektrik İletim Sistemi İşletmecileri Ağı’nın piyasadaki Santral
-      ve UEVÇB’lere, Avrupa standartlarına uygun formatta tanımladığı Enerji Tanımlama
-      Kodu’dur.  ENTSO-E (W) Kodları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Avrupa Elektrik İletim Sistemi İşletmecileri Ağı’nın piyasadaki Santral ve UEVÇB’lere, Avrupa standartlarına uygun formatta tanımladığı Enerji Tanımlama Kodu’dur.  ENTSO-E (W) Kodları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   entso-w-uevcb-export:
     endpoint: /v1/transmission/export/entso-w-uevcb
@@ -65,7 +55,7 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: ENTSO-E (W) UEVCB Listesi Dışa Aktarım Servisi
     description: ENTSO-E (W) UEVCB Listesi Dışa Aktarım Servisi
     response_structure: {}
@@ -80,11 +70,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Enterkonneksiyon Arıza Bakım Bildirimleri Dışa Aktarım Servisi
-    description: TCAT'ten temin edilen uluslararası hatlarda oluşan kesinti bilgileri
-      sayfasıdır. Enterkonneksiyon Arıza Bakım Bildirimleri Listesini XLSX, CSV ya
-      da PDF olarak dışa aktarır.
+    description: TCAT'ten temin edilen uluslararası hatlarda oluşan kesinti bilgileri sayfasıdır. Enterkonneksiyon Arıza Bakım Bildirimleri Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   iskk-export:
     endpoint: /v1/transmission/export/iskk-list
@@ -97,12 +85,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: İletim Sistemi Kayıp Katsayısı (ISKK) Dışa Aktarım Servisi
-    description: Uzlaştırma dönemi bazında iletim sistemi veriş ve çekiş miktarları
-      arasındaki farkın veriş miktarına oranlanmasıyla hesaplanan iletim sistemi kayıp
-      katsayısına ilişkin veri seti. İletim Sistemi Kayıp Katsayısı (ISKK) Listesini
-      XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Uzlaştırma dönemi bazında iletim sistemi veriş ve çekiş miktarları arasındaki farkın veriş miktarına oranlanmasıyla hesaplanan iletim sistemi kayıp katsayısına ilişkin veri seti. İletim Sistemi Kayıp Katsayısı (ISKK) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   line-capacities-export:
     endpoint: /v1/transmission/export/line-capacities
@@ -115,12 +100,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Hat Kapasiteleri Dışa Aktarım Servisi
-    description: Enterkonneksiyonlara ait hat toplam kapasite ve Kullanıma açık kapasite
-      değerleri gösterilmektedir. Enterkonneksiyonlara ait hat toplam kapasite ve
-      Kullanıma açık kapasite değerleri gösterilmektedir. Hat Kapasiteleri Listeleme
-      Servisi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Enterkonneksiyonlara ait hat toplam kapasite ve Kullanıma açık kapasite değerleri gösterilmektedir. Enterkonneksiyonlara ait hat toplam kapasite ve Kullanıma açık kapasite değerleri gösterilmektedir. Hat Kapasiteleri Listeleme Servisi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   nominal-capacity-export:
     endpoint: /v1/transmission/export/nominal-capacity
@@ -133,11 +115,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Nomine Kapasite Dışa Aktarım Servisi
-    description: Nomine Kapasite değerleri ithalat (satış miktarları) ve ihracat(alış
-      miktarı) için yapılan ikili anlaşmaları göstermektedir. Nomine Kapasite Listesini
-      XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Nomine Kapasite değerleri ithalat (satış miktarları) ve ihracat(alış miktarı) için yapılan ikili anlaşmaları göstermektedir. Nomine Kapasite Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   entso-organizasyon-export:
     endpoint: /v1/transmission/export/organization-list
@@ -150,51 +130,39 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: ENTSO-E (X) Kodları Dışa Aktarım Servisi
-    description: Avrupa Elektrik İletim Sistemi İşletmecileri Ağı’nın piyasadaki organizasyonlara,
-      Avrupa standartlarına uygun formatta tanımladığı Enerji Tanımlama Kodu’dur.
-      ENTSO-E (X) Kodları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Avrupa Elektrik İletim Sistemi İşletmecileri Ağı’nın piyasadaki organizasyonlara, Avrupa standartlarına uygun formatta tanımladığı Enerji Tanımlama Kodu’dur. ENTSO-E (X) Kodları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   tcat-pre-month-forecast-export:
     endpoint: /v1/transmission/export/tcat-pre-month-forecast
     method: POST
     auth: true
     short_name: tcat-pre-month-forecast-export
-    short_name_tr: Enterkonneksiyon Kapasitesine İlişkin Ay Öncesi Tahminler Dışa
-      Aktarım Servisi
+    short_name_tr: Enterkonneksiyon Kapasitesine İlişkin Ay Öncesi Tahminler Dışa Aktarım Servisi
     params:
     - body
     required:
     - body
     response: ''
-    var_type: dict
-    summary: Enterkonneksiyon Kapasitesine İlişkin Ay Öncesi Tahminler Dışa Aktarım
-      Servisi
-    description: Transfer yönü kapsamında ay öncesi Net Transfer Kapasitesi, Kullanıma
-      Açık Kapasite ve Tahsis Edilmiş Kapasite değerlerinin ay öncesi tahminlerine
-      ilişkin veri seti Enterkonneksiyon Kapasitesine İlişkin Ay Öncesi Tahminler
-      Listeleme Servisi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    var_type: []
+    summary: Enterkonneksiyon Kapasitesine İlişkin Ay Öncesi Tahminler Dışa Aktarım Servisi
+    description: Transfer yönü kapsamında ay öncesi Net Transfer Kapasitesi, Kullanıma Açık Kapasite ve Tahsis Edilmiş Kapasite değerlerinin ay öncesi tahminlerine ilişkin veri seti Enterkonneksiyon Kapasitesine İlişkin Ay Öncesi Tahminler Listeleme Servisi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   tcat-pre-year-forecast-export:
     endpoint: /v1/transmission/export/tcat-pre-year-forecast
     method: POST
     auth: true
     short_name: tcat-pre-year-forecast-export
-    short_name_tr: Enterkonneksiyon Kapasitesine İlişkin Yıl Öncesi Tahminler Dışa
-      Aktarım Servisi
+    short_name_tr: Enterkonneksiyon Kapasitesine İlişkin Yıl Öncesi Tahminler Dışa Aktarım Servisi
     params:
     - body
     required:
     - body
     response: ''
-    var_type: dict
-    summary: Enterkonneksiyon Kapasitesine İlişkin Yıl Öncesi Tahminler Dışa Aktarım
-      Servisi
-    description: Transfer yönü kapsamında yıl öncesi Net Transfer Kapasitesi, Kullanıma
-      Açık Kapasite ve Tahsis Edilmiş Kapasite değerlerinin yıl öncesi tahminlerine
-      ilişkin veri seti. Enterkonneksiyon Kapasitesine İlişkin Yıl Öncesi Tahminler
-      Listeleme Servisi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    var_type: []
+    summary: Enterkonneksiyon Kapasitesine İlişkin Yıl Öncesi Tahminler Dışa Aktarım Servisi
+    description: Transfer yönü kapsamında yıl öncesi Net Transfer Kapasitesi, Kullanıma Açık Kapasite ve Tahsis Edilmiş Kapasite değerlerinin yıl öncesi tahminlerine ilişkin veri seti. Enterkonneksiyon Kapasitesine İlişkin Yıl Öncesi Tahminler Listeleme Servisi Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   zero-balance-export:
     endpoint: /v1/transmission/export/zero-balance
@@ -207,12 +175,7 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Sıfır Bakiye Düzeltme Tutarı Aylık Dışa Aktarım Servisi
-    description: 'Sıfır bakiye düzeltme tutarı ve bileşenlerine ait aylık tutarlara
-      ilişkin veri seti.Bu veriler uzlaştırmaya esas olarak yayınlanmaktadır. Yük
-      Alma Talimatı:YAL, Yük Atma Talimatı: YAT, Yerine Getirilmeyen Yük Alma Talimat
-      Tutarı: YGYALT, Yerine Getirilmeyen Yük Atma Talimat Tutarı: YGYALT, GDDK: Geçmişe
-      Dönük Düzeltme Kalemi, KÜPST: Kesinleşmiş Üretim Planı Sapma Tutarı. Sıfır Bakiye
-      Düzeltme Tutarı Aylık Listesini XLSX, CSV ya da PDF olarak dışa aktarır.'
+    description: 'Sıfır bakiye düzeltme tutarı ve bileşenlerine ait aylık tutarlara ilişkin veri seti.Bu veriler uzlaştırmaya esas olarak yayınlanmaktadır. Yük Alma Talimatı:YAL, Yük Atma Talimatı: YAT, Yerine Getirilmeyen Yük Alma Talimat Tutarı: YGYALT, Yerine Getirilmeyen Yük Atma Talimat Tutarı: YGYALT, GDDK: Geçmişe Dönük Düzeltme Kalemi, KÜPST: Kesinleşmiş Üretim Planı Sapma Tutarı. Sıfır Bakiye Düzeltme Tutarı Aylık Listesini XLSX, CSV ya da PDF olarak dışa aktarır.'
     response_structure: {}

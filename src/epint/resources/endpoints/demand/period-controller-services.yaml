@@ -7,8 +7,8 @@ endpoints:
     short_name_tr: Aktif Dönemi Getir
     params: []
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Aktif Dönemi Getir
     description: Aktif dönemi getiren servistir.
     response_structure:
@@ -74,8 +74,8 @@ endpoints:
     short_name_tr: Tüm Dönemleri Getir
     params: []
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Tüm Dönemleri Getir
     description: Geçiş ve aktif tüm dönemleri getiren servistir.
     response_structure:

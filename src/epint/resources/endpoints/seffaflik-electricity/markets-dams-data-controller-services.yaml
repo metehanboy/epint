@@ -10,13 +10,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Aktif Doluluk Listeleme Servisi
-    description: 'Bir barajın maksimum ve minimum işletme seviyeleri arasındaki hacimin
-      yüzdesidir. Formül: Aktif Doluluk= [( İlgili Tarihteki Seviyeye Karşılık Gelen
-      Hacim – Minimum Hacim ) / ( Maksimum Hacim – Minimum Hacim )] * 100. Veriler
-      saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük olarak
-      verilmektedir. Geriye dönük veri bulunmamaktadır.'
+    description: 'Bir barajın maksimum ve minimum işletme seviyeleri arasındaki hacimin yüzdesidir. Formül: Aktif Doluluk= [( İlgili Tarihteki Seviyeye Karşılık Gelen Hacim – Minimum Hacim ) / ( Maksimum Hacim – Minimum Hacim )] * 100. Veriler saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük olarak verilmektedir. Geriye dönük veri bulunmamaktadır.'
     response_structure: {}
   active-volume:
     endpoint: /v1/dams/data/active-volume
@@ -26,17 +22,12 @@ endpoints:
     short_name_tr: Aktif Hacim Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Aktif Hacim Listeleme Servisi
-    description: Bir barajın ilgili tarihteki seviyeye karşılık gelen hacmi ve minimum
-      işletme seviyeleri arasındaki hacimdir. Veriler saat 17:00 itibariyle nihai
-      halini almaktadır. Baraj verileri günlük olarak verilmektedir. Geriye dönük
-      veri verilmemektedir.
+    description: Bir barajın ilgili tarihteki seviyeye karşılık gelen hacmi ve minimum işletme seviyeleri arasındaki hacimdir. Veriler saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük olarak verilmektedir. Geriye dönük veri verilmemektedir.
     response_structure: {}
   basin-list:
     endpoint: /v1/dams/data/basin-list
@@ -47,7 +38,7 @@ endpoints:
     params: []
     required: []
     response: ''
-    var_type: dict
+    var_type: []
     summary: Havza listesini dönen servisir.
     description: Havza listesini dönen servisir.
     response_structure: {}
@@ -62,11 +53,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Günlük Kot Listeleme Servisi
-    description: Barajın ilgili gündeki su yüksekliğini belirtir. Veriler saat 17:00
-      itibariyle nihai halini almaktadır. Baraj verileri günlük olarak verilmektedir.
-      Geriye dönük veri bulunmamaktadır.
+    description: Barajın ilgili gündeki su yüksekliğini belirtir. Veriler saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük olarak verilmektedir. Geriye dönük veri bulunmamaktadır.
     response_structure: {}
   daily-volume:
     endpoint: /v1/dams/data/daily-volume
@@ -76,16 +65,12 @@ endpoints:
     short_name_tr: Günlük Hacim Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Günlük Hacim Listeleme Servisi
-    description: Bir barajın ilgili tarihteki seviyesine karşılık gelen hacimdir.
-      Veriler saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük
-      olarak verilmektedir. Geriye dönük veri verilmemektedir.
+    description: Bir barajın ilgili tarihteki seviyesine karşılık gelen hacimdir. Veriler saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük olarak verilmektedir. Geriye dönük veri verilmemektedir.
     response_structure: {}
   dam-kot:
     endpoint: /v1/dams/data/dam-kot
@@ -95,12 +80,10 @@ endpoints:
     short_name_tr: Kot Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kot Listeleme Servisi
     description: İlgili barajın maximum ve minumum seviyesini gösterir.
     response_structure: {}
@@ -112,12 +95,10 @@ endpoints:
     short_name_tr: Havza ismi ile Barajlar listesini dönen servisir.
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Havza ismi ile Barajlar listesini dönen servisir.
     description: Havza ismi ile Barajlar listesini dönen servisir.
     response_structure: {}
@@ -129,12 +110,10 @@ endpoints:
     short_name_tr: Hacim Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Hacim Listeleme Servisi
     description: İlgili barajın maksimum ve minumum hacim seviyesini gösterir.
     response_structure: {}
@@ -146,15 +125,12 @@ endpoints:
     short_name_tr: Debi ve Kurulu Güç Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Debi ve Kurulu Güç Listeleme Servisi
-    description: İlgili barajda üniteden geçen suyun miktarını ve barajın kurulu gücünü
-      gösterir.
+    description: İlgili barajda üniteden geçen suyun miktarını ve barajın kurulu gücünü gösterir.
     response_structure: {}
   water-energy-provision:
     endpoint: /v1/dams/data/water-energy-provision
@@ -164,14 +140,10 @@ endpoints:
     short_name_tr: Suyun Enerji Karşılığı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Suyun Enerji Karşılığı Listeleme Servisi
-    description: Barajda yer alan suyun hesaplanan MWh cinsinden enerji karşılığıdır.
-      Veriler saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük
-      olarak verilmektedir. Geriye dönük veri verilmemektedir.
+    description: Barajda yer alan suyun hesaplanan MWh cinsinden enerji karşılığıdır. Veriler saat 17:00 itibariyle nihai halini almaktadır. Baraj verileri günlük olarak verilmektedir. Geriye dönük veri verilmemektedir.
     response_structure: {}

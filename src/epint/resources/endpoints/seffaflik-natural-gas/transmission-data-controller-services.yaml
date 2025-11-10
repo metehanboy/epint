@@ -7,12 +7,10 @@ endpoints:
     short_name_tr: Kapasite Nokta Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kapasite Nokta Servisi
     description: Kapasite Nokta Servisi
     response_structure: {}
@@ -24,15 +22,12 @@ endpoints:
     short_name_tr: Günlük Gerçekleşme Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Günlük Gerçekleşme Miktarı Listeleme Servisi
-    description: Şebekeden doğal gaz depolama tesislerine aktarılan doğal gaz miktarını
-      gösterir.
+    description: Şebekeden doğal gaz depolama tesislerine aktarılan doğal gaz miktarını gösterir.
     response_structure: {}
   day-ahead:
     endpoint: /v1/transmission/data/day-ahead
@@ -42,12 +37,10 @@ endpoints:
     short_name_tr: Gün Öncesi (UDN) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Gün Öncesi (UDN) Listeleme Servisi
     description: 'İkili anlaşma miktar bildirimini ifade eder. '
     response_structure: {}
@@ -59,12 +52,10 @@ endpoints:
     short_name_tr: Gün Sonu (UDN) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Gün Sonu (UDN) Listeleme Servisi
     description: Gün Sonu (UDN)
     response_structure: {}
@@ -76,12 +67,10 @@ endpoints:
     short_name_tr: Taşıma Giriş Miktarı Bildirimi (TMB) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Taşıma Giriş Miktarı Bildirimi (TMB) Listeleme Servisi
     description: Fiziki Nokta bazlı giriş miktar bildirimini ifade eder.
     response_structure: {}
@@ -93,12 +82,10 @@ endpoints:
     short_name_tr: Taşıma Çıkış Miktarı Bildirimi (TMB) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Taşıma Çıkış Miktarı Bildirimi (TMB) Listeleme Servisi
     description: Fiziki Nokta bazlı çıkış miktar bildirimini ifade eder.
     response_structure: {}
@@ -110,15 +97,12 @@ endpoints:
     short_name_tr: Maks Giriş Kapasite Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Maks Giriş Kapasite Miktarı Listeleme Servisi
-    description: İletim Şirketi kapasite planına göre iletim şebekesine eklenmesi
-      beklenen doğal gaz miktarını gösterir.
+    description: İletim Şirketi kapasite planına göre iletim şebekesine eklenmesi beklenen doğal gaz miktarını gösterir.
     response_structure: {}
   max-exit-amount:
     endpoint: /v1/transmission/data/max-exit-amount
@@ -128,15 +112,12 @@ endpoints:
     short_name_tr: Maks Çıkış Kapasite Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Maks Çıkış Kapasite Miktarı Listeleme Servisi
-    description: İletim Şirketi kapasite planına göre iletim şebekesinden çıkması
-      beklenen doğal gaz miktarını gösterir.
+    description: İletim Şirketi kapasite planına göre iletim şebekesinden çıkması beklenen doğal gaz miktarını gösterir.
     response_structure: {}
   actual-realization-entry-amount:
     endpoint: /v1/transmission/data/realization-entry-amount
@@ -146,15 +127,12 @@ endpoints:
     short_name_tr: Fiili Gerçekleşme Giriş Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Fiili Gerçekleşme Giriş Miktarı Listeleme Servisi
-    description: Taşıtanların Alış işlemi sonucu, sisteme eklenen fiili doğal gaz
-      miktarını gösterir.
+    description: Taşıtanların Alış işlemi sonucu, sisteme eklenen fiili doğal gaz miktarını gösterir.
     response_structure: {}
   actual-realization-exit-amount:
     endpoint: /v1/transmission/data/realization-exit-amount
@@ -164,15 +142,12 @@ endpoints:
     short_name_tr: Fiili Gerçekleşme Çıkış Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Fiili Gerçekleşme Çıkış Miktarı Listeleme Servisi
-    description: Taşıtanların Satış işlemi sonucu, sistemden çıkan fiili doğal gaz
-      miktarını gösterir.
+    description: Taşıtanların Satış işlemi sonucu, sistemden çıkan fiili doğal gaz miktarını gösterir.
     response_structure: {}
   rezerve-entry-amount:
     endpoint: /v1/transmission/data/rezerve-entry-amount
@@ -182,15 +157,12 @@ endpoints:
     short_name_tr: Rezerve Giriş Kapasite Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Rezerve Giriş Kapasite Miktarı Listeleme Servisi
-    description: İletim Şirketi rezervasyon programına göre iletim şebekesine eklenmesi
-      beklenen doğal gaz miktarını gösterir.
+    description: İletim Şirketi rezervasyon programına göre iletim şebekesine eklenmesi beklenen doğal gaz miktarını gösterir.
     response_structure: {}
   rezerve-exit-amount:
     endpoint: /v1/transmission/data/rezerve-exit-amount
@@ -200,15 +172,12 @@ endpoints:
     short_name_tr: Rezerve Çıkış Kapasite Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Rezerve Çıkış Kapasite Miktarı Listeleme Servisi
-    description: İletim Şirketi rezervasyon programına göre iletim şebekesinden çıkması
-      beklenen doğal gaz miktarını gösterir.
+    description: İletim Şirketi rezervasyon programına göre iletim şebekesinden çıkması beklenen doğal gaz miktarını gösterir.
     response_structure: {}
   stock-amount:
     endpoint: /v1/transmission/data/stock-amount
@@ -218,15 +187,12 @@ endpoints:
     short_name_tr: Stok Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Stok Miktarı Listeleme Servisi
-    description: İletim Şebekesinde sıkışmış durumdaki günlük doğal gaz miktarını
-      gösterir.
+    description: İletim Şebekesinde sıkışmış durumdaki günlük doğal gaz miktarını gösterir.
     response_structure: {}
   storage-facility:
     endpoint: /v1/transmission/data/storage-facility
@@ -235,11 +201,9 @@ endpoints:
     short_name: storage-facility
     short_name_tr: Depolama Tesisi Listeleme Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Depolama Tesisi Listeleme Servisi
     description: Depolama Tesisi Listeleme Servisi
     response_structure: {}
@@ -251,12 +215,10 @@ endpoints:
     short_name_tr: Transfer Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Transfer Listeleme Servisi
     description: Fiziki Nokta bazlı İkili anlaşma miktar bildirimini ifade eder.
     response_structure: {}

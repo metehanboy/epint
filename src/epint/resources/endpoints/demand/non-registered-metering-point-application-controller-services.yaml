@@ -23,8 +23,8 @@ endpoints:
     - customerNo
     - readingOrganizationId
     - uniqueCode
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: KMO Başvurusu Yap
     description: Kaydı mevcut olmayan ölçüm noktası başvuru kaydetme servisidir
     response_structure:
@@ -98,8 +98,8 @@ endpoints:
     - demandStatuses
     - periodDate
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: KMO Taleplerini Sorgula
     description: Kaydı mevcut olmayan ölçüm noktası taleplerinin sorgulama servisidir
     response_structure:
@@ -177,8 +177,8 @@ endpoints:
     - ids
     required:
     - ids
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: KMO Başvurusu Reddet
     description: Kaydı mevcut olmayan ölçüm noktası talebini reddetme servisidir
     response_structure:
@@ -208,8 +208,8 @@ endpoints:
     - id
     required:
     - id
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: KMO Başvurusu Geri Çek
     description: Kaydı mevcut olmayan ölçüm noktası talebini geri çekme servisidir
     response_structure:

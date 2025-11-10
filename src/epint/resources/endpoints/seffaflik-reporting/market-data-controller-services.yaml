@@ -6,13 +6,17 @@ endpoints:
     short_name: aoptf-and-yek-unit-cost-data
     short_name_tr: AOPTF ve YEKDEM birim maliyeti listeleme servisi.
     params:
-    - body
-    - TGT
+    - startDate
+    - endDate
     required:
-    - body
-    - TGT
-    response: ''
-    var_type: dict
+    - endDate
+    - startDate
+    response: Response
+    var_type: []
     summary: AOPTF ve YEKDEM birim maliyeti listeleme servisi.
     description: EPDK için, AOPTF ve YEKDEM birim maliyeti dönen servistir.
-    response_structure: {}
+    response_structure:
+      items:
+      - date: string
+        aoptf: number
+        yekdemUnitCost: number

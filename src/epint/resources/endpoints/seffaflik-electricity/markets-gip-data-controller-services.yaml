@@ -7,15 +7,12 @@ endpoints:
     short_name_tr: GİP Teklif Edilen Alış Satış Miktarları Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GİP Teklif Edilen Alış Satış Miktarları Listeleme Servisi
-    description: Gün İçi Piyasasında sunulan tekliflerin alış ve satış tekliflerinin
-      toplam miktarlarıdır.
+    description: Gün İçi Piyasasında sunulan tekliflerin alış ve satış tekliflerinin toplam miktarlarıdır.
     response_structure: {}
   gip-matching-quantity:
     endpoint: /v1/markets/idm/data/matching-quantity
@@ -25,15 +22,12 @@ endpoints:
     short_name_tr: GİP Eşleşme Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GİP Eşleşme Miktarı Listeleme Servisi
-    description: Gün İçi Piyasası’nda kontrat türüne göre saatlik veya blok olarak
-      gösterilen toplam eşleşme miktarıdır.
+    description: Gün İçi Piyasası’nda kontrat türüne göre saatlik veya blok olarak gösterilen toplam eşleşme miktarıdır.
     response_structure: {}
   min-max-bid-price:
     endpoint: /v1/markets/idm/data/min-max-bid-price
@@ -43,15 +37,12 @@ endpoints:
     short_name_tr: GİP Min - Maks Alış Teklif Fiyatı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GİP Min - Maks Alış Teklif Fiyatı Listeleme Servisi
-    description: Gün İçi Piyasası'nda kontrat türüne göre saatlik veya blok olarak
-      gösterilen en yüksek ve en düşük alış teklif fiyatıdır.
+    description: Gün İçi Piyasası'nda kontrat türüne göre saatlik veya blok olarak gösterilen en yüksek ve en düşük alış teklif fiyatıdır.
     response_structure: {}
   min-max-matching-price:
     endpoint: /v1/markets/idm/data/min-max-matching-price
@@ -61,15 +52,12 @@ endpoints:
     short_name_tr: GİP Min - Maks Eşleşme Fiyat Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GİP Min - Maks Eşleşme Fiyat Listeleme Servisi
-    description: Gün İçi Piyasası'nda kontrat türüne göre saatlik veya blok olarak
-      gösterilen en yüksek ve en düşük eşleşme fiyatıdır.
+    description: Gün İçi Piyasası'nda kontrat türüne göre saatlik veya blok olarak gösterilen en yüksek ve en düşük eşleşme fiyatıdır.
     response_structure: {}
   min-max-sales-offer-price:
     endpoint: /v1/markets/idm/data/min-max-sales-offer-price
@@ -79,15 +67,12 @@ endpoints:
     short_name_tr: GİP Min - Maks Satış Teklif Fiyatı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GİP Min - Maks Satış Teklif Fiyatı Listeleme Servisi
-    description: Gün İçi Piyasası'nda kontrat türüne göre saatlik veya blok olarak
-      gösterilen en yüksek ve en düşük satış teklif fiyatıdır.
+    description: Gün İçi Piyasası'nda kontrat türüne göre saatlik veya blok olarak gösterilen en yüksek ve en düşük satış teklif fiyatıdır.
     response_structure: {}
   trade-value:
     endpoint: /v1/markets/idm/data/trade-value
@@ -97,15 +82,12 @@ endpoints:
     short_name_tr: GİP İşlem Hacmi Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GİP İşlem Hacmi Listeleme Servisi
-    description: Gün İçi Piyasası’nda eşleşen alış-satış tekliflerinin saatlik toplam
-      mali değeridir.
+    description: Gün İçi Piyasası’nda eşleşen alış-satış tekliflerinin saatlik toplam mali değeridir.
     response_structure: {}
   transaction-history:
     endpoint: /v1/markets/idm/data/transaction-history
@@ -115,12 +97,10 @@ endpoints:
     short_name_tr: GİP İşlem Akışı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GİP İşlem Akışı Listeleme Servisi
     description: Gün İçi Piyasası’nda gerçekleşen anlık işlemlerin fiyat ve miktarlarıdır.
     response_structure: {}
@@ -132,13 +112,10 @@ endpoints:
     short_name_tr: GİP Ağırlıklı Ortalama Fiyat Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GİP Ağırlıklı Ortalama Fiyat Listeleme Servisi
-    description: Gün İçi Piyasası'ndaki her bir kontrata ilişkin işlemlerin saatlik
-      bazda hacimsel ağırlıklı ortalama fiyatıdır.
+    description: Gün İçi Piyasası'ndaki her bir kontrata ilişkin işlemlerin saatlik bazda hacimsel ağırlıklı ortalama fiyatıdır.
     response_structure: {}

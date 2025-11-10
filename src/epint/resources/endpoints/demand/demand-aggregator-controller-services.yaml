@@ -21,8 +21,8 @@ endpoints:
     - balancingMarketParticipation
     - electricSupplyParticipation
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Talep Toplayıcı Karşı Taleplerimi Sorgula
     description: Talep Toplayıcı Portföyünde bulunan sayaçları etkileyecek olan diğer organizasyonların yaptığı talepleri listeleme servisidir
     response_structure:
@@ -131,8 +131,8 @@ endpoints:
     - demandId
     required:
     - demandId
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Talep Toplayıcı Tarihçesini Sorgula
     description: İlgili talebin hangi aşamalardan geçtiğinin ve nihai statüsünün verildiği servistir
     response_structure:
@@ -197,8 +197,8 @@ endpoints:
     - warningConfirmation
     required:
     - isCustomerInformationChange
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Talep Toplayıcı Ekleme Talebi kaydet
     description: Talep toplayıcı Ekleme Talebi Servisidir
     response_structure:
@@ -332,8 +332,8 @@ endpoints:
     - isDemandSideParticipation
     - isBalancingMarketParticipation
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Talep Toplayıcı Ekleme Talebi Ön Sorgu
     description: Önyüz kullanımı için hazırlanmış ilgili tüketim noktası için ekleme talep yapmadan önce sorgulama yapılabilecek servistir
     response_structure:
@@ -397,8 +397,8 @@ endpoints:
     - warningConfirmation
     required:
     - isCustomerInformationChange
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Talep Toplayıcı Ekleme Talebi Güncelleme
     description: Talep Toplayıcı Ekleme Talebi Güncelleme Servisidir
     response_structure:
@@ -541,8 +541,8 @@ endpoints:
     - isBalancingMarketParticipation
     required:
     - isCustomerInformationChange
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Talep Toplayıcı Ekleme Talebi Güncelleme Ön Sorgu
     description: Talep Toplayıcı Ekleme talebi güncelleme Ön Sorgu servisi
     response_structure:
@@ -596,8 +596,8 @@ endpoints:
     - isDemandSideParticipation
     - isBalancingMarketParticipation
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Talep Toplayıcı Portföyden Çıkarma Talebi Kaydet
     description: Talep Toplayıcı Portföyden çıkarılmak istenen tüketim noktasının talebinin kaydedildiği servistir
     response_structure:
@@ -731,8 +731,8 @@ endpoints:
     - isDemandSideParticipation
     - isBalancingMarketParticipation
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Talep Toplacıyı portföy Çıkarma Talebi Ön Sorgu
     description: Talep Toplacıyı için çıkarma talep yapmadan önce abone bilgileriyle sorgulama yapılabilecek servistir
     response_structure:
@@ -784,8 +784,8 @@ endpoints:
     - isDemandSideParticipation
     - isBalancingMarketParticipation
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Portföyden Çıkarma Talebi Güncelle
     description: Portföyden çıkarma taleplerini güncelleme servisidir
     response_structure:
@@ -928,8 +928,8 @@ endpoints:
     - balancingMarketParticipation
     - electricSupplyParticipation
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Talep Toplayıcı Sorgusu Oluştur
     description: Talep Toplayıcı Sorgusu Oluşturma
     response_structure:
@@ -1039,8 +1039,8 @@ endpoints:
     - demandStatusId
     required:
     - demandStatusId
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Talep Toplayıcı Taleblerin Durum Gümcelleme
     description: Talep Toplayıcı Taleblerin Durum Gümcellemesi
     response_structure:

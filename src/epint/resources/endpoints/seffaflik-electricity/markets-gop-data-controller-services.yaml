@@ -10,10 +10,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Blok Alış Miktarı Listeleme Servisi
-    description: Gün Öncesi Piyasası'nda sunulan en az 4 en fazla 24 saati kapsayan
-      ve eşleşen blok alış tekliflerinin toplam miktarıdır.
+    description: Gün Öncesi Piyasası'nda sunulan en az 4 en fazla 24 saati kapsayan ve eşleşen blok alış tekliflerinin toplam miktarıdır.
     response_structure: {}
   amount-of-block-selling:
     endpoint: /v1/markets/dam/data/amount-of-block-selling
@@ -26,10 +25,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Blok Satış Miktarı Listeleme Servisi
-    description: Gün Öncesi Piyasası'nda sunulan en az 4 en fazla 24 saati kapsayan
-      ve eşleşen blok satış tekliflerinin toplam miktarıdır.
+    description: Gün Öncesi Piyasası'nda sunulan en az 4 en fazla 24 saati kapsayan ve eşleşen blok satış tekliflerinin toplam miktarıdır.
     response_structure: {}
   gop-matching-quantity:
     endpoint: /v1/markets/dam/data/clearing-quantity
@@ -39,12 +37,10 @@ endpoints:
     short_name_tr: GÖP Eşleşme Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Eşleşme Miktarı Listeleme Servisi
     description: Gün Öncesi Piyasası'nda eşleşen tekliflerin saatlik toplam miktardır.
     response_structure: {}
@@ -56,12 +52,10 @@ endpoints:
     short_name_tr: Göp Eşleşme Miktarı Organizasyon Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Göp Eşleşme Miktarı Organizasyon Listeleme Servisi
     description: Göp Eşleşme Miktarı için organizasyonları listeler.
     response_structure: {}
@@ -73,15 +67,12 @@ endpoints:
     short_name_tr: GÖP İşlem Hacmi Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP İşlem Hacmi Listeleme Servisi
-    description: Gün Öncesi Piyasası’nda eşleşen alış tekliflerinin saatlik toplam
-      mali değeridir.
+    description: Gün Öncesi Piyasası’nda eşleşen alış tekliflerinin saatlik toplam mali değeridir.
     response_structure: {}
   flexible-offer-buy-quantity:
     endpoint: /v1/markets/dam/data/flexible-offer-buying-quantity
@@ -91,17 +82,12 @@ endpoints:
     short_name_tr: GÖP Esnek Alış Teklif Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Esnek Alış Teklif Miktarı Listeleme Servisi
-    description: Gün öncesi piyasasına katılan piyasa katılımcısının, belirli bir
-      teklif zaman aralığında belirtilen teklif süresi için, lot cinsinden uzlaştırma
-      dönemi bazlı değişebilen alış miktarlarını eşleşen ve eşleşmeyen teklif kırılımında
-      içerir.
+    description: Gün öncesi piyasasına katılan piyasa katılımcısının, belirli bir teklif zaman aralığında belirtilen teklif süresi için, lot cinsinden uzlaştırma dönemi bazlı değişebilen alış miktarlarını eşleşen ve eşleşmeyen teklif kırılımında içerir.
     response_structure: {}
   flexible-offer-sell-quantity:
     endpoint: /v1/markets/dam/data/flexible-offer-selling-quantity
@@ -111,17 +97,12 @@ endpoints:
     short_name_tr: GÖP Esnek Satış Teklif Miktarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Esnek Satış Teklif Miktarı Listeleme Servisi
-    description: Gün öncesi piyasasına katılan piyasa katılımcısının, belirli bir
-      teklif zaman aralığında belirtilen teklif süresi için, lot cinsinden uzlaştırma
-      dönemi bazlı değişebilen satış miktarlarını eşleşen ve eşleşmeyen teklif kırılımında
-      içerir.
+    description: Gün öncesi piyasasına katılan piyasa katılımcısının, belirli bir teklif zaman aralığında belirtilen teklif süresi için, lot cinsinden uzlaştırma dönemi bazlı değişebilen satış miktarlarını eşleşen ve eşleşmeyen teklif kırılımında içerir.
     response_structure: {}
   interim-mcp-data:
     endpoint: /v1/markets/dam/data/interim-mcp
@@ -131,34 +112,25 @@ endpoints:
     short_name_tr: Kesinleşmemiş Piyasa Takas Fiyatı (K.PTF) Listeme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kesinleşmemiş Piyasa Takas Fiyatı (K.PTF) Listeme Servisi
-    description: Kesinleşmemiş Piyasa Takas Fiyatı , Gün Öncesi Piyasası'na sunulan
-      tekliflerin arz ve talebe göre eşleşmesiyle oluşan itiraz süreci tamamlanmamış
-      saatlik elektrik enerjisi fiyatıdır.İtiraz süreci tamamlanmamış saatlik elektrik
-      enerjisi fiyatıdır.
+    description: Kesinleşmemiş Piyasa Takas Fiyatı , Gün Öncesi Piyasası'na sunulan tekliflerin arz ve talebe göre eşleşmesiyle oluşan itiraz süreci tamamlanmamış saatlik elektrik enerjisi fiyatıdır.İtiraz süreci tamamlanmamış saatlik elektrik enerjisi fiyatıdır.
     response_structure: {}
   interim-mcp-published-status:
     endpoint: /v1/markets/dam/data/interim-mcp-published-status
     method: GET
     auth: true
     short_name: interim-mcp-published-status
-    short_name_tr: Kesinleşmemiş Piyasa Takas Fiyatı (K.PTF) yayınlanma durumunu dönen
-      servis
+    short_name_tr: Kesinleşmemiş Piyasa Takas Fiyatı (K.PTF) yayınlanma durumunu dönen servis
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kesinleşmemiş Piyasa Takas Fiyatı (K.PTF) yayınlanma durumunu dönen servis
-    description: Kesinleşmemiş Piyasa Takas Fiyatı (K.PTF) yayınlanma durumunu dönen
-      servis
+    description: Kesinleşmemiş Piyasa Takas Fiyatı (K.PTF) yayınlanma durumunu dönen servis
     response_structure: {}
   esnek-teklif-eslesme-miktari:
     endpoint: /v1/markets/dam/data/matched-flexible-offer-quantity
@@ -171,12 +143,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Esnek Teklif Eşleşme Miktarları Listeleme Servisi
-    description: Esnek Teklif Eşleşme Miktarları Belirli bir teklif zaman aralığı
-      boyunca belirli bir teklif süresi için değişebilen miktarlardan ve bu miktarlar
-      için tek fiyat bilgilerinden oluşan esnek tekliflerin alış ve satış yönlü eşleşme
-      miktarları
+    description: Esnek Teklif Eşleşme Miktarları Belirli bir teklif zaman aralığı boyunca belirli bir teklif süresi için değişebilen miktarlardan ve bu miktarlar için tek fiyat bilgilerinden oluşan esnek tekliflerin alış ve satış yönlü eşleşme miktarları
     response_structure: {}
   mcp-data:
     endpoint: /v1/markets/dam/data/mcp
@@ -186,16 +155,12 @@ endpoints:
     short_name_tr: Piyasa Takas Fiyatı (PTF) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Piyasa Takas Fiyatı (PTF) Listeleme Servisi
-    description: Piyasa Takas Fiyatı, Gün Öncesi Piyasası'na sunulan tekliflerin arz
-      ve talebe göre eşleşmesiyle oluşan saatlik elektrik enerjisi fiyatıdır.Gösterge
-      niteliğindeki Türkiye Cumhuriyet Merkez Bankası döviz alış kuru esas alınmıştır.
+    description: Piyasa Takas Fiyatı, Gün Öncesi Piyasası'na sunulan tekliflerin arz ve talebe göre eşleşmesiyle oluşan saatlik elektrik enerjisi fiyatıdır.Gösterge niteliğindeki Türkiye Cumhuriyet Merkez Bankası döviz alış kuru esas alınmıştır.
     response_structure: {}
   price-independent-bid:
     endpoint: /v1/markets/dam/data/price-independent-bid
@@ -205,15 +170,12 @@ endpoints:
     short_name_tr: GÖP Fiyattan Bağımsız Alış Teklifi Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Fiyattan Bağımsız Alış Teklifi Listeleme Servisi
-    description: Gün öncesi piyasasında saatlik olarak fiyat kırılımı oluşturulmadan
-      sunulan alış tekliflerinin toplamıdır.
+    description: Gün öncesi piyasasında saatlik olarak fiyat kırılımı oluşturulmadan sunulan alış tekliflerinin toplamıdır.
     response_structure: {}
   price-independent-offer:
     endpoint: /v1/markets/dam/data/price-independent-offer
@@ -223,15 +185,12 @@ endpoints:
     short_name_tr: GÖP Fiyattan Bağımsız Satış Teklifi Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Fiyattan Bağımsız Satış Teklifi Listeleme Servisi
-    description: Gün öncesi piyasasında saatlik olarak fiyat kırılımı oluşturulmadan
-      sunulan satış tekliflerinin toplamıdır.
+    description: Gün öncesi piyasasında saatlik olarak fiyat kırılımı oluşturulmadan sunulan satış tekliflerinin toplamıdır.
     response_structure: {}
   side-payment:
     endpoint: /v1/markets/dam/data/side-payments
@@ -241,17 +200,12 @@ endpoints:
     short_name_tr: GÖP Fark Tutarı Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Fark Tutarı Listeleme Servisi
-    description: Alış tekliflerinden kaynaklı fark tutarı alış yönlü blok ve esnek
-      teklif eşleşmelerinden, satış tekliflerinden kaynaklı fark tutarı satış yönlü
-      blok ve esnek teklif eşleşmelerinden kaynaklanmaktadır.Fark tutarı hesaplanması
-      ve dağıtılmasına ilişkin detaylar Fark Tutarı Prosedürü’nde yer almaktadır.
+    description: Alış tekliflerinden kaynaklı fark tutarı alış yönlü blok ve esnek teklif eşleşmelerinden, satış tekliflerinden kaynaklı fark tutarı satış yönlü blok ve esnek teklif eşleşmelerinden kaynaklanmaktadır.Fark tutarı hesaplanması ve dağıtılmasına ilişkin detaylar Fark Tutarı Prosedürü’nde yer almaktadır.
     response_structure: {}
   submitted-bid-order-volume:
     endpoint: /v1/markets/dam/data/submitted-bid-order-volume
@@ -261,15 +215,12 @@ endpoints:
     short_name_tr: GÖP Teklif Edilen Alış Miktarları Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Teklif Edilen Alış Miktarları Listeleme Servisi
-    description: Gün Öncesi Piyasası’nda 0 TL/MWh fiyat seviyesine sunulan saatlik,
-      blok ve esnek alış teklif miktarlarının toplamıdır.
+    description: Gün Öncesi Piyasası’nda 0 TL/MWh fiyat seviyesine sunulan saatlik, blok ve esnek alış teklif miktarlarının toplamıdır.
     response_structure: {}
   submitted-sales-order-volume:
     endpoint: /v1/markets/dam/data/submitted-sales-order-volume
@@ -279,16 +230,12 @@ endpoints:
     short_name_tr: GÖP Teklif Edilen Satış Miktarları Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Teklif Edilen Satış Miktarları Listeleme Servisi
-    description: Gün Öncesi Piyasası’nda azami uzlaştırma fiyat seviyesine sunulan
-      saatlik, blok ve esnek satış teklif miktarlarının toplamıdır.Azami Uzlaştırma
-      Fiyatı 01.10.2023 tarihinden itibaren kaldırılmıştır.
+    description: Gün Öncesi Piyasası’nda azami uzlaştırma fiyat seviyesine sunulan saatlik, blok ve esnek satış teklif miktarlarının toplamıdır.Azami Uzlaştırma Fiyatı 01.10.2023 tarihinden itibaren kaldırılmıştır.
     response_structure: {}
   supply-demand:
     endpoint: /v1/markets/dam/data/supply-demand
@@ -301,14 +248,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: GÖP Arz-Talep Listeleme Servisi
-    description: 'Her bir fiyat kırılımındaki saatlik teklif miktarına, kabul edilen
-      blok ve esnek teklif miktarlarının ilave edilmesiyle oluşturulmuş teklif setlerinin
-      gösterilmesidir.Arz miktarı: Her bir fiyat kırılımındaki saatlik arz ile kabul
-      edilen blok ve esnek arz miktarının toplamıdır. Talep miktarı: Her bir fiyat
-      kırılımındaki saatlik talep ile kabul edilen blok ve esnek talep miktarının
-      toplamıdır.'
+    description: 'Her bir fiyat kırılımındaki saatlik teklif miktarına, kabul edilen blok ve esnek teklif miktarlarının ilave edilmesiyle oluşturulmuş teklif setlerinin gösterilmesidir.Arz miktarı: Her bir fiyat kırılımındaki saatlik arz ile kabul edilen blok ve esnek arz miktarının toplamıdır. Talep miktarı: Her bir fiyat kırılımındaki saatlik talep ile kabul edilen blok ve esnek talep miktarının toplamıdır.'
     response_structure: {}
   supply-demand-chart-data:
     endpoint: /v1/markets/dam/data/supply-demand-chart-data
@@ -321,7 +263,7 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Arz Talep Grafik Verisi Veri Listeleme Servisi
     description: Arz Talep grafik gösterimi için gelmesi gereken verileri getirir.
     response_structure: {}
@@ -333,13 +275,10 @@ endpoints:
     short_name_tr: Arz Talep Grafik Saatlik Ptf Verisi Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Arz Talep Grafik Saatlik Ptf Verisi Servisi
-    description: Arz Talep grafik gösterimi için Fiyat,Eşleştirme Miktarı verilerini
-      getirir.
+    description: Arz Talep grafik gösterimi için Fiyat,Eşleştirme Miktarı verilerini getirir.
     response_structure: {}

@@ -12,8 +12,8 @@ endpoints:
     - uniqueCode
     - serial
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Serbest Tüketici Sorgulama
     description: Tüketim noktası bilgileriyle serbest tüketici bilgilerinin sorgulanabileceği servistir
     response_structure:

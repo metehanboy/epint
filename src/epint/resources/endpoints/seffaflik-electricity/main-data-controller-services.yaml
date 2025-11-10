@@ -6,11 +6,9 @@ endpoints:
     short_name: date-init
     short_name_tr: Ana Tarih Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Ana Tarih Servisi
     description: Uygulama genelinde kullanılacak olan tarih verilerini dönen servis
     response_structure: {}
@@ -22,12 +20,10 @@ endpoints:
     short_name_tr: İlçe Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: İlçe Listeleme Servisi
     description: Şehir bilgisine göre ilçe listelesini dönen servistir.
     response_structure: {}
@@ -38,12 +34,9 @@ endpoints:
     short_name: province-list
     short_name_tr: Şehir Listeleme Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Şehir Listeleme Servisi
-    description: EPİAŞ Sisteminde kayıtlı Türkiye şehir listelemesini dönen servistir.
-      İstanbul, Asya ve Avrupa olmak üzere ikiye ayrılmıştır.
+    description: EPİAŞ Sisteminde kayıtlı Türkiye şehir listelemesini dönen servistir. İstanbul, Asya ve Avrupa olmak üzere ikiye ayrılmıştır.
     response_structure: {}

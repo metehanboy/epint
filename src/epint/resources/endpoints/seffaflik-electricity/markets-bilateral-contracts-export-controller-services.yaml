@@ -7,16 +7,12 @@ endpoints:
     short_name_tr: EÜAŞ - GTŞ İkili Anlaşmalar Dışa Aktarım Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: EÜAŞ - GTŞ İkili Anlaşmalar Dışa Aktarım Servisi
-    description: Düzenlemeye tabi tarife kapsamına göre EÜAŞ ile GTŞ’lerin arasında
-      yapılan ikili anlaşmaların aylık toplamlarını göstermektedir. EÜAŞ - GTŞ İkili
-      Anlaşmalar Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Düzenlemeye tabi tarife kapsamına göre EÜAŞ ile GTŞ’lerin arasında yapılan ikili anlaşmaların aylık toplamlarını göstermektedir. EÜAŞ - GTŞ İkili Anlaşmalar Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   bilateral-contracts-bid-quantity-export:
     endpoint: /v1/markets/bilateral-contracts/export/bilateral-contracts-bid-quantity
@@ -29,10 +25,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: İkili Anlaşma (İA) Alış Miktarı Dışa Aktarım Servisi
-    description: İkili anlaşmalara ait alış miktarları verisidir. İkili Anlaşma (İA)
-      Alış Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: İkili anlaşmalara ait alış miktarları verisidir. İkili Anlaşma (İA) Alış Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   bilateral-contracts-offer-quantity-export:
     endpoint: /v1/markets/bilateral-contracts/export/bilateral-contracts-offer-quantity
@@ -45,8 +40,7 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: İkili Anlaşma (İA) Satış Miktarı Dışa Aktarım Servisi
-    description: İkili anlaşmalara ait satış miktarı verisidir. İkili Anlaşma (İA)
-      Satış Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: İkili anlaşmalara ait satış miktarı verisidir. İkili Anlaşma (İA) Satış Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}

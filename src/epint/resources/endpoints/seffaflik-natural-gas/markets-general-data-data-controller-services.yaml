@@ -7,12 +7,10 @@ endpoints:
     short_name_tr: Doğal Gaz Piyasa Katılımcıları Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Doğal Gaz Piyasa Katılımcıları Listeleme Servisi
     description: Katılımcıların piyasa (SGP, VGP) kayıt durumlarını gösterir.
     response_structure: {}
@@ -23,11 +21,9 @@ endpoints:
     short_name: participant-list
     short_name_tr: Katılımcı Listesi Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Katılımcı Listesi Servisi
     description: Katılımcı Listesi Servisi
     response_structure: {}

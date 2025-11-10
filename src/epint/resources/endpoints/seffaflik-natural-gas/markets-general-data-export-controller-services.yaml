@@ -10,8 +10,7 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Doğal Gaz Piyasa Katılımcıları Dışa Aktarım Servisi
-    description: Katılımcıların piyasa (SGP, VGP) kayıt durumlarını gösterir. Doğal
-      Gaz Piyasa Katılımcıları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Katılımcıların piyasa (SGP, VGP) kayıt durumlarını gösterir. Doğal Gaz Piyasa Katılımcıları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}

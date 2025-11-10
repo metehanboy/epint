@@ -12,8 +12,8 @@ endpoints:
     - isPreCheckOperation
     required:
     - isPreCheckOperation
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Otoprodüktör Sayacı Portföye Ekleme Talebi Kaydet
     description: Portföye eklenmek istenen otoprodüktör sayacının talebinin kaydedildiği servistir
     response_structure:
@@ -49,8 +49,8 @@ endpoints:
     required:
     - demandId
     - demandStatusId
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Otoprodüktör Sayacı Portföye Ekleme Talebi Durum Güncelle
     description: Portföye eklenmek istenen otoprodüktör sayacının talebinin durumunun güncellendiği servistir
     response_structure:
@@ -83,8 +83,8 @@ endpoints:
     - consumptionPointEic
     - isPreCheckOperation
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Otoprodüktör Sayacı Portföyden Çıkarma Talebi Kaydet
     description: Portföyden çıkarılmak istenen otoprodüktör sayacının talebinin kaydedildiği servistir
     response_structure:
@@ -120,8 +120,8 @@ endpoints:
     required:
     - demandId
     - demandStatusId
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Otoprodüktör Sayacı Portföyden Çıkarma Talebi Durum Güncelle
     description: Portföyden çıkarılmak istenen otoprodüktör sayacının talebinin durumunun güncellendiği servistir
     response_structure:
@@ -155,8 +155,8 @@ endpoints:
     required:
     - demandId
     - isSendToLastSupplier
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Otoprodüktör Sayacı Portföyden Çıkarma Son Kaynak Tedarikçi Durumu Güncelle
     description: Portföyden çıkarılmak istenen otoprodüktör sayacının portföyden çıktıktan sonra son kaynak tedariğine düşme durumunu güncelleyen servistir
     response_structure:
@@ -194,8 +194,8 @@ endpoints:
     - demandTypes
     - demandStatus
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Karşı Taleplerimi Sorgula
     description: Portföyümüzde bulunan sayaçları etkileyecek olan diğer organizasyonların yaptığı talepleri listeleme servisidir
     response_structure:
@@ -302,8 +302,8 @@ endpoints:
     - uniqueCode
     - demandStatus
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Karşı Taleplerimi Sorgula (Dağıtım)
     description: Portföyümüzde bulunan sayaçları etkileyecek olan diğer organizasyonların yaptığı talepleri listeleme servisidir
     response_structure:
@@ -407,8 +407,8 @@ endpoints:
     - demandId
     required:
     - demandId
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Talep Tarihçesini Sorgula
     description: İlgili talebin hangi aşamalardan geçtiğinin ve nihai statüsünün verildiği servistir
     response_structure:
@@ -462,8 +462,8 @@ endpoints:
     - demandId
     required:
     - demandId
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: OSB Ana Sayaç Talebi Bağlı Talepleri Sorgulama
     description: Osb ana sayaç talebine bağlı oluşmuş talepleri listeler.
     response_structure:
@@ -513,8 +513,8 @@ endpoints:
     - oizOrganizationId
     required:
     - isCustomerInformationChange
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: OSB Ana Sayaç Ekleme Talebi Kaydetme
     description: Ekleme talebi kaydetme servisidir.
     response_structure:
@@ -575,8 +575,8 @@ endpoints:
     - consumptionPointEic
     - oizOrganizationId
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: OSB Ana Sayaç Ekleme Talebi Ön Sorgulama
     description: Ekleme talebi oluşturmadan önce osb organizasyon bilgileriyle veya sayaç bilgileriyle sorgulama yapma servisidir.
     response_structure:
@@ -646,8 +646,8 @@ endpoints:
     required:
     - demandId
     - isCustomerInformationChange
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: OSB Ana Sayaç Ekleme Talebi Abone Bilgileri Güncelleme
     description: Ekleme talebi abone bilgileri güncelleme servisidir.
     response_structure:
@@ -683,8 +683,8 @@ endpoints:
     - demandId
     - demandStatusId
     - isPreCheckOperation
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: OSB Ana Sayaç Ekleme Talebi Durum Güncelleme
     description: Ekleme talebi durum güncelleme servisidir.
     response_structure:
@@ -716,8 +716,8 @@ endpoints:
     - consumptionPointEic
     - oizOrganizationId
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: OSB Ana Sayaç Çıkarma Talebi Kaydetme
     description: Çıkarma talebi kaydetme servisidir.
     response_structure:
@@ -764,8 +764,8 @@ endpoints:
     - consumptionPointEic
     - oizOrganizationId
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: OSB Ana Sayaç Çıkarma Talebi Ön Sorgulama
     description: Çıkarma talebi oluşturmadan önce osb organizasyon bilgileriyle veya sayaç bilgileriyle sorgulama yapma servisidir.
     response_structure:
@@ -813,8 +813,8 @@ endpoints:
     required:
     - demandId
     - demandStatusId
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: OSB Ana Sayaç Çıkarma Talebi Durum Güncelleme
     description: Çıkarma talebi durum güncelleme servisidir.
     response_structure:
@@ -859,8 +859,8 @@ endpoints:
     required:
     - isCustomerInformationChange
     - isPreCheckOperation
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Portföye Ekleme Talebi Kaydet
     description: Portföye eklenmek istenen tüketim noktasının talebinin kaydedildiği servistir
     response_structure:
@@ -909,8 +909,8 @@ endpoints:
     - demandStatusId
     - isCustomerInformationChange
     - isPreCheckOperation
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Portföye Ekleme Talebi Güncelle
     description: Portföye ekleme taleplerini güncelleme servisidir
     response_structure:
@@ -945,8 +945,8 @@ endpoints:
     - consumptionPointIds
     required:
     - consumptionPointIds
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Portföyden Çıkarma Talebi Kaydet
     description: Portföyden çıkarılmak istenen tüketim noktasının talebinin kaydedildiği servistir
     response_structure:
@@ -981,8 +981,8 @@ endpoints:
     required:
     - demandId
     - demandStatusId
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Portföyden Çıkarma Talebi Güncelle
     description: Portföyden çıkarma taleplerini güncelleme servisidir
     response_structure:
@@ -1028,8 +1028,8 @@ endpoints:
     required:
     - isCustomerInformationChange
     - isPreCheckOperation
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Yeniden Enerjilendirme Talebi Kaydet
     description: Yeniden enerjilendirme talebinin kaydedildiği servistir
     response_structure:
@@ -1068,8 +1068,8 @@ endpoints:
     - demandTypes
     - demandStatus
     required: []
-    response: RestResponse
-    var_type: dict
+    response: Response
+    var_type: []
     summary: Taleplerimi Sorgula
     description: Yapmış olduğunuz veya size bağlı olan organizasyonların yapmış olduğu talepleri listeleme servisidir
     response_structure:

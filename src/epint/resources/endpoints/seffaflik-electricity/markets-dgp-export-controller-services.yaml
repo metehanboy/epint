@@ -7,17 +7,12 @@ endpoints:
     short_name_tr: Yük Atma (YAT) Talimat Miktarı Dışa Aktarım Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Yük Atma (YAT) Talimat Miktarı Dışa Aktarım Servisi
-    description: 0, 1, 2 kodlu Alma Talimat Miktarı (YAT), sistem yönünde elektrik
-      fazlası durumlarda sistemi dengelemek için verilen talimat miktarıdır. Veriler
-      4 saat önceki talimatları yansıtmaktadır. Yük Atma (YAT) Talimat Miktarı Listesini
-      XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: 0, 1, 2 kodlu Alma Talimat Miktarı (YAT), sistem yönünde elektrik fazlası durumlarda sistemi dengelemek için verilen talimat miktarıdır. Veriler 4 saat önceki talimatları yansıtmaktadır. Yük Atma (YAT) Talimat Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   dgp-yal-export:
     endpoint: /v1/markets/bpm/export/order-summary-up
@@ -27,17 +22,12 @@ endpoints:
     short_name_tr: Yük Alma (YAL) Talimat Miktarları Dışa Aktarım Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Yük Alma (YAL) Talimat Miktarları Dışa Aktarım Servisi
-    description: 0, 1, 2 kodlu Alma Talimat Miktarı (YAL), sistem yönünde elektrik
-      açığı durumlarda sistemi dengelemek için verilen talimat miktarıdır. Veriler
-      4 saat önceki talimatları yansıtmaktadır. Yük Alma (YAL) Talimat Miktarları
-      Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: 0, 1, 2 kodlu Alma Talimat Miktarı (YAL), sistem yönünde elektrik açığı durumlarda sistemi dengelemek için verilen talimat miktarıdır. Veriler 4 saat önceki talimatları yansıtmaktadır. Yük Alma (YAL) Talimat Miktarları Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   system-direction-export:
     endpoint: /v1/markets/bpm/export/system-direction
@@ -47,16 +37,12 @@ endpoints:
     short_name_tr: Sistem Yönü Dışa Aktarım Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Sistem Yönü Dışa Aktarım Servisi
-    description: Sistemde elektrik fazlası veya elektrik açığı olduğunu gösterir.
-      Veriler 4 saat önceki talimatları yansıtmaktadır. Sistem Yönü Listesini XLSX,
-      CSV ya da PDF olarak dışa aktarır.
+    description: Sistemde elektrik fazlası veya elektrik açığı olduğunu gösterir. Veriler 4 saat önceki talimatları yansıtmaktadır. Sistem Yönü Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   system-marginal-price-export:
     endpoint: /v1/markets/bpm/export/system-marginal-price
@@ -66,14 +52,10 @@ endpoints:
     short_name_tr: Sistem Marjinal Fiyatı Dışa Aktarım Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Sistem Marjinal Fiyatı Dışa Aktarım Servisi
-    description: Sistem Marjinal Fiyatı, Dengeleme Güç Piyasasında net talimat hacmine
-      karşılık gelen teklifin fiyatıdır. Veriler 4 saat önceki talimatları yansıtmaktadır.
-      Sistem Marjinal Fiyatı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Sistem Marjinal Fiyatı, Dengeleme Güç Piyasasında net talimat hacmine karşılık gelen teklifin fiyatıdır. Veriler 4 saat önceki talimatları yansıtmaktadır. Sistem Marjinal Fiyatı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}

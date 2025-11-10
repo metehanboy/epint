@@ -7,15 +7,12 @@ endpoints:
     short_name_tr: Emre Amade Kapasite (EAK) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Emre Amade Kapasite (EAK) Listeleme Servisi
-    description: 'Emre Amade Kapasite: Bir üretim biriminin sisteme sağlayabileceği
-      aktif güç kapasitesidir.'
+    description: 'Emre Amade Kapasite: Bir üretim biriminin sisteme sağlayabileceği aktif güç kapasitesidir.'
     response_structure: {}
   dpp:
     endpoint: /v1/generation/data/dpp
@@ -25,16 +22,12 @@ endpoints:
     short_name_tr: Kesinleşmiş Günlük Üretim Planı (KGÜP) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kesinleşmiş Günlük Üretim Planı (KGÜP) Listeleme Servisi
-    description: Kesinleşmiş Gün Öncesi Üretim Programı, katılımcının bir sonraki
-      güne ilişkin gerçekleştirmeyi öngördüğü ve sistem işletmecisine dengeleme güç
-      piyasasının başlangıcında bildirdiği üretim değeridir.
+    description: Kesinleşmiş Gün Öncesi Üretim Programı, katılımcının bir sonraki güne ilişkin gerçekleştirmeyi öngördüğü ve sistem işletmecisine dengeleme güç piyasasının başlangıcında bildirdiği üretim değeridir.
     response_structure: {}
   dpp-bulk:
     endpoint: /v1/generation/data/dpp-bulk
@@ -44,12 +37,10 @@ endpoints:
     short_name_tr: Uevçb Bazlı Toplu Kgüp Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Uevçb Bazlı Toplu Kgüp Listeleme Servisi
     description: Verilen güne ait, topluca verilen Uevçb'lerin KGÜP değerlerini döner
     response_structure: {}
@@ -61,16 +52,12 @@ endpoints:
     short_name_tr: Kesinleşmiş Günlük Üretim Planı (KGÜP) İlk Versiyon Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kesinleşmiş Günlük Üretim Planı (KGÜP) İlk Versiyon Listeleme Servisi
-    description: Kesinleşmiş Gün Öncesi Üretim Programı, katılımcının bir sonraki
-      güne ilişkin gerçekleştirmeyi öngördüğü ve sistem işletmecisine dengeleme güç
-      piyasasının başlangıcında bildirdiği üretim değeridir.
+    description: Kesinleşmiş Gün Öncesi Üretim Programı, katılımcının bir sonraki güne ilişkin gerçekleştirmeyi öngördüğü ve sistem işletmecisine dengeleme güç piyasasının başlangıcında bildirdiği üretim değeridir.
     response_structure: {}
   injection-quantity:
     endpoint: /v1/generation/data/injection-quantity
@@ -80,15 +67,12 @@ endpoints:
     short_name_tr: Uzlaştırma Esas Veriş Miktarı (UEVM) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Uzlaştırma Esas Veriş Miktarı (UEVM) Listeleme Servisi
-    description: Uzlaştırmaya esas veriş birimlerinin, bir uzlaştırma dönemi içinde
-      saatlik olarak sisteme verdiği elektrik miktarının toplam değeridir.
+    description: Uzlaştırmaya esas veriş birimlerinin, bir uzlaştırma dönemi içinde saatlik olarak sisteme verdiği elektrik miktarının toplam değeridir.
     response_structure: {}
   injection-quantity-powerplant-list:
     endpoint: /v1/generation/data/injection-quantity-powerplant-list
@@ -97,11 +81,9 @@ endpoints:
     short_name: injection-quantity-powerplant-list
     short_name_tr: Uzlaştırma Esas Veriş Miktarı (UEVM) Santral Listesi Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Uzlaştırma Esas Veriş Miktarı (UEVM) Santral Listesi Servisi
     description: Uzlaştırma Esas Veriş Miktarı (UEVM) Santral Listesi Servisi
     response_structure: {}
@@ -113,16 +95,12 @@ endpoints:
     short_name_tr: Lisanslı Santral Yatırımları Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Lisanslı Santral Yatırımları Listeleme Servisi
-    description: Enerji İşleri Genel Müdürlüğü tarafından ön kabulü tamamlanmış ve
-      devreye alınmış elektrik üretim tesislerinin aylık listesidir. Elektrik üretim
-      tesislerinin aylık listesidir.
+    description: Enerji İşleri Genel Müdürlüğü tarafından ön kabulü tamamlanmış ve devreye alınmış elektrik üretim tesislerinin aylık listesidir. Elektrik üretim tesislerinin aylık listesidir.
     response_structure: {}
   organization-list:
     endpoint: /v1/generation/data/organization-list
@@ -132,15 +110,12 @@ endpoints:
     short_name_tr: Organizasyon Listesi Getirme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Organizasyon Listesi Getirme Servisi
-    description: İstekte verilen başlangıç ve bitiş tarihleri arasında tanımlı organizasyonların
-      listesini döner.
+    description: İstekte verilen başlangıç ve bitiş tarihleri arasında tanımlı organizasyonların listesini döner.
     response_structure: {}
   powerplant-list:
     endpoint: /v1/generation/data/powerplant-list
@@ -149,15 +124,11 @@ endpoints:
     short_name: powerplant-list
     short_name_tr: Santral Listeleme Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Santral Listeleme Servisi
-    description: TEİAŞ Sistemlerine Ait Santral Bilgileri Listeleme Servisi.Bu servis
-      sonucunda dönen santral bilgileri(santral id bilgisi gibi) TEIAS sistemlerinden
-      alınan verilerdir.
+    description: TEİAŞ Sistemlerine Ait Santral Bilgileri Listeleme Servisi.Bu servis sonucunda dönen santral bilgileri(santral id bilgisi gibi) TEIAS sistemlerinden alınan verilerdir.
     response_structure: {}
   powerplant-list-for-date-range:
     endpoint: /v1/generation/data/powerplant-list-for-date-range
@@ -167,16 +138,12 @@ endpoints:
     short_name_tr: Tarih Araligina Gore Santral Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Tarih Araligina Gore Santral Listeleme Servisi
-    description: TEİAŞ Sistemlerine Ait Santral Bilgilerini Tarih Araligina Gore Listeleme
-      Servisi.Bu servis sonucunda dönen santral bilgileri(santral id bilgisi gibi)
-      TEIAS sistemlerinden alınan verilerdir.
+    description: TEİAŞ Sistemlerine Ait Santral Bilgilerini Tarih Araligina Gore Listeleme Servisi.Bu servis sonucunda dönen santral bilgileri(santral id bilgisi gibi) TEIAS sistemlerinden alınan verilerdir.
     response_structure: {}
   realtime-generation:
     endpoint: /v1/generation/data/realtime-generation
@@ -186,16 +153,12 @@ endpoints:
     short_name_tr: Gerçek Zamanlı Üretim Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Gerçek Zamanlı Üretim Listeleme Servisi
-    description: Elektrik üretiminin kaynak bazında saatlik gösterimidir. Santrallere
-      ait üretim verileri için, en son bir önceki günün verileri gelmekte, ilgili
-      güne ait santral verileri çekilmek istendiğinde hatalı istek bilgisi dönmektedir.
+    description: Elektrik üretiminin kaynak bazında saatlik gösterimidir. Santrallere ait üretim verileri için, en son bir önceki günün verileri gelmekte, ilgili güne ait santral verileri çekilmek istendiğinde hatalı istek bilgisi dönmektedir.
     response_structure: {}
   realtime-generation-bulk:
     endpoint: /v1/generation/data/realtime-generation-bulk
@@ -205,15 +168,12 @@ endpoints:
     short_name_tr: Santral Bazlı Toplu Gerçek Zamanlı Uretim Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Santral Bazlı Toplu Gerçek Zamanlı Uretim Listeleme Servisi
-    description: Verilen güne ait, topluca verilen Santral Id'lerin Gerçek Zamanlı
-      Uretim değerlerini döner.
+    description: Verilen güne ait, topluca verilen Santral Id'lerin Gerçek Zamanlı Uretim değerlerini döner.
     response_structure: {}
   region-list:
     endpoint: /v1/generation/data/region-list
@@ -222,11 +182,9 @@ endpoints:
     short_name: region-list
     short_name_tr: Bölge Listesi Getirme Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Bölge Listesi Getirme Servisi
     description: Bölge Listesi Getirme Servisi
     response_structure: {}
@@ -235,20 +193,15 @@ endpoints:
     method: POST
     auth: true
     short_name: sbfgp
-    short_name_tr: Kesinleştirilmiş Uzlaştırma Dönemi Üretim Planı (KUDÜP) Listeleme
-      Servisi
+    short_name_tr: Kesinleştirilmiş Uzlaştırma Dönemi Üretim Planı (KUDÜP) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Kesinleştirilmiş Uzlaştırma Dönemi Üretim Planı (KUDÜP) Listeleme Servisi
-    description: Gün öncesinde bildirilen UEVÇB bazında kaynaklara göre kesinleşmiş
-      günlük üretim planlarının gün içi piyasasının kapanışından sonra DUY 69. madde
-      kapsamında güncellenmesiyle oluşan kesinleşmiş günlük üretim planları.
+    description: Gün öncesinde bildirilen UEVÇB bazında kaynaklara göre kesinleşmiş günlük üretim planlarının gün içi piyasasının kapanışından sonra DUY 69. madde kapsamında güncellenmesiyle oluşan kesinleşmiş günlük üretim planları.
     response_structure: {}
   uevcb-list:
     endpoint: /v1/generation/data/uevcb-list
@@ -258,12 +211,10 @@ endpoints:
     short_name_tr: Uevçb Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Uevçb Listeleme Servisi
     description: Verilen organizasyon id'ye ait UEVÇB'lerin listesini döner.
     response_structure: {}
@@ -275,12 +226,10 @@ endpoints:
     short_name_tr: Toplu UEVÇB Listeleme servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Toplu UEVÇB Listeleme servisi
     description: Verilen organizasyon id listesine ait Uevçbleri listeler.
     response_structure: {}

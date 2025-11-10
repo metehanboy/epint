@@ -7,12 +7,10 @@ endpoints:
     short_name_tr: Piyasa Mesaj Sistemi Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Piyasa Mesaj Sistemi Listeleme Servisi
     description: İlgili santralin arıza veya bakım bilgileridir.
     response_structure: {}
@@ -24,16 +22,12 @@ endpoints:
     short_name_tr: Azami Uzlaştırma Fiyatı (AUF) Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Azami Uzlaştırma Fiyatı (AUF) Listeleme Servisi
-    description: Kaynak Bazında Destekleme Bedelinin hesaplanmasında kullanılan “Azami
-      Uzlaştırma Fiyat” değerleridir. AUF uygulaması Ekim 2023 tarihi ile birlikte
-      yürürlükten kalkmıştır.
+    description: Kaynak Bazında Destekleme Bedelinin hesaplanmasında kullanılan “Azami Uzlaştırma Fiyat” değerleridir. AUF uygulaması Ekim 2023 tarihi ile birlikte yürürlükten kalkmıştır.
     response_structure: {}
   power-plant-list-by-organization-id:
     endpoint: /v1/markets/data/power-plant-list-by-organization-id
@@ -43,12 +37,10 @@ endpoints:
     short_name_tr: Piyasa Mesaj Sistemi Santral Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Piyasa Mesaj Sistemi Santral Listeleme Servisi
     description: Verilen organizasyon id'ye ait santral'lerin listesini döner.
     response_structure: {}
@@ -60,12 +52,10 @@ endpoints:
     short_name_tr: Piyasa Mesaj Sistemi Uevçb Listeleme Servisi
     params:
     - body
-    - TGT
     required:
     - body
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Piyasa Mesaj Sistemi Uevçb Listeleme Servisi
     description: Verilen santral id'ye ait UEVÇB'lerin listesini döner.
     response_structure: {}
@@ -76,11 +66,9 @@ endpoints:
     short_name: umm-message-type-list
     short_name_tr: Piyasa Mesaj Sistemi Mesaj Tipi Listeleme Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Piyasa Mesaj Sistemi Mesaj Tipi Listeleme Servisi
     description: Mesaj Tipi Listeleme Servisi
     response_structure: {}
@@ -91,11 +79,9 @@ endpoints:
     short_name: umm-region-list
     short_name_tr: Piyasa Mesaj Sistemi Bölge Listeleme Servisi
     params:
-    - TGT
     required:
-    - TGT
     response: ''
-    var_type: dict
+    var_type: []
     summary: Piyasa Mesaj Sistemi Bölge Listeleme Servisi
     description: Piyasa Mesaj Sistemi Sayfası Bölge Listeleme Servisi
     response_structure: {}

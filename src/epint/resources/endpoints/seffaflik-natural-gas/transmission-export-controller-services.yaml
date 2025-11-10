@@ -10,11 +10,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Günlük Gerçekleşme Miktarı Dışa Aktarım Servisi
-    description: Şebekeden doğal gaz depolama tesislerine aktarılan doğal gaz miktarını
-      gösterir. Günlük Gerçekleşme Miktarı Listesini XLSX, CSV ya da PDF olarak dışa
-      aktarır.
+    description: Şebekeden doğal gaz depolama tesislerine aktarılan doğal gaz miktarını gösterir. Günlük Gerçekleşme Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   day-ahead-export:
     endpoint: /v1/transmission/export/day-ahead
@@ -27,10 +25,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Gün Öncesi (UDN) Dışa Aktarım Servisi
-    description: İkili anlaşma miktar bildirimini ifade eder. Gün Öncesi (UDN) Listesini
-      XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: İkili anlaşma miktar bildirimini ifade eder. Gün Öncesi (UDN) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   day-end-export:
     endpoint: /v1/transmission/export/day-end
@@ -43,10 +40,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Gün Sonu (UDN) Dışa Aktarım Servisi
-    description: Gün Sonu (UDN). Gün Sonu (UDN) Listesini XLSX, CSV ya da PDF olarak
-      dışa aktarır.
+    description: Gün Sonu (UDN). Gün Sonu (UDN) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   entry-nomination-export:
     endpoint: /v1/transmission/export/entry-nomination
@@ -59,10 +55,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Taşıma Giriş Miktarı Bildirimi (TMB) Dışa Aktarım Servisi
-    description: Fiziki Nokta bazlı giriş miktar bildirimini ifade eder. Taşıma Giriş
-      Miktarı Bildirimi (TMB) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Fiziki Nokta bazlı giriş miktar bildirimini ifade eder. Taşıma Giriş Miktarı Bildirimi (TMB) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   exit-nomination-export:
     endpoint: /v1/transmission/export/exit-nomination
@@ -75,10 +70,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Taşıma Çıkış Miktarı Bildirimi (TMB) Dışa Aktarım Servisi
-    description: Fiziki Nokta bazlı çıkış miktar bildirimini ifade eder. Taşıma Çıkış
-      Miktarı Bildirimi (TMB) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Fiziki Nokta bazlı çıkış miktar bildirimini ifade eder. Taşıma Çıkış Miktarı Bildirimi (TMB) Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   max-entry-amount-export:
     endpoint: /v1/transmission/export/max-entry-amount
@@ -91,11 +85,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Maks Giriş Kapasite Miktarı Dışa Aktarım Servisi
-    description: İletim Şirketi kapasite planına göre iletim şebekesine eklenmesi
-      beklenen doğal gaz miktarını gösterir. Maks Giriş Kapasite Miktarı Listesini
-      XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: İletim Şirketi kapasite planına göre iletim şebekesine eklenmesi beklenen doğal gaz miktarını gösterir. Maks Giriş Kapasite Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   max-exit-amount-export:
     endpoint: /v1/transmission/export/max-exit-amount
@@ -108,11 +100,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Maks Çıkış Kapasite Miktarı Dışa Aktarım Servisi
-    description: İletim Şirketi kapasite planına göre iletim şebekesinden çıkması
-      beklenen doğal gaz miktarını gösterir. Maks Çıkış Kapasite Miktarı Listesini
-      XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: İletim Şirketi kapasite planına göre iletim şebekesinden çıkması beklenen doğal gaz miktarını gösterir. Maks Çıkış Kapasite Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   actual-realization-entry-amount-export:
     endpoint: /v1/transmission/export/realization-entry-amount
@@ -125,11 +115,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Fiili Gerçekleşme Giriş Miktarı Dışa Aktarım Servisi
-    description: Taşıtanların Alış işlemi sonucu, sisteme eklenen fiili doğal gaz
-      miktarını gösterir. Fiili Gerçekleşme Giriş Miktarı Listesini XLSX, CSV ya da
-      PDF olarak dışa aktarır.
+    description: Taşıtanların Alış işlemi sonucu, sisteme eklenen fiili doğal gaz miktarını gösterir. Fiili Gerçekleşme Giriş Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   actual-realization-exit-amount-export:
     endpoint: /v1/transmission/export/realization-exit-amount
@@ -142,11 +130,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Fiili Gerçekleşme Çıkış Miktarı Dışa Aktarım Servisi
-    description: Taşıtanların Satış işlemi sonucu, sistemden çıkan fiili doğal gaz
-      miktarını gösterir. Fiili Gerçekleşme Çıkış Miktarı Listesini XLSX, CSV ya da
-      PDF olarak dışa aktarır.
+    description: Taşıtanların Satış işlemi sonucu, sistemden çıkan fiili doğal gaz miktarını gösterir. Fiili Gerçekleşme Çıkış Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   rezerve-entry-amount-export:
     endpoint: /v1/transmission/export/rezerve-entry-amount
@@ -159,11 +145,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Rezerve Giriş Kapasite Miktarı Dışa Aktarım Servisi
-    description: İletim Şirketi rezervasyon programına göre iletim şebekesine eklenmesi
-      beklenen doğal gaz miktarını gösterir. Rezerve Giriş Kapasite Miktarı Listesini
-      XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: İletim Şirketi rezervasyon programına göre iletim şebekesine eklenmesi beklenen doğal gaz miktarını gösterir. Rezerve Giriş Kapasite Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   rezerve-exit-amount-export:
     endpoint: /v1/transmission/export/rezerve-exit-amount
@@ -176,11 +160,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Rezerve Çıkış Kapasite Miktarı Dışa Aktarım Servisi
-    description: İletim Şirketi rezervasyon programına göre iletim şebekesinden çıkması
-      beklenen doğal gaz miktarını gösterir. Rezerve Çıkış Kapasite Miktarı Listesini
-      XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: İletim Şirketi rezervasyon programına göre iletim şebekesinden çıkması beklenen doğal gaz miktarını gösterir. Rezerve Çıkış Kapasite Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   stock-amount-export:
     endpoint: /v1/transmission/export/stock-amount
@@ -193,10 +175,9 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Stok Miktarı Dışa Aktarım Servisi
-    description: İletim Şebekesinde sıkışmış durumdaki günlük doğal gaz miktarını
-      gösterir. Stok Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: İletim Şebekesinde sıkışmış durumdaki günlük doğal gaz miktarını gösterir. Stok Miktarı Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
   transfer-export:
     endpoint: /v1/transmission/export/transfer
@@ -209,8 +190,7 @@ endpoints:
     required:
     - body
     response: ''
-    var_type: dict
+    var_type: []
     summary: Transfer Dışa Aktarım Servisi
-    description: Fiziki Nokta bazlı İkili anlaşma miktar bildirimini ifade eder. Transfer
-      Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
+    description: Fiziki Nokta bazlı İkili anlaşma miktar bildirimini ifade eder. Transfer Listesini XLSX, CSV ya da PDF olarak dışa aktarır.
     response_structure: {}
