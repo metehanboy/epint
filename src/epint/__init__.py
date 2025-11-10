@@ -329,9 +329,20 @@ def _try_load_from_cache(cache_file):
             with open(cache_file, "r", encoding="utf-8") as f:
                 cache_data = json.load(f)
 
-            global _endpoint_search_index, _endpoint_categories
+            global _endpoint_search_index, _endpoint_categories, _endpoint_data
             _endpoint_search_index = cache_data.get("search_index", {})
             _endpoint_categories = cache_data.get("categories", {})
+            
+            # _endpoint_data'yı _endpoint_categories'den oluştur
+            _endpoint_data.clear()
+            for category_name, endpoints in _endpoint_categories.items():
+                for endpoint_name, endpoint_info in endpoints.items():
+                    endpoint_data = endpoint_info.get("data", {})
+                    if isinstance(endpoint_data, dict):
+                        endpoint_data_with_category = endpoint_data.copy()
+                        endpoint_data_with_category['category'] = category_name
+                        _endpoint_data[endpoint_name] = endpoint_data_with_category
+            
             print(f"Cache dosyası yüklendi (yaş: {cache_age_days:.1f} gün)")
             return True
         else:
@@ -923,25 +934,62 @@ def search(keyword, category=None, limit=20):
     if not _INITIALIZED:
         _load_all_endpoints()
     
-    keyword_lower = keyword.lower()
+    keyword_lower = keyword.lower().replace('-', '_').replace(' ', '_')
+    keyword_words = keyword_lower.split('_')
     results = []
+    seen = set()
     
     for endpoint_key, endpoint_info in _endpoint_data.items():
         # Kategori filtresi
         if category and endpoint_info.get('category') != category:
             continue
         
-        # Kelime eşleşmesi
-        if keyword_lower in endpoint_key.lower():
-            results.append({
-                'name': endpoint_key,
-                'category': endpoint_info.get('category', ''),
-                'short_name': endpoint_info.get('short_name', ''),
-                'short_name_tr': endpoint_info.get('short_name_tr', ''),
-            })
+        endpoint_key_lower = endpoint_key.lower()
         
-        if len(results) >= limit:
-            break
+        # Tam eşleşme
+        if keyword_lower in endpoint_key_lower:
+            if endpoint_key not in seen:
+                results.append({
+                    'name': endpoint_key,
+                    'category': endpoint_info.get('category', ''),
+                    'short_name': endpoint_info.get('short_name', ''),
+                    'short_name_tr': endpoint_info.get('short_name_tr', ''),
+                    'score': 100
+                })
+                seen.add(endpoint_key)
+        
+        # Kelime bazlı eşleşme (tire/underscore normalize)
+        elif any(word in endpoint_key_lower for word in keyword_words if len(word) > 2):
+            if endpoint_key not in seen:
+                # Skor hesapla
+                matches = sum(1 for word in keyword_words if word in endpoint_key_lower)
+                score = (matches / len(keyword_words)) * 50
+                
+                results.append({
+                    'name': endpoint_key,
+                    'category': endpoint_info.get('category', ''),
+                    'short_name': endpoint_info.get('short_name', ''),
+                    'short_name_tr': endpoint_info.get('short_name_tr', ''),
+                    'score': score
+                })
+                seen.add(endpoint_key)
+        
+        # Short name'de ara
+        short_name_tr = endpoint_info.get('short_name_tr', '').lower()
+        if keyword_lower in short_name_tr or any(word in short_name_tr for word in keyword_words if len(word) > 2):
+            if endpoint_key not in seen:
+                results.append({
+                    'name': endpoint_key,
+                    'category': endpoint_info.get('category', ''),
+                    'short_name': endpoint_info.get('short_name', ''),
+                    'short_name_tr': endpoint_info.get('short_name_tr', ''),
+                    'score': 30
+                })
+                seen.add(endpoint_key)
+    
+    # Skora göre sırala
+    results.sort(key=lambda x: x.get('score', 0), reverse=True)
+    results = results[:limit]
     
     # Sonuçları yazdır
     print(f"\n{'='*80}")
