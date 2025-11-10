@@ -1,0 +1,179 @@
+endpoints:
+  eligible-customer-query:
+    endpoint: /v1/eligible-customer/query
+    method: POST
+    auth: true
+    short_name: eligible-customer-query
+    short_name_tr: Serbest Tüketici Sorgulama
+    params:
+    - consumptionPointEic
+    - consumptionPointId
+    - meterReadingOrganizationId
+    - uniqueCode
+    - serial
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Serbest Tüketici Sorgulama
+    description: Tüketim noktası bilgileriyle serbest tüketici bilgilerinin sorgulanabileceği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          eic: string
+          uniqueCode: string
+          serial: string
+          readingOrganizationName: string
+          readingOrganizationId: integer
+          cityName: string
+          district: string
+          address: string
+          bilateralConsumerGroup:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          lastResortConsumerGroup:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          customerNo: string
+          title: string
+          category:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          recordUsageStatus:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          usageStatusType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          consumptionPointType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          supplierType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          mainTariffGroup:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          tariffClassType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          contractPower: number
+          readingType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          remoteReadingStatus:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          profileSubscriptionGroup:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          loadProfileFeature: boolean
+          readingDataType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          annualAverageConsumption: number
+          readingPeriod: integer
+          measurementType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          exceptionalSubstationStatus: boolean
+          balancingRegion: string
+          balancingRegionId: integer
+          biddingRegion: string
+          biddingRegionId: integer
+          substationPower: number
+          installedPower: number
+          meteringVoltageType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          busbarVoltageType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          withdrawPositionType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          connectionPositionDescriptionType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          noLoadLoss: number
+          loadLoss: number
+          lineConductorType1:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          lineCircuitCountType1:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          lineCrossSection1: number
+          lineLength1: number

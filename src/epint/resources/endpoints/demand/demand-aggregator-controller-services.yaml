@@ -1,0 +1,1163 @@
+endpoints:
+  aggregator-counter-query:
+    endpoint: v1/demand/aggregator/counterQuery
+    method: POST
+    auth: true
+    short_name: aggregator-counter-query
+    short_name_tr: Talep Toplayıcı Karşı Taleplerimi Sorgula
+    params:
+    - page
+    - selectedOrganizationId
+    - periodDates
+    - consumptionPointId
+    - consumptionPointEic
+    - uniqueCode
+    - customerNo
+    - demandTypes
+    - demandStatus
+    - gridTypeId
+    - balancingRegionId
+    - demandSideParticipation
+    - balancingMarketParticipation
+    - electricSupplyParticipation
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Talep Toplayıcı Karşı Taleplerimi Sorgula
+    description: Talep Toplayıcı Portföyünde bulunan sayaçları etkileyecek olan diğer organizasyonların yaptığı talepleri listeleme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          items:
+          - demandId: integer
+            periodDate: string
+            consumptionPointEic: string
+            consumptionPointId: integer
+            uniqueCode: string
+            demandType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            demandStatus:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            description:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            createDate: string
+            createUser: string
+            isOwnerOrganization: boolean
+            cancellationDate: string
+            cancellationUserName: string
+            customer:
+              categoryType: '...'
+              title: string
+              customerNo: string
+              authorizedPerson1Name: string
+              authorizedPerson2Name: string
+              authorizedPerson1No: string
+              authorizedPerson2No: string
+            cancellationOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            readingOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            ownerOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            electricSupplyParticipationOrganization:
+              oldOrganizationId: '...'
+              newOrganizationId: '...'
+              sameOrganization: boolean
+            demandSideParticipationOrganization:
+              oldOrganizationId: '...'
+              newOrganizationId: '...'
+              sameOrganization: boolean
+            balancingMarketParticipationOrganization:
+              oldOrganizationId: '...'
+              newOrganizationId: '...'
+              sameOrganization: boolean
+            gridType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            balancingRegionName: string
+            meterName: string
+            balancingMarketParticipationDemand: boolean
+            electricSupplyParticipationDemand: boolean
+            demandSideParticipationDemand: boolean
+          page:
+            number: integer
+            size: integer
+            total: integer
+            sort:
+              field: string
+              direction: string
+          sortableFields:
+          - string
+  aggregator-history-query:
+    endpoint: v1/demand/aggregator/getDemandHistory
+    method: GET
+    auth: true
+    short_name: aggregator-history-query
+    short_name_tr: Talep Toplayıcı Tarihçesini Sorgula
+    params:
+    - demandId
+    required:
+    - demandId
+    response: RestResponse
+    var_type: dict
+    summary: Talep Toplayıcı Tarihçesini Sorgula
+    description: İlgili talebin hangi aşamalardan geçtiğinin ve nihai statüsünün verildiği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          modifyDate: string
+          modifyUser: string
+          status:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          updateReason:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          demandOwnerOrganizationId:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          balancingMarketParticipationDemand: boolean
+          electricSupplyParticipationDemand: boolean
+          demandSideParticipationDemand: boolean
+  aggregator-portfolio-add:
+    endpoint: v1/demand/aggregator/portfolio-add/create
+    method: POST
+    auth: true
+    short_name: aggregator-portfolio-add
+    short_name_tr: Talep Toplayıcı Ekleme Talebi kaydet
+    params:
+    - selectedOrganizationId
+    - isCustomerInformationChange
+    - categoryTypeId
+    - title
+    - customerNo
+    - authorizedPerson1Name
+    - authorizedPerson1No
+    - authorizedPerson2Name
+    - authorizedPerson2No
+    - isAgreementChecked
+    - consumptionPointId
+    - consumptionPointEic
+    - isDemandSideParticipation
+    - isBalancingMarketParticipation
+    - warningConfirmation
+    required:
+    - isCustomerInformationChange
+    response: RestResponse
+    var_type: dict
+    summary: Talep Toplayıcı Ekleme Talebi kaydet
+    description: Talep toplayıcı Ekleme Talebi Servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandId: integer
+          periodDate: string
+          consumptionPointEic: string
+          consumptionPointId: integer
+          uniqueCode: string
+          demandType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          demandStatus:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          description:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          createDate: string
+          createUser: string
+          isOwnerOrganization: boolean
+          cancellationDate: string
+          cancellationUserName: string
+          customer:
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            title: string
+            customerNo: string
+            authorizedPerson1Name: string
+            authorizedPerson2Name: string
+            authorizedPerson1No: string
+            authorizedPerson2No: string
+          cancellationOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          readingOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          ownerOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          electricSupplyParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          demandSideParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          balancingMarketParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          gridType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          balancingRegionName: string
+          meterName: string
+          balancingMarketParticipationDemand: boolean
+          electricSupplyParticipationDemand: boolean
+          demandSideParticipationDemand: boolean
+  aggregator-portfolio-add-query:
+    endpoint: v1/demand/aggregator/portfolio-add/query
+    method: POST
+    auth: true
+    short_name: aggregator-portfolio-add-query
+    short_name_tr: Talep Toplayıcı Ekleme Talebi Ön Sorgu
+    params:
+    - selectedOrganizationId
+    - consumptionPointId
+    - consumptionPointEic
+    - isDemandSideParticipation
+    - isBalancingMarketParticipation
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Talep Toplayıcı Ekleme Talebi Ön Sorgu
+    description: Önyüz kullanımı için hazırlanmış ilgili tüketim noktası için ekleme talep yapmadan önce sorgulama yapılabilecek servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          consumptionPointId: integer
+          gridType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          balancingRegionName: string
+          meterName: string
+          customer:
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            title: string
+            customerNo: string
+            authorizedPerson1Name: string
+            authorizedPerson2Name: string
+            authorizedPerson1No: string
+            authorizedPerson2No: string
+          warningMessage: string
+  aggregator-portfolio-add-update:
+    endpoint: v1/demand/aggregator/portfolio-add/update
+    method: POST
+    auth: true
+    short_name: aggregator-portfolio-add-update
+    short_name_tr: Talep Toplayıcı Ekleme Talebi Güncelleme
+    params:
+    - selectedOrganizationId
+    - isCustomerInformationChange
+    - categoryTypeId
+    - title
+    - customerNo
+    - authorizedPerson1Name
+    - authorizedPerson1No
+    - authorizedPerson2Name
+    - authorizedPerson2No
+    - isAgreementChecked
+    - demandId
+    - isDemandSideParticipation
+    - isBalancingMarketParticipation
+    - warningConfirmation
+    required:
+    - isCustomerInformationChange
+    response: RestResponse
+    var_type: dict
+    summary: Talep Toplayıcı Ekleme Talebi Güncelleme
+    description: Talep Toplayıcı Ekleme Talebi Güncelleme Servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandId: integer
+          periodDate: string
+          consumptionPointEic: string
+          consumptionPointId: integer
+          uniqueCode: string
+          demandType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          demandStatus:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          description:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          createDate: string
+          createUser: string
+          isOwnerOrganization: boolean
+          cancellationDate: string
+          cancellationUserName: string
+          customer:
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            title: string
+            customerNo: string
+            authorizedPerson1Name: string
+            authorizedPerson2Name: string
+            authorizedPerson1No: string
+            authorizedPerson2No: string
+          cancellationOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          readingOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          ownerOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          electricSupplyParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          demandSideParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          balancingMarketParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          gridType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          balancingRegionName: string
+          meterName: string
+          balancingMarketParticipationDemand: boolean
+          electricSupplyParticipationDemand: boolean
+          demandSideParticipationDemand: boolean
+  aggregator-portfolio-add-update-query:
+    endpoint: v1/demand/aggregator/portfolio-add/updateQuery
+    method: POST
+    auth: true
+    short_name: aggregator-portfolio-add-update-query
+    short_name_tr: Talep Toplayıcı Ekleme Talebi Güncelleme Ön Sorgu
+    params:
+    - selectedOrganizationId
+    - isCustomerInformationChange
+    - categoryTypeId
+    - title
+    - customerNo
+    - authorizedPerson1Name
+    - authorizedPerson1No
+    - authorizedPerson2Name
+    - authorizedPerson2No
+    - isAgreementChecked
+    - demandId
+    - isDemandSideParticipation
+    - isBalancingMarketParticipation
+    required:
+    - isCustomerInformationChange
+    response: RestResponse
+    var_type: dict
+    summary: Talep Toplayıcı Ekleme Talebi Güncelleme Ön Sorgu
+    description: Talep Toplayıcı Ekleme talebi güncelleme Ön Sorgu servisi
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          consumptionPointId: integer
+          gridType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          balancingRegionName: string
+          meterName: string
+          customer:
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            title: string
+            customerNo: string
+            authorizedPerson1Name: string
+            authorizedPerson2Name: string
+            authorizedPerson1No: string
+            authorizedPerson2No: string
+          warningMessage: string
+  aggregator-portfolio-out:
+    endpoint: v1/demand/aggregator/portfolio-out/create
+    method: POST
+    auth: true
+    short_name: aggregator-portfolio-out
+    short_name_tr: Talep Toplayıcı Portföyden Çıkarma Talebi Kaydet
+    params:
+    - selectedOrganizationId
+    - consumptionPointId
+    - consumptionPointEic
+    - isDemandSideParticipation
+    - isBalancingMarketParticipation
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Talep Toplayıcı Portföyden Çıkarma Talebi Kaydet
+    description: Talep Toplayıcı Portföyden çıkarılmak istenen tüketim noktasının talebinin kaydedildiği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandId: integer
+          periodDate: string
+          consumptionPointEic: string
+          consumptionPointId: integer
+          uniqueCode: string
+          demandType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          demandStatus:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          description:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          createDate: string
+          createUser: string
+          isOwnerOrganization: boolean
+          cancellationDate: string
+          cancellationUserName: string
+          customer:
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            title: string
+            customerNo: string
+            authorizedPerson1Name: string
+            authorizedPerson2Name: string
+            authorizedPerson1No: string
+            authorizedPerson2No: string
+          cancellationOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          readingOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          ownerOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          electricSupplyParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          demandSideParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          balancingMarketParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          gridType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          balancingRegionName: string
+          meterName: string
+          balancingMarketParticipationDemand: boolean
+          electricSupplyParticipationDemand: boolean
+          demandSideParticipationDemand: boolean
+  aggregator-portfolio-out-query:
+    endpoint: v1/demand/aggregator/portfolio-out/query
+    method: POST
+    auth: true
+    short_name: aggregator-portfolio-out-query
+    short_name_tr: Talep Toplacıyı portföy Çıkarma Talebi Ön Sorgu
+    params:
+    - selectedOrganizationId
+    - consumptionPointId
+    - consumptionPointEic
+    - isDemandSideParticipation
+    - isBalancingMarketParticipation
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Talep Toplacıyı portföy Çıkarma Talebi Ön Sorgu
+    description: Talep Toplacıyı için çıkarma talep yapmadan önce abone bilgileriyle sorgulama yapılabilecek servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          consumptionPointId: integer
+          gridType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          balancingRegionName: string
+          meterName: string
+          customer:
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            title: string
+            customerNo: string
+            authorizedPerson1Name: string
+            authorizedPerson2Name: string
+            authorizedPerson1No: string
+            authorizedPerson2No: string
+          warningMessage: string
+  aggregator-portfolio-out-update:
+    endpoint: v1/demand/aggregator/portfolio-out/update
+    method: POST
+    auth: true
+    short_name: aggregator-portfolio-out-update
+    short_name_tr: Portföyden Çıkarma Talebi Güncelle
+    params:
+    - demandId
+    - isDemandSideParticipation
+    - isBalancingMarketParticipation
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Portföyden Çıkarma Talebi Güncelle
+    description: Portföyden çıkarma taleplerini güncelleme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandId: integer
+          periodDate: string
+          consumptionPointEic: string
+          consumptionPointId: integer
+          uniqueCode: string
+          demandType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          demandStatus:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          description:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          createDate: string
+          createUser: string
+          isOwnerOrganization: boolean
+          cancellationDate: string
+          cancellationUserName: string
+          customer:
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            title: string
+            customerNo: string
+            authorizedPerson1Name: string
+            authorizedPerson2Name: string
+            authorizedPerson1No: string
+            authorizedPerson2No: string
+          cancellationOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          readingOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          ownerOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          electricSupplyParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          demandSideParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          balancingMarketParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          gridType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          balancingRegionName: string
+          meterName: string
+          balancingMarketParticipationDemand: boolean
+          electricSupplyParticipationDemand: boolean
+          demandSideParticipationDemand: boolean
+  aggregator-query:
+    endpoint: v1/demand/aggregator/query
+    method: POST
+    auth: true
+    short_name: aggregator-query
+    short_name_tr: Talep Toplayıcı Sorgusu Oluştur
+    params:
+    - page
+    - selectedOrganizationId
+    - periodDates
+    - consumptionPointId
+    - consumptionPointEic
+    - uniqueCode
+    - customerNo
+    - demandTypes
+    - demandStatus
+    - gridTypeId
+    - balancingRegionId
+    - demandSideParticipation
+    - balancingMarketParticipation
+    - electricSupplyParticipation
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Talep Toplayıcı Sorgusu Oluştur
+    description: Talep Toplayıcı Sorgusu Oluşturma
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          items:
+          - demandId: integer
+            periodDate: string
+            consumptionPointEic: string
+            consumptionPointId: integer
+            uniqueCode: string
+            demandType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            demandStatus:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            description:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            createDate: string
+            createUser: string
+            isOwnerOrganization: boolean
+            cancellationDate: string
+            cancellationUserName: string
+            customer:
+              categoryType: '...'
+              title: string
+              customerNo: string
+              authorizedPerson1Name: string
+              authorizedPerson2Name: string
+              authorizedPerson1No: string
+              authorizedPerson2No: string
+            cancellationOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            readingOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            ownerOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            electricSupplyParticipationOrganization:
+              oldOrganizationId: '...'
+              newOrganizationId: '...'
+              sameOrganization: boolean
+            demandSideParticipationOrganization:
+              oldOrganizationId: '...'
+              newOrganizationId: '...'
+              sameOrganization: boolean
+            balancingMarketParticipationOrganization:
+              oldOrganizationId: '...'
+              newOrganizationId: '...'
+              sameOrganization: boolean
+            gridType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            balancingRegionName: string
+            meterName: string
+            balancingMarketParticipationDemand: boolean
+            electricSupplyParticipationDemand: boolean
+            demandSideParticipationDemand: boolean
+          page:
+            number: integer
+            size: integer
+            total: integer
+            sort:
+              field: string
+              direction: string
+          sortableFields:
+          - string
+  aggregator-status:
+    endpoint: v1/demand/aggregator/updateStatus
+    method: POST
+    auth: true
+    short_name: aggregator-status
+    short_name_tr: Talep Toplayıcı Taleblerin Durum Gümcelleme
+    params:
+    - demandId
+    - demandStatusId
+    required:
+    - demandStatusId
+    response: RestResponse
+    var_type: dict
+    summary: Talep Toplayıcı Taleblerin Durum Gümcelleme
+    description: Talep Toplayıcı Taleblerin Durum Gümcellemesi
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandId: integer
+          periodDate: string
+          consumptionPointEic: string
+          consumptionPointId: integer
+          uniqueCode: string
+          demandType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          demandStatus:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          description:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          createDate: string
+          createUser: string
+          isOwnerOrganization: boolean
+          cancellationDate: string
+          cancellationUserName: string
+          customer:
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            title: string
+            customerNo: string
+            authorizedPerson1Name: string
+            authorizedPerson2Name: string
+            authorizedPerson1No: string
+            authorizedPerson2No: string
+          cancellationOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          readingOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          ownerOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          electricSupplyParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          demandSideParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          balancingMarketParticipationOrganization:
+            oldOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganizationId:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            sameOrganization: boolean
+          gridType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          balancingRegionName: string
+          meterName: string
+          balancingMarketParticipationDemand: boolean
+          electricSupplyParticipationDemand: boolean
+          demandSideParticipationDemand: boolean

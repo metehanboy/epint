@@ -1,0 +1,1165 @@
+endpoints:
+  demand-auto-productor-portfolio-add-create:
+    endpoint: v1/demand/auto-productor/portfolio-add/create
+    method: POST
+    auth: true
+    short_name: demand-auto-productor-portfolio-add-create
+    short_name_tr: Otoprodüktör Sayacı Portföye Ekleme Talebi Kaydet
+    params:
+    - selectedOrganizationId
+    - consumptionPointId
+    - consumptionPointEic
+    - isPreCheckOperation
+    required:
+    - isPreCheckOperation
+    response: RestResponse
+    var_type: dict
+    summary: Otoprodüktör Sayacı Portföye Ekleme Talebi Kaydet
+    description: Portföye eklenmek istenen otoprodüktör sayacının talebinin kaydedildiği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          consumptionPointId: integer
+          consumptionPointEic: string
+          name: string
+          demandId: integer
+  demand-auto-productor-portfolio-add-update-status:
+    endpoint: v1/demand/auto-productor/portfolio-add/updateStatus
+    method: POST
+    auth: true
+    short_name: demand-auto-productor-portfolio-add-update-status
+    short_name_tr: Otoprodüktör Sayacı Portföye Ekleme Talebi Durum Güncelle
+    params:
+    - selectedOrganizationId
+    - demandId
+    - demandStatusId
+    required:
+    - demandId
+    - demandStatusId
+    response: RestResponse
+    var_type: dict
+    summary: Otoprodüktör Sayacı Portföye Ekleme Talebi Durum Güncelle
+    description: Portföye eklenmek istenen otoprodüktör sayacının talebinin durumunun güncellendiği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandId: integer
+          consumptionPointId: integer
+  demand-auto-productor-portfolio-out-create:
+    endpoint: v1/demand/auto-productor/portfolio-out/create
+    method: POST
+    auth: true
+    short_name: demand-auto-productor-portfolio-out-create
+    short_name_tr: Otoprodüktör Sayacı Portföyden Çıkarma Talebi Kaydet
+    params:
+    - selectedOrganizationId
+    - consumptionPointId
+    - consumptionPointEic
+    - isPreCheckOperation
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Otoprodüktör Sayacı Portföyden Çıkarma Talebi Kaydet
+    description: Portföyden çıkarılmak istenen otoprodüktör sayacının talebinin kaydedildiği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          consumptionPointId: integer
+          consumptionPointEic: string
+          name: string
+          demandId: integer
+  demand-auto-productor-portfolio-out-update-status:
+    endpoint: v1/demand/auto-productor/portfolio-out/updateStatus
+    method: POST
+    auth: true
+    short_name: demand-auto-productor-portfolio-out-update-status
+    short_name_tr: Otoprodüktör Sayacı Portföyden Çıkarma Talebi Durum Güncelle
+    params:
+    - selectedOrganizationId
+    - demandId
+    - demandStatusId
+    required:
+    - demandId
+    - demandStatusId
+    response: RestResponse
+    var_type: dict
+    summary: Otoprodüktör Sayacı Portföyden Çıkarma Talebi Durum Güncelle
+    description: Portföyden çıkarılmak istenen otoprodüktör sayacının talebinin durumunun güncellendiği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandId: integer
+          consumptionPointId: integer
+  demand-auto-productor-portfolio-out-update-supplier:
+    endpoint: v1/demand/auto-productor/portfolio-out/updateSupplier
+    method: POST
+    auth: true
+    short_name: demand-auto-productor-portfolio-out-update-supplier
+    short_name_tr: Otoprodüktör Sayacı Portföyden Çıkarma Son Kaynak Tedarikçi Durumu Güncelle
+    params:
+    - selectedOrganizationId
+    - demandId
+    - isSendToLastSupplier
+    required:
+    - demandId
+    - isSendToLastSupplier
+    response: RestResponse
+    var_type: dict
+    summary: Otoprodüktör Sayacı Portföyden Çıkarma Son Kaynak Tedarikçi Durumu Güncelle
+    description: Portföyden çıkarılmak istenen otoprodüktör sayacının portföyden çıktıktan sonra son kaynak tedariğine düşme durumunu güncelleyen servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandId: integer
+          consumptionPointId: integer
+  demand-counter-get:
+    endpoint: v1/demand/counter/get
+    method: POST
+    auth: true
+    short_name: demand-counter-get
+    short_name_tr: Karşı Taleplerimi Sorgula
+    params:
+    - page
+    - selectedOrganizationId
+    - periodDates
+    - consumptionPointId
+    - consumptionPointEic
+    - uniqueCode
+    - customerNo
+    - demandTypes
+    - demandStatus
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Karşı Taleplerimi Sorgula
+    description: Portföyümüzde bulunan sayaçları etkileyecek olan diğer organizasyonların yaptığı talepleri listeleme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          items:
+          - demandId: integer
+            periodDate: string
+            consumptionPointEic: string
+            consumptionPointId: integer
+            uniqueCode: string
+            demandType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            demandStatus:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            description:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            sendToLastSupplier: boolean
+            createDate: string
+            createUser: string
+            isOwnerOrganization: boolean
+            cancellationDate: string
+            cancellationUserName: string
+            cancellationOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            readingOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            customer:
+              categoryType: '...'
+              title: string
+              customerNo: string
+              authorizedPerson1Name: string
+              authorizedPerson2Name: string
+              authorizedPerson1No: string
+              authorizedPerson2No: string
+            ownerOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            oldOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            oizOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            customerNoMismatch: boolean
+          page:
+            number: integer
+            size: integer
+            total: integer
+            sort:
+              field: string
+              direction: string
+          sortableFields:
+          - string
+  demand-distribution-counter-get:
+    endpoint: v1/demand/distribution/counter/get
+    method: POST
+    auth: true
+    short_name: demand-distribution-counter-get
+    short_name_tr: Karşı Taleplerimi Sorgula (Dağıtım)
+    params:
+    - page
+    - consumptionPointId
+    - consumptionPointEic
+    - uniqueCode
+    - demandStatus
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Karşı Taleplerimi Sorgula (Dağıtım)
+    description: Portföyümüzde bulunan sayaçları etkileyecek olan diğer organizasyonların yaptığı talepleri listeleme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          items:
+          - demandId: integer
+            periodDate: string
+            consumptionPointEic: string
+            consumptionPointId: integer
+            uniqueCode: string
+            demandType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            demandStatus:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            description:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            sendToLastSupplier: boolean
+            createDate: string
+            createUser: string
+            isOwnerOrganization: boolean
+            cancellationDate: string
+            cancellationUserName: string
+            cancellationOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            readingOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            customer:
+              categoryType: '...'
+              title: string
+              customerNo: string
+              authorizedPerson1Name: string
+              authorizedPerson2Name: string
+              authorizedPerson1No: string
+              authorizedPerson2No: string
+            ownerOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            oldOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            oizOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            customerNoMismatch: boolean
+          page:
+            number: integer
+            size: integer
+            total: integer
+            sort:
+              field: string
+              direction: string
+          sortableFields:
+          - string
+  demand-history-get:
+    endpoint: v1/demand/getDemandHistory
+    method: GET
+    auth: true
+    short_name: demand-history-get
+    short_name_tr: Talep Tarihçesini Sorgula
+    params:
+    - demandId
+    required:
+    - demandId
+    response: RestResponse
+    var_type: dict
+    summary: Talep Tarihçesini Sorgula
+    description: İlgili talebin hangi aşamalardan geçtiğinin ve nihai statüsünün verildiği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandId: integer
+          items:
+          - createDate: string
+            createUser: string
+            status:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            updateReason:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            customerNo: string
+            title: string
+            authorizedPerson1No: string
+            authorizedPerson1Name: string
+            authorizedPerson2No: string
+            authorizedPerson2Name: string
+  get-oiz-main-meter-related-demand-nickname:
+    endpoint: v1/demand/oiz-main-meter/getRelatedDemand
+    method: GET
+    auth: true
+    short_name: get-oiz-main-meter-related-demand-nickname
+    short_name_tr: OSB Ana Sayaç Talebi Bağlı Talepleri Sorgulama
+    params:
+    - demandId
+    required:
+    - demandId
+    response: RestResponse
+    var_type: dict
+    summary: OSB Ana Sayaç Talebi Bağlı Talepleri Sorgulama
+    description: Osb ana sayaç talebine bağlı oluşmuş talepleri listeler.
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandList:
+          - eic: string
+            uniqueCode: string
+            readingOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            name: string
+  demand-oiz-main-meter-add-nickname:
+    endpoint: v1/demand/oiz-main-meter/portfolio-add/create
+    method: POST
+    auth: true
+    short_name: demand-oiz-main-meter-add-nickname
+    short_name_tr: OSB Ana Sayaç Ekleme Talebi Kaydetme
+    params:
+    - selectedOrganizationId
+    - isCustomerInformationChange
+    - categoryTypeId
+    - title
+    - customerNo
+    - authorizedPerson1Name
+    - authorizedPerson1No
+    - authorizedPerson2Name
+    - authorizedPerson2No
+    - isAgreementChecked
+    - consumptionPointId
+    - consumptionPointEic
+    - oizOrganizationId
+    required:
+    - isCustomerInformationChange
+    response: RestResponse
+    var_type: dict
+    summary: OSB Ana Sayaç Ekleme Talebi Kaydetme
+    description: Ekleme talebi kaydetme servisidir.
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          oizOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          customer:
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            title: string
+            customerNo: string
+            authorizedPerson1Name: string
+            authorizedPerson2Name: string
+            authorizedPerson1No: string
+            authorizedPerson2No: string
+          items:
+          - meter:
+              eic: string
+              uniqueCode: string
+              readingOrganization: '...'
+              name: string
+            demand:
+              demandId: integer
+              demandStatus: '...'
+            sameConsumptionPointDemandExistInThisPeriod: boolean
+            willDemandBeCreated: boolean
+            willDemandBeActivated: boolean
+            isInMyPortfolio: boolean
+  demand-oiz-main-meter-add-query-nickname:
+    endpoint: v1/demand/oiz-main-meter/portfolio-add/query
+    method: POST
+    auth: true
+    short_name: demand-oiz-main-meter-add-query-nickname
+    short_name_tr: OSB Ana Sayaç Ekleme Talebi Ön Sorgulama
+    params:
+    - selectedOrganizationId
+    - consumptionPointId
+    - consumptionPointEic
+    - oizOrganizationId
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: OSB Ana Sayaç Ekleme Talebi Ön Sorgulama
+    description: Ekleme talebi oluşturmadan önce osb organizasyon bilgileriyle veya sayaç bilgileriyle sorgulama yapma servisidir.
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          oizOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          customer:
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            title: string
+            customerNo: string
+            authorizedPerson1Name: string
+            authorizedPerson2Name: string
+            authorizedPerson1No: string
+            authorizedPerson2No: string
+          items:
+          - meter:
+              eic: string
+              uniqueCode: string
+              readingOrganization: '...'
+              name: string
+            demand:
+              demandId: integer
+              demandStatus: '...'
+            sameConsumptionPointDemandExistInThisPeriod: boolean
+            willDemandBeCreated: boolean
+            willDemandBeActivated: boolean
+            isInMyPortfolio: boolean
+  demand_oiz-main-meter-add-update-nickname:
+    endpoint: v1/demand/oiz-main-meter/portfolio-add/update
+    method: POST
+    auth: true
+    short_name: demand_oiz-main-meter-add-update-nickname
+    short_name_tr: OSB Ana Sayaç Ekleme Talebi Abone Bilgileri Güncelleme
+    params:
+    - selectedOrganizationId
+    - isCustomerInformationChange
+    - categoryTypeId
+    - title
+    - customerNo
+    - authorizedPerson1Name
+    - authorizedPerson1No
+    - authorizedPerson2Name
+    - authorizedPerson2No
+    - isAgreementChecked
+    - demandId
+    required:
+    - demandId
+    - isCustomerInformationChange
+    response: RestResponse
+    var_type: dict
+    summary: OSB Ana Sayaç Ekleme Talebi Abone Bilgileri Güncelleme
+    description: Ekleme talebi abone bilgileri güncelleme servisidir.
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          completed: boolean
+  demand-oiz-main-meter-add-update-status-nickname:
+    endpoint: v1/demand/oiz-main-meter/portfolio-add/updateStatus
+    method: POST
+    auth: true
+    short_name: demand-oiz-main-meter-add-update-status-nickname
+    short_name_tr: OSB Ana Sayaç Ekleme Talebi Durum Güncelleme
+    params:
+    - selectedOrganizationId
+    - demandId
+    - demandStatusId
+    - isAgreementChecked
+    - isPreCheckOperation
+    required:
+    - demandId
+    - demandStatusId
+    - isPreCheckOperation
+    response: RestResponse
+    var_type: dict
+    summary: OSB Ana Sayaç Ekleme Talebi Durum Güncelleme
+    description: Ekleme talebi durum güncelleme servisidir.
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          sameConsumptionPointDemandExistInThisPeriod: boolean
+  demand_oiz-main-meter-out-create-nickname:
+    endpoint: v1/demand/oiz-main-meter/portfolio-out/create
+    method: POST
+    auth: true
+    short_name: demand_oiz-main-meter-out-create-nickname
+    short_name_tr: OSB Ana Sayaç Çıkarma Talebi Kaydetme
+    params:
+    - selectedOrganizationId
+    - consumptionPointId
+    - consumptionPointEic
+    - oizOrganizationId
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: OSB Ana Sayaç Çıkarma Talebi Kaydetme
+    description: Çıkarma talebi kaydetme servisidir.
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          oizOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          items:
+          - meter:
+              eic: string
+              uniqueCode: string
+              readingOrganization: '...'
+              name: string
+            demand:
+              demandId: integer
+              demandStatus: '...'
+            willDemandBeCreated: boolean
+            willDemandBeActivated: boolean
+  demand_oiz-main-meter-out-query-nickname:
+    endpoint: v1/demand/oiz-main-meter/portfolio-out/query
+    method: POST
+    auth: true
+    short_name: demand_oiz-main-meter-out-query-nickname
+    short_name_tr: OSB Ana Sayaç Çıkarma Talebi Ön Sorgulama
+    params:
+    - selectedOrganizationId
+    - consumptionPointId
+    - consumptionPointEic
+    - oizOrganizationId
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: OSB Ana Sayaç Çıkarma Talebi Ön Sorgulama
+    description: Çıkarma talebi oluşturmadan önce osb organizasyon bilgileriyle veya sayaç bilgileriyle sorgulama yapma servisidir.
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          oizOrganization:
+            id: integer
+            eic: string
+            name: string
+            state: integer
+          items:
+          - meter:
+              eic: string
+              uniqueCode: string
+              readingOrganization: '...'
+              name: string
+            demand:
+              demandId: integer
+              demandStatus: '...'
+            willDemandBeCreated: boolean
+            willDemandBeActivated: boolean
+  demand_oiz-main-meter-out-update-status-nickname:
+    endpoint: v1/demand/oiz-main-meter/portfolio-out/updateStatus
+    method: POST
+    auth: true
+    short_name: demand_oiz-main-meter-out-update-status-nickname
+    short_name_tr: OSB Ana Sayaç Çıkarma Talebi Durum Güncelleme
+    params:
+    - selectedOrganizationId
+    - demandId
+    - demandStatusId
+    required:
+    - demandId
+    - demandStatusId
+    response: RestResponse
+    var_type: dict
+    summary: OSB Ana Sayaç Çıkarma Talebi Durum Güncelleme
+    description: Çıkarma talebi durum güncelleme servisidir.
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          completed: boolean
+  demand-portfolio-add-create:
+    endpoint: v1/demand/portfolio-add/create
+    method: POST
+    auth: true
+    short_name: demand-portfolio-add-create
+    short_name_tr: Portföye Ekleme Talebi Kaydet
+    params:
+    - selectedOrganizationId
+    - isCustomerInformationChange
+    - categoryTypeId
+    - title
+    - customerNo
+    - authorizedPerson1Name
+    - authorizedPerson1No
+    - authorizedPerson2Name
+    - authorizedPerson2No
+    - isAgreementChecked
+    - consumptionPointId
+    - consumptionPointEic
+    - meterReadingOrganizationId
+    - uniqueCode
+    - isPreCheckOperation
+    required:
+    - isCustomerInformationChange
+    - isPreCheckOperation
+    response: RestResponse
+    var_type: dict
+    summary: Portföye Ekleme Talebi Kaydet
+    description: Portföye eklenmek istenen tüketim noktasının talebinin kaydedildiği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          sameCustomerExistInMyPortfolio: boolean
+          sameCustomerDemandExistInThisPeriod: boolean
+          sameConsumptionPointDemandExistInThisPeriod: boolean
+          demandId: integer
+          consumptionPointId: integer
+  demand-portfolio-add-update:
+    endpoint: v1/demand/portfolio-add/update
+    method: POST
+    auth: true
+    short_name: demand-portfolio-add-update
+    short_name_tr: Portföye Ekleme Talebi Güncelle
+    params:
+    - selectedOrganizationId
+    - isCustomerInformationChange
+    - categoryTypeId
+    - title
+    - customerNo
+    - authorizedPerson1Name
+    - authorizedPerson1No
+    - authorizedPerson2Name
+    - authorizedPerson2No
+    - isAgreementChecked
+    - demandId
+    - demandStatusId
+    - isPreCheckOperation
+    required:
+    - demandId
+    - demandStatusId
+    - isCustomerInformationChange
+    - isPreCheckOperation
+    response: RestResponse
+    var_type: dict
+    summary: Portföye Ekleme Talebi Güncelle
+    description: Portföye ekleme taleplerini güncelleme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          sameCustomerExistInMyPortfolio: boolean
+          sameCustomerDemandExistInThisPeriod: boolean
+          sameConsumptionPointDemandExistInThisPeriod: boolean
+          demandId: integer
+          consumptionPointId: integer
+  demand-portfolio-out-create:
+    endpoint: v1/demand/portfolio-out/create
+    method: POST
+    auth: true
+    short_name: demand-portfolio-out-create
+    short_name_tr: Portföyden Çıkarma Talebi Kaydet
+    params:
+    - selectedOrganizationId
+    - consumptionPointIds
+    required:
+    - consumptionPointIds
+    response: RestResponse
+    var_type: dict
+    summary: Portföyden Çıkarma Talebi Kaydet
+    description: Portföyden çıkarılmak istenen tüketim noktasının talebinin kaydedildiği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandList:
+          - demandId: integer
+            consumptionPointId: integer
+  demand-portfolio-out-update:
+    endpoint: v1/demand/portfolio-out/update
+    method: POST
+    auth: true
+    short_name: demand-portfolio-out-update
+    short_name_tr: Portföyden Çıkarma Talebi Güncelle
+    params:
+    - selectedOrganizationId
+    - demandId
+    - demandStatusId
+    required:
+    - demandId
+    - demandStatusId
+    response: RestResponse
+    var_type: dict
+    summary: Portföyden Çıkarma Talebi Güncelle
+    description: Portföyden çıkarma taleplerini güncelleme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          demandId: integer
+          consumptionPointId: integer
+  demand-re-energisation-create:
+    endpoint: v1/demand/re-energisation/create
+    method: POST
+    auth: true
+    short_name: demand-re-energisation-create
+    short_name_tr: Yeniden Enerjilendirme Talebi Kaydet
+    params:
+    - selectedOrganizationId
+    - isCustomerInformationChange
+    - categoryTypeId
+    - title
+    - customerNo
+    - authorizedPerson1Name
+    - authorizedPerson1No
+    - authorizedPerson2Name
+    - authorizedPerson2No
+    - isAgreementChecked
+    - consumptionPointId
+    - consumptionPointEic
+    - meterReadingOrganizationId
+    - uniqueCode
+    - isPreCheckOperation
+    required:
+    - isCustomerInformationChange
+    - isPreCheckOperation
+    response: RestResponse
+    var_type: dict
+    summary: Yeniden Enerjilendirme Talebi Kaydet
+    description: Yeniden enerjilendirme talebinin kaydedildiği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          sameCustomerExistInMyPortfolio: boolean
+          demandId: integer
+          consumptionPointId: integer
+  demand-self-get:
+    endpoint: v1/demand/self/get
+    method: POST
+    auth: true
+    short_name: demand-self-get
+    short_name_tr: Taleplerimi Sorgula
+    params:
+    - page
+    - selectedOrganizationId
+    - periodDates
+    - consumptionPointId
+    - consumptionPointEic
+    - uniqueCode
+    - customerNo
+    - demandTypes
+    - demandStatus
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Taleplerimi Sorgula
+    description: Yapmış olduğunuz veya size bağlı olan organizasyonların yapmış olduğu talepleri listeleme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          items:
+          - demandId: integer
+            periodDate: string
+            consumptionPointEic: string
+            consumptionPointId: integer
+            uniqueCode: string
+            demandType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            demandStatus:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            description:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            sendToLastSupplier: boolean
+            createDate: string
+            createUser: string
+            isOwnerOrganization: boolean
+            cancellationDate: string
+            cancellationUserName: string
+            cancellationOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            readingOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            customer:
+              categoryType: '...'
+              title: string
+              customerNo: string
+              authorizedPerson1Name: string
+              authorizedPerson2Name: string
+              authorizedPerson1No: string
+              authorizedPerson2No: string
+            ownerOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            newOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            oldOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            oizOrganization:
+              id: integer
+              eic: string
+              name: string
+              state: integer
+            customerNoMismatch: boolean
+          page:
+            number: integer
+            size: integer
+            total: integer
+            sort:
+              field: string
+              direction: string
+          sortableFields:
+          - string

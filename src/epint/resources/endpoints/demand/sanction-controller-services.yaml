@@ -1,0 +1,82 @@
+endpoints:
+  sanction-query-participant:
+    endpoint: /v1/sanction/queryParticipant
+    method: POST
+    auth: true
+    short_name: sanction-query-participant
+    short_name_tr: Yaptırım Listele
+    params:
+    - page
+    - sanctionTypeId
+    - sanctionId
+    - processDateTime
+    - startDateTime
+    - endDateTime
+    - sanctionStatusIds
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Yaptırım Listele
+    description: Katılımcının yaptırımlarını listeleyebileceği servistir.
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          items:
+          - sanctionId: integer
+            sanctionStatus:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            sanctionType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            organizations:
+            - id: integer
+              eic: string
+              name: string
+              state: integer
+            startDateTime: string
+            endDateTime: string
+            sanctionOperations:
+            - sanctionOperationType: '...'
+              sanctionOperationStatus: '...'
+            createDateTime: string
+            createUser: string
+            explanation: string
+            updateDemands:
+            - descriptions:
+              - '...'
+              demandId: integer
+              createUser: string
+              createDate: string
+              approveOrRejectUser: string
+              approveOrRejectDate: string
+              demandStatus: '...'
+              sanctionStatus: '...'
+              explanation: string
+              endDateTime: string
+          page:
+            number: integer
+            size: integer
+            total: integer
+            sort:
+              field: string
+              direction: string
+          sortableFields:
+          - string

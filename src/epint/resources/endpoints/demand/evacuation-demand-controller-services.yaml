@@ -1,0 +1,315 @@
+endpoints:
+  evacuation-passivate:
+    endpoint: /v1/evacuation/passivate
+    method: POST
+    auth: true
+    short_name: evacuation-passivate
+    short_name_tr: Tahliye Talebi Pasife Al
+    params:
+    - readingOrganizationId
+    - consumptionPointId
+    - eic
+    - uniqueCode
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Tahliye Talebi Pasife Al
+    description: Tahliye talebini pasife alma servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          completed: boolean
+  evacuation-batch-passivate:
+    endpoint: /v1/evacuation/passivate-batch
+    method: POST
+    auth: true
+    short_name: evacuation-batch-passivate
+    short_name_tr: Toplu Tahliye Talebi Pasife Al
+    params: []
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Toplu Tahliye Talebi Pasife Al
+    description: Toplu Tahliye Talebi Pasife Al
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          consumptionPointId: integer
+          isSuccessful: boolean
+          errorMessage: string
+  evacuation-query:
+    endpoint: /v1/evacuation/query
+    method: POST
+    auth: true
+    short_name: evacuation-query
+    short_name_tr: Tahliye Taleplerimi Sorgula
+    params:
+    - page
+    - periodDates
+    - evacuationDemandDateStart
+    - evacuationDemandDateEnd
+    - consumptionPointId
+    - eic
+    - uniqueCode
+    - statuses
+    - readingOrganization
+    - organization
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Tahliye Taleplerimi Sorgula
+    description: Yapmış olduğunuz veya size bağlı olan organizasyonların yapmış olduğu tahliye taleplerini listeleme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          items:
+          - evacuationDemandCreateDate: string
+            id: integer
+            eic: string
+            consumptionPointId: integer
+            uniqueCode: string
+            title: string
+            customerNo: string
+            evacuationStatus:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            evacuationType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            explanation: string
+            meterOwnerOrganizationId: integer
+            meterOwnerOrganizationName: string
+            dspOrganizationId: integer
+            dspOrganizationName: string
+            bpmOrganizationId: integer
+            bpmOrganizationName: string
+            readingOrganizationId: integer
+            readingOrganizationName: string
+            evacuationDemandCreateUser: string
+            evacuationDemandCancelUser: string
+            evacuationDemandCancelDate: string
+            evacuationDemandCancelOrganizationId: integer
+            evacuationDemandCancelOrganizationName: string
+            rejectAllowed: boolean
+          page:
+            number: integer
+            size: integer
+            total: integer
+            sort:
+              field: string
+              direction: string
+          sortableFields:
+          - string
+  evacuation-reactivate:
+    endpoint: /v1/evacuation/reactivate
+    method: POST
+    auth: true
+    short_name: evacuation-reactivate
+    short_name_tr: Tahliye Talebi Reddi Geri Çek
+    params:
+    - readingOrganizationId
+    - consumptionPointId
+    - eic
+    - uniqueCode
+    - meterOwnerOrganizationId
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Tahliye Talebi Reddi Geri Çek
+    description: Tahliye talebini reddi geri çek servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          completed: boolean
+  evacuation-reject:
+    endpoint: /v1/evacuation/reject
+    method: POST
+    auth: true
+    short_name: evacuation-reject
+    short_name_tr: Tahliye Talebini Reddet
+    params:
+    - readingOrganizationId
+    - consumptionPointId
+    - eic
+    - uniqueCode
+    - meterOwnerOrganizationId
+    - rejectReason
+    required:
+    - rejectReason
+    response: RestResponse
+    var_type: dict
+    summary: Tahliye Talebini Reddet
+    description: Tahliye talebini reddetme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          completed: boolean
+  evacuation-save:
+    endpoint: /v1/evacuation/save
+    method: POST
+    auth: true
+    short_name: evacuation-save
+    short_name_tr: Tahliye Talebi Kaydet
+    params:
+    - readingOrganizationId
+    - consumptionPointId
+    - eic
+    - uniqueCode
+    - evacuationType
+    - explanation
+    required:
+    - evacuationType
+    response: RestResponse
+    var_type: dict
+    summary: Tahliye Talebi Kaydet
+    description: Tahliye edilmek istenen tüketim noktasının talebinin kaydedildiği servistir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          completed: boolean
+  evacuation-batch-save:
+    endpoint: /v1/evacuation/save-batch
+    method: POST
+    auth: true
+    short_name: evacuation-batch-save
+    short_name_tr: Toplu Tahliye Talebi Kaydet
+    params: []
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: Toplu Tahliye Talebi Kaydet
+    description: Tahliye edilmek istenen tüketim noktalarının taleplerinin toplu olarak kaydedildiği servistir.
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          consumptionPointId: integer
+          isSuccessful: boolean
+          errorMessage: string
+  evacuation-update:
+    endpoint: /v1/evacuation/update
+    method: POST
+    auth: true
+    short_name: evacuation-update
+    short_name_tr: Tahliye Talebi Güncelle
+    params:
+    - eic
+    - evacuationType
+    - explanation
+    required:
+    - evacuationType
+    response: RestResponse
+    var_type: dict
+    summary: Tahliye Talebi Güncelle
+    description: Tahliye taleplerini güncelleme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          completed: boolean

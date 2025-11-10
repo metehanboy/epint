@@ -1,0 +1,231 @@
+endpoints:
+  non-registered-metering-point-application-apply:
+    endpoint: /v1/non-registered-metering-point-application/apply
+    method: POST
+    auth: true
+    short_name: non-registered-metering-point-application-apply
+    short_name_tr: KMO Başvurusu Yap
+    params:
+    - supplierOrganizationId
+    - readingOrganizationId
+    - uniqueCode
+    - categoryType
+    - customerName
+    - customerNo
+    - authorizedPerson1Name
+    - authorizedPerson1No
+    - authorizedPerson2Name
+    - authorizedPerson2No
+    - isPrecheck
+    required:
+    - categoryType
+    - customerName
+    - customerNo
+    - readingOrganizationId
+    - uniqueCode
+    response: RestResponse
+    var_type: dict
+    summary: KMO Başvurusu Yap
+    description: Kaydı mevcut olmayan ölçüm noktası başvuru kaydetme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          supplierOrganizationId: integer
+          supplierOrganizationName: string
+          readingOrganizationId: integer
+          readingOrganizationName: string
+          uniqueCode: string
+          eic: string
+          customerName: string
+          customerNo: string
+          authorizedPerson1Name: string
+          authorizedPerson1No: string
+          authorizedPerson2Name: string
+          authorizedPerson2No: string
+          isCustomerNoUnique: boolean
+          applicationType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          categoryType:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          demandStatus:
+            id: integer
+            value: string
+            localizations:
+            - language: string
+              text: string
+          periodDate: string
+  non-registered-metering-point-application-query:
+    endpoint: /v1/non-registered-metering-point-application/query
+    method: POST
+    auth: true
+    short_name: non-registered-metering-point-application-query
+    short_name_tr: KMO Taleplerini Sorgula
+    params:
+    - page
+    - supplierOrganizationId
+    - supplierOrganizationIdContains
+    - uniqueCode
+    - uniqueCodeContains
+    - readingOrganizationId
+    - readingOrganizationIdContains
+    - eic
+    - eicContains
+    - categoryTypes
+    - customerName
+    - customerNameContains
+    - applicationTypes
+    - demandStatuses
+    - periodDate
+    required: []
+    response: RestResponse
+    var_type: dict
+    summary: KMO Taleplerini Sorgula
+    description: Kaydı mevcut olmayan ölçüm noktası taleplerinin sorgulama servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          items:
+          - id: integer
+            supplierOrganizationId: integer
+            supplierOrganizationName: string
+            uniqueCode: string
+            readingOrganizationId: integer
+            readingOrganizationName: string
+            eic: string
+            categoryType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            customerName: string
+            customerNo: string
+            authorizedPerson1Name: string
+            authorizedPerson1No: string
+            authorizedPerson2Name: string
+            authorizedPerson2No: string
+            applicationType:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            demandStatus:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            meteringPointStatus:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            explanation:
+              id: integer
+              value: string
+              localizations:
+              - '...'
+            periodDate: string
+          page:
+            number: integer
+            size: integer
+            total: integer
+            sort:
+              field: string
+              direction: string
+          sortableFields:
+          - string
+  non-registered-metering-point-application-reject:
+    endpoint: /v1/non-registered-metering-point-application/reject
+    method: POST
+    auth: true
+    short_name: non-registered-metering-point-application-reject
+    short_name_tr: KMO Başvurusu Reddet
+    params:
+    - ids
+    required:
+    - ids
+    response: RestResponse
+    var_type: dict
+    summary: KMO Başvurusu Reddet
+    description: Kaydı mevcut olmayan ölçüm noktası talebini reddetme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          completed: boolean
+  non-registered-metering-point-application-withdraw:
+    endpoint: /v1/non-registered-metering-point-application/withdraw
+    method: POST
+    auth: true
+    short_name: non-registered-metering-point-application-withdraw
+    short_name_tr: KMO Başvurusu Geri Çek
+    params:
+    - id
+    required:
+    - id
+    response: RestResponse
+    var_type: dict
+    summary: KMO Başvurusu Geri Çek
+    description: Kaydı mevcut olmayan ölçüm noktası talebini geri çekme servisidir
+    response_structure:
+      status: string
+      correlationId: string
+      spanIds: string
+      hostName: string
+      clientIp: string
+      userName: string
+      successMessage: string
+      errors:
+      - errorCode: string
+        errorMessage: string
+      unsuccessfulList:
+      - {}
+      dispatch: string
+      body:
+        content:
+          completed: boolean
