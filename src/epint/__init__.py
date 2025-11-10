@@ -35,12 +35,180 @@ class AuthenticationError(Exception):
 _endpoint_search_index = {}
 _endpoint_cache = {}
 _endpoint_categories = {}
+_endpoint_data = {}  # endpoint_name -> endpoint_data mapping
+_normalized_index = {}  # Normalize edilmiş isimler için indeks
+_keyword_index = {}  # Kelime bazlı indeks
 _INITIALIZED = False
 
 _username = None
 _password = None
 _auth_configured = False
 _current_mode = "prod"  # Default prod mode
+
+# Yaygın kısaltmalar ve alias'lar
+_ALIASES = {
+    # EPİAŞ kısaltmaları
+    'smf': 'smp_average',
+    'smp': 'smp_average',
+    'aof': 'aof_average',
+    'mcp': 'mcp_average',
+    'dgp': 'dgp',
+    'gop': 'gop',
+    'gip': 'gip',
+    'vep': 'vep',
+    'yekg': 'yekg',
+    'prices': 'daily_prices',
+    'fiyat': 'prices',
+    'fiyatlar': 'prices',
+    # Türkçe kelimeler
+    'günlük': 'daily',
+    'gunluk': 'daily',
+    'haftalık': 'weekly',
+    'haftalik': 'weekly',
+    'aylık': 'monthly',
+    'aylik': 'monthly',
+    'yıllık': 'yearly',
+    'yillik': 'yearly',
+    'rapor': 'report',
+    'liste': 'list',
+    'sorgu': 'query',
+    'sorgula': 'query',
+}
+
+
+def normalize_search_term(name):
+    """Arama terimini normalize et (Türkçe karakter, tire, underscore)"""
+    if not isinstance(name, str):
+        return str(name).lower()
+    
+    # Türkçe karakterleri normalize et
+    name = unicodedata.normalize('NFKD', name)
+    name = name.encode('ascii', 'ignore').decode('ascii')
+    
+    # Küçük harfe çevir
+    name = name.lower()
+    
+    # Tire ve boşlukları underscore'a çevir
+    name = name.replace('-', '_').replace(' ', '_')
+    
+    # Çoklu underscore'ları tek yap
+    while '__' in name:
+        name = name.replace('__', '_')
+    
+    # Başta/sonda underscore varsa temizle
+    name = name.strip('_')
+    
+    return name
+
+
+def _build_search_indexes():
+    """Arama indekslerini oluştur (normalized, keyword)"""
+    global _normalized_index, _keyword_index
+    
+    _normalized_index.clear()
+    _keyword_index.clear()
+    
+    for endpoint_key in _endpoint_search_index.keys():
+        # Normalized index
+        normalized = normalize_search_term(endpoint_key)
+        if normalized and normalized != endpoint_key:
+            _normalized_index[normalized] = endpoint_key
+        
+        # Keyword index - her kelime için mapping
+        words = endpoint_key.lower().replace('-', '_').split('_')
+        for word in words:
+            if len(word) > 2:  # 2 karakterden uzun kelimeler
+                if word not in _keyword_index:
+                    _keyword_index[word] = []
+                if endpoint_key not in _keyword_index[word]:
+                    _keyword_index[word].append(endpoint_key)
+
+
+def _apply_aliases(name):
+    """Alias'ları uygula"""
+    name_lower = name.lower()
+    
+    # Tam eşleşme
+    if name_lower in _ALIASES:
+        return _ALIASES[name_lower]
+    
+    # Kısmi eşleşme - alias'ı kelime olarak ara
+    words = name_lower.split('_')
+    new_words = []
+    for word in words:
+        if word in _ALIASES:
+            new_words.append(_ALIASES[word])
+        else:
+            new_words.append(word)
+    
+    result = '_'.join(new_words)
+    return result if result != name_lower else name
+
+
+def _keyword_search(name, max_results=10):
+    """Kelime bazlı arama"""
+    name_lower = name.lower().replace('-', '_')
+    words = [w for w in name_lower.split('_') if len(w) > 2]
+    
+    if not words:
+        return []
+    
+    # Her kelime için endpoint'leri bul
+    candidates = {}
+    for word in words:
+        if word in _keyword_index:
+            for endpoint_key in _keyword_index[word]:
+                if endpoint_key not in candidates:
+                    candidates[endpoint_key] = 0
+                candidates[endpoint_key] += 1
+    
+    # En çok eşleşen kelimeye sahip endpoint'leri döndür
+    if not candidates:
+        return []
+    
+    # Sırala ve en iyi sonuçları döndür
+    sorted_candidates = sorted(candidates.items(), key=lambda x: x[1], reverse=True)
+    
+    # En az %50 kelime eşleşmesi olmalı
+    min_matches = max(1, len(words) * 0.5)
+    results = [k for k, v in sorted_candidates if v >= min_matches]
+    
+    return results[:max_results]
+
+
+def _get_smart_suggestions(name, limit=10):
+    """Akıllı öneriler"""
+    suggestions = []
+    
+    # 1. Normalized arama
+    normalized = normalize_search_term(name)
+    if normalized in _normalized_index:
+        suggestions.append(_normalized_index[normalized])
+    
+    # 2. Keyword arama
+    keyword_results = _keyword_search(name, max_results=5)
+    suggestions.extend(keyword_results)
+    
+    # 3. Fuzzy search (düşük threshold)
+    name_lower = name.lower()
+    fuzzy_results = []
+    for search_key in list(_endpoint_search_index.keys())[:100]:
+        score = difflib.SequenceMatcher(None, name_lower, search_key.lower()).ratio()
+        if score > 0.4:
+            fuzzy_results.append((search_key, score))
+    
+    fuzzy_results.sort(key=lambda x: x[1], reverse=True)
+    suggestions.extend([k for k, s in fuzzy_results[:5]])
+    
+    # Duplicate'leri temizle, sırayı koru
+    seen = set()
+    unique_suggestions = []
+    for s in suggestions:
+        if s not in seen:
+            seen.add(s)
+            unique_suggestions.append(s)
+    
+    return unique_suggestions[:limit]
 
 
 def _load_all_endpoints():
@@ -53,6 +221,10 @@ def _load_all_endpoints():
 
     try:
         _load_endpoints_from_directory()
+        
+        # Arama indekslerini oluştur
+        _build_search_indexes()
+        
         _INITIALIZED = True
 
         duration = time.time() - start_time
@@ -60,7 +232,10 @@ def _load_all_endpoints():
             "_load_all_endpoints", duration, endpoint_count=len(_endpoint_search_index)
         )
         log_operation(
-            "_load_all_endpoints_complete", endpoint_count=len(_endpoint_search_index)
+            "_load_all_endpoints_complete", 
+            endpoint_count=len(_endpoint_search_index),
+            normalized_count=len(_normalized_index),
+            keyword_count=len(_keyword_index)
         )
 
     except Exception as e:
@@ -301,6 +476,12 @@ def _process_endpoints(endpoints, category_name=""):
             continue
 
         _endpoint_search_index[endpoint_name] = endpoint_name
+        
+        # Endpoint data'yı kategorisi ile birlikte sakla
+        global _endpoint_data
+        endpoint_data_with_category = endpoint_data.copy()
+        endpoint_data_with_category['category'] = category_name
+        _endpoint_data[endpoint_name] = endpoint_data_with_category
 
         global _endpoint_categories
         if category_name not in _endpoint_categories:
@@ -518,6 +699,47 @@ def _handle_no_match(name, start_time):
     raise AttributeError(f"'{name}' endpoint bulunamadı. Mevcut: {available}")
 
 
+def _handle_enhanced_no_match(name, start_time):
+    """Gelişmiş hata mesajı ile no match durumunu yönet"""
+    duration = time.time() - start_time
+    
+    # Akıllı öneriler al
+    suggestions = _get_smart_suggestions(name, limit=5)
+    
+    log_performance(
+        "__getattr__enhanced_no_match",
+        duration,
+        endpoint=name,
+        match_type="none",
+        suggestion_count=len(suggestions),
+    )
+    
+    # Hata mesajı
+    error_msg = f"\n{'='*80}\n"
+    error_msg += f"❌ '{name}' endpoint bulunamadı\n"
+    error_msg += f"{'='*80}\n\n"
+    
+    if suggestions:
+        error_msg += "💡 ÖNERİLER:\n"
+        for i, suggestion in enumerate(suggestions, 1):
+            # Endpoint bilgisini al
+            endpoint_info = _endpoint_data.get(suggestion, {})
+            short_name = endpoint_info.get('short_name_tr', '') or endpoint_info.get('short_name', '')
+            
+            error_msg += f"   {i}. {suggestion}"
+            if short_name:
+                error_msg += f" → {short_name}"
+            error_msg += "\n"
+    
+    error_msg += "\n📚 YARDIMCI FONKSİYONLAR:\n"
+    error_msg += "   • ep.search('keyword')           → Kelime içeren endpoint'ler\n"
+    error_msg += "   • ep.list_by_category('gop')     → Kategori bazlı listeleme\n"
+    error_msg += "   • ep.list_endpoints()            → Tüm endpoint'ler\n"
+    error_msg += f"\n{'='*80}\n"
+    
+    raise AttributeError(error_msg)
+
+
 def _validate_getattr_input(name):
     """__getattr__ için giriş validasyonu"""
     if name.startswith(("_ipython_", "_repr_")):
@@ -534,17 +756,49 @@ def __getattr__(name):
     try:
         _validate_getattr_input(name)
 
-        # Direct match
+        # 1. Direct match (tam eşleşme)
         if name in _endpoint_search_index:
             return _handle_direct_match(name, start_time)
 
-        # Fuzzy search
+        # 2. Normalized match (tire/underscore normalize)
+        normalized = normalize_search_term(name)
+        if normalized in _endpoint_search_index:
+            duration = time.time() - start_time
+            log_performance("__getattr__normalized_match", duration, 
+                          endpoint=name, matched=normalized, match_type="normalized")
+            return _get_endpoint(_endpoint_search_index[normalized])
+        
+        if normalized in _normalized_index:
+            matched_key = _normalized_index[normalized]
+            duration = time.time() - start_time
+            log_performance("__getattr__normalized_index_match", duration,
+                          endpoint=name, matched=matched_key, match_type="normalized_index")
+            return _get_endpoint(_endpoint_search_index[matched_key])
+
+        # 3. Alias match (kısaltmalar)
+        aliased = _apply_aliases(name)
+        if aliased != name and aliased in _endpoint_search_index:
+            duration = time.time() - start_time
+            log_performance("__getattr__alias_match", duration,
+                          endpoint=name, matched=aliased, match_type="alias")
+            return _get_endpoint(_endpoint_search_index[aliased])
+
+        # 4. Keyword match (kelime bazlı)
+        keyword_results = _keyword_search(name, max_results=1)
+        if keyword_results:
+            matched_key = keyword_results[0]
+            duration = time.time() - start_time
+            log_performance("__getattr__keyword_match", duration,
+                          endpoint=name, matched=matched_key, match_type="keyword")
+            return _get_endpoint(_endpoint_search_index[matched_key])
+
+        # 5. Fuzzy search (benzerlik skoru - threshold artırıldı)
         result = _handle_fuzzy_match(name, start_time)
         if result:
             return result
 
-        # No match found
-        _handle_no_match(name, start_time)
+        # 6. No match found - akıllı önerilerle
+        _handle_enhanced_no_match(name, start_time)
 
     except Exception as e:
         duration = time.time() - start_time
@@ -596,7 +850,8 @@ def _fuzzy_search(name):
     # Sadece adaylar arasında fuzzy search yap
     best_match, best_score = _find_best_fuzzy_match(name_lower, candidates)
 
-    if best_match and best_score > 0.5:
+    # Threshold artırıldı: 0.5 → 0.7 (daha iyi eşleşme için)
+    if best_match and best_score > 0.7:
         return _get_endpoint(best_match)
 
     return None
@@ -646,6 +901,206 @@ def _calculate_word_bonus(name, endpoint_name):
     return len(common_words) * 0.1 if common_words else 0.0
 
 
+# ============================================================================
+# PUBLIC HELPER FUNCTIONS - Kullanıcı için yardımcı fonksiyonlar
+# ============================================================================
+
+def search(keyword, category=None, limit=20):
+    """Kelime içeren endpoint'leri ara
+    
+    Args:
+        keyword: Aranacak kelime/ifade
+        category: Kategoriye göre filtrele (opsiyonel)
+        limit: Maksimum sonuç sayısı (varsayılan: 20)
+    
+    Returns:
+        list: Eşleşen endpoint isimleri
+    
+    Örnek:
+        >>> ep.search('daily')
+        >>> ep.search('mcp', category='seffaflik-reporting')
+    """
+    if not _INITIALIZED:
+        _load_all_endpoints()
+    
+    keyword_lower = keyword.lower()
+    results = []
+    
+    for endpoint_key, endpoint_info in _endpoint_data.items():
+        # Kategori filtresi
+        if category and endpoint_info.get('category') != category:
+            continue
+        
+        # Kelime eşleşmesi
+        if keyword_lower in endpoint_key.lower():
+            results.append({
+                'name': endpoint_key,
+                'category': endpoint_info.get('category', ''),
+                'short_name': endpoint_info.get('short_name', ''),
+                'short_name_tr': endpoint_info.get('short_name_tr', ''),
+            })
+        
+        if len(results) >= limit:
+            break
+    
+    # Sonuçları yazdır
+    print(f"\n{'='*80}")
+    print(f"🔍 '{keyword}' için {len(results)} sonuç bulundu")
+    if category:
+        print(f"📁 Kategori: {category}")
+    print(f"{'='*80}\n")
+    
+    for i, result in enumerate(results, 1):
+        print(f"{i:2}. {result['name']}")
+        if result['short_name_tr']:
+            print(f"    └─ {result['short_name_tr']}")
+        print(f"    📂 {result['category']}")
+        if i < len(results):
+            print()
+    
+    print(f"{'='*80}\n")
+    
+    return [r['name'] for r in results]
+
+
+def list_by_category(category):
+    """Kategoriye göre endpoint'leri listele
+    
+    Args:
+        category: Kategori adı (örn: 'gop', 'seffaflik-reporting')
+    
+    Returns:
+        list: Kategorideki tüm endpoint isimleri
+    
+    Örnek:
+        >>> ep.list_by_category('gop')
+        >>> ep.list_by_category('seffaflik-reporting')
+    """
+    if not _INITIALIZED:
+        _load_all_endpoints()
+    
+    results = []
+    
+    for endpoint_key, endpoint_info in _endpoint_data.items():
+        if endpoint_info.get('category') == category:
+            results.append({
+                'name': endpoint_key,
+                'short_name': endpoint_info.get('short_name', ''),
+                'short_name_tr': endpoint_info.get('short_name_tr', ''),
+            })
+    
+    # Sonuçları yazdır
+    print(f"\n{'='*80}")
+    print(f"📁 '{category}' kategorisinde {len(results)} endpoint bulundu")
+    print(f"{'='*80}\n")
+    
+    for i, result in enumerate(results, 1):
+        print(f"{i:2}. {result['name']}")
+        if result['short_name_tr']:
+            print(f"    └─ {result['short_name_tr']}")
+        if i < len(results):
+            print()
+    
+    print(f"{'='*80}\n")
+    
+    return [r['name'] for r in results]
+
+
+def list_endpoints(pattern=None):
+    """Tüm endpoint'leri listele
+    
+    Args:
+        pattern: Regex pattern (opsiyonel, örn: 'mcp.*daily')
+    
+    Returns:
+        dict: Kategorilere göre gruplanmış endpoint'ler
+    
+    Örnek:
+        >>> ep.list_endpoints()
+        >>> ep.list_endpoints(pattern='mcp.*')
+    """
+    if not _INITIALIZED:
+        _load_all_endpoints()
+    
+    # Kategorilere göre grupla
+    by_category = {}
+    
+    for endpoint_key, endpoint_info in _endpoint_data.items():
+        # Pattern filtresi
+        if pattern:
+            import re
+            if not re.search(pattern, endpoint_key):
+                continue
+        
+        category = endpoint_info.get('category', 'uncategorized')
+        if category not in by_category:
+            by_category[category] = []
+        
+        by_category[category].append({
+            'name': endpoint_key,
+            'short_name_tr': endpoint_info.get('short_name_tr', ''),
+        })
+    
+    # Sonuçları yazdır
+    print(f"\n{'='*80}")
+    print(f"📚 TÜML ENDPOINT'LER")
+    if pattern:
+        print(f"🔍 Pattern: {pattern}")
+    print(f"{'='*80}\n")
+    
+    total = 0
+    for category in sorted(by_category.keys()):
+        endpoints = by_category[category]
+        total += len(endpoints)
+        print(f"\n📁 {category} ({len(endpoints)} endpoint)")
+        print(f"{'─'*80}")
+        
+        for i, ep in enumerate(endpoints[:5], 1):  # İlk 5'i göster
+            print(f"   {i}. {ep['name']}")
+            if ep['short_name_tr']:
+                print(f"      └─ {ep['short_name_tr']}")
+        
+        if len(endpoints) > 5:
+            print(f"   ... ve {len(endpoints)-5} tane daha")
+    
+    print(f"\n{'='*80}")
+    print(f"📊 Toplam: {total} endpoint, {len(by_category)} kategori")
+    print(f"{'='*80}\n")
+    
+    return by_category
+
+
+def list_categories():
+    """Tüm kategorileri listele
+    
+    Returns:
+        dict: Kategoriler ve endpoint sayıları
+    
+    Örnek:
+        >>> ep.list_categories()
+    """
+    if not _INITIALIZED:
+        _load_all_endpoints()
+    
+    categories = {}
+    for endpoint_info in _endpoint_data.values():
+        category = endpoint_info.get('category', 'uncategorized')
+        categories[category] = categories.get(category, 0) + 1
+    
+    print(f"\n{'='*80}")
+    print(f"📂 TÜM KATEGORİLER")
+    print(f"{'='*80}\n")
+    
+    for i, (category, count) in enumerate(sorted(categories.items()), 1):
+        print(f"{i:2}. {category:40} ({count:4} endpoint)")
+    
+    print(f"\n{'='*80}")
+    print(f"📊 Toplam: {len(categories)} kategori")
+    print(f"{'='*80}\n")
+    
+    return categories
+
+
 def __repr__():
     return f"<module 'epint' v{__version__}>"
 
@@ -658,7 +1113,14 @@ __all__ = [
     "EndpointManager",
     "clear_cache",
     "set_auth",
+    "set_mode",
     "AuthenticationError",
+    # Yeni yardımcı fonksiyonlar
+    "search",
+    "list_by_category",
+    "list_endpoints",
+    "list_categories",
+    "normalize_search_term",
 ]
 
 _load_all_endpoints()
