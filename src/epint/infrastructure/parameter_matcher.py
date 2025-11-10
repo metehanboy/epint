@@ -15,8 +15,18 @@ class ParameterMatcher:
         matched_params = {}
         unmatched_params = {}
         used_param_names = set()
+        used_nested_names = set()  # Nested parametreler için tracking
+        
+        # Nested parametreler için body/object parametrelerini bul
+        body_param_name = None
+        
+        for param in self.endpoint_params:
+            if param.var_type in ["object", "dict"] and param.properties:
+                body_param_name = param.name
+                break
 
         for provided_key, provided_value in provided_params.items():
+            # Önce top-level eşleşme dene
             best_match = self._find_best_param_match(provided_key, used_param_names)
 
             if best_match and best_match not in used_param_names:
@@ -25,8 +35,35 @@ class ParameterMatcher:
                 )
                 matched_params[best_match] = converted_value
                 used_param_names.add(best_match)
+            elif body_param_name:
+                # Top-level eşleşme yoksa, nested (body) parametrelerinde ara
+                nested_match = self._find_best_nested_param_match(
+                    provided_key, body_param_name, used_nested_names
+                )
+                if nested_match and nested_match not in used_nested_names:
+                    if body_param_name not in matched_params:
+                        matched_params[body_param_name] = {}
+                    matched_params[body_param_name][nested_match] = provided_value
+                    used_nested_names.add(nested_match)
+                else:
+                    unmatched_params[provided_key] = provided_value
             else:
                 unmatched_params[provided_key] = provided_value
+
+        # Body parametresini oluştur (eğer nested parametreler eşleştiyse)
+        if body_param_name and body_param_name in matched_params:
+            # Body içindeki nested parametreleri dönüştür
+            body_data = matched_params[body_param_name]
+            converted_body = {}
+            for nested_key, nested_value in body_data.items():
+                nested_param = self._find_nested_param_definition(body_param_name, nested_key)
+                if nested_param:
+                    # Nested parametre için type conversion yap
+                    converted_value = self._convert_nested_parameter_value(nested_value, nested_param)
+                    converted_body[nested_key] = converted_value
+                else:
+                    converted_body[nested_key] = nested_value
+            matched_params[body_param_name] = converted_body
 
         self._add_default_values_if_needed(matched_params)
 
@@ -45,8 +82,20 @@ class ParameterMatcher:
 
             # Eğer parametre required ise ve eşleşmemişse default değer ver
             if param.required and param.name not in matched_params:
+                # Object/dict tipi ise ve properties varsa, nested parametreleri kontrol et
+                if param.var_type in ["object", "dict"] and param.properties:
+                    if param.name not in matched_params:
+                        matched_params[param.name] = {}
+                    
+                    # Nested required parametreleri kontrol et
+                    for nested_param in param.properties:
+                        if nested_param.required:
+                            nested_name = nested_param.name
+                            if nested_name not in matched_params[param.name]:
+                                # Nested parametre için default verme (kullanıcı vermeli)
+                                continue
                 # Özel eşleştirmeler
-                if "region" in param_name:
+                elif "region" in param_name:
                     matched_params[param.name] = "TR1"
                 elif "pageinfo" in param_name:
                     matched_params[param.name] = {"page": 1, "size": 1}
@@ -204,6 +253,19 @@ class ParameterMatcher:
             return value
 
         return value
+    
+    def _convert_nested_parameter_value(self, value: Any, nested_param: Any) -> Any:
+        """Nested parametre için type conversion"""
+        if not nested_param:
+            return value
+        
+        if isinstance(value, str):
+            return TypeConverter.convert_string_value(value, nested_param.var_type)
+        
+        if self._is_correct_type(value, nested_param.var_type):
+            return value
+        
+        return value
 
     def _is_correct_type(self, value: Any, expected_type: str) -> bool:
         type_checks = {
@@ -228,6 +290,73 @@ class ParameterMatcher:
             if param.name == param_name:
                 return param
         return None
+    
+    def _find_nested_param_definition(self, parent_param_name: str, nested_param_name: str) -> Optional[Any]:
+        """Nested parametre tanımını bul (body.startDate gibi)"""
+        parent_param = self._find_param_definition(parent_param_name)
+        if not parent_param or not parent_param.properties:
+            return None
+        
+        for prop in parent_param.properties:
+            if prop.name == nested_param_name:
+                return prop
+        return None
+    
+    def _find_best_nested_param_match(
+        self, provided_key: str, parent_param_name: str, used_nested_names: set = None
+    ) -> Optional[str]:
+        """Nested parametreler için en iyi eşleşmeyi bul"""
+        if used_nested_names is None:
+            used_nested_names = set()
+        
+        parent_param = self._find_param_definition(parent_param_name)
+        if not parent_param or not parent_param.properties:
+            return None
+        
+        best_match = None
+        best_score = 0
+        
+        for nested_param in parent_param.properties:
+            if nested_param.name in used_nested_names:
+                continue
+            
+            if provided_key == nested_param.name:
+                return nested_param.name
+            
+            # Özel eşleştirme kuralları
+            if self._check_abbreviation_match(provided_key.lower(), nested_param.name.lower()):
+                return nested_param.name
+            
+            scores = []
+            
+            scores.append(
+                difflib.SequenceMatcher(
+                    None, provided_key.lower(), nested_param.name.lower()
+                ).ratio()
+            )
+            
+            provided_words = provided_key.lower().replace("_", " ").split()
+            param_words = nested_param.name.lower().replace("_", " ").split()
+            word_score = self._calculate_word_similarity(provided_words, param_words)
+            scores.append(word_score)
+            
+            abbrev_score = self._calculate_abbreviation_similarity(
+                provided_key.lower(), nested_param.name.lower()
+            )
+            scores.append(abbrev_score)
+            
+            method_score = self._calculate_method_similarity(
+                provided_key.lower(), nested_param.name.lower()
+            )
+            scores.append(method_score)
+            
+            score = max(scores)
+            
+            if score > best_score and score > 0.3:
+                best_match = nested_param.name
+                best_score = score
+        
+        return best_match
 
     def _calculate_method_similarity(self, provided: str, param: str) -> float:
         method_keywords = self._get_method_keywords()

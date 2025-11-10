@@ -6,6 +6,7 @@ import time
 from typing import Dict, Any
 from requests import Session
 from .logger import get_logger
+from .json_encoder import JSONUtils
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
@@ -105,16 +106,37 @@ class HTTPClient:
         serialized_params: Dict[str, Any],
     ):
         method = method.upper()
+        
+        # JSON serialization için custom encoder kullan
+        # datetime objeleri JSON serializable hale getir
+        serialized_params = JSONUtils.make_serializable(serialized_params)
+        
         if method == "GET":
             return self.get(url, headers=header, params=serialized_params)
         elif method == "POST":
-            return self.post(url, headers=header, json=serialized_params)
+            # Custom encoder ile serialize et ve data olarak gönder
+            json_data = JSONUtils.dumps(serialized_params)
+            header_with_content_type = header.copy()
+            header_with_content_type.setdefault("Content-Type", "application/json")
+            return self.post(url, headers=header_with_content_type, data=json_data)
         elif method == "PUT":
-            return self.put(url, headers=header, json=serialized_params)
+            json_data = JSONUtils.dumps(serialized_params)
+            header_with_content_type = header.copy()
+            header_with_content_type.setdefault("Content-Type", "application/json")
+            return self.put(url, headers=header_with_content_type, data=json_data)
         elif method == "DELETE":
-            return self.delete(url, headers=header, json=serialized_params)
+            json_data = JSONUtils.dumps(serialized_params)
+            header_with_content_type = header.copy()
+            header_with_content_type.setdefault("Content-Type", "application/json")
+            return self.delete(url, headers=header_with_content_type, data=json_data)
         elif method == "PATCH":
-            return self.patch(url, headers=header, json=serialized_params)
+            json_data = JSONUtils.dumps(serialized_params)
+            header_with_content_type = header.copy()
+            header_with_content_type.setdefault("Content-Type", "application/json")
+            return self.patch(url, headers=header_with_content_type, data=json_data)
         else:
             # Varsayılan olarak POST kullan
-            return self.post(url, headers=header, json=serialized_params)
+            json_data = JSONUtils.dumps(serialized_params)
+            header_with_content_type = header.copy()
+            header_with_content_type.setdefault("Content-Type", "application/json")
+            return self.post(url, headers=header_with_content_type, data=json_data)

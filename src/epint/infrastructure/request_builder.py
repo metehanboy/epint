@@ -67,20 +67,45 @@ class RequestBuilder:
         if auth_mode == "gop":
             return self.prepare_gop_message(matched_params)
 
-        # Gunici servisleri için özel tarih formatı (category kontrolü)
+        # Serialize et
         if category in ["gunici", "gunici-trading"]:
-            return {
-                key: TypeConverter.serialize_for_gunici(value)
-                for key, value in matched_params.items()
-            }
-
-        if self.method == "GET":
-            return {
-                key: TypeConverter.serialize_for_get(value)
-                for key, value in matched_params.items()
-            }
+            serialized = self._serialize_recursive(
+                matched_params, TypeConverter.serialize_for_gunici
+            )
+        elif self.method == "GET":
+            serialized = self._serialize_recursive(
+                matched_params, TypeConverter.serialize_for_get
+            )
         else:
-            return {
-                key: TypeConverter.serialize_for_post(value)
-                for key, value in matched_params.items()
-            }
+            serialized = self._serialize_recursive(
+                matched_params, TypeConverter.serialize_for_post
+            )
+        
+        # Eğer sadece 'body' parametresi varsa ve başka parametre yoksa, body içeriğini unwrap et
+        # Bu, seffaflik-electricity gibi servislerde body wrapper'ını kaldırmak için
+        if len(serialized) == 1 and "body" in serialized and isinstance(serialized["body"], dict):
+            # Body içeriğini direkt gönder (unwrap)
+            return serialized["body"]
+        
+        return serialized
+    
+    def _serialize_recursive(
+        self, params: Dict[str, Any], serialize_func
+    ) -> Dict[str, Any]:
+        """Recursive olarak nested dict'leri serialize et"""
+        serialized = {}
+        for key, value in params.items():
+            if isinstance(value, dict):
+                # Nested dict ise recursive serialize et
+                serialized[key] = self._serialize_recursive(value, serialize_func)
+            elif isinstance(value, list):
+                # List ise içindeki her elemanı serialize et
+                serialized[key] = [
+                    self._serialize_recursive(item, serialize_func) if isinstance(item, dict)
+                    else serialize_func(item)
+                    for item in value
+                ]
+            else:
+                # Normal değer ise serialize et
+                serialized[key] = serialize_func(value)
+        return serialized

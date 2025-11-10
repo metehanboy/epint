@@ -44,16 +44,46 @@ class ValidationService:
         for param in self.endpoint_info.var_type:
             if param.name in matched_params:
                 value = matched_params[param.name]
-                is_valid, error_msg = ParameterValidator.validate_parameter_type(
-                    param.name, value, param.var_type
-                )
-
-                if is_valid:
-                    validated_params[param.name] = value
+                
+                # Object/dict tipi ise nested parametreleri de validate et
+                if param.var_type in ["object", "dict"] and isinstance(value, dict) and param.properties:
+                    # Nested parametreleri validate et
+                    validated_nested = {}
+                    for nested_param in param.properties:
+                        if nested_param.name in value:
+                            nested_value = value[nested_param.name]
+                            is_valid, error_msg = ParameterValidator.validate_parameter_type(
+                                nested_param.name, nested_value, nested_param.var_type
+                            )
+                            if is_valid:
+                                validated_nested[nested_param.name] = nested_value
+                            else:
+                                errors.append(error_msg)
+                        elif nested_param.required:
+                            errors.append(f"Zorunlu parametre '{param.name}.{nested_param.name}' eksik")
+                    
+                    # Validated nested parametreleri ekle
+                    if validated_nested:
+                        validated_params[param.name] = validated_nested
                 else:
-                    errors.append(error_msg)
+                    # Normal parametre validation
+                    is_valid, error_msg = ParameterValidator.validate_parameter_type(
+                        param.name, value, param.var_type
+                    )
+
+                    if is_valid:
+                        validated_params[param.name] = value
+                    else:
+                        errors.append(error_msg)
             elif param.required:
-                errors.append(f"Zorunlu parametre '{param.name}' eksik")
+                # Required parametre eksik - ama object tipi ise nested kontrolü yap
+                if param.var_type in ["object", "dict"] and param.properties:
+                    # Nested required parametreleri kontrol et
+                    for nested_param in param.properties:
+                        if nested_param.required:
+                            errors.append(f"Zorunlu parametre '{param.name}.{nested_param.name}' eksik")
+                else:
+                    errors.append(f"Zorunlu parametre '{param.name}' eksik")
         return validated_params
 
     def _check_extra_parameters(
