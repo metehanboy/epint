@@ -25,7 +25,7 @@ class TestEpintMethods(unittest.TestCase):
         """Test sınıfı başlatıldığında çalışır"""
         # Test için auth bilgileri (gerçek değerler kullanılmalı)
         # Burada test modu kullanılabilir
-        ep.set_auth("m3t3-han@hotmail.com", "C5760175m.")
+        ep.set_auth("xxxxxxcc", "xxxxxxxxc")
         # ep.set_mode("test")  # Test modu
         
         # Cache'i temizle ve endpoint'leri yükle
@@ -48,7 +48,6 @@ class TestEpintMethods(unittest.TestCase):
     
 
     def test_gop_contract_list(self):
-        # ep.set_auth("K2METE","B5760175m.")
         # ep.set_mode("test")
 
         # print(ep.grid.meter_count(effectiveDate='2025-11-01'))
