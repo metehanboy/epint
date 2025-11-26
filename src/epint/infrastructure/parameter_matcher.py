@@ -30,6 +30,12 @@ class ParameterMatcher:
             # Önce top-level eşleşme dene
             best_match = self._find_best_param_match(provided_key, used_param_names)
 
+            # Body parametresi için özel kontrol: body parametresi top-level olarak eşleşmemeli
+            # Çünkü body içindeki parametreler nested olarak eşleşmeli
+            if best_match == body_param_name:
+                # Body parametresi top-level olarak eşleşmemeli, nested olarak işlenmeli
+                best_match = None
+
             if best_match and best_match not in used_param_names:
                 converted_value = self._convert_parameter_value(
                     provided_value, best_match
@@ -43,6 +49,9 @@ class ParameterMatcher:
                 )
                 if nested_match and nested_match not in used_nested_names:
                     if body_param_name not in matched_params:
+                        matched_params[body_param_name] = {}
+                    # Eğer body_param_name zaten bir dict değilse, dict'e çevir
+                    if not isinstance(matched_params[body_param_name], dict):
                         matched_params[body_param_name] = {}
                     matched_params[body_param_name][nested_match] = provided_value
                     used_nested_names.add(nested_match)

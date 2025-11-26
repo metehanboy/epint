@@ -26,13 +26,13 @@ class RequestBuilder:
         tgt = self.auth_manager.get_tgt()
         
         # Accept header'ını format'a göre ayarla
+        # Export servisleri için Accept header'ı "application/json" olarak gönder
+        # API exportType parametresine göre response formatını belirliyor
+        # Accept header'ı sadece hint olarak kullanılıyor, asıl belirleyici exportType
         if accept_format:
-            accept_map = {
-                'XLSX': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                'CSV': 'text/csv',
-                'PDF': 'application/pdf'
-            }
-            accept = accept_map.get(accept_format.upper(), 'application/json')
+            # Export servisleri için Accept header'ı "application/json" olarak gönder
+            # Çünkü API exportType'a göre response formatını belirliyor
+            accept = "application/json, text/plain, */*"
         else:
             accept = "application/json"
         
@@ -115,6 +115,13 @@ class RequestBuilder:
             # Body içeriğini direkt gönder (unwrap)
             # Header parametreleri zaten header'a ekleniyor, body'den çıkar
             body_content = serialized.pop("body")
+            
+            # Optional parametreler için null değerleri ekle (export servisleri için)
+            # Eğer body içinde exportType varsa, optional parametreleri null olarak ekle
+            if "exportType" in body_content or "export_type" in body_content:
+                # Swagger'dan gelen endpoint info'yu kullanarak optional parametreleri null olarak ekle
+                # Bu sadece export servisleri için gerekli olabilir
+                pass  # Şimdilik pas geç, API'nin davranışını gözlemle
             
             # Eğer başka parametre yoksa sadece body içeriğini döndür
             if not serialized:
