@@ -9,9 +9,10 @@ import os
 import difflib
 import re
 import unicodedata
-import yaml
+import json
 import time
 from .infrastructure.endpoint_manager import EndpointManager
+from .infrastructure.swagger_parser import parse_swagger_file
 from .resources import get_resources_dir
 from .infrastructure.logger import (
     get_logger,
@@ -36,6 +37,7 @@ _endpoint_search_index = {}
 _endpoint_cache = {}
 _endpoint_categories = {}
 _endpoint_data = {}  # endpoint_name -> endpoint_data mapping
+_category_endpoints = {}  # category -> {method_name -> endpoint_data}
 _normalized_index = {}  # Normalize edilmiş isimler için indeks
 _keyword_index = {}  # Kelime bazlı indeks
 _INITIALIZED = False
@@ -44,6 +46,83 @@ _username = None
 _password = None
 _auth_configured = False
 _current_mode = "prod"  # Default prod mode
+
+
+class CategoryManager:
+    """Kategori bazlı endpoint erişimi için manager sınıfı
+    
+    Kullanım:
+        ep.gunici.category_list()
+        ep.gop.offer_list()
+    """
+    
+    def __init__(self, category: str):
+        self.category = category
+        self._endpoints = {}
+    
+    def _load_category_endpoints(self):
+        """Kategori endpoint'lerini yükle"""
+        if not _INITIALIZED:
+            _load_all_endpoints()
+        
+        if self.category not in _category_endpoints:
+            return {}
+        
+        if not self._endpoints:
+            self._endpoints = _category_endpoints[self.category]
+        
+        return self._endpoints
+    
+    def __getattr__(self, name):
+        """Endpoint'e erişim"""
+        if not _auth_configured:
+            raise AuthenticationError()
+        
+        endpoints = self._load_category_endpoints()
+        
+        # Normalize et
+        normalized = normalize_search_term(name)
+        
+        # Endpoint'i bul
+        endpoint_key = None
+        
+        # Direct match
+        if name in endpoints:
+            endpoint_key = name
+        elif normalized in endpoints:
+            endpoint_key = normalized
+        else:
+            # Normalize edilmiş endpoint'lerde ara
+            for key in endpoints.keys():
+                normalized_key = normalize_search_term(key)
+                if normalized_key == normalized:
+                    endpoint_key = key
+                    break
+            
+            # Hala bulunamadıysa sanitize ederek ara (tire/underscore)
+            if not endpoint_key:
+                sanitized_name = name.replace('_', '-').lower()
+                for key in endpoints.keys():
+                    if key.lower() == sanitized_name or key.replace('-', '_').lower() == name.replace('-', '_').lower():
+                        endpoint_key = key
+                        break
+        
+        if endpoint_key:
+            # Full key oluştur (category.method_name)
+            full_key = f"{self.category}.{endpoint_key}"
+            return _get_endpoint(full_key)
+        
+        # Hata mesajı
+        available = list(endpoints.keys())[:10]
+        raise AttributeError(
+            f"'{name}' endpoint'i '{self.category}' kategorisinde bulunamadı. "
+            f"Mevcut: {available}"
+        )
+    
+    def __dir__(self):
+        """Kategori endpoint'lerini listele"""
+        endpoints = self._load_category_endpoints()
+        return sorted(endpoints.keys())
 
 # Yaygın kısaltmalar ve alias'lar
 _ALIASES = {
@@ -309,7 +388,7 @@ def _load_endpoints_from_directory():
     if _try_load_from_cache(cache_file):
         return
 
-    _load_from_yaml_files(endpoints_dir)
+    _load_from_swagger_files(endpoints_dir)
 
     _save_to_cache(cache_file)
 
@@ -329,19 +408,23 @@ def _try_load_from_cache(cache_file):
             with open(cache_file, "r", encoding="utf-8") as f:
                 cache_data = json.load(f)
 
-            global _endpoint_search_index, _endpoint_categories, _endpoint_data
+            global _endpoint_search_index, _endpoint_categories, _endpoint_data, _category_endpoints
             _endpoint_search_index = cache_data.get("search_index", {})
             _endpoint_categories = cache_data.get("categories", {})
+            _category_endpoints = cache_data.get("category_endpoints", {})
+            _endpoint_data = cache_data.get("endpoint_data", {})
             
-            # _endpoint_data'yı _endpoint_categories'den oluştur
-            _endpoint_data.clear()
-            for category_name, endpoints in _endpoint_categories.items():
-                for endpoint_name, endpoint_info in endpoints.items():
-                    endpoint_data = endpoint_info.get("data", {})
-                    if isinstance(endpoint_data, dict):
-                        endpoint_data_with_category = endpoint_data.copy()
-                        endpoint_data_with_category['category'] = category_name
-                        _endpoint_data[endpoint_name] = endpoint_data_with_category
+            # Eğer eski format cache ise (category_endpoints yoksa) dönüştür
+            if not _category_endpoints and _endpoint_categories:
+                _category_endpoints = {}
+                for category_name, endpoints in _endpoint_categories.items():
+                    _category_endpoints[category_name] = {}
+                    for endpoint_name, endpoint_info in endpoints.items():
+                        endpoint_data = endpoint_info.get("data", {})
+                        if isinstance(endpoint_data, dict):
+                            # Method name'i endpoint_data'dan çıkar
+                            method_name = endpoint_data.get("short_name", endpoint_name)
+                            _category_endpoints[category_name][method_name] = endpoint_data
             
             print(f"Cache dosyası yüklendi (yaş: {cache_age_days:.1f} gün)")
             return True
@@ -356,19 +439,19 @@ def _try_load_from_cache(cache_file):
         return False
 
 
-def _load_from_yaml_files(endpoints_dir):
+def _load_from_swagger_files(endpoints_dir):
     start_time = time.time()
-    log_operation("_load_from_yaml_files_start", directory=endpoints_dir)
-    print("YAML dosyaları işleniyor...")
+    log_operation("_load_from_swagger_files_start", directory=endpoints_dir)
+    print("Swagger JSON dosyaları işleniyor...")
 
-    yaml_files = _find_yaml_files(endpoints_dir)
-    log_operation("_load_from_yaml_files_found", file_count=len(yaml_files))
+    swagger_files = _find_swagger_files(endpoints_dir)
+    log_operation("_load_from_swagger_files_found", file_count=len(swagger_files))
 
-    for yaml_path in yaml_files:
-        _process_yaml_file(yaml_path)
+    for swagger_path in swagger_files:
+        _process_swagger_file(swagger_path)
 
     duration = time.time() - start_time
-    log_performance("_load_from_yaml_files", duration, file_count=len(yaml_files))
+    log_performance("_load_from_swagger_files", duration, file_count=len(swagger_files))
 
 
 def _save_to_cache(cache_file):
@@ -379,6 +462,8 @@ def _save_to_cache(cache_file):
         cache_data = {
             "search_index": _endpoint_search_index,
             "categories": _endpoint_categories,
+            "category_endpoints": _category_endpoints,
+            "endpoint_data": _endpoint_data,
             "created_at": time.time(),
             "expire_days": 30,
         }
@@ -389,19 +474,21 @@ def _save_to_cache(cache_file):
         print("Cache dosyası yazılamadı")
 
 
-def _find_yaml_files(endpoints_dir):
-    yaml_files = []
+def _find_swagger_files(endpoints_dir):
+    """Swagger JSON dosyalarını bul (example.json hariç)"""
+    swagger_files = []
     for root, _, files in os.walk(endpoints_dir):
         for file in files:
-            if (
-                file.endswith(".yaml") or file.endswith(".yml")
-            ) and "service-params" not in file:
-                yaml_files.append(os.path.join(root, file))
-    return yaml_files
+            if file.endswith(".json") and file != "example.json":
+                # swagger.json dosyalarını bul
+                if file == "swagger.json":
+                    swagger_files.append(os.path.join(root, file))
+    return swagger_files
 
 
-def _extract_category_from_path(yaml_path):
-    path_parts = yaml_path.split(os.sep)
+def _extract_category_from_path(file_path):
+    """Dosya yolundan kategori adını çıkar"""
+    path_parts = file_path.split(os.sep)
     endpoints_idx = -1
     for i, part in enumerate(path_parts):
         if part == "endpoints":
@@ -413,100 +500,60 @@ def _extract_category_from_path(yaml_path):
     return ""
 
 
-def _process_yaml_file(yaml_path):
+def _process_swagger_file(swagger_path):
+    """Swagger JSON dosyasını işle"""
     start_time = time.time()
 
     try:
-        import yaml
+        category_name = _extract_category_from_path(swagger_path)
+        
+        # Swagger dosyasını parse et
+        endpoints = parse_swagger_file(swagger_path, category_name)
+        
+        # Kategori endpoint'lerini sakla
+        global _category_endpoints
+        if category_name not in _category_endpoints:
+            _category_endpoints[category_name] = {}
+        
+        # Endpoint'leri işle
+        for method_name, endpoint_data in endpoints.items():
+            # Full key: category.method_name
+            full_key = f"{category_name}.{method_name}"
+            
+            # Endpoint data'yı sakla
+            _endpoint_data[full_key] = endpoint_data
+            
+            # Kategori endpoint'lerini sakla
+            _category_endpoints[category_name][method_name] = endpoint_data
+            
+            # Search index'e ekle
+            _endpoint_search_index[full_key] = full_key
+            _endpoint_search_index[method_name] = full_key  # Method name ile de erişilebilir
+            
+            # Kategori bilgisini ekle
+            if category_name not in _endpoint_categories:
+                _endpoint_categories[category_name] = {}
+            _endpoint_categories[category_name][full_key] = {
+                "file_path": swagger_path,
+                "data": endpoint_data,
+            }
 
-        with open(yaml_path, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f)
-            if not data or not isinstance(data, dict):
-                return
-
-            category_name = _extract_category_from_path(yaml_path)
-
-            _process_endpoints_from_data(data, category_name)
-
-            duration = time.time() - start_time
-            log_performance(
-                "_process_yaml_file", duration, file=yaml_path, category=category_name
-            )
+        duration = time.time() - start_time
+        log_performance(
+            "_process_swagger_file", duration, file=swagger_path, category=category_name, endpoint_count=len(endpoints)
+        )
 
     except Exception as e:
         duration = time.time() - start_time
         log_error(
-            "_process_yaml_file_error",
-            file=yaml_path,
+            "_process_swagger_file_error",
+            file=swagger_path,
             error_msg=str(e),
             duration=duration,
         )
-        print(f"YAML dosyası işlenemedi {yaml_path}")
+        print(f"Swagger dosyası işlenemedi {swagger_path}: {str(e)}")
 
 
-def _process_endpoints_from_data(data, category_name):
-    if "endpoints" in data and isinstance(data["endpoints"], dict):
-        _process_endpoints(data["endpoints"], category_name)
-
-    for key, value in data.items():
-        if key != "endpoints" and isinstance(value, dict) and "endpoint" in value:
-            _process_endpoints({key: value}, category_name)
-
-
-def _process_yaml_file_fast(yaml_path):
-    try:
-        import yaml
-
-        with open(yaml_path, "r", encoding="utf-8") as f:
-            content = f.read()
-
-            import re
-
-            endpoints_match = re.search(
-                r"endpoints:\s*\n(.*?)(?=\n\w+:|$)", content, re.DOTALL
-            )
-            if not endpoints_match:
-                return
-
-            endpoints_content = "endpoints:\n" + endpoints_match.group(1)
-
-            data = yaml.safe_load(endpoints_content)
-            if not data or not isinstance(data, dict) or "endpoints" not in data:
-                return
-
-            category_name = _extract_category_from_path(yaml_path)
-            _process_endpoints(data["endpoints"], category_name)
-
-    except Exception:
-        _process_yaml_file(yaml_path)
-
-
-def _process_endpoints(endpoints, category_name=""):
-    for endpoint_name, endpoint_data in endpoints.items():
-        if not isinstance(endpoint_data, dict):
-            continue
-
-        _endpoint_search_index[endpoint_name] = endpoint_name
-        
-        # Endpoint data'yı kategorisi ile birlikte sakla
-        global _endpoint_data
-        endpoint_data_with_category = endpoint_data.copy()
-        endpoint_data_with_category['category'] = category_name
-        _endpoint_data[endpoint_name] = endpoint_data_with_category
-
-        global _endpoint_categories
-        if category_name not in _endpoint_categories:
-            _endpoint_categories[category_name] = {}
-        _endpoint_categories[category_name][endpoint_name] = {
-            "file_path": "",  # Bu daha sonra set edilecek
-            "data": endpoint_data,
-        }
-
-        sanitized_name = _sanitize_endpoint_name(endpoint_data)
-        if sanitized_name and sanitized_name != endpoint_name:
-            _endpoint_search_index[sanitized_name] = endpoint_name
-
-        _create_search_keys(endpoint_name, endpoint_data)
 
 
 def sanitize(text, **kwargs):
@@ -535,130 +582,50 @@ def sanitize(text, **kwargs):
     return encoded
 
 
-def _sanitize_endpoint_name(endpoint_data):
-    name_sources = [
-        endpoint_data.get("short_name", ""),
-        endpoint_data.get("short_name_tr", ""),
-        endpoint_data.get("summary", ""),
-        endpoint_data.get("description", ""),
-    ]
-
-    for name in name_sources:
-        if name and isinstance(name, str):
-            sanitized = sanitize(name, cleanspace=True)
-            if sanitized:
-                sanitized = re.sub(r"\s+", "_", sanitized.strip())
-                return sanitized
-
-    return ""
-
-
-def _create_search_keys(endpoint_name, endpoint_data):
-    search_fields = [
-        endpoint_data.get("short_name", ""),
-        endpoint_data.get("short_name_tr", ""),
-        endpoint_data.get("summary", ""),
-        endpoint_data.get("description", ""),
-    ]
-
-    for field_value in search_fields:
-        if field_value and isinstance(field_value, str):
-            sanitized_field = sanitize(field_value, cleanspace=True)
-            if sanitized_field:
-                sanitized_field = re.sub(r"\s+", "_", sanitized_field.strip())
-
-                if (
-                    sanitized_field != endpoint_name
-                    and sanitized_field not in _endpoint_search_index
-                ):
-                    _endpoint_search_index[sanitized_field] = endpoint_name
 
 
 def _get_endpoint(endpoint_key):
+    """Endpoint'i cache'den veya data'dan al"""
     if endpoint_key in _endpoint_cache:
         return _endpoint_cache[endpoint_key]
 
-    # Endpoint'i kategorilerden bul - dolu olan endpoint'i tercih et
-    endpoint_data = None
-    category = ""
-    fallback_data = None
-    fallback_category = ""
-
-    for cat_name, endpoints in _endpoint_categories.items():
-        if endpoint_key in endpoints:
-            candidate_data = endpoints[endpoint_key]["data"]
-            # Eğer var_type veya params dolu ise bunu tercih et
-            if candidate_data.get("var_type") or candidate_data.get("params"):
-                endpoint_data = candidate_data
-                category = cat_name
-                break  # Dolu olanı bulduğumuzda dur
-            elif not fallback_data:  # Boş olanı fallback olarak sakla
-                fallback_data = candidate_data
-                fallback_category = cat_name
-
-    # Eğer dolu olan bulunamadıysa fallback'i kullan
-    if not endpoint_data and fallback_data:
-        endpoint_data = fallback_data
-        category = fallback_category
-
+    # Endpoint data'yı bul
+    endpoint_data = _endpoint_data.get(endpoint_key)
+    
     if not endpoint_data:
-        # Fallback: YAML'dan yükle
-        endpoint_data = _load_endpoint_from_yaml(endpoint_key)
-        if endpoint_data:
-            category = ""
+        # Search index'ten bul
+        if endpoint_key in _endpoint_search_index:
+            actual_key = _endpoint_search_index[endpoint_key]
+            endpoint_data = _endpoint_data.get(actual_key)
+            if endpoint_data:
+                endpoint_key = actual_key
+    
+    if not endpoint_data:
+        return None
+    
+    # Category'yi çıkar
+    category = endpoint_data.get("category", "")
+    
+    # Eğer endpoint_key category.method_name formatındaysa category'yi çıkar
+    if "." in endpoint_key:
+        parts = endpoint_key.split(".", 1)
+        if len(parts) == 2:
+            category = parts[0]
+    
+    username = _username or ""
+    password = _password or ""
+    current_mode = _current_mode
 
-    if endpoint_data:
-        username = _username or ""
-        password = _password or ""
-        current_mode = _current_mode
-
-        manager = EndpointManager(
-            endpoint_key,
-            endpoint_data,
-            username=username,
-            password=password,
-            category=category,
-            mode=current_mode,
-        )
-        _endpoint_cache[endpoint_key] = manager
-        return manager
-
-    return None
-
-
-def _load_endpoint_from_yaml(endpoint_key):
-    endpoints_dir = get_resources_dir()
-    yaml_files = _find_yaml_files(endpoints_dir)
-
-    for yaml_path in yaml_files:
-        endpoint_data = _search_endpoint_in_yaml_file(yaml_path, endpoint_key)
-        if endpoint_data:
-            return endpoint_data
-
-    return None
-
-
-def _search_endpoint_in_yaml_file(yaml_path, endpoint_key):
-    try:
-        with open(yaml_path, "r", encoding="utf-8") as f:
-            data = yaml.safe_load(f)
-
-            if "endpoints" in data:
-                endpoints = data["endpoints"]
-                if endpoint_key in endpoints:
-                    return endpoints[endpoint_key]
-
-            if (
-                endpoint_key in data
-                and isinstance(data[endpoint_key], dict)
-                and "endpoint" in data[endpoint_key]
-            ):
-                return data[endpoint_key]
-
-    except Exception:
-        pass
-
-    return None
+    manager = EndpointManager(
+        endpoint_key,
+        endpoint_data,
+        username=username,
+        password=password,
+        category=category,
+        mode=current_mode,
+    )
+    _endpoint_cache[endpoint_key] = manager
+    return manager
 
 
 def __dir__():
@@ -753,10 +720,30 @@ def _handle_enhanced_no_match(name, start_time):
 
 def _validate_getattr_input(name):
     """__getattr__ için giriş validasyonu"""
-    if name.startswith(("_ipython_", "_repr_")):
+    # Python'un internal attribute'ları için AttributeError döndür (authentication kontrolü yapma)
+    internal_attrs = {
+        "__test__", "__bases__", "__class__", "__dict__", "__doc__", "__module__",
+        "__name__", "__qualname__", "__weakref__", "__annotations__", "__init__",
+        "__new__", "__subclasshook__", "__ipython__", "__repr__", "__str__",
+        "__dir__", "__getattribute__", "__setattr__", "__delattr__", "__hash__",
+        "__eq__", "__ne__", "__lt__", "__le__", "__gt__", "__ge__", "__bool__",
+        "__len__", "__iter__", "__next__", "__contains__", "__getitem__",
+        "__setitem__", "__delitem__", "__call__", "__enter__", "__exit__",
+        "__aenter__", "__aexit__", "__await__", "__aiter__", "__anext__",
+    }
+    
+    # Double underscore ile başlayan ve biten attribute'lar (magic methods)
+    if name.startswith("__") and name.endswith("__"):
         raise AttributeError(f"'{name}' not found")
-    if not _auth_configured:
-        raise AuthenticationError()
+    
+    # Bilinen internal attribute'lar
+    if name in internal_attrs:
+        raise AttributeError(f"'{name}' not found")
+    
+    # IPython ve Jupyter internal attribute'ları
+    if name.startswith(("_ipython_", "_repr_", "_jupyter_", "_repr_")):
+        raise AttributeError(f"'{name}' not found")
+    
     if not _INITIALIZED:
         _load_all_endpoints()
 
@@ -766,13 +753,40 @@ def __getattr__(name):
 
     try:
         _validate_getattr_input(name)
+        
+        # Önce kategori kontrolü yap (tam eşleşme)
+        if name in _category_endpoints:
+            return CategoryManager(name)
+        
+        # Normalize edilmiş kategori kontrolü (tire/underscore normalize)
+        normalized = normalize_search_term(name)
+        for category in _category_endpoints.keys():
+            normalized_category = normalize_search_term(category)
+            if normalized_category == normalized:
+                return CategoryManager(category)
+        
+        # Kategori isimlerini sanitize ederek eşleştir (tire -> underscore)
+        # Örnek: "seffaflik_electricity" -> "seffaflik-electricity"
+        sanitized_name = name.replace('_', '-').lower()
+        if sanitized_name in _category_endpoints:
+            return CategoryManager(sanitized_name)
+        
+        # Tersine: tire ile gelen kategoriyi underscore ile de bul
+        sanitized_name_underscore = name.replace('-', '_').lower()
+        for category in _category_endpoints.keys():
+            category_normalized = category.replace('-', '_').lower()
+            if category_normalized == sanitized_name_underscore:
+                return CategoryManager(category)
+
+        # Auth kontrolü (kategori değilse)
+        if not _auth_configured:
+            raise AuthenticationError()
 
         # 1. Direct match (tam eşleşme)
         if name in _endpoint_search_index:
             return _handle_direct_match(name, start_time)
 
         # 2. Normalized match (tire/underscore normalize)
-        normalized = normalize_search_term(name)
         if normalized in _endpoint_search_index:
             duration = time.time() - start_time
             log_performance("__getattr__normalized_match", duration, 
@@ -811,6 +825,27 @@ def __getattr__(name):
         # 6. No match found - akıllı önerilerle
         _handle_enhanced_no_match(name, start_time)
 
+    except AttributeError as e:
+        # Internal attribute'lar için log yazma
+        internal_attrs = {
+            "__test__", "__bases__", "__class__", "__dict__", "__doc__", "__module__",
+            "__name__", "__qualname__", "__weakref__", "__annotations__", "__init__",
+            "__new__", "__subclasshook__", "__ipython__", "__repr__", "__str__",
+            "__dir__", "__getattribute__", "__setattr__", "__delattr__", "__hash__",
+            "__eq__", "__ne__", "__lt__", "__le__", "__gt__", "__ge__", "__bool__",
+            "__len__", "__iter__", "__next__", "__contains__", "__getitem__",
+            "__setitem__", "__delitem__", "__call__", "__enter__", "__exit__",
+            "__aenter__", "__aexit__", "__await__", "__aiter__", "__anext__",
+        }
+        # Internal attribute'lar için log yazma (sessizce geç)
+        if name in internal_attrs or (name.startswith("__") and name.endswith("__")):
+            raise
+        # Diğer AttributeError'lar için log yaz
+        duration = time.time() - start_time
+        log_error(
+            "__getattr__error", endpoint=name, error_msg=str(e), duration=duration
+        )
+        raise
     except Exception as e:
         duration = time.time() - start_time
         log_error(
@@ -1159,6 +1194,7 @@ __all__ = [
     "__email__",
     "__description__",
     "EndpointManager",
+    "CategoryManager",
     "clear_cache",
     "set_auth",
     "set_mode",

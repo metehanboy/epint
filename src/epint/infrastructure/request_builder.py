@@ -65,7 +65,21 @@ class RequestBuilder:
         category: Optional[str] = None,
     ) -> Dict[str, Any]:
         if auth_mode == "gop":
-            return self.prepare_gop_message(matched_params)
+            # gop-service-ticket parametresini çıkar (zaten header'a ekleniyor)
+            gop_params = {k: v for k, v in matched_params.items() if k != "gop-service-ticket"}
+            
+            # Body içinde body varsa, içteki body'yi al
+            if "body" in gop_params and isinstance(gop_params["body"], dict):
+                body_data = gop_params["body"]
+                # Eğer body içinde body varsa (parameter_matcher'dan gelen yapı), içteki body'yi al
+                if "body" in body_data and isinstance(body_data["body"], dict):
+                    return self.prepare_gop_message(body_data["body"])
+                else:
+                    # Body içinde body yoksa, tüm body'yi al
+                    return self.prepare_gop_message(body_data)
+            else:
+                # Body parametresi yoksa, tüm parametreleri al
+                return self.prepare_gop_message(gop_params)
 
         # Serialize et
         if category in ["gunici", "gunici-trading"]:
@@ -81,11 +95,22 @@ class RequestBuilder:
                 matched_params, TypeConverter.serialize_for_post
             )
         
-        # Eğer sadece 'body' parametresi varsa ve başka parametre yoksa, body içeriğini unwrap et
-        # Bu, seffaflik-electricity gibi servislerde body wrapper'ını kaldırmak için
-        if len(serialized) == 1 and "body" in serialized and isinstance(serialized["body"], dict):
+        # Body parametresi unwrap işlemi
+        # Eğer 'body' parametresi varsa ve içinde dict varsa, body içeriğini unwrap et
+        # Header parametreleri (TGT, ST gibi) body'den ayrı tutulmalı
+        if "body" in serialized and isinstance(serialized["body"], dict):
             # Body içeriğini direkt gönder (unwrap)
-            return serialized["body"]
+            # Header parametreleri zaten header'a ekleniyor, body'den çıkar
+            body_content = serialized.pop("body")
+            
+            # Eğer başka parametre yoksa sadece body içeriğini döndür
+            if not serialized:
+                return body_content
+            
+            # Eğer başka parametreler varsa (header parametreleri gibi), 
+            # bunları body içine ekleme, sadece body içeriğini döndür
+            # Header parametreleri zaten header'a ekleniyor
+            return body_content
         
         return serialized
     

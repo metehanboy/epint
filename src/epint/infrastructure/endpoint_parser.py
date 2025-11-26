@@ -9,8 +9,36 @@ class EndpointParser:
 
     @staticmethod
     def parse_endpoint_parameter(param_data: Dict[str, Any]) -> EndpointParameter:
+        # Swagger formatından gelen properties (dict listesi)
         properties = param_data.get("properties")
-        if properties and isinstance(properties, dict):
+        
+        # Eğer properties bir dict listesi ise (Swagger formatı)
+        if properties and isinstance(properties, list):
+            properties_list = []
+            for prop_dict in properties:
+                if isinstance(prop_dict, dict):
+                    # Nested properties varsa recursive parse et
+                    nested_props = None
+                    if prop_dict.get("properties"):
+                        nested_props = [
+                            EndpointParser.parse_endpoint_parameter(np)
+                            for np in prop_dict.get("properties", [])
+                        ]
+                    
+                    properties_list.append(
+                        EndpointParameter(
+                            name=prop_dict.get("name", ""),
+                            var_type=prop_dict.get("type") or prop_dict.get("var_type", "str"),
+                            description=prop_dict.get("description", ""),
+                            required=prop_dict.get("required", False),
+                            example=prop_dict.get("example"),
+                            properties=nested_props,
+                            items=prop_dict.get("items"),
+                        )
+                    )
+            properties = properties_list
+        # Eğer properties bir dict ise (eski YAML formatı)
+        elif properties and isinstance(properties, dict):
             properties_list = []
             for prop_name, prop_data in properties.items():
                 if isinstance(prop_data, dict):
@@ -29,7 +57,7 @@ class EndpointParser:
 
         return EndpointParameter(
             name=param_data.get("name", ""),
-            var_type=param_data.get("var_type", "str"),
+            var_type=param_data.get("var_type") or param_data.get("type", "str"),
             description=param_data.get("description", ""),
             required=param_data.get("required", False),
             example=param_data.get("example"),

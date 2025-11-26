@@ -6,8 +6,9 @@ from .type_converter import TypeConverter
 
 
 class ParameterMatcher:
-    def __init__(self, endpoint_params: List[Any]):
+    def __init__(self, endpoint_params: List[Any], category: str = ""):
         self.endpoint_params = endpoint_params
+        self.category = category
 
     def fuzzy_match_params(
         self, provided_params: Dict[str, Any]
@@ -64,6 +65,10 @@ class ParameterMatcher:
                 else:
                     converted_body[nested_key] = nested_value
             matched_params[body_param_name] = converted_body
+            
+            # GOP için özel kontrol: body içindeki body'yi wrap et
+            if self.category == "gop" and body_param_name == "body":
+                matched_params[body_param_name] = {"body": converted_body}
 
         self._add_default_values_if_needed(matched_params)
 

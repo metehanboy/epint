@@ -11,7 +11,7 @@ class ValidationService:
 
     def __init__(self, endpoint_info: EndpointInfo):
         self.endpoint_info = endpoint_info
-        self.parameter_matcher = ParameterMatcher(endpoint_info.var_type)
+        self.parameter_matcher = ParameterMatcher(endpoint_info.var_type, endpoint_info.category)
 
     def validate_endpoint_call(self, **kwargs) -> ValidationResult:
         errors = []
@@ -47,24 +47,46 @@ class ValidationService:
                 
                 # Object/dict tipi ise nested parametreleri de validate et
                 if param.var_type in ["object", "dict"] and isinstance(value, dict) and param.properties:
-                    # Nested parametreleri validate et
-                    validated_nested = {}
-                    for nested_param in param.properties:
-                        if nested_param.name in value:
-                            nested_value = value[nested_param.name]
-                            is_valid, error_msg = ParameterValidator.validate_parameter_type(
-                                nested_param.name, nested_value, nested_param.var_type
-                            )
-                            if is_valid:
-                                validated_nested[nested_param.name] = nested_value
-                            else:
-                                errors.append(error_msg)
-                        elif nested_param.required:
-                            errors.append(f"Zorunlu parametre '{param.name}.{nested_param.name}' eksik")
-                    
-                    # Validated nested parametreleri ekle
-                    if validated_nested:
-                        validated_params[param.name] = validated_nested
+                    # GOP için özel kontrol: body içinde body varsa, içteki body'yi validate et
+                    if self.endpoint_info.category == "gop" and param.name == "body" and "body" in value:
+                        # Body içindeki body'yi validate et
+                        body_data = value["body"]
+                        validated_nested = {}
+                        for nested_param in param.properties:
+                            if nested_param.name in body_data:
+                                nested_value = body_data[nested_param.name]
+                                is_valid, error_msg = ParameterValidator.validate_parameter_type(
+                                    nested_param.name, nested_value, nested_param.var_type
+                                )
+                                if is_valid:
+                                    validated_nested[nested_param.name] = nested_value
+                                else:
+                                    errors.append(error_msg)
+                            elif nested_param.required:
+                                errors.append(f"Zorunlu parametre '{param.name}.{nested_param.name}' eksik")
+                        
+                        # Validated nested parametreleri body içine wrap et
+                        if validated_nested:
+                            validated_params[param.name] = {"body": validated_nested}
+                    else:
+                        # Normal nested parametreleri validate et
+                        validated_nested = {}
+                        for nested_param in param.properties:
+                            if nested_param.name in value:
+                                nested_value = value[nested_param.name]
+                                is_valid, error_msg = ParameterValidator.validate_parameter_type(
+                                    nested_param.name, nested_value, nested_param.var_type
+                                )
+                                if is_valid:
+                                    validated_nested[nested_param.name] = nested_value
+                                else:
+                                    errors.append(error_msg)
+                            elif nested_param.required:
+                                errors.append(f"Zorunlu parametre '{param.name}.{nested_param.name}' eksik")
+                        
+                        # Validated nested parametreleri ekle
+                        if validated_nested:
+                            validated_params[param.name] = validated_nested
                 else:
                     # Normal parametre validation
                     is_valid, error_msg = ParameterValidator.validate_parameter_type(

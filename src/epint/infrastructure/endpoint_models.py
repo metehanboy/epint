@@ -70,11 +70,24 @@ class EndpointInfo:
         return lines
 
     def _format_parameters(self) -> list:
+        from .service_config import get_auth_mode
+        
         lines = []
         if self.var_type:
-            lines.append(f"\n📋 Parametreler ({len(self.var_type)} adet):")
+            # GOP için özel gösterim: header parametresini sayma
+            param_count = len(self.var_type)
+            auth_mode = get_auth_mode(self.category, "prod")
+            if auth_mode == "gop":
+                # gop-service-ticket ve body içindeki header'ı sayma
+                param_count = sum(1 for p in self.var_type if p.name != "gop-service-ticket")
+            
+            lines.append(f"\n📋 Parametreler ({param_count} adet):")
             lines.append("-" * 40)
             for param in self.var_type:
+                # GOP için gop-service-ticket'ı gösterme (zaten header'a ekleniyor)
+                if auth_mode == "gop" and param.name == "gop-service-ticket":
+                    continue
+                
                 required_mark = "🔴" if param.required else "🟡"
                 example_text = f" (Örnek: {param.example})" if param.example else ""
                 lines.append(
@@ -82,26 +95,47 @@ class EndpointInfo:
                 )
 
                 if param.properties:
-                    param_type_name = (
-                        "Body"
-                        if param.name == "body"
-                        else "Header" if param.name == "header" else param.name.title()
-                    )
-                    lines.append(f"    📝 {param_type_name} İçeriği:")
-                    for prop in param.properties:
-                        prop_required_mark = "🔴" if prop.required else "🟡"
-                        prop_example_text = (
-                            f" (Örnek: {prop.example})" if prop.example else ""
+                    # GOP için body içindeki header'ı gösterme (otomatik dolduruluyor)
+                    if auth_mode == "gop" and param.name == "body":
+                        # Sadece body içindeki parametreleri göster (header'ı atla)
+                        body_props = [p for p in param.properties if p.name != "header"]
+                        if body_props:
+                            lines.append(f"    📝 Body İçeriği:")
+                            for prop in body_props:
+                                prop_required_mark = "🔴" if prop.required else "🟡"
+                                prop_example_text = (
+                                    f" (Örnek: {prop.example})" if prop.example else ""
+                                )
+                                lines.append(
+                                    f"      {prop_required_mark} {prop.name} ({prop.var_type}): {prop.description}{prop_example_text}"
+                                )
+                    else:
+                        param_type_name = (
+                            "Body"
+                            if param.name == "body"
+                            else "Header" if param.name == "header" else param.name.title()
                         )
-                        lines.append(
-                            f"      {prop_required_mark} {prop.name} ({prop.var_type}): {prop.description}{prop_example_text}"
-                        )
+                        lines.append(f"    📝 {param_type_name} İçeriği:")
+                        for prop in param.properties:
+                            prop_required_mark = "🔴" if prop.required else "🟡"
+                            prop_example_text = (
+                                f" (Örnek: {prop.example})" if prop.example else ""
+                            )
+                            lines.append(
+                                f"      {prop_required_mark} {prop.name} ({prop.var_type}): {prop.description}{prop_example_text}"
+                            )
         return lines
 
     def _format_required_params(self) -> list:
+        from .service_config import get_auth_mode
+        
         lines = []
         if self.required:
-            lines.append(f"\n⚠️  Zorunlu Parametreler: {', '.join(self.required)}")
+            # GOP için gop-service-ticket'ı çıkar (zaten header'a ekleniyor)
+            auth_mode = get_auth_mode(self.category, "prod")
+            required_list = [r for r in self.required if not (auth_mode == "gop" and r == "gop-service-ticket")]
+            if required_list:
+                lines.append(f"\n⚠️  Zorunlu Parametreler: {', '.join(required_list)}")
         return lines
 
     def _format_response_structure(self) -> list:
