@@ -47,6 +47,7 @@ class EndpointManager:
         self._request_builder: Optional[RequestBuilder] = None
         self._http_client: Optional[HTTPClient] = None
         self._http_client_timeout: Optional[int] = None
+        self._export_type: Optional[str] = None
 
     def validate_endpoint_call(self, **kwargs) -> ValidationResult:
         return self.validation_service.validate_endpoint_call(**kwargs)
@@ -287,10 +288,32 @@ class EndpointManager:
             except (ValueError, TypeError):
                 timeout = None
 
-        header = self.request_builder.prepare_headers(auth_mode, service_ticket_url)
+        # Export servisleri için Accept header'ını ayarla
+        # exportType parametresini kontrol et (nested olabilir, ama request'e gönderilmeli)
+        export_type = None
+        if 'exportType' in matched_params:
+            export_type = matched_params['exportType']
+        elif 'export_type' in matched_params:
+            export_type = matched_params['export_type']
+        elif 'body' in matched_params and isinstance(matched_params['body'], dict):
+            # Body içinde exportType olabilir
+            body = matched_params['body']
+            if 'exportType' in body:
+                export_type = body['exportType']
+            elif 'export_type' in body:
+                export_type = body['export_type']
+        
+        accept_format = None
+        if export_type:
+            accept_format = str(export_type).upper()
+        
+        header = self.request_builder.prepare_headers(auth_mode, service_ticket_url, accept_format=accept_format)
         serialized_params = self.request_builder.serialize_parameters(
             matched_params, auth_mode, self.endpoint_info.category
         )
+        
+        # Export type'ı response handling için sakla
+        self._export_type = export_type
 
         # Cache'lenmiş HTTP client'ı kullan (session reuse için)
         client = self.get_http_client(timeout)
@@ -309,7 +332,47 @@ class EndpointManager:
         if not response.ok:
             self._process_error_response(response)
 
-        response_data = response.json()
+        # Export servisleri için response formatını kontrol et
+        export_type = getattr(self, '_export_type', None)
+        
+        # Content-Type'a göre response handling
+        content_type = response.headers.get('Content-Type', '').lower()
+        
+        # Export type varsa veya binary content-type ise binary response döndür
+        if export_type:
+            export_type_upper = str(export_type).upper()
+            if export_type_upper in ['XLSX', 'CSV', 'PDF']:
+                # Binary response döndür
+                return {
+                    'content': response.content,
+                    'content_type': content_type or self._get_content_type_for_export(export_type_upper),
+                    'export_type': export_type_upper,
+                    'filename': self._generate_export_filename(export_type_upper)
+                }
+        
+        # Binary formatlar için Content-Type kontrolü
+        if any(ct in content_type for ct in ['application/vnd', 'application/pdf', 'application/csv', 
+                                              'text/csv', 'application/vnd.ms-excel', 
+                                              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                                              'application/octet-stream']):
+            detected_type = self._detect_export_type_from_content_type(content_type)
+            return {
+                'content': response.content,
+                'content_type': content_type,
+                'export_type': detected_type,
+                'filename': self._generate_export_filename(detected_type) if detected_type != 'BINARY' else None
+            }
+        
+        # JSON response
+        try:
+            response_data = response.json()
+        except (ValueError, json.JSONDecodeError):
+            # JSON parse edilemezse text olarak döndür
+            return {
+                'content': response.text,
+                'content_type': content_type,
+                'raw': True
+            }
         
         # response_structure varsa parse et
         if self.endpoint_info.response_structure:
@@ -319,3 +382,35 @@ class EndpointManager:
             )
         
         return response_data
+    
+    def _get_content_type_for_export(self, export_type: str) -> str:
+        """Export type'a göre Content-Type döndür"""
+        content_type_map = {
+            'XLSX': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'CSV': 'text/csv',
+            'PDF': 'application/pdf'
+        }
+        return content_type_map.get(export_type, 'application/octet-stream')
+    
+    def _generate_export_filename(self, export_type: str) -> str:
+        """Export dosyası için dosya adı oluştur"""
+        import datetime
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        extension_map = {
+            'XLSX': 'xlsx',
+            'CSV': 'csv',
+            'PDF': 'pdf'
+        }
+        ext = extension_map.get(export_type, 'bin')
+        return f"export_{self.endpoint_name}_{timestamp}.{ext}"
+    
+    def _detect_export_type_from_content_type(self, content_type: str) -> str:
+        """Content-Type'dan export type'ını tespit et"""
+        content_type_lower = content_type.lower()
+        if 'pdf' in content_type_lower:
+            return 'PDF'
+        elif 'csv' in content_type_lower or 'text/csv' in content_type_lower:
+            return 'CSV'
+        elif 'excel' in content_type_lower or 'spreadsheet' in content_type_lower or 'xlsx' in content_type_lower:
+            return 'XLSX'
+        return 'BINARY'

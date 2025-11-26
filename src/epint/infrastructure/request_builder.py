@@ -20,12 +20,25 @@ class RequestBuilder:
         self.application_name = application_name
 
     def prepare_headers(
-        self, auth_mode: str, service_ticket_url: Optional[str] = None
+        self, auth_mode: str, service_ticket_url: Optional[str] = None, 
+        accept_format: Optional[str] = None
     ) -> Dict[str, str]:
         tgt = self.auth_manager.get_tgt()
+        
+        # Accept header'ını format'a göre ayarla
+        if accept_format:
+            accept_map = {
+                'XLSX': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'CSV': 'text/csv',
+                'PDF': 'application/pdf'
+            }
+            accept = accept_map.get(accept_format.upper(), 'application/json')
+        else:
+            accept = "application/json"
+        
         header = {
             "TGT": tgt[0],
-            "Accept": "application/json",
+            "Accept": accept,
             "Content-Type": "application/json",
         }
 
