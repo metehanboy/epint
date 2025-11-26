@@ -1,0 +1,2573 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "EPYS - Market Servisleri"
+  },
+  "host" : "epys-qa.epias.com.tr",
+  "basePath" : "/reconciliation-market/",
+  "tags" : [ {
+    "name" : "advance-payment"
+  }, {
+    "name" : "bilateral-contract"
+  }, {
+    "name" : "reconciliation-transaction"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/v1/advance/detail/list" : {
+      "post" : {
+        "tags" : [ "advance-payment" ],
+        "summary" : "Avans Bildirim Detayını Görüntüle",
+        "description" : "Organizasyonların avas alacak borç detaylarını döner.",
+        "operationId" : "get-organization-advance-details",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AdvancePaymentDetailReqDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseGetAdvancePaymentMarketDetailsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/advance/export" : {
+      "post" : {
+        "tags" : [ "advance-payment" ],
+        "summary" : "Avans Bildirim Detayını Görüntüle.",
+        "description" : "Organizasyonların avas alacak borç detaylarını excel export servisi.",
+        "operationId" : "export-organization-advance-details",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AdvancePaymentDetailExportReqDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ModelAndView"
+            }
+          }
+        }
+      }
+    },
+    "/v1/advance/list" : {
+      "post" : {
+        "tags" : [ "advance-payment" ],
+        "summary" : "Avans Bildirim Detayını Görüntüle",
+        "description" : "Organizasyonların avas alacak borç detaylarını döner.",
+        "operationId" : "get-organization-advance",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AdvancePaymentDetailReqDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseGetAdvancePaymentMarketResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/bilateral-contract/detail/export" : {
+      "post" : {
+        "tags" : [ "bilateral-contract" ],
+        "summary" : "İkili Anlaşma Organizasyon Detay Version Dışarı Aktarma Servisi",
+        "description" : "Uzlaştırma dönemi bazından ikili anlaşma alış satış miktarlarını detaylarini export edilmesini yapar.",
+        "operationId" : "export-organization-bilateral-contract-details",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BilateralContractsDetailListRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ModelAndView"
+            }
+          }
+        }
+      }
+    },
+    "/v1/bilateral-contract/detail/list" : {
+      "post" : {
+        "tags" : [ "bilateral-contract" ],
+        "summary" : "İkili Anlaşma Detay Servisi",
+        "description" : "Organizasyonların aralarında yapmış oldukları ikili anlaşma detaylarını döner.",
+        "operationId" : "list-organization-bilateral-contract-details",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BilateralContractsDetailListRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseOrganizationBilateralContractDetailResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/bilateral-contract/detail/version/export" : {
+      "post" : {
+        "tags" : [ "bilateral-contract" ],
+        "summary" : "İkili Anlaşma Organizasyon Detay Version Dışarı Aktarma Servisi",
+        "description" : "Uzlaştırma dönemi bazından ikili anlaşma alış satış detaylarini versiyonlariyla export edilmesini yapar.",
+        "operationId" : "export-organization-bilateral-contract-detail-versions",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BilateralContractsDetailListVersionRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ModelAndView"
+            }
+          }
+        }
+      }
+    },
+    "/v1/bilateral-contract/detail/version/list" : {
+      "post" : {
+        "tags" : [ "bilateral-contract" ],
+        "summary" : "İkili Anlaşma Organizasyon Detay Version Listeleme Servisi",
+        "description" : "Organizasyonların aralarında yapmış oldukları ikili anlaşma detaylarının versiyonlarini döner.",
+        "operationId" : "list-organization-bilateral-contract-detail-versions",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BilateralContractsDetailListVersionRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseOrganizationBilateralContractDetailVersionResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/bilateral-contract/export" : {
+      "post" : {
+        "tags" : [ "bilateral-contract" ],
+        "summary" : "İkili Anlaşma Dışarı Aktarma Servisi",
+        "description" : "Uzlaştırma dönemi bazından günlük toplam ikili anlaşma alış satış miktarlarını export edilmesini yapar.",
+        "operationId" : "export-organization-bilateral-contract",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BilateralContractsListRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ModelAndView"
+            }
+          }
+        }
+      }
+    },
+    "/v1/bilateral-contract/list" : {
+      "post" : {
+        "tags" : [ "bilateral-contract" ],
+        "summary" : "İkili Anlaşma Listeleme Servisi",
+        "description" : "Uzlaştırma dönemi bazından günlük toplam ikili anlaşma alış satış miktarlarını döner.",
+        "operationId" : "list-organization-bilateral-contracts",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BilateralContractsListRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseOrganizationBilateralContractResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/bilateral-contract/version/export" : {
+      "post" : {
+        "tags" : [ "bilateral-contract" ],
+        "summary" : "İkili Anlaşma Versiyon Dışarı Aktarma Servisi",
+        "description" : "Uzlaştırma dönemi bazından günlük toplam ikili anlaşma alış satış miktarlarını export edilmesini yapar.",
+        "operationId" : "export-organization-bilateral-contract-versions",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BilateralContractsListVersionRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ModelAndView"
+            }
+          }
+        }
+      }
+    },
+    "/v1/bilateral-contract/version/list" : {
+      "post" : {
+        "tags" : [ "bilateral-contract" ],
+        "summary" : "İkili Anlaşma Versiyon Listeleme Servisi",
+        "description" : "Organizasyonların yapmış oldukları ikili anlaşma versiyonlarini döner.",
+        "operationId" : "list-organization-bilateral-contract-versions",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/BilateralContractsListVersionRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseOrganizationBilateralContractVersionResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/day-ahead-market/daily/export" : {
+      "post" : {
+        "tags" : [ "reconciliation-transaction" ],
+        "summary" : "GÖP Uzlaştırma Bildirimi Excele Aktarma (Saatlik Detay Ekranı)",
+        "description" : "Organizasyonların GÖP'de yapmış oldukları eşleşme detaylarını excel export işlemi.",
+        "operationId" : "export-organization-dam-daily-transactions",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DeliveryHourlyExportDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ModelAndView"
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/day-ahead-market/daily/list" : {
+      "post" : {
+        "tags" : [ "reconciliation-transaction" ],
+        "summary" : "GÖP Uzlaştırma Bildirimini Görüntüle (Saatlik Detay Ekranı)",
+        "description" : "Organizasyonun gün öncesi piyasasındaki eşleşme sonuçlarını saatlik deatyını döner.",
+        "operationId" : "get-organization-dam-daily-transactions",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DeliveryHourlyQueryDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseDailyTransactionResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/day-ahead-market/export" : {
+      "post" : {
+        "tags" : [ "reconciliation-transaction" ],
+        "summary" : "GÖP Uzlaştırma Bildirimi Excele Aktarma",
+        "description" : "Organizasyonların GÖP'de yapmış oldukları eşleşme detaylarını excel export işlemi.",
+        "operationId" : "export-organization-dam-transaction-details",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DeliveryDayExportDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ModelAndView"
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/day-ahead-market/gap-amount/list" : {
+      "post" : {
+        "tags" : [ "reconciliation-transaction" ],
+        "summary" : "GÖP Uzlaştırma Bildirimini (Fark tutarını) Görüntüle (Saatlik Detay Ekranı).",
+        "description" : "Organizasyonun gün öncesi piyasasında fark fonu bilgilerini döner.",
+        "operationId" : "get-organization-gap-amount-detail",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DeliveryDayQueryDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseGapAmountDailyResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/day-ahead-market/list" : {
+      "post" : {
+        "tags" : [ "reconciliation-transaction" ],
+        "summary" : "GÖP Uzlaştırma Bildirimi",
+        "description" : "Piyasa Katılımcılarının ilgili fatura döneminde GÖP sisteminde yaptıkları işlemlere ait Miktar ve Tutar bilgilerinin günlük bazda listelenmesidir. İhtiyaç halinde VEP Temerrüt Kaynaklı değerler de listelenebilmektedir.",
+        "operationId" : "get-organization-dam-transactions",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DeliveryDayQueryDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseDamTransactionResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/day-ahead-market/mcp/list" : {
+      "post" : {
+        "tags" : [ "reconciliation-transaction" ],
+        "summary" : "Gün öncesi piyasasına ait PTF bilgilerini listeler.",
+        "description" : "Gün öncesi piyasasında oluşan piyasa takas fiyatı servisi.",
+        "operationId" : "get-market-clearing-prices",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/GetMarketClearingPricesRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseGetMarketClearingPricesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/intraday-market/daily/export" : {
+      "post" : {
+        "tags" : [ "reconciliation-transaction" ],
+        "summary" : "Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını excel export servisi.",
+        "description" : "Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını excel export servisi.",
+        "operationId" : "export-organization-daily-idm-transactions",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DeliveryHourlyExportDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ModelAndView"
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/intraday-market/daily/list" : {
+      "post" : {
+        "tags" : [ "reconciliation-transaction" ],
+        "summary" : "Organizasyonun güniçi piyasasındaki eşleşme sonuçları",
+        "description" : "Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını döner.",
+        "operationId" : "get-organization-daily-idm-transactions",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DeliveryHourlyQueryDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseIdmTransactionDailyResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/intraday-market/export" : {
+      "post" : {
+        "tags" : [ "reconciliation-transaction" ],
+        "summary" : "Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını excel export servisi.",
+        "description" : "Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını excel export servisi.",
+        "operationId" : "export-organization-idm-transactions",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DeliveryDayExportDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ModelAndView"
+            }
+          }
+        }
+      }
+    },
+    "/v1/market/intraday-market/list" : {
+      "post" : {
+        "tags" : [ "reconciliation-transaction" ],
+        "summary" : "Organizasyonun güniçi piyasasındaki eşleşme sonuçları",
+        "description" : "Organizasyonun güniçi piyasasındaki eşleşme sonuçlarını döner.",
+        "operationId" : "get-organization-idm-transactions",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DeliveryDayQueryDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseIdmTransactionResponseDto"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "AdvancePaymentDetailDto" : {
+      "type" : "object",
+      "properties" : {
+        "receivable" : {
+          "type" : "number",
+          "description" : "Alacak Tutar (TL)"
+        },
+        "debt" : {
+          "type" : "number",
+          "description" : "Borç Tutar (TL)"
+        },
+        "balance" : {
+          "type" : "number",
+          "description" : "Net Tutar (TL)"
+        }
+      }
+    },
+    "AdvancePaymentDetailExportReqDto" : {
+      "type" : "object",
+      "properties" : {
+        "paymentDateStart" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Başlangıç Tarihi"
+        },
+        "paymentDateEnd" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Bitiş Tarihi"
+        }
+      }
+    },
+    "AdvancePaymentDetailReqDto" : {
+      "type" : "object",
+      "properties" : {
+        "paymentDateStart" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Başlangıç Tarihi"
+        },
+        "paymentDateEnd" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Bitiş Tarihi"
+        },
+        "page" : {
+          "description" : "Sayfa Bilgisi",
+          "$ref" : "#/definitions/Page"
+        }
+      }
+    },
+    "AdvancePaymentTransactionTypeDto" : {
+      "type" : "object",
+      "properties" : {
+        "dayAheadMarket" : {
+          "description" : "GÖP İşlemleri",
+          "$ref" : "#/definitions/AdvancePaymentDetailDto"
+        },
+        "intraDayMarket" : {
+          "description" : "GİP İşlemleri",
+          "$ref" : "#/definitions/AdvancePaymentDetailDto"
+        }
+      }
+    },
+    "AdvanceTotalDetailDto" : {
+      "type" : "object",
+      "properties" : {
+        "paymentDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Ödeme Tarihi"
+        },
+        "dispatchDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Bildirim Tarihi"
+        },
+        "amount" : {
+          "type" : "number",
+          "description" : "Ödeme Tutarı (TL)"
+        },
+        "details" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DeclarationAdvancePaymentDetailDto"
+          }
+        }
+      }
+    },
+    "AdvanceTotalDetailSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "amount" : {
+          "type" : "number",
+          "description" : "Ödeme Tutarı (TL)"
+        },
+        "marketParticipationAdvanceDetail" : {
+          "$ref" : "#/definitions/AdvancePaymentTransactionTypeDto"
+        },
+        "efmDefaultAdvanceDetail" : {
+          "$ref" : "#/definitions/AdvancePaymentTransactionTypeDto"
+        }
+      }
+    },
+    "AdvanceTotalDto" : {
+      "type" : "object",
+      "properties" : {
+        "paymentDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Ödeme Tarihi"
+        },
+        "dispatchDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Bildirim Tarihi"
+        },
+        "amount" : {
+          "type" : "number",
+          "description" : "Ödeme Tutarı (TL)"
+        },
+        "deliveryDay" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Tarih"
+        },
+        "marketParticipationAdvanceDetail" : {
+          "description" : "Piyasa Katılımcısı İşlemleri",
+          "$ref" : "#/definitions/AdvancePaymentTransactionTypeDto"
+        },
+        "efmDefaultAdvanceDetail" : {
+          "description" : "VEP Temerrüt İşlemleri",
+          "$ref" : "#/definitions/AdvancePaymentTransactionTypeDto"
+        }
+      }
+    },
+    "BaseDTO" : {
+      "type" : "object"
+    },
+    "BilateralContractsDetailListRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "page" : {
+          "description" : "Sayfa Bilgisi",
+          "$ref" : "#/definitions/Page"
+        },
+        "period" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Dönem"
+        },
+        "effectiveDateStart" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Başlangıç Tarihi"
+        },
+        "effectiveDateEnd" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Bitiş Tarihi"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "TR1",
+          "description" : "Bölge"
+        },
+        "targetOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Hedef Organizasyon Adı"
+        }
+      }
+    },
+    "BilateralContractsDetailListVersionRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "page" : {
+          "description" : "Sayfa Bilgisi",
+          "$ref" : "#/definitions/Page"
+        },
+        "period" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Dönem"
+        },
+        "effectiveDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Tarih"
+        },
+        "buyerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Alıcı Organizasyon Adı"
+        },
+        "sellerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Satıcı Organizasyon Adı"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "TR1",
+          "description" : "Bölge"
+        }
+      }
+    },
+    "BilateralContractsListRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "page" : {
+          "description" : "Sayfa Bilgisi",
+          "$ref" : "#/definitions/Page"
+        },
+        "period" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Dönem"
+        },
+        "effectiveDateStart" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Başlangıç Tarihi"
+        },
+        "effectiveDateEnd" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Bitiş Tarihi"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "TR1",
+          "description" : "Bölge"
+        }
+      }
+    },
+    "BilateralContractsListVersionRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "page" : {
+          "description" : "Sayfa Bilgisi",
+          "$ref" : "#/definitions/Page"
+        },
+        "period" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Dönem"
+        },
+        "effectiveDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Tarih"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "TR1",
+          "description" : "Bölge"
+        }
+      }
+    },
+    "DailyTransactionDto" : {
+      "type" : "object",
+      "properties" : {
+        "effectiveDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Tarih"
+        },
+        "mcp" : {
+          "type" : "number",
+          "description" : "PTF"
+        },
+        "smp" : {
+          "type" : "number",
+          "description" : "SMF"
+        },
+        "marketParticipationTransaction" : {
+          "$ref" : "#/definitions/TransactionDetailDto"
+        },
+        "efmDefaultTransaction" : {
+          "$ref" : "#/definitions/TransactionDetailDto"
+        }
+      }
+    },
+    "DailyTransactionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DailyTransactionDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "summary" : {
+          "$ref" : "#/definitions/DailyTransactionSummaryDto"
+        }
+      }
+    },
+    "DailyTransactionSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "marketParticipationTransaction" : {
+          "$ref" : "#/definitions/TransactionDetailDto"
+        },
+        "efmDefaultTransaction" : {
+          "$ref" : "#/definitions/TransactionDetailDto"
+        }
+      }
+    },
+    "DamTransactionDetailDto" : {
+      "type" : "object",
+      "properties" : {
+        "purchaseVolume" : {
+          "type" : "number",
+          "description" : "Alış Hacmi"
+        },
+        "salesVolume" : {
+          "type" : "number",
+          "description" : "Satış Hacmi"
+        },
+        "purchaseAmount" : {
+          "type" : "number",
+          "description" : "Alış Hacmi"
+        },
+        "salesAmount" : {
+          "type" : "number",
+          "description" : "Satış Miktarı"
+        },
+        "payableGapAmount" : {
+          "type" : "number",
+          "description" : "Fark tutarı borç."
+        },
+        "receivableGapAmount" : {
+          "type" : "number",
+          "description" : "Fark tutarı alacak."
+        }
+      }
+    },
+    "DamTransactionDto" : {
+      "type" : "object",
+      "properties" : {
+        "effectiveDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Tarih"
+        },
+        "marketParticipationTransaction" : {
+          "$ref" : "#/definitions/DamTransactionDetailDto"
+        },
+        "efmDefaultTransaction" : {
+          "$ref" : "#/definitions/DamTransactionDetailDto"
+        }
+      }
+    },
+    "DamTransactionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DamTransactionDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "summary" : {
+          "$ref" : "#/definitions/DamTransactionSummaryDto"
+        }
+      }
+    },
+    "DamTransactionSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "marketParticipationTransaction" : {
+          "$ref" : "#/definitions/DamTransactionDetailDto"
+        },
+        "efmDefaultTransaction" : {
+          "$ref" : "#/definitions/DamTransactionDetailDto"
+        }
+      }
+    },
+    "DeclarationAdvancePaymentDetailDto" : {
+      "type" : "object",
+      "properties" : {
+        "deliveryDay" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Tarih"
+        },
+        "marketParticipationAdvanceDetail" : {
+          "description" : "Piyasa Katılımcısı İşlemleri",
+          "$ref" : "#/definitions/AdvancePaymentTransactionTypeDto"
+        },
+        "efmDefaultAdvanceDetail" : {
+          "description" : "VEP Temerrüt İşlemleri",
+          "$ref" : "#/definitions/AdvancePaymentTransactionTypeDto"
+        }
+      }
+    },
+    "DeliveryDayExportDto" : {
+      "type" : "object",
+      "properties" : {
+        "period" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Dönem"
+        },
+        "deliveryDayStart" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Başlangıç Tarihi"
+        },
+        "deliveryDayEnd" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Bitiş Tarihi"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "TR1",
+          "description" : "Bölge"
+        }
+      }
+    },
+    "DeliveryDayQueryDto" : {
+      "type" : "object",
+      "properties" : {
+        "period" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Dönem"
+        },
+        "deliveryDayStart" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Başlangıç Tarihi"
+        },
+        "deliveryDayEnd" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Bitiş Tarihi"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "TR1",
+          "description" : "Bölge"
+        },
+        "page" : {
+          "description" : "Sayfa Bilgisi",
+          "$ref" : "#/definitions/Page"
+        }
+      }
+    },
+    "DeliveryHourlyExportDto" : {
+      "type" : "object",
+      "properties" : {
+        "period" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Dönem"
+        },
+        "deliveryDayStart" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Başlangıç Tarihi"
+        },
+        "deliveryDayEnd" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Bitiş Tarihi"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "TR1",
+          "description" : "Bölge"
+        }
+      }
+    },
+    "DeliveryHourlyQueryDto" : {
+      "type" : "object",
+      "properties" : {
+        "period" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Dönem"
+        },
+        "deliveryDayStart" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Başlangıç Tarihi"
+        },
+        "deliveryDayEnd" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Bitiş Tarihi"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "TR1",
+          "description" : "Bölge"
+        },
+        "page" : {
+          "description" : "Sayfa Bilgisi",
+          "$ref" : "#/definitions/Page"
+        }
+      }
+    },
+    "GapAmountDailyDetailDto" : {
+      "type" : "object",
+      "properties" : {
+        "deliveryDay" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Tarih"
+        },
+        "totalOfPurchasingAmount" : {
+          "type" : "number",
+          "description" : "Alış tutarı"
+        },
+        "totalOfSalesAmount" : {
+          "type" : "number",
+          "description" : "Satış Tutarı"
+        },
+        "purchaseMatchingQuantity" : {
+          "type" : "number",
+          "description" : "Günlük Piyasa Alış Miktarı"
+        },
+        "salesMatchingQuantity" : {
+          "type" : "number",
+          "description" : "Günlük Piyasa Satış Miktarı"
+        },
+        "purchaseGapAmount" : {
+          "type" : "number",
+          "description" : "Alış Teklifleri Kaynaklı Fark Tutarı"
+        },
+        "salesGapAmount" : {
+          "type" : "number",
+          "description" : "Satış Teklifleri Kaynaklı Fark Tutarı"
+        },
+        "roundingGapAmount" : {
+          "type" : "number",
+          "description" : "Günlük Yuvarlama Fark Tutarı"
+        },
+        "marketParticipationGapAmountDetail" : {
+          "description" : "Organizasyonun piyasa işlemlerinden dolayı oluşan fark fonu",
+          "$ref" : "#/definitions/GapAmountDetailSummaryDto"
+        },
+        "efmDefaultGapAmountDetail" : {
+          "description" : "Organizasyonun VEP temerrüt işlemlerinden dolayı oluşan fark fonu",
+          "$ref" : "#/definitions/GapAmountDetailSummaryDto"
+        }
+      }
+    },
+    "GapAmountDailyResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/GapAmountDailyDetailDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "summary" : {
+          "$ref" : "#/definitions/GapAmountSummaryDto"
+        }
+      }
+    },
+    "GapAmountDetailSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "purchaseCapacity" : {
+          "type" : "number",
+          "description" : "Günlük Organizasyon Alış Miktarı"
+        },
+        "salesCapacity" : {
+          "type" : "number",
+          "description" : "Günlük Organizasyon Satış Miktarı."
+        },
+        "purchaseGapAmount" : {
+          "type" : "number",
+          "description" : "Alış Teklifleri Kaynaklı Fark Tutarı (TL)."
+        },
+        "salesGapAmount" : {
+          "type" : "number",
+          "description" : "Satış Teklifleri Kaynaklı Fark Tutarı (TL)."
+        },
+        "roundingGapAmount" : {
+          "type" : "number",
+          "description" : "Günlük Yuvarlama Fark Tutarı (organizasyon)."
+        }
+      }
+    },
+    "GapAmountSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "totalOfPurchasingAmount" : {
+          "type" : "number",
+          "description" : "Alış tutarı"
+        },
+        "totalOfSalesAmount" : {
+          "type" : "number",
+          "description" : "Satış Tutarı"
+        },
+        "purchaseMatchingQuantity" : {
+          "type" : "number",
+          "description" : "Günlük Piyasa Alış Miktarı"
+        },
+        "salesMatchingQuantity" : {
+          "type" : "number",
+          "description" : "Günlük Piyasa Satış Miktarı"
+        },
+        "purchaseGapAmount" : {
+          "type" : "number",
+          "description" : "Alış Teklifleri Fark Tutarı"
+        },
+        "salesGapAmount" : {
+          "type" : "number",
+          "description" : "Satış Teklifleri Kaynaklı Fark Tutarı"
+        },
+        "roundingGapAmount" : {
+          "type" : "number",
+          "description" : "Günlük Yuvarlama Fark Tutarı"
+        },
+        "marketParticipationGapAmountDetail" : {
+          "description" : "Organizasyonun piyasa işlemlerinden dolayı oluşan fark fonu",
+          "$ref" : "#/definitions/GapAmountDetailSummaryDto"
+        },
+        "efmDefaultGapAmountDetail" : {
+          "description" : "Organizasyonun VEP temerrüt işlemlerinden dolayı oluşan fark fonu",
+          "$ref" : "#/definitions/GapAmountDetailSummaryDto"
+        }
+      }
+    },
+    "GetAdvancePaymentMarketDetailsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AdvanceTotalDetailDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "summary" : {
+          "$ref" : "#/definitions/AdvanceTotalDetailSummaryDto"
+        },
+        "sortableFields" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "GetAdvancePaymentMarketResponse" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AdvanceTotalDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "summary" : {
+          "$ref" : "#/definitions/AdvanceTotalDetailSummaryDto"
+        }
+      }
+    },
+    "GetMarketClearingPricesRequest" : {
+      "type" : "object",
+      "properties" : {
+        "effectiveDateStart" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00"
+        },
+        "effectiveDateEnd" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "TR1"
+        }
+      }
+    },
+    "GetMarketClearingPricesResponse" : {
+      "type" : "object",
+      "properties" : {
+        "marketClearingPrices" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/McpDto"
+          }
+        }
+      }
+    },
+    "IdmTransactionDailyDto" : {
+      "type" : "object",
+      "properties" : {
+        "effectiveDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Tarih"
+        },
+        "mcp" : {
+          "type" : "number",
+          "description" : "PTF"
+        },
+        "smp" : {
+          "type" : "number",
+          "description" : "SMF"
+        },
+        "marketParticipationTransaction" : {
+          "$ref" : "#/definitions/TransactionDetailDto"
+        },
+        "efmDefaultTransaction" : {
+          "$ref" : "#/definitions/TransactionDetailDto"
+        }
+      }
+    },
+    "IdmTransactionDailyResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/IdmTransactionDailyDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "summary" : {
+          "$ref" : "#/definitions/IdmTransactionSummaryDto"
+        }
+      }
+    },
+    "IdmTransactionDto" : {
+      "type" : "object",
+      "properties" : {
+        "effectiveDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Tarih"
+        },
+        "marketParticipationTransaction" : {
+          "$ref" : "#/definitions/TransactionDetailDto"
+        },
+        "efmDefaultTransaction" : {
+          "$ref" : "#/definitions/TransactionDetailDto"
+        }
+      }
+    },
+    "IdmTransactionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/IdmTransactionDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "summary" : {
+          "$ref" : "#/definitions/IdmTransactionSummaryDto"
+        }
+      }
+    },
+    "IdmTransactionSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "marketParticipationTransaction" : {
+          "$ref" : "#/definitions/TransactionDetailDto"
+        },
+        "efmDefaultTransaction" : {
+          "$ref" : "#/definitions/TransactionDetailDto"
+        }
+      }
+    },
+    "McpDto" : {
+      "type" : "object",
+      "properties" : {
+        "effectiveDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00"
+        },
+        "mcp" : {
+          "type" : "number"
+        },
+        "region" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ModelAndView" : {
+      "type" : "object",
+      "properties" : {
+        "view" : {
+          "$ref" : "#/definitions/View"
+        },
+        "model" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object"
+          }
+        },
+        "status" : {
+          "type" : "string",
+          "enum" : [ "CONTINUE", "SWITCHING_PROTOCOLS", "PROCESSING", "CHECKPOINT", "OK", "CREATED", "ACCEPTED", "NON_AUTHORITATIVE_INFORMATION", "NO_CONTENT", "RESET_CONTENT", "PARTIAL_CONTENT", "MULTI_STATUS", "ALREADY_REPORTED", "IM_USED", "MULTIPLE_CHOICES", "MOVED_PERMANENTLY", "FOUND", "MOVED_TEMPORARILY", "SEE_OTHER", "NOT_MODIFIED", "USE_PROXY", "TEMPORARY_REDIRECT", "PERMANENT_REDIRECT", "BAD_REQUEST", "UNAUTHORIZED", "PAYMENT_REQUIRED", "FORBIDDEN", "NOT_FOUND", "METHOD_NOT_ALLOWED", "NOT_ACCEPTABLE", "PROXY_AUTHENTICATION_REQUIRED", "REQUEST_TIMEOUT", "CONFLICT", "GONE", "LENGTH_REQUIRED", "PRECONDITION_FAILED", "PAYLOAD_TOO_LARGE", "REQUEST_ENTITY_TOO_LARGE", "URI_TOO_LONG", "REQUEST_URI_TOO_LONG", "UNSUPPORTED_MEDIA_TYPE", "REQUESTED_RANGE_NOT_SATISFIABLE", "EXPECTATION_FAILED", "I_AM_A_TEAPOT", "INSUFFICIENT_SPACE_ON_RESOURCE", "METHOD_FAILURE", "DESTINATION_LOCKED", "UNPROCESSABLE_ENTITY", "LOCKED", "FAILED_DEPENDENCY", "UPGRADE_REQUIRED", "PRECONDITION_REQUIRED", "TOO_MANY_REQUESTS", "REQUEST_HEADER_FIELDS_TOO_LARGE", "UNAVAILABLE_FOR_LEGAL_REASONS", "INTERNAL_SERVER_ERROR", "NOT_IMPLEMENTED", "BAD_GATEWAY", "SERVICE_UNAVAILABLE", "GATEWAY_TIMEOUT", "HTTP_VERSION_NOT_SUPPORTED", "VARIANT_ALSO_NEGOTIATES", "INSUFFICIENT_STORAGE", "LOOP_DETECTED", "BANDWIDTH_LIMIT_EXCEEDED", "NOT_EXTENDED", "NETWORK_AUTHENTICATION_REQUIRED" ]
+        },
+        "empty" : {
+          "type" : "boolean"
+        },
+        "reference" : {
+          "type" : "boolean"
+        },
+        "viewName" : {
+          "type" : "string"
+        },
+        "modelMap" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "object"
+          }
+        }
+      }
+    },
+    "OrganizationBilateralContractDetailDto" : {
+      "type" : "object",
+      "properties" : {
+        "effectiveDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Tarih"
+        },
+        "version" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Versiyon"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "TR1",
+          "description" : "Bölge"
+        },
+        "buyerOrganizationName" : {
+          "type" : "string",
+          "description" : "Alıcı Organizasyon Adı"
+        },
+        "sellerOrganizationName" : {
+          "type" : "string",
+          "description" : "Satıcı Organizayon Adı"
+        },
+        "bcContractId" : {
+          "type" : "string",
+          "description" : "İkili Anlaşma Kontrat id'si"
+        },
+        "transactionVolume" : {
+          "type" : "number",
+          "description" : "İşlem Hacmi"
+        },
+        "buyerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Alıcı Organizasyon Adı"
+        },
+        "sellerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Satıcı Organizasyon Adı"
+        },
+        "firstVersion" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "OrganizationBilateralContractDetailResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/OrganizationBilateralContractDetailDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        }
+      }
+    },
+    "OrganizationBilateralContractDetailVersionDto" : {
+      "type" : "object",
+      "properties" : {
+        "effectiveDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Tarih"
+        },
+        "version" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Versiyon"
+        },
+        "buyerOrganizationName" : {
+          "type" : "string",
+          "description" : "Alıcı Organizasyon Adı"
+        },
+        "sellerOrganizationName" : {
+          "type" : "string",
+          "description" : "Satıcı Organizayon Adı"
+        },
+        "bcContractId" : {
+          "type" : "string",
+          "description" : "İkili Anlaşma Kontrat id'si"
+        },
+        "transactionVolume" : {
+          "type" : "number",
+          "description" : "İşlem Hacmi"
+        }
+      }
+    },
+    "OrganizationBilateralContractDetailVersionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/OrganizationBilateralContractDetailVersionDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        }
+      }
+    },
+    "OrganizationBilateralContractDto" : {
+      "type" : "object",
+      "properties" : {
+        "effectiveDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Tarih"
+        },
+        "version" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Versiyon"
+        },
+        "region" : {
+          "type" : "string",
+          "example" : "TR1",
+          "description" : "Bölge"
+        },
+        "purchaseVolume" : {
+          "type" : "number",
+          "description" : "Alış Hacmi"
+        },
+        "salesVolume" : {
+          "type" : "number",
+          "description" : "Satış Hacmi"
+        },
+        "firstVersion" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "OrganizationBilateralContractResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/OrganizationBilateralContractDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "summary" : {
+          "$ref" : "#/definitions/OrganizationBilateralContractSummaryDto"
+        }
+      }
+    },
+    "OrganizationBilateralContractSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "purchaseVolume" : {
+          "type" : "number",
+          "description" : "Alış Hacmi"
+        },
+        "salesVolume" : {
+          "type" : "number",
+          "description" : "Satış Hacmi"
+        }
+      }
+    },
+    "OrganizationBilateralContractVersionDto" : {
+      "type" : "object",
+      "properties" : {
+        "effectiveDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Tarih"
+        },
+        "version" : {
+          "type" : "string",
+          "format" : "date-time",
+          "example" : "2020-01-01T00:00:00+03:00",
+          "description" : "Versiyon"
+        },
+        "purchaseVolume" : {
+          "type" : "number",
+          "description" : "Alış Hacmi"
+        },
+        "salesVolume" : {
+          "type" : "number",
+          "description" : "Satış Hacmi"
+        }
+      }
+    },
+    "OrganizationBilateralContractVersionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/OrganizationBilateralContractVersionDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        }
+      }
+    },
+    "Page" : {
+      "type" : "object",
+      "properties" : {
+        "number" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : "${EXAMPLE_PAGE_NUMBER}",
+          "description" : "${VALUE_PAGE_NUMBER}"
+        },
+        "size" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : "${EXAMPLE_PAGE_SIZE}",
+          "description" : "${VALUE_PAGE_SIZE}"
+        },
+        "total" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : "${EXAMPLE_PAGE_TOTAL}",
+          "description" : "${VALUE_PAGE_TOTAL}"
+        },
+        "sort" : {
+          "description" : "${VALUE_PAGE_SORT}",
+          "$ref" : "#/definitions/SortDTO"
+        }
+      }
+    },
+    "RestResponse" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyObject"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "type" : "object",
+          "readOnly" : true
+        }
+      }
+    },
+    "RestResponseBodyDailyTransactionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/DailyTransactionResponseDto"
+        }
+      }
+    },
+    "RestResponseBodyDamTransactionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/DamTransactionResponseDto"
+        }
+      }
+    },
+    "RestResponseBodyGapAmountDailyResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/GapAmountDailyResponseDto"
+        }
+      }
+    },
+    "RestResponseBodyGetAdvancePaymentMarketDetailsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/GetAdvancePaymentMarketDetailsResponse"
+        }
+      }
+    },
+    "RestResponseBodyGetAdvancePaymentMarketResponse" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/GetAdvancePaymentMarketResponse"
+        }
+      }
+    },
+    "RestResponseBodyGetMarketClearingPricesResponse" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/GetMarketClearingPricesResponse"
+        }
+      }
+    },
+    "RestResponseBodyIdmTransactionDailyResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/IdmTransactionDailyResponseDto"
+        }
+      }
+    },
+    "RestResponseBodyIdmTransactionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/IdmTransactionResponseDto"
+        }
+      }
+    },
+    "RestResponseBodyObject" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "type" : "object",
+          "readOnly" : true
+        }
+      }
+    },
+    "RestResponseBodyOrganizationBilateralContractDetailResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/OrganizationBilateralContractDetailResponseDto"
+        }
+      }
+    },
+    "RestResponseBodyOrganizationBilateralContractDetailVersionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/OrganizationBilateralContractDetailVersionResponseDto"
+        }
+      }
+    },
+    "RestResponseBodyOrganizationBilateralContractResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/OrganizationBilateralContractResponseDto"
+        }
+      }
+    },
+    "RestResponseBodyOrganizationBilateralContractVersionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/OrganizationBilateralContractVersionResponseDto"
+        }
+      }
+    },
+    "RestResponseDailyTransactionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyDailyTransactionResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseDamTransactionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyDamTransactionResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseError" : {
+      "type" : "object",
+      "properties" : {
+        "errorCode" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_ERROR_CODE}"
+        },
+        "errorMessage" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_ERROR_MESSAGE}"
+        }
+      }
+    },
+    "RestResponseGapAmountDailyResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyGapAmountDailyResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseGetAdvancePaymentMarketDetailsResponse" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyGetAdvancePaymentMarketDetailsResponse"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseGetAdvancePaymentMarketResponse" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyGetAdvancePaymentMarketResponse"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseGetMarketClearingPricesResponse" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyGetMarketClearingPricesResponse"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseIdmTransactionDailyResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyIdmTransactionDailyResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseIdmTransactionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyIdmTransactionResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseOrganizationBilateralContractDetailResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyOrganizationBilateralContractDetailResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseOrganizationBilateralContractDetailVersionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyOrganizationBilateralContractDetailVersionResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseOrganizationBilateralContractResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyOrganizationBilateralContractResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseOrganizationBilateralContractVersionResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_STATUS}"
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_TX_ID}"
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "${REST_RESPONSE_USERNAME}"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_ERROR}",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "${REST_RESPONSE_BODY}",
+          "$ref" : "#/definitions/RestResponseBodyOrganizationBilateralContractVersionResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "SortDTO" : {
+      "type" : "object",
+      "properties" : {
+        "field" : {
+          "type" : "string",
+          "example" : "${EXAMPLE_SORT_FIELD}",
+          "description" : "${VALUE_SORT_FIELD}"
+        },
+        "direction" : {
+          "type" : "string",
+          "example" : "ASC",
+          "description" : "${VALUE_SORT_DIRECTION}",
+          "enum" : [ "ASC", "DESC" ]
+        }
+      }
+    },
+    "TransactionDetailDto" : {
+      "type" : "object",
+      "properties" : {
+        "purchaseVolume" : {
+          "type" : "number",
+          "description" : "Alış Hacmi"
+        },
+        "salesVolume" : {
+          "type" : "number",
+          "description" : "Satış Hacmi"
+        },
+        "purchaseAmount" : {
+          "type" : "number",
+          "description" : "Alış Hacmi"
+        },
+        "salesAmount" : {
+          "type" : "number",
+          "description" : "Satış Miktarı"
+        }
+      }
+    },
+    "View" : {
+      "type" : "object",
+      "properties" : {
+        "contentType" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}
