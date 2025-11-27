@@ -23,20 +23,10 @@ class TestEpintMethods(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Test sınıfı başlatıldığında çalışır"""
-        # Test için auth bilgileri (gerçek değerler kullanılmalı)
-        # Burada test modu kullanılabilir
-        ep.set_auth("m3t3-han@hotmail.com", "C5760175m.")
-        # ep.set_mode("test")  # Test modu
-        
-        # Cache'i temizle ve endpoint'leri yükle
         try:
             ep.clear_cache()
         except:
             pass
-        
-        print("\n" + "="*80)
-        print("EPINT Method Testleri Başlatılıyor...")
-        print("="*80)
     
     def setUp(self):
         """Her test öncesi çalışır"""
@@ -47,17 +37,42 @@ class TestEpintMethods(unittest.TestCase):
         pass
     
 
-    def test_gop_contract_list(self):
-        # ep.set_auth("K2METE","B5760175m.")
-        # ep.set_mode("test")
+    def test_idm_contract_list(self):
+        ep.set_auth("*****", "*****")
 
-        # print(ep.grid.meter_count(effectiveDate='2025-11-01'))
-        result = ep.seffaflik_electricity.consumer_quantity_export(
-            period='2024-01-01T00:00:00+03:00',
-            exportType='XLSX'  # veya 'CSV', 'PDF'
-        )
+        print(ep.mcp_smp_aritme_average(start='2025-11-27',enddate='2025-11-28'))
 
-        print(result)
+
+    def test_st_meter_count(self):
+        ep.set_auth("*****", "*****")
+        
+        print(ep.stsa())
+
+    def test_zero_balance(self):
+        ep.set_auth("*****", "*****")
+        
+        print(ep.zero_balance(start='2025-11-01',end='2025-11-02'))
+
+    def test_unit_cost(self):
+        ep.set_auth("*****", "*****")
+        
+        print(ep.unit_cost(start='2025-10-01',end='2025-11-01'))
+
+    def test_gop_collateral_organization(self):
+
+        ep.set_auth('*****', '*****')
+        ep.set_mode('test')
+
+
+        print(ep.gop.collateral_organization(deliveryday='2025-10-27'))
+
+    def test_gop_market_final_results(self):
+
+        ep.set_auth('*****', '*****')
+        ep.set_mode('test')
+
+
+        print(ep.gop.market_finalresults(deliveryday='2025-11-28'))
 
 def run_tests():
     """Testleri çalıştır"""

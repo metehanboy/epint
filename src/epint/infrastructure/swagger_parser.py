@@ -347,8 +347,8 @@ def parse_swagger_path(path: str, path_item: Dict[str, Any], definitions: Dict[s
             if parsed_param.required:
                 required_params.append(parsed_param.name)
         
-        # Response structure (basit versiyon)
-        response_structure = {}
+        # Response structure - gerçek response yapısını parse et
+        response_structure = None
         responses = operation.get("responses", {})
         if "200" in responses:
             response_200 = responses["200"]
@@ -358,8 +358,25 @@ def parse_swagger_path(path: str, path_item: Dict[str, Any], definitions: Dict[s
                 if ref:
                     resolved = resolve_ref(ref, definitions)
                     if resolved:
-                        # Basit response structure
-                        response_structure = {"body": "object"}
+                        # Gerçek response structure'ı parse et
+                        properties = resolved.get("properties", {})
+                        if properties:
+                            # Properties'ten response structure oluştur
+                            response_structure = {}
+                            for prop_name, prop_data in properties.items():
+                                if isinstance(prop_data, dict):
+                                    prop_type = prop_data.get("type", "object")
+                                    # Format varsa kullan
+                                    if prop_data.get("format") == "date-time":
+                                        prop_type = "datetime"
+                                    elif prop_data.get("format") == "date":
+                                        prop_type = "date"
+                                    response_structure[prop_name] = prop_type
+                                else:
+                                    response_structure[prop_name] = "object"
+                        else:
+                            # Properties yoksa None döndür (response_structure kullanılmayacak)
+                            response_structure = None
         
         # var_type listesini dict formatına çevir
         var_type_dict_list = []

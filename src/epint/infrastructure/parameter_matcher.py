@@ -1,8 +1,50 @@
 # -*- coding: utf-8 -*-
 
 import difflib
+import re
+import unicodedata
 from typing import Any, Dict, List, Optional, Tuple
 from .type_converter import TypeConverter
+
+
+def sanitize_param_name(text: str) -> str:
+    """Parametre ismi için sanitize fonksiyonu
+    
+    Parametre eşleştirme için basitleştirilmiş sanitize:
+    - Unicode normalize (Türkçe karakterler için)
+    - Küçük harfe çevir
+    - Tire/underscore normalize (startDate vs start_date)
+    - Özel karakterleri temizle
+    
+    Args:
+        text: Parametre ismi
+        
+    Returns:
+        str: Sanitize edilmiş parametre ismi
+    """
+    if not text:
+        return ""
+    
+    # Türkçe karakterleri normalize et
+    text = unicodedata.normalize('NFKD', str(text))
+    text = text.encode('ascii', 'ignore').decode('ascii')
+    
+    # Küçük harfe çevir
+    text = text.lower()
+    
+    # Özel karakterleri temizle (sadece harf, rakam, tire, underscore bırak)
+    text = re.sub(r'[^\w\s-]', '', text)
+    
+    # Boşluk, tire, underscore'ı normalize et (hepsini underscore'a çevir)
+    text = re.sub(r'[\s\-_]+', '_', text)
+    
+    # Çoklu underscore'ları tek yap
+    text = re.sub(r'_+', '_', text)
+    
+    # Başta/sonda underscore varsa temizle
+    text = text.strip('_')
+    
+    return text
 
 
 class ParameterMatcher:
@@ -36,28 +78,32 @@ class ParameterMatcher:
                 # Body parametresi top-level olarak eşleşmemeli, nested olarak işlenmeli
                 best_match = None
 
-            if best_match and best_match not in used_param_names:
+            # Önce nested (body) parametrelerinde ara (öncelikli)
+            # Çünkü start/end gibi parametreler body içindeki startDate/endDate ile eşleşmeli
+            nested_match = None
+            if body_param_name:
+                nested_match = self._find_best_nested_param_match(
+                    provided_key, body_param_name, used_nested_names
+                )
+            
+            if nested_match and nested_match not in used_nested_names:
+                # Nested eşleşme bulundu, bunu kullan
+                if body_param_name not in matched_params:
+                    matched_params[body_param_name] = {}
+                # Eğer body_param_name zaten bir dict değilse, dict'e çevir
+                if not isinstance(matched_params[body_param_name], dict):
+                    matched_params[body_param_name] = {}
+                matched_params[body_param_name][nested_match] = provided_value
+                used_nested_names.add(nested_match)
+            elif best_match and best_match not in used_param_names:
+                # Top-level eşleşme bulundu ve nested eşleşme yok
                 converted_value = self._convert_parameter_value(
                     provided_value, best_match
                 )
                 matched_params[best_match] = converted_value
                 used_param_names.add(best_match)
-            elif body_param_name:
-                # Top-level eşleşme yoksa, nested (body) parametrelerinde ara
-                nested_match = self._find_best_nested_param_match(
-                    provided_key, body_param_name, used_nested_names
-                )
-                if nested_match and nested_match not in used_nested_names:
-                    if body_param_name not in matched_params:
-                        matched_params[body_param_name] = {}
-                    # Eğer body_param_name zaten bir dict değilse, dict'e çevir
-                    if not isinstance(matched_params[body_param_name], dict):
-                        matched_params[body_param_name] = {}
-                    matched_params[body_param_name][nested_match] = provided_value
-                    used_nested_names.add(nested_match)
-                else:
-                    unmatched_params[provided_key] = provided_value
             else:
+                # Hiçbir eşleşme bulunamadı
                 unmatched_params[provided_key] = provided_value
 
         # Body parametresini oluştur (eğer nested parametreler eşleştiyse)
@@ -141,6 +187,9 @@ class ParameterMatcher:
 
         best_match = None
         best_score = 0
+        
+        # Sanitize edilmiş provided_key
+        sanitized_provided = sanitize_param_name(provided_key)
 
         for param in self.endpoint_params:
             # Skip already used parameters
@@ -149,31 +198,38 @@ class ParameterMatcher:
 
             if provided_key == param.name:
                 return param.name
+            
+            # Sanitize edilmiş parametre ismi
+            sanitized_param = sanitize_param_name(param.name)
+            
+            # Sanitize edilmiş isimlerle direkt eşleşme kontrolü
+            if sanitized_provided == sanitized_param:
+                return param.name
 
-            # Özel eşleştirme kuralları
-            if self._check_abbreviation_match(provided_key.lower(), param.name.lower()):
+            # Özel eşleştirme kuralları (sanitize edilmiş isimlerle)
+            if self._check_abbreviation_match(sanitized_provided, sanitized_param):
                 return param.name
 
             scores = []
 
             scores.append(
                 difflib.SequenceMatcher(
-                    None, provided_key.lower(), param.name.lower()
+                    None, sanitized_provided, sanitized_param
                 ).ratio()
             )
 
-            provided_words = provided_key.lower().replace("_", " ").split()
-            param_words = param.name.lower().replace("_", " ").split()
+            provided_words = sanitized_provided.replace("_", " ").split()
+            param_words = sanitized_param.replace("_", " ").split()
             word_score = self._calculate_word_similarity(provided_words, param_words)
             scores.append(word_score)
 
             abbrev_score = self._calculate_abbreviation_similarity(
-                provided_key.lower(), param.name.lower()
+                sanitized_provided, sanitized_param
             )
             scores.append(abbrev_score)
 
             method_score = self._calculate_method_similarity(
-                provided_key.lower(), param.name.lower()
+                sanitized_provided, sanitized_param
             )
             scores.append(method_score)
 
@@ -186,22 +242,38 @@ class ParameterMatcher:
         return best_match
 
     def _check_start_end_match(self, provided: str, param: str) -> bool:
-        """start/end ile ilgili eşleştirmeleri kontrol et"""
-        if provided in ["start", "end"] and param.startswith(provided):
-            return True
-        if param in ["start", "end"] and provided.startswith(param):
-            return True
-        if provided in ["start", "end"] and param.startswith(provided + "Date"):
-            return True
-        if provided in ["start", "end"] and param.startswith(provided + "Time"):
-            return True
-        if provided in ["start", "end"] and "payment" in param and "date" in param:
-            return True
+        """start/end ile ilgili eşleştirmeleri kontrol et (sanitize edilmiş değerlerle çalışır)"""
+        # Zaten sanitize edilmiş değerler geliyor, direkt karşılaştır
+        provided_sanitized = sanitize_param_name(provided)
+        param_sanitized = sanitize_param_name(param)
+        
+        # start/end -> startdate/enddate eşleştirmesi
+        if provided_sanitized in ["start", "end"]:
+            # startdate, starttime gibi kombinasyonlar (öncelikli kontrol)
+            if param_sanitized == provided_sanitized + "date" or param_sanitized == provided_sanitized + "time":
+                return True
+            # startdate, starttime gibi kombinasyonlar (startswith kontrolü)
+            if param_sanitized.startswith(provided_sanitized + "date") or param_sanitized.startswith(provided_sanitized + "time"):
+                return True
+            # Genel startswith kontrolü
+            if param_sanitized.startswith(provided_sanitized):
+                return True
+        
+        # startdate/enddate -> start/end eşleştirmesi (ters yön)
+        if param_sanitized in ["start", "end"]:
+            if provided_sanitized.startswith(param_sanitized):
+                return True
+        
         # start_date/end_date -> effectiveDateStart/effectiveDateEnd eşleştirmesi
-        if provided == "start_date" and param.lower().startswith("effectivedatestart"):
+        if provided_sanitized == "start_date" and param_sanitized.startswith("effectivedatestart"):
             return True
-        if provided == "end_date" and param.lower().startswith("effectivedateend"):
+        if provided_sanitized == "end_date" and param_sanitized.startswith("effectivedateend"):
             return True
+        
+        # payment date eşleştirmesi
+        if provided_sanitized in ["start", "end"] and "payment" in param_sanitized and "date" in param_sanitized:
+            return True
+        
         return False
 
     def _check_date_keywords_match(self, provided: str, param: str) -> bool:
@@ -232,25 +304,29 @@ class ParameterMatcher:
         return total_score / len(words1)
 
     def _calculate_abbreviation_similarity(self, provided: str, param: str) -> float:
+        # Zaten sanitize edilmiş değerler geliyor
+        provided_sanitized = sanitize_param_name(provided)
+        param_sanitized = sanitize_param_name(param)
+        
         # start/end ile startDate/endDate eşleştirmesi için özel kurallar
-        if provided in ["start", "end"] and param.startswith(provided + "Date"):
+        if provided_sanitized in ["start", "end"] and param_sanitized.startswith(provided_sanitized + "date"):
             return 0.9
-        if provided in ["start", "end"] and param.startswith(provided + "Time"):
+        if provided_sanitized in ["start", "end"] and param_sanitized.startswith(provided_sanitized + "time"):
             return 0.9
 
         # start_date/end_date ile effectiveDateStart/effectiveDateEnd eşleştirmesi
-        if provided == "start_date" and param.lower().startswith("effectivedatestart"):
+        if provided_sanitized == "start_date" and param_sanitized.startswith("effectivedatestart"):
             return 0.95
-        if provided == "end_date" and param.lower().startswith("effectivedateend"):
+        if provided_sanitized == "end_date" and param_sanitized.startswith("effectivedateend"):
             return 0.95
 
-        if len(provided) < len(param) and provided in param.lower():
+        if len(provided_sanitized) < len(param_sanitized) and provided_sanitized in param_sanitized:
             return 0.8
 
-        if len(param) < len(provided) and param in provided.lower():
+        if len(param_sanitized) < len(provided_sanitized) and param_sanitized in provided_sanitized:
             return 0.8
 
-        if provided.startswith(param[:3]) or param.startswith(provided[:3]):
+        if provided_sanitized.startswith(param_sanitized[:3]) or param_sanitized.startswith(provided_sanitized[:3]):
             return 0.6
 
         return 0.0
@@ -330,6 +406,9 @@ class ParameterMatcher:
         best_match = None
         best_score = 0
         
+        # Sanitize edilmiş provided_key
+        sanitized_provided = sanitize_param_name(provided_key)
+        
         for nested_param in parent_param.properties:
             if nested_param.name in used_nested_names:
                 continue
@@ -337,30 +416,37 @@ class ParameterMatcher:
             if provided_key == nested_param.name:
                 return nested_param.name
             
-            # Özel eşleştirme kuralları
-            if self._check_abbreviation_match(provided_key.lower(), nested_param.name.lower()):
+            # Sanitize edilmiş nested parametre ismi
+            sanitized_nested = sanitize_param_name(nested_param.name)
+            
+            # Sanitize edilmiş isimlerle direkt eşleşme kontrolü
+            if sanitized_provided == sanitized_nested:
+                return nested_param.name
+            
+            # Özel eşleştirme kuralları (sanitize edilmiş isimlerle)
+            if self._check_abbreviation_match(sanitized_provided, sanitized_nested):
                 return nested_param.name
             
             scores = []
             
             scores.append(
                 difflib.SequenceMatcher(
-                    None, provided_key.lower(), nested_param.name.lower()
+                    None, sanitized_provided, sanitized_nested
                 ).ratio()
             )
             
-            provided_words = provided_key.lower().replace("_", " ").split()
-            param_words = nested_param.name.lower().replace("_", " ").split()
+            provided_words = sanitized_provided.replace("_", " ").split()
+            param_words = sanitized_nested.replace("_", " ").split()
             word_score = self._calculate_word_similarity(provided_words, param_words)
             scores.append(word_score)
             
             abbrev_score = self._calculate_abbreviation_similarity(
-                provided_key.lower(), nested_param.name.lower()
+                sanitized_provided, sanitized_nested
             )
             scores.append(abbrev_score)
             
             method_score = self._calculate_method_similarity(
-                provided_key.lower(), nested_param.name.lower()
+                sanitized_provided, sanitized_nested
             )
             scores.append(method_score)
             

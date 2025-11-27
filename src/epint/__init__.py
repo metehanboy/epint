@@ -11,6 +11,10 @@ import re
 import unicodedata
 import json
 import time
+import urllib3
+
+# urllib3 warning'lerini kapat
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 from .infrastructure.endpoint_manager import EndpointManager
 from .infrastructure.swagger_parser import parse_swagger_file
 from .resources import get_resources_dir

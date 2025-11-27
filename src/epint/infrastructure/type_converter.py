@@ -90,21 +90,25 @@ class TypeConverter:
         if isinstance(response_structure, dict):
             # Dict yapısı - her key için parse et
             parsed = {}
+            
+            # Önce response_data'da olan key'leri parse et
             for key, structure in response_structure.items():
                 if key in response_data:
                     parsed[key] = TypeConverter.parse_response(response_data[key], structure)
-                else:
-                    # Key yoksa None ekle, ancak response_data'nın diğer key'lerini koru
-                    if isinstance(response_data, dict):
-                        parsed[key] = None
-                    else:
-                        parsed[key] = None
+                # Key yoksa None ekleme - sadece response_data'da olan key'leri işle
+            
             # response_data'da olup response_structure'da olmayan key'leri de ekle
             if isinstance(response_data, dict):
                 for key in response_data:
                     if key not in parsed:
+                        # response_structure'da tanımlı değilse direkt ekle
                         parsed[key] = response_data[key]
-            return parsed
+            
+            # Eğer parsed boşsa ama response_data varsa, response_data'yı direkt döndür
+            if not parsed and response_data:
+                return response_data
+            
+            return parsed if parsed else response_data
         elif isinstance(response_structure, list):
             # List yapısı - YAML'da list item'ları şu şekilde: [- item1, item2]
             if len(response_structure) > 0:

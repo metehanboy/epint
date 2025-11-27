@@ -69,24 +69,44 @@ class ValidationService:
                         if validated_nested:
                             validated_params[param.name] = {"body": validated_nested}
                     else:
-                        # Normal nested parametreleri validate et
+                        # Normal nested parametreleri validate et (seffaflik-reporting gibi kategoriler için)
                         validated_nested = {}
-                        for nested_param in param.properties:
-                            if nested_param.name in value:
-                                nested_value = value[nested_param.name]
+                        
+                        # Önce value içindeki tüm parametreleri işle
+                        # Hem properties'te tanımlı olanları hem de tanımlı olmayanları ekle
+                        for key, val in value.items():
+                            # Properties'te bu parametreyi bul
+                            nested_param = None
+                            for prop in param.properties:
+                                if prop.name == key:
+                                    nested_param = prop
+                                    break
+                            
+                            if nested_param:
+                                # Properties'te tanımlı parametre - validate et
                                 is_valid, error_msg = ParameterValidator.validate_parameter_type(
-                                    nested_param.name, nested_value, nested_param.var_type
+                                    nested_param.name, val, nested_param.var_type
                                 )
                                 if is_valid:
-                                    validated_nested[nested_param.name] = nested_value
+                                    validated_nested[nested_param.name] = val
                                 else:
                                     errors.append(error_msg)
-                            elif nested_param.required:
+                            else:
+                                # Properties'te tanımlı değil ama value'da var - direkt ekle
+                                # (Fuzzy matching ile eşleştirilmiş olabilir)
+                                validated_nested[key] = val
+                        
+                        # Required parametreleri kontrol et
+                        for nested_param in param.properties:
+                            if nested_param.required and nested_param.name not in validated_nested:
                                 errors.append(f"Zorunlu parametre '{param.name}.{nested_param.name}' eksik")
                         
                         # Validated nested parametreleri ekle
                         if validated_nested:
                             validated_params[param.name] = validated_nested
+                        elif value:
+                            # Eğer hiçbir nested parametre validate edilemediyse ama value varsa, direkt kullan
+                            validated_params[param.name] = value
                 else:
                     # Normal parametre validation
                     is_valid, error_msg = ParameterValidator.validate_parameter_type(
