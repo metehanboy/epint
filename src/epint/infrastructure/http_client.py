@@ -62,13 +62,24 @@ class HTTPClient:
             )
 
             if not response.ok:
-                self.logger.log_error(
-                    "http_request_error",
-                    method=method.upper(),
-                    url=endpoint,
-                    status_code=response.status_code,
-                    response_text=response.text[:500],  # İlk 500 karakter
+                # DateRangeError durumunda log yazma (decorator progress bar gösterecek)
+                response_text_lower = response.text[:500].lower()
+                is_date_range_error = (
+                    response.status_code == 400 and
+                    "tarih" in response_text_lower and
+                    "aralık" in response_text_lower and
+                    ("month" in response_text_lower or "year" in response_text_lower or 
+                     "week" in response_text_lower or "day" in response_text_lower)
                 )
+                
+                if not is_date_range_error:
+                    self.logger.log_error(
+                        "http_request_error",
+                        method=method.upper(),
+                        url=endpoint,
+                        status_code=response.status_code,
+                        response_text=response.text[:500],  # İlk 500 karakter
+                    )
 
             return response
 

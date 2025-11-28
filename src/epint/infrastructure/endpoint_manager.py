@@ -17,6 +17,14 @@ from .validation_service import ValidationService
 from .request_builder import RequestBuilder
 from .logger import get_logger
 from .type_converter import TypeConverter
+from .exceptions import (
+    create_exception_from_status_code,
+    parse_api_error,
+    EPINTException,
+    APIValidationError,
+    APIBusinessRuleError,
+    DateRangeError,
+)
 import json
 import time
 
@@ -160,10 +168,12 @@ class EndpointManager:
                 return
 
             error_text = self._build_gop_error_message(error_data)
+            # GOP formatı için error_data'yı None geç (GOP formatı farklı)
+            self._raise_appropriate_exception(response.status_code, error_text, None)
         else:
             error_text = self._build_error_message(error_data)
-
-        self._raise_appropriate_exception(response.status_code, error_text)
+            # Error data'yı exception'a geçir (daha detaylı hata işleme için)
+            self._raise_appropriate_exception(response.status_code, error_text, error_data)
 
     def _is_gop_error_format(self, error_data: dict) -> bool:
         return (
@@ -214,19 +224,23 @@ class EndpointManager:
         error_text += f"\nCorrelation ID: {correlation_id}"
         return error_text
 
-    def _raise_appropriate_exception(self, status_code: int, error_text: str) -> None:
-        if status_code == 400:
-            raise ValueError(error_text)
-        elif status_code == 401:
-            raise PermissionError(f"Kimlik doğrulama hatası: {error_text}")
-        elif status_code == 403:
-            raise PermissionError(f"Erişim reddedildi: {error_text}")
-        elif status_code == 404:
-            raise FileNotFoundError(f"Endpoint bulunamadı: {error_text}")
-        elif status_code >= 500:
-            raise ConnectionError(f"Sunucu hatası: {error_text}")
+    def _raise_appropriate_exception(self, status_code: int, error_text: str, error_data: Optional[Dict[str, Any]] = None) -> None:
+        """
+        HTTP status code ve error data'ya göre uygun exception fırlatır
+        
+        Args:
+            status_code: HTTP status code
+            error_text: Hata mesajı (backward compatibility için)
+            error_data: API error response dict (opsiyonel)
+        """
+        if error_data:
+            # Error data varsa parse et ve uygun exception fırlat
+            exception = create_exception_from_status_code(status_code, error_data, error_text)
+            raise exception
         else:
-            raise Exception(error_text)
+            # Error data yoksa status code'a göre oluştur
+            exception = create_exception_from_status_code(status_code, None, error_text)
+            raise exception
 
     def __call__(self, **kwargs):
         debug = kwargs.get("debug", False)
@@ -266,14 +280,17 @@ class EndpointManager:
 
         except Exception as e:
             duration = time.time() - start_time
-            self.logger.log_error(
-                "endpoint_call_error",
-                endpoint=self.endpoint_name,
-                category=self.endpoint_info.category,
-                method=self.endpoint_info.method,
-                error_msg=str(e),
-                duration=duration,
-            )
+            # DateRangeError durumunda log yazma (decorator progress bar gösterecek)
+            from .exceptions import DateRangeError
+            if not isinstance(e, DateRangeError):
+                self.logger.log_error(
+                    "endpoint_call_error",
+                    endpoint=self.endpoint_name,
+                    category=self.endpoint_info.category,
+                    method=self.endpoint_info.method,
+                    error_msg=str(e),
+                    duration=duration,
+                )
             raise
 
     def _make_http_request(self, matched_params: Dict[str, Any], debug: bool = False):

@@ -13,7 +13,6 @@ import sys
 
 # Proje root'unu path'e ekle
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 import epint as ep
 
 
@@ -35,44 +34,57 @@ class TestEpintMethods(unittest.TestCase):
     def tearDown(self):
         """Her test sonrası çalışır"""
         pass
+
+    def set_seffaflik(self):
+        ep.set_auth("*****", "*****")
+    def set_epys(self):
+        ep.set_auth("*****", "*****")
+        ep.set_mode("test")
     
 
-    def test_idm_contract_list(self):
-        ep.set_auth("*****", "*****")
+    # def test_idm_contract_list(self):
+    #     self.set_seffaflik()
 
-        print(ep.mcp_smp_aritme_average(start='2025-11-27',enddate='2025-11-28'))
+    #     print(ep.mcp_smp_aritme_average(start='2025-11-27',enddate='2025-11-28'))
 
 
-    def test_st_meter_count(self):
-        ep.set_auth("*****", "*****")
+    # def test_st_meter_count(self):
+    #     self.set_seffaflik()
         
-        print(ep.stsa())
+    #     print(ep.stsa())
 
-    def test_zero_balance(self):
-        ep.set_auth("*****", "*****")
+    # def test_zero_balance(self):
+    #     self.set_seffaflik()
         
-        print(ep.zero_balance(start='2025-11-01',end='2025-11-02'))
+    #     print(ep.zero_balance(start='2025-11-01',end='2025-11-02'))
 
-    def test_unit_cost(self):
-        ep.set_auth("*****", "*****")
+    # def test_unit_cost(self):
+    #     self.set_seffaflik()
         
-        print(ep.unit_cost(start='2025-10-01',end='2025-11-01'))
+    #     print(ep.unit_cost(start='2025-10-01',end='2025-11-01'))
 
-    def test_gop_collateral_organization(self):
+    # def test_gop_collateral_organization(self):
 
-        ep.set_auth('*****', '*****')
-        ep.set_mode('test')
-
-
-        print(ep.gop.collateral_organization(deliveryday='2025-10-27'))
-
-    def test_gop_market_final_results(self):
-
-        ep.set_auth('*****', '*****')
-        ep.set_mode('test')
+    #     self.set_epys()
 
 
-        print(ep.gop.market_finalresults(deliveryday='2025-11-28'))
+    #     print(ep.gop.collateral_organization(deliveryday='2025-10-27'))
+
+    # def test_gop_market_final_results(self):
+
+    #     self.set_epys()
+
+
+    #     print(ep.gop.market_finalresults(deliveryday='2025-11-28'))
+
+
+    def test_mcp(self):
+        self.set_seffaflik()
+
+        data = ep.seffaflik_electricity.mcp_data(start='2020-01-01',end='2025-11-27')
+        print(data)
+
+    
 
 def run_tests():
     """Testleri çalıştır"""

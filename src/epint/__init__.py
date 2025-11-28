@@ -25,6 +25,22 @@ from .infrastructure.logger import (
     log_performance,
     log_error,
 )
+from .infrastructure.exceptions import (
+    EPINTException,
+    APIValidationError,
+    APIBusinessRuleError,
+    DateRangeError,
+    APIAuthenticationError,
+    APIAuthorizationError,
+    APINotFoundError,
+    APIServerError,
+    parse_api_error,
+    create_exception_from_status_code,
+)
+from .infrastructure.date_range_helper import (
+    auto_split_date_range,
+    with_auto_date_range_split,
+)
 
 
 class AuthenticationError(Exception):
@@ -347,7 +363,6 @@ def set_auth(username, password):
     _username = username
     _password = password
     _auth_configured = True
-    print("Kimlik bilgileri başarıyla ayarlandı")
 
 
 def set_mode(mode: str) -> None:
@@ -377,8 +392,6 @@ def clear_cache():
     if os.path.exists(cache_file):
         os.remove(cache_file)
         print("Cache dosyası temizlendi")
-    else:
-        print("Cache dosyası bulunamadı")
 
 
 def _load_endpoints_from_directory():
@@ -430,12 +443,8 @@ def _try_load_from_cache(cache_file):
                             method_name = endpoint_data.get("short_name", endpoint_name)
                             _category_endpoints[category_name][method_name] = endpoint_data
             
-            print(f"Cache dosyası yüklendi (yaş: {cache_age_days:.1f} gün)")
             return True
         else:
-            print(
-                f"Cache dosyası eski (yaş: {cache_age_days:.1f} gün), yeniden oluşturuluyor..."
-            )
             os.remove(cache_file)
             return False
     except Exception:
@@ -446,7 +455,6 @@ def _try_load_from_cache(cache_file):
 def _load_from_swagger_files(endpoints_dir):
     start_time = time.time()
     log_operation("_load_from_swagger_files_start", directory=endpoints_dir)
-    print("Swagger JSON dosyaları işleniyor...")
 
     swagger_files = _find_swagger_files(endpoints_dir)
     log_operation("_load_from_swagger_files_found", file_count=len(swagger_files))
@@ -473,9 +481,8 @@ def _save_to_cache(cache_file):
         }
         with open(cache_file, "w", encoding="utf-8") as f:
             json.dump(cache_data, f, ensure_ascii=False, indent=2)
-        print(f"Cache dosyası oluşturuldu: {len(_endpoint_search_index)} endpoint")
     except Exception:
-        print("Cache dosyası yazılamadı")
+        pass
 
 
 def _find_swagger_files(endpoints_dir):
@@ -1203,6 +1210,20 @@ __all__ = [
     "set_auth",
     "set_mode",
     "AuthenticationError",
+    # Exception sınıfları
+    "EPINTException",
+    "APIValidationError",
+    "APIBusinessRuleError",
+    "DateRangeError",
+    "APIAuthenticationError",
+    "APIAuthorizationError",
+    "APINotFoundError",
+    "APIServerError",
+    "parse_api_error",
+    "create_exception_from_status_code",
+    # Tarih aralığı helper fonksiyonları
+    "auto_split_date_range",
+    "with_auto_date_range_split",
     # Yeni yardımcı fonksiyonlar
     "search",
     "list_by_category",

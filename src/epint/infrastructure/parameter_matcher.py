@@ -191,6 +191,29 @@ class ParameterMatcher:
         # Sanitize edilmiş provided_key
         sanitized_provided = sanitize_param_name(provided_key)
 
+        # Önce exact match kontrolü (case-insensitive)
+        for param in self.endpoint_params:
+            if param.name in used_param_names:
+                continue
+            if provided_key.lower() == param.name.lower():
+                return param.name
+
+        # Period date parametreleri için özel kontrol (periodDateStart, periodDateEnd)
+        period_date_patterns = {
+            "perioddatestart": "periodDateStart",
+            "perioddateend": "periodDateEnd",
+            "period_date_start": "periodDateStart",
+            "period_date_end": "periodDateEnd",
+        }
+        sanitized_lower = sanitized_provided.lower()
+        if sanitized_lower in period_date_patterns:
+            target_name = period_date_patterns[sanitized_lower]
+            for param in self.endpoint_params:
+                if param.name in used_param_names:
+                    continue
+                if param.name == target_name:
+                    return param.name
+
         for param in self.endpoint_params:
             # Skip already used parameters
             if param.name in used_param_names:
@@ -206,8 +229,24 @@ class ParameterMatcher:
             if sanitized_provided == sanitized_param:
                 return param.name
 
+            # Period date parametreleri için özel kontrol
+            # periodDateStart -> periodDateStart (exact match öncelikli)
+            if sanitized_provided in ["perioddatestart", "period_date_start"]:
+                if sanitized_param == "perioddatestart":
+                    return param.name
+            if sanitized_provided in ["perioddateend", "period_date_end"]:
+                if sanitized_param == "perioddateend":
+                    return param.name
+
             # Özel eşleştirme kuralları (sanitize edilmiş isimlerle)
+            # Ancak period date parametreleri için effectiveDate ile eşleşmemeli
+            if sanitized_provided.startswith("perioddate") and sanitized_param.startswith("effectivedate"):
+                continue  # Bu eşleşmeyi atla
+            
             if self._check_abbreviation_match(sanitized_provided, sanitized_param):
+                # Period date parametreleri için effectiveDate ile eşleşmeyi engelle
+                if sanitized_provided.startswith("perioddate") and sanitized_param.startswith("effectivedate"):
+                    continue
                 return param.name
 
             scores = []
@@ -235,6 +274,10 @@ class ParameterMatcher:
 
             score = max(scores)
 
+            # Period date parametreleri için effectiveDate ile eşleşmeyi engelle
+            if sanitized_provided.startswith("perioddate") and sanitized_param.startswith("effectivedate"):
+                score = 0  # Bu eşleşmeyi engelle
+
             if score > best_score and score > 0.3:
                 best_match = param.name
                 best_score = score
@@ -247,6 +290,16 @@ class ParameterMatcher:
         provided_sanitized = sanitize_param_name(provided)
         param_sanitized = sanitize_param_name(param)
         
+        # Period date parametreleri için özel kontrol - effectiveDate ile eşleşmemeli
+        if provided_sanitized.startswith("perioddate") and param_sanitized.startswith("effectivedate"):
+            return False
+        
+        # Period date parametreleri için exact match kontrolü
+        if provided_sanitized == "perioddatestart" and param_sanitized == "perioddatestart":
+            return True
+        if provided_sanitized == "perioddateend" and param_sanitized == "perioddateend":
+            return True
+        
         # start/end -> startdate/enddate eşleştirmesi
         if provided_sanitized in ["start", "end"]:
             # startdate, starttime gibi kombinasyonlar (öncelikli kontrol)
@@ -255,8 +308,8 @@ class ParameterMatcher:
             # startdate, starttime gibi kombinasyonlar (startswith kontrolü)
             if param_sanitized.startswith(provided_sanitized + "date") or param_sanitized.startswith(provided_sanitized + "time"):
                 return True
-            # Genel startswith kontrolü
-            if param_sanitized.startswith(provided_sanitized):
+            # Genel startswith kontrolü (ama period date ile eşleşmemeli)
+            if param_sanitized.startswith(provided_sanitized) and not param_sanitized.startswith("perioddate"):
                 return True
         
         # startdate/enddate -> start/end eşleştirmesi (ters yön)
@@ -265,10 +318,13 @@ class ParameterMatcher:
                 return True
         
         # start_date/end_date -> effectiveDateStart/effectiveDateEnd eşleştirmesi
+        # Ama periodDateStart/periodDateEnd ile eşleşmemeli
         if provided_sanitized == "start_date" and param_sanitized.startswith("effectivedatestart"):
-            return True
+            if not provided_sanitized.startswith("perioddate"):
+                return True
         if provided_sanitized == "end_date" and param_sanitized.startswith("effectivedateend"):
-            return True
+            if not provided_sanitized.startswith("perioddate"):
+                return True
         
         # payment date eşleştirmesi
         if provided_sanitized in ["start", "end"] and "payment" in param_sanitized and "date" in param_sanitized:
@@ -308,25 +364,49 @@ class ParameterMatcher:
         provided_sanitized = sanitize_param_name(provided)
         param_sanitized = sanitize_param_name(param)
         
+        # Period date parametreleri için özel kontrol - effectiveDate ile eşleşmemeli
+        if provided_sanitized.startswith("perioddate") and param_sanitized.startswith("effectivedate"):
+            return 0.0
+        
+        # Period date parametreleri için exact match
+        if provided_sanitized == "perioddatestart" and param_sanitized == "perioddatestart":
+            return 1.0
+        if provided_sanitized == "perioddateend" and param_sanitized == "perioddateend":
+            return 1.0
+        
         # start/end ile startDate/endDate eşleştirmesi için özel kurallar
         if provided_sanitized in ["start", "end"] and param_sanitized.startswith(provided_sanitized + "date"):
-            return 0.9
+            # Period date ile eşleşmemeli
+            if not param_sanitized.startswith("perioddate"):
+                return 0.9
         if provided_sanitized in ["start", "end"] and param_sanitized.startswith(provided_sanitized + "time"):
             return 0.9
 
         # start_date/end_date ile effectiveDateStart/effectiveDateEnd eşleştirmesi
+        # Ama periodDateStart/periodDateEnd ile eşleşmemeli
         if provided_sanitized == "start_date" and param_sanitized.startswith("effectivedatestart"):
-            return 0.95
+            if not provided_sanitized.startswith("perioddate"):
+                return 0.95
         if provided_sanitized == "end_date" and param_sanitized.startswith("effectivedateend"):
-            return 0.95
+            if not provided_sanitized.startswith("perioddate"):
+                return 0.95
 
         if len(provided_sanitized) < len(param_sanitized) and provided_sanitized in param_sanitized:
+            # Period date kontrolü
+            if provided_sanitized.startswith("perioddate") and param_sanitized.startswith("effectivedate"):
+                return 0.0
             return 0.8
 
         if len(param_sanitized) < len(provided_sanitized) and param_sanitized in provided_sanitized:
+            # Period date kontrolü
+            if provided_sanitized.startswith("perioddate") and param_sanitized.startswith("effectivedate"):
+                return 0.0
             return 0.8
 
         if provided_sanitized.startswith(param_sanitized[:3]) or param_sanitized.startswith(provided_sanitized[:3]):
+            # Period date kontrolü
+            if provided_sanitized.startswith("perioddate") and param_sanitized.startswith("effectivedate"):
+                return 0.0
             return 0.6
 
         return 0.0
@@ -409,6 +489,29 @@ class ParameterMatcher:
         # Sanitize edilmiş provided_key
         sanitized_provided = sanitize_param_name(provided_key)
         
+        # Önce exact match kontrolü (case-insensitive)
+        for nested_param in parent_param.properties:
+            if nested_param.name in used_nested_names:
+                continue
+            if provided_key.lower() == nested_param.name.lower():
+                return nested_param.name
+        
+        # Period date parametreleri için özel kontrol
+        period_date_patterns = {
+            "perioddatestart": "periodDateStart",
+            "perioddateend": "periodDateEnd",
+            "period_date_start": "periodDateStart",
+            "period_date_end": "periodDateEnd",
+        }
+        sanitized_lower = sanitized_provided.lower()
+        if sanitized_lower in period_date_patterns:
+            target_name = period_date_patterns[sanitized_lower]
+            for nested_param in parent_param.properties:
+                if nested_param.name in used_nested_names:
+                    continue
+                if nested_param.name == target_name:
+                    return nested_param.name
+        
         for nested_param in parent_param.properties:
             if nested_param.name in used_nested_names:
                 continue
@@ -423,8 +526,23 @@ class ParameterMatcher:
             if sanitized_provided == sanitized_nested:
                 return nested_param.name
             
+            # Period date parametreleri için özel kontrol
+            if sanitized_provided in ["perioddatestart", "period_date_start"]:
+                if sanitized_nested == "perioddatestart":
+                    return nested_param.name
+            if sanitized_provided in ["perioddateend", "period_date_end"]:
+                if sanitized_nested == "perioddateend":
+                    return nested_param.name
+            
             # Özel eşleştirme kuralları (sanitize edilmiş isimlerle)
+            # Period date parametreleri için effectiveDate ile eşleşmeyi engelle
+            if sanitized_provided.startswith("perioddate") and sanitized_nested.startswith("effectivedate"):
+                continue  # Bu eşleşmeyi atla
+            
             if self._check_abbreviation_match(sanitized_provided, sanitized_nested):
+                # Period date parametreleri için effectiveDate ile eşleşmeyi engelle
+                if sanitized_provided.startswith("perioddate") and sanitized_nested.startswith("effectivedate"):
+                    continue
                 return nested_param.name
             
             scores = []
@@ -451,6 +569,10 @@ class ParameterMatcher:
             scores.append(method_score)
             
             score = max(scores)
+            
+            # Period date parametreleri için effectiveDate ile eşleşmeyi engelle
+            if sanitized_provided.startswith("perioddate") and sanitized_nested.startswith("effectivedate"):
+                score = 0  # Bu eşleşmeyi engelle
             
             if score > best_score and score > 0.3:
                 best_match = nested_param.name
