@@ -346,6 +346,44 @@ class EndpointManager:
         if debug:
             return response
 
+        # 401 hatası geldiğinde TGT geçersiz olabilir, yeniden dene
+        if response.status_code == 401:
+            # Error data'yı kontrol et
+            try:
+                error_data = response.json()
+                errors = error_data.get("errors", [])
+                # AUT001 hatası varsa TGT geçersiz demektir
+                is_auth_error = False
+                for error in errors:
+                    if isinstance(error, dict):
+                        error_code = error.get("errorCode", "")
+                        if error_code == "AUT001":
+                            is_auth_error = True
+                            break
+                
+                if is_auth_error:
+                    # TGT'yi temizle ve yeniden dene
+                    self.logger.log_operation(
+                        "auth_tgt_invalid_retry_from_401",
+                        endpoint=self.endpoint_name,
+                        category=self.endpoint_info.category,
+                    )
+                    self.request_builder.auth_manager.clear_tickets()
+                    
+                    # Yeni header'ları al (yeni TGT ile)
+                    header = self.request_builder.prepare_headers(auth_mode, service_ticket_url, accept_format=accept_format)
+                    
+                    # Yeniden dene
+                    response = client.execute_request(
+                        self.endpoint_info.method,
+                        self.get_full_url(),
+                        header,
+                        serialized_params,
+                    )
+            except (json.JSONDecodeError, KeyError, AttributeError):
+                # Error data parse edilemezse normal akışa devam et
+                pass
+
         if not response.ok:
             self._process_error_response(response)
 

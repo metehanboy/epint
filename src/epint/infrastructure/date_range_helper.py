@@ -8,6 +8,7 @@ from typing import Callable, Any, Dict, List, Optional, Tuple
 from datetime import datetime, timedelta
 import re
 import math
+import copy
 from .exceptions import DateRangeError
 from .datetime_utils import DateTimeUtils
 from .progress_bar import ProgressBar
@@ -374,6 +375,208 @@ def _merge_results(results: List[Any]) -> Any:
         return results
 
 
+def _extract_page_info(result: Dict[str, Any]) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
+    """
+    Result'tan page bilgisini çıkarır
+    
+    Returns:
+        (page_info_dict, content_path) veya (None, None)
+        content_path: "body.content" veya None (direkt page varsa)
+    """
+    # Format 1: result['page'] (seffaflik gibi)
+    page_info = result.get("page")
+    if isinstance(page_info, dict):
+        return page_info, None
+    
+    # Format 2: result['body']['content']['page'] (grid gibi)
+    if "body" in result and isinstance(result["body"], dict):
+        if "content" in result["body"] and isinstance(result["body"]["content"], dict):
+            page_info = result["body"]["content"].get("page")
+            if isinstance(page_info, dict):
+                return page_info, "body.content"
+    
+    return None, None
+
+
+def _prepare_count_kwargs(base_kwargs: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Count servisi için kwargs hazırlar - page parametrelerini kaldırır
+    """
+    count_kwargs = copy.deepcopy(base_kwargs)
+    
+    # page parametrelerini kaldır
+    if "page" in count_kwargs:
+        del count_kwargs["page"]
+    if "pageNumber" in count_kwargs:
+        del count_kwargs["pageNumber"]
+    if "pageInfo" in count_kwargs:
+        if isinstance(count_kwargs["pageInfo"], dict):
+            page_info_copy = copy.deepcopy(count_kwargs["pageInfo"])
+            # Sayfalama ile ilgili parametreleri kaldır
+            for key in ["page", "number", "size", "total", "sort"]:
+                if key in page_info_copy:
+                    del page_info_copy[key]
+            # Eğer pageInfo boş kaldıysa tamamen kaldır
+            if not page_info_copy:
+                del count_kwargs["pageInfo"]
+            else:
+                count_kwargs["pageInfo"] = page_info_copy
+        else:
+            del count_kwargs["pageInfo"]
+    
+    return count_kwargs
+
+
+def _extract_total_from_count_result(count_result: Dict[str, Any]) -> int:
+    """
+    Count servisi sonucundan toplam kayıt sayısını çıkarır
+    """
+    if not isinstance(count_result, dict):
+        return 0
+    
+    # body.content.count formatı (grid servisleri için)
+    if "body" in count_result and isinstance(count_result["body"], dict):
+        if "content" in count_result["body"] and isinstance(count_result["body"]["content"], dict):
+            content = count_result["body"]["content"]
+            if "count" in content:
+                return int(content["count"])
+            elif "total" in content:
+                return int(content["total"])
+        elif "count" in count_result["body"]:
+            return int(count_result["body"]["count"])
+    
+    # Direkt content.count formatı
+    if "content" in count_result and isinstance(count_result["content"], dict):
+        if "count" in count_result["content"]:
+            return int(count_result["content"]["count"])
+        elif "total" in count_result["content"]:
+            return int(count_result["content"]["total"])
+    
+    # Direkt count formatı
+    if "count" in count_result:
+        return int(count_result["count"])
+    if "total" in count_result:
+        return int(count_result["total"])
+    
+    return 0
+
+
+def _find_page_param_in_kwargs(kwargs: Dict[str, Any]) -> Optional[str]:
+    """
+    kwargs içinde page parametresini bulur
+    
+    Returns:
+        "page", "pageNumber", "pageInfo" veya None
+    """
+    # Olası parametre isimlerini kontrol et
+    if "page" in kwargs:
+        return "page"
+    if "pageNumber" in kwargs:
+        return "pageNumber"
+    if "pageInfo" in kwargs and isinstance(kwargs["pageInfo"], dict):
+        return "pageInfo"
+    return None
+
+
+def _create_page_kwargs(
+    base_kwargs: Dict[str, Any],
+    page_num: int,
+    page_param: Optional[str],
+    first_result: Dict[str, Any]
+) -> Dict[str, Any]:
+    """
+    Belirli bir sayfa için kwargs oluşturur
+    
+    Args:
+        base_kwargs: Orijinal kwargs (değiştirilmemeli)
+        page_num: Sayfa numarası
+        page_param: Page parametresi adı ("page", "pageNumber", "pageInfo" veya None)
+        first_result: İlk sayfa sonucu (page yapısını kopyalamak için)
+    
+    Returns:
+        Yeni sayfa için kwargs (deep copy)
+    """
+    # Deep copy ile başla
+    page_kwargs = copy.deepcopy(base_kwargs)
+    
+    if page_param == "pageInfo":
+        # pageInfo.page formatı
+        if isinstance(page_kwargs.get("pageInfo"), dict):
+            page_kwargs["pageInfo"]["page"] = page_num
+    elif page_param == "page":
+        # page dict formatı: {"number": 1, "size": 10, ...}
+        if isinstance(page_kwargs.get("page"), dict):
+            page_kwargs["page"]["number"] = page_num
+        else:
+            # page sayı olarak verilmişse
+            page_kwargs["page"] = page_num
+    elif page_param == "pageNumber":
+        # Direkt pageNumber parametresi
+        page_kwargs["pageNumber"] = page_num
+    else:
+        # Parametre bulunamadı, first_result'tan page yapısını kopyala
+        page_info, _ = _extract_page_info(first_result)
+        if page_info:
+            # Page yapısını kopyala ve number'ı güncelle
+            page_kwargs["page"] = copy.deepcopy(page_info)
+            page_kwargs["page"]["number"] = page_num
+        else:
+            # Page bilgisi bulunamadı, varsayılan oluştur
+            page_kwargs["page"] = {"number": page_num, "size": 20}
+    
+    return page_kwargs
+
+
+def _merge_paginated_results(
+    all_results: List[Dict[str, Any]],
+    content_path: Optional[str],
+    total_pages: int,
+    total_items: int
+) -> Dict[str, Any]:
+    """
+    Sayfalanmış sonuçları birleştirir
+    
+    Args:
+        all_results: Tüm sayfa sonuçları
+        content_path: "body.content" veya None
+        total_pages: Toplam sayfa sayısı
+        total_items: Toplam kayıt sayısı
+    """
+    if not all_results:
+        return {}
+    
+    if len(all_results) == 1:
+        return all_results[0]
+    
+    # Grid formatı (body.content.items)
+    if content_path == "body.content":
+        # Tüm sayfalardan items'ı topla
+        all_items = []
+        for result in all_results:
+            if isinstance(result, dict) and "body" in result:
+                body = result["body"]
+                if isinstance(body, dict) and "content" in body:
+                    content = body["content"]
+                    if isinstance(content, dict) and "items" in content:
+                        items = content["items"]
+                        if isinstance(items, list):
+                            all_items.extend(items)
+        
+        # İlk sonucu kopyala ve items'ı güncelle
+        merged_result = copy.deepcopy(all_results[0])
+        merged_result["body"]["content"]["items"] = all_items
+        
+        # Page bilgisini güncelle
+        if "page" in merged_result["body"]["content"]:
+            merged_result["body"]["content"]["page"]["total"] = total_items
+            merged_result["body"]["content"]["page"]["number"] = total_pages
+        
+        return merged_result
+    else:
+        # Direkt format (seffaflik gibi)
+        return _merge_results(all_results)
+
+
 def _fetch_all_pages(
     endpoint_func: Callable,
     first_result: Dict[str, Any],
@@ -386,93 +589,38 @@ def _fetch_all_pages(
     Args:
         endpoint_func: Endpoint fonksiyonu
         first_result: İlk sayfa sonucu
-        base_kwargs: Temel parametreler
+        base_kwargs: Temel parametreler (ORIJINAL - değiştirilmemeli)
         total_count_service: Toplam kayıt sayısını almak için kullanılacak servis (opsiyonel)
         
     Returns:
         Tüm sayfalar birleştirilmiş sonuç
     """
-    # Farklı response formatlarını destekle
-    # Format 1: result['page'] (seffaflik gibi)
-    # Format 2: result['body']['content']['page'] (grid gibi)
-    page_info = first_result.get("page")
-    content = None
+    # ADIM 1: Page bilgisini bul
+    page_info, content_path = _extract_page_info(first_result)
     
-    if not isinstance(page_info, dict):
-        # Grid formatını kontrol et: body.content.page
-        if "body" in first_result and isinstance(first_result["body"], dict):
-            if "content" in first_result["body"] and isinstance(first_result["body"]["content"], dict):
-                content = first_result["body"]["content"]
-                page_info = content.get("page")
-    
-    if not isinstance(page_info, dict):
+    if not page_info:
         # Sayfalama bilgisi yoksa direkt döndür
         return first_result
     
+    # ADIM 2: Mevcut sayfa bilgilerini al
     current_page = page_info.get("number", 1)
     page_size = page_info.get("size", 20)
     total_items = page_info.get("total", 0)
     
-    # Eğer total_count_service verilmişse, gerçek toplam kayıt sayısını al
+    # ADIM 3: Eğer total_count_service verilmişse, gerçek toplam kayıt sayısını al
     if total_count_service is not None:
         try:
-            # page parametrelerini temizle (count servisi için gerekli değil)
-            count_kwargs = base_kwargs.copy()
-            
-            # page parametrelerini kaldır (count servisi için gerekli değil)
-            if "page" in count_kwargs:
-                del count_kwargs["page"]
-            if "pageNumber" in count_kwargs:
-                del count_kwargs["pageNumber"]
-            if "pageInfo" in count_kwargs:
-                # pageInfo içindeki sayfalama parametrelerini kaldır
-                if isinstance(count_kwargs["pageInfo"], dict):
-                    page_info_copy = count_kwargs["pageInfo"].copy()
-                    # Sayfalama ile ilgili parametreleri kaldır
-                    for key in ["page", "number", "size", "total", "sort"]:
-                        if key in page_info_copy:
-                            del page_info_copy[key]
-                    # Eğer pageInfo boş kaldıysa tamamen kaldır
-                    if not page_info_copy:
-                        del count_kwargs["pageInfo"]
-                    else:
-                        count_kwargs["pageInfo"] = page_info_copy
-                else:
-                    del count_kwargs["pageInfo"]
-            
-            # Count servisini çağır
+            # Count servisi için page parametrelerini temizle
+            count_kwargs = _prepare_count_kwargs(base_kwargs)
             count_result = total_count_service(**count_kwargs)
-            
-            # Count sonucundan toplam kayıt sayısını al
-            # Farklı response formatları için kontrol et
-            if isinstance(count_result, dict):
-                # body.content.count formatı (grid servisleri için)
-                if "body" in count_result and isinstance(count_result["body"], dict):
-                    if "content" in count_result["body"] and isinstance(count_result["body"]["content"], dict):
-                        if "count" in count_result["body"]["content"]:
-                            total_items = int(count_result["body"]["content"]["count"])
-                        elif "total" in count_result["body"]["content"]:
-                            total_items = int(count_result["body"]["content"]["total"])
-                    elif "count" in count_result["body"]:
-                        total_items = int(count_result["body"]["count"])
-                # Direkt content.count formatı
-                elif "content" in count_result and isinstance(count_result["content"], dict):
-                    if "count" in count_result["content"]:
-                        total_items = int(count_result["content"]["count"])
-                    elif "total" in count_result["content"]:
-                        total_items = int(count_result["content"]["total"])
-                # Direkt count formatı
-                elif "count" in count_result:
-                    total_items = int(count_result["count"])
-                elif "total" in count_result:
-                    total_items = int(count_result["total"])
+            total_items = _extract_total_from_count_result(count_result)
         except Exception as e:
             # Count servisi başarısız olursa, mevcut total'i kullan
             import sys
             print(f"WARNING: Count servisi hatası: {e}", file=sys.stderr)
             pass
     
-    # Toplam sayfa sayısını hesapla
+    # ADIM 4: Toplam sayfa sayısını hesapla
     if total_items <= 0 or page_size <= 0:
         return first_result
     
@@ -482,7 +630,7 @@ def _fetch_all_pages(
     if total_pages <= 1:
         return first_result
     
-    # Progress bar oluştur
+    # ADIM 5: Progress bar oluştur
     progress = ProgressBar(
         total=total_pages,
         desc=f"📄 Sayfalar çekiliyor (Toplam {total_items} kayıt, {total_pages} sayfa)"
@@ -491,110 +639,34 @@ def _fetch_all_pages(
     # İlk sayfa zaten alındı
     progress.update(1)
     
-    # Tüm sayfaları topla
+    # ADIM 6: Orijinal page parametresini bul ve sakla
+    original_page_param = _find_page_param_in_kwargs(base_kwargs)
+    
+    # ADIM 7: Diğer sayfaları al
     all_results = [first_result]
-    
-    # Sayfa parametrelerini bul (page, pageNumber, pageInfo.page, vb.)
-    page_param = None
-    
-    # Olası parametre isimlerini kontrol et
-    possible_page_params = ["page", "pageNumber"]
-    
-    for param in possible_page_params:
-        if param in base_kwargs:
-            page_param = param
-            break
-    
-    # Eğer page parametresi yoksa, pageInfo.page formatını kontrol et
-    if not page_param and "pageInfo" in base_kwargs:
-        if isinstance(base_kwargs["pageInfo"], dict):
-            page_param = "pageInfo"
-    
-    # Diğer sayfaları al
     for page_num in range(2, total_pages + 1):
-        # Progress bar güncelle
         progress.set_description(f"📄 Sayfa {page_num}/{total_pages} çekiliyor...")
-        page_kwargs = base_kwargs.copy()
         
-        if page_param == "pageInfo" and isinstance(page_kwargs.get("pageInfo"), dict):
-            # pageInfo.page formatı
-            page_kwargs["pageInfo"]["page"] = page_num
-        elif page_param == "page" and isinstance(page_kwargs.get("page"), dict):
-            # page dict formatı: {"number": 1, "size": 10, ...}
-            page_kwargs["page"] = page_kwargs["page"].copy()
-            page_kwargs["page"]["number"] = page_num
-        elif page_param:
-            # Direkt page parametresi (sayı olarak)
-            page_kwargs[page_param] = page_num
-        else:
-            # Parametre bulunamadı, page dict formatını dene
-            if "page" not in page_kwargs:
-                # İlk sayfadan page yapısını kopyala
-                if isinstance(first_result, dict):
-                    first_page = first_result.get("page")
-                    if isinstance(first_page, dict):
-                        page_kwargs["page"] = first_page.copy()
-                        page_kwargs["page"]["number"] = page_num
-                    else:
-                        # Grid formatı: body.content.page
-                        if "body" in first_result and isinstance(first_result["body"], dict):
-                            if "content" in first_result["body"] and isinstance(first_result["body"]["content"], dict):
-                                first_page = first_result["body"]["content"].get("page")
-                                if isinstance(first_page, dict):
-                                    page_kwargs["page"] = first_page.copy()
-                                    page_kwargs["page"]["number"] = page_num
-            elif isinstance(page_kwargs.get("page"), dict):
-                # page zaten dict formatında, sadece number'ı güncelle
-                page_kwargs["page"] = page_kwargs["page"].copy()
-                page_kwargs["page"]["number"] = page_num
-            else:
-                # pageInfo.page formatını dene
-                if "pageInfo" not in page_kwargs:
-                    page_kwargs["pageInfo"] = {}
-                if isinstance(page_kwargs["pageInfo"], dict):
-                    page_kwargs["pageInfo"]["page"] = page_num
-                else:
-                    # pageInfo dict değilse, direkt page parametresi ekle
-                    page_kwargs["page"] = page_num
+        # Her sayfa için temiz kwargs oluştur
+        page_kwargs = _create_page_kwargs(base_kwargs, page_num, original_page_param, first_result)
         
         try:
             page_result = endpoint_func(**page_kwargs)
             if isinstance(page_result, dict):
                 all_results.append(page_result)
-                # Progress bar güncelle
                 progress.update(1)
-        except Exception:
+        except Exception as e:
             # Sayfa alınamazsa devam et
+            import sys
+            print(f"WARNING: Sayfa {page_num} alınamadı: {e}", file=sys.stderr)
             progress.close()
             break
     
     # Progress bar'ı kapat
     progress.close()
     
-    # Tüm sayfaları birleştir
-    merged_result = _merge_results(all_results)
-    
-    # Eğer grid formatındaysa (body.content.items), items'ı birleştir
-    if isinstance(merged_result, dict) and "body" in merged_result:
-        if isinstance(merged_result["body"], dict) and "content" in merged_result["body"]:
-            if isinstance(merged_result["body"]["content"], dict) and "items" in merged_result["body"]["content"]:
-                # Tüm sayfalardan items'ı topla
-                all_items = []
-                for result in all_results:
-                    if isinstance(result, dict) and "body" in result:
-                        if isinstance(result["body"], dict) and "content" in result["body"]:
-                            if isinstance(result["body"]["content"], dict) and "items" in result["body"]["content"]:
-                                items = result["body"]["content"]["items"]
-                                if isinstance(items, list):
-                                    all_items.extend(items)
-                
-                # Birleştirilmiş items'ı yerleştir
-                merged_result["body"]["content"]["items"] = all_items
-                
-                # Page bilgisini güncelle
-                if "page" in merged_result["body"]["content"]:
-                    merged_result["body"]["content"]["page"]["total"] = len(all_items)
-                    merged_result["body"]["content"]["page"]["number"] = total_pages
+    # ADIM 8: Tüm sayfaları birleştir
+    merged_result = _merge_paginated_results(all_results, content_path, total_pages, total_items)
     
     return merged_result
 
