@@ -12,8 +12,6 @@ include requirements-dev.txt
 include pyproject.toml
 
 # Include package data files
-recursive-include src/epint/resources *.yml
-recursive-include src/epint/resources *.yaml
 recursive-include src/epint/resources *.json
 
 # Include source files
