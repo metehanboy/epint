@@ -1,653 +1,765 @@
 {
-  "swagger" : "2.0",
-  "info" : {
-    "version" : "1.0.0",
-    "title" : "EPYS - Piyasa İşletim Ücreti Uzlaştırma Servisi"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "EPYS - Piyasa İşletim Ücreti Uzlaştırma Servisi"
   },
-  "host" : "epys-qa.epias.com.tr",
-  "basePath" : "/reconciliation-mof/servis/",
-  "tags" : [ {
-    "name" : "recon-organization-mof-detail"
-  } ],
-  "schemes" : [ "https" ],
-  "paths" : {
-    "/v1/reconciliation/mof/organization/export" : {
-      "post" : {
-        "tags" : [ "recon-organization-mof-detail" ],
-        "summary" : "Dönemlik organizasyon piu detayı",
-        "description" : "Dönemlik organizasyon piu detayını döner.",
-        "operationId" : "export-organization-mof-details",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/OrganizationMofDetailReqDto"
+  "host": "epys-qa.epias.com.tr",
+  "basePath": "/reconciliation-mof/servis/",
+  "tags": [
+    {
+      "name": "recon-organization-mof-detail"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/v1/reconciliation/mof/organization/export": {
+      "post": {
+        "tags": [
+          "recon-organization-mof-detail"
+        ],
+        "summary": "Dönemlik organizasyon piu detayı",
+        "description": "Dönemlik organizasyon piu detayını döner.",
+        "operationId": "export-organization-mof-details",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/OrganizationMofDetailReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/ModelAndView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ModelAndView"
             }
           }
         }
       }
     },
-    "/v1/reconciliation/mof/organization/list" : {
-      "post" : {
-        "tags" : [ "recon-organization-mof-detail" ],
-        "summary" : "Dönemlik organizasyon piu detayı",
-        "description" : "Dönemlik organizasyon piu detayını döner.",
-        "operationId" : "get-organization-mof-details",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/OrganizationMofDetailReqDto"
+    "/v1/reconciliation/mof/organization/list": {
+      "post": {
+        "tags": [
+          "recon-organization-mof-detail"
+        ],
+        "summary": "Dönemlik organizasyon piu detayı",
+        "description": "Dönemlik organizasyon piu detayını döner.",
+        "operationId": "get-organization-mof-details",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/OrganizationMofDetailReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseOrganizationMofDetailRespDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseOrganizationMofDetailRespDto"
             }
           }
         }
       }
     },
-    "/v1/reconciliation/mof/organization/retrospective/export" : {
-      "post" : {
-        "tags" : [ "recon-organization-mof-detail" ],
-        "summary" : "GDDK Tutarı içerisindeki PİÜ detayları",
-        "description" : "GDDK Tutarı içerisindeki seçili döneme ait PİÜ detaylarının görüntülenmesi işlemidir.",
-        "operationId" : "export-retrospective-organization-mof-details",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/OrganizationMofDetailDiffReqDto"
+    "/v1/reconciliation/mof/organization/retrospective/export": {
+      "post": {
+        "tags": [
+          "recon-organization-mof-detail"
+        ],
+        "summary": "GDDK Tutarı içerisindeki PİÜ detayları",
+        "description": "GDDK Tutarı içerisindeki seçili döneme ait PİÜ detaylarının görüntülenmesi işlemidir.",
+        "operationId": "export-retrospective-organization-mof-details",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/OrganizationMofDetailDiffReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/ModelAndView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ModelAndView"
             }
           }
         }
       }
     },
-    "/v1/reconciliation/mof/organization/retrospective/list" : {
-      "post" : {
-        "tags" : [ "recon-organization-mof-detail" ],
-        "summary" : "GDDK Tutarı içerisindeki PİÜ detayları",
-        "description" : "GDDK Tutarı içerisindeki seçili döneme ait PİÜ detaylarının görüntülenmesi işlemidir.",
-        "operationId" : "list-retrospective-organization-mof-details",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/OrganizationMofDetailDiffReqDto"
+    "/v1/reconciliation/mof/organization/retrospective/list": {
+      "post": {
+        "tags": [
+          "recon-organization-mof-detail"
+        ],
+        "summary": "GDDK Tutarı içerisindeki PİÜ detayları",
+        "description": "GDDK Tutarı içerisindeki seçili döneme ait PİÜ detaylarının görüntülenmesi işlemidir.",
+        "operationId": "list-retrospective-organization-mof-details",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/OrganizationMofDetailDiffReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseMofRetrospectiveDetailRespDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseMofRetrospectiveDetailRespDto"
             }
           }
         }
       }
     }
   },
-  "definitions" : {
-    "BaseDTO" : {
-      "type" : "object"
+  "definitions": {
+    "BaseDTO": {
+      "type": "object"
     },
-    "MarketOperationFeeCoefficientDto" : {
-      "type" : "object",
-      "properties" : {
-        "effectiveDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Tarih"
+    "MarketOperationFeeCoefficientDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Tarih"
         },
-        "version" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Versiyon"
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Versiyon"
         },
-        "damCoefficient" : {
-          "type" : "number",
-          "description" : ""
+        "damCoefficient": {
+          "type": "number",
+          "description": ""
         },
-        "bpmCoefficient" : {
-          "type" : "number",
-          "description" : ""
+        "bpmCoefficient": {
+          "type": "number",
+          "description": ""
         },
-        "imbalanceCoefficient" : {
-          "type" : "number",
-          "description" : ""
+        "imbalanceCoefficient": {
+          "type": "number",
+          "description": ""
         },
-        "idmCoefficient" : {
-          "type" : "number",
-          "description" : ""
+        "idmCoefficient": {
+          "type": "number",
+          "description": ""
         }
       }
     },
-    "MarketOperationFeeDetailRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "effectiveDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Tarih"
+    "MarketOperationFeeDetailRespDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Tarih"
         },
-        "version" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Versiyon"
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Versiyon"
         },
-        "damConstant" : {
-          "type" : "number",
-          "description" : "GÖP sabit tutar"
+        "damConstant": {
+          "type": "number",
+          "description": "GÖP sabit tutar"
         },
-        "damChangeable" : {
-          "type" : "number",
-          "description" : "GÖP değişken tutar."
+        "damChangeable": {
+          "type": "number",
+          "description": "GÖP değişken tutar."
         },
-        "damTotal" : {
-          "type" : "number",
-          "description" : "GÖP toplam tutar."
+        "damTotal": {
+          "type": "number",
+          "description": "GÖP toplam tutar."
         },
-        "bpmConstant" : {
-          "type" : "number",
-          "description" : "DGP sabit tutar."
+        "bpmConstant": {
+          "type": "number",
+          "description": "DGP sabit tutar."
         },
-        "bpmChangeable" : {
-          "type" : "number",
-          "description" : "DGP değişken tutar."
+        "bpmChangeable": {
+          "type": "number",
+          "description": "DGP değişken tutar."
         },
-        "bpmTotal" : {
-          "type" : "number",
-          "description" : "DGP toplam tutar."
+        "bpmTotal": {
+          "type": "number",
+          "description": "DGP toplam tutar."
         },
-        "imbalanceConstant" : {
-          "type" : "number",
-          "description" : "EDM sabit tutar."
+        "imbalanceConstant": {
+          "type": "number",
+          "description": "EDM sabit tutar."
         },
-        "imbalanceChangeable" : {
-          "type" : "number",
-          "description" : "EDM değişken tutar."
+        "imbalanceChangeable": {
+          "type": "number",
+          "description": "EDM değişken tutar."
         },
-        "imbalanceTotal" : {
-          "type" : "number",
-          "description" : "EDM toplam tutar."
+        "imbalanceTotal": {
+          "type": "number",
+          "description": "EDM toplam tutar."
         },
-        "idmConstant" : {
-          "type" : "number",
-          "description" : "GİP sabit tutar."
+        "idmConstant": {
+          "type": "number",
+          "description": "GİP sabit tutar."
         },
-        "idmChangeable" : {
-          "type" : "number",
-          "description" : "GİP değişken tutar."
+        "idmChangeable": {
+          "type": "number",
+          "description": "GİP değişken tutar."
         },
-        "idmObjection" : {
-          "type" : "number",
-          "description" : "GİP Ceza Tutar."
+        "idmObjection": {
+          "type": "number",
+          "description": "GİP Ceza Tutar."
         },
-        "idmTotal" : {
-          "type" : "number",
-          "description" : "GİP Toplam Tutar."
+        "idmTotal": {
+          "type": "number",
+          "description": "GİP Toplam Tutar."
         },
-        "total" : {
-          "type" : "number",
-          "description" : "Toplam"
+        "total": {
+          "type": "number",
+          "description": "Toplam"
         }
       }
     },
-    "MarketOperationFeeDetailTotalRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "damConstant" : {
-          "type" : "number"
+    "MarketOperationFeeDetailTotalRespDto": {
+      "type": "object",
+      "properties": {
+        "damConstant": {
+          "type": "number"
         },
-        "damChangeable" : {
-          "type" : "number"
+        "damChangeable": {
+          "type": "number"
         },
-        "damTotal" : {
-          "type" : "number"
+        "damTotal": {
+          "type": "number"
         },
-        "bpmConstant" : {
-          "type" : "number"
+        "bpmConstant": {
+          "type": "number"
         },
-        "bpmChangeable" : {
-          "type" : "number"
+        "bpmChangeable": {
+          "type": "number"
         },
-        "bpmTotal" : {
-          "type" : "number"
+        "bpmTotal": {
+          "type": "number"
         },
-        "imbalanceConstant" : {
-          "type" : "number"
+        "imbalanceConstant": {
+          "type": "number"
         },
-        "imbalanceChangeable" : {
-          "type" : "number"
+        "imbalanceChangeable": {
+          "type": "number"
         },
-        "imbalanceTotal" : {
-          "type" : "number"
+        "imbalanceTotal": {
+          "type": "number"
         },
-        "idmConstant" : {
-          "type" : "number"
+        "idmConstant": {
+          "type": "number"
         },
-        "idmChangeable" : {
-          "type" : "number"
+        "idmChangeable": {
+          "type": "number"
         },
-        "idmObjection" : {
-          "type" : "number"
+        "idmObjection": {
+          "type": "number"
         },
-        "idmTotal" : {
-          "type" : "number"
+        "idmTotal": {
+          "type": "number"
         },
-        "total" : {
-          "type" : "number"
+        "total": {
+          "type": "number"
         }
       }
     },
-    "MarketOperationFeeSummaryDto" : {
-      "type" : "object",
-      "properties" : {
-        "damChangeable" : {
-          "type" : "number",
-          "description" : "GÖP değişken tutar."
+    "MarketOperationFeeSummaryDto": {
+      "type": "object",
+      "properties": {
+        "damChangeable": {
+          "type": "number",
+          "description": "GÖP değişken tutar."
         },
-        "damConstant" : {
-          "type" : "number",
-          "description" : "GÖP sabit tutar"
+        "damConstant": {
+          "type": "number",
+          "description": "GÖP sabit tutar"
         },
-        "damTotal" : {
-          "type" : "number",
-          "description" : "GÖP toplam tutar."
+        "damTotal": {
+          "type": "number",
+          "description": "GÖP toplam tutar."
         },
-        "bpmChangeable" : {
-          "type" : "number",
-          "description" : "DGP değişken tutar."
+        "bpmChangeable": {
+          "type": "number",
+          "description": "DGP değişken tutar."
         },
-        "bpmConstant" : {
-          "type" : "number",
-          "description" : "DGP sabit tutar."
+        "bpmConstant": {
+          "type": "number",
+          "description": "DGP sabit tutar."
         },
-        "bpmTotal" : {
-          "type" : "number",
-          "description" : "DGP toplam tutar."
+        "bpmTotal": {
+          "type": "number",
+          "description": "DGP toplam tutar."
         },
-        "imbalanceChangeable" : {
-          "type" : "number",
-          "description" : "EDM değişken tutar."
+        "imbalanceChangeable": {
+          "type": "number",
+          "description": "EDM değişken tutar."
         },
-        "imbalanceConstant" : {
-          "type" : "number",
-          "description" : "EDM sabit tutar."
+        "imbalanceConstant": {
+          "type": "number",
+          "description": "EDM sabit tutar."
         },
-        "imbalanceTotal" : {
-          "type" : "number",
-          "description" : "EDM toplam tutar."
+        "imbalanceTotal": {
+          "type": "number",
+          "description": "EDM toplam tutar."
         },
-        "idmChangeable" : {
-          "type" : "number",
-          "description" : "GİP değişken tutar."
+        "idmChangeable": {
+          "type": "number",
+          "description": "GİP değişken tutar."
         },
-        "idmConstant" : {
-          "type" : "number",
-          "description" : "GİP sabit tutar."
+        "idmConstant": {
+          "type": "number",
+          "description": "GİP sabit tutar."
         },
-        "idmObjection" : {
-          "type" : "number",
-          "description" : "GİP Ceza Tutar."
+        "idmObjection": {
+          "type": "number",
+          "description": "GİP Ceza Tutar."
         },
-        "idmTotal" : {
-          "type" : "number",
-          "description" : "GİP Toplam Tutar."
+        "idmTotal": {
+          "type": "number",
+          "description": "GİP Toplam Tutar."
         },
-        "total" : {
-          "type" : "number",
-          "description" : "Toplam"
+        "total": {
+          "type": "number",
+          "description": "Toplam"
         }
       }
     },
-    "ModelAndView" : {
-      "type" : "object",
-      "properties" : {
-        "view" : {
-          "$ref" : "#/definitions/View"
+    "ModelAndView": {
+      "type": "object",
+      "properties": {
+        "view": {
+          "$ref": "#/definitions/View"
         },
-        "model" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
+        "model": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
           }
         },
-        "status" : {
-          "type" : "string",
-          "enum" : [ "CONTINUE", "SWITCHING_PROTOCOLS", "PROCESSING", "CHECKPOINT", "OK", "CREATED", "ACCEPTED", "NON_AUTHORITATIVE_INFORMATION", "NO_CONTENT", "RESET_CONTENT", "PARTIAL_CONTENT", "MULTI_STATUS", "ALREADY_REPORTED", "IM_USED", "MULTIPLE_CHOICES", "MOVED_PERMANENTLY", "FOUND", "MOVED_TEMPORARILY", "SEE_OTHER", "NOT_MODIFIED", "USE_PROXY", "TEMPORARY_REDIRECT", "PERMANENT_REDIRECT", "BAD_REQUEST", "UNAUTHORIZED", "PAYMENT_REQUIRED", "FORBIDDEN", "NOT_FOUND", "METHOD_NOT_ALLOWED", "NOT_ACCEPTABLE", "PROXY_AUTHENTICATION_REQUIRED", "REQUEST_TIMEOUT", "CONFLICT", "GONE", "LENGTH_REQUIRED", "PRECONDITION_FAILED", "PAYLOAD_TOO_LARGE", "REQUEST_ENTITY_TOO_LARGE", "URI_TOO_LONG", "REQUEST_URI_TOO_LONG", "UNSUPPORTED_MEDIA_TYPE", "REQUESTED_RANGE_NOT_SATISFIABLE", "EXPECTATION_FAILED", "I_AM_A_TEAPOT", "INSUFFICIENT_SPACE_ON_RESOURCE", "METHOD_FAILURE", "DESTINATION_LOCKED", "UNPROCESSABLE_ENTITY", "LOCKED", "FAILED_DEPENDENCY", "UPGRADE_REQUIRED", "PRECONDITION_REQUIRED", "TOO_MANY_REQUESTS", "REQUEST_HEADER_FIELDS_TOO_LARGE", "UNAVAILABLE_FOR_LEGAL_REASONS", "INTERNAL_SERVER_ERROR", "NOT_IMPLEMENTED", "BAD_GATEWAY", "SERVICE_UNAVAILABLE", "GATEWAY_TIMEOUT", "HTTP_VERSION_NOT_SUPPORTED", "VARIANT_ALSO_NEGOTIATES", "INSUFFICIENT_STORAGE", "LOOP_DETECTED", "BANDWIDTH_LIMIT_EXCEEDED", "NOT_EXTENDED", "NETWORK_AUTHENTICATION_REQUIRED" ]
+        "status": {
+          "type": "string",
+          "enum": [
+            "CONTINUE",
+            "SWITCHING_PROTOCOLS",
+            "PROCESSING",
+            "CHECKPOINT",
+            "OK",
+            "CREATED",
+            "ACCEPTED",
+            "NON_AUTHORITATIVE_INFORMATION",
+            "NO_CONTENT",
+            "RESET_CONTENT",
+            "PARTIAL_CONTENT",
+            "MULTI_STATUS",
+            "ALREADY_REPORTED",
+            "IM_USED",
+            "MULTIPLE_CHOICES",
+            "MOVED_PERMANENTLY",
+            "FOUND",
+            "MOVED_TEMPORARILY",
+            "SEE_OTHER",
+            "NOT_MODIFIED",
+            "USE_PROXY",
+            "TEMPORARY_REDIRECT",
+            "PERMANENT_REDIRECT",
+            "BAD_REQUEST",
+            "UNAUTHORIZED",
+            "PAYMENT_REQUIRED",
+            "FORBIDDEN",
+            "NOT_FOUND",
+            "METHOD_NOT_ALLOWED",
+            "NOT_ACCEPTABLE",
+            "PROXY_AUTHENTICATION_REQUIRED",
+            "REQUEST_TIMEOUT",
+            "CONFLICT",
+            "GONE",
+            "LENGTH_REQUIRED",
+            "PRECONDITION_FAILED",
+            "PAYLOAD_TOO_LARGE",
+            "REQUEST_ENTITY_TOO_LARGE",
+            "URI_TOO_LONG",
+            "REQUEST_URI_TOO_LONG",
+            "UNSUPPORTED_MEDIA_TYPE",
+            "REQUESTED_RANGE_NOT_SATISFIABLE",
+            "EXPECTATION_FAILED",
+            "I_AM_A_TEAPOT",
+            "INSUFFICIENT_SPACE_ON_RESOURCE",
+            "METHOD_FAILURE",
+            "DESTINATION_LOCKED",
+            "UNPROCESSABLE_ENTITY",
+            "LOCKED",
+            "FAILED_DEPENDENCY",
+            "UPGRADE_REQUIRED",
+            "PRECONDITION_REQUIRED",
+            "TOO_MANY_REQUESTS",
+            "REQUEST_HEADER_FIELDS_TOO_LARGE",
+            "UNAVAILABLE_FOR_LEGAL_REASONS",
+            "INTERNAL_SERVER_ERROR",
+            "NOT_IMPLEMENTED",
+            "BAD_GATEWAY",
+            "SERVICE_UNAVAILABLE",
+            "GATEWAY_TIMEOUT",
+            "HTTP_VERSION_NOT_SUPPORTED",
+            "VARIANT_ALSO_NEGOTIATES",
+            "INSUFFICIENT_STORAGE",
+            "LOOP_DETECTED",
+            "BANDWIDTH_LIMIT_EXCEEDED",
+            "NOT_EXTENDED",
+            "NETWORK_AUTHENTICATION_REQUIRED"
+          ]
         },
-        "empty" : {
-          "type" : "boolean"
+        "empty": {
+          "type": "boolean"
         },
-        "reference" : {
-          "type" : "boolean"
+        "reference": {
+          "type": "boolean"
         },
-        "viewName" : {
-          "type" : "string"
+        "viewName": {
+          "type": "string"
         },
-        "modelMap" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
+        "modelMap": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
           }
         }
       }
     },
-    "MofRetrospectiveDetailRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "details" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/MarketOperationFeeDetailRespDto"
+    "MofRetrospectiveDetailRespDto": {
+      "type": "object",
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MarketOperationFeeDetailRespDto"
           }
         },
-        "summary" : {
-          "$ref" : "#/definitions/MarketOperationFeeSummaryDto"
+        "summary": {
+          "$ref": "#/definitions/MarketOperationFeeSummaryDto"
         }
       }
     },
-    "OrganizationMofDetailDiffReqDto" : {
-      "type" : "object",
-      "properties" : {
-        "period" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Dönem"
+    "OrganizationMofDetailDiffReqDto": {
+      "type": "object",
+      "properties": {
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Dönem"
         },
-        "version" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Versiyon"
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Versiyon"
         }
       }
     },
-    "OrganizationMofDetailReqDto" : {
-      "type" : "object",
-      "properties" : {
-        "period" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Dönem"
+    "OrganizationMofDetailReqDto": {
+      "type": "object",
+      "properties": {
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Dönem"
         },
-        "version" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Versiyon"
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Versiyon"
         }
       }
     },
-    "OrganizationMofDetailRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "mofCoefficient" : {
-          "$ref" : "#/definitions/MarketOperationFeeCoefficientDto"
+    "OrganizationMofDetailRespDto": {
+      "type": "object",
+      "properties": {
+        "mofCoefficient": {
+          "$ref": "#/definitions/MarketOperationFeeCoefficientDto"
         },
-        "details" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/MarketOperationFeeDetailRespDto"
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MarketOperationFeeDetailRespDto"
           }
         },
-        "total" : {
-          "$ref" : "#/definitions/MarketOperationFeeDetailTotalRespDto"
+        "total": {
+          "$ref": "#/definitions/MarketOperationFeeDetailTotalRespDto"
         }
       }
     },
-    "RestResponse" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_STATUS}"
+    "RestResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "${REST_RESPONSE_STATUS}"
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_TX_ID}"
+        "correlationId": {
+          "type": "string",
+          "description": "${REST_RESPONSE_TX_ID}"
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        "clientIp": {
+          "type": "string",
+          "description": "${REST_RESPONSE_CLIENT_IP}"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_USERNAME}"
+        "userName": {
+          "type": "string",
+          "description": "${REST_RESPONSE_USERNAME}"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "${REST_RESPONSE_ERROR}",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "${REST_RESPONSE_ERROR}",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "${REST_RESPONSE_BODY}",
-          "$ref" : "#/definitions/RestResponseBodyObject"
+        "body": {
+          "description": "${REST_RESPONSE_BODY}",
+          "$ref": "#/definitions/RestResponseBodyObject"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseBody" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "type" : "object",
-          "readOnly" : true
+    "RestResponseBody": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "object",
+          "readOnly": true
         }
       }
     },
-    "RestResponseBodyMofRetrospectiveDetailRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/MofRetrospectiveDetailRespDto"
+    "RestResponseBodyMofRetrospectiveDetailRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/MofRetrospectiveDetailRespDto"
         }
       }
     },
-    "RestResponseBodyObject" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "type" : "object",
-          "readOnly" : true
+    "RestResponseBodyObject": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "object",
+          "readOnly": true
         }
       }
     },
-    "RestResponseBodyOrganizationMofDetailRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/OrganizationMofDetailRespDto"
+    "RestResponseBodyOrganizationMofDetailRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/OrganizationMofDetailRespDto"
         }
       }
     },
-    "RestResponseError" : {
-      "type" : "object",
-      "properties" : {
-        "errorCode" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_ERROR_CODE}"
+    "RestResponseError": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "${REST_RESPONSE_ERROR_CODE}"
         },
-        "errorMessage" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_ERROR_MESSAGE}"
+        "errorMessage": {
+          "type": "string",
+          "description": "${REST_RESPONSE_ERROR_MESSAGE}"
         }
       }
     },
-    "RestResponseMofRetrospectiveDetailRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_STATUS}"
+    "RestResponseMofRetrospectiveDetailRespDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "${REST_RESPONSE_STATUS}"
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_TX_ID}"
+        "correlationId": {
+          "type": "string",
+          "description": "${REST_RESPONSE_TX_ID}"
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        "clientIp": {
+          "type": "string",
+          "description": "${REST_RESPONSE_CLIENT_IP}"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_USERNAME}"
+        "userName": {
+          "type": "string",
+          "description": "${REST_RESPONSE_USERNAME}"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "${REST_RESPONSE_ERROR}",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "${REST_RESPONSE_ERROR}",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "${REST_RESPONSE_BODY}",
-          "$ref" : "#/definitions/RestResponseBodyMofRetrospectiveDetailRespDto"
+        "body": {
+          "description": "${REST_RESPONSE_BODY}",
+          "$ref": "#/definitions/RestResponseBodyMofRetrospectiveDetailRespDto"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseOrganizationMofDetailRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_STATUS}"
+    "RestResponseOrganizationMofDetailRespDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "${REST_RESPONSE_STATUS}"
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_TX_ID}"
+        "correlationId": {
+          "type": "string",
+          "description": "${REST_RESPONSE_TX_ID}"
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_CLIENT_IP}"
+        "clientIp": {
+          "type": "string",
+          "description": "${REST_RESPONSE_CLIENT_IP}"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "${REST_RESPONSE_USERNAME}"
+        "userName": {
+          "type": "string",
+          "description": "${REST_RESPONSE_USERNAME}"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "${REST_RESPONSE_ERROR}",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "${REST_RESPONSE_ERROR}",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "${REST_RESPONSE_UNSUCCESSFUL_LIST}",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "${REST_RESPONSE_BODY}",
-          "$ref" : "#/definitions/RestResponseBodyOrganizationMofDetailRespDto"
+        "body": {
+          "description": "${REST_RESPONSE_BODY}",
+          "$ref": "#/definitions/RestResponseBodyOrganizationMofDetailRespDto"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "View" : {
-      "type" : "object",
-      "properties" : {
-        "contentType" : {
-          "type" : "string"
+    "View": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string"
         }
       }
     }

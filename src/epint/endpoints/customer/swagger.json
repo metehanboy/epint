@@ -1,1522 +1,1650 @@
 {
-  "swagger" : "2.0",
-  "info" : {
-    "version" : "1.0.0",
-    "title" : "EPYS - Abone Servisleri"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "EPYS - Abone Servisleri"
   },
-  "host" : "epys-prp.epias.com.tr",
-  "basePath" : "/customer",
-  "tags" : [ {
-    "name" : "customer-controller"
-  } ],
-  "schemes" : [ "https" ],
-  "paths" : {
-    "/v1/lookup" : {
-      "get" : {
-        "summary" : "Mevcut Çoklu Seçim Anahtar Sorgulama Servisi",
-        "description" : "Mevcut çoklu seçim anahtar verilerini sorgular.",
-        "operationId" : "available-lookups",
-        "produces" : [ "application/json", "application/xml" ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseLookupTypeResponse"
+  "host": "epys-prp.epias.com.tr",
+  "basePath": "/customer",
+  "tags": [
+    {
+      "name": "customer-controller"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/v1/lookup": {
+      "get": {
+        "summary": "Mevcut Çoklu Seçim Anahtar Sorgulama Servisi",
+        "description": "Mevcut çoklu seçim anahtar verilerini sorgular.",
+        "operationId": "available-lookups",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseLookupTypeResponse"
             }
           }
         }
       }
     },
-    "/v1/lookup/query" : {
-      "post" : {
-        "summary" : "Çoklu Seçim Detay Sorgulama Servisi",
-        "description" : "Çoklu seçim detay verilerini sorgular.",
-        "operationId" : "lookup-query",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/LookupRequest"
+    "/v1/lookup/query": {
+      "post": {
+        "summary": "Çoklu Seçim Detay Sorgulama Servisi",
+        "description": "Çoklu seçim detay verilerini sorgular.",
+        "operationId": "lookup-query",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/LookupRequest"
+            }
+          },
+          {
+            "name": "accept-language",
+            "in": "header",
+            "required": false,
+            "type": "string"
           }
-        }, {
-          "name" : "accept-language",
-          "in" : "header",
-          "required" : false,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseLookupResponse"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseLookupResponse"
             }
           }
         }
       }
     },
-    "v1/customer/get-state-customer-predefined-in-portfolio" : {
-      "post" : {
-        "tags" : [ "customer-controller" ],
-        "summary" : "Portföyde önceden Tanımlanmış Abone Durumunu Getir",
-        "description" : "Tüketicinin bu kayıttan etkilenerek güncellenecek başka aboneliğinin olup olmadığının kontrol edildiği servistir.",
-        "operationId" : "get-state-customer-predefined-in-portfolio",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/StatePredefinedCustomerInPortfolioRequestDto"
+    "v1/customer/get-state-customer-predefined-in-portfolio": {
+      "post": {
+        "tags": [
+          "customer-controller"
+        ],
+        "summary": "Portföyde önceden Tanımlanmış Abone Durumunu Getir",
+        "description": "Tüketicinin bu kayıttan etkilenerek güncellenecek başka aboneliğinin olup olmadığının kontrol edildiği servistir.",
+        "operationId": "get-state-customer-predefined-in-portfolio",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/StatePredefinedCustomerInPortfolioRequestDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseBooleanDTO"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseBooleanDTO"
             }
           }
         }
       }
     },
-    "v1/customer/history" : {
-      "post" : {
-        "tags" : [ "customer-controller" ],
-        "summary" : "Abone Tarihçe Sorgula",
-        "description" : "Abone üzerinde yapılan değişikliklerin sorgulandığı servistir.",
-        "operationId" : "customer-query-history",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CustomerHistoryRequestDto"
+    "v1/customer/history": {
+      "post": {
+        "tags": [
+          "customer-controller"
+        ],
+        "summary": "Abone Tarihçe Sorgula",
+        "description": "Abone üzerinde yapılan değişikliklerin sorgulandığı servistir.",
+        "operationId": "customer-query-history",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CustomerHistoryRequestDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseSortablePageResponseCustomerDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseSortablePageResponseCustomerDto"
             }
           }
         }
       }
     },
-    "v1/customer/passivate-customer" : {
-      "post" : {
-        "tags" : [ "customer-controller" ],
-        "summary" : "Abone Pasife Al",
-        "description" : "Aktif aboneleri pasife alabileceğiniz servistir.",
-        "operationId" : "customer-passivate",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CustomerPassivateRequestDto"
+    "v1/customer/passivate-customer": {
+      "post": {
+        "tags": [
+          "customer-controller"
+        ],
+        "summary": "Abone Pasife Al",
+        "description": "Aktif aboneleri pasife alabileceğiniz servistir.",
+        "operationId": "customer-passivate",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CustomerPassivateRequestDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseBooleanDTO"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseBooleanDTO"
             }
           }
         }
       }
     },
-    "v1/customer/pre-check" : {
-      "post" : {
-        "tags" : [ "customer-controller" ],
-        "summary" : "Kayıt Geçerlilik Ön Kontrolü",
-        "description" : "Önyüz kullanımı için abonenin kaydını yapılıp yapılamacağının bilgisinin aldığı servistir. Kayıt servisi ön kontrol olarak bu validasyonaları yapmaktadır.",
-        "operationId" : "customer-pre-check",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CustomerPreCheckRequestDto"
+    "v1/customer/pre-check": {
+      "post": {
+        "tags": [
+          "customer-controller"
+        ],
+        "summary": "Kayıt Geçerlilik Ön Kontrolü",
+        "description": "Önyüz kullanımı için abonenin kaydını yapılıp yapılamacağının bilgisinin aldığı servistir. Kayıt servisi ön kontrol olarak bu validasyonaları yapmaktadır.",
+        "operationId": "customer-pre-check",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CustomerPreCheckRequestDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseCustomerPreCheckResponse"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseCustomerPreCheckResponse"
             }
           }
         }
       }
     },
-    "v1/customer/query" : {
-      "post" : {
-        "tags" : [ "customer-controller" ],
-        "summary" : "Abone Sorgula",
-        "description" : "Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin sorgulandığı servistir.",
-        "operationId" : "customer-query",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CustomerQueryRequestDto"
+    "v1/customer/query": {
+      "post": {
+        "tags": [
+          "customer-controller"
+        ],
+        "summary": "Abone Sorgula",
+        "description": "Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin sorgulandığı servistir.",
+        "operationId": "customer-query",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CustomerQueryRequestDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseSortablePageResponseCustomerDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseSortablePageResponseCustomerDto"
             }
           }
         }
       }
     },
-    "v1/customer/query-count" : {
-      "post" : {
-        "tags" : [ "customer-controller" ],
-        "summary" : "Abone Sorgulama Kayıt Sayısı",
-        "description" : "Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin kayıt sayılarının sorgulandığı servistir.",
-        "operationId" : "customer-query-count",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CustomerQueryCountRequestDto"
+    "v1/customer/query-count": {
+      "post": {
+        "tags": [
+          "customer-controller"
+        ],
+        "summary": "Abone Sorgulama Kayıt Sayısı",
+        "description": "Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin kayıt sayılarının sorgulandığı servistir.",
+        "operationId": "customer-query-count",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CustomerQueryCountRequestDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseCustomerQueryCountResponseDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseCustomerQueryCountResponseDto"
             }
           }
         }
       }
     },
-    "v1/customer/query-without-count" : {
-      "post" : {
-        "tags" : [ "customer-controller" ],
-        "summary" : "Kayıt Sayısı Olmadan Abone Sorgulama",
-        "description" : "Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin kayıt sayısı olmadan sorgulandığı servistir.",
-        "operationId" : "customer-query-without-count",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CustomerQueryRequestDto"
+    "v1/customer/query-without-count": {
+      "post": {
+        "tags": [
+          "customer-controller"
+        ],
+        "summary": "Kayıt Sayısı Olmadan Abone Sorgulama",
+        "description": "Portföyünüzde yer alan veya sorumlusu olduğunuz abonelerin kayıt sayısı olmadan sorgulandığı servistir.",
+        "operationId": "customer-query-without-count",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CustomerQueryRequestDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseSortablePageResponseCustomerDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseSortablePageResponseCustomerDto"
             }
           }
         }
       }
     },
-    "v1/customer/register" : {
-      "post" : {
-        "tags" : [ "customer-controller" ],
-        "summary" : "Abone Kaydet",
-        "description" : "Portföyünüzde yer alan abonenin kaydını yapan servistir.",
-        "operationId" : "customer-register",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CustomerRegisterRequestDto"
+    "v1/customer/register": {
+      "post": {
+        "tags": [
+          "customer-controller"
+        ],
+        "summary": "Abone Kaydet",
+        "description": "Portföyünüzde yer alan abonenin kaydını yapan servistir.",
+        "operationId": "customer-register",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CustomerRegisterRequestDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseCustomerDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseCustomerDto"
             }
           }
         }
       }
     },
-    "v1/customer/update" : {
-      "post" : {
-        "tags" : [ "customer-controller" ],
-        "summary" : "Abone Güncelle",
-        "description" : "Abone bilgilerinin güncellendiği servistir.",
-        "operationId" : "customer-update",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/CustomerUpdateRequestDto"
+    "v1/customer/update": {
+      "post": {
+        "tags": [
+          "customer-controller"
+        ],
+        "summary": "Abone Güncelle",
+        "description": "Abone bilgilerinin güncellendiği servistir.",
+        "operationId": "customer-update",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CustomerUpdateRequestDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseBooleanDTO"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseBooleanDTO"
             }
           }
         }
       }
     }
   },
-  "definitions" : {
-    "BaseDTO" : {
-      "type" : "object"
+  "definitions": {
+    "BaseDTO": {
+      "type": "object"
     },
-    "BooleanDTO" : {
-      "type" : "object",
-      "properties" : {
-        "completed" : {
-          "type" : "boolean"
+    "BooleanDTO": {
+      "type": "object",
+      "properties": {
+        "completed": {
+          "type": "boolean"
         }
       }
     },
-    "CustomerDto" : {
-      "type" : "object",
-      "properties" : {
-        "eic" : {
-          "type" : "string",
-          "description" : "Sayaca ait enerji tanımlama kodu (EIC)."
+    "CustomerDto": {
+      "type": "object",
+      "properties": {
+        "eic": {
+          "type": "string",
+          "description": "Sayaca ait enerji tanımlama kodu (EIC)."
         },
-        "consumptionPointId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Sayaca ait tüketim noktası id."
+        "consumptionPointId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sayaca ait tüketim noktası id."
         },
-        "id" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone kayıt id."
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone kayıt id."
         },
-        "customerStatus" : {
-          "description" : "Abone durumu lookup değeridir.",
-          "$ref" : "#/definitions/LookupDTO"
+        "customerStatus": {
+          "description": "Abone durumu lookup değeridir.",
+          "$ref": "#/definitions/LookupDTO"
         },
-        "customerNo" : {
-          "type" : "string",
-          "description" : "Abone tüketici no bilgisi."
+        "customerNo": {
+          "type": "string",
+          "description": "Abone tüketici no bilgisi."
         },
-        "organizationId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abonenin kayıtlı olduğu organizasyonun id bilgisi."
+        "organizationId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abonenin kayıtlı olduğu organizasyonun id bilgisi."
         },
-        "organizationName" : {
-          "type" : "string",
-          "description" : "Abonenin kayıtlı olduğu organizasyonun ad bilgisi."
+        "organizationName": {
+          "type": "string",
+          "description": "Abonenin kayıtlı olduğu organizasyonun ad bilgisi."
         },
-        "organizationNameBreakdown" : {
-          "type" : "array",
-          "description" : "Abonenin kayıtlı olduğu organizasyonun tarihçesi.",
-          "items" : {
-            "$ref" : "#/definitions/NameBreakdownResponseDto"
+        "organizationNameBreakdown": {
+          "type": "array",
+          "description": "Abonenin kayıtlı olduğu organizasyonun tarihçesi.",
+          "items": {
+            "$ref": "#/definitions/NameBreakdownResponseDto"
           }
         },
-        "categoryType" : {
-          "description" : "Abone kategori tipi lookup değeridir.",
-          "$ref" : "#/definitions/LookupDTO"
+        "categoryType": {
+          "description": "Abone kategori tipi lookup değeridir.",
+          "$ref": "#/definitions/LookupDTO"
         },
-        "title" : {
-          "type" : "string",
-          "description" : "Tüketici ad/soyad veya ünvan bilgisi."
+        "title": {
+          "type": "string",
+          "description": "Tüketici ad/soyad veya ünvan bilgisi."
         },
-        "startDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy başlangıç bilgisi."
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy başlangıç bilgisi."
         },
-        "endDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy bitiş bilgisi."
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy bitiş bilgisi."
         },
-        "authorizedPerson1Name" : {
-          "type" : "string",
-          "description" : "Birinci yetkili kişi ad/soyad bilgisi."
+        "authorizedPerson1Name": {
+          "type": "string",
+          "description": "Birinci yetkili kişi ad/soyad bilgisi."
         },
-        "authorizedPerson2Name" : {
-          "type" : "string",
-          "description" : "İkinci yetkili kişi ad/soyad bilgisi."
+        "authorizedPerson2Name": {
+          "type": "string",
+          "description": "İkinci yetkili kişi ad/soyad bilgisi."
         },
-        "authorizedPerson1No" : {
-          "type" : "string",
-          "description" : "Birinci yetkili kişi tckn bilgisi."
+        "authorizedPerson1No": {
+          "type": "string",
+          "description": "Birinci yetkili kişi tckn bilgisi."
         },
-        "authorizedPerson2No" : {
-          "type" : "string",
-          "description" : "İkinci yetkili kişi tckn bilgisi."
+        "authorizedPerson2No": {
+          "type": "string",
+          "description": "İkinci yetkili kişi tckn bilgisi."
         },
-        "createDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Kayıt yaratılma tarihi."
+        "createDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Kayıt yaratılma tarihi."
         },
-        "modifyDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Kayıt güncellenme tarihi."
+        "modifyDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Kayıt güncellenme tarihi."
         },
-        "modifyUser" : {
-          "type" : "string",
-          "description" : "Kayıt güncelleyen kullanıcı."
+        "modifyUser": {
+          "type": "string",
+          "description": "Kayıt güncelleyen kullanıcı."
         },
-        "effectiveDateStart" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Kayıt geçerlilik başlangıç tarihi."
+        "effectiveDateStart": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Kayıt geçerlilik başlangıç tarihi."
         },
-        "effectiveDateEnd" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Kayıt geçerlilik bitiş tarihi."
+        "effectiveDateEnd": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Kayıt geçerlilik bitiş tarihi."
         },
-        "updateReason" : {
-          "description" : "Abone güncellenme nedeni lookup değeridir.",
-          "$ref" : "#/definitions/LookupDTO"
+        "updateReason": {
+          "description": "Abone güncellenme nedeni lookup değeridir.",
+          "$ref": "#/definitions/LookupDTO"
         },
-        "tariffGroup" : {
-          "description" : "Abone tarife grubu lookup değeridir.",
-          "$ref" : "#/definitions/LookupDTO"
+        "tariffGroup": {
+          "description": "Abone tarife grubu lookup değeridir.",
+          "$ref": "#/definitions/LookupDTO"
         },
-        "tariffTimeType" : {
-          "description" : "Abone tarife zaman tipi lookup değeridir.",
-          "$ref" : "#/definitions/LookupDTO"
+        "tariffTimeType": {
+          "description": "Abone tarife zaman tipi lookup değeridir.",
+          "$ref": "#/definitions/LookupDTO"
         }
       }
     },
-    "CustomerHistoryRequestDto" : {
-      "type" : "object",
-      "required" : [ "customerId" ],
-      "properties" : {
-        "page" : {
-          "$ref" : "#/definitions/Page"
+    "CustomerHistoryRequestDto": {
+      "type": "object",
+      "required": [
+        "customerId"
+      ],
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/Page"
         },
-        "customerId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone kayıt id."
+        "customerId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone kayıt id."
         }
       }
     },
-    "CustomerPassivateRequestDto" : {
-      "type" : "object",
-      "required" : [ "customerId", "statusId" ],
-      "properties" : {
-        "customerId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone kayıt id."
+    "CustomerPassivateRequestDto": {
+      "type": "object",
+      "required": [
+        "customerId",
+        "statusId"
+      ],
+      "properties": {
+        "customerId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone kayıt id."
         },
-        "statusId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone durumu lookup değeridir."
+        "statusId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone durumu lookup değeridir."
         }
       }
     },
-    "CustomerPreCheckRequestDto" : {
-      "type" : "object",
-      "required" : [ "startDate" ],
-      "properties" : {
-        "consumptionPointEicCode" : {
-          "type" : "string",
-          "description" : "Sayaca ait enerji tanımlama kodu (EIC)."
+    "CustomerPreCheckRequestDto": {
+      "type": "object",
+      "required": [
+        "startDate"
+      ],
+      "properties": {
+        "consumptionPointEicCode": {
+          "type": "string",
+          "description": "Sayaca ait enerji tanımlama kodu (EIC)."
         },
-        "consumptionPointId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Sayaca ait tüketim noktası id."
+        "consumptionPointId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sayaca ait tüketim noktası id."
         },
-        "checkForUpdate" : {
-          "type" : "boolean",
-          "description" : "Sayaca ait tüketim noktası id."
+        "checkForUpdate": {
+          "type": "boolean",
+          "description": "Sayaca ait tüketim noktası id."
         },
-        "startDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy başlangıç bilgisi."
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy başlangıç bilgisi."
         },
-        "endDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy bitiş bilgisi."
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy bitiş bilgisi."
         },
-        "myPortfolioState" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Portföyünde bulunma durumu lookup değeri."
+        "myPortfolioState": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Portföyünde bulunma durumu lookup değeri."
         }
       }
     },
-    "CustomerPreCheckResponse" : {
-      "type" : "object",
-      "properties" : {
-        "isEligibleForOperation" : {
-          "type" : "boolean",
-          "description" : "Yapılan isteğin geçerli olup olmama durumu."
+    "CustomerPreCheckResponse": {
+      "type": "object",
+      "properties": {
+        "isEligibleForOperation": {
+          "type": "boolean",
+          "description": "Yapılan isteğin geçerli olup olmama durumu."
         },
-        "consumptionPointEicCode" : {
-          "type" : "string",
-          "description" : "Sayaca ait enerji tanımlama kodu (EIC)."
+        "consumptionPointEicCode": {
+          "type": "string",
+          "description": "Sayaca ait enerji tanımlama kodu (EIC)."
         },
-        "consumptionPointMainTariffGroupId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Sayaca ait tüketim noktası ana tarife grubu id."
+        "consumptionPointMainTariffGroupId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sayaca ait tüketim noktası ana tarife grubu id."
         },
-        "startDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy başlangıç bilgisi."
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy başlangıç bilgisi."
         },
-        "endDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy bitiş bilgisi."
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy bitiş bilgisi."
         },
-        "selectedOrganizationName" : {
-          "type" : "string",
-          "description" : "Organizasyon Adı."
+        "selectedOrganizationName": {
+          "type": "string",
+          "description": "Organizasyon Adı."
         },
-        "selectedOrganizationId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Organizasyon Id."
+        "selectedOrganizationId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Organizasyon Id."
         },
-        "selectedOrganizationSubtypeId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Organizasyon Alt Tip Id."
+        "selectedOrganizationSubtypeId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Organizasyon Alt Tip Id."
         }
       }
     },
-    "CustomerQueryCountRequestDto" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone kayıt id."
+    "CustomerQueryCountRequestDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone kayıt id."
         },
-        "consumptionPointEicCode" : {
-          "type" : "string",
-          "example" : "40X000000000002C",
-          "description" : "Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği durumda gönderilmemelidir."
+        "consumptionPointEicCode": {
+          "type": "string",
+          "example": "40X000000000002C",
+          "description": "Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği durumda gönderilmemelidir."
         },
-        "consumptionPointId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Sayaca ait tüketim noktası id. EIC gönderildiği durumda gönderilmemelidir."
+        "consumptionPointId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sayaca ait tüketim noktası id. EIC gönderildiği durumda gönderilmemelidir."
         },
-        "customerNo" : {
-          "type" : "string",
-          "description" : "Abone tüketici no bilgisi."
+        "customerNo": {
+          "type": "string",
+          "description": "Abone tüketici no bilgisi."
         },
-        "startDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy başlangıç bilgisi."
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy başlangıç bilgisi."
         },
-        "endDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy bitiş bilgisi."
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy bitiş bilgisi."
         },
-        "period" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Dönem bilgisi"
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Dönem bilgisi"
         },
-        "status" : {
-          "type" : "array",
-          "description" : "Abone durumu lookup değeridir.",
-          "items" : {
-            "type" : "integer",
-            "format" : "int64"
+        "status": {
+          "type": "array",
+          "description": "Abone durumu lookup değeridir.",
+          "items": {
+            "type": "integer",
+            "format": "int64"
           }
         },
-        "category" : {
-          "type" : "array",
-          "description" : "Abone kategori tipi lookup değeridir.",
-          "items" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        }
-      }
-    },
-    "CustomerQueryCountResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "count" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Kayıt Sayısı"
-        }
-      }
-    },
-    "CustomerQueryRequestDto" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone kayıt id."
-        },
-        "consumptionPointEicCode" : {
-          "type" : "string",
-          "example" : "40X000000000002C",
-          "description" : "Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği durumda gönderilmemelidir."
-        },
-        "consumptionPointId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Sayaca ait tüketim noktası id. EIC gönderildiği durumda gönderilmemelidir."
-        },
-        "customerNo" : {
-          "type" : "string",
-          "description" : "Abone tüketici no bilgisi."
-        },
-        "startDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy başlangıç bilgisi."
-        },
-        "endDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy bitiş bilgisi."
-        },
-        "period" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Dönem bilgisi"
-        },
-        "status" : {
-          "type" : "array",
-          "description" : "Abone durumu lookup değeridir.",
-          "items" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        },
-        "category" : {
-          "type" : "array",
-          "description" : "Abone kategori tipi lookup değeridir.",
-          "items" : {
-            "type" : "integer",
-            "format" : "int64"
-          }
-        },
-        "page" : {
-          "description" : "Sorgulama Sayfası",
-          "$ref" : "#/definitions/Page"
-        }
-      }
-    },
-    "CustomerRegisterRequestDto" : {
-      "type" : "object",
-      "required" : [ "categoryType", "customerNo", "startDate", "title" ],
-      "properties" : {
-        "consumptionPointEicCode" : {
-          "type" : "string",
-          "example" : "40X000000000002C",
-          "description" : "Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği durumda gönderilmemelidir."
-        },
-        "consumptionPointId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Sayaca ait tüketim noktası id. EIC gönderildiği durumda gönderilmemelidir."
-        },
-        "startDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy başlangıç bilgisi."
-        },
-        "endDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy bitiş bilgisi."
-        },
-        "categoryType" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone kategori tipi lookup değeridir."
-        },
-        "customerNo" : {
-          "type" : "string",
-          "description" : "Abone tüketici no bilgisi."
-        },
-        "title" : {
-          "type" : "string",
-          "description" : "Tüketici ad/soyad veya ünvan bilgisi."
-        },
-        "authorizedPerson1Name" : {
-          "type" : "string",
-          "description" : "Birinci yetkili kişi ad/soyad bilgisi. Abone tipine göre zorunluluk arz edebilir."
-        },
-        "authorizedPerson2Name" : {
-          "type" : "string",
-          "description" : "İkinci yetkili kişi ad/soyad bilgisi."
-        },
-        "authorizedPerson1No" : {
-          "type" : "string",
-          "description" : "Birinci yetkili kişi tckn bilgisi. Abone tipine göre zorunluluk arz edebilir."
-        },
-        "authorizedPerson2No" : {
-          "type" : "string",
-          "description" : "İkinci yetkili kişi tckn bilgisi."
-        },
-        "isAgreementChecked" : {
-          "type" : "boolean",
-          "description" : "Abone ile yapılmış ikili anlaşma durumu."
-        },
-        "tariffGroup" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone tarife grubu lookup değeridir."
-        },
-        "tariffTimeType" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone tarife zaman tipi lookup değeridir."
-        }
-      }
-    },
-    "CustomerUpdateRequestDto" : {
-      "type" : "object",
-      "required" : [ "customerId" ],
-      "properties" : {
-        "customerId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone kayıt id."
-        },
-        "startDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy başlangıç bilgisi."
-        },
-        "endDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Abone portföy bitiş bilgisi."
-        },
-        "title" : {
-          "type" : "string",
-          "description" : "Tüketici ad/soyad veya ünvan bilgisi."
-        },
-        "authorizedPerson1Name" : {
-          "type" : "string",
-          "description" : "Birinci yetkili kişi ad/soyad bilgisi. Abone tipine göre zorunluluk arz edebilir."
-        },
-        "authorizedPerson2Name" : {
-          "type" : "string",
-          "description" : "İkinci yetkili kişi ad/soyad bilgisi."
-        },
-        "authorizedPerson1No" : {
-          "type" : "string",
-          "description" : "Birinci yetkili kişi tckn bilgisi. Abone tipine göre zorunluluk arz edebilir."
-        },
-        "authorizedPerson2No" : {
-          "type" : "string",
-          "description" : "İkinci yetkili kişi tckn bilgisi."
-        },
-        "tariffGroup" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone tarife grubu lookup değeridir."
-        },
-        "tariffTimeType" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone tarife zaman tipi lookup değeridir."
-        }
-      }
-    },
-    "LocalizationDTO" : {
-      "type" : "object",
-      "properties" : {
-        "language" : {
-          "type" : "string",
-          "description" : "Çoklu Seçim Dili"
-        },
-        "text" : {
-          "type" : "string",
-          "description" : "Çoklu Seçim Açıklama (Dile Göre)"
-        }
-      }
-    },
-    "LookupDTO" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Çoklu Seçim ID"
-        },
-        "value" : {
-          "type" : "string",
-          "description" : "Çoklu Seçim Değer"
-        },
-        "localizations" : {
-          "type" : "array",
-          "description" : "Çoklu Seçim Yerelleştirme Listesi",
-          "items" : {
-            "$ref" : "#/definitions/LocalizationDTO"
+        "category": {
+          "type": "array",
+          "description": "Abone kategori tipi lookup değeridir.",
+          "items": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       }
     },
-    "LookupRequest" : {
-      "type" : "object",
-      "required" : [ "lookupType" ],
-      "properties" : {
-        "lookupType" : {
-          "type" : "string",
-          "description" : "Çoklu Seçim Anahtarı"
+    "CustomerQueryCountResponseDto": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Kayıt Sayısı"
         }
       }
     },
-    "LookupResponse" : {
-      "type" : "object",
-      "properties" : {
-        "values" : {
-          "type" : "array",
-          "description" : "Çoklu Seçim Değer Listesi",
-          "items" : {
-            "$ref" : "#/definitions/LookupDTO"
+    "CustomerQueryRequestDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone kayıt id."
+        },
+        "consumptionPointEicCode": {
+          "type": "string",
+          "example": "40X000000000002C",
+          "description": "Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği durumda gönderilmemelidir."
+        },
+        "consumptionPointId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sayaca ait tüketim noktası id. EIC gönderildiği durumda gönderilmemelidir."
+        },
+        "customerNo": {
+          "type": "string",
+          "description": "Abone tüketici no bilgisi."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy başlangıç bilgisi."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy bitiş bilgisi."
+        },
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Dönem bilgisi"
+        },
+        "status": {
+          "type": "array",
+          "description": "Abone durumu lookup değeridir.",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "category": {
+          "type": "array",
+          "description": "Abone kategori tipi lookup değeridir.",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "page": {
+          "description": "Sorgulama Sayfası",
+          "$ref": "#/definitions/Page"
+        }
+      }
+    },
+    "CustomerRegisterRequestDto": {
+      "type": "object",
+      "required": [
+        "categoryType",
+        "customerNo",
+        "startDate",
+        "title"
+      ],
+      "properties": {
+        "consumptionPointEicCode": {
+          "type": "string",
+          "example": "40X000000000002C",
+          "description": "Sayaca ait enerji tanımlama kodu (EIC). Tüketim noktası id gönderildiği durumda gönderilmemelidir."
+        },
+        "consumptionPointId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Sayaca ait tüketim noktası id. EIC gönderildiği durumda gönderilmemelidir."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy başlangıç bilgisi."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy bitiş bilgisi."
+        },
+        "categoryType": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone kategori tipi lookup değeridir."
+        },
+        "customerNo": {
+          "type": "string",
+          "description": "Abone tüketici no bilgisi."
+        },
+        "title": {
+          "type": "string",
+          "description": "Tüketici ad/soyad veya ünvan bilgisi."
+        },
+        "authorizedPerson1Name": {
+          "type": "string",
+          "description": "Birinci yetkili kişi ad/soyad bilgisi. Abone tipine göre zorunluluk arz edebilir."
+        },
+        "authorizedPerson2Name": {
+          "type": "string",
+          "description": "İkinci yetkili kişi ad/soyad bilgisi."
+        },
+        "authorizedPerson1No": {
+          "type": "string",
+          "description": "Birinci yetkili kişi tckn bilgisi. Abone tipine göre zorunluluk arz edebilir."
+        },
+        "authorizedPerson2No": {
+          "type": "string",
+          "description": "İkinci yetkili kişi tckn bilgisi."
+        },
+        "isAgreementChecked": {
+          "type": "boolean",
+          "description": "Abone ile yapılmış ikili anlaşma durumu."
+        },
+        "tariffGroup": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone tarife grubu lookup değeridir."
+        },
+        "tariffTimeType": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone tarife zaman tipi lookup değeridir."
+        }
+      }
+    },
+    "CustomerUpdateRequestDto": {
+      "type": "object",
+      "required": [
+        "customerId"
+      ],
+      "properties": {
+        "customerId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone kayıt id."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy başlangıç bilgisi."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Abone portföy bitiş bilgisi."
+        },
+        "title": {
+          "type": "string",
+          "description": "Tüketici ad/soyad veya ünvan bilgisi."
+        },
+        "authorizedPerson1Name": {
+          "type": "string",
+          "description": "Birinci yetkili kişi ad/soyad bilgisi. Abone tipine göre zorunluluk arz edebilir."
+        },
+        "authorizedPerson2Name": {
+          "type": "string",
+          "description": "İkinci yetkili kişi ad/soyad bilgisi."
+        },
+        "authorizedPerson1No": {
+          "type": "string",
+          "description": "Birinci yetkili kişi tckn bilgisi. Abone tipine göre zorunluluk arz edebilir."
+        },
+        "authorizedPerson2No": {
+          "type": "string",
+          "description": "İkinci yetkili kişi tckn bilgisi."
+        },
+        "tariffGroup": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone tarife grubu lookup değeridir."
+        },
+        "tariffTimeType": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone tarife zaman tipi lookup değeridir."
+        }
+      }
+    },
+    "LocalizationDTO": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "Çoklu Seçim Dili"
+        },
+        "text": {
+          "type": "string",
+          "description": "Çoklu Seçim Açıklama (Dile Göre)"
+        }
+      }
+    },
+    "LookupDTO": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Çoklu Seçim ID"
+        },
+        "value": {
+          "type": "string",
+          "description": "Çoklu Seçim Değer"
+        },
+        "localizations": {
+          "type": "array",
+          "description": "Çoklu Seçim Yerelleştirme Listesi",
+          "items": {
+            "$ref": "#/definitions/LocalizationDTO"
           }
         }
       }
     },
-    "LookupTypeDTO" : {
-      "type" : "object",
-      "properties" : {
-        "lookupType" : {
-          "type" : "string",
-          "description" : "Çoklu Seçim Anahtarı"
-        },
-        "lookupDescription" : {
-          "type" : "string",
-          "description" : "Çoklu Seçim Anahtar Açıklama"
+    "LookupRequest": {
+      "type": "object",
+      "required": [
+        "lookupType"
+      ],
+      "properties": {
+        "lookupType": {
+          "type": "string",
+          "description": "Çoklu Seçim Anahtarı"
         }
       }
     },
-    "LookupTypeResponse" : {
-      "type" : "object",
-      "properties" : {
-        "types" : {
-          "type" : "array",
-          "description" : "Çoklu Seçim Anahtar Listesi",
-          "items" : {
-            "$ref" : "#/definitions/LookupTypeDTO"
+    "LookupResponse": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "Çoklu Seçim Değer Listesi",
+          "items": {
+            "$ref": "#/definitions/LookupDTO"
           }
         }
       }
     },
-    "NameBreakdownResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "name" : {
-          "type" : "string",
-          "description" : "Organizasyon Adı."
+    "LookupTypeDTO": {
+      "type": "object",
+      "properties": {
+        "lookupType": {
+          "type": "string",
+          "description": "Çoklu Seçim Anahtarı"
         },
-        "effectiveDateStart" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Kayıt geçerlilik başlangıç tarihi."
-        },
-        "effectiveDateEnd" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Kayıt geçerlilik bitiş tarihi."
-        },
-        "effectiveId" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Organizasyon Id."
+        "lookupDescription": {
+          "type": "string",
+          "description": "Çoklu Seçim Anahtar Açıklama"
         }
       }
     },
-    "Page" : {
-      "type" : "object",
-      "properties" : {
-        "number" : {
-          "type" : "integer",
-          "format" : "int64",
-          "example" : "${EXAMPLE_PAGE_NUMBER}",
-          "description" : "${VALUE_PAGE_NUMBER}"
-        },
-        "size" : {
-          "type" : "integer",
-          "format" : "int64",
-          "example" : "${EXAMPLE_PAGE_SIZE}",
-          "description" : "${VALUE_PAGE_SIZE}"
-        },
-        "total" : {
-          "type" : "integer",
-          "format" : "int64",
-          "example" : "${EXAMPLE_PAGE_TOTAL}",
-          "description" : "${VALUE_PAGE_TOTAL}"
-        },
-        "sort" : {
-          "description" : "${VALUE_PAGE_SORT}",
-          "$ref" : "#/definitions/SortDTO"
+    "LookupTypeResponse": {
+      "type": "object",
+      "properties": {
+        "types": {
+          "type": "array",
+          "description": "Çoklu Seçim Anahtar Listesi",
+          "items": {
+            "$ref": "#/definitions/LookupTypeDTO"
+          }
         }
       }
     },
-    "RestResponse" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "NameBreakdownResponseDto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Organizasyon Adı."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        "effectiveDateStart": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Kayıt geçerlilik başlangıç tarihi."
         },
-        "spanIds" : {
-          "type" : "string"
+        "effectiveDateEnd": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Kayıt geçerlilik bitiş tarihi."
         },
-        "hostName" : {
-          "type" : "string"
+        "effectiveId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Organizasyon Id."
+        }
+      }
+    },
+    "Page": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "format": "int64",
+          "example": "${EXAMPLE_PAGE_NUMBER}",
+          "description": "${VALUE_PAGE_NUMBER}"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "example": "${EXAMPLE_PAGE_SIZE}",
+          "description": "${VALUE_PAGE_SIZE}"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "example": "${EXAMPLE_PAGE_TOTAL}",
+          "description": "${VALUE_PAGE_TOTAL}"
         },
-        "successMessage" : {
-          "type" : "string"
+        "sort": {
+          "description": "${VALUE_PAGE_SORT}",
+          "$ref": "#/definitions/SortDTO"
+        }
+      }
+    },
+    "RestResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
+        },
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyObject"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyObject"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseBody" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "type" : "object",
-          "readOnly" : true
+    "RestResponseBody": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "object",
+          "readOnly": true
         }
       }
     },
-    "RestResponseBodyBooleanDTO" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/BooleanDTO"
+    "RestResponseBodyBooleanDTO": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/BooleanDTO"
         }
       }
     },
-    "RestResponseBodyCustomerDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/CustomerDto"
+    "RestResponseBodyCustomerDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/CustomerDto"
         }
       }
     },
-    "RestResponseBodyCustomerPreCheckResponse" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/CustomerPreCheckResponse"
+    "RestResponseBodyCustomerPreCheckResponse": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/CustomerPreCheckResponse"
         }
       }
     },
-    "RestResponseBodyCustomerQueryCountResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/CustomerQueryCountResponseDto"
+    "RestResponseBodyCustomerQueryCountResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/CustomerQueryCountResponseDto"
         }
       }
     },
-    "RestResponseBodyLookupResponse" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/LookupResponse"
+    "RestResponseBodyLookupResponse": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/LookupResponse"
         }
       }
     },
-    "RestResponseBodyLookupTypeResponse" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/LookupTypeResponse"
+    "RestResponseBodyLookupTypeResponse": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/LookupTypeResponse"
         }
       }
     },
-    "RestResponseBodyObject" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "type" : "object",
-          "readOnly" : true
+    "RestResponseBodyObject": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "object",
+          "readOnly": true
         }
       }
     },
-    "RestResponseBodySortablePageResponseCustomerDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/SortablePageResponseCustomerDto"
+    "RestResponseBodySortablePageResponseCustomerDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/SortablePageResponseCustomerDto"
         }
       }
     },
-    "RestResponseBooleanDTO" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseBooleanDTO": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyBooleanDTO"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyBooleanDTO"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseCustomerDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseCustomerDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyCustomerDto"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyCustomerDto"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseCustomerPreCheckResponse" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseCustomerPreCheckResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyCustomerPreCheckResponse"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyCustomerPreCheckResponse"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseCustomerQueryCountResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseCustomerQueryCountResponseDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyCustomerQueryCountResponseDto"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyCustomerQueryCountResponseDto"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseError" : {
-      "type" : "object",
-      "properties" : {
-        "errorCode" : {
-          "type" : "string",
-          "description" : "Alınan hatanın kod bilgisi."
+    "RestResponseError": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Alınan hatanın kod bilgisi."
         },
-        "errorMessage" : {
-          "type" : "string",
-          "description" : "Alınan hatanın açıklaması."
+        "errorMessage": {
+          "type": "string",
+          "description": "Alınan hatanın açıklaması."
         }
       }
     },
-    "RestResponseLookupResponse" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseLookupResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyLookupResponse"
-        }
-      },
-      "xml" : {
-        "name" : "response"
-      }
-    },
-    "RestResponseLookupTypeResponse" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
-        },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
-        },
-        "spanIds" : {
-          "type" : "string"
-        },
-        "hostName" : {
-          "type" : "string"
-        },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
-        },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
-        },
-        "successMessage" : {
-          "type" : "string"
-        },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
-          }
-        },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
-          }
-        },
-        "dispatch" : {
-          "type" : "string"
-        },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyLookupTypeResponse"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyLookupResponse"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseSortablePageResponseCustomerDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseLookupTypeResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodySortablePageResponseCustomerDto"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyLookupTypeResponse"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "SortDTO" : {
-      "type" : "object",
-      "properties" : {
-        "field" : {
-          "type" : "string",
-          "example" : "${EXAMPLE_SORT_FIELD}",
-          "description" : "${VALUE_SORT_FIELD}"
+    "RestResponseSortablePageResponseCustomerDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "direction" : {
-          "type" : "string",
-          "example" : "ASC",
-          "description" : "${VALUE_SORT_DIRECTION}",
-          "enum" : [ "ASC", "DESC" ]
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
+        },
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodySortablePageResponseCustomerDto"
+        }
+      },
+      "xml": {
+        "name": "response"
+      }
+    },
+    "SortDTO": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "example": "${EXAMPLE_SORT_FIELD}",
+          "description": "${VALUE_SORT_FIELD}"
+        },
+        "direction": {
+          "type": "string",
+          "example": "ASC",
+          "description": "${VALUE_SORT_DIRECTION}",
+          "enum": [
+            "ASC",
+            "DESC"
+          ]
         }
       }
     },
-    "SortablePageResponse" : {
-      "type" : "object",
-      "properties" : {
-        "items" : {
-          "type" : "array",
-          "items" : {
-            "type" : "object"
+    "SortablePageResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object"
           }
         },
-        "page" : {
-          "$ref" : "#/definitions/Page"
+        "page": {
+          "$ref": "#/definitions/Page"
         },
-        "sortableFields" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "type" : "string"
-          }
-        }
-      }
-    },
-    "SortablePageResponseCustomerDto" : {
-      "type" : "object",
-      "properties" : {
-        "items" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/CustomerDto"
-          }
-        },
-        "page" : {
-          "$ref" : "#/definitions/Page"
-        },
-        "sortableFields" : {
-          "type" : "array",
-          "uniqueItems" : true,
-          "items" : {
-            "type" : "string"
+        "sortableFields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
           }
         }
       }
     },
-    "StatePredefinedCustomerInPortfolioRequestDto" : {
-      "type" : "object",
-      "required" : [ "categoryType", "customerNo" ],
-      "properties" : {
-        "categoryType" : {
-          "type" : "integer",
-          "format" : "int64",
-          "description" : "Abone kategori tipi lookup değeridir."
+    "SortablePageResponseCustomerDto": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerDto"
+          }
         },
-        "customerNo" : {
-          "type" : "string",
-          "description" : "Abone tüketici no bilgisi."
+        "page": {
+          "$ref": "#/definitions/Page"
+        },
+        "sortableFields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "StatePredefinedCustomerInPortfolioRequestDto": {
+      "type": "object",
+      "required": [
+        "categoryType",
+        "customerNo"
+      ],
+      "properties": {
+        "categoryType": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Abone kategori tipi lookup değeridir."
+        },
+        "customerNo": {
+          "type": "string",
+          "description": "Abone tüketici no bilgisi."
         }
       }
     }

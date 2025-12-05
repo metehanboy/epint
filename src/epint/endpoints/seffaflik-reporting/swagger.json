@@ -6,46 +6,67 @@
     },
     "host": "seffaflik.epias.com.tr",
     "basePath": "/reporting-service",
-    "tags": [{
-        "name": "aof-average-data-controller"
-    }, {
-        "name": "market-data-controller"
-    }, {
-        "name": "mcp-average-data-controller"
-    }, {
-        "name": "reporting-data-controller"
-    }, {
-        "name": "reporting-export-controller"
-    }, {
-        "name": "smp-average-data-controller"
-    }, {
-        "name": "yekdem-data-controller"
-    }],
-    "schemes": ["https"],
+    "tags": [
+        {
+            "name": "aof-average-data-controller"
+        },
+        {
+            "name": "market-data-controller"
+        },
+        {
+            "name": "mcp-average-data-controller"
+        },
+        {
+            "name": "reporting-data-controller"
+        },
+        {
+            "name": "reporting-export-controller"
+        },
+        {
+            "name": "smp-average-data-controller"
+        },
+        {
+            "name": "yekdem-data-controller"
+        }
+    ],
+    "schemes": [
+        "https"
+    ],
     "paths": {
         "/v1/aof-average/data/daily": {
             "post": {
-                "tags": ["aof-average-data-controller"],
+                "tags": [
+                    "aof-average-data-controller"
+                ],
                 "summary": "Epiaş Web Sitesi İçin AOF Günlük Aritmetik Ortalama Listeleme Servisi",
                 "description": "Epiaş web sitesinde gösterilmek üzere Güniçi AOF fiyatının seçilen tarihlere göre günlük aritmetik ortalamasını dönen servistir.",
                 "operationId": "aof-average-daily-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -64,27 +85,38 @@
         },
         "/v1/aof-average/data/default": {
             "post": {
-                "tags": ["aof-average-data-controller"],
+                "tags": [
+                    "aof-average-data-controller"
+                ],
                 "summary": "AOF Aritmetik Ortalama Listeleme Servisi",
                 "description": "Gün içi AOF fiyatının seçilen tarihlere göre çeyreklik(QUARTERLY), yarı-yıl(HALF-YEAR) ve yıllık(YEARLY) aritmetik ortalamasını dönen servistir.",
                 "operationId": "aof-average-default-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -103,27 +135,38 @@
         },
         "/v1/aof-average/data/monthly": {
             "post": {
-                "tags": ["aof-average-data-controller"],
+                "tags": [
+                    "aof-average-data-controller"
+                ],
                 "summary": "AOF Aylık Aritmetik Ortalama Listeleme Servisi",
                 "description": "Gün içi AOF fiyatının seçilen tarihlere göre aylık aritmetik ortalamasını dönen servistir.",
                 "operationId": "aof-average-monthly-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -142,27 +185,38 @@
         },
         "/v1/aof-average/data/weekly": {
             "post": {
-                "tags": ["aof-average-data-controller"],
+                "tags": [
+                    "aof-average-data-controller"
+                ],
                 "summary": "AOF Haftalık Aritmetik Ortalama Listeleme Servisi",
                 "description": "Gün içi AOF fiyatının seçilen tarihlere göre haftalık aritmetik ortalamasını dönen servistir.",
                 "operationId": "aof-average-weekly-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -181,27 +235,38 @@
         },
         "/v1/data/daily-prices": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Günlük Fiyatlar Verisi Servisi",
                 "description": "Günlük Fiyatlar Verisi Servisi",
                 "operationId": "daily-prices",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GunlukFiyatRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GunlukFiyatRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -220,27 +285,38 @@
         },
         "/v1/data/daily-prices-average": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Günlük Fiyatlar Ortalama Verisi Servisi",
                 "description": "Günlük Fiyatlar Ortalama Verisi Servisi",
                 "operationId": "daily-prices-average",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GunlukFiyatRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GunlukFiyatRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -259,27 +335,38 @@
         },
         "/v1/data/daily-prices-min-max": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Günlük Fiyatlar Min Maks Fiyat Servisi",
                 "description": "Günlük Fiyatlar Min Maks Fiyat Servisi",
                 "operationId": "daily-prices-min-max",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GunlukFiyatRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GunlukFiyatRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -298,27 +385,38 @@
         },
         "/v1/data/daily-prices-min-max-monthly": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Günlük Fiyatlar Aylık Min Maks Fiyat Servisi",
                 "description": "Günlük Fiyatlar Aylık Min Maks Fiyat Servisi",
                 "operationId": "daily-prices-min-max-monthly",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GunlukFiyatRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GunlukFiyatRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -337,27 +435,38 @@
         },
         "/v1/data/daily-prices-min-max-yearly": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Günlük Fiyatlar Yıllık Min Maks Fiyat Servisi",
                 "description": "Günlük Fiyatlar Yıllık Min Maks Fiyat Servisi",
                 "operationId": "daily-prices-min-max-yearly",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GunlukFiyatRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GunlukFiyatRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -376,27 +485,38 @@
         },
         "/v1/data/daily-report": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Günlük Rapor Listeleme Servisi",
                 "description": "Günlük Rapor Listeleme Servisi",
                 "operationId": "daily-report",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/DailyReportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DailyReportRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -415,27 +535,38 @@
         },
         "/v1/data/dgp-talimat": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "DGP Talimatları Listeleme Servisi",
                 "description": "DGP Talimatları Listeleme Servisi",
                 "operationId": "dgp-talimat",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/DgpTalimatRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DgpTalimatRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -454,27 +585,38 @@
         },
         "/v1/data/dgp-talimat-agr-ort": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "DGP Talimatları (Ağırlıklı Ortalama) Listeleme Servisi",
                 "description": "DGP Talimatları (Ağırlıklı Ortalama) Listeleme Servisi",
                 "operationId": "dgp-talimat-agr-ort",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/DgpTalimatAgrOrtRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DgpTalimatAgrOrtRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -493,27 +635,38 @@
         },
         "/v1/data/electricity-market-volume-physically": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Elektrik Piyasa Hacimleri Fiziksel Listeleme Servisi",
                 "description": "Elektrik Piyasa Hacimleri Fiziksel Listeleme Servisi",
                 "operationId": "electricity-market-volume-physically",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/ElektrikPiyasaHacimFizikselRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ElektrikPiyasaHacimFizikselRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -532,18 +685,25 @@
         },
         "/v1/data/eligible-consumer-and-meter-increases": {
             "get": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Serbest Tüketici ve Sayaç Artış Miktarı Servisi",
                 "description": "Serbest Tüketici ve Sayaç Artış Miktarı Servisi",
                 "operationId": "eligible-consumer-and-meter-increases",
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -562,27 +722,38 @@
         },
         "/v1/data/gip-kontrat": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Gip Kontrat Listesi Servisi",
                 "description": "Gip Kontrat Listesi Servisi",
                 "operationId": "gip-kontrat",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GipKontratRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GipKontratRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -601,26 +772,34 @@
         },
         "/v1/data/idm-contract-summary": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "GİP Kontrat Özeti Listeleme Servisi",
                 "description": "GİP Kontrat Özeti Listeleme Servisi",
                 "operationId": "idm-contract-summary",
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GipKontratOzetRequestDto"
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GipKontratOzetRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -639,27 +818,38 @@
         },
         "/v1/data/idm-order-list": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "GiP Teklif Listesi Listeleme Servisi",
                 "description": "GiP Teklif Listesi Listeleme Servisi",
                 "operationId": "idm-order-list",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GipKontratTekliflerRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GipKontratTekliflerRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -678,27 +868,38 @@
         },
         "/v1/data/mcp-smp-arithmetic-averages": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "SMF ve PTF Aritmetik Ortalamaları Listeleme Servisi",
                 "description": "SMF ve PTF Aritmetik Ortalamaları",
                 "operationId": "mcp-smp-arithmetic-averages",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/SmfPtfAritmetikOrtalamaRequest"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SmfPtfAritmetikOrtalamaRequest"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -717,27 +918,38 @@
         },
         "/v1/data/mcp-smp-averages": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "SMF ve PTF Ortalamaları Listeleme Servisi",
                 "description": "SMF ve PTF Ortalamaları",
                 "operationId": "mcp-smp-averages",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/PtfSmfOrtalamalariRequest"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PtfSmfOrtalamalariRequest"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -756,27 +968,38 @@
         },
         "/v1/data/periodic-price-averages": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Dönemlik Fiyat Ortalamaları Listeleme Servisi",
                 "description": "Dönemlik Fiyat Ortalamaları Listeleme Servisi",
                 "operationId": "ptf-smf-periodic-price-averages",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/PtfSmfDonemlikAgirlikliOrtalamaRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PtfSmfDonemlikAgirlikliOrtalamaRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -795,27 +1018,38 @@
         },
         "/v1/data/periodic-price-volume": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Dönemlik Piyasa Hacimleri Listeleme Servisi",
                 "description": "Dönemlik Piyasa Hacimleri Listeleme Servisi",
                 "operationId": "periodic-price-volume",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/PeriodicPriceVolumeRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PeriodicPriceVolumeRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -834,27 +1068,38 @@
         },
         "/v1/data/ptf-smf-sdf": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "PTF SMF ve SDF Listeleme Servisi",
                 "description": "PTF SMF ve SDF Listeleme Servisi",
                 "operationId": "ptf-sm-sdf",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/PtfSmfSdfRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PtfSmfSdfRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -873,27 +1118,38 @@
         },
         "/v1/data/smp-mcp-multiple-daytime-avg": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "PTF ve SMF 3 Zamanlı Fiyat Ortalamaları Rapor Listeleme Servisi",
                 "description": "PTF ve SMF 3 Zamanlı Fiyat Ortalamaları",
                 "operationId": "smp-mcp-multiple-daytime-avg",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/PtfSmfUcZamanliAgirlikliOrtalamaRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PtfSmfUcZamanliAgirlikliOrtalamaRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -912,27 +1168,38 @@
         },
         "/v1/data/stsa": {
             "post": {
-                "tags": ["reporting-data-controller"],
+                "tags": [
+                    "reporting-data-controller"
+                ],
                 "summary": "Serbest Tüketici Sayaç Adeti",
                 "description": "Serbest Tüketici Sayaç Adeti",
                 "operationId": "Stsa",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/StsaRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/StsaRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -951,21 +1218,31 @@
         },
         "/v1/export/daily-prices": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "Günlük Fiyatlar Verisi Dışa Aktarım Servisi",
                 "description": "Günlük Fiyatlar Verisi Dışa Aktarım Servisi",
                 "operationId": "daily-prices-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GunlukFiyatlarExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GunlukFiyatlarExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -978,21 +1255,31 @@
         },
         "/v1/export/daily-prices-average": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "Günlük Fiyatlar Ortalama Verisi Dışa Aktarım Servisi",
                 "description": "Günlük Fiyatlar Ortalama Verisi Dışa Aktarım Servisi",
                 "operationId": "daily-prices-average-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GunlukFiyatlarExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GunlukFiyatlarExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1005,21 +1292,31 @@
         },
         "/v1/export/daily-prices-min-max": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "Günlük Fiyatlar Min Maks Fiyat Dışa Aktarım Servisi",
                 "description": "Günlük Fiyatlar Min Maks Fiyat Dışa Aktarım Servisi",
                 "operationId": "daily-prices-min-max-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GunlukFiyatlarExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GunlukFiyatlarExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1032,21 +1329,31 @@
         },
         "/v1/export/daily-prices-min-max-monthly": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "Günlük Fiyatlar Aylık Min Maks Fiyat Dışa Aktarım Servisi",
                 "description": "Günlük Fiyatlar Aylık Min Maks Fiyat Dışa Aktarım Servisi",
                 "operationId": "daily-prices-min-max-monthly-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GunlukFiyatlarExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GunlukFiyatlarExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1059,21 +1366,31 @@
         },
         "/v1/export/daily-prices-min-max-yearly": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "Günlük Fiyatlar Yıllık Min Maks Fiyat Dışa Aktarım Servisi",
                 "description": "Günlük Fiyatlar Yıllık Min Maks Fiyat Dışa Aktarım Servisi",
                 "operationId": "daily-prices-min-max-yearly-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GunlukFiyatlarExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GunlukFiyatlarExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1086,21 +1403,31 @@
         },
         "/v1/export/daily-report": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "Günlük Rapor Dışa Aktarım Servisi",
                 "description": "Günlük Rapor Dışa Aktarım Servisi",
                 "operationId": "daily-report-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/DailyReportExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DailyReportExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1113,21 +1440,31 @@
         },
         "/v1/export/dgp-talimat": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "DGP Talimatları Dışa Aktarım Servisi",
                 "description": "DGP Talimatları Dışa Aktarım Servisi",
                 "operationId": "dgp-talimat-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/DgpTalimatExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DgpTalimatExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1140,21 +1477,31 @@
         },
         "/v1/export/dgp-talimat-agr-ort": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "DGP Talimatları (Ağırlıklı Ortalama) Dışa Aktarım Servisi",
                 "description": "DGP Talimatları (Ağırlıklı Ortalama) Dışa Aktarım Servisi",
                 "operationId": "dgp-talimat-agr-ort-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/DgpTalimatAgrOrtExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DgpTalimatAgrOrtExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1167,21 +1514,31 @@
         },
         "/v1/export/electricity-market-volume-physically": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "Elektrik Piyasa Hacimleri Fiziksel Dışa Aktarım Servisi",
                 "description": "Elektrik Piyasa Hacimleri Fiziksel Dışa Aktarım Servisi",
                 "operationId": "electricity-market-volume-physically-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/ElektrikPiyasaHacimFizikselExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ElektrikPiyasaHacimFizikselExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1194,21 +1551,31 @@
         },
         "/v1/export/eligible-consumer-and-meter-increases": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "Serbest Tüketici ve Sayaç Artış Miktarı Dışa Aktarım Servisi",
                 "description": "Serbest Tüketici ve Sayaç Artış Miktarı Dışa Aktarım Servisi",
                 "operationId": "eligible-consumer-and-meter-increases-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/SerbestTuketiciSayacArtisExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SerbestTuketiciSayacArtisExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1221,21 +1588,31 @@
         },
         "/v1/export/idm-contract-summary": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "GİP Kontrat Özeti Dışa Aktarım Servisi",
                 "description": "GİP Kontrat Özeti Dışa Aktarım Servisi",
                 "operationId": "idm-contract-summary-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GipKontratOzetExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GipKontratOzetExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1248,21 +1625,31 @@
         },
         "/v1/export/idm-order-list": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "GiP Teklif Listesi Dışa Aktarım Servisi",
                 "description": "GiP Teklif Listesi Dışa Aktarım Servisi",
                 "operationId": "idm-order-list-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/GipKontratTekliflerExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GipKontratTekliflerExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1275,21 +1662,31 @@
         },
         "/v1/export/mcp-smp-averages": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "SMF ve PTF Ortalamaları Dışa Aktarım Servisi",
                 "description": "SMF ve PTF Ortalamaları",
                 "operationId": "mcp-smp-averages-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/PtfSmfOrtalamalariExportRequest"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PtfSmfOrtalamalariExportRequest"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1302,21 +1699,31 @@
         },
         "/v1/export/periodic-price-averages": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "Dönemlik Fiyat Ortalamaları Listeleme Dışa Aktarım Servisi",
                 "description": "PTF SMF ve SDF Listeleme Dışa Aktarım Servisi",
                 "operationId": "ptf-smf-periodic-price-averages-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/PtfSmfDonemlikAgirlikliOrtalamaExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PtfSmfDonemlikAgirlikliOrtalamaExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1329,20 +1736,27 @@
         },
         "/v1/export/periodic-price-volume": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "Dönemlik Piyasa Hacimleri Dışa Aktarım Servisi",
                 "description": "Dönemlik Piyasa Hacimleri Dışa Aktarım Servisi",
                 "operationId": "periodic-price-volume-export",
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/PeriodicPriceVolumeExportRequestDto"
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PeriodicPriceVolumeExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1355,21 +1769,31 @@
         },
         "/v1/export/ptf-smf-sdf": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "PTF SMF ve SDF Listeleme Dışa Aktarım Servisi",
                 "description": "PTF SMF ve SDF Listeleme Dışa Aktarım Servisi",
                 "operationId": "ptf-sm-sdf-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/PtfSmfSdfExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PtfSmfSdfExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1382,21 +1806,31 @@
         },
         "/v1/export/smp-mcp-multiple-daytime-avg": {
             "post": {
-                "tags": ["reporting-export-controller"],
+                "tags": [
+                    "reporting-export-controller"
+                ],
                 "summary": "PTF ve SMF 3 Zamanlı Fiyat Ortalamaları Rapor Dışa Aktarım Servisi",
                 "description": "PTF ve SMF 3 Zamanlı Fiyat Ortalamaları",
                 "operationId": "smp-mcp-multiple-daytime-avg-export",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/PtfSmfUcZamanliAgirlikliOrtalamaExportRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PtfSmfUcZamanliAgirlikliOrtalamaExportRequestDto"
+                        }
                     }
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1409,27 +1843,38 @@
         },
         "/v1/market/data/avg-mcp-and-renewables-unit-cost": {
             "post": {
-                "tags": ["market-data-controller"],
+                "tags": [
+                    "market-data-controller"
+                ],
                 "summary": "AOPTF ve YEKDEM birim maliyeti listeleme servisi.",
                 "description": "EPDK için, AOPTF ve YEKDEM birim maliyeti dönen servistir.",
                 "operationId": "aoptf-and-yek-unit-cost-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -1448,27 +1893,38 @@
         },
         "/v1/mcp-average/data/daily": {
             "post": {
-                "tags": ["mcp-average-data-controller"],
+                "tags": [
+                    "mcp-average-data-controller"
+                ],
                 "summary": "Epiaş Web Sitesi İçin GÖP Takas Fiyatı Günlük Aritmetik Ortalama Listeleme Servisi",
                 "description": "Epiaş web sitesinde gösterilmek üzere piyasa takas fiyatının seçilen tarihlere göre günlük aritmetik ortalamasını dönen servistir.",
                 "operationId": "mcp-average-daily-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -1487,27 +1943,38 @@
         },
         "/v1/mcp-average/data/default": {
             "post": {
-                "tags": ["mcp-average-data-controller"],
+                "tags": [
+                    "mcp-average-data-controller"
+                ],
                 "summary": "GÖP Piyasa Takas Fiyatı Aritmetik Ortalama Listeleme Servisi",
                 "description": "Piyasa takas fiyatının seçilen tarihlere göre çeyreklik(QUARTERLY), yarı-yıl(HALF-YEAR) ve yıllık(YEARLY) aritmetik ortalamasını dönen servistir.",
                 "operationId": "mcp-average-default-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -1526,27 +1993,38 @@
         },
         "/v1/mcp-average/data/monthly": {
             "post": {
-                "tags": ["mcp-average-data-controller"],
+                "tags": [
+                    "mcp-average-data-controller"
+                ],
                 "summary": "GÖP Piyasa Takas Fiyatı Aylık Aritmetik Ortalama Listeleme Servisi",
                 "description": "Piyasa takas fiyatının seçilen tarihlere göre aylık aritmetik ortalamasını dönen servistir.",
                 "operationId": "mcp-average-monthly-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -1565,27 +2043,38 @@
         },
         "/v1/mcp-average/data/weekly": {
             "post": {
-                "tags": ["mcp-average-data-controller"],
+                "tags": [
+                    "mcp-average-data-controller"
+                ],
                 "summary": "GÖP Piyasa Takas Fiyatı Haftalık Aritmetik Ortalama Listeleme Servisi",
                 "description": "Piyasa takas fiyatının seçilen tarihlere göre haftalık aritmetik ortalamasını dönen servistir.",
                 "operationId": "mcp-average-weekly-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -1604,27 +2093,38 @@
         },
         "/v1/renewables/data/renewables-unit-cost": {
             "post": {
-                "tags": ["yekdem-data-controller"],
+                "tags": [
+                    "yekdem-data-controller"
+                ],
                 "summary": "Yekdem Birim Maliyeti listeleme servisi",
                 "description": "EPDK için, YEKDEM Birim Maliyeti verilerini dönen servistir.",
                 "operationId": "renewables-unit-cost-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -1643,27 +2143,38 @@
         },
         "/v1/renewables/data/renewables-unit-cost-mcp": {
             "post": {
-                "tags": ["yekdem-data-controller"],
+                "tags": [
+                    "yekdem-data-controller"
+                ],
                 "summary": "Yekdem Birim Maliyeti PTF listeleme servisi",
                 "description": "EPDK için, YEKDEM Birim Maliyeti PTF verilerini dönen servistir.",
                 "operationId": "renewables-unit-cost-mcp-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -1682,27 +2193,38 @@
         },
         "/v1/smp-average/data/daily": {
             "post": {
-                "tags": ["smp-average-data-controller"],
+                "tags": [
+                    "smp-average-data-controller"
+                ],
                 "summary": "Epiaş Web Sitesi İçin SMF Günlük Aritmetik Ortalama Listeleme Servisi",
                 "description": "Epiaş web sitesinde gösterilmek üzere sistem marjinal fiyatının seçilen tarihlere göre günlük aritmetik ortalamasını dönen servistir.",
                 "operationId": "smp-average-daily-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -1721,27 +2243,38 @@
         },
         "/v1/smp-average/data/default": {
             "post": {
-                "tags": ["smp-average-data-controller"],
+                "tags": [
+                    "smp-average-data-controller"
+                ],
                 "summary": "SMF Aritmetik Ortalama Listeleme Servisi",
                 "description": "Sistem marjinal fiyatının seçilen tarihlere göre çeyreklik(QUARTERLY), yarı-yıl(HALF-YEAR) ve yıllık(YEARLY) aritmetik ortalamasını dönen servistir.",
                 "operationId": "smp-average-default-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -1760,27 +2293,38 @@
         },
         "/v1/smp-average/data/monthly": {
             "post": {
-                "tags": ["smp-average-data-controller"],
+                "tags": [
+                    "smp-average-data-controller"
+                ],
                 "summary": "SMF Aylık Aritmetik Ortalama Listeleme Servisi",
                 "description": "Sistem marjinal fiyatının seçilen tarihlere göre aylık aritmetik ortalamasını dönen servistir.",
                 "operationId": "smp-average-monthly-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -1799,27 +2343,38 @@
         },
         "/v1/smp-average/data/weekly": {
             "post": {
-                "tags": ["smp-average-data-controller"],
+                "tags": [
+                    "smp-average-data-controller"
+                ],
                 "summary": "SMF Haftalık Aritmetik Ortalama Listeleme Servisi",
                 "description": "Sistem marjinal fiyatının seçilen tarihlere göre haftalık aritmetik ortalamasını dönen servistir.",
                 "operationId": "smp-average-weekly-data",
-                "consumes": ["application/json", "application/xml"],
-                "produces": ["application/json", "application/xml"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Yapılacak isteğin içeriği.",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Yapılacak isteğin içeriği.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/BaseStartEndDateRequestDto"
+                        }
+                    },
+                    {
+                        "name": "TGT",
+                        "in": "header",
+                        "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
+                        "required": true,
+                        "type": "string"
                     }
-                }, {
-                    "name": "TGT",
-                    "in": "header",
-                    "description": "Required TGT header for authentication. More on: https://seffaflik.epias.com.tr/reporting-service/technical/en/index.html#_adding_security_information_to_requests",
-                    "required": true,
-                    "type": "string"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "Operation successful",
@@ -1876,7 +2431,14 @@
                 "periodType": {
                     "type": "string",
                     "description": "Dönem Tipi Bilgisi(Daily, Weekly, Monthly, Yearly)",
-                    "enum": ["DAILY", "WEEKLY", "MONTHLY", "YEARLY", "QUARTERLY", "HALF_YEAR"]
+                    "enum": [
+                        "DAILY",
+                        "WEEKLY",
+                        "MONTHLY",
+                        "YEARLY",
+                        "QUARTERLY",
+                        "HALF_YEAR"
+                    ]
                 }
             }
         },
@@ -1932,7 +2494,10 @@
         },
         "BaseStartEndDateRequestDto": {
             "type": "object",
-            "required": ["endDate", "startDate"],
+            "required": [
+                "endDate",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -2025,7 +2590,11 @@
         },
         "DailyReportExportRequestDto": {
             "type": "object",
-            "required": ["endDate", "exportType", "startDate"],
+            "required": [
+                "endDate",
+                "exportType",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -2047,13 +2616,20 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
         "DailyReportRequestDto": {
             "type": "object",
-            "required": ["endDate", "startDate"],
+            "required": [
+                "endDate",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -2189,7 +2765,10 @@
         },
         "DgpTalimatAgrOrtExportRequestDto": {
             "type": "object",
-            "required": ["date", "exportType"],
+            "required": [
+                "date",
+                "exportType"
+            ],
             "properties": {
                 "date": {
                     "type": "string",
@@ -2205,13 +2784,19 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
         "DgpTalimatAgrOrtRequestDto": {
             "type": "object",
-            "required": ["date"],
+            "required": [
+                "date"
+            ],
             "properties": {
                 "date": {
                     "type": "string",
@@ -2341,7 +2926,10 @@
         },
         "DgpTalimatExportRequestDto": {
             "type": "object",
-            "required": ["date", "exportType"],
+            "required": [
+                "date",
+                "exportType"
+            ],
             "properties": {
                 "date": {
                     "type": "string",
@@ -2357,13 +2945,19 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
         "DgpTalimatRequestDto": {
             "type": "object",
-            "required": ["date"],
+            "required": [
+                "date"
+            ],
             "properties": {
                 "date": {
                     "type": "string",
@@ -2443,7 +3037,11 @@
         },
         "ElektrikPiyasaHacimFizikselExportRequestDto": {
             "type": "object",
-            "required": ["endDate", "exportType", "startDate"],
+            "required": [
+                "endDate",
+                "exportType",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -2465,13 +3063,20 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
         "ElektrikPiyasaHacimFizikselRequestDto": {
             "type": "object",
-            "required": ["endDate", "startDate"],
+            "required": [
+                "endDate",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -2581,7 +3186,11 @@
         },
         "GipKontratOzetExportRequestDto": {
             "type": "object",
-            "required": ["endDate", "exportType", "startDate"],
+            "required": [
+                "endDate",
+                "exportType",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -2603,13 +3212,20 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
         "GipKontratOzetRequestDto": {
             "type": "object",
-            "required": ["endDate", "startDate"],
+            "required": [
+                "endDate",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -2645,7 +3261,10 @@
         },
         "GipKontratRequestDto": {
             "type": "object",
-            "required": ["endDate", "startDate"],
+            "required": [
+                "endDate",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -2729,7 +3348,12 @@
         },
         "GipKontratTekliflerExportRequestDto": {
             "type": "object",
-            "required": ["contractId", "endDate", "exportType", "startDate"],
+            "required": [
+                "contractId",
+                "endDate",
+                "exportType",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -2756,13 +3380,21 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
         "GipKontratTekliflerRequestDto": {
             "type": "object",
-            "required": ["contractId", "endDate", "startDate"],
+            "required": [
+                "contractId",
+                "endDate",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -2841,7 +3473,9 @@
         },
         "GunlukFiyatRequestDto": {
             "type": "object",
-            "required": ["date"],
+            "required": [
+                "date"
+            ],
             "properties": {
                 "date": {
                     "type": "string",
@@ -2871,7 +3505,10 @@
         },
         "GunlukFiyatlarExportRequestDto": {
             "type": "object",
-            "required": ["date", "exportType"],
+            "required": [
+                "date",
+                "exportType"
+            ],
             "properties": {
                 "date": {
                     "type": "string",
@@ -2887,7 +3524,11 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
@@ -3040,7 +3681,14 @@
                 "periodType": {
                     "type": "string",
                     "description": "Dönem Tipi Bilgisi(Daily, Weekly, Monthly, Yearly)",
-                    "enum": ["DAILY", "WEEKLY", "MONTHLY", "YEARLY", "QUARTERLY", "HALF_YEAR"]
+                    "enum": [
+                        "DAILY",
+                        "WEEKLY",
+                        "MONTHLY",
+                        "YEARLY",
+                        "QUARTERLY",
+                        "HALF_YEAR"
+                    ]
                 }
             }
         },
@@ -3082,7 +3730,75 @@
                 },
                 "status": {
                     "type": "string",
-                    "enum": ["CONTINUE", "SWITCHING_PROTOCOLS", "PROCESSING", "CHECKPOINT", "OK", "CREATED", "ACCEPTED", "NON_AUTHORITATIVE_INFORMATION", "NO_CONTENT", "RESET_CONTENT", "PARTIAL_CONTENT", "MULTI_STATUS", "ALREADY_REPORTED", "IM_USED", "MULTIPLE_CHOICES", "MOVED_PERMANENTLY", "FOUND", "MOVED_TEMPORARILY", "SEE_OTHER", "NOT_MODIFIED", "USE_PROXY", "TEMPORARY_REDIRECT", "PERMANENT_REDIRECT", "BAD_REQUEST", "UNAUTHORIZED", "PAYMENT_REQUIRED", "FORBIDDEN", "NOT_FOUND", "METHOD_NOT_ALLOWED", "NOT_ACCEPTABLE", "PROXY_AUTHENTICATION_REQUIRED", "REQUEST_TIMEOUT", "CONFLICT", "GONE", "LENGTH_REQUIRED", "PRECONDITION_FAILED", "PAYLOAD_TOO_LARGE", "REQUEST_ENTITY_TOO_LARGE", "URI_TOO_LONG", "REQUEST_URI_TOO_LONG", "UNSUPPORTED_MEDIA_TYPE", "REQUESTED_RANGE_NOT_SATISFIABLE", "EXPECTATION_FAILED", "I_AM_A_TEAPOT", "INSUFFICIENT_SPACE_ON_RESOURCE", "METHOD_FAILURE", "DESTINATION_LOCKED", "UNPROCESSABLE_ENTITY", "LOCKED", "FAILED_DEPENDENCY", "UPGRADE_REQUIRED", "PRECONDITION_REQUIRED", "TOO_MANY_REQUESTS", "REQUEST_HEADER_FIELDS_TOO_LARGE", "UNAVAILABLE_FOR_LEGAL_REASONS", "INTERNAL_SERVER_ERROR", "NOT_IMPLEMENTED", "BAD_GATEWAY", "SERVICE_UNAVAILABLE", "GATEWAY_TIMEOUT", "HTTP_VERSION_NOT_SUPPORTED", "VARIANT_ALSO_NEGOTIATES", "INSUFFICIENT_STORAGE", "LOOP_DETECTED", "BANDWIDTH_LIMIT_EXCEEDED", "NOT_EXTENDED", "NETWORK_AUTHENTICATION_REQUIRED"]
+                    "enum": [
+                        "CONTINUE",
+                        "SWITCHING_PROTOCOLS",
+                        "PROCESSING",
+                        "CHECKPOINT",
+                        "OK",
+                        "CREATED",
+                        "ACCEPTED",
+                        "NON_AUTHORITATIVE_INFORMATION",
+                        "NO_CONTENT",
+                        "RESET_CONTENT",
+                        "PARTIAL_CONTENT",
+                        "MULTI_STATUS",
+                        "ALREADY_REPORTED",
+                        "IM_USED",
+                        "MULTIPLE_CHOICES",
+                        "MOVED_PERMANENTLY",
+                        "FOUND",
+                        "MOVED_TEMPORARILY",
+                        "SEE_OTHER",
+                        "NOT_MODIFIED",
+                        "USE_PROXY",
+                        "TEMPORARY_REDIRECT",
+                        "PERMANENT_REDIRECT",
+                        "BAD_REQUEST",
+                        "UNAUTHORIZED",
+                        "PAYMENT_REQUIRED",
+                        "FORBIDDEN",
+                        "NOT_FOUND",
+                        "METHOD_NOT_ALLOWED",
+                        "NOT_ACCEPTABLE",
+                        "PROXY_AUTHENTICATION_REQUIRED",
+                        "REQUEST_TIMEOUT",
+                        "CONFLICT",
+                        "GONE",
+                        "LENGTH_REQUIRED",
+                        "PRECONDITION_FAILED",
+                        "PAYLOAD_TOO_LARGE",
+                        "REQUEST_ENTITY_TOO_LARGE",
+                        "URI_TOO_LONG",
+                        "REQUEST_URI_TOO_LONG",
+                        "UNSUPPORTED_MEDIA_TYPE",
+                        "REQUESTED_RANGE_NOT_SATISFIABLE",
+                        "EXPECTATION_FAILED",
+                        "I_AM_A_TEAPOT",
+                        "INSUFFICIENT_SPACE_ON_RESOURCE",
+                        "METHOD_FAILURE",
+                        "DESTINATION_LOCKED",
+                        "UNPROCESSABLE_ENTITY",
+                        "LOCKED",
+                        "FAILED_DEPENDENCY",
+                        "UPGRADE_REQUIRED",
+                        "PRECONDITION_REQUIRED",
+                        "TOO_MANY_REQUESTS",
+                        "REQUEST_HEADER_FIELDS_TOO_LARGE",
+                        "UNAVAILABLE_FOR_LEGAL_REASONS",
+                        "INTERNAL_SERVER_ERROR",
+                        "NOT_IMPLEMENTED",
+                        "BAD_GATEWAY",
+                        "SERVICE_UNAVAILABLE",
+                        "GATEWAY_TIMEOUT",
+                        "HTTP_VERSION_NOT_SUPPORTED",
+                        "VARIANT_ALSO_NEGOTIATES",
+                        "INSUFFICIENT_STORAGE",
+                        "LOOP_DETECTED",
+                        "BANDWIDTH_LIMIT_EXCEEDED",
+                        "NOT_EXTENDED",
+                        "NETWORK_AUTHENTICATION_REQUIRED"
+                    ]
                 },
                 "empty": {
                     "type": "boolean"
@@ -3195,7 +3911,9 @@
         },
         "PeriodicPriceVolumeExportRequestDto": {
             "type": "object",
-            "required": ["exportType"],
+            "required": [
+                "exportType"
+            ],
             "properties": {
                 "page": {
                     "description": "Sayfalama bilgisi.",
@@ -3205,7 +3923,11 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
@@ -3264,7 +3986,9 @@
         },
         "PtfSmfDonemlikAgirlikliOrtalamaExportRequestDto": {
             "type": "object",
-            "required": ["exportType"],
+            "required": [
+                "exportType"
+            ],
             "properties": {
                 "page": {
                     "description": "Sayfalama bilgisi.",
@@ -3274,7 +3998,11 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
@@ -3347,7 +4075,11 @@
         },
         "PtfSmfOrtalamalariExportRequest": {
             "type": "object",
-            "required": ["endDate", "exportType", "startDate"],
+            "required": [
+                "endDate",
+                "exportType",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -3369,13 +4101,20 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
         "PtfSmfOrtalamalariRequest": {
             "type": "object",
-            "required": ["endDate", "startDate"],
+            "required": [
+                "endDate",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -3432,7 +4171,11 @@
         },
         "PtfSmfSdfExportRequestDto": {
             "type": "object",
-            "required": ["endDate", "exportType", "startDate"],
+            "required": [
+                "endDate",
+                "exportType",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -3454,13 +4197,20 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
         "PtfSmfSdfRequestDto": {
             "type": "object",
-            "required": ["endDate", "startDate"],
+            "required": [
+                "endDate",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -3536,7 +4286,9 @@
         },
         "PtfSmfUcZamanliAgirlikliOrtalamaExportRequestDto": {
             "type": "object",
-            "required": ["exportType"],
+            "required": [
+                "exportType"
+            ],
             "properties": {
                 "page": {
                     "description": "Sayfalama bilgisi.",
@@ -3546,7 +4298,11 @@
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
@@ -3650,13 +4406,19 @@
         },
         "SerbestTuketiciSayacArtisExportRequestDto": {
             "type": "object",
-            "required": ["exportType"],
+            "required": [
+                "exportType"
+            ],
             "properties": {
                 "exportType": {
                     "type": "string",
                     "example": "XLSX",
                     "description": "XLSX, CSV ya da PDF",
-                    "enum": ["XLSX", "CSV", "PDF"]
+                    "enum": [
+                        "XLSX",
+                        "CSV",
+                        "PDF"
+                    ]
                 }
             }
         },
@@ -3706,7 +4468,10 @@
         },
         "SmfPtfAritmetikOrtalamaRequest": {
             "type": "object",
-            "required": ["endDate", "startDate"],
+            "required": [
+                "endDate",
+                "startDate"
+            ],
             "properties": {
                 "startDate": {
                     "type": "string",
@@ -3774,7 +4539,14 @@
                 "periodType": {
                     "type": "string",
                     "description": "Dönem Tipi Bilgisi(Daily, Weekly, Monthly, Yearly)",
-                    "enum": ["DAILY", "WEEKLY", "MONTHLY", "YEARLY", "QUARTERLY", "HALF_YEAR"]
+                    "enum": [
+                        "DAILY",
+                        "WEEKLY",
+                        "MONTHLY",
+                        "YEARLY",
+                        "QUARTERLY",
+                        "HALF_YEAR"
+                    ]
                 }
             }
         },
@@ -3814,7 +4586,10 @@
                     "type": "string",
                     "example": "ASC",
                     "description": "Sort direction (ASC or DESC)",
-                    "enum": ["ASC", "DESC"]
+                    "enum": [
+                        "ASC",
+                        "DESC"
+                    ]
                 }
             }
         },

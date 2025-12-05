@@ -1,1797 +1,2035 @@
 {
-  "swagger" : "2.0",
-  "info" : {
-    "version" : "1.0.0",
-    "title" : "EPYS - Faturalama Servisleri"
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "EPYS - Faturalama Servisleri"
   },
-  "host" : "epys-prp.epias.com.tr",
-  "basePath" : "/reconciliation-invoice/",
-  "tags" : [ {
-    "name" : "reconciliation-invoice-notice-controller"
-  }, {
-    "name" : "reconciliation-summary-controller"
-  } ],
-  "schemes" : [ "https" ],
-  "paths" : {
-    "/v1/invoice-notice/arp-balance/export" : {
-      "post" : {
-        "tags" : [ "reconciliation-invoice-notice-controller" ],
-        "summary" : "Cari Bakiye Servisi",
-        "description" : "Cari bakiye bilgilerinin alındığı servis.",
-        "operationId" : "arp-balance-export",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/LogoInvoiceReqDto"
+  "host": "epys-prp.epias.com.tr",
+  "basePath": "/reconciliation-invoice/",
+  "tags": [
+    {
+      "name": "reconciliation-invoice-notice-controller"
+    },
+    {
+      "name": "reconciliation-summary-controller"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/v1/invoice-notice/arp-balance/export": {
+      "post": {
+        "tags": [
+          "reconciliation-invoice-notice-controller"
+        ],
+        "summary": "Cari Bakiye Servisi",
+        "description": "Cari bakiye bilgilerinin alındığı servis.",
+        "operationId": "arp-balance-export",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/LogoInvoiceReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/ModelAndView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ModelAndView"
             }
           }
         }
       }
     },
-    "/v1/invoice-notice/arp-extract/export" : {
-      "post" : {
-        "tags" : [ "reconciliation-invoice-notice-controller" ],
-        "summary" : "Cari Ekstre Servisi",
-        "description" : "Cari ekstre bilgilerinin alındığı servis.",
-        "operationId" : "arp-extract-export",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/LogoInvoiceReqDto"
+    "/v1/invoice-notice/arp-extract/export": {
+      "post": {
+        "tags": [
+          "reconciliation-invoice-notice-controller"
+        ],
+        "summary": "Cari Ekstre Servisi",
+        "description": "Cari ekstre bilgilerinin alındığı servis.",
+        "operationId": "arp-extract-export",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/LogoInvoiceReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/ModelAndView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ModelAndView"
             }
           }
         }
       }
     },
-    "/v1/invoice-notice/earchive-invoice/export" : {
-      "post" : {
-        "tags" : [ "reconciliation-invoice-notice-controller" ],
-        "summary" : "E-Arşive Fatura Servisi",
-        "description" : "E-Arşive fatura bilgilerinin alındığı servis",
-        "operationId" : "earchive-invoice-export",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/LogoInvoiceReqDto"
+    "/v1/invoice-notice/earchive-invoice/export": {
+      "post": {
+        "tags": [
+          "reconciliation-invoice-notice-controller"
+        ],
+        "summary": "E-Arşive Fatura Servisi",
+        "description": "E-Arşive fatura bilgilerinin alındığı servis",
+        "operationId": "earchive-invoice-export",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/LogoInvoiceReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/ModelAndView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ModelAndView"
             }
           }
         }
       }
     },
-    "/v1/invoice-notice/export" : {
-      "post" : {
-        "tags" : [ "reconciliation-invoice-notice-controller" ],
-        "summary" : "Aylık Uzlaştırma Bildirimi Dışarı Aktarma",
-        "description" : "Aylık uzlaştırma bildiriminin excel, csv ve pdf olarak dışarı aktarılmasını sağlar.",
-        "operationId" : "excel-export-reconciliation-notice",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/ReconciliationNoticeListReqDto"
+    "/v1/invoice-notice/export": {
+      "post": {
+        "tags": [
+          "reconciliation-invoice-notice-controller"
+        ],
+        "summary": "Aylık Uzlaştırma Bildirimi Dışarı Aktarma",
+        "description": "Aylık uzlaştırma bildiriminin excel, csv ve pdf olarak dışarı aktarılmasını sağlar.",
+        "operationId": "excel-export-reconciliation-notice",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ReconciliationNoticeListReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/ModelAndView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ModelAndView"
             }
           }
         }
       }
     },
-    "/v1/invoice-notice/invoice-item-with-tax/list" : {
-      "post" : {
-        "tags" : [ "reconciliation-invoice-notice-controller" ],
-        "summary" : "Fatura Bildirimi Servisi",
-        "description" : "Faturaya esas kalemlerinin tutarlarının dönüldüğü servis.",
-        "operationId" : "get-invoice-item-details-with-tax",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/EffectiveDateDto"
+    "/v1/invoice-notice/invoice-item-with-tax/list": {
+      "post": {
+        "tags": [
+          "reconciliation-invoice-notice-controller"
+        ],
+        "summary": "Fatura Bildirimi Servisi",
+        "description": "Faturaya esas kalemlerinin tutarlarının dönüldüğü servis.",
+        "operationId": "get-invoice-item-details-with-tax",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EffectiveDateDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseInvoiceItemWithTaxRespDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseInvoiceItemWithTaxRespDto"
             }
           }
         }
       }
     },
-    "/v1/invoice-notice/invoice-item-with-tax/list/export" : {
-      "post" : {
-        "tags" : [ "reconciliation-invoice-notice-controller" ],
-        "summary" : "Fatura Bildirimi Dışarı Aktarma Servisi",
-        "description" : "Faturaya esas kalemlerinin tutarlarının dışarı aktarılmasını sağlar.",
-        "operationId" : "export-invoice-item-details-with-tax",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/InvoiceItemWithTaxExportReqDto"
+    "/v1/invoice-notice/invoice-item-with-tax/list/export": {
+      "post": {
+        "tags": [
+          "reconciliation-invoice-notice-controller"
+        ],
+        "summary": "Fatura Bildirimi Dışarı Aktarma Servisi",
+        "description": "Faturaya esas kalemlerinin tutarlarının dışarı aktarılmasını sağlar.",
+        "operationId": "export-invoice-item-details-with-tax",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/InvoiceItemWithTaxExportReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/ModelAndView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ModelAndView"
             }
           }
         }
       }
     },
-    "/v1/invoice-notice/invoice-item/list" : {
-      "post" : {
-        "tags" : [ "reconciliation-invoice-notice-controller" ],
-        "summary" : "Fatura Kalem Tanımları",
-        "description" : "Fatura kalemlerinin tanımlarının alındığı servis.",
-        "operationId" : "get-invoice-item-details",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/EffectiveDateDto"
+    "/v1/invoice-notice/invoice-item/list": {
+      "post": {
+        "tags": [
+          "reconciliation-invoice-notice-controller"
+        ],
+        "summary": "Fatura Kalem Tanımları",
+        "description": "Fatura kalemlerinin tanımlarının alındığı servis.",
+        "operationId": "get-invoice-item-details",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EffectiveDateDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseInvoiceItemDetailResponseDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseInvoiceItemDetailResponseDto"
             }
           }
         }
       }
     },
-    "/v1/invoice-notice/list" : {
-      "post" : {
-        "tags" : [ "reconciliation-invoice-notice-controller" ],
-        "summary" : "Aylık Uzlaştırma Bildirimi ",
-        "description" : "Aylık uzlaştrıma bildirimi listeleme servisi.",
-        "operationId" : "get-reconciliation-notice",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/ReconciliationNoticeListReqDto"
+    "/v1/invoice-notice/list": {
+      "post": {
+        "tags": [
+          "reconciliation-invoice-notice-controller"
+        ],
+        "summary": "Aylık Uzlaştırma Bildirimi ",
+        "description": "Aylık uzlaştrıma bildirimi listeleme servisi.",
+        "operationId": "get-reconciliation-notice",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ReconciliationNoticeListReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseReconciliationNoticeResponseDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseReconciliationNoticeResponseDto"
             }
           }
         }
       }
     },
-    "/v1/invoice-notice/retrospective-item/list" : {
-      "post" : {
-        "tags" : [ "reconciliation-invoice-notice-controller" ],
-        "summary" : "GDDK Kalem Tanımları",
-        "description" : "GDDK kalemlerinin tanımlarının alındığı servis.",
-        "operationId" : "get-retrospective-item-details",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/EffectiveDateDto"
+    "/v1/invoice-notice/retrospective-item/list": {
+      "post": {
+        "tags": [
+          "reconciliation-invoice-notice-controller"
+        ],
+        "summary": "GDDK Kalem Tanımları",
+        "description": "GDDK kalemlerinin tanımlarının alındığı servis.",
+        "operationId": "get-retrospective-item-details",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EffectiveDateDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseRetrospectiveItemResponseDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseRetrospectiveItemResponseDto"
             }
           }
         }
       }
     },
-    "/v1/invoice-notice/retrospective/export" : {
-      "post" : {
-        "tags" : [ "reconciliation-invoice-notice-controller" ],
-        "summary" : "Dönemlik GDDK Dışarı Aktarma",
-        "description" : "Dönemlik GDDK tutarlarının excel olarak dışarı aktarılmasını sağlar.",
-        "operationId" : "export-reconciliation-retrospective-notice",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/EffectiveDateDto"
+    "/v1/invoice-notice/retrospective/export": {
+      "post": {
+        "tags": [
+          "reconciliation-invoice-notice-controller"
+        ],
+        "summary": "Dönemlik GDDK Dışarı Aktarma",
+        "description": "Dönemlik GDDK tutarlarının excel olarak dışarı aktarılmasını sağlar.",
+        "operationId": "export-reconciliation-retrospective-notice",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EffectiveDateDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/ModelAndView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ModelAndView"
             }
           }
         }
       }
     },
-    "/v1/invoice-notice/retrospective/list" : {
-      "post" : {
-        "tags" : [ "reconciliation-invoice-notice-controller" ],
-        "summary" : "Dönemlik GDDK Listeleme",
-        "description" : "Dönemlik GDDK tutarlarının listelendiği servis.",
-        "operationId" : "get-reconciliation-retrospective-notice",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/EffectiveDateDto"
+    "/v1/invoice-notice/retrospective/list": {
+      "post": {
+        "tags": [
+          "reconciliation-invoice-notice-controller"
+        ],
+        "summary": "Dönemlik GDDK Listeleme",
+        "description": "Dönemlik GDDK tutarlarının listelendiği servis.",
+        "operationId": "get-reconciliation-retrospective-notice",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/EffectiveDateDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseRetrospectiveDetailResponseDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseRetrospectiveDetailResponseDto"
             }
           }
         }
       }
     },
-    "/v1/reconciliation/detail/daily" : {
-      "post" : {
-        "tags" : [ "reconciliation-summary-controller" ],
-        "summary" : "Günlük Uzlaştırma Detayı",
-        "description" : "Günlük uzlaştrıma bildirimi listeleme servisi.",
-        "operationId" : "get-reconciliation-summary-daily",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/ReconciliationSummaryReqDto"
+    "/v1/reconciliation/detail/daily": {
+      "post": {
+        "tags": [
+          "reconciliation-summary-controller"
+        ],
+        "summary": "Günlük Uzlaştırma Detayı",
+        "description": "Günlük uzlaştrıma bildirimi listeleme servisi.",
+        "operationId": "get-reconciliation-summary-daily",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ReconciliationSummaryReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseReconciliationSummaryDailyRespDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseReconciliationSummaryDailyRespDto"
             }
           }
         }
       }
     },
-    "/v1/reconciliation/detail/daily/export" : {
-      "post" : {
-        "tags" : [ "reconciliation-summary-controller" ],
-        "summary" : "Aylık Uzlaştırma Bildirimi ",
-        "description" : "Aylık uzlaştrıma bildirimi listeleme servisi.",
-        "operationId" : "get-reconciliation-summary-daily-export",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/ReconciliationSummaryReqDto"
+    "/v1/reconciliation/detail/daily/export": {
+      "post": {
+        "tags": [
+          "reconciliation-summary-controller"
+        ],
+        "summary": "Aylık Uzlaştırma Bildirimi ",
+        "description": "Aylık uzlaştrıma bildirimi listeleme servisi.",
+        "operationId": "get-reconciliation-summary-daily-export",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ReconciliationSummaryReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/ModelAndView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ModelAndView"
             }
           }
         }
       }
     },
-    "/v1/reconciliation/detail/hourly" : {
-      "post" : {
-        "tags" : [ "reconciliation-summary-controller" ],
-        "summary" : "Günlük Uzlaştırma Detayı",
-        "description" : "Günlük uzlaştrıma bildirimi listeleme servisi.",
-        "operationId" : "get-reconciliation-summary-hourly",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/ReconciliationSummaryReqDto"
+    "/v1/reconciliation/detail/hourly": {
+      "post": {
+        "tags": [
+          "reconciliation-summary-controller"
+        ],
+        "summary": "Günlük Uzlaştırma Detayı",
+        "description": "Günlük uzlaştrıma bildirimi listeleme servisi.",
+        "operationId": "get-reconciliation-summary-hourly",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ReconciliationSummaryReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/RestResponseReconciliationSummaryHourlyRespDto"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseReconciliationSummaryHourlyRespDto"
             }
           }
         }
       }
     },
-    "/v1/reconciliation/detail/hourly/export" : {
-      "post" : {
-        "tags" : [ "reconciliation-summary-controller" ],
-        "summary" : "Aylık Uzlaştırma Bildirimi ",
-        "description" : "Aylık uzlaştrıma bildirimi listeleme servisi.",
-        "operationId" : "get-reconciliation-summary-hourly-export",
-        "consumes" : [ "application/json", "application/xml" ],
-        "produces" : [ "application/json", "application/xml" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "required" : false,
-          "schema" : {
-            "$ref" : "#/definitions/ReconciliationSummaryReqDto"
+    "/v1/reconciliation/detail/hourly/export": {
+      "post": {
+        "tags": [
+          "reconciliation-summary-controller"
+        ],
+        "summary": "Aylık Uzlaştırma Bildirimi ",
+        "description": "Aylık uzlaştrıma bildirimi listeleme servisi.",
+        "operationId": "get-reconciliation-summary-hourly-export",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ReconciliationSummaryReqDto"
+            }
           }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "schema" : {
-              "$ref" : "#/definitions/ModelAndView"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ModelAndView"
             }
           }
         }
       }
     }
   },
-  "definitions" : {
-    "BaseDTO" : {
-      "type" : "object"
+  "definitions": {
+    "BaseDTO": {
+      "type": "object"
     },
-    "EffectiveDateDto" : {
-      "type" : "object",
-      "properties" : {
-        "effectiveDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00"
+    "EffectiveDateDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
         }
       }
     },
-    "InvoiceDetailDto" : {
-      "type" : "object",
-      "properties" : {
-        "invoiceItemDetail" : {
-          "description" : "Uzlaştırma Kalemi Detayı",
-          "$ref" : "#/definitions/InvoiceItemDetailDto"
+    "InvoiceDetailDto": {
+      "type": "object",
+      "properties": {
+        "invoiceItemDetail": {
+          "description": "Uzlaştırma Kalemi Detayı",
+          "$ref": "#/definitions/InvoiceItemDetailDto"
         },
-        "amount" : {
-          "type" : "number",
-          "description" : "Tutar "
+        "amount": {
+          "type": "number",
+          "description": "Tutar "
         },
-        "order" : {
-          "type" : "integer",
-          "format" : "int32"
+        "order": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
-    "InvoiceItemDetailDto" : {
-      "type" : "object",
-      "properties" : {
-        "item" : {
-          "description" : "Uzlaştırma Kalemi",
-          "$ref" : "#/definitions/LabelValueDTO"
+    "InvoiceItemDetailDto": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "description": "Uzlaştırma Kalemi",
+          "$ref": "#/definitions/LabelValueDTO"
         },
-        "isDetail" : {
-          "type" : "boolean"
+        "isDetail": {
+          "type": "boolean"
         }
       }
     },
-    "InvoiceItemDetailResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "receivableItemDetails" : {
-          "type" : "array",
-          "description" : "Alacak Fatura Kalemleri",
-          "items" : {
-            "$ref" : "#/definitions/InvoiceItemDetailDto"
+    "InvoiceItemDetailResponseDto": {
+      "type": "object",
+      "properties": {
+        "receivableItemDetails": {
+          "type": "array",
+          "description": "Alacak Fatura Kalemleri",
+          "items": {
+            "$ref": "#/definitions/InvoiceItemDetailDto"
           }
         },
-        "debtItemDetails" : {
-          "type" : "array",
-          "description" : "Borç Fatura Kalemleri",
-          "items" : {
-            "$ref" : "#/definitions/InvoiceItemDetailDto"
-          }
-        }
-      }
-    },
-    "InvoiceItemKeyValueDto" : {
-      "type" : "object",
-      "properties" : {
-        "label" : {
-          "type" : "string",
-          "description" : "GDDK Kalemi"
-        },
-        "isDetail" : {
-          "type" : "boolean"
-        },
-        "amount" : {
-          "type" : "number",
-          "description" : "GDDK Kalemi Tutarı"
-        }
-      }
-    },
-    "InvoiceItemWithTaxDetailDto" : {
-      "type" : "object",
-      "properties" : {
-        "quantity" : {
-          "type" : "number",
-          "description" : "${INVOICE_ITEM_TAX_DETAIL_QUANTITY}"
-        },
-        "unit" : {
-          "$ref" : "#/definitions/LabelValueDTO"
-        },
-        "amount" : {
-          "type" : "number",
-          "description" : "Tutar (TL)"
-        },
-        "taxRatio" : {
-          "type" : "number",
-          "description" : "KDV Oranı"
-        },
-        "name" : {
-          "type" : "string",
-          "description" : "Fatura Kalemi"
-        },
-        "key" : {
-          "type" : "string",
-          "description" : "Fatura Kalem Id"
-        },
-        "taxAmount" : {
-          "type" : "number",
-          "description" : "KDV Tutarı (TL)"
-        },
-        "totalWithTax" : {
-          "type" : "number",
-          "description" : "KDV Dahil Toplam (TL)"
-        }
-      }
-    },
-    "InvoiceItemWithTaxExportReqDto" : {
-      "type" : "object",
-      "properties" : {
-        "effectiveDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Effective Date"
-        },
-        "exportType" : {
-          "type" : "string",
-          "example" : "XLSX, CSV or PDF",
-          "description" : "Export Type",
-          "enum" : [ "XLSX", "CSV", "PDF" ]
-        }
-      }
-    },
-    "InvoiceItemWithTaxRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "receivableItemDetails" : {
-          "type" : "array",
-          "description" : "Alacak Fatura Kalemleri",
-          "items" : {
-            "$ref" : "#/definitions/InvoiceItemWithTaxDetailDto"
-          }
-        },
-        "debtItemDetails" : {
-          "type" : "array",
-          "description" : "Borç Fatura Kalemleri",
-          "items" : {
-            "$ref" : "#/definitions/InvoiceItemWithTaxDetailDto"
-          }
-        },
-        "totalReceivable" : {
-          "type" : "number",
-          "description" : "Net Alacak Tutarı"
-        },
-        "totalDebt" : {
-          "type" : "number",
-          "description" : "Net Borç Tutarı"
-        },
-        "reconciliationStatus" : {
-          "description" : "Uzlaştırma Durumu",
-          "$ref" : "#/definitions/KeyValueDto"
-        },
-        "finalizedDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "description" : "Fatura Tebliğ Tarihi"
-        },
-        "invoiceDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "description" : "Fatura Son Ödeme Tarihi"
-        }
-      }
-    },
-    "KeyValueDto" : {
-      "type" : "object",
-      "properties" : {
-        "key" : {
-          "type" : "string"
-        },
-        "value" : {
-          "type" : "string"
-        }
-      }
-    },
-    "LabelValueDTO" : {
-      "type" : "object",
-      "properties" : {
-        "label" : {
-          "type" : "string"
-        },
-        "value" : {
-          "type" : "string"
-        }
-      }
-    },
-    "LogoInvoiceReqDto" : {
-      "type" : "object",
-      "properties" : {
-        "period" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00"
-        }
-      }
-    },
-    "ModelAndView" : {
-      "type" : "object",
-      "properties" : {
-        "view" : {
-          "$ref" : "#/definitions/View"
-        },
-        "model" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
-          }
-        },
-        "status" : {
-          "type" : "string",
-          "enum" : [ "CONTINUE", "SWITCHING_PROTOCOLS", "PROCESSING", "CHECKPOINT", "OK", "CREATED", "ACCEPTED", "NON_AUTHORITATIVE_INFORMATION", "NO_CONTENT", "RESET_CONTENT", "PARTIAL_CONTENT", "MULTI_STATUS", "ALREADY_REPORTED", "IM_USED", "MULTIPLE_CHOICES", "MOVED_PERMANENTLY", "FOUND", "MOVED_TEMPORARILY", "SEE_OTHER", "NOT_MODIFIED", "USE_PROXY", "TEMPORARY_REDIRECT", "PERMANENT_REDIRECT", "BAD_REQUEST", "UNAUTHORIZED", "PAYMENT_REQUIRED", "FORBIDDEN", "NOT_FOUND", "METHOD_NOT_ALLOWED", "NOT_ACCEPTABLE", "PROXY_AUTHENTICATION_REQUIRED", "REQUEST_TIMEOUT", "CONFLICT", "GONE", "LENGTH_REQUIRED", "PRECONDITION_FAILED", "PAYLOAD_TOO_LARGE", "REQUEST_ENTITY_TOO_LARGE", "URI_TOO_LONG", "REQUEST_URI_TOO_LONG", "UNSUPPORTED_MEDIA_TYPE", "REQUESTED_RANGE_NOT_SATISFIABLE", "EXPECTATION_FAILED", "I_AM_A_TEAPOT", "INSUFFICIENT_SPACE_ON_RESOURCE", "METHOD_FAILURE", "DESTINATION_LOCKED", "UNPROCESSABLE_ENTITY", "LOCKED", "FAILED_DEPENDENCY", "UPGRADE_REQUIRED", "PRECONDITION_REQUIRED", "TOO_MANY_REQUESTS", "REQUEST_HEADER_FIELDS_TOO_LARGE", "UNAVAILABLE_FOR_LEGAL_REASONS", "INTERNAL_SERVER_ERROR", "NOT_IMPLEMENTED", "BAD_GATEWAY", "SERVICE_UNAVAILABLE", "GATEWAY_TIMEOUT", "HTTP_VERSION_NOT_SUPPORTED", "VARIANT_ALSO_NEGOTIATES", "INSUFFICIENT_STORAGE", "LOOP_DETECTED", "BANDWIDTH_LIMIT_EXCEEDED", "NOT_EXTENDED", "NETWORK_AUTHENTICATION_REQUIRED" ]
-        },
-        "empty" : {
-          "type" : "boolean"
-        },
-        "reference" : {
-          "type" : "boolean"
-        },
-        "viewName" : {
-          "type" : "string"
-        },
-        "modelMap" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "type" : "object"
+        "debtItemDetails": {
+          "type": "array",
+          "description": "Borç Fatura Kalemleri",
+          "items": {
+            "$ref": "#/definitions/InvoiceItemDetailDto"
           }
         }
       }
     },
-    "Page" : {
-      "type" : "object",
-      "properties" : {
-        "number" : {
-          "type" : "integer",
-          "format" : "int64",
-          "example" : "${EXAMPLE_PAGE_NUMBER}",
-          "description" : "${VALUE_PAGE_NUMBER}"
+    "InvoiceItemKeyValueDto": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "GDDK Kalemi"
         },
-        "size" : {
-          "type" : "integer",
-          "format" : "int64",
-          "example" : "${EXAMPLE_PAGE_SIZE}",
-          "description" : "${VALUE_PAGE_SIZE}"
+        "isDetail": {
+          "type": "boolean"
         },
-        "total" : {
-          "type" : "integer",
-          "format" : "int64",
-          "example" : "${EXAMPLE_PAGE_TOTAL}",
-          "description" : "${VALUE_PAGE_TOTAL}"
-        },
-        "sort" : {
-          "description" : "${VALUE_PAGE_SORT}",
-          "$ref" : "#/definitions/SortDTO"
+        "amount": {
+          "type": "number",
+          "description": "GDDK Kalemi Tutarı"
         }
       }
     },
-    "ReconciliationNoticeDetailDto" : {
-      "type" : "object",
-      "properties" : {
-        "details" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/InvoiceDetailDto"
+    "InvoiceItemWithTaxDetailDto": {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "number",
+          "description": "${INVOICE_ITEM_TAX_DETAIL_QUANTITY}"
+        },
+        "unit": {
+          "$ref": "#/definitions/LabelValueDTO"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Tutar (TL)"
+        },
+        "taxRatio": {
+          "type": "number",
+          "description": "KDV Oranı"
+        },
+        "name": {
+          "type": "string",
+          "description": "Fatura Kalemi"
+        },
+        "key": {
+          "type": "string",
+          "description": "Fatura Kalem Id"
+        },
+        "taxAmount": {
+          "type": "number",
+          "description": "KDV Tutarı (TL)"
+        },
+        "totalWithTax": {
+          "type": "number",
+          "description": "KDV Dahil Toplam (TL)"
+        }
+      }
+    },
+    "InvoiceItemWithTaxExportReqDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Effective Date"
+        },
+        "exportType": {
+          "type": "string",
+          "example": "XLSX, CSV or PDF",
+          "description": "Export Type",
+          "enum": [
+            "XLSX",
+            "CSV",
+            "PDF"
+          ]
+        }
+      }
+    },
+    "InvoiceItemWithTaxRespDto": {
+      "type": "object",
+      "properties": {
+        "receivableItemDetails": {
+          "type": "array",
+          "description": "Alacak Fatura Kalemleri",
+          "items": {
+            "$ref": "#/definitions/InvoiceItemWithTaxDetailDto"
+          }
+        },
+        "debtItemDetails": {
+          "type": "array",
+          "description": "Borç Fatura Kalemleri",
+          "items": {
+            "$ref": "#/definitions/InvoiceItemWithTaxDetailDto"
+          }
+        },
+        "totalReceivable": {
+          "type": "number",
+          "description": "Net Alacak Tutarı"
+        },
+        "totalDebt": {
+          "type": "number",
+          "description": "Net Borç Tutarı"
+        },
+        "reconciliationStatus": {
+          "description": "Uzlaştırma Durumu",
+          "$ref": "#/definitions/KeyValueDto"
+        },
+        "finalizedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fatura Tebliğ Tarihi"
+        },
+        "invoiceDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fatura Son Ödeme Tarihi"
+        }
+      }
+    },
+    "KeyValueDto": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "LabelValueDTO": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "LogoInvoiceReqDto": {
+      "type": "object",
+      "properties": {
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        }
+      }
+    },
+    "ModelAndView": {
+      "type": "object",
+      "properties": {
+        "view": {
+          "$ref": "#/definitions/View"
+        },
+        "model": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "CONTINUE",
+            "SWITCHING_PROTOCOLS",
+            "PROCESSING",
+            "CHECKPOINT",
+            "OK",
+            "CREATED",
+            "ACCEPTED",
+            "NON_AUTHORITATIVE_INFORMATION",
+            "NO_CONTENT",
+            "RESET_CONTENT",
+            "PARTIAL_CONTENT",
+            "MULTI_STATUS",
+            "ALREADY_REPORTED",
+            "IM_USED",
+            "MULTIPLE_CHOICES",
+            "MOVED_PERMANENTLY",
+            "FOUND",
+            "MOVED_TEMPORARILY",
+            "SEE_OTHER",
+            "NOT_MODIFIED",
+            "USE_PROXY",
+            "TEMPORARY_REDIRECT",
+            "PERMANENT_REDIRECT",
+            "BAD_REQUEST",
+            "UNAUTHORIZED",
+            "PAYMENT_REQUIRED",
+            "FORBIDDEN",
+            "NOT_FOUND",
+            "METHOD_NOT_ALLOWED",
+            "NOT_ACCEPTABLE",
+            "PROXY_AUTHENTICATION_REQUIRED",
+            "REQUEST_TIMEOUT",
+            "CONFLICT",
+            "GONE",
+            "LENGTH_REQUIRED",
+            "PRECONDITION_FAILED",
+            "PAYLOAD_TOO_LARGE",
+            "REQUEST_ENTITY_TOO_LARGE",
+            "URI_TOO_LONG",
+            "REQUEST_URI_TOO_LONG",
+            "UNSUPPORTED_MEDIA_TYPE",
+            "REQUESTED_RANGE_NOT_SATISFIABLE",
+            "EXPECTATION_FAILED",
+            "I_AM_A_TEAPOT",
+            "INSUFFICIENT_SPACE_ON_RESOURCE",
+            "METHOD_FAILURE",
+            "DESTINATION_LOCKED",
+            "UNPROCESSABLE_ENTITY",
+            "LOCKED",
+            "FAILED_DEPENDENCY",
+            "UPGRADE_REQUIRED",
+            "PRECONDITION_REQUIRED",
+            "TOO_MANY_REQUESTS",
+            "REQUEST_HEADER_FIELDS_TOO_LARGE",
+            "UNAVAILABLE_FOR_LEGAL_REASONS",
+            "INTERNAL_SERVER_ERROR",
+            "NOT_IMPLEMENTED",
+            "BAD_GATEWAY",
+            "SERVICE_UNAVAILABLE",
+            "GATEWAY_TIMEOUT",
+            "HTTP_VERSION_NOT_SUPPORTED",
+            "VARIANT_ALSO_NEGOTIATES",
+            "INSUFFICIENT_STORAGE",
+            "LOOP_DETECTED",
+            "BANDWIDTH_LIMIT_EXCEEDED",
+            "NOT_EXTENDED",
+            "NETWORK_AUTHENTICATION_REQUIRED"
+          ]
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "reference": {
+          "type": "boolean"
+        },
+        "viewName": {
+          "type": "string"
+        },
+        "modelMap": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
           }
         }
       }
     },
-    "ReconciliationNoticeListReqDto" : {
-      "type" : "object",
-      "properties" : {
-        "period" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00"
+    "Page": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "format": "int64",
+          "example": "${EXAMPLE_PAGE_NUMBER}",
+          "description": "${VALUE_PAGE_NUMBER}"
         },
-        "exportType" : {
-          "type" : "string",
-          "example" : "XLSX, CSV or PDF",
-          "description" : "Export Type",
-          "enum" : [ "XLSX", "CSV", "PDF" ]
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "example": "${EXAMPLE_PAGE_SIZE}",
+          "description": "${VALUE_PAGE_SIZE}"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "example": "${EXAMPLE_PAGE_TOTAL}",
+          "description": "${VALUE_PAGE_TOTAL}"
+        },
+        "sort": {
+          "description": "${VALUE_PAGE_SORT}",
+          "$ref": "#/definitions/SortDTO"
         }
       }
     },
-    "ReconciliationNoticeResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "period" : {
-          "type" : "string",
-          "format" : "date-time",
-          "description" : "Fatura Dönemi"
-        },
-        "finalizedDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "description" : "Fatura Tebliğ Tarihi"
-        },
-        "invoiceDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "description" : "Fatura Son Ödeme Tarihi"
-        },
-        "executionDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "description" : "Uzlaştırma Çalışma Tarihi"
-        },
-        "status" : {
-          "type" : "string",
-          "description" : "Uzlaştırma Durumu"
-        },
-        "receivable" : {
-          "description" : "Alacak Uzlaştırma Kalemleri",
-          "$ref" : "#/definitions/ReconciliationNoticeDetailDto"
-        },
-        "debt" : {
-          "description" : "Borç Uzlaştırma Kalemleri",
-          "$ref" : "#/definitions/ReconciliationNoticeDetailDto"
+    "ReconciliationNoticeDetailDto": {
+      "type": "object",
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvoiceDetailDto"
+          }
         }
       }
     },
-    "ReconciliationSummaryDailyDto" : {
-      "type" : "object",
-      "properties" : {
-        "effectiveDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00"
+    "ReconciliationNoticeListReqDto": {
+      "type": "object",
+      "properties": {
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
         },
-        "version" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00"
-        },
-        "region" : {
-          "type" : "string"
-        },
-        "damSalesVolume" : {
-          "type" : "number",
-          "description" : "GÖP SSM (MWh)"
-        },
-        "damSalesAmount" : {
-          "type" : "number",
-          "description" : "GÖP SST (TL)"
-        },
-        "damPurchasesVolume" : {
-          "type" : "number",
-          "description" : "GÖP SAM (MWh)"
-        },
-        "damPurchaseAmount" : {
-          "type" : "number",
-          "description" : "GÖP SAT (TL)"
-        },
-        "bcSalesVolume" : {
-          "type" : "number",
-          "description" : "İA Alış (MWh)"
-        },
-        "bcPurchaseVolume" : {
-          "type" : "number",
-          "description" : "İA Satış (MWh)"
-        },
-        "idmSalesVolume" : {
-          "type" : "number",
-          "description" : "GİPSM (MWh)"
-        },
-        "idmSalesAmount" : {
-          "type" : "number",
-          "description" : "GİPST (TL)"
-        },
-        "idmPurchasesVolume" : {
-          "type" : "number",
-          "description" : "GİPAM (MWh)"
-        },
-        "idmPurchaseAmount" : {
-          "type" : "number",
-          "description" : "GİPAT (TL)"
-        },
-        "efmSalesVolume" : {
-          "type" : "number",
-          "description" : "VEPSM (MWh)"
-        },
-        "efmPurchaseVolume" : {
-          "type" : "number",
-          "description" : "VEPAM (MWh)"
-        },
-        "acceptedUpRegulation" : {
-          "type" : "number",
-          "description" : "KEYALM (MWh)"
-        },
-        "acceptedUpRegulationAmount" : {
-          "type" : "number",
-          "description" : "KEYALT (TL)"
-        },
-        "acceptedDownRegulation" : {
-          "type" : "number",
-          "description" : "KEYATM (MWh)"
-        },
-        "acceptedDownRegulationAmount" : {
-          "type" : "number",
-          "description" : "KEYATT (TL)"
-        },
-        "kupsm" : {
-          "type" : "number",
-          "description" : "KUPSM (MWh)"
-        },
-        "kupst" : {
-          "type" : "number",
-          "description" : "KUPST (TL)"
-        },
-        "generation" : {
-          "type" : "number",
-          "description" : "UEVM (MWh)"
-        },
-        "consumption" : {
-          "type" : "number",
-          "description" : "UEÇM (MWh)"
-        },
-        "positiveBalanceGroupImbalanceVolume" : {
-          "type" : "number",
-          "description" : "Pozitif EDM DSG (MWh)"
-        },
-        "positiveBalanceGroupImbalanceAmount" : {
-          "type" : "number",
-          "description" : "Pozitif EDT DSG (TL)"
-        },
-        "negativeBalanceGroupImbalanceVolume" : {
-          "type" : "number",
-          "description" : "Negatif EDM DSG (MWh)"
-        },
-        "negativeBalanceGroupImbalanceAmount" : {
-          "type" : "number",
-          "description" : "Negatif EDT DSG (TL)"
-        },
-        "receivableGapAmount" : {
-          "type" : "number",
-          "description" : "Fark Tutarı Alacak (TL)"
-        },
-        "payableGapAmount" : {
-          "type" : "number",
-          "description" : "Fark Tutarı Borç (TL)"
+        "exportType": {
+          "type": "string",
+          "example": "XLSX, CSV or PDF",
+          "description": "Export Type",
+          "enum": [
+            "XLSX",
+            "CSV",
+            "PDF"
+          ]
         }
       }
     },
-    "ReconciliationSummaryDailyRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "items" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/ReconciliationSummaryDailyDto"
+    "ReconciliationNoticeResponseDto": {
+      "type": "object",
+      "properties": {
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fatura Dönemi"
+        },
+        "finalizedDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fatura Tebliğ Tarihi"
+        },
+        "invoiceDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Fatura Son Ödeme Tarihi"
+        },
+        "executionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Uzlaştırma Çalışma Tarihi"
+        },
+        "status": {
+          "type": "string",
+          "description": "Uzlaştırma Durumu"
+        },
+        "receivable": {
+          "description": "Alacak Uzlaştırma Kalemleri",
+          "$ref": "#/definitions/ReconciliationNoticeDetailDto"
+        },
+        "debt": {
+          "description": "Borç Uzlaştırma Kalemleri",
+          "$ref": "#/definitions/ReconciliationNoticeDetailDto"
+        }
+      }
+    },
+    "ReconciliationSummaryDailyDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        },
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        },
+        "region": {
+          "type": "string"
+        },
+        "damSalesVolume": {
+          "type": "number",
+          "description": "GÖP SSM (MWh)"
+        },
+        "damSalesAmount": {
+          "type": "number",
+          "description": "GÖP SST (TL)"
+        },
+        "damPurchasesVolume": {
+          "type": "number",
+          "description": "GÖP SAM (MWh)"
+        },
+        "damPurchaseAmount": {
+          "type": "number",
+          "description": "GÖP SAT (TL)"
+        },
+        "bcSalesVolume": {
+          "type": "number",
+          "description": "İA Alış (MWh)"
+        },
+        "bcPurchaseVolume": {
+          "type": "number",
+          "description": "İA Satış (MWh)"
+        },
+        "idmSalesVolume": {
+          "type": "number",
+          "description": "GİPSM (MWh)"
+        },
+        "idmSalesAmount": {
+          "type": "number",
+          "description": "GİPST (TL)"
+        },
+        "idmPurchasesVolume": {
+          "type": "number",
+          "description": "GİPAM (MWh)"
+        },
+        "idmPurchaseAmount": {
+          "type": "number",
+          "description": "GİPAT (TL)"
+        },
+        "efmSalesVolume": {
+          "type": "number",
+          "description": "VEPSM (MWh)"
+        },
+        "efmPurchaseVolume": {
+          "type": "number",
+          "description": "VEPAM (MWh)"
+        },
+        "acceptedUpRegulation": {
+          "type": "number",
+          "description": "KEYALM (MWh)"
+        },
+        "acceptedUpRegulationAmount": {
+          "type": "number",
+          "description": "KEYALT (TL)"
+        },
+        "acceptedDownRegulation": {
+          "type": "number",
+          "description": "KEYATM (MWh)"
+        },
+        "acceptedDownRegulationAmount": {
+          "type": "number",
+          "description": "KEYATT (TL)"
+        },
+        "kupsm": {
+          "type": "number",
+          "description": "KUPSM (MWh)"
+        },
+        "kupst": {
+          "type": "number",
+          "description": "KUPST (TL)"
+        },
+        "generation": {
+          "type": "number",
+          "description": "UEVM (MWh)"
+        },
+        "consumption": {
+          "type": "number",
+          "description": "UEÇM (MWh)"
+        },
+        "positiveBalanceGroupImbalanceVolume": {
+          "type": "number",
+          "description": "Pozitif EDM DSG (MWh)"
+        },
+        "positiveBalanceGroupImbalanceAmount": {
+          "type": "number",
+          "description": "Pozitif EDT DSG (TL)"
+        },
+        "negativeBalanceGroupImbalanceVolume": {
+          "type": "number",
+          "description": "Negatif EDM DSG (MWh)"
+        },
+        "negativeBalanceGroupImbalanceAmount": {
+          "type": "number",
+          "description": "Negatif EDT DSG (TL)"
+        },
+        "receivableGapAmount": {
+          "type": "number",
+          "description": "Fark Tutarı Alacak (TL)"
+        },
+        "payableGapAmount": {
+          "type": "number",
+          "description": "Fark Tutarı Borç (TL)"
+        }
+      }
+    },
+    "ReconciliationSummaryDailyRespDto": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReconciliationSummaryDailyDto"
           }
         },
-        "page" : {
-          "$ref" : "#/definitions/Page"
+        "page": {
+          "$ref": "#/definitions/Page"
         },
-        "summary" : {
-          "$ref" : "#/definitions/ReconciliationSummaryDto"
+        "summary": {
+          "$ref": "#/definitions/ReconciliationSummaryDto"
         }
       }
     },
-    "ReconciliationSummaryDto" : {
-      "type" : "object",
-      "properties" : {
-        "damSalesVolume" : {
-          "type" : "number",
-          "description" : "GÖP SSM (MWh)"
+    "ReconciliationSummaryDto": {
+      "type": "object",
+      "properties": {
+        "damSalesVolume": {
+          "type": "number",
+          "description": "GÖP SSM (MWh)"
         },
-        "damSalesAmount" : {
-          "type" : "number",
-          "description" : "GÖP SST (TL)"
+        "damSalesAmount": {
+          "type": "number",
+          "description": "GÖP SST (TL)"
         },
-        "damPurchasesVolume" : {
-          "type" : "number",
-          "description" : "GÖP SAM (MWh)"
+        "damPurchasesVolume": {
+          "type": "number",
+          "description": "GÖP SAM (MWh)"
         },
-        "damPurchaseAmount" : {
-          "type" : "number",
-          "description" : "GÖP SAT (TL)"
+        "damPurchaseAmount": {
+          "type": "number",
+          "description": "GÖP SAT (TL)"
         },
-        "bcSalesVolume" : {
-          "type" : "number",
-          "description" : "İA Alış (MWh)"
+        "bcSalesVolume": {
+          "type": "number",
+          "description": "İA Alış (MWh)"
         },
-        "bcPurchaseVolume" : {
-          "type" : "number",
-          "description" : "İA Satış (MWh)"
+        "bcPurchaseVolume": {
+          "type": "number",
+          "description": "İA Satış (MWh)"
         },
-        "idmSalesVolume" : {
-          "type" : "number",
-          "description" : "GİPSM (MWh)"
+        "idmSalesVolume": {
+          "type": "number",
+          "description": "GİPSM (MWh)"
         },
-        "idmSalesAmount" : {
-          "type" : "number",
-          "description" : "GİPST (TL)"
+        "idmSalesAmount": {
+          "type": "number",
+          "description": "GİPST (TL)"
         },
-        "idmPurchasesVolume" : {
-          "type" : "number",
-          "description" : "GİPAM (MWh)"
+        "idmPurchasesVolume": {
+          "type": "number",
+          "description": "GİPAM (MWh)"
         },
-        "idmPurchaseAmount" : {
-          "type" : "number",
-          "description" : "GİPAT (TL)"
+        "idmPurchaseAmount": {
+          "type": "number",
+          "description": "GİPAT (TL)"
         },
-        "efmSalesVolume" : {
-          "type" : "number",
-          "description" : "VEPSM (MWh)"
+        "efmSalesVolume": {
+          "type": "number",
+          "description": "VEPSM (MWh)"
         },
-        "efmPurchaseVolume" : {
-          "type" : "number",
-          "description" : "VEPAM (MWh)"
+        "efmPurchaseVolume": {
+          "type": "number",
+          "description": "VEPAM (MWh)"
         },
-        "acceptedUpRegulation" : {
-          "type" : "number",
-          "description" : "KEYALM (MWh)"
+        "acceptedUpRegulation": {
+          "type": "number",
+          "description": "KEYALM (MWh)"
         },
-        "acceptedDownRegulation" : {
-          "type" : "number",
-          "description" : "KEYATM (MWh)"
+        "acceptedDownRegulation": {
+          "type": "number",
+          "description": "KEYATM (MWh)"
         },
-        "acceptedUpRegulationAmount" : {
-          "type" : "number",
-          "description" : "KEYALT (TL)"
+        "acceptedUpRegulationAmount": {
+          "type": "number",
+          "description": "KEYALT (TL)"
         },
-        "acceptedDownRegulationAmount" : {
-          "type" : "number",
-          "description" : "KEYATT (TL)"
+        "acceptedDownRegulationAmount": {
+          "type": "number",
+          "description": "KEYATT (TL)"
         },
-        "kupsm" : {
-          "type" : "number",
-          "description" : "KUPSM (MWh)"
+        "kupsm": {
+          "type": "number",
+          "description": "KUPSM (MWh)"
         },
-        "kupst" : {
-          "type" : "number",
-          "description" : "KUPST (TL)"
+        "kupst": {
+          "type": "number",
+          "description": "KUPST (TL)"
         },
-        "generation" : {
-          "type" : "number",
-          "description" : "UEVM (MWh)"
+        "generation": {
+          "type": "number",
+          "description": "UEVM (MWh)"
         },
-        "consumption" : {
-          "type" : "number",
-          "description" : "UEÇM (MWh)"
+        "consumption": {
+          "type": "number",
+          "description": "UEÇM (MWh)"
         },
-        "positiveBalanceGroupImbalanceVolume" : {
-          "type" : "number",
-          "description" : "Pozitif EDM DSG (MWh)"
+        "positiveBalanceGroupImbalanceVolume": {
+          "type": "number",
+          "description": "Pozitif EDM DSG (MWh)"
         },
-        "positiveBalanceGroupImbalanceAmount" : {
-          "type" : "number",
-          "description" : "Pozitif EDT DSG (TL)"
+        "positiveBalanceGroupImbalanceAmount": {
+          "type": "number",
+          "description": "Pozitif EDT DSG (TL)"
         },
-        "negativeBalanceGroupImbalanceVolume" : {
-          "type" : "number",
-          "description" : "Negatif EDM DSG (MWh)"
+        "negativeBalanceGroupImbalanceVolume": {
+          "type": "number",
+          "description": "Negatif EDM DSG (MWh)"
         },
-        "negativeBalanceGroupImbalanceAmount" : {
-          "type" : "number",
-          "description" : "Negatif EDT DSG (TL)"
+        "negativeBalanceGroupImbalanceAmount": {
+          "type": "number",
+          "description": "Negatif EDT DSG (TL)"
         },
-        "receivableGapAmount" : {
-          "type" : "number",
-          "description" : "Fark Tutarı Alacak (TL)"
+        "receivableGapAmount": {
+          "type": "number",
+          "description": "Fark Tutarı Alacak (TL)"
         },
-        "payableGapAmount" : {
-          "type" : "number",
-          "description" : "Fark Tutarı Borç (TL)"
+        "payableGapAmount": {
+          "type": "number",
+          "description": "Fark Tutarı Borç (TL)"
         }
       }
     },
-    "ReconciliationSummaryHourlyDto" : {
-      "type" : "object",
-      "properties" : {
-        "effectiveDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00"
+    "ReconciliationSummaryHourlyDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
         },
-        "version" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00"
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
         },
-        "region" : {
-          "type" : "string"
+        "region": {
+          "type": "string"
         },
-        "damSalesVolume" : {
-          "type" : "number",
-          "description" : "GÖP SSM (MWh)"
+        "damSalesVolume": {
+          "type": "number",
+          "description": "GÖP SSM (MWh)"
         },
-        "damSalesAmount" : {
-          "type" : "number",
-          "description" : "GÖP SST (TL)"
+        "damSalesAmount": {
+          "type": "number",
+          "description": "GÖP SST (TL)"
         },
-        "damPurchasesVolume" : {
-          "type" : "number",
-          "description" : "GÖP SAM (MWh)"
+        "damPurchasesVolume": {
+          "type": "number",
+          "description": "GÖP SAM (MWh)"
         },
-        "damPurchaseAmount" : {
-          "type" : "number",
-          "description" : "GÖP SAT (TL)"
+        "damPurchaseAmount": {
+          "type": "number",
+          "description": "GÖP SAT (TL)"
         },
-        "bcSalesVolume" : {
-          "type" : "number",
-          "description" : "İA Alış (MWh)"
+        "bcSalesVolume": {
+          "type": "number",
+          "description": "İA Alış (MWh)"
         },
-        "bcPurchaseVolume" : {
-          "type" : "number",
-          "description" : "İA Satış (MWh)"
+        "bcPurchaseVolume": {
+          "type": "number",
+          "description": "İA Satış (MWh)"
         },
-        "idmSalesVolume" : {
-          "type" : "number",
-          "description" : "GİPSM (MWh)"
+        "idmSalesVolume": {
+          "type": "number",
+          "description": "GİPSM (MWh)"
         },
-        "idmSalesAmount" : {
-          "type" : "number",
-          "description" : "GİPST (TL)"
+        "idmSalesAmount": {
+          "type": "number",
+          "description": "GİPST (TL)"
         },
-        "idmPurchasesVolume" : {
-          "type" : "number",
-          "description" : "GİPAM (MWh)"
+        "idmPurchasesVolume": {
+          "type": "number",
+          "description": "GİPAM (MWh)"
         },
-        "idmPurchaseAmount" : {
-          "type" : "number",
-          "description" : "GİPAT (TL)"
+        "idmPurchaseAmount": {
+          "type": "number",
+          "description": "GİPAT (TL)"
         },
-        "efmSalesVolume" : {
-          "type" : "number",
-          "description" : "VEPSM (MWh)"
+        "efmSalesVolume": {
+          "type": "number",
+          "description": "VEPSM (MWh)"
         },
-        "efmPurchaseVolume" : {
-          "type" : "number",
-          "description" : "VEPAM (MWh)"
+        "efmPurchaseVolume": {
+          "type": "number",
+          "description": "VEPAM (MWh)"
         },
-        "acceptedUpRegulation" : {
-          "type" : "number",
-          "description" : "KEYALM (MWh)"
+        "acceptedUpRegulation": {
+          "type": "number",
+          "description": "KEYALM (MWh)"
         },
-        "acceptedUpRegulationAmount" : {
-          "type" : "number",
-          "description" : "KEYALT (TL)"
+        "acceptedUpRegulationAmount": {
+          "type": "number",
+          "description": "KEYALT (TL)"
         },
-        "acceptedDownRegulation" : {
-          "type" : "number",
-          "description" : "KEYATM (MWh)"
+        "acceptedDownRegulation": {
+          "type": "number",
+          "description": "KEYATM (MWh)"
         },
-        "acceptedDownRegulationAmount" : {
-          "type" : "number",
-          "description" : "KEYATT (TL)"
+        "acceptedDownRegulationAmount": {
+          "type": "number",
+          "description": "KEYATT (TL)"
         },
-        "kupsm" : {
-          "type" : "number",
-          "description" : "KUPSM (MWh)"
+        "kupsm": {
+          "type": "number",
+          "description": "KUPSM (MWh)"
         },
-        "kupst" : {
-          "type" : "number",
-          "description" : "KUPST (TL)"
+        "kupst": {
+          "type": "number",
+          "description": "KUPST (TL)"
         },
-        "generation" : {
-          "type" : "number",
-          "description" : "UEVM (MWh)"
+        "generation": {
+          "type": "number",
+          "description": "UEVM (MWh)"
         },
-        "consumption" : {
-          "type" : "number",
-          "description" : "UEÇM (MWh)"
+        "consumption": {
+          "type": "number",
+          "description": "UEÇM (MWh)"
         },
-        "positiveBalanceGroupImbalanceVolume" : {
-          "type" : "number",
-          "description" : "Pozitif EDM DSG (MWh)"
+        "positiveBalanceGroupImbalanceVolume": {
+          "type": "number",
+          "description": "Pozitif EDM DSG (MWh)"
         },
-        "positiveBalanceGroupImbalanceAmount" : {
-          "type" : "number",
-          "description" : "Pozitif EDT DSG (TL)"
+        "positiveBalanceGroupImbalanceAmount": {
+          "type": "number",
+          "description": "Pozitif EDT DSG (TL)"
         },
-        "negativeBalanceGroupImbalanceVolume" : {
-          "type" : "number",
-          "description" : "Negatif EDM DSG (MWh)"
+        "negativeBalanceGroupImbalanceVolume": {
+          "type": "number",
+          "description": "Negatif EDM DSG (MWh)"
         },
-        "negativeBalanceGroupImbalanceAmount" : {
-          "type" : "number",
-          "description" : "Negatif EDT DSG (TL)"
+        "negativeBalanceGroupImbalanceAmount": {
+          "type": "number",
+          "description": "Negatif EDT DSG (TL)"
         },
-        "mcp" : {
-          "type" : "number",
-          "description" : "PTF (TL / MWh)"
+        "mcp": {
+          "type": "number",
+          "description": "PTF (TL / MWh)"
         },
-        "smp" : {
-          "type" : "number",
-          "description" : "SMF (TL / MWh)"
+        "smp": {
+          "type": "number",
+          "description": "SMF (TL / MWh)"
         }
       }
     },
-    "ReconciliationSummaryHourlyRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "items" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/ReconciliationSummaryHourlyDto"
+    "ReconciliationSummaryHourlyRespDto": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReconciliationSummaryHourlyDto"
           }
         },
-        "page" : {
-          "$ref" : "#/definitions/Page"
+        "page": {
+          "$ref": "#/definitions/Page"
         },
-        "summary" : {
-          "$ref" : "#/definitions/ReconciliationSummaryDto"
+        "summary": {
+          "$ref": "#/definitions/ReconciliationSummaryDto"
         }
       }
     },
-    "ReconciliationSummaryReqDto" : {
-      "type" : "object",
-      "properties" : {
-        "period" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Fatura Dönemi"
+    "ReconciliationSummaryReqDto": {
+      "type": "object",
+      "properties": {
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Fatura Dönemi"
         },
-        "version" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Fatura Dönemi"
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Fatura Dönemi"
         },
-        "region" : {
-          "type" : "string"
+        "region": {
+          "type": "string"
         },
-        "effectiveDateStart" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Başlangıç Tarihi"
+        "effectiveDateStart": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Başlangıç Tarihi"
         },
-        "effectiveDateEnd" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Bitiş Tarihi"
+        "effectiveDateEnd": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Bitiş Tarihi"
         },
-        "exportType" : {
-          "type" : "string",
-          "description" : "Export Type",
-          "enum" : [ "XLSX", "CSV", "PDF" ]
+        "exportType": {
+          "type": "string",
+          "description": "Export Type",
+          "enum": [
+            "XLSX",
+            "CSV",
+            "PDF"
+          ]
         }
       }
     },
-    "RestResponse" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyObject"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyObject"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseBody" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "type" : "object",
-          "readOnly" : true
+    "RestResponseBody": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "object",
+          "readOnly": true
         }
       }
     },
-    "RestResponseBodyInvoiceItemDetailResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/InvoiceItemDetailResponseDto"
+    "RestResponseBodyInvoiceItemDetailResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/InvoiceItemDetailResponseDto"
         }
       }
     },
-    "RestResponseBodyInvoiceItemWithTaxRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/InvoiceItemWithTaxRespDto"
+    "RestResponseBodyInvoiceItemWithTaxRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/InvoiceItemWithTaxRespDto"
         }
       }
     },
-    "RestResponseBodyObject" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "type" : "object",
-          "readOnly" : true
+    "RestResponseBodyObject": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "object",
+          "readOnly": true
         }
       }
     },
-    "RestResponseBodyReconciliationNoticeResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/ReconciliationNoticeResponseDto"
+    "RestResponseBodyReconciliationNoticeResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/ReconciliationNoticeResponseDto"
         }
       }
     },
-    "RestResponseBodyReconciliationSummaryDailyRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/ReconciliationSummaryDailyRespDto"
+    "RestResponseBodyReconciliationSummaryDailyRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/ReconciliationSummaryDailyRespDto"
         }
       }
     },
-    "RestResponseBodyReconciliationSummaryHourlyRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/ReconciliationSummaryHourlyRespDto"
+    "RestResponseBodyReconciliationSummaryHourlyRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/ReconciliationSummaryHourlyRespDto"
         }
       }
     },
-    "RestResponseBodyRetrospectiveDetailResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/RetrospectiveDetailResponseDto"
+    "RestResponseBodyRetrospectiveDetailResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/RetrospectiveDetailResponseDto"
         }
       }
     },
-    "RestResponseBodyRetrospectiveItemResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "content" : {
-          "readOnly" : true,
-          "$ref" : "#/definitions/RetrospectiveItemResponseDto"
+    "RestResponseBodyRetrospectiveItemResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/RetrospectiveItemResponseDto"
         }
       }
     },
-    "RestResponseError" : {
-      "type" : "object",
-      "properties" : {
-        "errorCode" : {
-          "type" : "string",
-          "description" : "Alınan hatanın kod bilgisi"
+    "RestResponseError": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Alınan hatanın kod bilgisi"
         },
-        "errorMessage" : {
-          "type" : "string",
-          "description" : "Alınan hatanın açıklaması"
+        "errorMessage": {
+          "type": "string",
+          "description": "Alınan hatanın açıklaması"
         }
       }
     },
-    "RestResponseInvoiceItemDetailResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseInvoiceItemDetailResponseDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyInvoiceItemDetailResponseDto"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyInvoiceItemDetailResponseDto"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseInvoiceItemWithTaxRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseInvoiceItemWithTaxRespDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyInvoiceItemWithTaxRespDto"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyInvoiceItemWithTaxRespDto"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseReconciliationNoticeResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseReconciliationNoticeResponseDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyReconciliationNoticeResponseDto"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyReconciliationNoticeResponseDto"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseReconciliationSummaryDailyRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseReconciliationSummaryDailyRespDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyReconciliationSummaryDailyRespDto"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyReconciliationSummaryDailyRespDto"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseReconciliationSummaryHourlyRespDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseReconciliationSummaryHourlyRespDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyReconciliationSummaryHourlyRespDto"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyReconciliationSummaryHourlyRespDto"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseRetrospectiveDetailResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseRetrospectiveDetailResponseDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyRetrospectiveDetailResponseDto"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyRetrospectiveDetailResponseDto"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RestResponseRetrospectiveItemResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "type" : "string",
-          "description" : "Yapılan isteğin HTTP status kodunu dönmektedir."
+    "RestResponseRetrospectiveItemResponseDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
         },
-        "correlationId" : {
-          "type" : "string",
-          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunad bu bilgiyi göndermeniz zorunludur."
         },
-        "spanIds" : {
-          "type" : "string"
+        "spanIds": {
+          "type": "string"
         },
-        "hostName" : {
-          "type" : "string"
+        "hostName": {
+          "type": "string"
         },
-        "clientIp" : {
-          "type" : "string",
-          "description" : "İsteği yapan clientin ip bilgisi"
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
         },
-        "userName" : {
-          "type" : "string",
-          "description" : "İsteği yapan kullanıcı bilgisi"
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
         },
-        "successMessage" : {
-          "type" : "string"
+        "successMessage": {
+          "type": "string"
         },
-        "errors" : {
-          "type" : "array",
-          "description" : "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/RestResponseError"
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir.Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
           }
         },
-        "unsuccessfulList" : {
-          "type" : "array",
-          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items" : {
-            "$ref" : "#/definitions/BaseDTO"
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
           }
         },
-        "dispatch" : {
-          "type" : "string"
+        "dispatch": {
+          "type": "string"
         },
-        "body" : {
-          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref" : "#/definitions/RestResponseBodyRetrospectiveItemResponseDto"
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı . İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyRetrospectiveItemResponseDto"
         }
       },
-      "xml" : {
-        "name" : "response"
+      "xml": {
+        "name": "response"
       }
     },
-    "RetrospectiveDetailDto" : {
-      "type" : "object",
-      "properties" : {
-        "total" : {
-          "type" : "number",
-          "description" : "Genel Toplam (TL)"
+    "RetrospectiveDetailDto": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "number",
+          "description": "Genel Toplam (TL)"
         },
-        "details" : {
-          "type" : "array",
-          "description" : "GDDK Alacak/Borç Özeti",
-          "items" : {
-            "$ref" : "#/definitions/RetrospectiveItemDetailDto"
+        "details": {
+          "type": "array",
+          "description": "GDDK Alacak/Borç Özeti",
+          "items": {
+            "$ref": "#/definitions/RetrospectiveItemDetailDto"
           }
         },
-        "summary" : {
-          "type" : "object",
-          "description" : "GDDK Alacak/Borç Toplam",
-          "additionalProperties" : {
-            "$ref" : "#/definitions/InvoiceItemKeyValueDto"
-          }
-        }
-      }
-    },
-    "RetrospectiveDetailResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "receivableDetails" : {
-          "description" : "GDDK Alacak Kalemleri",
-          "$ref" : "#/definitions/RetrospectiveDetailDto"
-        },
-        "debtDetails" : {
-          "description" : "GDDK Borç Kalemleri",
-          "$ref" : "#/definitions/RetrospectiveDetailDto"
-        }
-      }
-    },
-    "RetrospectiveItemDetailDto" : {
-      "type" : "object",
-      "properties" : {
-        "period" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Fatura Dönemi"
-        },
-        "version" : {
-          "type" : "string",
-          "format" : "date-time",
-          "example" : "2020-01-01T00:00:00+03:00",
-          "description" : "Version"
-        },
-        "details" : {
-          "type" : "object",
-          "additionalProperties" : {
-            "$ref" : "#/definitions/InvoiceItemKeyValueDto"
+        "summary": {
+          "type": "object",
+          "description": "GDDK Alacak/Borç Toplam",
+          "additionalProperties": {
+            "$ref": "#/definitions/InvoiceItemKeyValueDto"
           }
         }
       }
     },
-    "RetrospectiveItemDto" : {
-      "type" : "object",
-      "properties" : {
-        "item" : {
-          "$ref" : "#/definitions/KeyValueDto"
+    "RetrospectiveDetailResponseDto": {
+      "type": "object",
+      "properties": {
+        "receivableDetails": {
+          "description": "GDDK Alacak Kalemleri",
+          "$ref": "#/definitions/RetrospectiveDetailDto"
         },
-        "isDetail" : {
-          "type" : "boolean"
+        "debtDetails": {
+          "description": "GDDK Borç Kalemleri",
+          "$ref": "#/definitions/RetrospectiveDetailDto"
         }
       }
     },
-    "RetrospectiveItemResponseDto" : {
-      "type" : "object",
-      "properties" : {
-        "receivableItemDetails" : {
-          "type" : "array",
-          "description" : "Alacak Fatura Kalemleri",
-          "items" : {
-            "$ref" : "#/definitions/RetrospectiveItemDto"
+    "RetrospectiveItemDetailDto": {
+      "type": "object",
+      "properties": {
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Fatura Dönemi"
+        },
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00",
+          "description": "Version"
+        },
+        "details": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/InvoiceItemKeyValueDto"
+          }
+        }
+      }
+    },
+    "RetrospectiveItemDto": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "$ref": "#/definitions/KeyValueDto"
+        },
+        "isDetail": {
+          "type": "boolean"
+        }
+      }
+    },
+    "RetrospectiveItemResponseDto": {
+      "type": "object",
+      "properties": {
+        "receivableItemDetails": {
+          "type": "array",
+          "description": "Alacak Fatura Kalemleri",
+          "items": {
+            "$ref": "#/definitions/RetrospectiveItemDto"
           }
         },
-        "debtItemDetails" : {
-          "type" : "array",
-          "description" : "Borç Fatura Kalemleri",
-          "items" : {
-            "$ref" : "#/definitions/RetrospectiveItemDto"
+        "debtItemDetails": {
+          "type": "array",
+          "description": "Borç Fatura Kalemleri",
+          "items": {
+            "$ref": "#/definitions/RetrospectiveItemDto"
           }
         }
       }
     },
-    "SortDTO" : {
-      "type" : "object",
-      "properties" : {
-        "field" : {
-          "type" : "string",
-          "example" : "${EXAMPLE_SORT_FIELD}",
-          "description" : "${VALUE_SORT_FIELD}"
+    "SortDTO": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "example": "${EXAMPLE_SORT_FIELD}",
+          "description": "${VALUE_SORT_FIELD}"
         },
-        "direction" : {
-          "type" : "string",
-          "example" : "ASC",
-          "description" : "${VALUE_SORT_DIRECTION}",
-          "enum" : [ "ASC", "DESC" ]
+        "direction": {
+          "type": "string",
+          "example": "ASC",
+          "description": "${VALUE_SORT_DIRECTION}",
+          "enum": [
+            "ASC",
+            "DESC"
+          ]
         }
       }
     },
-    "View" : {
-      "type" : "object",
-      "properties" : {
-        "contentType" : {
-          "type" : "string"
+    "View": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string"
         }
       }
     }

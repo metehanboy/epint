@@ -27,6 +27,7 @@ def get_swagger_file(category: str) -> str:
 def load_category(category: str):
     """Kategori endpoint'lerini yükle"""
     if category in EndpointModel.get_all_categories():
+        print(f"[+] Zaten yüklü! {category}")
         return  # Zaten yüklü
     
     swagger_path = get_swagger_file(category)

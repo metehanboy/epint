@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from .__priv__ import get_version
-from .endpoints import get_endpoints_dir, list_categories, get_endpoints, load_category
+from .endpoints import get_endpoints_dir, list_categories, get_endpoints,\
+    load_category
 
 __version__ = get_version()
 
