@@ -13,6 +13,7 @@ include pyproject.toml
 
 # Include package data files
 recursive-include src/epint/resources *.json
+recursive-include src/epint/endpoints *.json
 
 # Include source files
 recursive-include src/epint *.py

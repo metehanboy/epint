@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "epint"
-version = "0.2.0"
+dynamic = ["version"]
 description = "Türkiye Enerji Piyasası Market Operatörünün API'lerinin Python versiyonu. Swagger dosyalarından oluşturulmuştur."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -18,7 +18,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
@@ -68,3 +67,15 @@ extend-exclude = '''
 profile = "black"
 multi_line_output = 3
 line_length = 88
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+epint = ["endpoints/**/*.json"]
+
+[tool.setuptools.dynamic]
+version = {attr = "epint.modules.version.__version__"}
