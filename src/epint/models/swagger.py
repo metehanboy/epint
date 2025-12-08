@@ -38,6 +38,8 @@ class SwaggerModel:
                 method_name = operation_id.replace('-', '_')
                 
                 endpoints[method_name] = {
+                    'host':self.host,
+                    'basePath':self.base_path,
                     'path': path,
                     'method': method.upper(),
                     'operation_id': operation_id,
@@ -69,8 +71,14 @@ class SwaggerModel:
             if 'schema' in param:
                 schema = param['schema']
                 if '$ref' in schema:
-                    param_data['schema'] = self._resolve_ref_recursive(schema['$ref'])
+                    resolved_schema = self._resolve_ref_recursive(schema['$ref'])
+                    if resolved_schema:
+                        # Resolved schema'yı da tamamen çöz (nested $ref'ler ve properties içindeki $ref'ler için)
+                        param_data['schema'] = self._resolve_all_refs(resolved_schema)
+                    else:
+                        param_data['schema'] = None
                 else:
+                    # Schema içindeki tüm $ref'leri recursive olarak çöz
                     param_data['schema'] = self._resolve_all_refs(schema)
             
             # Items (array için)

@@ -9,8 +9,7 @@ from typing import Dict, Tuple, Optional
 from dataclasses import dataclass
 
 from ..http_client import HTTPClient
-from .datetime_utils import DateTimeUtils
-from .logger import get_logger
+from ..datetime import DateTimeUtils
 import time
 
 
@@ -30,36 +29,36 @@ class Authentication:
     ST_EXPIRE_SECONDS: int = 30
     DATE_FORMAT: str = DateTimeUtils.DATETIME_FORMAT
 
-    ENDPOINTS: Dict[str, str] = {
-        "tgt": "/cas/v1/tickets",
-        "st": "/cas/v1/tickets/{tgt_code}",
-    }
+    TGT_ENDPOINT: str = "/cas/v1/tickets"
+    ST_ENDPOINT: str = "/cas/v1/tickets/{tgt_code}"
 
-    ROOT_URLS: Dict[str, str] = {
-        "transparency": "https://giris.epias.com.tr",
-        "epys": "https://cas.epias.com.tr",
-    }
+    TRANSPARENCY_BASEPATH: str = "giris.epias.com.tr"
+    EPYS_BASEPATH: str = "cas.epias.com.tr"
+    PROTOCOL = "https://"
 
     def __init__(
         self,
         username: str,
         password: str,
-        auth_mode: str = "epys",
-        environment_mode: str = "prod",
+        target_service: str = "epys", # epys, seffaflik
+        runtime_mode: str = "prod", # prod, test
     ):
         self.username = username
         self.password = password
-        self.auth_mode = auth_mode
-        self.environment_mode = environment_mode
-        self.root = self._get_root_url(auth_mode, environment_mode)
-        self.logger = get_logger()
+        self.target_service = target_service,
+        self.runtime_mode = runtime_mode
+        self.root = self._get_root_url(target_service, runtime_mode)
         self._setup_directories()
 
-    def _get_root_url(self, auth_mode: str, environment_mode: str) -> str:
-        """Mode'a göre root URL'i döndür"""
-        from .service_config import get_auth_root_url
+    def _get_root_url(self, target_service: str, runtime_mode: str) -> str:
+        prefix = "test" if runtime_mode != "prod" else ""
+        if target_service == "transparency":
+            prefix = ""
 
-        return get_auth_root_url(auth_mode, environment_mode)
+        base_path = self.EPYS_BASEPATH if target_service == "epys" else self.TRANSPARENCY_BASEPATH
+        
+        return f"{self.PROTOCOL}{prefix}{base_path}"
+
 
     def _setup_directories(self) -> None:
         temp_dir = os.path.join(tempfile.gettempdir(), "epint")
@@ -125,12 +124,7 @@ class Authentication:
         start_time = time.time()
 
         try:
-            self.logger.log_operation(
-                "auth_tgt_generation_start",
-                username=self.username,
-                mode=self.auth_mode,
-                root_url=self.root,
-            )
+            
 
             headers = self._get_base_headers()
             payload = {"username": self.username, "password": self.password}
@@ -138,7 +132,7 @@ class Authentication:
 
             with HTTPClient() as cl:
                 rp = cl.post(
-                    self.root + self.ENDPOINTS["tgt"],
+                    self.root + self.TGT_ENDPOINT,
                     data=payload,
                     headers=headers,
                     # params=params,
@@ -146,37 +140,19 @@ class Authentication:
                 rp.raise_for_status()
 
             duration = time.time() - start_time
-            self.logger.log_performance(
-                "auth_tgt_generation",
-                duration,
-                username=self.username,
-                mode=self.auth_mode,
-                success=True,
-            )
+            
 
             return rp.text
 
         except Exception as e:
             duration = time.time() - start_time
-            self.logger.log_error(
-                "auth_tgt_generation_error",
-                username=self.username,
-                mode=self.auth_mode,
-                error_msg=str(e),
-                duration=duration,
-            )
+            
             raise
 
     def _generate_st(self, service: str) -> str:
         start_time = time.time()
 
         try:
-            self.logger.log_operation(
-                "auth_st_generation_start",
-                username=self.username,
-                service=service,
-                mode=self.auth_mode,
-            )
 
             tgt_code, _ = self.get_tgt()
             headers = self._get_base_headers()
@@ -184,23 +160,18 @@ class Authentication:
 
             with HTTPClient() as cl:
                 rp = cl.post(
-                    self.root + self.ENDPOINTS["st"].format(tgt_code=tgt_code),
+                    self.root + self.ST_ENDPOINT.format(tgt_code=tgt_code),
                     data=payload,
                     headers=headers,
                 )
 
                 if rp.status_code == 404:
-                    self.logger.log_operation(
-                        "auth_tgt_invalid_retry",
-                        username=self.username,
-                        service=service,
-                        status_code=404,
-                    )
+                    
                     print("TGT geçersiz, yeni TGT oluşturuluyor...")
                     self.clear_tickets()
                     tgt_code, _ = self.get_tgt()
                     rp = cl.post(
-                        self.root + self.ENDPOINTS["st"].format(tgt_code=tgt_code),
+                        self.root + self.ST_ENDPOINT.format(tgt_code=tgt_code),
                         data=payload,
                         headers=headers,
                     )
@@ -208,27 +179,13 @@ class Authentication:
                 rp.raise_for_status()
 
             duration = time.time() - start_time
-            self.logger.log_performance(
-                "auth_st_generation",
-                duration,
-                username=self.username,
-                service=service,
-                mode=self.auth_mode,
-                success=True,
-            )
+            
 
             return rp.text
 
         except Exception as e:
             duration = time.time() - start_time
-            self.logger.log_error(
-                "auth_st_generation_error",
-                username=self.username,
-                service=service,
-                mode=self.auth_mode,
-                error_msg=str(e),
-                duration=duration,
-            )
+            
             raise
 
     def _validate_ticket(self, ticket_code: str, ticket_type: str) -> bool:
@@ -239,7 +196,7 @@ class Authentication:
         if ticket_type == "tgt":
             hours = (
                 self.TGT_EXPIRE_HOURS_TRANSPARENCY
-                if self.auth_mode == "transparency"
+                if self.target_service == "transparency"
                 else self.TGT_EXPIRE_HOURS
             )
             delta = datetime.timedelta(hours=hours)

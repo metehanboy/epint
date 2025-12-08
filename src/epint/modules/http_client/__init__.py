@@ -24,7 +24,7 @@ class HTTPClient:
         timeout: Optional[Union[float, Tuple[float, float]]] = None,
         headers: Optional[Dict[str, str]] = None,
         verify: bool = True,
-        max_redirects: int = 5,
+        allow_redirects: bool = True,
     ):
         """
         HTTP Client oluştur
@@ -37,7 +37,7 @@ class HTTPClient:
             timeout: Request timeout süresi (saniye) veya (connect_timeout, read_timeout) tuple
             headers: Varsayılan header'lar
             verify: SSL sertifika doğrulaması
-            max_redirects: Maksimum redirect sayısı
+            allow_redirects: Redirect'lere izin ver (default: True)
         """
         self.retries = retries
         self.backoff_factor = backoff_factor
@@ -46,7 +46,7 @@ class HTTPClient:
         self.timeout = timeout
         self.headers = headers or {}
         self.verify = verify
-        self.max_redirects = max_redirects
+        self.allow_redirects = allow_redirects
         
         self._session: Optional[Session] = None
     
@@ -70,7 +70,6 @@ class HTTPClient:
             max_retries=retry_strategy,
             pool_connections=10,
             pool_maxsize=20,
-            max_redirects=self.max_redirects,
         )
         
         session.mount("http://", adapter)
@@ -131,12 +130,33 @@ class HTTPClient:
         if 'verify' not in kwargs:
             kwargs['verify'] = self.verify
         
+        # Redirect ayarı
+        if 'allow_redirects' not in kwargs:
+            kwargs['allow_redirects'] = self.allow_redirects
+        
+        response: Optional[Response] = None
         try:
             response = session.request(method=method.upper(), url=url, **kwargs)
             response.raise_for_status()
             return response
         except (RequestException, RetryError, Timeout) as e:
-            raise
+            # Response varsa detaylı hata mesajı oluştur
+            error_msg = str(e)
+            if response is not None:
+                try:
+                    response_text = response.text[:1000]  # İlk 1000 karakter
+                    error_msg += f"\nResponse Status: {response.status_code}"
+                    error_msg += f"\nResponse Headers: {dict(response.headers)}"
+                    if response_text:
+                        error_msg += f"\nResponse Body: {response_text}"
+                except Exception:
+                    # Response okunamazsa sadece status code'u ekle
+                    error_msg += f"\nResponse Status: {response.status_code}"
+            
+            # Yeni exception oluştur (orijinal exception'ı preserve et)
+            new_exception = type(e)(error_msg)
+            new_exception.__cause__ = e
+            raise new_exception from e
     
     def get(self, url: str, **kwargs: Any) -> Response:
         """GET request"""
