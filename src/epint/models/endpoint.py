@@ -17,7 +17,18 @@ class Endpoint:
     
     def __call__(self, **kwargs: Any) -> Dict[str, Any]:
         """Endpoint çağrıldığında çalışır"""
+
+        import epint
+
+        print(f"username: {epint._username}")
+        print(f"password: {epint._password}")
+        print(f"mode: {epint._mode}")
+
+        
+
         print(f"'{self._category}.{self._name}' methodu çalıştırıldı")
+        
+
         
         # RequestModel oluştur
         request_model = RequestModel(self._data, kwargs)

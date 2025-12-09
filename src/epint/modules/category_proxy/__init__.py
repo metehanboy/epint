@@ -2,6 +2,7 @@
 from typing import Dict, Any
 from ...models.endpoint import EndpointModel, Endpoint
 from ..search.method_name_decorator import to_python_method_name
+from ..search.find_closest import find_closest_match
 
 
 class CategoryProxy:
@@ -18,22 +19,27 @@ class CategoryProxy:
         endpoint_data = None
         endpoint_name = None
         
-        # Önce normalize edilmiş isimle ara
+        # 1. Önce normalize edilmiş isimle tam eşleşme kontrolü
         if normalized_name in endpoints:
             endpoint_data = endpoints[normalized_name]
             endpoint_name = normalized_name
-        # Orijinal isimle ara
+        # 2. Orijinal isimle tam eşleşme kontrolü
         elif name in endpoints:
             endpoint_data = endpoints[name]
             endpoint_name = name
         else:
-            # Tüm endpoint isimlerinde ara (case-insensitive, normalize edilmiş)
-            for ep_name, ep_data in endpoints.items():
-                normalized_endpoint = to_python_method_name(ep_name)
-                if normalized_endpoint == normalized_name or ep_name.lower() == name.lower():
-                    endpoint_data = ep_data
-                    endpoint_name = ep_name
-                    break
+            # 3. Normalize edilmiş isimlerle fuzzy matching
+            normalized_endpoints = {to_python_method_name(ep_name): ep_name for ep_name in endpoints.keys()}
+            closest_normalized = find_closest_match(normalized_name, list(normalized_endpoints.keys()), threshold=0.7)
+            if closest_normalized:
+                endpoint_name = normalized_endpoints[closest_normalized]
+                endpoint_data = endpoints[endpoint_name]
+            else:
+                # 4. Orijinal endpoint isimleriyle fuzzy matching (düşük threshold)
+                closest = find_closest_match(name, list(endpoints.keys()), threshold=0.6)
+                if closest:
+                    endpoint_name = closest
+                    endpoint_data = endpoints[closest]
         
         if not endpoint_data:
             available = list(endpoints.keys())[:10]

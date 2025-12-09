@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import re
 from typing import Dict, Any, List, Optional, Callable
 from ..modules.search.find_closest import find_closest_match
 
@@ -44,9 +45,87 @@ class RequestModel:
         Returns:
             Eşleşen parametre ismi veya None
         """
-        # find_closest_match zaten direkt eşleşme kontrolü yapıyor
+        if not param_name or not available_params:
+            return None
+        
+        # 1. Önce case-insensitive tam eşleşme kontrolü
+        param_lower = param_name.lower()
+        for candidate in available_params:
+            if candidate.lower() == param_lower:
+                return candidate
+        
+        # 2. Substring eşleşmesi kontrolü (daha kısa isim, daha uzun isimde geçiyor mu?)
+        # Örnek: "readingorganizationid" -> "readingOrganizationId" (daha iyi)
+        #         "readingorganizationid" -> "meterReadingOrganizationId" (daha kötü)
+        param_words = self._split_camel_case(param_lower)
+        best_substring_match = None
+        best_substring_score = 0.0
+        
+        for candidate in available_params:
+            candidate_lower = candidate.lower()
+            candidate_words = self._split_camel_case(candidate_lower)
+            
+            # Önce tam substring kontrolü (param candidate'ın başında veya sonunda mı?)
+            if param_lower in candidate_lower:
+                # Param candidate'ın substring'i ise, candidate'ın uzunluğuna göre score ver
+                # Daha kısa candidate'lar daha iyi (ör: "readingOrganizationId" < "meterReadingOrganizationId")
+                substring_ratio = len(param_lower) / len(candidate_lower)
+                if substring_ratio > best_substring_score:
+                    best_substring_score = substring_ratio
+                    best_substring_match = candidate
+            
+            # Parametre kelimelerinin kaç tanesi candidate'de geçiyor?
+            matched_words = sum(1 for word in param_words if word in candidate_lower)
+            score = matched_words / len(param_words) if param_words else 0
+            
+            # Eğer tüm kelimeler eşleşiyorsa ve candidate daha kısa veya eşit uzunluktaysa öncelik ver
+            if matched_words == len(param_words) and len(candidate_lower) <= len(param_lower) * 1.2:
+                if score > best_substring_score:
+                    best_substring_score = score
+                    best_substring_match = candidate
+        
+        # Tam substring eşleşmesi varsa ve score yeterince yüksekse döndür
+        if best_substring_match and best_substring_score >= 0.7:
+            return best_substring_match
+        
+        # 3. Fuzzy matching (SequenceMatcher ile)
         match = find_closest_match(param_name, available_params, threshold=threshold)
         return match
+    
+    def _split_camel_case(self, name: str) -> List[str]:
+        """CamelCase veya snake_case string'i kelimelere ayır"""
+        import re
+        # Önce büyük harfleri küçük harfe çevir ve önüne boşluk ekle (CamelCase için)
+        words = re.sub(r'([a-z])([A-Z])', r'\1 \2', name)
+        # Snake_case ve tire'leri split et
+        words = re.sub(r'[_\s-]+', ' ', words)
+        # Küçük harfe çevir ve boşluklara göre split et
+        result = [w.lower() for w in words.split() if w]
+        
+        # Eğer tek kelime varsa ve uzunsa, yaygın kelimelere göre böl
+        # Örnek: "readingorganizationid" -> ["reading", "organization", "id"]
+        if len(result) == 1 and len(result[0]) > 10:
+            word = result[0]
+            # Yaygın kelimeleri ara
+            common_words = ['id', 'code', 'name', 'date', 'time', 'type', 'status', 
+                          'organization', 'reading', 'meter', 'point', 'consumption']
+            found_words = []
+            remaining = word
+            
+            for common_word in sorted(common_words, key=len, reverse=True):
+                if common_word in remaining:
+                    idx = remaining.find(common_word)
+                    if idx > 0:
+                        found_words.append(remaining[:idx])
+                    found_words.append(common_word)
+                    remaining = remaining[idx + len(common_word):]
+            
+            if found_words:
+                if remaining:
+                    found_words.append(remaining)
+                return found_words
+        
+        return result
     
     def _is_service_wrapper(self, schema: Dict[str, Any]) -> bool:
         """

@@ -6,7 +6,6 @@ include LICENSE
 
 # Include requirements files
 include requirements.txt
-include requirements-dev.txt
 
 # Include configuration files
 include pyproject.toml
