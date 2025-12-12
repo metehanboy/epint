@@ -2,7 +2,9 @@
 
 import re
 from typing import Dict, Any, List, Optional, Callable
+import epint
 from ..modules.search.find_closest import find_closest_match
+from ..modules.authentication.auth_manager import Authentication
 
 
 class RequestModel:
@@ -32,6 +34,31 @@ class RequestModel:
         self._data = None
         
         self._parse_parameters()
+
+        self._endpoint_data["host"] = self._get_host(epint._mode == "test") + ".epias.com.tr"
+        self.st_service_url = self._get_st_service_endpoint(epint._mode == "test") + ".epias.com.tr"
+
+
+    def _get_host(self,test_mode: bool) -> str:
+
+        if "seffaflik" in self._category:
+            return "seffaflik"
+        if "gop" == self._category:
+            return "testgop" if test_mode else "gop"
+        if "gunici" == self._category:
+            return "gunici"
+ 
+        return "epys-prp" if test_mode else "epys"
+
+
+    def _get_st_service_endpoint(self, test_mode: bool) -> str:
+
+        if "gop" == self._category:
+            return "testgop" if test_mode else "gop"
+ 
+        return "epys"
+
+
     
     def _find_param_match(self, param_name: str, available_params: List[str], threshold: float = 0.5) -> Optional[str]:
         """
@@ -414,6 +441,31 @@ class RequestModel:
                     matched_body[array_name] = []
                 # Array içine object olarak ekle
                 matched_body[array_name].append(array_fields)
+        
+        # GOP kategorisi için service wrapper yapısı kontrolü
+        is_service_wrapper = self._category == 'gop' and self._is_service_wrapper(schema)
+        
+        if is_service_wrapper:
+            # Service wrapper yapısı: header ve body ayrı
+            wrapper_body = {}
+            
+            # Header'ı ayır (varsa)
+            header_array = matched_body.pop('header', [])
+            if not header_array:
+                header_array = []
+            
+            # Header default değerlerini ekle
+            header_array.append({'key': 'transactionId', 'value': Authentication.create_transaction_id()})
+            header_array.append({'key': 'application', 'value': epint.__appname__})
+            
+            # Diğer tüm parametreleri body altına ekle
+            wrapper_body = matched_body.copy()
+            
+            # Service wrapper yapısını oluştur
+            matched_body = {
+                'header': header_array,
+                'body': wrapper_body if wrapper_body else {}
+            }
         
         # Body'yi ayarla
         if matched_body:

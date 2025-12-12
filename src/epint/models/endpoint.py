@@ -3,6 +3,9 @@
 import json
 import os
 from typing import Dict, Any, List, Optional
+
+import epint
+from ..modules.authentication.auth_manager import Authentication
 from .swagger import SwaggerModel
 from .request_model import RequestModel
 
@@ -14,21 +17,18 @@ class Endpoint:
         self._category = category
         self._name = name
         self._data = data
+
     
     def __call__(self, **kwargs: Any) -> Dict[str, Any]:
         """Endpoint çağrıldığında çalışır"""
 
-        import epint
-
-        print(f"username: {epint._username}")
-        print(f"password: {epint._password}")
-        print(f"mode: {epint._mode}")
-
+        target_service = "transparency" if "seffaflik" in self._category else "epys"
+        runtime_mode = epint._mode
+        auth = Authentication(epint._username, epint._password, target_service, runtime_mode)
         
 
-        print(f"'{self._category}.{self._name}' methodu çalıştırıldı")
+        print(f"Endpoint çağrıldı: kategori = '{self._category}', isim = '{self._name}'")
         
-
         
         # RequestModel oluştur
         request_model = RequestModel(self._data, kwargs)
@@ -41,9 +41,13 @@ class Endpoint:
             print(f"JSON Body: {json.dumps(request_model.json, indent=2, ensure_ascii=False)}")
         if request_model.data:
             print(f"Form Data: {request_model.data}")
-        
-        return request_model.to_dict()
+
+        request_model.headers["TGT"] = auth.get_tgt()
+        if not ("seffaflik" in self._category):
+            request_model["ST"] = auth.get_st(request_model.st_service_url)
+
         # return self._data
+        return request_model.to_dict()
     
     def __getitem__(self, key: str) -> Any:
         """Endpoint data'sına erişim için"""

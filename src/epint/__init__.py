@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .modules.version import __version__
+from .modules.version import __version__, __appname__
 from .modules.search.ipython_blockage import IPYTHON_MAGIC_METHODS
 from .modules.search.method_name_decorator import to_python_method_name
 from .modules.search.find_closest import find_closest_match
@@ -54,9 +54,6 @@ def get_endpoints(category: str):
 def __getattr__(name):
     if name in IPYTHON_MAGIC_METHODS:
         raise AttributeError(f"'{__name__}' module has blocked attribute '{name}'")
-    
-    # Auth kontrolü - kategori erişimi yapılmadan önce kontrol et
-    _check_auth()
     
     categories = list_categories()
     

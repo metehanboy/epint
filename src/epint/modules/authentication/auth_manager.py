@@ -10,6 +10,7 @@ from dataclasses import dataclass
 
 from ..http_client import HTTPClient
 from ..datetime import DateTimeUtils
+import random
 import time
 
 
@@ -59,6 +60,16 @@ class Authentication:
         
         return f"{self.PROTOCOL}{prefix}{base_path}"
 
+    @classmethod
+    def random_hex(self, n):
+
+        return ''.join(random.choices('0123456789abcdef', k=n))
+
+    @classmethod
+    def create_transaction_id(self) -> str:
+
+        sections = [8, 4, 4, 4, 12]
+        return '-'.join(self.random_hex(s) for s in sections)
 
     def _setup_directories(self) -> None:
         temp_dir = os.path.join(tempfile.gettempdir(), "epint")

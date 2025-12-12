@@ -1,1 +1,8 @@
-__version__ = "0.2.0"
+__major__ = 0
+__minor__ = 2
+__semantic__ = 0
+__tag__ = "dev"
+
+__version__ = f"{__major__}.{__minor__}.{__semantic__}-{__tag__}"
+
+__appname__ = "EPINT Client"

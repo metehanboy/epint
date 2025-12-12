@@ -7,6 +7,7 @@ from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
 from requests import Session, Response
 from requests.exceptions import RequestException, RetryError, Timeout
+import time
 
 
 class HTTPClient:
@@ -98,6 +99,42 @@ class HTTPClient:
             self._session = self._create_session()
         return self._session
     
+    def _check_rate_limit(self, response: Response) -> Optional[float]:
+        """
+        Rate limit header'larını kontrol et ve gerekirse bekleme süresi döndür
+        
+        Args:
+            response: HTTP response objesi
+            
+        Returns:
+            Bekleme süresi (saniye) veya None
+        """
+        headers = response.headers
+        
+        # Rate limit header'larını al
+        remaining = headers.get('RateLimit-Remaining')
+        limit = headers.get('RateLimit-Limit')
+        reset = headers.get('RateLimit-Reset')
+        
+        if remaining is not None:
+            try:
+                remaining_int = int(remaining)
+                # Eğer kalan istek sayısı 0 veya çok düşükse (örn. 5'ten az)
+                if remaining_int <= 5:
+                    # Reset süresini kontrol et
+                    if reset is not None:
+                        try:
+                            reset_float = float(reset)
+                            return reset_float
+                        except (ValueError, TypeError):
+                            pass
+                    # Reset bilgisi yoksa varsayılan bekleme süresi
+                    return 60.0
+            except (ValueError, TypeError):
+                pass
+        
+        return None
+    
     def _make_request(
         self,
         method: str,
@@ -135,28 +172,81 @@ class HTTPClient:
             kwargs['allow_redirects'] = self.allow_redirects
         
         response: Optional[Response] = None
-        try:
-            response = session.request(method=method.upper(), url=url, **kwargs)
+        max_retries = 3
+        retry_count = 0
+        
+        while retry_count <= max_retries:
+            try:
+                response = session.request(method=method.upper(), url=url, **kwargs)
+                
+                # Rate limit kontrolü (429 veya rate limit aşıldıysa)
+                if response.status_code == 429 or self._check_rate_limit(response) is not None:
+                    wait_time = self._check_rate_limit(response)
+                    if wait_time is None:
+                        # 429 durumunda reset süresini header'dan al
+                        reset = response.headers.get('RateLimit-Reset')
+                        if reset is not None:
+                            try:
+                                wait_time = float(reset)
+                            except (ValueError, TypeError):
+                                wait_time = 60.0
+                        else:
+                            wait_time = 60.0
+                    
+                    if retry_count < max_retries:
+                        time.sleep(wait_time)
+                        retry_count += 1
+                        continue
+                    else:
+                        # Max retry aşıldı, exception fırlat
+                        response.raise_for_status()
+                
+                response.raise_for_status()
+                return response
+                
+            except (RequestException, RetryError, Timeout) as e:
+                # Response varsa rate limit kontrolü yap
+                if response is not None:
+                    # 429 durumunda retry yap
+                    if response.status_code == 429:
+                        wait_time = self._check_rate_limit(response)
+                        if wait_time is None:
+                            reset = response.headers.get('RateLimit-Reset')
+                            if reset is not None:
+                                try:
+                                    wait_time = float(reset)
+                                except (ValueError, TypeError):
+                                    wait_time = 60.0
+                            else:
+                                wait_time = 60.0
+                        
+                        if retry_count < max_retries:
+                            time.sleep(wait_time)
+                            retry_count += 1
+                            continue
+                
+                # Response varsa detaylı hata mesajı oluştur
+                error_msg = str(e)
+                if response is not None:
+                    try:
+                        response_text = response.text[:1000]  # İlk 1000 karakter
+                        error_msg += f"\nResponse Status: {response.status_code}"
+                        error_msg += f"\nResponse Headers: {dict(response.headers)}"
+                        if response_text:
+                            error_msg += f"\nResponse Body: {response_text}"
+                    except Exception:
+                        # Response okunamazsa sadece status code'u ekle
+                        error_msg += f"\nResponse Status: {response.status_code}"
+                
+                # Yeni exception oluştur (orijinal exception'ı preserve et)
+                new_exception = type(e)(error_msg)
+                new_exception.__cause__ = e
+                raise new_exception from e
+        
+        # Buraya gelmemeli ama güvenlik için
+        if response is not None:
             response.raise_for_status()
-            return response
-        except (RequestException, RetryError, Timeout) as e:
-            # Response varsa detaylı hata mesajı oluştur
-            error_msg = str(e)
-            if response is not None:
-                try:
-                    response_text = response.text[:1000]  # İlk 1000 karakter
-                    error_msg += f"\nResponse Status: {response.status_code}"
-                    error_msg += f"\nResponse Headers: {dict(response.headers)}"
-                    if response_text:
-                        error_msg += f"\nResponse Body: {response_text}"
-                except Exception:
-                    # Response okunamazsa sadece status code'u ekle
-                    error_msg += f"\nResponse Status: {response.status_code}"
-            
-            # Yeni exception oluştur (orijinal exception'ı preserve et)
-            new_exception = type(e)(error_msg)
-            new_exception.__cause__ = e
-            raise new_exception from e
+        raise RequestException("Max retry limit reached for rate limit")
     
     def get(self, url: str, **kwargs: Any) -> Response:
         """GET request"""

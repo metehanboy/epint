@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from typing import Dict, Any
+import epint
 from ...models.endpoint import EndpointModel, Endpoint
 from ..search.method_name_decorator import to_python_method_name
 from ..search.find_closest import find_closest_match
@@ -13,6 +14,9 @@ class CategoryProxy:
     
     def __getattr__(self, name):
         """Method ismine erişim - epint.category.method_name"""
+
+        epint._check_auth()
+
         normalized_name = to_python_method_name(name)
         
         endpoints = EndpointModel.get_category_endpoints(self._category)
