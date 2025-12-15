@@ -3,9 +3,12 @@
 import json
 import os
 from typing import Dict, Any, List, Optional
+from urllib.parse import urljoin
 
 import epint
 from ..modules.authentication.auth_manager import Authentication
+from ..modules.http_client import HTTPClient
+from ..modules.error_handler import ErrorHandler
 from .swagger import SwaggerModel
 from .request_model import RequestModel
 
@@ -17,6 +20,7 @@ class Endpoint:
         self._category = category
         self._name = name
         self._data = data
+        self.client = HTTPClient()
 
     
     def __call__(self, **kwargs: Any) -> Dict[str, Any]:
@@ -26,36 +30,44 @@ class Endpoint:
         runtime_mode = epint._mode
         auth = Authentication(epint._username, epint._password, target_service, runtime_mode)
         
-
-        print(f"Endpoint çağrıldı: kategori = '{self._category}', isim = '{self._name}'")
-        
-        
         # RequestModel oluştur
         request_model = RequestModel(self._data, kwargs)
         
-        # Request bilgilerini göster
-        print(f"Request Model: {request_model}")
-        print(f"Params: {request_model.params}")
-        print(f"Headers: {request_model.headers}")
-        if request_model.json:
-            print(f"JSON Body: {json.dumps(request_model.json, indent=2, ensure_ascii=False)}")
-        if request_model.data:
-            print(f"Form Data: {request_model.data}")
 
-        request_model.headers["TGT"] = auth.get_tgt()
-        if not ("seffaflik" in self._category):
-            request_model["ST"] = auth.get_st(request_model.st_service_url)
+        if "gop" != self._category:
+            request_model.headers["TGT"] = auth.get_tgt()[0]
+        if not ("gop" in self._category or "seffaflik" in self._category):
+            request_model.headers["ST"] = auth.get_st(request_model.st_service_url)[0]
+        if "gop" in self._category:
+            request_model.headers["gop-service-ticket"] = auth.get_st(request_model.st_service_url)[0]
 
-        # return self._data
-        return request_model.to_dict()
-    
-    def __getitem__(self, key: str) -> Any:
-        """Endpoint data'sına erişim için"""
-        return self._data.get(key)
-    
-    def __repr__(self) -> str:
-        """Endpoint bilgisini göster"""
-        return f"<Endpoint: {self._data.get('operation_id', 'unknown')}>"
+        
+        url = self.client.buildurl(self._data.get("host"), self._data.get("basePath"), self._data.get("path"))
+        method = self._data.get("method")
+
+        # Prepare parameters for the HTTP request, including body if exists
+        request_args = {
+            "headers": request_model.headers
+        }
+        if request_model.params:
+            request_args["params"] = request_model.params
+        if request_model.json is not None:
+            request_args["json"] = request_model.json
+        if request_model.data is not None:
+            request_args["data"] = request_model.data
+
+        # ErrorHandler oluştur
+        error_handler = ErrorHandler(auth)
+        try:
+            response = self.client.__getattribute__(method.lower())(
+                url,
+                **request_args
+            )
+            return response
+        except Exception as e:
+            # Hataları ErrorHandler ile yönet
+            error_handler.handle_exception(e)
+            raise
 
 
 class EndpointModel:

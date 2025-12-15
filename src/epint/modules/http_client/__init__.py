@@ -7,6 +7,7 @@ from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
 from requests import Session, Response
 from requests.exceptions import RequestException, RetryError, Timeout
+from ..version import __fullname__
 import time
 
 
@@ -79,6 +80,8 @@ class HTTPClient:
         # Varsayılan header'ları ayarla
         if self.headers:
             session.headers.update(self.headers)
+
+        session.headers.update({"User-Agent":__fullname__})
         
         return session
     
@@ -227,20 +230,63 @@ class HTTPClient:
                 
                 # Response varsa detaylı hata mesajı oluştur
                 error_msg = str(e)
+                
+                # Request bilgilerini ekle
+                error_msg += f"\nRequest Method: {method.upper()}"
+                error_msg += f"\nRequest URL: {url}"
+                print(f"Request Method: {method.upper()}")
+                print(f"Request URL: {url}")
+                
+                # Request headers
+                request_headers = kwargs.get('headers', {})
+                if request_headers:
+                    error_msg += f"\nRequest Headers: {dict(request_headers)}"
+                    print(f"Request Headers: {dict(request_headers)}")
+                
+                # Request body
+                request_data = kwargs.get('data')
+                request_json = kwargs.get('json')
+                if request_json is not None:
+                    try:
+                        import json
+                        body_str = json.dumps(request_json, ensure_ascii=False, indent=2)
+                        error_msg += f"\nRequest Body (JSON): {body_str[:2000]}"
+                        print(f"Request Body (JSON): {body_str}")
+                    except Exception:
+                        body_str = str(request_json)
+                        error_msg += f"\nRequest Body (JSON): {body_str[:1000]}"
+                        print(f"Request Body (JSON): {body_str}")
+                elif request_data is not None:
+                    if isinstance(request_data, (str, bytes)):
+                        body_str = request_data if isinstance(request_data, str) else request_data.decode('utf-8', errors='ignore')
+                        error_msg += f"\nRequest Body: {body_str[:2000]}"
+                        print(f"Request Body: {body_str}")
+                    else:
+                        body_str = str(request_data)
+                        error_msg += f"\nRequest Body: {body_str[:1000]}"
+                        print(f"Request Body: {body_str}")
+                
                 if response is not None:
                     try:
                         response_text = response.text[:1000]  # İlk 1000 karakter
                         error_msg += f"\nResponse Status: {response.status_code}"
                         error_msg += f"\nResponse Headers: {dict(response.headers)}"
+                        print(f"Response Status: {response.status_code}")
+                        print(f"Response Headers: {dict(response.headers)}")
                         if response_text:
                             error_msg += f"\nResponse Body: {response_text}"
+                            print(f"Response Body: {response_text}")
                     except Exception:
                         # Response okunamazsa sadece status code'u ekle
                         error_msg += f"\nResponse Status: {response.status_code}"
+                        print(f"Response Status: {response.status_code}")
                 
                 # Yeni exception oluştur (orijinal exception'ı preserve et)
                 new_exception = type(e)(error_msg)
                 new_exception.__cause__ = e
+                # Response'u exception'a ekle
+                if response is not None:
+                    new_exception.response = response
                 raise new_exception from e
         
         # Buraya gelmemeli ama güvenlik için
@@ -275,7 +321,20 @@ class HTTPClient:
     def options(self, url: str, **kwargs: Any) -> Response:
         """OPTIONS request"""
         return self._make_request("OPTIONS", url, **kwargs)
-    
+
+    def buildurl(self, *parts: str) -> str:
+
+        cleaned = [str(part).strip("/") for part in parts if part]
+        if not cleaned:
+            return ""
+        # Eğer ilk parça bir protokol içeriyorsa, protokolü koruyalım (örn: "https://")
+        if "://" in cleaned[0]:
+            protocol, rest = cleaned[0].split("://", 1)
+            url = protocol + "://" + "/".join([rest] + cleaned[1:])
+        else:
+            url = "/".join(cleaned)
+        return url
+        
     def close(self) -> None:
         """Session'ı kapat"""
         if self._session:

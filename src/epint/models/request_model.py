@@ -5,6 +5,7 @@ from typing import Dict, Any, List, Optional, Callable
 import epint
 from ..modules.search.find_closest import find_closest_match
 from ..modules.authentication.auth_manager import Authentication
+from ..modules.datetime import DateTimeUtils
 
 
 class RequestModel:
@@ -35,8 +36,12 @@ class RequestModel:
         
         self._parse_parameters()
 
-        self._endpoint_data["host"] = self._get_host(epint._mode == "test") + ".epias.com.tr"
-        self.st_service_url = self._get_st_service_endpoint(epint._mode == "test") + ".epias.com.tr"
+        st_service = self._get_st_service_endpoint(epint._mode == "test") + ".epias.com.tr"
+        host_endpoint = self._get_host(epint._mode == "test") + ".epias.com.tr"
+
+
+        self._endpoint_data["host"] = "https://%s"%host_endpoint
+        self.st_service_url = "https://%s"%st_service
 
 
     def _get_host(self,test_mode: bool) -> str:
@@ -57,6 +62,179 @@ class RequestModel:
             return "testgop" if test_mode else "gop"
  
         return "epys"
+    
+    def _convert_value_by_format(self, value: Any, param_schema: Dict[str, Any]) -> Any:
+        """
+        Format tipine göre değeri dönüştür
+        
+        Args:
+            value: Dönüştürülecek değer
+            param_schema: Parametre schema bilgisi (type, format içerir)
+        
+        Returns:
+            Dönüştürülmüş değer
+        """
+        if value is None:
+            return value
+        
+        format_type = param_schema.get('format', '')
+        param_type = param_schema.get('type', '')
+        
+        # date-time formatı
+        if format_type == 'date-time':
+            if isinstance(value, str):
+                try:
+                    dt = DateTimeUtils.from_string(value)
+                    # GOP servisi için özel format
+                    if self._category == 'gop':
+                        return DateTimeUtils.to_gop_iso_string(dt)
+                    return DateTimeUtils.to_iso_string(dt)
+                except (ValueError, TypeError):
+                    return value
+            elif hasattr(value, 'strftime'):
+                # GOP servisi için özel format
+                if self._category == 'gop':
+                    return DateTimeUtils.to_gop_iso_string(value)
+                return DateTimeUtils.to_iso_string(value)
+        
+        # integer formatları
+        if format_type in ('int64', 'int32') or param_type == 'integer':
+            try:
+                return int(value)
+            except (ValueError, TypeError):
+                return value
+        
+        # float formatları
+        if format_type in ('float', 'double') or param_type == 'number':
+            try:
+                return float(value)
+            except (ValueError, TypeError):
+                return value
+        
+        return value
+    
+    def _get_param_schema(self, param_name: str, parameters: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+        """
+        Parametre ismine göre schema bilgisini al
+        
+        Args:
+            param_name: Parametre ismi
+            parameters: Parametreler listesi
+        
+        Returns:
+            Parametre schema bilgisi veya None
+        """
+        
+        for param in parameters:
+            if param.get('name') == param_name:
+                return param
+        return None
+    
+    def _get_schema_property(self, schema: Dict[str, Any], field_name: str) -> Optional[Dict[str, Any]]:
+        """
+        Schema'dan field property'sini al
+        
+        Args:
+            schema: Schema dict'i
+            field_name: Field ismi
+        
+        Returns:
+            Field property bilgisi veya None
+        """
+        if not isinstance(schema, dict):
+            return None
+        
+        # Service wrapper kontrolü
+        if self._is_service_wrapper(schema):
+            body_prop = schema.get('properties', {}).get('body', {})
+            if isinstance(body_prop, dict) and 'properties' in body_prop:
+                schema = body_prop
+        
+        properties = schema.get('properties', {})
+        if field_name in properties:
+            return properties[field_name]
+        
+        # Nested properties kontrolü
+        for prop_name, prop_value in properties.items():
+            if isinstance(prop_value, dict):
+                if 'properties' in prop_value:
+                    nested_prop = prop_value['properties'].get(field_name)
+                    if nested_prop:
+                        return nested_prop
+                # Array items kontrolü
+                if prop_value.get('type') == 'array' and 'items' in prop_value:
+                    items = prop_value.get('items', {})
+                    if isinstance(items, dict) and 'properties' in items:
+                        nested_prop = items['properties'].get(field_name)
+                        if nested_prop:
+                            return nested_prop
+        
+        return None
+    
+    def _convert_dict_by_schema(self, data: Dict[str, Any], schema: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Dict içindeki değerleri schema'ya göre dönüştür (recursive)
+        
+        Args:
+            data: Dönüştürülecek dict
+            schema: Schema bilgisi
+        
+        Returns:
+            Dönüştürülmüş dict
+        """
+        if not isinstance(data, dict) or not isinstance(schema, dict):
+            return data
+        
+        result = {}
+        
+        # Service wrapper kontrolü - hem schema hem de data service wrapper yapısında mı?
+        is_schema_wrapper = self._is_service_wrapper(schema)
+        is_data_wrapper = 'header' in data and 'body' in data
+        
+        if is_schema_wrapper and is_data_wrapper:
+            # Service wrapper yapısı: header'ı olduğu gibi bırak, sadece body'yi dönüştür
+            result['header'] = data['header']
+            body_prop = schema.get('properties', {}).get('body', {})
+            if isinstance(body_prop, dict) and 'properties' in body_prop:
+                result['body'] = self._convert_dict_by_schema(data['body'], body_prop)
+            else:
+                result['body'] = data['body']
+            return result
+        
+        # Schema service wrapper ama data değil - schema'nın body property'sine geç
+        if is_schema_wrapper:
+            body_prop = schema.get('properties', {}).get('body', {})
+            if isinstance(body_prop, dict) and 'properties' in body_prop:
+                schema = body_prop
+        
+        properties = schema.get('properties', {})
+        
+        for key, value in data.items():
+            if key in properties:
+                prop_schema = properties[key]
+                # Nested object kontrolü
+                if isinstance(value, dict) and 'properties' in prop_schema:
+                    result[key] = self._convert_dict_by_schema(value, prop_schema)
+                # Array kontrolü
+                elif isinstance(value, list) and prop_schema.get('type') == 'array':
+                    items_schema = prop_schema.get('items', {})
+                    if isinstance(items_schema, dict) and 'properties' in items_schema:
+                        result[key] = [
+                            self._convert_dict_by_schema(item, items_schema) if isinstance(item, dict) else item
+                            for item in value
+                        ]
+                    else:
+                        result[key] = [
+                            self._convert_value_by_format(item, items_schema) if items_schema else item
+                            for item in value
+                        ]
+                else:
+                    result[key] = self._convert_value_by_format(value, prop_schema)
+            else:
+                # Schema'da bulunamayan field'ları olduğu gibi bırak
+                result[key] = value
+        
+        return result
 
 
     
@@ -379,6 +557,11 @@ class RequestModel:
         self._match_and_extract_params(query_param_names, self._params)
         # Default parametreleri uygula
         self._apply_default_params(self._params, query_param_names)
+        # Format dönüşümlerini uygula
+        for param_name, param_value in list(self._params.items()):
+            param_schema = self._get_param_schema(param_name, query_params)
+            if param_schema:
+                self._params[param_name] = self._convert_value_by_format(param_value, param_schema)
     
     def _process_header_params(self, header_params: List[Dict[str, Any]]):
         """Header parametrelerini işle"""
@@ -386,6 +569,11 @@ class RequestModel:
         self._match_and_extract_params(header_param_names, self._headers)
         # Default parametreleri uygula
         self._apply_default_params(self._headers, header_param_names)
+        # Format dönüşümlerini uygula
+        for param_name, param_value in list(self._headers.items()):
+            param_schema = self._get_param_schema(param_name, header_params)
+            if param_schema:
+                self._headers[param_name] = self._convert_value_by_format(param_value, param_schema)
     
     def _process_path_params(self, path_params: List[Dict[str, Any]]):
         """Path parametrelerini işle (şimdilik sadece kwargs'tan çıkar)"""
@@ -456,7 +644,7 @@ class RequestModel:
             
             # Header default değerlerini ekle
             header_array.append({'key': 'transactionId', 'value': Authentication.create_transaction_id()})
-            header_array.append({'key': 'application', 'value': epint.__appname__})
+            header_array.append({'key': 'application', 'value': epint.__fullname__})
             
             # Diğer tüm parametreleri body altına ekle
             wrapper_body = matched_body.copy()
@@ -467,10 +655,18 @@ class RequestModel:
                 'body': wrapper_body if wrapper_body else {}
             }
         
+        # Format dönüşümlerini uygula
+        if matched_body and body_params:
+            body_param = body_params[0]
+            schema = body_param.get('schema', {})
+            matched_body = self._convert_dict_by_schema(matched_body, schema)
+        
         # Body'yi ayarla
         if matched_body:
             consumes = self._endpoint_data.get('consumes', [])
-            if 'application/json' in consumes:
+            produces = self._endpoint_data.get('produces', [])
+            # Hem consumes hem de produces kontrol et
+            if 'application/json' in consumes or ('application/json' in produces and not consumes):
                 self._json = matched_body
             else:
                 self._data = matched_body
@@ -490,11 +686,15 @@ class RequestModel:
         
         # Content-Type header'ı ekle
         consumes = self._endpoint_data.get('consumes', [])
+        produces = self._endpoint_data.get('produces', [])
         if consumes:
             if 'application/json' in consumes:
                 self._headers['Content-Type'] = 'application/json'
             else:
                 self._headers['Content-Type'] = consumes[0]
+        elif produces and 'application/json' in produces:
+            # consumes boşsa produces'a bak
+            self._headers['Content-Type'] = 'application/json'
         
         # Accept header'ı ekle
         produces = self._endpoint_data.get('produces', [])

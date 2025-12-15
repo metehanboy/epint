@@ -1,0 +1,140 @@
+# -*- coding: utf-8 -*-
+
+from typing import Dict, Any, Optional, Callable, List
+from ..authentication.auth_manager import Authentication
+
+
+class ErrorHandler:
+    """HTTP ve API hatalarını yöneten modül"""
+    
+    def __init__(self, auth: Optional[Authentication] = None):
+        """
+        ErrorHandler oluştur
+        
+        Args:
+            auth: Authentication instance (TGT/ST temizleme için)
+        """
+        self.auth = auth
+        self._handlers: Dict[str, List[Callable]] = {}
+    
+    def register_handler(self, error_code: str, handler: Callable):
+        """
+        Özel hata handler'ı kaydet
+        
+        Args:
+            error_code: Hata kodu (örn: 'AUTH009', '401', 'RATE_LIMIT')
+            handler: Handler fonksiyonu (exception, response) -> None
+        """
+        if error_code not in self._handlers:
+            self._handlers[error_code] = []
+        self._handlers[error_code].append(handler)
+    
+    def handle_exception(self, exception: Exception, response: Optional[Any] = None) -> None:
+        """
+        Exception'ı işle ve gerekli aksiyonları al
+        
+        Args:
+            exception: Yakalanan exception
+            response: HTTP response objesi (varsa)
+        """
+        if not response and hasattr(exception, 'response'):
+            response = exception.response
+        
+        if not response:
+            return
+        
+        status_code = getattr(response, 'status_code', None)
+        if not status_code:
+            return
+        
+        # Status code bazlı handler'lar
+        if status_code == 401:
+            self._handle_401(response)
+        elif status_code == 403:
+            self._handle_403(response)
+        elif status_code == 404:
+            self._handle_404(response)
+        elif status_code == 429:
+            self._handle_429(response)
+        elif status_code >= 500:
+            self._handle_5xx(response)
+        
+        # Response body'den hata kodlarını al ve işle
+        try:
+            response_body = response.json()
+            errors = response_body.get('errors', [])
+            for error in errors:
+                error_code = error.get('errorCode', '')
+                error_message = error.get('errorMessage', '')
+                
+                # Özel handler'ları çağır
+                if error_code in self._handlers:
+                    for handler in self._handlers[error_code]:
+                        handler(exception, response, error)
+                
+                # Varsayılan handler'lar
+                self._handle_error_code(error_code, error_message, response)
+        except:
+            pass
+    
+    def _handle_401(self, response: Any) -> None:
+        """401 Unauthorized hatası"""
+        try:
+            response_body = response.json()
+            errors = response_body.get('errors', [])
+            
+            for error in errors:
+                error_code = error.get('errorCode', '')
+                error_message = str(error.get('errorMessage', '')).upper()
+                
+                # TGT hatası
+                if error_code == 'AUTH009' or 'TGT' in error_message:
+                    if self.auth:
+                        self.auth.clear_tickets()
+                
+                # ST hatası
+                elif error_code == 'AUTH010' or 'ST' in error_message:
+                    if self.auth:
+                        self.auth.clear_tickets()
+        except:
+            pass
+    
+    def _handle_403(self, response: Any) -> None:
+        """403 Forbidden hatası"""
+        pass
+    
+    def _handle_404(self, response: Any) -> None:
+        """404 Not Found hatası"""
+        pass
+    
+    def _handle_429(self, response: Any) -> None:
+        """429 Rate Limit hatası"""
+        pass
+    
+    def _handle_5xx(self, response: Any) -> None:
+        """5xx Server Error hatası"""
+        pass
+    
+    def _handle_error_code(self, error_code: str, error_message: str, response: Any) -> None:
+        """
+        Hata koduna göre işlem yap
+        
+        Args:
+            error_code: Hata kodu
+            error_message: Hata mesajı
+            response: HTTP response
+        """
+        # AUTH hataları
+        if error_code.startswith('AUTH'):
+            if self.auth:
+                if error_code in ('AUTH009', 'AUTH010'):
+                    self.auth.clear_tickets()
+        
+        # Rate limit hataları
+        elif error_code.startswith('RATE'):
+            pass
+        
+        # Validation hataları
+        elif error_code.startswith('VALID'):
+            pass
+

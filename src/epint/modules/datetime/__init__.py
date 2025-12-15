@@ -68,6 +68,22 @@ class DateTimeUtils:
         return formatted
 
     @classmethod
+    def to_gop_iso_string(cls, dt: _dt.datetime) -> str:
+        """GOP servisi için özel ISO format: 2016-04-22T00:00:00.000+0300"""
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=cls.DEFAULT_TIMEZONE)
+        
+        # Timezone offset'i al (+0300 formatında, : olmadan)
+        offset = dt.strftime("%z")
+        
+        # Milisaniye ekle
+        milliseconds = dt.microsecond // 1000
+        
+        # Format: YYYY-MM-DDTHH:MM:SS.mmm+HHMM
+        formatted = dt.strftime(f"%Y-%m-%dT%H:%M:%S.{milliseconds:03d}{offset}")
+        return formatted
+
+    @classmethod
     def add_hours(cls, dt: _dt.datetime, hours: int) -> _dt.datetime:
 
         return dt + _dt.timedelta(hours=hours)

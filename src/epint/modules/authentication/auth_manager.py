@@ -25,7 +25,7 @@ class TicketInfo:
 
 class Authentication:
 
-    TGT_EXPIRE_HOURS: int = 8
+    TGT_EXPIRE_HOURS: int = 5
     TGT_EXPIRE_HOURS_TRANSPARENCY: int = 1
     ST_EXPIRE_SECONDS: int = 30
     DATE_FORMAT: str = DateTimeUtils.DATETIME_FORMAT
@@ -175,6 +175,7 @@ class Authentication:
                     data=payload,
                     headers=headers,
                 )
+            
 
                 if rp.status_code == 404:
                     
