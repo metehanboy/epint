@@ -1,5 +1,5 @@
 __major__ = 0
-__minor__ = 2
+__minor__ = 3
 __semantic__ = 0
 __tag__ = "dev"
 
