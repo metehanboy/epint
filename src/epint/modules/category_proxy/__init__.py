@@ -51,7 +51,7 @@ class CategoryProxy:
                     endpoint_data = endpoints[closest]
         
         if not endpoint_data:
-            available = list(endpoints.keys())[:10]
+            available = [to_python_method_name(method_name) for method_name in list(endpoints.keys())[:10]]
             raise AttributeError(
                 f"'{self._category}' category has no endpoint '{name}'. "
                 f"Available endpoints: {available}"
