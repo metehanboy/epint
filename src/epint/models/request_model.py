@@ -16,6 +16,7 @@ class RequestModel:
         'page': lambda: {'number': 1, 'size': 1000},
         'region': lambda: 'TR1',
         'regionCode': lambda: 'TR1',
+        'counterRegionCode': lambda: 'TR1'
     }
     
     def __init__(self, endpoint_data: Dict[str, Any], kwargs: Dict[str, Any]):

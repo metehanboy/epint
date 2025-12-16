@@ -55,7 +55,8 @@ class Endpoint:
             request_args["json"] = request_model.json
         if request_model.data is not None:
             request_args["data"] = request_model.data
-
+        
+        # return request_args
         # ErrorHandler oluştur
         error_handler = ErrorHandler(auth)
         try:
