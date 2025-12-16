@@ -12,6 +12,21 @@ import os
 # Kategori cache
 _category_objects = {}
 
+# Kategori alternatif isimleri (alias'lar)
+CATEGORY_ALIASES = {
+    'transparency': 'seffaflik-electricity',
+    'naturalgas': 'seffaflik-natural-gas',
+    'cng': 'seffaflik-natural-gas',
+    'dogalgaz': 'seffaflik-natural-gas',
+    'reporting': 'seffaflik-reporting',
+    'invoice': 'reconciliation-invoice',
+    'bpm': 'reconciliation-bpm',
+    'imbalance': 'reconciliation-imbalance',
+    'market': 'reconciliation-market',
+    'mof': 'reconciliation-mof',
+    'res': 'reconciliation-res',
+}
+
 _username: str = None
 _password: str = None
 _mode: str = "prod"
@@ -64,10 +79,80 @@ def __getattr__(name):
             _category_objects[name] = CategoryProxy(name)
         return _category_objects[name]
     
+    # 2. Alternatif isimlerle (alias) eşleşme kontrolü
+    if name in CATEGORY_ALIASES:
+        category = CATEGORY_ALIASES[name]
+        load_category(category)
+        if category not in _category_objects:
+            _category_objects[category] = CategoryProxy(category)
+        return _category_objects[category]
+    
+    # 2b. Alternatif isimlerle (alias) fuzzy matching
     normalized_name = to_python_method_name(name)
+    alias_keys = list(CATEGORY_ALIASES.keys())
+    closest_alias = find_closest_match(normalized_name, alias_keys, threshold=0.6)
+    if closest_alias:
+        category = CATEGORY_ALIASES[closest_alias]
+        load_category(category)
+        if category not in _category_objects:
+            _category_objects[category] = CategoryProxy(category)
+        return _category_objects[category]
     normalized_categories = {to_python_method_name(cat): cat for cat in categories}
     
-    # 2. Normalize edilmiş isimle tam eşleşme kontrolü
+    # 3. Seffaflik kategorileri için prefix'i yoksayarak arama
+    # Örnek: "seffalik", "seffaflik" -> "seffaflik-electricity", "seffaflik-natural-gas", vb.
+    if normalized_name not in normalized_categories:
+        seffaflik_categories = [cat for cat in categories if cat.startswith('seffaflik-')]
+        if seffaflik_categories:
+            # "seffaflik" veya "seffalik" gibi yazımları kontrol et
+            name_lower = name.lower()
+            if 'seffaflik' in name_lower or 'seffalik' in name_lower:
+                # Eğer sadece "seffaflik" veya "seffalik" yazılmışsa, en yaygın olanı döndür
+                if normalized_name in ['seffaflik', 'seffalik'] or name_lower in ['seffaflik', 'seffalik']:
+                    # Varsayılan olarak seffaflik-electricity'yi döndür
+                    category = 'seffaflik-electricity'
+                    load_category(category)
+                    if category not in _category_objects:
+                        _category_objects[category] = CategoryProxy(category)
+                    return _category_objects[category]
+                else:
+                    # Alt kategori ismi varsa (örn: "electricity", "naturalgas") fuzzy matching yap
+                    for cat in seffaflik_categories:
+                        suffix = cat.replace('seffaflik-', '')
+                        normalized_suffix = to_python_method_name(suffix)
+                        if normalized_name == normalized_suffix:
+                            category = cat
+                            load_category(category)
+                            if category not in _category_objects:
+                                _category_objects[category] = CategoryProxy(category)
+                            return _category_objects[category]
+                    # Fuzzy matching ile en yakın seffaflik kategorisini bul
+                    closest_seffaflik = find_closest_match(normalized_name, [to_python_method_name(cat.replace('seffaflik-', '')) for cat in seffaflik_categories], threshold=0.6)
+                    if closest_seffaflik:
+                        for cat in seffaflik_categories:
+                            if to_python_method_name(cat.replace('seffaflik-', '')) == closest_seffaflik:
+                                category = cat
+                                load_category(category)
+                                if category not in _category_objects:
+                                    _category_objects[category] = CategoryProxy(category)
+                                return _category_objects[category]
+    
+    # 4. Reconciliation kategorileri için prefix'i yoksayarak arama
+    # Örnek: "invoice" -> "reconciliation-invoice"
+    if normalized_name not in normalized_categories:
+        for cat in categories:
+            if cat.startswith('reconciliation-'):
+                # reconciliation- prefix'ini kaldır ve normalize et
+                suffix = cat.replace('reconciliation-', '')
+                normalized_suffix = to_python_method_name(suffix)
+                if normalized_name == normalized_suffix:
+                    category = cat
+                    load_category(category)
+                    if category not in _category_objects:
+                        _category_objects[category] = CategoryProxy(category)
+                    return _category_objects[category]
+
+    # 4. Normalize edilmiş isimle tam eşleşme kontrolü
     if normalized_name in normalized_categories:
         category = normalized_categories[normalized_name]
         load_category(category)
@@ -75,7 +160,7 @@ def __getattr__(name):
             _category_objects[category] = CategoryProxy(category)
         return _category_objects[category]
     
-    # 3. Normalize edilmiş isimle fuzzy matching (düşük öncelik)
+    # 5. Normalize edilmiş isimle fuzzy matching
     closest_normalized = find_closest_match(normalized_name, list(normalized_categories.keys()), threshold=0.6)
     if closest_normalized:
         category = normalized_categories[closest_normalized]
@@ -84,7 +169,7 @@ def __getattr__(name):
             _category_objects[category] = CategoryProxy(category)
         return _category_objects[category]
     
-    # 4. Orijinal kategori isimleriyle fuzzy matching (en düşük öncelik)
+    # 6. Orijinal kategori isimleriyle fuzzy matching (en düşük öncelik)
     closest = find_closest_match(normalized_name, categories, threshold=0.6)
     if closest:
         load_category(closest)

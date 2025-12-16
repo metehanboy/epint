@@ -22,6 +22,8 @@ class Endpoint:
         self._data = data
         self.client = HTTPClient()
 
+    def __repr__(self) -> str:
+        return f"{self._category} | {self._name}"
     
     def __call__(self, **kwargs: Any) -> Dict[str, Any]:
         """Endpoint çağrıldığında çalışır"""
