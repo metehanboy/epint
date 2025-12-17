@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .modules.version import __version__, __appname__, __fullname__
+from .modules.version import __version__, __appname__, __fullname__, __author__
 from .modules.search.ipython_blockage import IPYTHON_MAGIC_METHODS
 from .modules.search.method_name_decorator import to_python_method_name
 from .modules.search.find_closest import find_closest_match
