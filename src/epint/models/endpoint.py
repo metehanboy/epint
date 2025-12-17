@@ -11,6 +11,7 @@ from ..modules.http_client import HTTPClient
 from ..modules.error_handler import ErrorHandler
 from .swagger import SwaggerModel
 from .request_model import RequestModel
+from .response_model import ResponseModel
 
 
 class Endpoint:
@@ -254,7 +255,9 @@ class Endpoint:
                 url,
                 **request_args
             )
-            return response
+            # ResponseModel oluştur
+            response_model = ResponseModel(self._data, response)
+            return response_model.data
         except Exception as e:
             # Hataları ErrorHandler ile yönet
             error_handler.handle_exception(e)
