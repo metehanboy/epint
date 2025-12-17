@@ -9,6 +9,8 @@ import epint
 from ..modules.authentication.auth_manager import Authentication
 from ..modules.http_client import HTTPClient
 from ..modules.error_handler import ErrorHandler
+from ..modules.date_range_handler import DateRangeHandler
+from ..modules.search.find_closest import find_closest_match
 from .swagger import SwaggerModel
 from .request_model import RequestModel
 from .response_model import ResponseModel
@@ -22,6 +24,7 @@ class Endpoint:
         self._name = name
         self._data = data
         self.client = HTTPClient()
+        self.date_range_handler = DateRangeHandler()
 
     def __repr__(self) -> str:
         """Endpoint bilgilerini detaylı olarak göster"""
@@ -216,7 +219,26 @@ class Endpoint:
     
     def __call__(self, **kwargs: Any) -> Dict[str, Any]:
         """Endpoint çağrıldığında çalışır"""
-
+        
+        # allData parametresini fuzzy matching ile kontrol et ve kwargs'tan çıkar
+        all_data = False
+        all_data_keys = ['allData', 'all_data', 'alldata', 'all-data', 'AllData', 'ALL_DATA']
+        
+        # Önce direkt eşleşmeleri kontrol et (case-insensitive)
+        kwargs_keys_lower = {k.lower(): k for k in kwargs.keys()}
+        for key in all_data_keys:
+            key_lower = key.lower()
+            if key_lower in kwargs_keys_lower:
+                original_key = kwargs_keys_lower[key_lower]
+                all_data = bool(kwargs.pop(original_key))
+                break
+        
+        # Direkt eşleşme yoksa fuzzy matching yap
+        if not all_data and kwargs:
+            matched_key = find_closest_match('allData', list(kwargs.keys()), threshold=0.7)
+            if matched_key:
+                all_data = bool(kwargs.pop(matched_key))
+        
         target_service = "transparency" if "seffaflik" in self._category else "epys"
         runtime_mode = epint._mode
         auth = Authentication(epint._username, epint._password, target_service, runtime_mode)
@@ -247,7 +269,6 @@ class Endpoint:
         if request_model.data is not None:
             request_args["data"] = request_model.data
         
-        # return request_args
         # ErrorHandler oluştur
         error_handler = ErrorHandler(auth)
         try:
@@ -259,8 +280,24 @@ class Endpoint:
             response_model = ResponseModel(self._data, response)
             return response_model.data
         except Exception as e:
+
+            if all_data:
+                # Tarih aralığı hatası kontrolü
+                is_date_error = self.date_range_handler.is_date_range_error(e)
+                
+                if is_date_error:
+                    result = self.date_range_handler.handle_date_range_error(
+                        kwargs,
+                        request_model,
+                        self.__call__
+                    )
+                    
+                    if result is not None:
+                        return result
+            
             # Hataları ErrorHandler ile yönet
             error_handler.handle_exception(e)
+            
             raise
 
 

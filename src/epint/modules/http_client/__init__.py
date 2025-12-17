@@ -234,14 +234,14 @@ class HTTPClient:
                 # Request bilgilerini ekle
                 error_msg += f"\nRequest Method: {method.upper()}"
                 error_msg += f"\nRequest URL: {url}"
-                print(f"Request Method: {method.upper()}")
-                print(f"Request URL: {url}")
+                # print(f"Request Method: {method.upper()}")
+                # print(f"Request URL: {url}")
                 
                 # Request headers
                 request_headers = kwargs.get('headers', {})
                 if request_headers:
                     error_msg += f"\nRequest Headers: {dict(request_headers)}"
-                    print(f"Request Headers: {dict(request_headers)}")
+                    # print(f"Request Headers: {dict(request_headers)}")
                 
                 # Request body
                 request_data = kwargs.get('data')
@@ -251,35 +251,35 @@ class HTTPClient:
                         import json
                         body_str = json.dumps(request_json, ensure_ascii=False, indent=2)
                         error_msg += f"\nRequest Body (JSON): {body_str[:2000]}"
-                        print(f"Request Body (JSON): {body_str}")
+                        # print(f"Request Body (JSON): {body_str}")
                     except Exception:
                         body_str = str(request_json)
                         error_msg += f"\nRequest Body (JSON): {body_str[:1000]}"
-                        print(f"Request Body (JSON): {body_str}")
+                        # print(f"Request Body (JSON): {body_str}")
                 elif request_data is not None:
                     if isinstance(request_data, (str, bytes)):
                         body_str = request_data if isinstance(request_data, str) else request_data.decode('utf-8', errors='ignore')
                         error_msg += f"\nRequest Body: {body_str[:2000]}"
-                        print(f"Request Body: {body_str}")
+                        # print(f"Request Body: {body_str}")
                     else:
                         body_str = str(request_data)
                         error_msg += f"\nRequest Body: {body_str[:1000]}"
-                        print(f"Request Body: {body_str}")
+                        # print(f"Request Body: {body_str}")
                 
                 if response is not None:
                     try:
                         response_text = response.text[:1000]  # İlk 1000 karakter
                         error_msg += f"\nResponse Status: {response.status_code}"
                         error_msg += f"\nResponse Headers: {dict(response.headers)}"
-                        print(f"Response Status: {response.status_code}")
-                        print(f"Response Headers: {dict(response.headers)}")
+                        # print(f"Response Status: {response.status_code}")
+                        # print(f"Response Headers: {dict(response.headers)}")
                         if response_text:
                             error_msg += f"\nResponse Body: {response_text}"
-                            print(f"Response Body: {response_text}")
+                            # print(f"Response Body: {response_text}")
                     except Exception:
                         # Response okunamazsa sadece status code'u ekle
                         error_msg += f"\nResponse Status: {response.status_code}"
-                        print(f"Response Status: {response.status_code}")
+                        # print(f"Response Status: {response.status_code}")
                 
                 # Yeni exception oluştur (orijinal exception'ı preserve et)
                 new_exception = type(e)(error_msg)
