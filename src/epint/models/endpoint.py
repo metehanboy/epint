@@ -10,6 +10,7 @@ from ..modules.authentication.auth_manager import Authentication
 from ..modules.http_client import HTTPClient
 from ..modules.error_handler import ErrorHandler
 from ..modules.date_range_handler import DateRangeHandler
+from ..modules.pagination_handler import PaginationHandler
 from ..modules.search.find_closest import find_closest_match
 from .swagger import SwaggerModel
 from .request_model import RequestModel
@@ -25,6 +26,7 @@ class Endpoint:
         self._data = data
         self.client = HTTPClient()
         self.date_range_handler = DateRangeHandler()
+        self.pagination_handler = PaginationHandler()
 
     def __repr__(self) -> str:
         """Endpoint bilgilerini detaylı olarak göster"""
@@ -217,10 +219,15 @@ class Endpoint:
         if len(properties) > 20:
             lines.append(f"{indent_str}... and {len(properties) - 20} more properties")
     
-    def __call__(self, **kwargs: Any) -> Dict[str, Any]:
-        """Endpoint çağrıldığında çalışır"""
+    def _extract_all_data_param(self, kwargs: Dict[str, Any]) -> bool:
+        """allData parametresini kwargs'tan çıkarır ve boolean değerini döndürür
         
-        # allData parametresini fuzzy matching ile kontrol et ve kwargs'tan çıkar
+        Args:
+            kwargs: Endpoint parametreleri dictionary'si
+            
+        Returns:
+            allData parametresinin boolean değeri (varsayılan: False)
+        """
         all_data = False
         all_data_keys = ['allData', 'all_data', 'alldata', 'all-data', 'AllData', 'ALL_DATA']
         
@@ -239,13 +246,21 @@ class Endpoint:
             if matched_key:
                 all_data = bool(kwargs.pop(matched_key))
         
+        return all_data
+    
+    def __call__(self, **kwargs: Any) -> Dict[str, Any]:
+        """Endpoint çağrıldığında çalışır"""
+        
+        # allData parametresini kontrol et ve kwargs'tan çıkar
+        all_data = self._extract_all_data_param(kwargs)
+        
         target_service = "transparency" if "seffaflik" in self._category else "epys"
         runtime_mode = epint._mode
         auth = Authentication(epint._username, epint._password, target_service, runtime_mode)
         
+
         # RequestModel oluştur
         request_model = RequestModel(self._data, kwargs)
-        
 
         if "gop" != self._category:
             request_model.headers["TGT"] = auth.get_tgt()[0]
@@ -268,7 +283,7 @@ class Endpoint:
             request_args["json"] = request_model.json
         if request_model.data is not None:
             request_args["data"] = request_model.data
-        
+
         # ErrorHandler oluştur
         error_handler = ErrorHandler(auth)
         try:
@@ -278,7 +293,18 @@ class Endpoint:
             )
             # ResponseModel oluştur
             response_model = ResponseModel(self._data, response)
-            return response_model.data
+            result_data = response_model.data
+            
+            # all_data parametresi verildiyse ve pagination varsa tüm sayfaları topla
+            if all_data and isinstance(result_data, dict):
+                if self.pagination_handler.has_pagination(result_data):
+                    result_data = self.pagination_handler.collect_all_pages(
+                        result_data,
+                        kwargs,
+                        self.__call__
+                    )
+            
+            return result_data
         except Exception as e:
 
             if all_data:

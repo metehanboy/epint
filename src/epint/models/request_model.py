@@ -467,7 +467,10 @@ class RequestModel:
             # Diğer property'ler için normal işlem
             if isinstance(prop_value, dict):
                 if 'properties' in prop_value:
-                    # Nested object varsa içindeki field'ları ekle
+                    # Nested object varsa hem objeyi hem de içindeki field'ları ekle
+                    # Önce objeyi ekle (kullanıcı page={...} şeklinde gönderebilir)
+                    fields.append(prop_name)
+                    # Sonra içindeki field'ları da ekle (kullanıcı page.number şeklinde de gönderebilir)
                     fields.extend(prop_value['properties'].keys())
                 else:
                     # Normal property
@@ -543,13 +546,24 @@ class RequestModel:
             param_names: Endpoint'te tanımlı parametre isimleri listesi
         """
         for param_name, default_factory in self.DEFAULT_PARAMS.items():
-            # Parametre endpoint'te tanımlı mı ve kullanıcı vermemiş mi kontrol et
-            if param_name in param_names and param_name not in target_dict:
-                # Factory fonksiyonunu çağırarak yeni değer oluştur
+            # Parametre endpoint'te tanımlı mı kontrol et
+            if param_name not in param_names:
+                continue
+            
+            # Parametre yoksa tamamen ekle
+            if param_name not in target_dict:
                 default_value = default_factory()
-                # None değerleri ekleme, sadece gerçek default değerleri ekle
                 if default_value is not None:
                     target_dict[param_name] = default_value
+            # Parametre varsa ama dict ise, içindeki eksik alanları default değerlerle doldur
+            elif isinstance(target_dict[param_name], dict):
+                default_value = default_factory()
+                if isinstance(default_value, dict):
+                    # Default değerlerdeki her alanı kontrol et
+                    for default_key, default_val in default_value.items():
+                        # Eğer kullanıcı bu alanı vermemişse default değeri ekle
+                        if default_key not in target_dict[param_name]:
+                            target_dict[param_name][default_key] = default_val
     
     def _process_query_params(self, query_params: List[Dict[str, Any]]):
         """Query parametrelerini işle"""
@@ -587,6 +601,8 @@ class RequestModel:
             if self._kwargs:
                 self._json = self._kwargs.copy()
             return
+
+        
         
         body_param = body_params[0]  # Genelde tek body parametresi var
         schema = body_param.get('schema', {})
