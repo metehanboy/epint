@@ -10,7 +10,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 license = {text = "MIT"}
 authors = [
-    {name = "metehanboy"}
+    {name = "metehanboy"},
+    {name = "farukkornaz"},
+    {name = "rumeysskara"},
 ]
 keywords = ["epias", "energy", "api", "turkish", "electricity", "market"]
 classifiers = [
