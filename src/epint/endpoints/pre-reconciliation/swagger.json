@@ -1628,7 +1628,7 @@
         ],
         "summary": "UEVÇB Verileri Listeleme Servisi",
         "description": "UEVÇB verilerini listeler.",
-        "operationId": "list-settlement-point-data",
+        "operationId": "list-settlement-point-oiz-data",
         "consumes": [
           "application/json",
           "application/xml"
