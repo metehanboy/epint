@@ -19,30 +19,30 @@ def format_schema_properties(properties: Dict[str, Any], lines: List[str], inden
     """Schema properties'lerini recursive olarak formatla"""
     if current_depth >= max_depth:
         return
-    
+
     indent_str = " " * indent
     for prop_name, prop_value in list(properties.items())[:20]:  # İlk 20 property
         if not isinstance(prop_value, dict):
             continue
-        
+
         prop_type = prop_value.get('type', '')
         prop_format = prop_value.get('format', '')
         prop_desc = prop_value.get('description', '')
         prop_example = prop_value.get('example')
         prop_enum = prop_value.get('enum')
-        
+
         # Object tipinde ise içindeki property isimlerini göster
         nested_props = None
         if prop_type == 'object' and 'properties' in prop_value:
             nested_props = prop_value.get('properties', {})
-        
+
         # Array tipinde ise items içindeki yapıyı kontrol et
         array_items = None
         if prop_type == 'array' and 'items' in prop_value:
             array_items = prop_value.get('items', {})
-        
+
         prop_info = [f"{indent_str}- {prop_name}"]
-        
+
         if prop_type:
             prop_info.append(f": {prop_type}")
             # Object ise içindeki property isimlerini göster
@@ -79,19 +79,19 @@ def format_schema_properties(properties: Dict[str, Any], lines: List[str], inden
         if prop_desc:
             desc_short = prop_desc[:40] + "..." if len(prop_desc) > 40 else prop_desc
             prop_info.append(f"- {desc_short}")
-        
+
         lines.append(" ".join(prop_info))
-        
+
         # Nested properties (object içinde) - detaylı göster
         if prop_type == 'object' and nested_props:
             format_schema_properties(nested_props, lines, indent + 2, max_depth, current_depth + 1)
-        
+
         # Array items içindeki properties - detaylı göster
         if prop_type == 'array' and isinstance(array_items, dict):
             if array_items.get('type') == 'object' and 'properties' in array_items:
                 lines.append(f"{indent_str}  Array items (object):")
                 format_schema_properties(array_items.get('properties', {}), lines, indent + 4, max_depth, current_depth + 1)
-    
+
     if len(properties) > 20:
         lines.append(f"{indent_str}... and {len(properties) - 20} more properties")
 
@@ -99,7 +99,7 @@ def format_schema_properties(properties: Dict[str, Any], lines: List[str], inden
 def format_endpoint_repr(category: str, name: str, data: Dict[str, Any]) -> str:
     """Endpoint bilgilerini detaylı olarak formatla"""
     lines = [f"{category} | {name}"]
-    
+
     # Summary/Description
     summary = data.get('summary', '')
     description = data.get('description', '')
@@ -107,13 +107,13 @@ def format_endpoint_repr(category: str, name: str, data: Dict[str, Any]) -> str:
         lines.append(f"Summary: {summary}")
     if description and description != summary:
         lines.append(f"Description: {description[:100]}..." if len(description) > 100 else f"Description: {description}")
-    
+
     # Method ve Path
     method = data.get('method', '')
     path = data.get('path', '')
     if method and path:
         lines.append(f"{method} {path}")
-    
+
     # Parameters
     parameters = data.get('parameters', [])
     if parameters:
@@ -126,18 +126,18 @@ def format_endpoint_repr(category: str, name: str, data: Dict[str, Any]) -> str:
             param_in = param.get('in', '')
             param_required = param.get('required', False)
             param_desc = param.get('description', '')
-            
+
             # Schema'dan example değerleri çıkar
             example_value = None
             schema = param.get('schema', {})
-            
+
             # Service wrapper kontrolü (GOP kategorisi için)
             is_service_wrapper = False
             if isinstance(schema, dict) and 'properties' in schema:
                 props = schema.get('properties', {})
                 if 'header' in props and 'body' in props:
                     is_service_wrapper = True
-            
+
             if isinstance(schema, dict):
                 example_value = schema.get('example')
                 if not example_value and 'properties' in schema:
@@ -146,7 +146,7 @@ def format_endpoint_repr(category: str, name: str, data: Dict[str, Any]) -> str:
                     if props:
                         first_prop = list(props.values())[0]
                         example_value = first_prop.get('example')
-            
+
             param_info.append(f"  - {param_name}")
             if param_in:
                 param_info.append(f"({param_in})")
@@ -161,9 +161,9 @@ def format_endpoint_repr(category: str, name: str, data: Dict[str, Any]) -> str:
             if param_desc:
                 desc_short = param_desc[:50] + "..." if len(param_desc) > 50 else param_desc
                 param_info.append(f"- {desc_short}")
-            
+
             lines.append(" ".join(param_info))
-            
+
             # Body parametresi içindeki properties'leri göster
             if param_name == 'body' and isinstance(schema, dict):
                 # Service wrapper kontrolü (GOP kategorisi için)
@@ -176,10 +176,10 @@ def format_endpoint_repr(category: str, name: str, data: Dict[str, Any]) -> str:
                 elif 'properties' in schema:
                     lines.append("    Body Parameters:")
                     format_schema_properties(schema.get('properties', {}), lines, indent=4, max_depth=5)
-        
+
         if len(parameters) > 10:
             lines.append(f"  ... and {len(parameters) - 10} more parameters")
-    
+
     # Responses
     responses = data.get('responses', {})
     if responses:
@@ -189,7 +189,7 @@ def format_endpoint_repr(category: str, name: str, data: Dict[str, Any]) -> str:
             resp_desc = response_data.get('description', '')
             if resp_desc:
                 resp_info.append(resp_desc[:60] + "..." if len(resp_desc) > 60 else resp_desc)
-            
+
             # Response schema yapısını göster
             resp_schema = response_data.get('schema', {})
             if isinstance(resp_schema, dict):
@@ -199,11 +199,11 @@ def format_endpoint_repr(category: str, name: str, data: Dict[str, Any]) -> str:
                 elif 'properties' in resp_schema:
                     props_count = len(resp_schema.get('properties', {}))
                     resp_info.append(f"(object with {props_count} properties)")
-            
+
             lines.append(" ".join(resp_info))
-        
+
         if len(responses) > 5:
             lines.append(f"  ... and {len(responses) - 5} more responses")
-    
+
     return "\n".join(lines)
 
