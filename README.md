@@ -19,6 +19,12 @@ ep.set_mode("prod")  # veya "test"
 
 ## Kullanım
 
+### Detaylı Kullanım Örnekleri
+
+Belirli servisler için detaylı kullanım örnekleri ve açıklamalar:
+
+- **[Profil Katsayıları Sorgulama](docs/profil-katsayilari.md)**: Elektrik tüketiminin zaman içindeki dağılımını gösteren profil katsayılarını sorgulama
+
 ### Temel Yapı
 
 ```python
@@ -71,10 +77,6 @@ result = ep.seffaflik_natural_gas.consumer_count_export(
     export_type='XLSX'
 )
 ```
-
-### Profil Katsayıları Sorgulama
-
-Detaylı kullanım için [Profil Katsayıları](docs/profil-katsayilari.md) dokümantasyonuna bakınız.
 
 ### Parametre Kullanımı
 
