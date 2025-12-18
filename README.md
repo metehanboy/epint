@@ -72,6 +72,10 @@ result = ep.seffaflik_natural_gas.consumer_count_export(
 )
 ```
 
+### Profil Katsayıları Sorgulama
+
+Detaylı kullanım için [Profil Katsayıları](docs/profil-katsayilari.md) dokümantasyonuna bakınız.
+
 ### Parametre Kullanımı
 
 #### Tarih Parametreleri
