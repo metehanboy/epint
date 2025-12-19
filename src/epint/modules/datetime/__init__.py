@@ -66,11 +66,18 @@ class DateTimeUtils:
         )
 
     @classmethod
-    def to_string(cls, dt: _dt.datetime, format_string: str = DATETIME_FORMAT) -> str:
+    def to_string(cls, dt: Union[_dt.datetime, _dt.date], format_string: str = DATETIME_FORMAT) -> str:
+        # date nesnesi ise datetime'a çevir
+        if isinstance(dt, _dt.date) and not isinstance(dt, _dt.datetime):
+            dt = _dt.datetime.combine(dt, _dt.time.min)
         return dt.strftime(format_string)
 
     @classmethod
-    def to_iso_string(cls, dt: _dt.datetime) -> str:
+    def to_iso_string(cls, dt: Union[_dt.datetime, _dt.date]) -> str:
+        # date nesnesi ise datetime'a çevir
+        if isinstance(dt, _dt.date) and not isinstance(dt, _dt.datetime):
+            dt = _dt.datetime.combine(dt, _dt.time.min)
+        
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=cls.DEFAULT_TIMEZONE)
 
@@ -80,8 +87,12 @@ class DateTimeUtils:
         return formatted
 
     @classmethod
-    def to_gop_iso_string(cls, dt: _dt.datetime) -> str:
+    def to_gop_iso_string(cls, dt: Union[_dt.datetime, _dt.date]) -> str:
         """GOP servisi için özel ISO format: 2016-04-22T00:00:00.000+0300"""
+        # date nesnesi ise datetime'a çevir
+        if isinstance(dt, _dt.date) and not isinstance(dt, _dt.datetime):
+            dt = _dt.datetime.combine(dt, _dt.time.min)
+        
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=cls.DEFAULT_TIMEZONE)
         
@@ -296,6 +307,33 @@ class DateTimeUtils:
         now = cls.now()
         fday, lday = cls.get_settlement_date(now.date())
         return fday, lday
+
+    @classmethod
+    def get_month_range(cls, date: Union[str, _dt.date, _dt.datetime]) -> Tuple[_dt.date, _dt.date]:
+        # String ise date'e çevir
+        if isinstance(date, str):
+            try:
+                # Önce datetime formatını dene
+                date = cls.from_string(date).date()
+            except (ValueError, AttributeError):
+                # Datetime parse edilemezse date formatını dene
+                date = cls.from_date_string(date)
+        
+        # datetime ise date'e çevir
+        if isinstance(date, _dt.datetime):
+            date = date.date()
+        
+        year = date.year
+        month = date.month
+        
+        # Ayın ilk günü
+        first_day = _dt.date(year, month, 1)
+        
+        # Ayın son günü
+        _, last_day_num = monthrange(year, month)
+        last_day = _dt.date(year, month, last_day_num)
+        
+        return first_day, last_day
 
     @classmethod
     def get_current_settlement_fday(cls) -> _dt.date:
