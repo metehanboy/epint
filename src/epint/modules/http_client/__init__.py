@@ -93,7 +93,7 @@ class HTTPClient:
         if self.headers:
             session.headers.update(self.headers)
 
-        session.headers.update({"User-Agent":__fullname__})
+        session.headers.update({"User-Agent":__fullname__, "Accept-Language":"tr-TR"})
         
         return session
     
@@ -193,7 +193,7 @@ class HTTPClient:
         while retry_count <= max_retries:
             try:
                 response = session.request(method=method.upper(), url=url, **kwargs)
-                
+
                 # Rate limit kontrolü (429 veya rate limit aşıldıysa)
                 if response.status_code == 429 or self._check_rate_limit(response) is not None:
                     wait_time = self._check_rate_limit(response)

@@ -21,7 +21,7 @@ def format_schema_properties(properties: Dict[str, Any], lines: List[str], inden
         return
 
     indent_str = " " * indent
-    for prop_name, prop_value in list(properties.items())[:20]:  # İlk 20 property
+    for prop_name, prop_value in list(properties.items()):  # İlk 20 property
         if not isinstance(prop_value, dict):
             continue
 
@@ -92,8 +92,8 @@ def format_schema_properties(properties: Dict[str, Any], lines: List[str], inden
                 lines.append(f"{indent_str}  Array items (object):")
                 format_schema_properties(array_items.get('properties', {}), lines, indent + 4, max_depth, current_depth + 1)
 
-    if len(properties) > 20:
-        lines.append(f"{indent_str}... and {len(properties) - 20} more properties")
+    # if len(properties) > 20:
+    #     lines.append(f"{indent_str}... and {len(properties) - 20} more properties")
 
 
 def format_endpoint_repr(category: str, name: str, data: Dict[str, Any]) -> str:
