@@ -25,7 +25,7 @@ class RequestModel:
     
     # Ön tanımlı parametreler ve default değerleri (factory fonksiyonları)
     DEFAULT_PARAMS: Dict[str, Callable[[], Any]] = {
-        'page': lambda: {'number': 1, 'size': 1000},
+        'page': lambda: {'number': 1, 'size': 1000, 'limit': 1000},
         'region': lambda: 'TR1',
         'regionCode': lambda: 'TR1',
         'counterRegionCode': lambda: 'TR1'
