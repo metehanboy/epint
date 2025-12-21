@@ -24,6 +24,7 @@ ep.set_mode("prod")  # veya "test"
 Belirli servisler için detaylı kullanım örnekleri ve açıklamalar:
 
 - **[Profil Katsayıları Sorgulama](docs/profil-katsayilari.md)**: Elektrik tüketiminin zaman içindeki dağılımını gösteren profil katsayılarını sorgulama
+- **...
 
 ### Temel Yapı
 
@@ -67,13 +68,13 @@ ep.[kategori].[method_adi](parametreler)
 ```python
 # Elektrik şeffaflık verileri
 result = ep.seffaflik_electricity.mcp_data(
-    start='2025-12-10', 
+    start='2025-12-10',
     end='2025-12-11'
 )
 
 # Doğalgaz şeffaflık verileri
 result = ep.seffaflik_natural_gas.consumer_count_export(
-    period='2025-10-01', 
+    period='2025-10-01',
     export_type='XLSX'
 )
 ```
@@ -92,7 +93,7 @@ ep.seffaflik_electricity.mcp_data(start='2025-12-10', end='2025-12-11')
 
 # Datetime format
 ep.seffaflik_electricity.mcp_data(
-    start=datetime(2025, 12, 10), 
+    start=datetime(2025, 12, 10),
     end=datetime(2025, 12, 11)
 )
 ```
@@ -128,7 +129,7 @@ Export metodları binary format (XLSX, PDF) döndürür. Bu response'lar `io.Byt
 ```python
 # XLSX export
 xlsx_data = ep.seffaflik_electricity.consumer_count_export(
-    period='2025-10-01', 
+    period='2025-10-01',
     export_type='XLSX'
 )
 

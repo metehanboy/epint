@@ -19,7 +19,7 @@ import threading
 import queue
 from typing import Dict, Any, List, Callable
 
-from .error_detector import is_date_range_error
+from .error_detector import is_date_range_error, extract_max_days_from_error
 from .date_parser import format_date_value
 
 
@@ -41,7 +41,7 @@ def recursive_fetch(
 ) -> None:
     """
     Recursive olarak tarih aralığını böl ve verileri topla
-    
+
     Args:
         start_dt: Başlangıç tarihi
         end_dt: Bitiş tarihi
@@ -65,7 +65,7 @@ def recursive_fetch(
                 Exception(f"Maximum recursion depth reached for date range: {start_dt} to {end_dt}")
             )
         return
-    
+
     # Tek bir aralık için istek yapmayı dene
     try:
         new_kwargs = original_kwargs.copy()
@@ -73,22 +73,22 @@ def recursive_fetch(
         end_param = date_params['end_param']
         original_start_value = date_params['start_value']
         original_end_value = date_params['end_value']
-        
+
         # Tarih değerlerini formatla
         formatted_start = format_date_value(start_dt, original_start_value)
         formatted_end = format_date_value(end_dt, original_end_value)
-        
+
         # kwargs'a ekle
         new_kwargs[start_param] = formatted_start
         new_kwargs[end_param] = formatted_end
-        
+
         # Endpoint çağrısı yap
         result = endpoint_callable(**new_kwargs)
-        
+
         # Başarılı sonucu queue'ya ekle
         with results_lock:
             results_queue.put(result)
-        
+
         # İlerleme güncelle
         if progress_bar is not None:
             with progress_lock:
@@ -113,15 +113,23 @@ def recursive_fetch(
                 except (TypeError, AttributeError):
                     # Hata durumunda sessizce devam et
                     pass
-        
+
     except Exception as e:
         # Tarih aralığı hatası kontrolü
         if is_date_range_error(e):
-            # Daha küçük parçalara böl
-            next_max_days = max_days // 2
+            # Hata mesajından maksimum gün sayısını çıkar
+            extracted_max_days = extract_max_days_from_error(e)
+
+            if extracted_max_days is not None:
+                # Hata mesajından çıkarılan değeri kullan, güvenlik için %80'ini al
+                next_max_days = int(extracted_max_days * 0.8)
+            else:
+                # Hata mesajından çıkarılamadıysa mevcut değerin yarısını kullan
+                next_max_days = max_days // 2
+
             if next_max_days < 30:
                 next_max_days = 30  # Minimum 30 gün
-            
+
             # Aralığı ikiye böl
             total_days = (end_dt - start_dt).days
             if total_days <= 1:
@@ -131,10 +139,10 @@ def recursive_fetch(
                         Exception(f"Date range too small to split: {start_dt} to {end_dt}")
                     )
                 return
-            
+
             mid_point = start_dt + datetime.timedelta(days=total_days // 2)
             mid_point = mid_point.replace(hour=0, minute=0, second=0, microsecond=0)
-            
+
             # İki parçayı task queue'ya ekle (paralel işlenmesi için)
             with results_lock:
                 task_queue.put((start_dt, mid_point, next_max_days, depth + 1))
@@ -161,7 +169,7 @@ def worker_thread(
 ) -> None:
     """
     Worker thread fonksiyonu - task queue'dan görev alır ve işler
-    
+
     Args:
         task_queue: İşlenecek görevlerin olduğu queue
         results_queue: Sonuçların ekleneceği queue
@@ -178,11 +186,11 @@ def worker_thread(
         try:
             # Task queue'dan görev al (timeout ile)
             task = task_queue.get(timeout=1)
-            
+
             # Sentinel değeri kontrolü (thread'i sonlandır)
             if task is None:
                 break
-            
+
             # Task formatı: (start_dt, end_dt, max_days, depth)
             if len(task) == 4:
                 start_dt, end_dt, max_days, depth = task
@@ -191,7 +199,7 @@ def worker_thread(
                 start_dt, end_dt = task
                 max_days = 365
                 depth = 0
-            
+
             # Recursive fetch çağrısı
             recursive_fetch(
                 start_dt, end_dt,
@@ -201,10 +209,10 @@ def worker_thread(
                 results_lock, exceptions_lock, progress_lock,
                 progress_bar, depth
             )
-            
+
             # Task tamamlandı
             task_queue.task_done()
-            
+
         except queue.Empty:
             # Timeout - devam et
             continue
