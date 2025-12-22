@@ -211,6 +211,7 @@ tests/
 old_epint/
 examples/
 scripts
+.cursorignore
 
 docs/wiki/*
 !docs/wiki/.git
