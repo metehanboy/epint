@@ -210,4 +210,8 @@ build/
 tests/
 old_epint/
 examples/
-docs/wiki/WIKI-SETUP.md
+scripts
+
+docs/wiki/*
+!docs/wiki/.git
+!docs/wiki/.gitmodules
