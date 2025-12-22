@@ -15,7 +15,7 @@
 """Error detection utilities for date range errors"""
 
 import re
-from typing import List, Optional
+from typing import Optional
 
 
 # Tarih aralığı hatası için anahtar kelimeler

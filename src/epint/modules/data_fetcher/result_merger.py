@@ -20,22 +20,22 @@ from typing import List, Any
 def merge_results(results: List[Any]) -> Any:
     """
     Sonuçları birleştir
-    
+
     Args:
         results: Birleştirilecek sonuçlar listesi
-    
+
     Returns:
         Birleştirilmiş sonuç
     """
     if not results:
         return None
-    
+
     if len(results) == 1:
         return results[0]
-    
+
     # İlk sonucun tipine göre birleştirme stratejisi belirle
     first_result = results[0]
-    
+
     if isinstance(first_result, list):
         # Liste ise extend et
         merged = []

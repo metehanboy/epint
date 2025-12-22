@@ -12,15 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Data fetching utilities with parallel processing"""
+"""Recursive data fetching utilities with pagination and date range support"""
 
 import datetime
 import threading
 import queue
-from typing import Dict, Any, List, Callable
+from typing import Dict, Any, List, Callable, Optional
 
 from .error_detector import is_date_range_error, extract_max_days_from_error
-from .date_parser import format_date_value
+from .date_checker import format_date_value
+from .pagination_checker import has_pagination
+from .page_collector import collect_all_pages
 
 
 def recursive_fetch(
@@ -37,10 +39,14 @@ def recursive_fetch(
     exceptions_lock: threading.Lock,
     progress_lock: threading.Lock,
     progress_bar: Any = None,
-    depth: int = 0
+    depth: int = 0,
+    pagination_handler: Optional[Any] = None,
+    debug: bool = False,
+    print_queue: Optional[queue.Queue] = None
 ) -> None:
     """
     Recursive olarak tarih aralığını böl ve verileri topla
+    Her tarih aralığı için pagination kontrolü yapar ve tüm sayfaları toplar
 
     Args:
         start_dt: Başlangıç tarihi
@@ -57,6 +63,7 @@ def recursive_fetch(
         progress_lock: Progress bar için thread lock
         progress_bar: İlerleme çubuğu (opsiyonel)
         depth: Recursive derinlik (max 3 seviye)
+        pagination_handler: Pagination handler (eğer varsa)
     """
     # Maksimum derinlik kontrolü
     if depth > 3:
@@ -82,8 +89,32 @@ def recursive_fetch(
         new_kwargs[start_param] = formatted_start
         new_kwargs[end_param] = formatted_end
 
+        # Debug: Tarih aralığı bilgisi
+        if debug and print_queue is not None:
+            page_info = new_kwargs.get('page', {})
+            page_num = page_info.get('number', 1) if isinstance(page_info, dict) else 1
+            print_queue.put(f"[DataFetcher] Veri çekiliyor: Tarih {start_dt.strftime('%Y-%m-%d')} - {end_dt.strftime('%Y-%m-%d')} | Sayfa: {page_num}")
+
         # Endpoint çağrısı yap
         result = endpoint_callable(**new_kwargs)
+
+        # Pagination kontrolü yap (eğer pagination_handler varsa ve result dict ise)
+        if pagination_handler is not None and isinstance(result, dict):
+            if has_pagination(result):
+                if debug and print_queue is not None:
+                    page_info_result = result.get('page', {})
+                    total_pages = (page_info_result.get('total', 0) + page_info_result.get('size', 0) - 1) // page_info_result.get('size', 1)
+                    print_queue.put(f"[DataFetcher] Bu tarih aralığı için pagination tespit edildi ({total_pages} sayfa), tüm sayfalar toplanıyor...")
+                # Tüm sayfaları topla
+                result = collect_all_pages(
+                    result,
+                    new_kwargs,
+                    endpoint_callable,
+                    debug=debug,
+                    print_queue=print_queue
+                )
+                if debug and print_queue is not None:
+                    print_queue.put(f"[DataFetcher] ✓ Tarih aralığı {start_dt.strftime('%Y-%m-%d')} - {end_dt.strftime('%Y-%m-%d')} için tüm sayfalar toplandı")
 
         # Başarılı sonucu queue'ya ekle
         with results_lock:
@@ -93,25 +124,17 @@ def recursive_fetch(
         if progress_bar is not None:
             with progress_lock:
                 try:
-                    # alive_progress'te progress_bar bir callable objesi
-                    # Bazı versiyonlarda progress_bar() çağrısı increment yapar
-                    # Bazı versiyonlarda progress_bar(1) çağrısı gerekir
-                    # ContextDecorator hatası alınırsa, progress bar'ı güncellemeyi atla
                     if hasattr(progress_bar, 'current'):
-                        # current attribute varsa, direkt increment yap
                         progress_bar.current += 1
                     elif callable(progress_bar):
-                        # Callable ise, argümanlı veya argümansız çağır
                         try:
                             progress_bar(1)
                         except TypeError:
                             try:
                                 progress_bar()
                             except TypeError:
-                                # ContextDecorator hatası - progress bar'ı güncellemeyi atla
                                 pass
                 except (TypeError, AttributeError):
-                    # Hata durumunda sessizce devam et
                     pass
 
     except Exception as e:
@@ -165,7 +188,10 @@ def worker_thread(
     results_lock: threading.Lock,
     exceptions_lock: threading.Lock,
     progress_lock: threading.Lock,
-    progress_bar: Any = None
+    progress_bar: Any = None,
+    pagination_handler: Optional[Any] = None,
+    debug: bool = False,
+    print_queue: Optional[queue.Queue] = None
 ) -> None:
     """
     Worker thread fonksiyonu - task queue'dan görev alır ve işler
@@ -181,6 +207,7 @@ def worker_thread(
         exceptions_lock: Exceptions için thread lock
         progress_lock: Progress bar için thread lock
         progress_bar: İlerleme çubuğu (opsiyonel)
+        pagination_handler: Pagination handler (eğer varsa)
     """
     while True:
         try:
@@ -191,14 +218,23 @@ def worker_thread(
             if task is None:
                 break
 
-            # Task formatı: (start_dt, end_dt, max_days, depth)
-            if len(task) == 4:
+            # Task formatı: (start_dt, end_dt, max_days, depth, debug, print_queue) veya (start_dt, end_dt, max_days, depth, debug) veya (start_dt, end_dt, max_days, depth)
+            if len(task) == 6:
+                start_dt, end_dt, max_days, depth, debug, print_queue = task
+            elif len(task) == 5:
+                start_dt, end_dt, max_days, depth, debug = task
+                print_queue = None
+            elif len(task) == 4:
                 start_dt, end_dt, max_days, depth = task
+                debug = False
+                print_queue = None
             else:
                 # Eski format desteği (geriye uyumluluk)
                 start_dt, end_dt = task
                 max_days = 365
                 depth = 0
+                debug = False
+                print_queue = None
 
             # Recursive fetch çağrısı
             recursive_fetch(
@@ -207,7 +243,7 @@ def worker_thread(
                 endpoint_callable, max_days,
                 results_queue, task_queue, exceptions_list,
                 results_lock, exceptions_lock, progress_lock,
-                progress_bar, depth
+                progress_bar, depth, pagination_handler, debug, print_queue
             )
 
             # Task tamamlandı
