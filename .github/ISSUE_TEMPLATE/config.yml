@@ -1,0 +1,12 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Güvenlik Açığı Bildirimi
+    url: https://github.com/epint/epint/security/advisories/new
+    about: Güvenlik açığı bildirmek için burayı kullanın
+  - name: Dokümantasyon
+    url: https://github.com/epint/epint#readme
+    about: Dokümantasyonu kontrol edin
+  - name: Tartışmalar
+    url: https://github.com/epint/epint/discussions
+    about: Genel sorular için Discussions'ı kullanın
+
