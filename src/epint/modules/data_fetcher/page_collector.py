@@ -14,6 +14,8 @@
 
 """Page collection utilities"""
 
+import time
+import datetime
 from typing import Dict, Any, Callable, Optional
 
 
@@ -22,7 +24,9 @@ def collect_all_pages(
     original_kwargs: Dict[str, Any],
     endpoint_callable: Callable,
     debug: bool = False,
-    print_queue: Optional[Any] = None
+    print_queue: Optional[Any] = None,
+    rate_limit_handler: Optional[Any] = None,
+    request_interval: float = 0.1
 ) -> Dict[str, Any]:
     """
     Tüm sayfaları topla ve birleştir
@@ -77,6 +81,24 @@ def collect_all_pages(
 
     # Kalan sayfaları topla
     for page_num in range(2, total_pages + 1):
+        # Rate limit kontrolü - eğer rate limit varsa reset zamanına kadar bekle
+        if rate_limit_handler is not None:
+            reset_time = rate_limit_handler.get_reset_time()
+            if reset_time is not None:
+                now = datetime.datetime.now()
+                if reset_time > now:
+                    wait_seconds = (reset_time - now).total_seconds()
+                    if wait_seconds > 0:
+                        if debug and print_queue is not None:
+                            print_queue.put(f"[DataFetcher] Rate limit nedeniyle {wait_seconds:.1f} saniye bekleniyor...")
+                        time.sleep(wait_seconds)
+                        # Bekledikten sonra rate limit'i temizle
+                        rate_limit_handler.clear_rate_limit()
+
+        # İstekler arası interval bekleme
+        if page_num > 2:
+            time.sleep(request_interval)
+
         # Page parametresini güncelle
         page_param['number'] = page_num
         if sort_info:

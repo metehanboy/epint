@@ -17,6 +17,7 @@
 import datetime
 import threading
 import queue
+import time
 from typing import Dict, Any, List, Callable, Optional
 
 from .error_detector import is_date_range_error, extract_max_days_from_error
@@ -42,7 +43,9 @@ def recursive_fetch(
     depth: int = 0,
     pagination_handler: Optional[Any] = None,
     debug: bool = False,
-    print_queue: Optional[queue.Queue] = None
+    print_queue: Optional[queue.Queue] = None,
+    rate_limit_handler: Optional[Any] = None,
+    scheduled_time: Optional[datetime.datetime] = None
 ) -> None:
     """
     Recursive olarak tarih aralığını böl ve verileri topla
@@ -75,6 +78,30 @@ def recursive_fetch(
 
     # Tek bir aralık için istek yapmayı dene
     try:
+        # Rate limit kontrolü - zamanlanmış istek varsa bekle
+        if scheduled_time is not None:
+            now = datetime.datetime.now()
+            if scheduled_time > now:
+                wait_seconds = (scheduled_time - now).total_seconds()
+                if wait_seconds > 0:
+                    if debug and print_queue is not None:
+                        print_queue.put(f"[DataFetcher] Rate limit nedeniyle {wait_seconds:.1f} saniye bekleniyor...")
+                    time.sleep(wait_seconds)
+
+        # Rate limit kontrolü - eğer rate limit varsa reset zamanına kadar bekle
+        if rate_limit_handler is not None:
+            reset_time = rate_limit_handler.get_reset_time()
+            if reset_time is not None:
+                now = datetime.datetime.now()
+                if reset_time > now:
+                    wait_seconds = (reset_time - now).total_seconds()
+                    if wait_seconds > 0:
+                        if debug and print_queue is not None:
+                            print_queue.put(f"[DataFetcher] Rate limit nedeniyle {wait_seconds:.1f} saniye bekleniyor (reset: {reset_time.strftime('%H:%M:%S')})...")
+                        time.sleep(wait_seconds)
+                        # Bekledikten sonra rate limit'i temizle
+                        rate_limit_handler.clear_rate_limit()
+
         new_kwargs = original_kwargs.copy()
         start_param = date_params['start_param']
         end_param = date_params['end_param']
@@ -111,7 +138,9 @@ def recursive_fetch(
                     new_kwargs,
                     endpoint_callable,
                     debug=debug,
-                    print_queue=print_queue
+                    print_queue=print_queue,
+                    rate_limit_handler=rate_limit_handler,
+                    request_interval=0.1
                 )
                 if debug and print_queue is not None:
                     print_queue.put(f"[DataFetcher] ✓ Tarih aralığı {start_dt.strftime('%Y-%m-%d')} - {end_dt.strftime('%Y-%m-%d')} için tüm sayfalar toplandı")
@@ -191,7 +220,8 @@ def worker_thread(
     progress_bar: Any = None,
     pagination_handler: Optional[Any] = None,
     debug: bool = False,
-    print_queue: Optional[queue.Queue] = None
+    print_queue: Optional[queue.Queue] = None,
+    rate_limit_handler: Optional[Any] = None
 ) -> None:
     """
     Worker thread fonksiyonu - task queue'dan görev alır ve işler
@@ -218,8 +248,13 @@ def worker_thread(
             if task is None:
                 break
 
-            # Task formatı: (start_dt, end_dt, max_days, depth, debug, print_queue) veya (start_dt, end_dt, max_days, depth, debug) veya (start_dt, end_dt, max_days, depth)
-            if len(task) == 6:
+            # Task formatı: (start_dt, end_dt, max_days, depth, debug, print_queue, scheduled_time)
+            # veya (start_dt, end_dt, max_days, depth, debug, print_queue)
+            # veya (start_dt, end_dt, max_days, depth, debug) veya (start_dt, end_dt, max_days, depth)
+            scheduled_time = None
+            if len(task) == 7:
+                start_dt, end_dt, max_days, depth, debug, print_queue, scheduled_time = task
+            elif len(task) == 6:
                 start_dt, end_dt, max_days, depth, debug, print_queue = task
             elif len(task) == 5:
                 start_dt, end_dt, max_days, depth, debug = task
@@ -243,7 +278,8 @@ def worker_thread(
                 endpoint_callable, max_days,
                 results_queue, task_queue, exceptions_list,
                 results_lock, exceptions_lock, progress_lock,
-                progress_bar, depth, pagination_handler, debug, print_queue
+                progress_bar, depth, pagination_handler, debug, print_queue,
+                rate_limit_handler, scheduled_time
             )
 
             # Task tamamlandı

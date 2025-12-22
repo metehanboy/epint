@@ -20,6 +20,7 @@ from requests.adapters import HTTPAdapter
 from requests import Session, Response
 from requests.exceptions import RequestException, RetryError, Timeout
 from ..version import __fullname__
+from .rate_limit_handler import get_rate_limit_handler
 import time
 
 
@@ -28,7 +29,7 @@ class HTTPClient:
     Retry mekanizması olan gelişmiş HTTP client.
     Context manager olarak kullanılabilir.
     """
-    
+
     def __init__(
         self,
         retries: int = 3,
@@ -42,7 +43,7 @@ class HTTPClient:
     ):
         """
         HTTP Client oluştur
-        
+
         Args:
             retries: Toplam retry sayısı
             backoff_factor: Retry arasındaki bekleme çarpanı
@@ -61,13 +62,13 @@ class HTTPClient:
         self.headers = headers or {}
         self.verify = verify
         self.allow_redirects = allow_redirects
-        
+
         self._session: Optional[Session] = None
-    
+
     def _create_session(self) -> Session:
         """Retry mekanizması ile session oluştur"""
         session = Session()
-        
+
         # Retry stratejisi
         retry_strategy = Retry(
             total=self.retries,
@@ -78,59 +79,59 @@ class HTTPClient:
             allowed_methods=list(self.allowed_methods),
             raise_on_status=False,
         )
-        
+
         # HTTP adapter'ları mount et
         adapter = HTTPAdapter(
             max_retries=retry_strategy,
             pool_connections=10,
             pool_maxsize=20,
         )
-        
+
         session.mount("http://", adapter)
         session.mount("https://", adapter)
-        
+
         # Varsayılan header'ları ayarla
         if self.headers:
             session.headers.update(self.headers)
 
         session.headers.update({"User-Agent":__fullname__, "Accept-Language":"tr-TR"})
-        
+
         return session
-    
+
     def __enter__(self) -> HTTPClient:
         """Context manager giriş"""
         self._session = self._create_session()
         return self
-    
+
     def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         """Context manager çıkış"""
         if self._session:
             self._session.close()
             self._session = None
-    
+
     def _get_session(self) -> Session:
         """Session'ı al veya oluştur"""
         if self._session is None:
             self._session = self._create_session()
         return self._session
-    
+
     def _check_rate_limit(self, response: Response) -> Optional[float]:
         """
         Rate limit header'larını kontrol et ve gerekirse bekleme süresi döndür
-        
+
         Args:
             response: HTTP response objesi
-            
+
         Returns:
             Bekleme süresi (saniye) veya None
         """
         headers = response.headers
-        
+
         # Rate limit header'larını al
         remaining = headers.get('RateLimit-Remaining')
         limit = headers.get('RateLimit-Limit')
         reset = headers.get('RateLimit-Reset')
-        
+
         if remaining is not None:
             try:
                 remaining_int = int(remaining)
@@ -147,9 +148,9 @@ class HTTPClient:
                     return 60.0
             except (ValueError, TypeError):
                 pass
-        
+
         return None
-    
+
     def _make_request(
         self,
         method: str,
@@ -158,44 +159,48 @@ class HTTPClient:
     ) -> Response:
         """
         HTTP request yap
-        
+
         Args:
             method: HTTP metodu (GET, POST, vb.)
             url: Request URL'i
             **kwargs: requests.Session.request() için ek parametreler
-            
+
         Returns:
             Response objesi
-            
+
         Raises:
             RequestException: Request başarısız olduğunda
             Timeout: Timeout olduğunda
             RetryError: Retry limiti aşıldığında
         """
         session = self._get_session()
-        
+
         # Timeout ayarla
         if self.timeout is not None and 'timeout' not in kwargs:
             kwargs['timeout'] = self.timeout
-        
+
         # SSL doğrulaması
         if 'verify' not in kwargs:
             kwargs['verify'] = self.verify
-        
+
         # Redirect ayarı
         if 'allow_redirects' not in kwargs:
             kwargs['allow_redirects'] = self.allow_redirects
-        
+
         response: Optional[Response] = None
         max_retries = 3
         retry_count = 0
-        
+
         while retry_count <= max_retries:
             try:
                 response = session.request(method=method.upper(), url=url, **kwargs)
 
                 # Rate limit kontrolü (429 veya rate limit aşıldıysa)
-                if response.status_code == 429 or self._check_rate_limit(response) is not None:
+                if response.status_code == 429:
+                    # Rate limit handler'a bildir
+                    rate_limit_handler = get_rate_limit_handler()
+                    rate_limit_handler.handle_429_error(response)
+
                     wait_time = self._check_rate_limit(response)
                     if wait_time is None:
                         # 429 durumunda reset süresini header'dan al
@@ -207,7 +212,7 @@ class HTTPClient:
                                 wait_time = 60.0
                         else:
                             wait_time = 60.0
-                    
+
                     if retry_count < max_retries:
                         time.sleep(wait_time)
                         retry_count += 1
@@ -215,15 +220,26 @@ class HTTPClient:
                     else:
                         # Max retry aşıldı, exception fırlat
                         response.raise_for_status()
-                
+                elif self._check_rate_limit(response) is not None:
+                    # Rate limit yaklaşıyor ama henüz 429 değil
+                    wait_time = self._check_rate_limit(response)
+                    if wait_time and retry_count < max_retries:
+                        time.sleep(wait_time)
+                        retry_count += 1
+                        continue
+
                 response.raise_for_status()
                 return response
-                
+
             except (RequestException, RetryError, Timeout) as e:
                 # Response varsa rate limit kontrolü yap
                 if response is not None:
                     # 429 durumunda retry yap
                     if response.status_code == 429:
+                        # Rate limit handler'a bildir
+                        rate_limit_handler = get_rate_limit_handler()
+                        rate_limit_handler.handle_429_error(response)
+
                         wait_time = self._check_rate_limit(response)
                         if wait_time is None:
                             reset = response.headers.get('RateLimit-Reset')
@@ -234,27 +250,27 @@ class HTTPClient:
                                     wait_time = 60.0
                             else:
                                 wait_time = 60.0
-                        
+
                         if retry_count < max_retries:
                             time.sleep(wait_time)
                             retry_count += 1
                             continue
-                
+
                 # Response varsa detaylı hata mesajı oluştur
                 error_msg = str(e)
-                
+
                 # Request bilgilerini ekle
                 error_msg += f"\nRequest Method: {method.upper()}"
                 error_msg += f"\nRequest URL: {url}"
                 # print(f"Request Method: {method.upper()}")
                 # print(f"Request URL: {url}")
-                
+
                 # Request headers
                 request_headers = kwargs.get('headers', {})
                 if request_headers:
                     error_msg += f"\nRequest Headers: {dict(request_headers)}"
                     # print(f"Request Headers: {dict(request_headers)}")
-                
+
                 # Request body
                 request_data = kwargs.get('data')
                 request_json = kwargs.get('json')
@@ -277,7 +293,7 @@ class HTTPClient:
                         body_str = str(request_data)
                         error_msg += f"\nRequest Body: {body_str[:1000]}"
                         # print(f"Request Body: {body_str}")
-                
+
                 if response is not None:
                     try:
                         response_text = response.text[:1000]  # İlk 1000 karakter
@@ -292,7 +308,7 @@ class HTTPClient:
                         # Response okunamazsa sadece status code'u ekle
                         error_msg += f"\nResponse Status: {response.status_code}"
                         # print(f"Response Status: {response.status_code}")
-                
+
                 # Yeni exception oluştur (orijinal exception'ı preserve et)
                 new_exception = type(e)(error_msg)
                 new_exception.__cause__ = e
@@ -300,36 +316,36 @@ class HTTPClient:
                 if response is not None:
                     new_exception.response = response
                 raise new_exception from e
-        
+
         # Buraya gelmemeli ama güvenlik için
         if response is not None:
             response.raise_for_status()
         raise RequestException("Max retry limit reached for rate limit")
-    
+
     def get(self, url: str, **kwargs: Any) -> Response:
         """GET request"""
         return self._make_request("GET", url, **kwargs)
-    
+
     def post(self, url: str, **kwargs: Any) -> Response:
         """POST request"""
         return self._make_request("POST", url, **kwargs)
-    
+
     def put(self, url: str, **kwargs: Any) -> Response:
         """PUT request"""
         return self._make_request("PUT", url, **kwargs)
-    
+
     def delete(self, url: str, **kwargs: Any) -> Response:
         """DELETE request"""
         return self._make_request("DELETE", url, **kwargs)
-    
+
     def patch(self, url: str, **kwargs: Any) -> Response:
         """PATCH request"""
         return self._make_request("PATCH", url, **kwargs)
-    
+
     def head(self, url: str, **kwargs: Any) -> Response:
         """HEAD request"""
         return self._make_request("HEAD", url, **kwargs)
-    
+
     def options(self, url: str, **kwargs: Any) -> Response:
         """OPTIONS request"""
         return self._make_request("OPTIONS", url, **kwargs)
@@ -346,7 +362,7 @@ class HTTPClient:
         else:
             url = "/".join(cleaned)
         return url
-        
+
     def close(self) -> None:
         """Session'ı kapat"""
         if self._session:

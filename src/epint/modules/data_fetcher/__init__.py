@@ -17,6 +17,7 @@
 import datetime
 import threading
 import queue
+import time
 from typing import Dict, Any, List, Optional, Callable
 
 from .pagination_checker import has_pagination
@@ -25,6 +26,7 @@ from .error_detector import is_date_range_error, extract_max_days_from_error
 from .result_merger import merge_results
 from .recursive_fetcher import recursive_fetch, worker_thread
 from .page_collector import collect_all_pages
+from ..http_client.rate_limit_handler import get_rate_limit_handler
 
 
 class DataFetcher:
@@ -44,6 +46,10 @@ class DataFetcher:
         self._print_queue = None
         self._print_thread = None
         self._print_lock = threading.Lock()
+        self._rate_limit_handler = get_rate_limit_handler()
+        self._request_interval = 0.1  # İstekler arası minimum süre (saniye)
+        self._last_request_time = 0.0
+        self._request_lock = threading.Lock()
 
     def _start_print_queue(self):
         """Print queue ve worker thread'i başlat"""
@@ -221,12 +227,25 @@ class DataFetcher:
         # Tarih aralığını kontrol et
         total_days = (end_dt - start_dt).days
 
+        # Rate limit kontrolü ve zamanlama
+        now = datetime.datetime.now()
+        reset_time = self._rate_limit_handler.get_reset_time()
+        base_scheduled_time = now
+
+        if reset_time is not None and reset_time > now:
+            # Rate limit varsa, reset zamanından sonra başlat
+            base_scheduled_time = reset_time + datetime.timedelta(seconds=1)
+            if debug:
+                wait_seconds = (reset_time - now).total_seconds()
+                self._print(f"[DataFetcher] Rate limit tespit edildi, istekler {wait_seconds:.1f} saniye sonra başlayacak...")
+
         if total_days > max_days:
             # Aralığı parçalara böl
             if debug:
                 self._print(f"[DataFetcher] Tarih aralığı çok büyük ({total_days} gün), {max_days} günlük parçalara bölünüyor...")
             current_start = start_dt
             chunk_num = 1
+            scheduled_time = base_scheduled_time
             while current_start < end_dt:
                 current_end = min(
                     current_start + datetime.timedelta(days=max_days),
@@ -234,13 +253,15 @@ class DataFetcher:
                 )
                 if debug:
                     self._print(f"[DataFetcher] Parça {chunk_num}: {current_start.strftime('%Y-%m-%d')} - {current_end.strftime('%Y-%m-%d')}")
-                task_queue.put((current_start, current_end, max_days, 0, debug, self._print_queue if debug else None))
+                # Her istek için zamanlama ekle (istekler arası interval)
+                task_queue.put((current_start, current_end, max_days, 0, debug, self._print_queue if debug else None, scheduled_time))
+                scheduled_time = scheduled_time + datetime.timedelta(seconds=self._request_interval)
                 current_start = current_end + datetime.timedelta(days=1)
                 chunk_num += 1
         else:
             if debug:
                 self._print(f"[DataFetcher] Tarih aralığı: {start_dt.strftime('%Y-%m-%d')} - {end_dt.strftime('%Y-%m-%d')} ({total_days} gün)")
-            task_queue.put((start_dt, end_dt, max_days, 0, debug, self._print_queue if debug else None))
+            task_queue.put((start_dt, end_dt, max_days, 0, debug, self._print_queue if debug else None, base_scheduled_time))
 
         # Worker thread'leri başlat (pagination_handler olmadan)
         threads = []
@@ -251,7 +272,7 @@ class DataFetcher:
                     task_queue, results_queue, exceptions_list,
                     original_kwargs, date_params, endpoint_callable,
                     self.results_lock, self.exceptions_lock, self.progress_lock,
-                    None, None, debug, self._print_queue if debug else None  # progress_bar, pagination_handler, debug, print_queue
+                    None, None, debug, self._print_queue if debug else None, self._rate_limit_handler  # progress_bar, pagination_handler, debug, print_queue, rate_limit_handler
                 ),
                 daemon=True
             )
@@ -311,12 +332,25 @@ class DataFetcher:
         # Tarih aralığını kontrol et
         total_days = (end_dt - start_dt).days
 
+        # Rate limit kontrolü ve zamanlama
+        now = datetime.datetime.now()
+        reset_time = self._rate_limit_handler.get_reset_time()
+        base_scheduled_time = now
+
+        if reset_time is not None and reset_time > now:
+            # Rate limit varsa, reset zamanından sonra başlat
+            base_scheduled_time = reset_time + datetime.timedelta(seconds=1)
+            if debug:
+                wait_seconds = (reset_time - now).total_seconds()
+                self._print(f"[DataFetcher] Rate limit tespit edildi, istekler {wait_seconds:.1f} saniye sonra başlayacak...")
+
         if total_days > max_days:
             # Aralığı parçalara böl
             if debug:
                 self._print(f"[DataFetcher] Tarih aralığı çok büyük ({total_days} gün), {max_days} günlük parçalara bölünüyor...")
             current_start = start_dt
             chunk_num = 1
+            scheduled_time = base_scheduled_time
             while current_start < end_dt:
                 current_end = min(
                     current_start + datetime.timedelta(days=max_days),
@@ -324,13 +358,15 @@ class DataFetcher:
                 )
                 if debug:
                     self._print(f"[DataFetcher] Parça {chunk_num}: {current_start.strftime('%Y-%m-%d')} - {current_end.strftime('%Y-%m-%d')}")
-                task_queue.put((current_start, current_end, max_days, 0, debug, self._print_queue if debug else None))
+                # Her istek için zamanlama ekle (istekler arası interval)
+                task_queue.put((current_start, current_end, max_days, 0, debug, self._print_queue if debug else None, scheduled_time))
+                scheduled_time = scheduled_time + datetime.timedelta(seconds=self._request_interval)
                 current_start = current_end + datetime.timedelta(days=1)
                 chunk_num += 1
         else:
             if debug:
                 self._print(f"[DataFetcher] Tarih aralığı: {start_dt.strftime('%Y-%m-%d')} - {end_dt.strftime('%Y-%m-%d')} ({total_days} gün)")
-            task_queue.put((start_dt, end_dt, max_days, 0, debug, self._print_queue if debug else None))
+            task_queue.put((start_dt, end_dt, max_days, 0, debug, self._print_queue if debug else None, base_scheduled_time))
 
         # Worker thread'leri başlat (pagination_handler ile)
         threads = []
@@ -341,7 +377,7 @@ class DataFetcher:
                     task_queue, results_queue, exceptions_list,
                     original_kwargs, date_params, endpoint_callable,
                     self.results_lock, self.exceptions_lock, self.progress_lock,
-                    None, self, debug, self._print_queue if debug else None  # progress_bar, pagination_handler, debug, print_queue
+                    None, self, debug, self._print_queue if debug else None, self._rate_limit_handler  # progress_bar, pagination_handler, debug, print_queue, rate_limit_handler
                 ),
                 daemon=True
             )
@@ -417,18 +453,30 @@ class DataFetcher:
             # Tarih aralığını kontrol et
             total_days = (end_dt - start_dt).days
 
+            # Rate limit kontrolü ve zamanlama
+            now = datetime.datetime.now()
+            reset_time = self._rate_limit_handler.get_reset_time()
+            base_scheduled_time = now
+
+            if reset_time is not None and reset_time > now:
+                # Rate limit varsa, reset zamanından sonra başlat
+                base_scheduled_time = reset_time + datetime.timedelta(seconds=1)
+
             if total_days > max_days:
                 # Aralığı parçalara böl
                 current_start = start_dt
+                scheduled_time = base_scheduled_time
                 while current_start < end_dt:
                     current_end = min(
                         current_start + datetime.timedelta(days=max_days),
                         end_dt
                     )
-                    task_queue.put((current_start, current_end, max_days, 0, debug, self._print_queue if debug else None))
+                    # Her istek için zamanlama ekle (istekler arası interval)
+                    task_queue.put((current_start, current_end, max_days, 0, debug, self._print_queue if debug else None, scheduled_time))
+                    scheduled_time = scheduled_time + datetime.timedelta(seconds=self._request_interval)
                     current_start = current_end + datetime.timedelta(days=1)
             else:
-                task_queue.put((start_dt, end_dt, max_days, 0, debug, self._print_queue if debug else None))
+                task_queue.put((start_dt, end_dt, max_days, 0, debug, self._print_queue if debug else None, base_scheduled_time))
 
             # Worker thread'leri başlat (pagination_handler ile - her tarih aralığı için sayfaları toplar)
             threads = []
@@ -439,7 +487,7 @@ class DataFetcher:
                         task_queue, results_queue, exceptions_list,
                         original_kwargs, date_params, endpoint_callable,
                         self.results_lock, self.exceptions_lock, self.progress_lock,
-                        None, self, debug, self._print_queue if debug else None  # progress_bar, pagination_handler, debug, print_queue
+                        None, self, debug, self._print_queue if debug else None, self._rate_limit_handler  # progress_bar, pagination_handler, debug, print_queue, rate_limit_handler
                     ),
                     daemon=True
                 )

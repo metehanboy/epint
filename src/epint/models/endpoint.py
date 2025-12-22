@@ -20,6 +20,7 @@ from ..modules.authentication.auth_manager import Authentication
 from ..modules.http_client import HTTPClient
 from ..modules.error_handler import ErrorHandler
 from ..modules.data_fetcher import DataFetcher
+from ..modules.http_client.rate_limit_handler import get_rate_limit_handler
 from ..modules.search.find_closest import find_closest_match
 from ..modules.repr_formatter.endpoint_repr import format_endpoint_repr
 from .swagger import SwaggerModel
@@ -137,6 +138,13 @@ class Endpoint:
             request_args["json"] = request_model.json
         if request_model.data is not None:
             request_args["data"] = request_model.data
+
+        # Rate limit kontrolü - istek yapmadan önce kontrol et
+        rate_limit_handler = get_rate_limit_handler()
+        rate_limit_error = rate_limit_handler.get_rate_limit_error()
+        if rate_limit_error:
+            # Rate limit aktif, hata fırlat
+            raise rate_limit_error
 
         # ErrorHandler oluştur
         error_handler = ErrorHandler(auth)

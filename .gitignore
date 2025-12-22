@@ -216,3 +216,5 @@ scripts
 docs/wiki/*
 !docs/wiki/.git
 !docs/wiki/.gitmodules
+COMMIT_MSG*
+
