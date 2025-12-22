@@ -6,6 +6,20 @@ EPİAŞ API'lerine erişim sağlayan Python kütüphanesi.
 
 ## Kurulum
 
+EPINT henüz PyPI'da yayınlanmadığı için GitHub'dan kurulum yapabilirsiniz:
+
+```bash
+pip install git+https://github.com/metehanboy/epint.git
+```
+
+veya geliştirme modunda:
+
+```bash
+pip install -e git+https://github.com/metehanboy/epint.git#egg=epint
+```
+
+Kurulumdan sonra:
+
 ```python
 import epint as ep
 ```
@@ -26,6 +40,7 @@ ep.set_mode("prod")  # veya "test"
 Belirli servisler için detaylı kullanım örnekleri ve açıklamalar:
 
 - **[Profil Katsayıları Sorgulama](docs/profil-katsayilari.md)**: Elektrik tüketiminin zaman içindeki dağılımını gösteren profil katsayılarını sorgulama
+- **[Wiki: Profil Katsayıları Rehberi](https://github.com/metehanboy/epint/wiki/Profile-Coefficients)**: Profil katsayıları hakkında detaylı wiki rehberi
 - **...
 
 ### Temel Yapı
