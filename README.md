@@ -39,8 +39,7 @@ ep.set_mode("prod")  # veya "test"
 
 Belirli servisler için detaylı kullanım örnekleri ve açıklamalar:
 
-- **[Profil Katsayıları Sorgulama](docs/profil-katsayilari.md)**: Elektrik tüketiminin zaman içindeki dağılımını gösteren profil katsayılarını sorgulama
-- **[Wiki: Profil Katsayıları Rehberi](https://github.com/metehanboy/epint/wiki/Profile-Coefficients)**: Profil katsayıları hakkında detaylı wiki rehberi
+- **[Wiki: Profil Katsayıları Rehberi](https://github.com/metehanboy/epint/wiki/Examples/Profile-Coefficients)**: Profil katsayıları hakkında detaylı wiki rehberi (Examples alt sayfası)
 - **...
 
 ### Temel Yapı
