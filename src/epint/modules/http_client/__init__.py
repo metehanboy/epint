@@ -18,7 +18,7 @@ from typing import Dict, Optional, Tuple, Union, Any
 from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
 from requests import Session, Response
-from requests.exceptions import RequestException, RetryError, Timeout
+from requests.exceptions import RequestException, RetryError, Timeout, HTTPError
 from ..version import __fullname__
 import time
 
@@ -39,6 +39,7 @@ class HTTPClient:
         headers: Optional[Dict[str, str]] = None,
         verify: bool = True,
         allow_redirects: bool = True,
+        auth: Optional[Any] = None,
     ):
         """
         HTTP Client oluştur
@@ -61,6 +62,7 @@ class HTTPClient:
         self.headers = headers or {}
         self.verify = verify
         self.allow_redirects = allow_redirects
+        self.auth = auth
 
         self._session: Optional[Session] = None
 
@@ -150,6 +152,45 @@ class HTTPClient:
 
         return None
 
+    def _is_tgt_invalid(self, response: Response) -> bool:
+        """
+        404 hatasında TGT geçersizliğini kontrol et
+
+        Args:
+            response: HTTP response objesi
+
+        Returns:
+            TGT geçersizse True, değilse False
+        """
+        if response.status_code != 404:
+            return False
+
+        try:
+            # Response body'yi text olarak al
+            response_text = response.text if hasattr(response, 'text') else str(response.content or '')
+            response_text_lower = response_text.lower()
+
+            # TGT geçersizliğini belirten anahtar kelimeler
+            tgt_invalid_keywords = [
+                'could not be found',
+                'is considered invalid',
+                'invalid',
+                'not found',
+                'geçersiz',
+                'bulunamadı'
+            ]
+
+            # TGT ile ilgili bir mesaj var mı kontrol et
+            has_tgt_reference = 'tgt-' in response_text_lower or 'ticket' in response_text_lower
+
+            # TGT geçersizliği belirtiliyor mu kontrol et
+            is_tgt_invalid = any(keyword in response_text_lower for keyword in tgt_invalid_keywords)
+
+            # Eğer TGT referansı var ve geçersizlik belirtiliyorsa True döndür
+            return has_tgt_reference and is_tgt_invalid
+        except:
+            return False
+
     def _make_request(
         self,
         method: str,
@@ -189,10 +230,37 @@ class HTTPClient:
         response: Optional[Response] = None
         max_retries = 3
         retry_count = 0
+        tgt_retry_count = 0
+        max_tgt_retries = 3
 
         while retry_count <= max_retries:
             try:
                 response = session.request(method=method.upper(), url=url, **kwargs)
+
+                # 404 hatası ve TGT geçersizliği kontrolü
+                if response.status_code == 404 and self._is_tgt_invalid(response):
+                    if self.auth and tgt_retry_count < max_tgt_retries:
+                        # TGT geçersiz, ticket'ları temizle
+                        self.auth.clear_tickets()
+
+                        # URL'de TGT kodu varsa yeni TGT ile güncelle
+                        if '/cas/v1/tickets/' in url or '/v1/tickets/' in url:
+                            try:
+                                # Yeni TGT al
+                                new_tgt_code, _ = self.auth.get_tgt()
+                                # URL'deki eski TGT kodunu yeni ile değiştir
+                                import re
+                                # TGT- ile başlayan kodu bul ve değiştir
+                                url = re.sub(r'TGT-[^/]+', new_tgt_code, url)
+                            except Exception:
+                                pass
+
+                        tgt_retry_count += 1
+                        retry_count += 1
+                        continue
+                    else:
+                        # Max TGT retry aşıldı, exception fırlat
+                        response.raise_for_status()
 
                 # 429 hatası kontrolü
                 if response.status_code == 429:

@@ -37,7 +37,7 @@ class TicketInfo:
 
 class Authentication:
 
-    TGT_EXPIRE_HOURS: int = 2
+    TGT_EXPIRE_HOURS: int = 8
     TGT_EXPIRE_HOURS_TRANSPARENCY: int = 1
     ST_EXPIRE_SECONDS: int = 30
     DATE_FORMAT: str = DateTimeUtils.DATETIME_FORMAT
@@ -181,29 +181,15 @@ class Authentication:
             headers = self._get_base_headers()
             payload = {"service": service}
 
-            with HTTPClient() as cl:
+            # HTTPClient'a auth parametresini geç, retry mekanizması çalışsın
+            with HTTPClient(auth=self) as cl:
                 rp = cl.post(
                     self.root + self.ST_ENDPOINT.format(tgt_code=tgt_code),
                     data=payload,
                     headers=headers,
                 )
 
-
-                if rp.status_code == 404:
-
-                    print("TGT geçersiz, yeni TGT oluşturuluyor...")
-                    self.clear_tickets()
-                    tgt_code, _ = self.get_tgt()
-                    rp = cl.post(
-                        self.root + self.ST_ENDPOINT.format(tgt_code=tgt_code),
-                        data=payload,
-                        headers=headers,
-                    )
-
-                rp.raise_for_status()
-
             duration = time.time() - start_time
-
 
             return rp.text
 
@@ -329,6 +315,7 @@ class Authentication:
         self._store_ticket("st", st_code, expire_date, service=service)
         return st_code, expire_date
 
+    @classmethod
     def clear_tickets(self) -> None:
         print("Tokens cleared!")
         if os.path.exists(self.tgt_dir):
@@ -363,6 +350,7 @@ class Authentication:
         st_code, _ = self.get_st(service)
         return {"Authorization": f"Bearer {st_code}"}
 
+    @classmethod
     def report_tickets(self) -> str:
         report = []
 

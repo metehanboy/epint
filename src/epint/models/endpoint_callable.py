@@ -48,6 +48,9 @@ class Endpoint:
         runtime_mode = epint._mode
         auth = Authentication(epint._username, epint._password, target_service, runtime_mode)
 
+        # HTTPClient'a auth parametresini geç
+        if not hasattr(self.client, 'auth') or self.client.auth != auth:
+            self.client.auth = auth
 
         # RequestModel oluştur
         request_model = RequestModel(self._data, kwargs)
