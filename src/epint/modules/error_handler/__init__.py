@@ -14,7 +14,6 @@
 
 from typing import Dict, Any, Optional, Callable, List
 from ..authentication.auth_manager import Authentication
-from ..http_client.rate_limit_handler import get_rate_limit_handler
 
 
 class ErrorHandler:
@@ -118,12 +117,37 @@ class ErrorHandler:
 
     def _handle_404(self, response: Any) -> None:
         """404 Not Found hatası"""
-        pass
+        try:
+            # Response body'yi text olarak al
+            response_text = response.text if hasattr(response, 'text') else str(response.content or '')
+            response_text_lower = response_text.lower()
+
+            # TGT geçersizliğini belirten anahtar kelimeler
+            tgt_invalid_keywords = [
+                'could not be found',
+                'is considered invalid',
+                'invalid',
+                'not found',
+                'geçersiz',
+                'bulunamadı'
+            ]
+
+            # TGT ile ilgili bir mesaj var mı kontrol et
+            has_tgt_reference = 'tgt-' in response_text_lower or 'ticket' in response_text_lower
+
+            # TGT geçersizliği belirtiliyor mu kontrol et
+            is_tgt_invalid = any(keyword in response_text_lower for keyword in tgt_invalid_keywords)
+
+            # Eğer TGT referansı var ve geçersizlik belirtiliyorsa ticket'ları temizle
+            if has_tgt_reference and is_tgt_invalid:
+                if self.auth:
+                    self.auth.clear_tickets()
+        except:
+            pass
 
     def _handle_429(self, response: Any) -> None:
         """429 Rate Limit hatası"""
-        rate_limit_handler = get_rate_limit_handler()
-        rate_limit_handler.handle_429_error(response)
+        pass
 
     def _handle_5xx(self, response: Any) -> None:
         """5xx Server Error hatası"""

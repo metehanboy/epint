@@ -20,7 +20,6 @@ from requests.adapters import HTTPAdapter
 from requests import Session, Response
 from requests.exceptions import RequestException, RetryError, Timeout
 from ..version import __fullname__
-from .rate_limit_handler import get_rate_limit_handler
 import time
 
 
@@ -195,12 +194,8 @@ class HTTPClient:
             try:
                 response = session.request(method=method.upper(), url=url, **kwargs)
 
-                # Rate limit kontrolü (429 veya rate limit aşıldıysa)
+                # 429 hatası kontrolü
                 if response.status_code == 429:
-                    # Rate limit handler'a bildir
-                    rate_limit_handler = get_rate_limit_handler()
-                    rate_limit_handler.handle_429_error(response)
-
                     wait_time = self._check_rate_limit(response)
                     if wait_time is None:
                         # 429 durumunda reset süresini header'dan al
@@ -220,13 +215,6 @@ class HTTPClient:
                     else:
                         # Max retry aşıldı, exception fırlat
                         response.raise_for_status()
-                elif self._check_rate_limit(response) is not None:
-                    # Rate limit yaklaşıyor ama henüz 429 değil
-                    wait_time = self._check_rate_limit(response)
-                    if wait_time and retry_count < max_retries:
-                        time.sleep(wait_time)
-                        retry_count += 1
-                        continue
 
                 response.raise_for_status()
                 return response
@@ -236,10 +224,6 @@ class HTTPClient:
                 if response is not None:
                     # 429 durumunda retry yap
                     if response.status_code == 429:
-                        # Rate limit handler'a bildir
-                        rate_limit_handler = get_rate_limit_handler()
-                        rate_limit_handler.handle_429_error(response)
-
                         wait_time = self._check_rate_limit(response)
                         if wait_time is None:
                             reset = response.headers.get('RateLimit-Reset')

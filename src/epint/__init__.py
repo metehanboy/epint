@@ -19,7 +19,7 @@ from .modules.search.method_name_decorator import to_python_method_name
 from .modules.search.find_closest import find_closest_match
 from .modules.category_proxy import CategoryProxy
 from .endpoints import get_endpoints_dir, list_categories
-from .models.endpoint import EndpointModel
+from .models.endpoint_registry import EndpointModel
 import os
 
 
@@ -70,9 +70,9 @@ def _check_auth():
 def load_category(category: str):
     if category in EndpointModel.get_all_categories():
         return  # daha önce çağırıldı ise tekrar yüklemeyelim.
-    
+
     swagger_path = os.path.join(get_endpoints_dir(), category, "swagger.json")
-    
+
     if os.path.exists(swagger_path):
         EndpointModel.load_swagger(category, swagger_path)
 
@@ -83,16 +83,16 @@ def get_endpoints(category: str):
 def __getattr__(name):
     if name in IPYTHON_MAGIC_METHODS:
         raise AttributeError(f"'{__name__}' module has blocked attribute '{name}'")
-    
+
     categories = list_categories()
-    
+
     # 1. Önce orijinal isimle tam eşleşme kontrolü (en yüksek öncelik)
     if name in categories:
         load_category(name)
         if name not in _category_objects:
             _category_objects[name] = CategoryProxy(name)
         return _category_objects[name]
-    
+
     # 2. Alternatif isimlerle (alias) eşleşme kontrolü
     if name in CATEGORY_ALIASES:
         category = CATEGORY_ALIASES[name]
@@ -100,7 +100,7 @@ def __getattr__(name):
         if category not in _category_objects:
             _category_objects[category] = CategoryProxy(category)
         return _category_objects[category]
-    
+
     # 2b. Alternatif isimlerle (alias) fuzzy matching
     normalized_name = to_python_method_name(name)
     alias_keys = list(CATEGORY_ALIASES.keys())
@@ -112,7 +112,7 @@ def __getattr__(name):
             _category_objects[category] = CategoryProxy(category)
         return _category_objects[category]
     normalized_categories = {to_python_method_name(cat): cat for cat in categories}
-    
+
     # 3. Seffaflik kategorileri için prefix'i yoksayarak arama
     # Örnek: "seffalik", "seffaflik" -> "seffaflik-electricity", "seffaflik-natural-gas", vb.
     if normalized_name not in normalized_categories:
@@ -120,10 +120,16 @@ def __getattr__(name):
         if seffaflik_categories:
             # "seffaflik" veya "seffalik" gibi yazımları kontrol et
             name_lower = name.lower()
-            if 'seffaflik' in name_lower or 'seffalik' in name_lower:
-                # Eğer sadece "seffaflik" veya "seffalik" yazılmışsa, en yaygın olanı döndür
-                if normalized_name in ['seffaflik', 'seffalik'] or name_lower in ['seffaflik', 'seffalik']:
-                    # Varsayılan olarak seffaflik-electricity'yi döndür
+            # "seffaflik" yanlış yazılmış olabilir, burada da fuzzy search yapalım
+            seffaflik_variants = ['seffaflik', 'seffalik', 'sffaflik', 'sefaflik', 'sefaflik', 'seffaflk', 'seffflik']
+            fuzzy_match = find_closest_match(name_lower, seffaflik_variants, threshold=0.7)
+            if 'seffaflik' in name_lower or 'seffalik' in name_lower or fuzzy_match:
+                # Eğer yalnızca (yanlış veya doğru yazılmış) 'seffaflik'/'seffalik' yazılmışsa, varsayılanı döndür
+                if (
+                    normalized_name in seffaflik_variants
+                    or name_lower in seffaflik_variants
+                    or (fuzzy_match and (normalized_name == fuzzy_match or name_lower == fuzzy_match))
+                ):
                     category = 'seffaflik-electricity'
                     load_category(category)
                     if category not in _category_objects:
@@ -150,7 +156,7 @@ def __getattr__(name):
                                 if category not in _category_objects:
                                     _category_objects[category] = CategoryProxy(category)
                                 return _category_objects[category]
-    
+
     # 4. Reconciliation kategorileri için prefix'i yoksayarak arama
     # Örnek: "invoice" -> "reconciliation-invoice"
     if normalized_name not in normalized_categories:
@@ -173,7 +179,7 @@ def __getattr__(name):
         if category not in _category_objects:
             _category_objects[category] = CategoryProxy(category)
         return _category_objects[category]
-    
+
     # 5. Normalize edilmiş isimle fuzzy matching
     closest_normalized = find_closest_match(normalized_name, list(normalized_categories.keys()), threshold=0.6)
     if closest_normalized:
@@ -182,7 +188,7 @@ def __getattr__(name):
         if category not in _category_objects:
             _category_objects[category] = CategoryProxy(category)
         return _category_objects[category]
-    
+
     # 6. Orijinal kategori isimleriyle fuzzy matching (en düşük öncelik)
     closest = find_closest_match(normalized_name, categories, threshold=0.6)
     if closest:
@@ -190,7 +196,7 @@ def __getattr__(name):
         if closest not in _category_objects:
             _category_objects[closest] = CategoryProxy(closest)
         return _category_objects[closest]
-    
+
     raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
 
 

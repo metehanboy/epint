@@ -15,28 +15,29 @@
 from typing import Dict, Any
 from collections.abc import Iterable
 import epint
-from ...models.endpoint import EndpointModel, Endpoint
+from ...models.endpoint_registry import EndpointModel
+from ...models.endpoint_callable import Endpoint
 from ..search.method_name_decorator import to_python_method_name
 from ..search.find_closest import find_closest_match
 
 
 class CategoryProxy:
     """Kategori proxy objesi - epint.category.method_name şeklinde erişim sağlar"""
-    
+
     def __init__(self, category: str):
         self._category = category
 
     def __dir__(self) -> Iterable[str]:
         endpoints = set([to_python_method_name(method) for method in EndpointModel.get_category_endpoints(self._category).keys()])
         return sorted(endpoints)
-    
+
     def __getattr__(self, name):
         """Method ismine erişim - epint.category.method_name"""
 
         epint._check_auth()
 
         normalized_name = to_python_method_name(name)
-        
+
         endpoints = EndpointModel.get_category_endpoints(self._category)
         endpoint_data = None
         endpoint_name = None
@@ -61,14 +62,14 @@ class CategoryProxy:
                 if closest:
                     endpoint_name = closest
                     endpoint_data = endpoints[closest]
-        
+
         if not endpoint_data:
             available = [to_python_method_name(method_name) for method_name in list(endpoints.keys())[:10]]
             raise AttributeError(
                 f"'{self._category}' category has no endpoint '{name}'. "
                 f"Available endpoints: {available}"
             )
-        
+
         # EndpointModel.Endpoint objesi döndür
         return Endpoint(self._category, endpoint_name or name, endpoint_data)
 

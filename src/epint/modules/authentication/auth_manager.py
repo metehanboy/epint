@@ -69,7 +69,7 @@ class Authentication:
             prefix = ""
 
         base_path = self.EPYS_BASEPATH if target_service == "epys" else self.TRANSPARENCY_BASEPATH
-        
+
         return f"{self.PROTOCOL}{prefix}{base_path}"
 
     @classmethod
@@ -90,7 +90,7 @@ class Authentication:
         # Kullanıcı bazlı ticket dosyaları - farklı kullanıcılar için ticket karışmasını önle
         import hashlib
         user_hash = hashlib.md5(self.username.encode()).hexdigest()[:8]
-        
+
         self.tgt_dir = os.path.join(temp_dir, f"tgt_{user_hash}.dat")
         self.st_dir = os.path.join(temp_dir, f"st_{user_hash}.dat")
 
@@ -106,27 +106,27 @@ class Authentication:
         self, ticket_type: str, code: str, expire_date: str, **kwargs
     ) -> None:
         file_path = self.tgt_dir if ticket_type == "tgt" else self.st_dir
-        
+
         # Expired ticket'ları temizle
         self._cleanup_expired_tickets(file_path, ticket_type)
-        
+
         with open(file_path, "a", encoding="utf-8") as f:
             if ticket_type == "tgt":
                 f.write(f"{code}|{expire_date}|{self.username}|{self.root}\n")
             else:
                 service = kwargs.get("service", "")
                 f.write(f"{code}|{service}|{expire_date}|{self.username}|{self.root}\n")
-    
+
     def _cleanup_expired_tickets(self, file_path: str, ticket_type: str) -> None:
         """Expired ticket'ları dosyadan temizle"""
         if not os.path.exists(file_path):
             return
-        
+
         valid_lines = []
         with open(file_path, "r", encoding="utf-8") as f:
             for line in f:
                 parts = line.strip().split("|")
-                
+
                 if ticket_type == "tgt" and len(parts) == 4:
                     _, expire_date, _, _ = parts
                     if not DateTimeUtils.is_expired(expire_date):
@@ -138,7 +138,7 @@ class Authentication:
                 else:
                     # Format bozuksa da sakla (geriye dönük uyumluluk)
                     valid_lines.append(line)
-        
+
         # Sadece geçerli ticket'ları yaz
         with open(file_path, "w", encoding="utf-8") as f:
             f.writelines(valid_lines)
@@ -147,7 +147,7 @@ class Authentication:
         start_time = time.time()
 
         try:
-            
+
 
             headers = self._get_base_headers()
             payload = {"username": self.username, "password": self.password}
@@ -163,13 +163,13 @@ class Authentication:
                 rp.raise_for_status()
 
             duration = time.time() - start_time
-            
+
 
             return rp.text
 
         except Exception as e:
             duration = time.time() - start_time
-            
+
             raise
 
     def _generate_st(self, service: str) -> str:
@@ -187,10 +187,10 @@ class Authentication:
                     data=payload,
                     headers=headers,
                 )
-            
+
 
                 if rp.status_code == 404:
-                    
+
                     print("TGT geçersiz, yeni TGT oluşturuluyor...")
                     self.clear_tickets()
                     tgt_code, _ = self.get_tgt()
@@ -203,13 +203,13 @@ class Authentication:
                 rp.raise_for_status()
 
             duration = time.time() - start_time
-            
+
 
             return rp.text
 
         except Exception as e:
             duration = time.time() - start_time
-            
+
             raise
 
     def _validate_ticket(self, ticket_code: str, ticket_type: str) -> bool:
@@ -330,6 +330,7 @@ class Authentication:
         return st_code, expire_date
 
     def clear_tickets(self) -> None:
+        print("Tokens cleared!")
         if os.path.exists(self.tgt_dir):
             os.remove(self.tgt_dir)
         if os.path.exists(self.st_dir):
