@@ -77,7 +77,7 @@ class DateTimeUtils:
         # date nesnesi ise datetime'a çevir
         if isinstance(dt, _dt.date) and not isinstance(dt, _dt.datetime):
             dt = _dt.datetime.combine(dt, _dt.time.min)
-        
+
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=cls.DEFAULT_TIMEZONE)
 
@@ -92,16 +92,16 @@ class DateTimeUtils:
         # date nesnesi ise datetime'a çevir
         if isinstance(dt, _dt.date) and not isinstance(dt, _dt.datetime):
             dt = _dt.datetime.combine(dt, _dt.time.min)
-        
+
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=cls.DEFAULT_TIMEZONE)
-        
+
         # Timezone offset'i al (+0300 formatında, : olmadan)
         offset = dt.strftime("%z")
-        
+
         # Milisaniye ekle
         milliseconds = dt.microsecond // 1000
-        
+
         # Format: YYYY-MM-DDTHH:MM:SS.mmm+HHMM
         formatted = dt.strftime(f"%Y-%m-%dT%H:%M:%S.{milliseconds:03d}{offset}")
         return formatted
@@ -112,9 +112,30 @@ class DateTimeUtils:
         return dt + _dt.timedelta(hours=hours)
 
     @classmethod
+    def add_minutes(cls, dt:_dt.datetime, minutes: int) -> _dt.datetime:
+
+        return dt + _dt.timedelta(minutes=minutes)
+
+    @classmethod
     def add_seconds(cls, dt: _dt.datetime, seconds: int) -> _dt.datetime:
 
         return dt + _dt.timedelta(seconds=seconds)
+
+    @classmethod
+    def get_timedelta(cls, delta_type: str, delta_value: Union[int, float]) -> _dt.timedelta:
+
+        VALID_DELTA_TYPES = ["seconds", "minutes", "hours", "days", "weeks", "microseconds"]
+
+        delta_type = delta_type.lower()
+
+        if delta_type not in VALID_DELTA_TYPES:
+            valid_types = ", ".join(f"'{t}'" for t in VALID_DELTA_TYPES)
+            raise ValueError(
+                f"Geçersiz delta_type: '{delta_type}'. "
+                f"Geçerli değerler: {valid_types}"
+            )
+
+        return _dt.timedelta(**{delta_type: delta_value})
 
     @classmethod
     def is_expired(cls, expire_date: str, format_string: str = DATETIME_FORMAT) -> bool:
@@ -275,7 +296,7 @@ class DateTimeUtils:
             y, m, d = date.year, date.month, date.day
         else:
             y, m, d = date
-        
+
         period = _dt.datetime(y, m, 1, tzinfo=cls.DEFAULT_TIMEZONE)
         _, days = monthrange(y, m)
         settlement_date = _dt.datetime(
@@ -318,21 +339,21 @@ class DateTimeUtils:
             except (ValueError, AttributeError):
                 # Datetime parse edilemezse date formatını dene
                 date = cls.from_date_string(date)
-        
+
         # datetime ise date'e çevir
         if isinstance(date, _dt.datetime):
             date = date.date()
-        
+
         year = date.year
         month = date.month
-        
+
         # Ayın ilk günü
         first_day = _dt.date(year, month, 1)
-        
+
         # Ayın son günü
         _, last_day_num = monthrange(year, month)
         last_day = _dt.date(year, month, last_day_num)
-        
+
         return first_day, last_day
 
     @classmethod

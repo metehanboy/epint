@@ -37,9 +37,17 @@ class TicketInfo:
 
 class Authentication:
 
-    TGT_EXPIRE_HOURS: int = 8
-    TGT_EXPIRE_HOURS_TRANSPARENCY: int = 1
-    ST_EXPIRE_SECONDS: int = 30
+    """
+        epys servisleri için tgt geçerlilik 45 dk her kullanışta geçerlilik 45 dk uzar
+        seffaflik servisleri için tgt geçerlilik 2 saat süre uzamıyor
+        st için geçerlilik 15 saniye tek kullanımlık
+        gop servisi için st geçerlilik 30 saniye
+    """
+
+    TGT_EXPIRE_HOURS: float = 0.75  # EPYS için 45 dk
+    TGT_EXPIRE_HOURS_TRANSPARENCY: int = 2  # Seffaflik için 2 saat
+    ST_EXPIRE_SECONDS: int = 15  # Genel ST için 15 saniye
+    ST_EXPIRE_SECONDS_GOP: int = 30  # GOP servisi için 30 saniye
     DATE_FORMAT: str = DateTimeUtils.DATETIME_FORMAT
 
     TGT_ENDPOINT: str = "/cas/v1/tickets"
@@ -58,7 +66,7 @@ class Authentication:
     ):
         self.username = username
         self.password = password
-        self.target_service = target_service,
+        self.target_service = target_service
         self.runtime_mode = runtime_mode
         self.root = self._get_root_url(target_service, runtime_mode)
         self._setup_directories()
@@ -85,6 +93,12 @@ class Authentication:
 
     def _setup_directories(self) -> None:
         temp_dir = os.path.join(tempfile.gettempdir(), "epint")
+
+        # Okuma/yazma sorunu kontrolü
+        if self._has_permission_issues(temp_dir):
+            # Klasörü sıfırla ve yeniden oluştur
+            self._reset_temp_directory(temp_dir)
+
         os.makedirs(temp_dir, exist_ok=True)
 
         # Kullanıcı bazlı ticket dosyaları - farklı kullanıcılar için ticket karışmasını önle
@@ -93,6 +107,78 @@ class Authentication:
 
         self.tgt_dir = os.path.join(temp_dir, f"tgt_{user_hash}.dat")
         self.st_dir = os.path.join(temp_dir, f"st_{user_hash}.dat")
+
+        # Dosya okuma/yazma testi
+        self._test_file_permissions()
+
+    def _has_permission_issues(self, temp_dir: str) -> bool:
+        """Klasör veya dosyalarda okuma/yazma sorunu var mı kontrol et"""
+        if not os.path.exists(temp_dir):
+            return False
+
+        try:
+            # Klasör okunabilir mi?
+            os.listdir(temp_dir)
+
+            # Test dosyası yazma/okuma testi
+            test_file = os.path.join(temp_dir, ".epint_test")
+            try:
+                with open(test_file, "w") as f:
+                    f.write("test")
+                with open(test_file, "r") as f:
+                    f.read()
+                os.remove(test_file)
+            except (IOError, OSError, PermissionError):
+                return True
+
+            return False
+        except (IOError, OSError, PermissionError):
+            return True
+
+    def _reset_temp_directory(self, temp_dir: str) -> None:
+        """Geçici klasörü temizle ve yeniden oluştur"""
+        try:
+            import shutil
+            if os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir)
+        except (IOError, OSError, PermissionError) as e:
+            # Silme başarısız olursa, en azından dosyaları temizlemeyi dene
+            try:
+                if os.path.exists(temp_dir):
+                    for item in os.listdir(temp_dir):
+                        item_path = os.path.join(temp_dir, item)
+                        try:
+                            if os.path.isfile(item_path):
+                                os.remove(item_path)
+                            elif os.path.isdir(item_path):
+                                import shutil
+                                shutil.rmtree(item_path)
+                        except (IOError, OSError, PermissionError):
+                            pass
+            except (IOError, OSError, PermissionError):
+                pass
+
+    def _test_file_permissions(self) -> None:
+        """Ticket dosyalarının okuma/yazma izinlerini test et"""
+        try:
+            # TGT dosyası testi
+            if os.path.exists(self.tgt_dir):
+                with open(self.tgt_dir, "r") as f:
+                    f.read()
+
+            # ST dosyası testi
+            if os.path.exists(self.st_dir):
+                with open(self.st_dir, "r") as f:
+                    f.read()
+        except (IOError, OSError, PermissionError):
+            # Okuma sorunu varsa dosyaları sil
+            try:
+                if os.path.exists(self.tgt_dir):
+                    os.remove(self.tgt_dir)
+                if os.path.exists(self.st_dir):
+                    os.remove(self.st_dir)
+            except (IOError, OSError, PermissionError):
+                pass
 
     def _get_base_headers(self) -> Dict[str, str]:
         return {
@@ -202,7 +288,7 @@ class Authentication:
         prefix = "TGT-" if ticket_type == "tgt" else "ST-"
         return ("cas" in ticket_code) and (ticket_code.startswith(prefix))
 
-    def _get_expire_date(self, ticket_type: str) -> str:
+    def _get_expire_date(self, ticket_type: str, service: Optional[str] = None) -> str:
         if ticket_type == "tgt":
             hours = (
                 self.TGT_EXPIRE_HOURS_TRANSPARENCY
@@ -211,13 +297,22 @@ class Authentication:
             )
             delta = datetime.timedelta(hours=hours)
         else:
-            delta = datetime.timedelta(seconds=self.ST_EXPIRE_SECONDS)
+            # ST için service kontrolü: GOP servisi için 30 saniye, diğerleri için 15 saniye
+            seconds = (
+                self.ST_EXPIRE_SECONDS_GOP
+                if service and "gop" in service.lower()
+                else self.ST_EXPIRE_SECONDS
+            )
+            delta = datetime.timedelta(seconds=seconds)
 
         return DateTimeUtils.to_string(DateTimeUtils.now() + delta)
 
     def get_tgt(self) -> Tuple[str, str]:
         existing_tgt = self._find_valid_tgt()
         if existing_tgt:
+            # EPYS servisleri için TGT her kullanışta 45 dk uzar
+            if self.target_service == "epys":
+                return self._extend_tgt_expiry(existing_tgt[0], existing_tgt[1])
             return existing_tgt
 
         return self._create_new_tgt()
@@ -251,6 +346,42 @@ class Authentication:
 
     def _is_tgt_valid(self, tgt_data: dict) -> bool:
         return not DateTimeUtils.is_expired(tgt_data["expire_date"])
+
+    def _extend_tgt_expiry(self, tgt_code: str, current_expire_date: str) -> Tuple[str, str]:
+        """EPYS servisleri için TGT'nin geçerlilik süresini şu anki zamandan itibaren 45 dk olarak ayarla"""
+        # Şu anki zamandan itibaren 45 dk geçerli olacak şekilde yeni expire_date oluştur
+        new_expire = DateTimeUtils.now() + datetime.timedelta(hours=self.TGT_EXPIRE_HOURS)
+        new_expire_date = DateTimeUtils.to_string(new_expire)
+
+        # Dosyadaki expire_date'i güncelle
+        self._update_tgt_expire_date(tgt_code, new_expire_date)
+
+        return tgt_code, new_expire_date
+
+    def _update_tgt_expire_date(self, tgt_code: str, new_expire_date: str) -> None:
+        """TGT dosyasındaki expire_date'i güncelle"""
+        if not os.path.exists(self.tgt_dir):
+            return
+
+        lines = []
+        updated = False
+        with open(self.tgt_dir, "r", encoding="utf-8") as f:
+            for line in f:
+                parts = line.strip().split("|")
+                if len(parts) == 4:
+                    stored_tgt_code, _, username, root_endpoint = parts
+                    if stored_tgt_code == tgt_code and username == self.username and root_endpoint == self.root:
+                        # Expire_date'i güncelle
+                        lines.append(f"{tgt_code}|{new_expire_date}|{username}|{root_endpoint}\n")
+                        updated = True
+                    else:
+                        lines.append(line)
+                else:
+                    lines.append(line)
+
+        if updated:
+            with open(self.tgt_dir, "w", encoding="utf-8") as f:
+                f.writelines(lines)
 
     def _create_new_tgt(self) -> Tuple[str, str]:
         self._invalidate_old_tgts()
@@ -311,7 +442,7 @@ class Authentication:
         if not self._validate_ticket(st_code, "st"):
             raise Exception(f"ST Oluşturma Hatası: ST Geçerli Değil: {st_code}")
 
-        expire_date = self._get_expire_date("st")
+        expire_date = self._get_expire_date("st", service=service)
         self._store_ticket("st", st_code, expire_date, service=service)
         return st_code, expire_date
 
