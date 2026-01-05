@@ -218,3 +218,5 @@ docs/wiki/*
 !docs/wiki/.gitmodules
 COMMIT_MSG*
 
+# GitHub token (güvenlik için)
+.github_token
