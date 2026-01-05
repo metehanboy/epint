@@ -217,6 +217,28 @@ Bu komut şunları gösterir:
 - Response yapısı
 - Örnek değerler
 
+
+## 📊 İstatistikler
+
+### Repository İstatistikleri
+
+- ⭐ **Stars**: 2
+- 🍴 **Forks**: 1
+- 👀 **Watchers**: 2
+- 🐛 **Open Issues**: 0
+
+### Pull Request İstatistikleri
+
+- 📝 **Toplam PR**: 1
+- ✅ **Açık PR**: 0
+- 🔒 **Kapalı PR**: 1
+- 🔀 **Birleştirilmiş PR**: 1
+
+### Katkıda Bulunanlar
+
+- [metehanboy](https://github.com/metehanboy) (73 katkı)
+- [farukkornaz](https://github.com/farukkornaz) (1 katkı)
+
 ## Notlar
 
 - İlk kullanımda kategori otomatik olarak yüklenir
