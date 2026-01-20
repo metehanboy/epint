@@ -77,6 +77,9 @@ class Endpoint:
         if request_model.data is not None:
             request_args["data"] = request_model.data
 
+        if debug:
+            return request_model
+
         # ErrorHandler oluştur
         error_handler = ErrorHandler(auth)
         try:

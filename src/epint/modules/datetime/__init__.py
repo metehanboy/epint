@@ -106,6 +106,17 @@ class DateTimeUtils:
         formatted = dt.strftime(f"%Y-%m-%dT%H:%M:%S.{milliseconds:03d}{offset}")
         return formatted
 
+    def to_gunici_iso_string(cls, dt: Union[_dt.datetime, _dt.date]) -> str:
+        if isinstance(dt, _dt.date) and not isinstance(dt, _dt.datetime):
+            dt = _dt.datetime.combine(dt, _dt.time.min)
+
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=cls.DEFAULT_TIMEZONE)
+
+        # Format: YYYY-MM-DDTHH:MM:SS
+        formatted = dt.strftime(f"%Y-%m-%dT%H:%M:%S")
+        return formatted
+
     @classmethod
     def add_hours(cls, dt: _dt.datetime, hours: int) -> _dt.datetime:
 

@@ -223,6 +223,7 @@ Bu komut şunları gösterir:
 
 
 
+
 ## 📊 İstatistikler
 
 ### Repository İstatistikleri
@@ -234,46 +235,45 @@ Bu komut şunları gösterir:
 
 ### 📈 Trafik İstatistikleri
 
-- 👁️ **Toplam Görüntülenme**: 37
-- 👤 **Benzersiz Görüntüleyen**: 3
-- 📥 **Toplam Clone**: 200
-- 📥 **Benzersiz Clone**: 65
-- 📊 **Son 7 Gün Görüntülenme**: 14
-- 📊 **Son 7 Gün Benzersiz**: 6
-- 📅 **Son Gün Görüntülenme**: 2
+- 👁️ **Toplam Görüntülenme**: 29
+- 👤 **Benzersiz Görüntüleyen**: 5
+- 📥 **Toplam Clone**: 159
+- 📥 **Benzersiz Clone**: 19
+- 📊 **Son 7 Gün Görüntülenme**: 7
+- 📊 **Son 7 Gün Benzersiz**: 2
+- 📅 **Son Gün Görüntülenme**: 6
 - 📅 **Son Gün Benzersiz**: 1
-- 📊 **Son 7 Gün Clone**: 67
-- 📊 **Son 7 Gün Clone (Benzersiz)**: 26
-- 📅 **Son Gün Clone**: 14
-- 📅 **Son Gün Clone (Benzersiz)**: 6
+- 📊 **Son 7 Gün Clone**: 94
+- 📊 **Son 7 Gün Clone (Benzersiz)**: 15
+- 📅 **Son Gün Clone**: 27
+- 📅 **Son Gün Clone (Benzersiz)**: 3
 
 **En Popüler Sayfalar:**
-  1. `/metehanboy/epint/wiki/Examples` - 8 görüntülenme (1 benzersiz)
-  2. `/metehanboy/epint` - 6 görüntülenme (2 benzersiz)
-  3. `/metehanboy/epint/tree/main/src/epint/endpoints` - 6 görüntülenme (1 benzersiz)
-  4. `/metehanboy/epint/commits/main` - 5 görüntülenme (1 benzersiz)
-  5. `/metehanboy/epint/blob/main/src/epint/endpoints/seffaflik-electricity/swagger.json` - 4 görüntülenme (1 benzersiz)
+  1. `/metehanboy/epint/wiki/Examples` - 6 görüntülenme (2 benzersiz)
+  2. `/metehanboy/epint/tree/main/src/epint/endpoints` - 6 görüntülenme (1 benzersiz)
+  3. `/metehanboy/epint` - 3 görüntülenme (2 benzersiz)
+  4. `/metehanboy/epint/blob/main/src/epint/__init__.py` - 3 görüntülenme (1 benzersiz)
+  5. `/metehanboy/epint/tree/main/src/epint` - 3 görüntülenme (1 benzersiz)
 
 **En Popüler Referanslar:**
-  1. `github.com` - 33 (1 benzersiz)
-  2. `statics.teams.cdn.office.net` - 2 (2 benzersiz)
+  1. `github.com` - 22 (1 benzersiz)
 
 #### 📊 Görüntülenme Grafikleri
 
 ```mermaid
 xychart-beta
     title "Günlük Görüntülenme (Son 14 Gün)"
-    x-axis ["22/12", "23/12", "24/12", "25/12", "26/12", "27/12", "28/12", "29/12", "30/12", "31/12", "01/01", "02/01", "03/01", "04/01"]
-    y-axis "Görüntülenme" 0 --> 9
-    line [1, 7, 8, 3, 4, 0, 0, 4, 2, 2, 4, 0, 0, 2]
+    x-axis ["05/01", "06/01", "07/01", "08/01", "09/01", "10/01", "11/01", "12/01", "13/01", "14/01", "15/01", "16/01", "17/01", "18/01"]
+    y-axis "Görüntülenme" 0 --> 13
+    line [4, 12, 3, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 6]
 ```
 
 ```mermaid
 xychart-beta
     title "Benzersiz Görüntüleyen (Son 14 Gün)"
-    x-axis ["22/12", "23/12", "24/12", "25/12", "26/12", "27/12", "28/12", "29/12", "30/12", "31/12", "01/01", "02/01", "03/01", "04/01"]
-    y-axis "Benzersiz" 0 --> 3
-    line [1, 2, 1, 1, 1, 0, 0, 1, 2, 1, 1, 0, 0, 1]
+    x-axis ["05/01", "06/01", "07/01", "08/01", "09/01", "10/01", "11/01", "12/01", "13/01", "14/01", "15/01", "16/01", "17/01", "18/01"]
+    y-axis "Benzersiz" 0 --> 2
+    line [1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1]
 ```
 
 
@@ -282,9 +282,9 @@ xychart-beta
 ```mermaid
 xychart-beta
     title "Günlük Clone (Son 14 Gün)"
-    x-axis ["22/12", "23/12", "24/12", "25/12", "26/12", "27/12", "28/12", "29/12", "30/12", "31/12", "01/01", "02/01", "03/01", "04/01"]
-    y-axis "Clone" 0 --> 78
-    bar [71, 26, 8, 6, 7, 6, 9, 11, 9, 9, 9, 8, 7, 14]
+    x-axis ["05/01", "06/01", "07/01", "08/01", "09/01", "10/01", "11/01", "12/01", "13/01", "14/01", "15/01", "16/01", "17/01", "18/01"]
+    y-axis "Clone" 0 --> 33
+    bar [30, 6, 9, 6, 3, 3, 8, 9, 3, 15, 6, 25, 9, 27]
 ```
 
 
@@ -297,7 +297,7 @@ xychart-beta
 
 ### Katkıda Bulunanlar
 
-- [metehanboy](https://github.com/metehanboy) (74 katkı)
+- [metehanboy](https://github.com/metehanboy) (76 katkı)
 - [farukkornaz](https://github.com/farukkornaz) (1 katkı)
 ## Notlar
 
