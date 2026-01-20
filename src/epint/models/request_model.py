@@ -26,6 +26,7 @@ class RequestModel:
     # Ön tanımlı parametreler ve default değerleri (factory fonksiyonları)
     DEFAULT_PARAMS: Dict[str, Callable[[], Any]] = {
         'page': lambda: {'number': 1, 'size': 1000, 'limit': 1000},
+        'pageInfo': lambda: {'number': 1, 'page':1, 'size': 1000, 'limit': 1000},
         'region': lambda: 'TR1',
         'regionCode': lambda: 'TR1',
         'counterRegionCode': lambda: 'TR1'
@@ -450,6 +451,10 @@ class RequestModel:
                     # Body'nin properties'lerini ekle
                     for prop_name, prop_value in body_prop['properties'].items():
                         fields.append(prop_name)
+                        # Nested object varsa içindeki field'ları da prefix ile ekle
+                        if isinstance(prop_value, dict) and 'properties' in prop_value:
+                            for inner_key in prop_value['properties'].keys():
+                                fields.append(f"{prop_name}.{inner_key}")
                         # Eğer array ise, items içindeki field'ları da ekle
                         nested_fields = self._extract_nested_array_fields(prop_value)
                         fields.extend(nested_fields)
@@ -461,6 +466,10 @@ class RequestModel:
                     if 'properties' in body_prop:
                         for prop_name, prop_value in body_prop['properties'].items():
                             fields.append(prop_name)
+                            # Nested object varsa içindeki field'ları da prefix ile ekle
+                            if isinstance(prop_value, dict) and 'properties' in prop_value:
+                                for inner_key in prop_value['properties'].keys():
+                                    fields.append(f"{prop_name}.{inner_key}")
                             nested_fields = self._extract_nested_array_fields(prop_value)
                             fields.extend(nested_fields)
             # 'header' property'sini ignore et (kullanıcıdan gelmez)
@@ -474,6 +483,11 @@ class RequestModel:
                 if 'properties' in prop_value:
                     for nested_prop_name, nested_prop_value in prop_value['properties'].items():
                         fields.append(nested_prop_name)
+                        # Nested object varsa içindeki field'ları da prefix ile ekle
+                        if isinstance(nested_prop_value, dict) and 'properties' in nested_prop_value:
+                            for inner_key in nested_prop_value['properties'].keys():
+                                fields.append(f"{nested_prop_name}.{inner_key}")
+                        # Array field'ları da ekle
                         nested_fields = self._extract_nested_array_fields(nested_prop_value)
                         fields.extend(nested_fields)
                 continue
@@ -485,7 +499,8 @@ class RequestModel:
                     # Önce objeyi ekle (kullanıcı page={...} şeklinde gönderebilir)
                     fields.append(prop_name)
                     # Sonra içindeki field'ları da ekle (kullanıcı page.number şeklinde de gönderebilir)
-                    fields.extend(prop_value['properties'].keys())
+                    for nested_key in prop_value['properties'].keys():
+                        fields.append(f"{prop_name}.{nested_key}")
                 else:
                     # Normal property
                     fields.append(prop_name)
