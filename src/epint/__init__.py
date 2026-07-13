@@ -46,6 +46,8 @@ _password: str = None
 _mode: str = "prod"
 
 def set_auth(username: str, password: str) -> None:
+    print(f"Merhaba {username}")
+
     """Kullanıcı adı ve şifre ayarla"""
     global _username
     global _password

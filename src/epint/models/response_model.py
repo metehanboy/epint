@@ -115,6 +115,10 @@ class ResponseModel:
         if value is None:
             return value
         
+        # Safety check: if prop_schema is not a dict, return value as is
+        if not isinstance(prop_schema, dict):
+            return value
+        
         format_type = prop_schema.get('format', '')
         prop_type = prop_schema.get('type', '')
         
@@ -197,8 +201,11 @@ class ResponseModel:
             if key in properties:
                 prop_schema = properties[key]
                 
-                # Nested object kontrolü
-                if isinstance(value, dict) and 'properties' in prop_schema:
+                # Safety check: if prop_schema is not a dict, return value as is
+                if not isinstance(prop_schema, dict):
+                    result[key] = value
+                # prop_schema None ise 'in' operatörü hata vermesin
+                elif isinstance(value, dict) and 'properties' in prop_schema:
                     result[key] = self._convert_by_schema(value, prop_schema)
                 # Array kontrolü
                 elif isinstance(value, list) and prop_schema.get('type') == 'array':
