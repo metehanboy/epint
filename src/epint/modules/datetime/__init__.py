@@ -106,6 +106,7 @@ class DateTimeUtils:
         formatted = dt.strftime(f"%Y-%m-%dT%H:%M:%S.{milliseconds:03d}{offset}")
         return formatted
 
+    @classmethod
     def to_gunici_iso_string(cls, dt: Union[_dt.datetime, _dt.date]) -> str:
         if isinstance(dt, _dt.date) and not isinstance(dt, _dt.datetime):
             dt = _dt.datetime.combine(dt, _dt.time.min)

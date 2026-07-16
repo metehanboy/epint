@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: Test (py${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install package with dev dependencies
+        run: pip install -e ".[dev]"
+
+      - name: Run tests
+        run: python -m pytest
+
+  lint:
+    name: Lint (new code)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install lint tools
+        run: pip install black isort
+
+      # NOT: src/ henüz proje genelinde black/isort ile formatlanmadı (bkz. #<issue>).
+      # Regresyonu önlemek için şimdilik yalnızca tests/ üzerinde katı kontrol yapılır;
+      # src/ genel reformat ayrı bir işte ele alınmalı.
+      - name: Check formatting (tests/)
+        run: |
+          black --check tests
+          isort --check tests

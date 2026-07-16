@@ -30,6 +30,15 @@ dependencies = [
     "urllib3>=2.0.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "pytest-mock>=3.14.0",
+    "black>=24.0.0",
+    "isort>=5.13.0",
+]
+
 [project.urls]
 Homepage = "https://github.com/epint/epint"
 Repository = "https://github.com/epint/epint"
@@ -69,3 +78,11 @@ epint = ["endpoints/**/*.json"]
 
 [tool.setuptools.dynamic]
 version = {attr = "epint.modules.version.__version__"}
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --cov=epint --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["src/epint"]
+omit = ["*/__pycache__/*"]

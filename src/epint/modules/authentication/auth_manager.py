@@ -91,8 +91,42 @@ class Authentication:
         sections = [8, 4, 4, 4, 12]
         return '-'.join(self.random_hex(s) for s in sections)
 
+    def _get_os_user_hash(self) -> str:
+        """
+        İşletim sistemi kullanıcısını dosya-adı-güvenli şekilde tanımla.
+
+        Paylaşımlı bir makinede (örn. Linux sunucu) tempfile.gettempdir()
+        tüm OS kullanıcıları için aynı dizini (/tmp) döner. Ortak "epint"
+        alt dizinini ilk oluşturan kullanıcı onu varsayılan izinlerle
+        (örn. 0755) sahiplenir; bu durumda diğer OS kullanıcıları o dizin
+        içine kendi ticket dosyalarını bile yazamaz (PermissionError).
+        Dizini OS kullanıcısına göre ayırmak bu çakışmayı tamamen ortadan
+        kaldırır - her kullanıcı yalnızca kendi sahip olduğu bir dizine yazar.
+        """
+        import getpass
+        import hashlib
+
+        os_user = None
+        try:
+            os_user = getpass.getuser()
+        except Exception:
+            pass
+
+        if not os_user:
+            os_user = os.environ.get("USERNAME") or os.environ.get("USER")
+
+        if not os_user and hasattr(os, "getuid"):
+            os_user = str(os.getuid())
+
+        if not os_user:
+            os_user = "shared"
+
+        return hashlib.md5(os_user.encode("utf-8", errors="ignore")).hexdigest()[:8]
+
     def _setup_directories(self) -> None:
-        temp_dir = os.path.join(tempfile.gettempdir(), "epint")
+        temp_dir = os.path.join(
+            tempfile.gettempdir(), f"epint-{self._get_os_user_hash()}"
+        )
 
         # Okuma/yazma sorunu kontrolü
         if self._has_permission_issues(temp_dir):
@@ -101,7 +135,7 @@ class Authentication:
 
         os.makedirs(temp_dir, exist_ok=True)
 
-        # Kullanıcı bazlı ticket dosyaları - farklı kullanıcılar için ticket karışmasını önle
+        # Kullanıcı bazlı ticket dosyaları - farklı EPİAŞ kullanıcıları için ticket karışmasını önle
         import hashlib
         user_hash = hashlib.md5(self.username.encode()).hexdigest()[:8]
 
@@ -446,7 +480,6 @@ class Authentication:
         self._store_ticket("st", st_code, expire_date, service=service)
         return st_code, expire_date
 
-    @classmethod
     def clear_tickets(self) -> None:
         print("Tokens cleared!")
         if os.path.exists(self.tgt_dir):
