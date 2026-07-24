@@ -1,0 +1,2770 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0.0",
+    "title" : "EPYS - Endeks ve Ek Tüketim Servisleri"
+  },
+  "host" : "epys-prp.epias.com.tr",
+  "basePath" : "/index-ac",
+  "tags" : [ {
+    "name" : "additionalConsumption"
+  }, {
+    "name" : "index"
+  }, {
+    "name" : "indexAcLookup"
+  }, {
+    "name" : "readObligation"
+  }, {
+    "name" : "summaryReport"
+  } ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/v1/additional-consumption/passivate" : {
+      "post" : {
+        "tags" : [ "additionalConsumption" ],
+        "summary" : "Ek Tüketim Pasife Alma Servisi",
+        "description" : "Ek Tüketim verilerini pasife alır.",
+        "operationId" : "additional-consumption-passivate",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AdditionalConsumptionPassivateRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseAdditionalConsumptionSummaryDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/additional-consumption/query" : {
+      "post" : {
+        "tags" : [ "additionalConsumption" ],
+        "summary" : "Ek Tüketim Sorgulama Servisi",
+        "description" : "Ek Tüketim verilerini sorgular.",
+        "operationId" : "additional-consumption-query",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AdditionalConsumptionQueryRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseSortablePageResponseAdditionalConsumptionQueryResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/additional-consumption/save" : {
+      "post" : {
+        "tags" : [ "additionalConsumption" ],
+        "summary" : "Ek Tüketim Kayıt Servisi",
+        "description" : "Ek Tüketim verilerini sisteme kaydeder.",
+        "operationId" : "additional-consumption-save",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/AdditionalConsumptionSaveRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseAdditionalConsumptionSummaryDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/index/count" : {
+      "post" : {
+        "tags" : [ "index" ],
+        "summary" : "Endeks Kayıt Sayısı Sorgulama Servisi",
+        "description" : "Endeks kayıt sayısı sorgular.",
+        "operationId" : "index-count",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/IndexCountRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseCountResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/index/export" : {
+      "post" : {
+        "tags" : [ "index" ],
+        "summary" : "Endeks Dışa Aktarma Yardımcı Servisi",
+        "description" : "Endeks verilerini dışarı aktarma icin yardımcı servis sunar.",
+        "operationId" : "index-export",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/IndexExportRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseExportPageResponseIndexQueryResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/index/passivate" : {
+      "post" : {
+        "tags" : [ "index" ],
+        "summary" : "Endeks Pasife Alma Servisi",
+        "description" : "Endeks verilerini pasife alır.",
+        "operationId" : "index-passivate",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/IndexPassivateRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseIndexSummaryDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/index/query" : {
+      "post" : {
+        "tags" : [ "index" ],
+        "summary" : "Endeks Sorgulama Servisi",
+        "description" : "Endeks verilerini sorgular.",
+        "operationId" : "index-query",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/IndexQueryRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseSortablePageResponseIndexQueryResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/index/save" : {
+      "post" : {
+        "tags" : [ "index" ],
+        "summary" : "Endeks Kayıt Servisi",
+        "description" : "Endeks verilerini sisteme kaydeder.",
+        "operationId" : "index-save",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/IndexSaveRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseIndexSummaryDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/index/save-batch" : {
+      "post" : {
+        "tags" : [ "index" ],
+        "summary" : "Endeks Toplu Kayıt Servisi",
+        "description" : "Endeks verilerini toplu olarak sisteme kaydeder.",
+        "operationId" : "index-save-batch",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/IndexSaveRequestDto"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseIndexBatchSummaryDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/index/update" : {
+      "post" : {
+        "tags" : [ "index" ],
+        "summary" : "Endeks Güncelleme Servisi",
+        "description" : "Endeks verilerini günceller.",
+        "operationId" : "index-update",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/IndexUpdateRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseIndexSummaryDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/lookup" : {
+      "get" : {
+        "summary" : "Mevcut Çoklu Seçim Anahtar Sorgulama Servisi",
+        "description" : "Mevcut çoklu seçim anahtar verilerini sorgular.",
+        "operationId" : "available-lookups",
+        "produces" : [ "application/json", "application/xml" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseLookupTypeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/lookup/query" : {
+      "post" : {
+        "summary" : "Çoklu Seçim Detay Sorgulama Servisi",
+        "description" : "Çoklu seçim detay verilerini sorgular.",
+        "operationId" : "lookup-query",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/LookupRequest"
+          }
+        }, {
+          "name" : "accept-language",
+          "in" : "header",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseLookupResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/read-obligation/query" : {
+      "post" : {
+        "tags" : [ "readObligation" ],
+        "summary" : "Okuma Yükümlülük Raporu Sorgulama Servisi",
+        "description" : "Okuma Yükümlülük Raporu verilerini sorgular.",
+        "operationId" : "read-obligation-query",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/ReadObligationQueryRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseSortablePageResponseReadObligationDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/summary-report/query" : {
+      "post" : {
+        "tags" : [ "summaryReport" ],
+        "summary" : "Endeks ve Ek Tüketim Özet Raporu Sorgulama Servisi",
+        "description" : "Endeks ve Ek Tüketim Özet Raporu verilerini sorgular.",
+        "operationId" : "summary-report-query",
+        "consumes" : [ "application/json", "application/xml" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/SummaryReportQueryRequestDto"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RestResponseSummaryReportQueryResponseDto"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "AdditionalConsumptionPassivateRequestDto" : {
+      "type" : "object",
+      "required" : [ "explanation", "id" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ek Tüketim ID"
+        },
+        "explanation" : {
+          "type" : "string",
+          "description" : "Açıklama"
+        }
+      }
+    },
+    "AdditionalConsumptionQueryRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "additionalConsumptionStatuses" : {
+          "type" : "array",
+          "description" : "Ek Tüketim Durumu",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "firstReadDateAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Dönem - Başlangıç"
+        },
+        "lastReadDateAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Dönem - Bitiş"
+        },
+        "energyTypes" : {
+          "type" : "array",
+          "description" : "Enerji Türü",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "additionalConsumptionReasons" : {
+          "type" : "array",
+          "description" : "Ek Tüketim Nedeni",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "consumptionPointId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ölçüm Noktası ID"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ek Tüketim ID"
+        },
+        "createDateStartAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İşlem Tarihi - Başlangıç"
+        },
+        "createDateEndAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İşlem Tarihi - Bitiş"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "meterOwnerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Organizasyon ID"
+        },
+        "portfolioType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Portföy Tipi"
+        }
+      }
+    },
+    "AdditionalConsumptionQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ek Tüketim ID"
+        },
+        "consumptionPointId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ölçüm Noktası ID"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "readingOrganizationName" : {
+          "type" : "string",
+          "description" : "Sayaç Okuyan Kurum Adı"
+        },
+        "meterOwnerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Organizasyon ID"
+        },
+        "meterOwnerOrganizationName" : {
+          "type" : "string",
+          "description" : "Organizasyon Adı"
+        },
+        "firstReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Ek Tüketim Başlangıç Tarihi"
+        },
+        "lastReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Ek Tüketim Bitiş Tarihi"
+        },
+        "createDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İşlem Tarihi"
+        },
+        "modifyDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Güncelleme Tarihi"
+        },
+        "createUser" : {
+          "type" : "string",
+          "description" : "İşlem Yapan Kullanıcı"
+        },
+        "modifyUser" : {
+          "type" : "string",
+          "description" : "Güncelleme Yapan Kullanıcı"
+        },
+        "energyType" : {
+          "description" : "Enerji Türü",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "t1" : {
+          "type" : "string",
+          "description" : "T1 (kWh)"
+        },
+        "t2" : {
+          "type" : "string",
+          "description" : "T2 (kWh)"
+        },
+        "t3" : {
+          "type" : "string",
+          "description" : "T3 (kWh)"
+        },
+        "reactiveOrDemand" : {
+          "type" : "string",
+          "description" : "Reaktif (kVarh) / Demand (kW)"
+        },
+        "inductive" : {
+          "type" : "string",
+          "description" : "RI (kVarh)"
+        },
+        "capacitive" : {
+          "type" : "string",
+          "description" : "RC (kVarh)"
+        },
+        "demand" : {
+          "type" : "string",
+          "description" : "Demand"
+        },
+        "explanation" : {
+          "type" : "string",
+          "description" : "Açıklama"
+        },
+        "period" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Periyot"
+        },
+        "additionalConsumptionStatus" : {
+          "description" : "Ek Tüketim Durumu",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "additionalConsumptionReason" : {
+          "description" : "Ek Tüketim Nedeni",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "uploadPeriod" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Yükleme Süresi"
+        },
+        "portfolioType" : {
+          "description" : "Portföy Tipi",
+          "$ref" : "#/definitions/LookupDTO"
+        }
+      }
+    },
+    "AdditionalConsumptionSaveRequestDto" : {
+      "type" : "object",
+      "required" : [ "additionalConsumptionReason", "energyType", "firstReadDate", "lastReadDate" ],
+      "properties" : {
+        "consumptionPointId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ölçüm Noktası ID"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "firstReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Ek Tüketim Başlangıç Tarihi"
+        },
+        "lastReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Ek Tüketim Bitiş Tarihi"
+        },
+        "energyType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Enerji Türü"
+        },
+        "t1" : {
+          "type" : "number",
+          "description" : "T1 (kWh)"
+        },
+        "t2" : {
+          "type" : "number",
+          "description" : "T2 (kWh)"
+        },
+        "t3" : {
+          "type" : "number",
+          "description" : "T3 (kWh)"
+        },
+        "inductive" : {
+          "type" : "number",
+          "description" : "RI (kVarh)"
+        },
+        "capacitive" : {
+          "type" : "number",
+          "description" : "RC (kVarh)"
+        },
+        "demand" : {
+          "type" : "number",
+          "description" : "Demand"
+        },
+        "explanation" : {
+          "type" : "string",
+          "description" : "Açıklama"
+        },
+        "additionalConsumptionReason" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ek Tüketim Nedeni"
+        }
+      }
+    },
+    "AdditionalConsumptionSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ek Tüketim ID"
+        },
+        "consumptionPointId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ölçüm Noktası ID"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "meterOwnerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Organizasyon ID"
+        },
+        "firstReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Ek Tüketim Başlangıç Tarihi"
+        },
+        "lastReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Ek Tüketim Bitiş Tarihi"
+        },
+        "energyType" : {
+          "description" : "Enerji Türü",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "additionalConsumptionStatus" : {
+          "description" : "Ek Tüketim Durumu",
+          "$ref" : "#/definitions/LookupDTO"
+        }
+      }
+    },
+    "BaseDTO" : {
+      "type" : "object"
+    },
+    "CountResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "count" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Kayıt Sayısı"
+        }
+      }
+    },
+    "ExportPageResponse" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        }
+      }
+    },
+    "ExportPageResponseIndexQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/IndexQueryResponseDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        }
+      }
+    },
+    "IndexBatchSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "indexId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Endeks ID"
+        },
+        "consumptionPointId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ölçüm Noktası ID"
+        },
+        "firstReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İlk Okuma Tarihi"
+        },
+        "lastReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Son Okuma Tarihi"
+        },
+        "energyType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Enerji Türü"
+        },
+        "isSuccessful" : {
+          "type" : "boolean",
+          "description" : "Kayıt Başarılı mı?"
+        },
+        "errorMessage" : {
+          "type" : "string",
+          "description" : "Hata Mesajı"
+        },
+        "explanation" : {
+          "type" : "string",
+          "description" : "Açıklama"
+        }
+      }
+    },
+    "IndexCountRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "indexStatuses" : {
+          "type" : "array",
+          "description" : "Endeks Durum",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "firstReadDateAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Dönem - İlk Okuma"
+        },
+        "lastReadDateAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Dönem - Son Okuma"
+        },
+        "energyTypes" : {
+          "type" : "array",
+          "description" : "Enerji Türü",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "consumptionPointId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ölçüm Noktası ID"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "indexId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Endeks ID"
+        },
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "ID (Migrasyon öncesi eşleme)"
+        },
+        "firstReadTypes" : {
+          "type" : "array",
+          "description" : "İlk Okuma Türü",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "lastReadTypes" : {
+          "type" : "array",
+          "description" : "Son Okuma Türü",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "createDateStartAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İşlem Tarihi - Başlangıç"
+        },
+        "createDateEndAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İşlem Tarihi - Bitiş"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "meterOwnerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Organizasyon ID"
+        },
+        "periodSwitch" : {
+          "type" : "boolean",
+          "description" : "Okuma Periyodu"
+        },
+        "portfolioType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Portföy Tipi"
+        }
+      }
+    },
+    "IndexExportRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "indexStatuses" : {
+          "type" : "array",
+          "description" : "Endeks Durum",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "firstReadDateAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Dönem - İlk Okuma"
+        },
+        "lastReadDateAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Dönem - Son Okuma"
+        },
+        "energyTypes" : {
+          "type" : "array",
+          "description" : "Enerji Türü",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "consumptionPointId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ölçüm Noktası ID"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "indexId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Endeks ID"
+        },
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "ID (Migrasyon öncesi eşleme)"
+        },
+        "firstReadTypes" : {
+          "type" : "array",
+          "description" : "İlk Okuma Türü",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "lastReadTypes" : {
+          "type" : "array",
+          "description" : "Son Okuma Türü",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "createDateStartAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İşlem Tarihi - Başlangıç"
+        },
+        "createDateEndAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İşlem Tarihi - Bitiş"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "meterOwnerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Organizasyon ID"
+        },
+        "periodSwitch" : {
+          "type" : "boolean",
+          "description" : "Okuma Periyodu"
+        },
+        "portfolioType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Portföy Tipi"
+        },
+        "page" : {
+          "description" : "Sorgulama Sayfası",
+          "$ref" : "#/definitions/Page"
+        }
+      }
+    },
+    "IndexPassivateRequestDto" : {
+      "type" : "object",
+      "required" : [ "explanation", "indexId" ],
+      "properties" : {
+        "indexId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Endeks ID"
+        },
+        "explanation" : {
+          "type" : "string",
+          "description" : "Açıklama"
+        }
+      }
+    },
+    "IndexQueryRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "indexStatuses" : {
+          "type" : "array",
+          "description" : "Endeks Durum",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "firstReadDateAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Dönem - İlk Okuma"
+        },
+        "lastReadDateAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Dönem - Son Okuma"
+        },
+        "energyTypes" : {
+          "type" : "array",
+          "description" : "Enerji Türü",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "consumptionPointId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ölçüm Noktası ID"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "indexId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Endeks ID"
+        },
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "ID (Migrasyon öncesi eşleme)"
+        },
+        "firstReadTypes" : {
+          "type" : "array",
+          "description" : "İlk Okuma Türü",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "lastReadTypes" : {
+          "type" : "array",
+          "description" : "Son Okuma Türü",
+          "items" : {
+            "type" : "integer",
+            "format" : "int64"
+          }
+        },
+        "createDateStartAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İşlem Tarihi - Başlangıç"
+        },
+        "createDateEndAsPeriod" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İşlem Tarihi - Bitiş"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "meterOwnerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Organizasyon ID"
+        },
+        "periodSwitch" : {
+          "type" : "boolean",
+          "description" : "Okuma Periyodu"
+        },
+        "portfolioType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Portföy Tipi"
+        },
+        "page" : {
+          "description" : "Sorgulama Sayfası",
+          "$ref" : "#/definitions/Page"
+        }
+      }
+    },
+    "IndexQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "ID (Migrasyon öncesi eşleme)"
+        },
+        "indexId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Endeks ID"
+        },
+        "version" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Versiyon"
+        },
+        "consumptionPointId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ölçüm Noktası ID"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "readingOrganizationName" : {
+          "type" : "string",
+          "description" : "Sayaç Okuyan Kurum Adı"
+        },
+        "meterOwnerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Organizasyon ID"
+        },
+        "meterOwnerOrganizationName" : {
+          "type" : "string",
+          "description" : "Organizasyon Adı"
+        },
+        "firstReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İlk Okuma Tarihi"
+        },
+        "lastReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Son Okuma Tarihi"
+        },
+        "createDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İşlem Tarihi"
+        },
+        "energyType" : {
+          "description" : "Enerji Türü",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "firstT1" : {
+          "type" : "string",
+          "description" : "T1 İlk"
+        },
+        "firstT2" : {
+          "type" : "string",
+          "description" : "T2 İlk"
+        },
+        "firstT3" : {
+          "type" : "string",
+          "description" : "T3 İlk"
+        },
+        "lastT1" : {
+          "type" : "string",
+          "description" : "T1 Son"
+        },
+        "lastT2" : {
+          "type" : "string",
+          "description" : "T2 Son"
+        },
+        "lastT3" : {
+          "type" : "string",
+          "description" : "T3 Son"
+        },
+        "firstReactiveOrDemand" : {
+          "type" : "string",
+          "description" : "Reaktif İlk / Demand"
+        },
+        "lastReactive" : {
+          "type" : "string",
+          "description" : "Reaktif Son"
+        },
+        "firstInductive" : {
+          "type" : "string",
+          "description" : "RI İlk"
+        },
+        "lastInductive" : {
+          "type" : "string",
+          "description" : "RI Son"
+        },
+        "firstCapacitive" : {
+          "type" : "string",
+          "description" : "RC İlk"
+        },
+        "lastCapacitive" : {
+          "type" : "string",
+          "description" : "RC Son"
+        },
+        "demand" : {
+          "type" : "string",
+          "description" : "Demand"
+        },
+        "factor" : {
+          "type" : "number",
+          "description" : "Çarpan Değeri"
+        },
+        "meterBrand" : {
+          "type" : "string",
+          "description" : "Sayaç Marka"
+        },
+        "meterSerialNumber" : {
+          "type" : "string",
+          "description" : "Sayaç Seri No"
+        },
+        "digitCount" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Hane Sayısı"
+        },
+        "firstReadType" : {
+          "description" : "İlk Okuma Türü",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "lastReadType" : {
+          "description" : "Son Okuma Türü",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "firstLoadType" : {
+          "description" : "İlk Yükleme Türü",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "lastLoadType" : {
+          "description" : "Son Yükleme Türü",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "explanation" : {
+          "type" : "string",
+          "description" : "Açıklama"
+        },
+        "period" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Okuma Periyodu"
+        },
+        "periodExplanation" : {
+          "description" : "Periyot Açıklama",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "indexStatus" : {
+          "description" : "Endeks Durum",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "uploadPeriod" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Yükleme Süresi"
+        },
+        "createUser" : {
+          "type" : "string",
+          "description" : "Kullanıcı Adı"
+        },
+        "portfolioType" : {
+          "description" : "Portföy Tipi",
+          "$ref" : "#/definitions/LookupDTO"
+        }
+      }
+    },
+    "IndexSaveRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "consumptionPointId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ölçüm Noktası ID"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "firstReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İlk Okuma Tarihi"
+        },
+        "lastReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Son Okuma Tarihi"
+        },
+        "energyType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Enerji Türü"
+        },
+        "firstT1" : {
+          "type" : "number",
+          "description" : "T1 İlk"
+        },
+        "firstT2" : {
+          "type" : "number",
+          "description" : "T2 İlk"
+        },
+        "firstT3" : {
+          "type" : "number",
+          "description" : "T3 İlk"
+        },
+        "lastT1" : {
+          "type" : "number",
+          "description" : "T1 Son"
+        },
+        "lastT2" : {
+          "type" : "number",
+          "description" : "T2 Son"
+        },
+        "lastT3" : {
+          "type" : "number",
+          "description" : "T3 Son"
+        },
+        "firstInductive" : {
+          "type" : "number",
+          "description" : "RI İlk"
+        },
+        "lastInductive" : {
+          "type" : "number",
+          "description" : "RI Son"
+        },
+        "firstCapacitive" : {
+          "type" : "number",
+          "description" : "RC İlk"
+        },
+        "lastCapacitive" : {
+          "type" : "number",
+          "description" : "RC Son"
+        },
+        "demand" : {
+          "type" : "number",
+          "description" : "Demand"
+        },
+        "factor" : {
+          "type" : "number",
+          "description" : "Çarpan Değeri"
+        },
+        "meterBrand" : {
+          "type" : "string",
+          "description" : "Sayaç Marka"
+        },
+        "meterSerialNumber" : {
+          "type" : "string",
+          "description" : "Sayaç Seri No"
+        },
+        "digitCount" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Hane Sayısı"
+        },
+        "firstReadType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "İlk Okuma Türü"
+        },
+        "lastReadType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Son Okuma Türü"
+        },
+        "firstLoadType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "İlk Yükleme Türü"
+        },
+        "lastLoadType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Son Yükleme Türü"
+        },
+        "explanation" : {
+          "type" : "string",
+          "description" : "Açıklama"
+        },
+        "periodExplanation" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Periyot Açıklama"
+        },
+        "overrideFullOverlap" : {
+          "type" : "boolean",
+          "description" : "Tam Çakışma Kaydetme"
+        }
+      }
+    },
+    "IndexSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "indexId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Endeks ID"
+        },
+        "version" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Versiyon"
+        },
+        "consumptionPointId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Ölçüm Noktası ID"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "meterOwnerOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Organizasyon ID"
+        },
+        "firstReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "İlk Okuma Tarihi"
+        },
+        "lastReadDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Son Okuma Tarihi"
+        },
+        "energyType" : {
+          "description" : "Enerji Türü",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "indexStatus" : {
+          "description" : "Endeks Durum",
+          "$ref" : "#/definitions/LookupDTO"
+        },
+        "fullOverrideExist" : {
+          "type" : "boolean",
+          "description" : "Tam Çakışma Mevcut"
+        },
+        "explanation" : {
+          "type" : "string",
+          "description" : "Açıklama"
+        }
+      }
+    },
+    "IndexUpdateRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "indexId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Endeks ID"
+        },
+        "firstT1" : {
+          "type" : "number",
+          "description" : "T1 İlk"
+        },
+        "firstT2" : {
+          "type" : "number",
+          "description" : "T2 İlk"
+        },
+        "firstT3" : {
+          "type" : "number",
+          "description" : "T3 İlk"
+        },
+        "lastT1" : {
+          "type" : "number",
+          "description" : "T1 Son"
+        },
+        "lastT2" : {
+          "type" : "number",
+          "description" : "T2 Son"
+        },
+        "lastT3" : {
+          "type" : "number",
+          "description" : "T3 Son"
+        },
+        "firstInductive" : {
+          "type" : "number",
+          "description" : "RI İlk"
+        },
+        "lastInductive" : {
+          "type" : "number",
+          "description" : "RI Son"
+        },
+        "firstCapacitive" : {
+          "type" : "number",
+          "description" : "RC İlk"
+        },
+        "lastCapacitive" : {
+          "type" : "number",
+          "description" : "RC Son"
+        },
+        "demand" : {
+          "type" : "number",
+          "description" : "Demand"
+        },
+        "factor" : {
+          "type" : "number",
+          "description" : "Çarpan Değeri"
+        },
+        "meterBrand" : {
+          "type" : "string",
+          "description" : "Sayaç Marka"
+        },
+        "meterSerialNumber" : {
+          "type" : "string",
+          "description" : "Sayaç Seri No"
+        },
+        "digitCount" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Hane Sayısı"
+        },
+        "firstReadType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "İlk Okuma Türü"
+        },
+        "lastReadType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Son Okuma Türü"
+        },
+        "firstLoadType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "İlk Yükleme Türü"
+        },
+        "lastLoadType" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Son Yükleme Türü"
+        },
+        "explanation" : {
+          "type" : "string",
+          "description" : "Açıklama"
+        },
+        "periodExplanation" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Periyot Açıklama"
+        }
+      }
+    },
+    "LocalizationDTO" : {
+      "type" : "object",
+      "properties" : {
+        "language" : {
+          "type" : "string",
+          "description" : "Çoklu Seçim Dili"
+        },
+        "text" : {
+          "type" : "string",
+          "description" : "Çoklu Seçim Açıklama (Dile Göre)"
+        }
+      }
+    },
+    "LookupDTO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Çoklu Seçim ID"
+        },
+        "value" : {
+          "type" : "string",
+          "description" : "Çoklu Seçim Değer"
+        },
+        "localizations" : {
+          "type" : "array",
+          "description" : "Çoklu Seçim Yerelleştirme Listesi",
+          "items" : {
+            "$ref" : "#/definitions/LocalizationDTO"
+          }
+        }
+      }
+    },
+    "LookupRequest" : {
+      "type" : "object",
+      "required" : [ "lookupType" ],
+      "properties" : {
+        "lookupType" : {
+          "type" : "string",
+          "description" : "Çoklu Seçim Anahtarı"
+        }
+      }
+    },
+    "LookupResponse" : {
+      "type" : "object",
+      "properties" : {
+        "values" : {
+          "type" : "array",
+          "description" : "Çoklu Seçim Değer Listesi",
+          "items" : {
+            "$ref" : "#/definitions/LookupDTO"
+          }
+        }
+      }
+    },
+    "LookupTypeDTO" : {
+      "type" : "object",
+      "properties" : {
+        "lookupType" : {
+          "type" : "string",
+          "description" : "Çoklu Seçim Anahtarı"
+        },
+        "lookupDescription" : {
+          "type" : "string",
+          "description" : "Çoklu Seçim Anahtar Açıklama"
+        }
+      }
+    },
+    "LookupTypeResponse" : {
+      "type" : "object",
+      "properties" : {
+        "types" : {
+          "type" : "array",
+          "description" : "Çoklu Seçim Anahtar Listesi",
+          "items" : {
+            "$ref" : "#/definitions/LookupTypeDTO"
+          }
+        }
+      }
+    },
+    "Page" : {
+      "type" : "object",
+      "properties" : {
+        "number" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : "${EXAMPLE_PAGE_NUMBER}",
+          "description" : "${VALUE_PAGE_NUMBER}"
+        },
+        "size" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : "${EXAMPLE_PAGE_SIZE}",
+          "description" : "${VALUE_PAGE_SIZE}"
+        },
+        "total" : {
+          "type" : "integer",
+          "format" : "int64",
+          "example" : "${EXAMPLE_PAGE_TOTAL}",
+          "description" : "${VALUE_PAGE_TOTAL}"
+        },
+        "sort" : {
+          "description" : "${VALUE_PAGE_SORT}",
+          "$ref" : "#/definitions/SortDTO"
+        }
+      }
+    },
+    "ReadObligationDto" : {
+      "type" : "object",
+      "properties" : {
+        "period" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Dönem"
+        },
+        "effectiveId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç ID"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "uniqueCode" : {
+          "type" : "string",
+          "description" : "Tekil Kod"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "readingOrganizationName" : {
+          "type" : "string",
+          "description" : "Sayaç Okuyan Kurum Adı"
+        },
+        "organizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Tedarikçi Organizasyon ID"
+        },
+        "organizationName" : {
+          "type" : "string",
+          "description" : "Tedarikçi Organizasyon Adı"
+        },
+        "indexAcData" : {
+          "type" : "boolean",
+          "description" : "Endeks / Ek Tüketim Verisi"
+        },
+        "reconciliationData" : {
+          "type" : "boolean",
+          "description" : "Uzlaştırma Verisi"
+        },
+        "meterId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç ID"
+        }
+      }
+    },
+    "ReadObligationQueryRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "organizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Tedarikçi Organizasyon ID"
+        },
+        "period" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Dönem"
+        },
+        "eic" : {
+          "type" : "string",
+          "description" : "EIC Kod"
+        },
+        "uniqueCode" : {
+          "type" : "string",
+          "description" : "Tekil Kod"
+        },
+        "effectiveId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç ID"
+        },
+        "excludeHighReadPeriod" : {
+          "type" : "boolean",
+          "description" : "Yüksek Okuma Periyotlular Hariç"
+        }
+      }
+    },
+    "RestResponse" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodyObject"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseAdditionalConsumptionSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodyAdditionalConsumptionSummaryDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseBody" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "type" : "object",
+          "readOnly" : true
+        }
+      }
+    },
+    "RestResponseBodyAdditionalConsumptionSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/AdditionalConsumptionSummaryDto"
+        }
+      }
+    },
+    "RestResponseBodyCountResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/CountResponseDto"
+        }
+      }
+    },
+    "RestResponseBodyExportPageResponseIndexQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/ExportPageResponseIndexQueryResponseDto"
+        }
+      }
+    },
+    "RestResponseBodyIndexBatchSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/IndexBatchSummaryDto"
+        }
+      }
+    },
+    "RestResponseBodyIndexSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/IndexSummaryDto"
+        }
+      }
+    },
+    "RestResponseBodyLookupResponse" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/LookupResponse"
+        }
+      }
+    },
+    "RestResponseBodyLookupTypeResponse" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/LookupTypeResponse"
+        }
+      }
+    },
+    "RestResponseBodyObject" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "type" : "object",
+          "readOnly" : true
+        }
+      }
+    },
+    "RestResponseBodySortablePageResponseAdditionalConsumptionQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/SortablePageResponseAdditionalConsumptionQueryResponseDto"
+        }
+      }
+    },
+    "RestResponseBodySortablePageResponseIndexQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/SortablePageResponseIndexQueryResponseDto"
+        }
+      }
+    },
+    "RestResponseBodySortablePageResponseReadObligationDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/SortablePageResponseReadObligationDto"
+        }
+      }
+    },
+    "RestResponseBodySummaryReportQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "readOnly" : true,
+          "$ref" : "#/definitions/SummaryReportQueryResponseDto"
+        }
+      }
+    },
+    "RestResponseCountResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodyCountResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseError" : {
+      "type" : "object",
+      "properties" : {
+        "errorCode" : {
+          "type" : "string",
+          "description" : "Alınan hatanın kod bilgisi"
+        },
+        "errorMessage" : {
+          "type" : "string",
+          "description" : "Alınan hatanın açıklaması"
+        }
+      }
+    },
+    "RestResponseExportPageResponseIndexQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodyExportPageResponseIndexQueryResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseIndexBatchSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodyIndexBatchSummaryDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseIndexSummaryDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodyIndexSummaryDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseLookupResponse" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodyLookupResponse"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseLookupTypeResponse" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodyLookupTypeResponse"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseSortablePageResponseAdditionalConsumptionQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodySortablePageResponseAdditionalConsumptionQueryResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseSortablePageResponseIndexQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodySortablePageResponseIndexQueryResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseSortablePageResponseReadObligationDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodySortablePageResponseReadObligationDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "RestResponseSummaryReportQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "description" : "Yapılan isteğin HTTP durum kodunu dönmektedir."
+        },
+        "correlationId" : {
+          "type" : "string",
+          "description" : "Yapmış olduğunuz isteği tekilleştirmeye yarar. Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "clientIp" : {
+          "type" : "string",
+          "description" : "İsteği yapan istemcinin IP bilgisi"
+        },
+        "userName" : {
+          "type" : "string",
+          "description" : "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage" : {
+          "type" : "string"
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList" : {
+          "type" : "array",
+          "description" : "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items" : {
+            "$ref" : "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch" : {
+          "type" : "string"
+        },
+        "body" : {
+          "description" : "Yapılan istek başarılı olması durumunda çağırılan servisin cevabıdır. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref" : "#/definitions/RestResponseBodySummaryReportQueryResponseDto"
+        }
+      },
+      "xml" : {
+        "name" : "response"
+      }
+    },
+    "SortDTO" : {
+      "type" : "object",
+      "properties" : {
+        "field" : {
+          "type" : "string",
+          "example" : "${EXAMPLE_SORT_FIELD}",
+          "description" : "${VALUE_SORT_FIELD}"
+        },
+        "direction" : {
+          "type" : "string",
+          "example" : "ASC",
+          "description" : "${VALUE_SORT_DIRECTION}",
+          "enum" : [ "ASC", "DESC" ]
+        }
+      }
+    },
+    "SortablePageResponse" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "type" : "object"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "sortableFields" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "SortablePageResponseAdditionalConsumptionQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/AdditionalConsumptionQueryResponseDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "sortableFields" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "SortablePageResponseIndexQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/IndexQueryResponseDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "sortableFields" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "SortablePageResponseReadObligationDto" : {
+      "type" : "object",
+      "properties" : {
+        "items" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ReadObligationDto"
+          }
+        },
+        "page" : {
+          "$ref" : "#/definitions/Page"
+        },
+        "sortableFields" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "SummaryDurationReportDto" : {
+      "type" : "object",
+      "properties" : {
+        "normal" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Zamanında Yükleme"
+        },
+        "late" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Geç Yükleme"
+        },
+        "extremelyLate" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Çok Geç Yükleme"
+        },
+        "total" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Toplam"
+        }
+      }
+    },
+    "SummaryReportQueryRequestDto" : {
+      "type" : "object",
+      "properties" : {
+        "readingOrganizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sayaç Okuyan Kurum ID"
+        },
+        "organizationId" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Organizasyon ID"
+        },
+        "period" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "Dönem"
+        },
+        "excludeHighReadPeriod" : {
+          "type" : "boolean",
+          "description" : "Yüksek Okuma Periyotlular Hariç"
+        }
+      }
+    },
+    "SummaryReportQueryResponseDto" : {
+      "type" : "object",
+      "properties" : {
+        "states" : {
+          "$ref" : "#/definitions/SummaryStateReportDto"
+        },
+        "durations" : {
+          "$ref" : "#/definitions/SummaryDurationReportDto"
+        }
+      }
+    },
+    "SummaryStateReportDto" : {
+      "type" : "object",
+      "properties" : {
+        "bothExisting" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Endeks ve Uzlaştırma Verisi Yüklenenler"
+        },
+        "bothNonExisting" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Endeks ve Uzlaştırma Verisi Yüklenmeyenler"
+        },
+        "onlyIndexAcExisting" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sadece Endeks Verisi Yüklenenler"
+        },
+        "onlyReconciliationExisting" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Sadece Uzlaştırma Verisi Yüklenenler"
+        },
+        "totalIndexAcExisting" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Toplam Endeks Verisi Yüklenenler"
+        },
+        "totalIndexAcNonExisting" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Toplam Endeks Verisi Yüklenmeyenler"
+        },
+        "totalReconciliationExisting" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Toplam Uzlaştırma Verisi Yüklenenler"
+        },
+        "totalReconciliationNonExisting" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Toplam Uzlaştırma Verisi Yüklenmeyenler"
+        },
+        "total" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Toplam"
+        }
+      }
+    }
+  }
+}

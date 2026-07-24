@@ -76,6 +76,7 @@ ep.[kategori].[method_adi](parametreler)
 - **`balancing_group`**: Dengeleme grubu servisleri
 - **`gunici`**: Gün içi servisleri
 - **`gunici_trading`**: Gün içi ticaret servisleri
+- **`index_ac`**: Endeks / Ek Tüketim servisleri
 
 ## Örnekler
 
