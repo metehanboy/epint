@@ -64,7 +64,7 @@ class RequestModel:
             return "seffaflik"
         if "gop" == self._category:
             return "testgop" if test_mode else "gop"
-        if "gunici" == self._category:
+        if self._category.startswith("gunici"):
             return "gunici"
 
         return "epys-prp" if test_mode else "epys"

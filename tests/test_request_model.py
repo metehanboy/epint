@@ -164,3 +164,19 @@ def test_host_selection_gop_test_mode():
     epint.set_mode("test")
     rm = RequestModel(endpoint, {})
     assert rm._endpoint_data["host"] == "https://testgop.epias.com.tr"
+
+
+def test_host_selection_gunici():
+    endpoint = _endpoint("gunici", [])
+    epint.set_mode("prod")
+    rm = RequestModel(endpoint, {})
+    assert rm._endpoint_data["host"] == "https://gunici.epias.com.tr"
+
+
+def test_host_selection_gunici_trading_uses_gunici_host():
+    # Regresyon testi: "gunici-trading" kategorisi tam eşleşme yerine
+    # startswith ile kontrol edilmeli, aksi halde epys host'a düşer.
+    endpoint = _endpoint("gunici-trading", [])
+    epint.set_mode("prod")
+    rm = RequestModel(endpoint, {})
+    assert rm._endpoint_data["host"] == "https://gunici.epias.com.tr"

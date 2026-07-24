@@ -49,7 +49,7 @@ def find_closest_match(target: str, candidates: List[str], threshold: float = 0.
             best_match = candidate
     return best_match
 
-def dict_key_search(search_keys: list, dict_object: dict) -> any:
+def dict_key_search(search_keys: list, dict_object: dict, fuzzy: bool = True) -> any:
     # Önce direkt eşleşmeleri kontrol et (case-insensitive)
     kwargs_keys_lower = {k.lower(): k for k in dict_object.keys()}
     for search_key in search_keys:
@@ -57,6 +57,9 @@ def dict_key_search(search_keys: list, dict_object: dict) -> any:
         if key_lower in kwargs_keys_lower:
             original_key = kwargs_keys_lower[key_lower]
             return dict_object.pop(original_key)
+
+    if not fuzzy:
+        return None
 
     # Direkt eşleşme yoksa fuzzy matching yap (her bir anahtar için)
     for search_key in search_keys:

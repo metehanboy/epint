@@ -178,6 +178,41 @@ ep.invoice.list(...)           # reconciliation_invoice
 ep.bpm.list(...)               # reconciliation_bpm
 ```
 
+### Diğer Kategori Örnekleri
+
+```python
+# GOP (Gün Öncesi Piyasası) - özel service ticket akışı kullanır (TGT header gönderilmez)
+result = ep.gop.contract_list()
+
+# Kayıt / müşteri / talep / şebeke / dengeleme grubu servisleri
+result = ep.registration.organization_query()
+result = ep.customer.customer_list()
+result = ep.demand.demand_forecast(region='TR1')
+result = ep.grid.region_query()
+result = ep.balancing_group.brg_query()
+
+# Gün içi piyasası (GİP) ve gün içi ticaret servisleri
+result = ep.gunici.list_contracts()
+result = ep.gunici_trading.list_active_contract()
+
+# Endeks / Ek Tüketim servisleri
+result = ep.index_ac.index_query(
+    consumptionPointId=200000000,
+    lastReadDateAsPeriod='2025-08-01T00:00:00+03:00',
+)
+```
+
+### Hata Ayıklama (Debug)
+
+Gerçek HTTP isteği göndermeden, oluşturulacak request'i (headers/params/body) incelemek için `debug=True` geç:
+
+```python
+request_preview = ep.seffaflik_electricity.mcp_data(start='2025-12-10', end='2025-12-11', debug=True)
+print(request_preview.headers, request_preview.params, request_preview.json)
+```
+
+`debug=True` verildiğinde HTTP isteği **gönderilmez**, `RequestModel` objesi döner.
+
 ## Özellikler
 
 ### Otomatik Parametre Dönüşümü
@@ -305,4 +340,6 @@ xychart-beta
 - İlk kullanımda kategori otomatik olarak yüklenir
 - Authentication bilgileri her endpoint çağrısında kontrol edilir
 - Test modunda test sunucularına, prod modunda production sunucularına bağlanılır
-- GOP servisleri için özel authentication mekanizması kullanılır
+- GOP servisleri için özel authentication mekanizması kullanılır (TGT yerine `gop-service-ticket` header'ı)
+- `ep.set_mode(...)` yalnızca tam olarak `"prod"` (case-insensitive) değerini prod olarak kabul eder; farklı/typo bir değer sessizce `"test"` moduna düşer — mode değerini sabit kodla, kullanıcı girdisinden almayın
+- Method/parametre isimleri fuzzy matching ile eşleştirilir; belirsiz kısaltmalar kullanmaktan kaçının, tam swagger ismini veya snake_case karşılığını tercih edin

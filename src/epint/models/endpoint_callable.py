@@ -40,9 +40,11 @@ class Endpoint:
     def __call__(self, **kwargs: Any) -> Dict[str, Any]:
         """Endpoint çağrıldığında çalışır"""
 
-        all_data = dict_key_search(['allData', 'all_data', 'alldata', 'all-data', 'AllData', 'ALL_DATA'], kwargs)
+        # fuzzy=False: bunlar dahili kontrol bayrakları, gerçek API parametreleriyle
+        # (ör. "data") fuzzy eşleşip sessizce kwargs'tan silinmemeli.
+        all_data = dict_key_search(['allData', 'all_data', 'alldata', 'all-data', 'AllData', 'ALL_DATA'], kwargs, fuzzy=False)
 
-        debug = dict_key_search(['debug', 'Debug', 'DEBUG'], kwargs)
+        debug = dict_key_search(['debug', 'Debug', 'DEBUG'], kwargs, fuzzy=False)
 
         target_service = "transparency" if "seffaflik" in self._category else "epys"
         runtime_mode = epint._mode
@@ -83,10 +85,11 @@ class Endpoint:
         # ErrorHandler oluştur
         error_handler = ErrorHandler(auth)
         try:
-            response = self.client.__getattribute__(method.lower())(
-                url,
-                **request_args
-            )
+            with self.client as cl:
+                response = cl.__getattribute__(method.lower())(
+                    url,
+                    **request_args
+                )
             # ResponseModel oluştur
             response_model = ResponseModel(self._data, response)
             result_data = response_model.data

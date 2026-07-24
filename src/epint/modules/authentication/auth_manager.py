@@ -23,7 +23,6 @@ from dataclasses import dataclass
 from ..http_client import HTTPClient
 from ..datetime import DateTimeUtils
 import random
-import time
 
 
 @dataclass
@@ -264,59 +263,33 @@ class Authentication:
             f.writelines(valid_lines)
 
     def _generate_tgt(self) -> str:
-        start_time = time.time()
+        headers = self._get_base_headers()
+        payload = {"username": self.username, "password": self.password}
 
-        try:
+        with HTTPClient() as cl:
+            rp = cl.post(
+                self.root + self.TGT_ENDPOINT,
+                data=payload,
+                headers=headers,
+            )
+            rp.raise_for_status()
 
-
-            headers = self._get_base_headers()
-            payload = {"username": self.username, "password": self.password}
-            # params = {"format": "text"}
-
-            with HTTPClient() as cl:
-                rp = cl.post(
-                    self.root + self.TGT_ENDPOINT,
-                    data=payload,
-                    headers=headers,
-                    # params=params,
-                )
-                rp.raise_for_status()
-
-            duration = time.time() - start_time
-
-
-            return rp.text
-
-        except Exception as e:
-            duration = time.time() - start_time
-
-            raise
+        return rp.text
 
     def _generate_st(self, service: str) -> str:
-        start_time = time.time()
+        tgt_code, _ = self.get_tgt()
+        headers = self._get_base_headers()
+        payload = {"service": service}
 
-        try:
+        # HTTPClient'a auth parametresini geç, retry mekanizması çalışsın
+        with HTTPClient(auth=self) as cl:
+            rp = cl.post(
+                self.root + self.ST_ENDPOINT.format(tgt_code=tgt_code),
+                data=payload,
+                headers=headers,
+            )
 
-            tgt_code, _ = self.get_tgt()
-            headers = self._get_base_headers()
-            payload = {"service": service}
-
-            # HTTPClient'a auth parametresini geç, retry mekanizması çalışsın
-            with HTTPClient(auth=self) as cl:
-                rp = cl.post(
-                    self.root + self.ST_ENDPOINT.format(tgt_code=tgt_code),
-                    data=payload,
-                    headers=headers,
-                )
-
-            duration = time.time() - start_time
-
-            return rp.text
-
-        except Exception as e:
-            duration = time.time() - start_time
-
-            raise
+        return rp.text
 
     def _validate_ticket(self, ticket_code: str, ticket_type: str) -> bool:
         prefix = "TGT-" if ticket_type == "tgt" else "ST-"

@@ -104,8 +104,8 @@ class ErrorHandler:
                     if self.auth:
                         self.auth.clear_tickets()
 
-                # ST hatası
-                elif error_code == 'AUTH010' or 'ST' in error_message:
+                # ST hatası ("ST" tek başına çok geniş eşleşir; ticket kodu önekini ara)
+                elif error_code == 'AUTH010' or 'ST-' in error_message:
                     if self.auth:
                         self.auth.clear_tickets()
         except:

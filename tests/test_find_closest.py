@@ -46,3 +46,17 @@ def test_dict_key_search_no_match_returns_none_and_leaves_dict_untouched():
     result = dict_key_search(["debug"], d)
     assert result is None
     assert d == {"foo": 1}
+
+
+def test_dict_key_search_fuzzy_false_does_not_swallow_real_param():
+    # Regresyon testi: fuzzy=False verildiğinde "data" gibi gerçek bir API
+    # parametresi "alldata" kontrol bayrağıyla fuzzy eşleşip sessizce
+    # kwargs'tan silinmemeli (ratio("alldata", "data") == 0.73 >= 0.7).
+    d = {"data": "IMPORTANT_VALUE", "other": 1}
+    result = dict_key_search(
+        ["allData", "all_data", "alldata", "all-data", "AllData", "ALL_DATA"],
+        d,
+        fuzzy=False,
+    )
+    assert result is None
+    assert d == {"data": "IMPORTANT_VALUE", "other": 1}
