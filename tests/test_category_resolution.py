@@ -68,3 +68,17 @@ def test_category_proxy_unknown_method_raises_attribute_error():
 
     with pytest.raises(AttributeError):
         proxy.completely_unrelated_endpoint_name
+
+
+def test_set_mode_accepts_prod_and_test_case_insensitive():
+    epint.set_mode("PROD")
+    assert epint._mode == "prod"
+    epint.set_mode("Test")
+    assert epint._mode == "test"
+
+
+def test_set_mode_rejects_unknown_value():
+    # Regresyon testi: eskiden "prod" dışındaki her değer sessizce
+    # "test"e düşüyordu (typo/whitespace ile yanlış ortama bağlanma riski).
+    with pytest.raises(ValueError):
+        epint.set_mode("production")

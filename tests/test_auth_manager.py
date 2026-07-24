@@ -2,6 +2,7 @@
 import datetime as dt
 import getpass
 import os
+import threading
 
 import pytest
 
@@ -141,3 +142,55 @@ def test_create_new_tgt_raises_on_invalid_ticket_format(monkeypatch):
 
     with pytest.raises(Exception):
         auth.get_tgt()
+
+
+def test_concurrent_get_tgt_calls_do_not_corrupt_ticket_file(monkeypatch):
+    # Regresyon testi: ticket dosyası kilitsiz read-modify-write ediliyordu;
+    # eşzamanlı çağrılar birbirinin satırını ezip dosyayı bozabiliyordu.
+    # Şimdi `_locked` sayesinde her çağrı sırayla dosyayı tutarlı bırakmalı.
+    auth = Authentication("concurrent_user", "pass")
+    call_counter = {"n": 0}
+    counter_lock = threading.Lock()
+
+    def fake_generate_tgt():
+        with counter_lock:
+            call_counter["n"] += 1
+            n = call_counter["n"]
+        return f"TGT-cas-{n:03d}"
+
+    monkeypatch.setattr(auth, "_generate_tgt", fake_generate_tgt)
+
+    errors = []
+
+    def worker():
+        try:
+            auth.get_tgt()
+        except Exception as e:  # pragma: no cover - sadece görünürlük için
+            errors.append(e)
+
+    threads = [threading.Thread(target=worker) for _ in range(20)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+
+    assert not errors
+    # Dosya kilitsiz bozulsaydı satırlar birbirine karışabilir/eksik satır
+    # kalabilirdi; burada dosyanın her satırı hâlâ tam ve parse edilebilir olmalı.
+    with open(auth.tgt_dir, "r", encoding="utf-8") as f:
+        lines = [line for line in f.readlines() if line.strip()]
+    for line in lines:
+        parts = line.strip().split("|")
+        assert len(parts) == 4
+        assert parts[0].startswith("TGT-cas-")
+
+
+def test_clear_tickets_logs_via_epint_logger(monkeypatch, caplog):
+    auth = Authentication("user1", "pass")
+    monkeypatch.setattr(auth, "_generate_tgt", lambda: "TGT-cas-abc")
+    auth.get_tgt()
+
+    with caplog.at_level("INFO", logger="epint"):
+        auth.clear_tickets()
+
+    assert any("Ticket cache temizleniyor" in r.message for r in caplog.records)

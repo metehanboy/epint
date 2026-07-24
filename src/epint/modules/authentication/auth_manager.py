@@ -14,6 +14,8 @@
 
 from __future__ import annotations
 
+import contextlib
+import logging
 import os
 import tempfile
 import datetime
@@ -23,6 +25,45 @@ from dataclasses import dataclass
 from ..http_client import HTTPClient
 from ..datetime import DateTimeUtils
 import random
+
+logger = logging.getLogger("epint")
+
+
+@contextlib.contextmanager
+def _locked(lock_path: str):
+    """
+    `lock_path` üzerinde process/thread-arası exclusive lock alır.
+
+    Ticket dosyaları (tgt_dir/st_dir) read-modify-write ile güncelleniyor
+    (bkz. `_store_ticket`, `_update_tgt_expire_date`, `_invalidate_old_tgts`).
+    Kilitsiz durumda aynı OS kullanıcısı altında eşzamanlı thread/process'ler
+    bu dosyayı okuyup-yazarken yarışa girip kayıt kaybedebilir/dosyayı
+    bozabilir. POSIX'te `fcntl.flock`, Windows'ta `msvcrt.locking` kullanılır.
+    """
+    lock_file = open(lock_path, "a+")
+    try:
+        if os.name == "nt":
+            import msvcrt
+
+            msvcrt.locking(lock_file.fileno(), msvcrt.LK_LOCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
+        yield
+    finally:
+        try:
+            if os.name == "nt":
+                import msvcrt
+
+                lock_file.seek(0)
+                msvcrt.locking(lock_file.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                import fcntl
+
+                fcntl.flock(lock_file.fileno(), fcntl.LOCK_UN)
+        finally:
+            lock_file.close()
 
 
 @dataclass
@@ -140,6 +181,8 @@ class Authentication:
 
         self.tgt_dir = os.path.join(temp_dir, f"tgt_{user_hash}.dat")
         self.st_dir = os.path.join(temp_dir, f"st_{user_hash}.dat")
+        self._tgt_lock_path = self.tgt_dir + ".lock"
+        self._st_lock_path = self.st_dir + ".lock"
 
         # Dosya okuma/yazma testi
         self._test_file_permissions()
@@ -315,14 +358,18 @@ class Authentication:
         return DateTimeUtils.to_string(DateTimeUtils.now() + delta)
 
     def get_tgt(self) -> Tuple[str, str]:
-        existing_tgt = self._find_valid_tgt()
-        if existing_tgt:
-            # EPYS servisleri için TGT her kullanışta 45 dk uzar
-            if self.target_service == "epys":
-                return self._extend_tgt_expiry(existing_tgt[0], existing_tgt[1])
-            return existing_tgt
+        # Ticket dosyasının okunması, olası genişletilmesi/oluşturulması tek
+        # bir kilit altında yapılır — aksi halde eşzamanlı çağrılar birbirinin
+        # yazdığı satırı ezebilir (bkz. `_locked`).
+        with _locked(self._tgt_lock_path):
+            existing_tgt = self._find_valid_tgt()
+            if existing_tgt:
+                # EPYS servisleri için TGT her kullanışta 45 dk uzar
+                if self.target_service == "epys":
+                    return self._extend_tgt_expiry(existing_tgt[0], existing_tgt[1])
+                return existing_tgt
 
-        return self._create_new_tgt()
+            return self._create_new_tgt()
 
     def _find_valid_tgt(self) -> Optional[Tuple[str, str]]:
         if not os.path.exists(self.tgt_dir):
@@ -399,15 +446,17 @@ class Authentication:
 
         expire_date = self._get_expire_date("tgt")
         self._store_ticket("tgt", tgt_code, expire_date)
+        logger.info("Yeni TGT oluşturuldu (username=%s, expire=%s)", self.username, expire_date)
         return tgt_code, expire_date
 
     def get_st(self, service: str, find_valid: bool = False) -> Tuple[str, str]:
-        if find_valid:
-            existing_st = self._find_valid_st(service)
-            if existing_st:
-                return existing_st
+        with _locked(self._st_lock_path):
+            if find_valid:
+                existing_st = self._find_valid_st(service)
+                if existing_st:
+                    return existing_st
 
-        return self._create_new_st(service)
+            return self._create_new_st(service)
 
     def _find_valid_st(self, service: str) -> Optional[Tuple[str, str]]:
         if not os.path.exists(self.st_dir):
@@ -451,14 +500,17 @@ class Authentication:
 
         expire_date = self._get_expire_date("st", service=service)
         self._store_ticket("st", st_code, expire_date, service=service)
+        logger.debug("Yeni ST oluşturuldu (service=%s, expire=%s)", service, expire_date)
         return st_code, expire_date
 
     def clear_tickets(self) -> None:
-        print("Tokens cleared!")
-        if os.path.exists(self.tgt_dir):
-            os.remove(self.tgt_dir)
-        if os.path.exists(self.st_dir):
-            os.remove(self.st_dir)
+        logger.info("Ticket cache temizleniyor (username=%s)", self.username)
+        with _locked(self._tgt_lock_path):
+            if os.path.exists(self.tgt_dir):
+                os.remove(self.tgt_dir)
+        with _locked(self._st_lock_path):
+            if os.path.exists(self.st_dir):
+                os.remove(self.st_dir)
 
     def _invalidate_old_tgts(self) -> None:
         if not os.path.exists(self.tgt_dir):

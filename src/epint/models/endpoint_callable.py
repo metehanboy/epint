@@ -16,7 +16,7 @@ from typing import Dict, Any
 
 import epint
 from ..modules.authentication.auth_manager import Authentication
-from ..modules.http_client import HTTPClient
+from ..modules.http_client import get_shared_client
 from ..modules.error_handler import ErrorHandler
 from ..modules.search.find_closest import dict_key_search
 from ..modules.repr_formatter.endpoint_repr import format_endpoint_repr
@@ -31,7 +31,9 @@ class Endpoint:
         self._category = category
         self._name = name
         self._data = data
-        self.client = HTTPClient()
+        # Paylaşılan/kalıcı client: her Endpoint çağrısında yeni Session açıp
+        # kapatmak yerine process ömrü boyunca bağlantı yeniden kullanılır.
+        self.client = get_shared_client()
 
     def __repr__(self) -> str:
         """Endpoint bilgilerini detaylı olarak göster"""
@@ -49,10 +51,6 @@ class Endpoint:
         target_service = "transparency" if "seffaflik" in self._category else "epys"
         runtime_mode = epint._mode
         auth = Authentication(epint._username, epint._password, target_service, runtime_mode)
-
-        # HTTPClient'a auth parametresini geç
-        if not hasattr(self.client, 'auth') or self.client.auth != auth:
-            self.client.auth = auth
 
         # RequestModel oluştur
         request_model = RequestModel(self._data, kwargs)
@@ -85,11 +83,11 @@ class Endpoint:
         # ErrorHandler oluştur
         error_handler = ErrorHandler(auth)
         try:
-            with self.client as cl:
-                response = cl.__getattribute__(method.lower())(
-                    url,
-                    **request_args
-                )
+            response = self.client.__getattribute__(method.lower())(
+                url,
+                auth=auth,
+                **request_args
+            )
             # ResponseModel oluştur
             response_model = ResponseModel(self._data, response)
             result_data = response_model.data

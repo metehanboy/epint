@@ -12,8 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import logging
 from typing import Dict, Any, Optional, Callable, List
 from ..authentication.auth_manager import Authentication
+
+logger = logging.getLogger("epint")
 
 
 class ErrorHandler:
@@ -86,8 +89,8 @@ class ErrorHandler:
 
                 # Varsayılan handler'lar
                 self._handle_error_code(error_code, error_message, response)
-        except:
-            pass
+        except Exception:
+            logger.debug("Response body hata kodları işlenemedi (status=%s)", status_code, exc_info=True)
 
     def _handle_401(self, response: Any) -> None:
         """401 Unauthorized hatası"""
@@ -101,15 +104,17 @@ class ErrorHandler:
 
                 # TGT hatası
                 if error_code == 'AUTH009' or 'TGT' in error_message:
+                    logger.warning("401 %s: TGT hatası tespit edildi, ticket cache temizlenecek", error_code)
                     if self.auth:
                         self.auth.clear_tickets()
 
                 # ST hatası ("ST" tek başına çok geniş eşleşir; ticket kodu önekini ara)
                 elif error_code == 'AUTH010' or 'ST-' in error_message:
+                    logger.warning("401 %s: ST hatası tespit edildi, ticket cache temizlenecek", error_code)
                     if self.auth:
                         self.auth.clear_tickets()
-        except:
-            pass
+        except Exception:
+            logger.debug("401 response body işlenemedi", exc_info=True)
 
     def _handle_403(self, response: Any) -> None:
         """403 Forbidden hatası"""
@@ -140,10 +145,11 @@ class ErrorHandler:
 
             # Eğer TGT referansı var ve geçersizlik belirtiliyorsa ticket'ları temizle
             if has_tgt_reference and is_tgt_invalid:
+                logger.warning("404 response TGT geçersizliğine işaret ediyor, ticket cache temizlenecek")
                 if self.auth:
                     self.auth.clear_tickets()
-        except:
-            pass
+        except Exception:
+            logger.debug("404 response body işlenemedi", exc_info=True)
 
     def _handle_429(self, response: Any) -> None:
         """429 Rate Limit hatası"""

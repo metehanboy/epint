@@ -14,6 +14,8 @@
 
 from __future__ import annotations
 
+import logging
+import threading
 from typing import Dict, Optional, Tuple, Union, Any
 from urllib3.util.retry import Retry
 from requests.adapters import HTTPAdapter
@@ -21,6 +23,8 @@ from requests import Session, Response
 from requests.exceptions import RequestException, RetryError, Timeout, HTTPError
 from ..version import __fullname__
 import time
+
+logger = logging.getLogger("epint")
 
 
 class HTTPClient:
@@ -195,6 +199,7 @@ class HTTPClient:
         self,
         method: str,
         url: str,
+        auth: Optional[Any] = None,
         **kwargs: Any
     ) -> Response:
         """
@@ -203,6 +208,10 @@ class HTTPClient:
         Args:
             method: HTTP metodu (GET, POST, vb.)
             url: Request URL'i
+            auth: Bu istek için kullanılacak Authentication (verilmezse `self.auth`).
+                Paylaşılan/kalıcı bir client'ta (bkz. `get_shared_client`) çağrılar
+                arasında farklı auth gerekebileceğinden instance state yerine
+                per-call parametre olarak geçirilir.
             **kwargs: requests.Session.request() için ek parametreler
 
         Returns:
@@ -214,6 +223,7 @@ class HTTPClient:
             RetryError: Retry limiti aşıldığında
         """
         session = self._get_session()
+        effective_auth = auth if auth is not None else self.auth
 
         # Timeout ayarla
         if self.timeout is not None and 'timeout' not in kwargs:
@@ -239,15 +249,16 @@ class HTTPClient:
 
                 # 404 hatası ve TGT geçersizliği kontrolü
                 if response.status_code == 404 and self._is_tgt_invalid(response):
-                    if self.auth and tgt_retry_count < max_tgt_retries:
+                    if effective_auth and tgt_retry_count < max_tgt_retries:
                         # TGT geçersiz, ticket'ları temizle
-                        self.auth.clear_tickets()
+                        logger.warning("TGT geçersiz, ticket cache temizleniyor ve yenileniyor (url=%s)", url)
+                        effective_auth.clear_tickets()
 
                         # URL'de TGT kodu varsa yeni TGT ile güncelle
                         if '/cas/v1/tickets/' in url or '/v1/tickets/' in url:
                             try:
                                 # Yeni TGT al
-                                new_tgt_code, _ = self.auth.get_tgt()
+                                new_tgt_code, _ = effective_auth.get_tgt()
                                 # URL'deki eski TGT kodunu yeni ile değiştir
                                 import re
                                 # TGT- ile başlayan kodu bul ve değiştir
@@ -277,6 +288,7 @@ class HTTPClient:
                             wait_time = 60.0
 
                     if retry_count < max_retries:
+                        logger.info("429 rate limit, %.1fs bekleyip tekrar denenecek (url=%s)", wait_time, url)
                         time.sleep(wait_time)
                         retry_count += 1
                         continue
@@ -367,6 +379,7 @@ class HTTPClient:
                 # Response'u exception'a ekle
                 if response is not None:
                     new_exception.response = response
+                logger.error("HTTP isteği başarısız: %s %s -> %s", method.upper(), url, e)
                 raise new_exception from e
 
         # Buraya gelmemeli ama güvenlik için
@@ -420,4 +433,29 @@ class HTTPClient:
         if self._session:
             self._session.close()
             self._session = None
+
+
+_shared_client: Optional["HTTPClient"] = None
+_shared_client_lock = threading.Lock()
+
+
+def get_shared_client() -> "HTTPClient":
+    """
+    Process ömrü boyunca paylaşılan, tek bir HTTPClient/Session döndürür.
+
+    Her `Endpoint` çağrısında yeni bir `HTTPClient()` (dolayısıyla yeni bir
+    `requests.Session` + connection pool) açılıp kapatmak yerine, tekrarlanan
+    çağrılar arasında TCP/TLS bağlantısı yeniden kullanılsın diye bu paylaşılan
+    client tercih edilir. Auth, bu client üzerinde instance state olarak DEĞİL,
+    her çağrıda `auth=` parametresiyle geçirilir (bkz. `_make_request`) — aksi
+    halde eşzamanlı farklı kategorideki çağrılar birbirinin auth'unu ezerdi.
+    """
+    global _shared_client
+    if _shared_client is None:
+        with _shared_client_lock:
+            if _shared_client is None:
+                client = HTTPClient()
+                client._session = client._create_session()
+                _shared_client = client
+    return _shared_client
 

@@ -57,7 +57,12 @@ def set_mode(mode: str) -> None:
     """Runtime mode ayarla (prod/test)"""
     global _mode
 
-    _mode = "test" if mode.lower() != "prod" else "prod"
+    normalized = mode.strip().lower() if isinstance(mode, str) else mode
+    if normalized not in ("prod", "test"):
+        raise ValueError(
+            f"Geçersiz mode: {mode!r}. 'prod' veya 'test' (büyük/küçük harf önemsiz) olmalı."
+        )
+    _mode = normalized
 
 def _check_auth():
     """Auth bilgilerinin set edilip edilmediğini kontrol et"""
