@@ -223,3 +223,6 @@ COMMIT_MSG*
 
 # GitHub token (güvenlik için)
 .github_token
+
+# Local automation script (should not be tracked)
+auto-pull.sh
