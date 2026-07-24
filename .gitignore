@@ -149,9 +149,13 @@ dmypy.json
 # pytype static type analyzer
 .pytype/
 
-# Codeium & Claude artifacts
+# Codeium & Claude artifacts (local settings/session state stays ignored;
+# the epint skill docs are tracked so they ship with the repo on GitHub)
 .codeium/
-.claude/
+.claude/*
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/epint/
 
 # VS Code
 .vscode/
