@@ -14,7 +14,7 @@
 
 __major__ = 0 # stabil release
 __minor__ = 7 # yeni özellik
-__semantic__ = 6 # bug fix
+__semantic__ = 7 # bug fix
 __tag__ = "dev"
 
 __version__ = f"{__major__}.{__minor__}.{__semantic__}-{__tag__}"
