@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
+import threading
+import time
 from unittest.mock import MagicMock
 
+from epint.modules import http_client as http_client_module
 from epint.modules.http_client import HTTPClient, get_shared_client
 
 
@@ -68,3 +71,70 @@ def test_make_request_uses_per_call_auth_not_instance_state(monkeypatch):
     client.get("https://example.epias.com.tr/a", auth=auth_a)
 
     assert client.auth is None  # instance state hiç değişmedi
+
+
+def _reset_rate_limit_state():
+    with http_client_module._rate_limit_lock:
+        http_client_module._rate_limit_state["until"] = 0.0
+        http_client_module._rate_limit_state["consecutive_429"] = 0
+
+
+def test_429_backs_off_with_floor_wait_and_recovers_on_success(monkeypatch):
+    # Regresyon testi: gateway 429'da 'RateLimit-Reset': '0' döndürebiliyor
+    # (canlı örnek: 80 req/60sn limitine takılınca). Bu değere körü körüne
+    # güvenip 0s bekleyip hemen tekrar denemek gateway'i daha da yoruyordu
+    # (limit dakikalar içinde 50 -> 25 -> 12 -> 6'ya düşüyordu). Artık taban/
+    # tavan sınırlı üstel backoff uygulanıyor ve başarı sonrası sayaç sıfırlanıyor.
+    _reset_rate_limit_state()
+    monkeypatch.setattr(http_client_module, "_RATE_LIMIT_MIN_WAIT", 0.05)
+    monkeypatch.setattr(http_client_module, "_RATE_LIMIT_MAX_WAIT", 0.2)
+
+    client = HTTPClient()
+    too_many = MagicMock(status_code=429, headers={"RateLimit-Remaining": "0", "RateLimit-Reset": "0"})
+    ok = MagicMock(status_code=200, headers={})
+    ok.raise_for_status = lambda: None
+    responses = [too_many, ok]
+    monkeypatch.setattr(client, "_get_session", lambda: MagicMock(request=lambda **kw: responses.pop(0)))
+
+    result = client.get("https://seffaflik.epias.com.tr/x")
+
+    assert result is ok
+    assert http_client_module._rate_limit_state["consecutive_429"] == 0
+
+
+def test_second_client_waits_for_gate_opened_by_first_clients_429(monkeypatch):
+    # Regresyon testi: rate-limit kapısı process çapında paylaşılıyor - bir
+    # istek 429 alıp kapıyı ileri itince, kendisi hiç 429 almamış BAŞKA bir
+    # istek/thread de kapı açılana kadar bekler. Eskiden her thread bağımsız
+    # karar verdiği için eş-zamanlı N istek aynı anda 429 alıp hepsi hemen
+    # (0s) tekrar deniyor, throttling'i derinleştiriyordu.
+    _reset_rate_limit_state()
+    monkeypatch.setattr(http_client_module, "_RATE_LIMIT_MIN_WAIT", 0.2)
+    monkeypatch.setattr(http_client_module, "_RATE_LIMIT_MAX_WAIT", 0.2)
+
+    client_a = HTTPClient()
+    client_b = HTTPClient()
+
+    too_many = MagicMock(status_code=429, headers={"RateLimit-Remaining": "0", "RateLimit-Reset": "0"})
+    # A'nın 429 aldığını ve paylaşılan kapıyı ileri ittiğini simüle et.
+    wait_time = client_a._register_rate_limit_hit(too_many)
+    gate_opens_at = time.monotonic() + wait_time
+
+    ok_b = MagicMock(status_code=200, headers={})
+    ok_b.raise_for_status = lambda: None
+    b_request_times = []
+
+    def fake_request_b(**kw):
+        b_request_times.append(time.monotonic())
+        return ok_b
+
+    monkeypatch.setattr(client_b, "_get_session", lambda: MagicMock(request=fake_request_b))
+
+    # B, A ile aynı süreçte farklı bir HTTPClient/thread'i temsil ediyor -
+    # kendisi hiç 429 almadı ama modül seviyesindeki paylaşılan kapıya tabi.
+    thread_b = threading.Thread(target=client_b.get, args=("https://seffaflik.epias.com.tr/b",))
+    thread_b.start()
+    thread_b.join(timeout=2)
+
+    assert b_request_times, "B isteği hiç gönderilmemiş"
+    assert b_request_times[0] >= gate_opens_at - 0.01, "B, A'nın 429 sonrası açtığı paylaşılan kapıyı beklemeli"
