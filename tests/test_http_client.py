@@ -27,6 +27,35 @@ def test_shared_client_session_persists_across_requests(monkeypatch):
     assert client._session is not None
 
 
+def test_401_auth009_clears_tickets_and_refreshes_tgt_header(monkeypatch):
+    # Regresyon testi: şeffaflık servisleri TGT geçersizliğini 404 değil,
+    # 401 + {"errorCode": "AUTH009"} ile bildiriyor (bkz. _is_tgt_invalid).
+    # Bu durumda eskiden hiç fark edilmeyip aynı bayat TGT ile tekrar
+    # denenip nihayetinde exception fırlatılıyordu; artık ticket cache
+    # temizlenip yeni TGT alınmalı ve 'TGT' header'ı güncellenmeli.
+    client = HTTPClient()
+
+    unauthorized = MagicMock(status_code=401, headers={})
+    unauthorized.text = '{"errorCode": "AUTH009", "errorMessage": "Güvenlik bilgisi(TGT) hatalı!"}'
+    ok = MagicMock(status_code=200, headers={})
+    ok.raise_for_status = lambda: None
+    responses = [unauthorized, ok]
+
+    session = MagicMock(request=lambda **kw: responses.pop(0))
+    monkeypatch.setattr(client, "_get_session", lambda: session)
+
+    auth = MagicMock()
+    auth.get_tgt.return_value = ("TGT-NEW", "2099-01-01 00:00:00")
+    headers = {"TGT": "TGT-STALE"}
+
+    result = client.post("https://seffaflik.epias.com.tr/x", auth=auth, headers=headers)
+
+    assert result is ok
+    auth.clear_tickets.assert_called_once()
+    auth.get_tgt.assert_called_once()
+    assert headers["TGT"] == "TGT-NEW"
+
+
 def test_make_request_uses_per_call_auth_not_instance_state(monkeypatch):
     # Regresyon testi: auth artık client'a instance state olarak yazılmıyor
     # (paylaşılan client'ta bu, eşzamanlı farklı auth'lu çağrılar arasında
