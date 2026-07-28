@@ -48,6 +48,44 @@ Geliştirme / test kuralları için `usage-conventions.md`; kategori listesi iç
 - `seffaflik*` → yalnızca `TGT` (ST yok); `gop` → `gop-service-ticket`; diğer EPYS → `TGT`+`ST`.
 - TGT: EPYS 45 dk (kullanımda uzar); şeffaflık 2 saat (uzamaz). Cache: işletim sistemi temp dizini altında kullanıcı-hash'li klasör.
 - 401/404 ticket invalid → cache temiz + retry (`debug=True` ise HTTP atılmaz, `RequestModel` döner).
+- **`Endpoint.__call__` HER çağrıda YENİ bir `Authentication(...)` nesnesi yaratır** (satır
+  `auth = Authentication(epint._username, epint._password, target_service, runtime_mode)`) -
+  paylaşılan/cache'lenmiş TEK bir instance YOK. Tek-thread kullanımda sorun değil, ama
+  **çoklu-thread'den (ör. `ThreadPoolExecutor` ile paralel istek atan çağıran kod) eş-zamanlı
+  çağrılarda** `Authentication.__init__` → `_setup_directories()` çalışır - bkz. GOTCHA aşağıda.
+
+### GOTCHA: paralel/çoklu-thread'den çağrıda her thread kendi TGT'sini yaratıyordu (2026-07-28, canlı testte bulundu, DÜZELTİLDİ)
+
+`epint.set_auth()` sonrası aynı process içinden (aynı kimlik bilgileriyle) 20 thread aynı
+seffaflik-electricity servisini `ThreadPoolExecutor` ile eş-zamanlı çağırınca, log'da aynı
+saniyede ~20 kez `"Yeni TGT oluşturuldu"` görülüyordu - beklenen: sadece İLK thread TGT
+yaratmalı (TGT şeffaflık için 2 saat geçerli), diğerleri onu reuse etmeliydi.
+
+**Kök neden**: `Endpoint.__call__` her çağrıda yeni `Authentication(...)` yarattığı için (§6
+yukarıda), her thread kendi `_setup_directories()`'ini KİLİTSİZ çalıştırıyordu:
+`_has_permission_issues`/`_reset_temp_directory` (paylaşılan `.epint_test` dosyasında,
+`shutil.rmtree` ile TÜM temp_dir'i - tgt_dir + `.lock` dosyaları DAHİL - silebiliyordu) ve
+`_test_file_permissions` (tgt_dir/st_dir'i KİLİTSİZ okuyup, okuma hatasında `os.remove` ile
+siliyordu - başka bir thread'in AYNI ANDA `_store_ticket()` ile yazdığı dosyayla yarışabiliyordu).
+`get_tgt()`'in KENDİ kilidi (`_locked`, `fcntl.flock`) doğruydu ama bu kilide gelmeden ÖNCEKİ
+adımlar kilidin dayandığı dosya/lock-inode sürekliliğini bozabiliyordu - sonuç: her thread
+"benim için geçerli TGT yok" sanıp ayrı ayrı TGT yaratıyordu.
+
+**Fix**: `_setup_directories()`'in yıkıcı permission-check/reset kısmı artık process başına
+EN FAZLA BİR KEZ çalışır (double-checked locking: `_setup_lock` + `_verified_temp_dirs` set'i,
+modül seviyesinde) - ilk `Authentication()` bu adımı tamamladıktan sonra aynı process içindeki
+(thread farketmeksizin) sonraki construction'lar bu kısmı atlar. `_test_file_permissions` artık
+tgt_dir/st_dir'i `get_tgt()`/`_store_ticket()` ile AYNI kilit (`_locked(self._tgt_lock_path)` /
+`_locked(self._st_lock_path)`) altında okuyor - başka bir thread'in mid-write dosyasıyla artık
+yarışmıyor. Regresyon testi: `tests/test_auth_manager.py`
+`test_concurrent_authentication_construction_creates_single_tgt` (20 eş-zamanlı AYRI
+`Authentication()` construction'ı simüle eder, fix öncesi kod bu testte `FileNotFoundError` ile
+patlıyordu, fix sonrası tek bir TGT üretildiğini doğruluyor).
+
+**Kullanım tarafı not**: bu fix `epint` İÇİNDE - tüketici kod (ör. Airflow DAG'ları) tarafında
+paralel/`ThreadPoolExecutor` ile çekim yapan mevcut desenler (bkz. airflow reposu
+`dags/pmnt/_seffaflik_generation_common.py` `AdaptiveRateLimiter`) bu fix'i içeren epint
+sürümüne güncellenince otomatik faydalanır, ekstra kod değişikliği gerekmez.
 
 ## 7. Tarih formatları
 

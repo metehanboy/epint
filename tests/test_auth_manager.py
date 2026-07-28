@@ -185,6 +185,57 @@ def test_concurrent_get_tgt_calls_do_not_corrupt_ticket_file(monkeypatch):
         assert parts[0].startswith("TGT-cas-")
 
 
+def test_concurrent_authentication_construction_creates_single_tgt(monkeypatch):
+    """Regresyon: `Endpoint.__call__` (models/endpoint_callable.py) HER API çağrısında YENİ
+    bir `Authentication(...)` nesnesi yaratıyor (paylaşılan/cache'lenmiş TEK bir instance
+    YOK). Çoklu-thread'den (ör. ThreadPoolExecutor ile paralel istek atan çağıran kod)
+    eş-zamanlı çağrılarda bu, `_setup_directories()`'in KİLİTSİZ permission-check/reset
+    mantığının (`_has_permission_issues`/`_reset_temp_directory`) HER thread'de tekrar
+    tekrar çalışmasına, ve `_test_file_permissions()`'ın da kilitsiz okuma yüzünden başka
+    bir thread'in AYNI ANDA yazdığı ticket dosyasını "bozuk" sanıp SİLMESİNE yol açıyordu -
+    bu da `get_tgt()`'in kendi kilidinin dayandığı dosya sürekliliğini bozup HER thread'in
+    "benim için geçerli TGT yok" sonucuna varıp AYRI AYRI TGT yaratmasına neden oluyordu
+    (canlı testte gözlemlendi: 20 eş-zamanlı çağrıda ~20 "Yeni TGT oluşturuldu" log satırı).
+
+    Fix sonrası: aynı kullanıcı için eş-zamanlı 20 AYRI `Authentication()` construction'ı
+    olsa bile (gerçek `Endpoint.__call__` davranışını taklit eder - tek bir paylaşılan
+    instance DEĞİL) sadece TEK bir TGT yaratılmalı, hepsi onu reuse etmeli."""
+    call_counter = {"n": 0}
+    counter_lock = threading.Lock()
+
+    def fake_generate_tgt(self):
+        with counter_lock:
+            call_counter["n"] += 1
+            n = call_counter["n"]
+        return f"TGT-cas-{n:03d}"
+
+    monkeypatch.setattr(Authentication, "_generate_tgt", fake_generate_tgt)
+
+    errors = []
+    results = []
+
+    def worker():
+        try:
+            # Gercek Endpoint.__call__ deseni: HER cagrida YENI bir Authentication nesnesi.
+            auth = Authentication("concurrent_construct_user", "pass")
+            code, _ = auth.get_tgt()
+            results.append(code)
+        except Exception as e:  # pragma: no cover - sadece görünürlük için
+            errors.append(e)
+
+    threads = [threading.Thread(target=worker) for _ in range(20)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+
+    assert not errors
+    assert (
+        call_counter["n"] == 1
+    ), f"{call_counter['n']} kez TGT yaratıldı, beklenen 1 (hepsi aynı TGT'yi reuse etmeliydi)"
+    assert len(set(results)) == 1
+
+
 def test_clear_tickets_logs_via_epint_logger(monkeypatch, caplog):
     auth = Authentication("user1", "pass")
     monkeypatch.setattr(auth, "_generate_tgt", lambda: "TGT-cas-abc")
