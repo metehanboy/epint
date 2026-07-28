@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 import logging
+import random
 import threading
 from typing import Dict, Optional, Tuple, Union, Any
 from urllib3.util.retry import Retry
@@ -25,6 +26,26 @@ from ..version import __fullname__
 import time
 
 logger = logging.getLogger("epint")
+
+# 429 gateway throttling paylaşılan (process çapında) durumu.
+#
+# EPİAŞ gateway'i rate limiti kaynak IP başına uyguluyor (bkz. header
+# `X-RateLimit-Identity`) - yani limit tek bir HTTPClient/thread'e değil,
+# process'in yaptığı TÜM isteklere birden uygulanıyor. Eskiden her thread
+# kendi retry döngüsünde bağımsız karar veriyordu: `RateLimit-Reset` header'ı
+# genellikle '0' geliyor (gateway saniye altı reset veriyor gibi görünüyor)
+# ve bu değer olduğu gibi bekleme süresi sayılınca, aynı anda 429 alan N
+# thread hemen (0s bekleyip) tekrar deniyor, gateway'i daha da yoruyor ve
+# limit sürekli düşüyordu (bkz. canlı log: limit 50 -> 25 -> 12 -> 6
+# istek/60sn birkaç saniye içinde). Fix: tüm thread'ler TEK bir paylaşılan
+# "şu ana kadar bekle" kapısını (`_rate_limit_state["until"]`) kontrol eder;
+# bir thread 429 alınca kapıyı ileri iter, kapının arkasındaki diğer TÜM
+# thread'ler de (kendileri 429 almamış olsa bile) aynı pencereyi bekler.
+_rate_limit_lock = threading.Lock()
+_rate_limit_state: Dict[str, float] = {"until": 0.0, "consecutive_429": 0.0}
+
+_RATE_LIMIT_MIN_WAIT = 1.0
+_RATE_LIMIT_MAX_WAIT = 60.0
 
 
 class HTTPClient:
@@ -44,6 +65,7 @@ class HTTPClient:
         verify: bool = True,
         allow_redirects: bool = True,
         auth: Optional[Any] = None,
+        max_rate_limit_retries: int = 8,
     ):
         """
         HTTP Client oluştur
@@ -67,6 +89,7 @@ class HTTPClient:
         self.verify = verify
         self.allow_redirects = allow_redirects
         self.auth = auth
+        self.max_rate_limit_retries = max_rate_limit_retries
 
         self._session: Optional[Session] = None
 
@@ -155,6 +178,53 @@ class HTTPClient:
                 pass
 
         return None
+
+    def _wait_for_rate_limit_gate(self) -> None:
+        """
+        Paylaşılan rate-limit kapısı kapalıysa (başka bir istek/thread 429
+        aldığı için), kapı açılana kadar bekle. Böylece aynı gateway'e
+        eş-zamanlı istek atan diğer thread'ler de kör kör isteklerini
+        gönderip 429'u derinleştirmek yerine ortak pencereyi bekler.
+        """
+        while True:
+            with _rate_limit_lock:
+                remaining = _rate_limit_state["until"] - time.monotonic()
+            if remaining <= 0:
+                return
+            time.sleep(min(remaining, 5.0))
+
+    def _register_rate_limit_hit(self, response: Response) -> float:
+        """
+        429 alındığında bekleme süresini hesapla ve paylaşılan kapıyı ileri
+        it (tüm thread'ler bu pencereyi bekler). Ardışık 429 sayısına göre
+        üstel geri çekilme uygular - gateway'in `RateLimit-Reset` header'ı
+        genellikle '0' döndüğü için (bkz. modül üstü not) header değerine
+        körü körüne güvenilmiyor, taban/tavan sınırlı üstel backoff ile
+        birleştiriliyor.
+        """
+        header_wait = self._check_rate_limit(response)
+        if header_wait is None:
+            reset = response.headers.get('RateLimit-Reset')
+            if reset is not None:
+                try:
+                    header_wait = float(reset)
+                except (ValueError, TypeError):
+                    header_wait = None
+
+        with _rate_limit_lock:
+            _rate_limit_state["consecutive_429"] += 1
+            consecutive = _rate_limit_state["consecutive_429"]
+            backoff = min(_RATE_LIMIT_MIN_WAIT * (2 ** (consecutive - 1)), _RATE_LIMIT_MAX_WAIT)
+            wait = max(header_wait or 0.0, backoff)
+            wait += random.uniform(0, wait * 0.1)
+            _rate_limit_state["until"] = max(_rate_limit_state["until"], time.monotonic() + wait)
+
+        return wait
+
+    def _register_rate_limit_recovery(self) -> None:
+        """Başarılı yanıt sonrası ardışık 429 sayacını sıfırla (backoff geriler)."""
+        with _rate_limit_lock:
+            _rate_limit_state["consecutive_429"] = 0
 
     def _is_tgt_invalid(self, response: Response) -> bool:
         """
@@ -251,9 +321,13 @@ class HTTPClient:
         retry_count = 0
         tgt_retry_count = 0
         max_tgt_retries = 3
+        rate_limit_retry_count = 0
 
         while retry_count <= max_retries:
             try:
+                # Başka bir thread'in tetiklediği 429 backoff'u varsa, kör kör
+                # isteği göndermeden önce paylaşılan pencere kapanana kadar bekle.
+                self._wait_for_rate_limit_gate()
                 response = session.request(method=method.upper(), url=url, **kwargs)
 
                 # 404 (CAS) veya 401 AUTH009 (şeffaflık/EPYS) - TGT geçersizliği kontrolü
@@ -289,29 +363,24 @@ class HTTPClient:
                         # Max TGT retry aşıldı, exception fırlat
                         response.raise_for_status()
 
-                # 429 hatası kontrolü
+                # 429 hatası kontrolü - paylaşılan kapıyı ileri iter (§ modül üstü not),
+                # bu sırada diğer thread'ler de gate'e takılıp bekler.
                 if response.status_code == 429:
-                    wait_time = self._check_rate_limit(response)
-                    if wait_time is None:
-                        # 429 durumunda reset süresini header'dan al
-                        reset = response.headers.get('RateLimit-Reset')
-                        if reset is not None:
-                            try:
-                                wait_time = float(reset)
-                            except (ValueError, TypeError):
-                                wait_time = 60.0
-                        else:
-                            wait_time = 60.0
+                    wait_time = self._register_rate_limit_hit(response)
 
-                    if retry_count < max_retries:
-                        logger.info("429 rate limit, %.1fs bekleyip tekrar denenecek (url=%s)", wait_time, url)
+                    if rate_limit_retry_count < self.max_rate_limit_retries:
+                        logger.info(
+                            "429 rate limit, %.1fs bekleyip tekrar denenecek (deneme %d/%d, url=%s)",
+                            wait_time, rate_limit_retry_count + 1, self.max_rate_limit_retries, url,
+                        )
                         time.sleep(wait_time)
-                        retry_count += 1
+                        rate_limit_retry_count += 1
                         continue
                     else:
-                        # Max retry aşıldı, exception fırlat
+                        # Max rate-limit retry aşıldı, exception fırlat
                         response.raise_for_status()
 
+                self._register_rate_limit_recovery()
                 response.raise_for_status()
                 return response
 
@@ -320,20 +389,11 @@ class HTTPClient:
                 if response is not None:
                     # 429 durumunda retry yap
                     if response.status_code == 429:
-                        wait_time = self._check_rate_limit(response)
-                        if wait_time is None:
-                            reset = response.headers.get('RateLimit-Reset')
-                            if reset is not None:
-                                try:
-                                    wait_time = float(reset)
-                                except (ValueError, TypeError):
-                                    wait_time = 60.0
-                            else:
-                                wait_time = 60.0
+                        wait_time = self._register_rate_limit_hit(response)
 
-                        if retry_count < max_retries:
+                        if rate_limit_retry_count < self.max_rate_limit_retries:
                             time.sleep(wait_time)
-                            retry_count += 1
+                            rate_limit_retry_count += 1
                             continue
 
                 # Response varsa detaylı hata mesajı oluştur
