@@ -18,6 +18,7 @@ import contextlib
 import logging
 import os
 import tempfile
+import threading
 import datetime
 from typing import Dict, Tuple, Optional
 from dataclasses import dataclass
@@ -27,6 +28,27 @@ from ..datetime import DateTimeUtils
 import random
 
 logger = logging.getLogger("epint")
+
+# `Endpoint.__call__` (models/endpoint_callable.py) HER API cagrisinda YENI bir
+# `Authentication(...)` nesnesi yaratir (paylasilan/cache'lenmis tek bir instance YOK).
+# Coklu-thread'den (ör. ThreadPoolExecutor ile paralel istek atan cagiran kod) es-zamanli
+# cagrilarda bu, `_setup_directories()`'in KILITSIZ permission-check/reset mantiginin
+# (bkz. `_has_permission_issues`/`_reset_temp_directory`/`_test_file_permissions`) her
+# thread'de TEKRAR TEKRAR calismasina yol aciyordu - bir thread'in test-yazdigi/sildigi
+# dosyayla digerinin ES ZAMANLI okumasi/silmesi yarisa girip (yanlislikla) "izin sorunu var"
+# sanilip TUM temp_dir'in (tgt_dir + `.lock` dosyalari DAHIL) silinmesine/yeniden
+# yaratilmasina neden olabiliyordu - bu da `get_tgt()`'in KENDI kilidinin (asagida,
+# `_locked`) dayandigi dosya/inode surekliligini bozup, HER thread'in "benim icin gecerli
+# TGT yok" sonucuna varip AYRI AYRI TGT yaratmasina yol aciyordu (canli testte gozlemlendi:
+# 20 thread es-zamanli cagirinca ~20 "Yeni TGT olusturuldu" log satiri, ayni saniyede).
+#
+# Fix: bu YIKICI probe/reset adimi process basina EN FAZLA BIR KEZ calisir (double-checked
+# locking, `_setup_lock` + `_verified_temp_dirs`) - ilk `Authentication()` bu adimi
+# tamamladiktan SONRA, ayni process icindeki (thread farketmeksizin) SONRAKI TUM
+# `Authentication(...)` construction'lari bu KILITSIZ/RISKLI kismi ATLAR, sadece
+# `os.makedirs(exist_ok=True)` gibi zaten idempotent/guvenli adimlari calistirir.
+_setup_lock = threading.Lock()
+_verified_temp_dirs: set = set()
 
 
 @contextlib.contextmanager
@@ -168,12 +190,20 @@ class Authentication:
             tempfile.gettempdir(), f"epint-{self._get_os_user_hash()}"
         )
 
-        # Okuma/yazma sorunu kontrolü
-        if self._has_permission_issues(temp_dir):
-            # Klasörü sıfırla ve yeniden oluştur
-            self._reset_temp_directory(temp_dir)
+        # Permission-check/reset (bkz. modul docstring'i, `_setup_lock`) SADECE process
+        # basina ILK `Authentication()` construction'inda calisir - double-checked locking:
+        # kilitsiz hizli-yol (cogunlukla True), kilit ALTINDA ikinci kontrol (yaris onlenir).
+        if temp_dir not in _verified_temp_dirs:
+            with _setup_lock:
+                if temp_dir not in _verified_temp_dirs:
+                    # Okuma/yazma sorunu kontrolü
+                    if self._has_permission_issues(temp_dir):
+                        # Klasörü sıfırla ve yeniden oluştur
+                        self._reset_temp_directory(temp_dir)
+                    os.makedirs(temp_dir, exist_ok=True)
+                    _verified_temp_dirs.add(temp_dir)
 
-        os.makedirs(temp_dir, exist_ok=True)
+        os.makedirs(temp_dir, exist_ok=True)   # idempotent - zaten var, sadece garanti
 
         # Kullanıcı bazlı ticket dosyaları - farklı EPİAŞ kullanıcıları için ticket karışmasını önle
         import hashlib
@@ -235,26 +265,39 @@ class Authentication:
                 pass
 
     def _test_file_permissions(self) -> None:
-        """Ticket dosyalarının okuma/yazma izinlerini test et"""
-        try:
-            # TGT dosyası testi
-            if os.path.exists(self.tgt_dir):
-                with open(self.tgt_dir, "r") as f:
-                    f.read()
+        """Ticket dosyalarının okuma/yazma izinlerini test et.
 
-            # ST dosyası testi
-            if os.path.exists(self.st_dir):
-                with open(self.st_dir, "r") as f:
-                    f.read()
+        AYNI kilit (`_locked`, `get_tgt()`/`_store_ticket()`'in kullandığı) altında okunur -
+        aksi halde bu okuma, başka bir thread'in (farklı bir `Authentication` nesnesi
+        üzerinden, bkz. modül docstring'i) AYNI ANDA `_store_ticket()` ile yazdığı dosyayı
+        yarım/tutarsız görüp "bozuk" sanıp SİLEBİLİYORDU - geçerli, az önce yaratılmış bir
+        TGT/ST bu race yüzünden yok edilip her thread'in kendi TGT'sini yaratmasına yol
+        açan asıl nedenlerden biriydi."""
+        try:
+            if os.path.exists(self.tgt_dir):
+                with _locked(self._tgt_lock_path):
+                    with open(self.tgt_dir, "r") as f:
+                        f.read()
         except (IOError, OSError, PermissionError):
-            # Okuma sorunu varsa dosyaları sil
-            try:
-                if os.path.exists(self.tgt_dir):
-                    os.remove(self.tgt_dir)
-                if os.path.exists(self.st_dir):
-                    os.remove(self.st_dir)
-            except (IOError, OSError, PermissionError):
-                pass
+            with _locked(self._tgt_lock_path):
+                try:
+                    if os.path.exists(self.tgt_dir):
+                        os.remove(self.tgt_dir)
+                except (IOError, OSError, PermissionError):
+                    pass
+
+        try:
+            if os.path.exists(self.st_dir):
+                with _locked(self._st_lock_path):
+                    with open(self.st_dir, "r") as f:
+                        f.read()
+        except (IOError, OSError, PermissionError):
+            with _locked(self._st_lock_path):
+                try:
+                    if os.path.exists(self.st_dir):
+                        os.remove(self.st_dir)
+                except (IOError, OSError, PermissionError):
+                    pass
 
     def _get_base_headers(self) -> Dict[str, str]:
         return {
