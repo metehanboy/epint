@@ -158,7 +158,9 @@ class HTTPClient:
 
     def _is_tgt_invalid(self, response: Response) -> bool:
         """
-        404 hatasında TGT geçersizliğini kontrol et
+        404 (CAS: "TGT ... could not be found/is considered invalid") veya 401
+        (Şeffaflık/EPYS servisleri: errorCode AUTH009 "Güvenlik bilgisi(TGT)
+        hatalı!") hatasında TGT geçersizliğini kontrol et.
 
         Args:
             response: HTTP response objesi
@@ -166,13 +168,20 @@ class HTTPClient:
         Returns:
             TGT geçersizse True, değilse False
         """
-        if response.status_code != 404:
+        if response.status_code not in (401, 404):
             return False
 
         try:
             # Response body'yi text olarak al
             response_text = response.text if hasattr(response, 'text') else str(response.content or '')
             response_text_lower = response_text.lower()
+
+            if response.status_code == 401:
+                # Servis 401 döndüğünde body'de errorCode: AUTH009 var mı kontrol et
+                # (bkz. şeffaflık örneği: {"errorCode": "AUTH009", "errorMessage":
+                # "Güvenlik bilgisi(TGT) hatalı!"}) - bu, kullanılan TGT'nin servis
+                # tarafında (halihazırda) geçersiz sayıldığı anlamına gelir.
+                return 'auth009' in response_text_lower
 
             # TGT geçersizliğini belirten anahtar kelimeler
             tgt_invalid_keywords = [
@@ -247,24 +256,31 @@ class HTTPClient:
             try:
                 response = session.request(method=method.upper(), url=url, **kwargs)
 
-                # 404 hatası ve TGT geçersizliği kontrolü
-                if response.status_code == 404 and self._is_tgt_invalid(response):
+                # 404 (CAS) veya 401 AUTH009 (şeffaflık/EPYS) - TGT geçersizliği kontrolü
+                if response.status_code in (401, 404) and self._is_tgt_invalid(response):
                     if effective_auth and tgt_retry_count < max_tgt_retries:
                         # TGT geçersiz, ticket'ları temizle
                         logger.warning("TGT geçersiz, ticket cache temizleniyor ve yenileniyor (url=%s)", url)
                         effective_auth.clear_tickets()
 
-                        # URL'de TGT kodu varsa yeni TGT ile güncelle
-                        if '/cas/v1/tickets/' in url or '/v1/tickets/' in url:
-                            try:
-                                # Yeni TGT al
-                                new_tgt_code, _ = effective_auth.get_tgt()
-                                # URL'deki eski TGT kodunu yeni ile değiştir
+                        try:
+                            # Yeni TGT al
+                            new_tgt_code, _ = effective_auth.get_tgt()
+
+                            # URL'de TGT kodu varsa yeni TGT ile güncelle (CAS ST üretimi)
+                            if '/cas/v1/tickets/' in url or '/v1/tickets/' in url:
                                 import re
                                 # TGT- ile başlayan kodu bul ve değiştir
                                 url = re.sub(r'TGT-[^/]+', new_tgt_code, url)
-                            except Exception:
-                                pass
+
+                            # Header'da TGT varsa yeni TGT ile güncelle (şeffaflık
+                            # injection-quantity gibi servisler TGT'yi 'TGT' header'ında
+                            # gönderir, URL'de değil - bkz. AUTH009 örneği)
+                            request_headers = kwargs.get('headers')
+                            if request_headers and 'TGT' in request_headers:
+                                request_headers['TGT'] = new_tgt_code
+                        except Exception:
+                            pass
 
                         tgt_retry_count += 1
                         retry_count += 1
