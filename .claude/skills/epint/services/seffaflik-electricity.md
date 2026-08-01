@@ -64,7 +64,11 @@ Path öneki: `/v1/generation/`.
 | `realtime_generation` | POST | `/v1/generation/data/realtime-generation` | Gerçek zamanlı üretim |
 | `sbfgp` | POST | `/v1/generation/data/sbfgp` | Kesinleştirilmiş Uzlaştırma Dönemi Üretim Planı (KUDÜP) |
 | `injection_quantity` | POST | `/v1/generation/data/injection-quantity` | Uzlaştırma Esas Veriş Miktarı (UEVM) |
-| `powerplant_list` | GET | `/v1/generation/data/powerplant-list` | Santral listesi |
+| `injection_quantity_powerplant_list` | GET | `/v1/generation/data/injection-quantity-powerplant-list` | UEVM Santral Listesi Servisi - `powerplant_list` gibi PARAMETRESİZ (swagger'da sadece TGT header, tarih YOK), her zaman GÜNCEL listeyi döner. |
+| `powerplant_list` | GET | `/v1/generation/data/powerplant-list` | Santral listesi (parametresiz, ŞU AN aktif olanlar) |
+| `powerplant_list_for_date_range` | POST | `/v1/generation/data/powerplant-list-for-date-range` | Santral listesi (tarih aralıklı — bkz. GOTCHA aşağıda, tarih parametreleri GÖRÜNÜŞTE çalışır ama davranışı beklenenden FARKLI) |
+| `powerplant_generation` | POST | `/v1/generation/data/powerplant-generation` | Tek santral saatlik üretim (kaynak bazlı kırılım) |
+| `powerplant_generation_bulk` | POST | `/v1/generation/data/powerplant-generation-bulk` | Çoklu santral saatlik üretim (bkz. GOTCHA — startDate FİİLEN yok sayılır) |
 | `realtime_generation_export` | POST | `/v1/generation/export/realtime-generation` | Export varyantı |
 
 ### 4. Yenilenebilir Enerji / YEKDEM (`renewables-data-controller` + `-export-controller`, 36 endpoint)
@@ -224,6 +228,96 @@ Path önekleri: `/v1/main/`, `/v1/menu/`, `/v1/markets/data/`, `/v1/markets/gene
 - **Fuzzy method matching**: Method adında küçük yazım hataları (`mcpData` / `mcp_data`) tolere edilir; kategori adında da `seffaflik` yazım hataları (`seffalik`, `sefaflik` vb.) fuzzy olarak `seffaflik-electricity`'e eşlenir.
 - **`ST` header YOK**: Bu kategoriye ait hiçbir endpoint'in swagger tanımında `ST` parametresi bulunmaz; sadece `TGT` header'ı zorunludur. Diğer EPYS kategorilerinde görülen ST-tabanlı hata ayıklama mantığı burada geçersizdir.
 - **Response wrapper**: Bazı response şemaları `RestResponse` benzeri sarmalayıcı içerebilir; `epint` bunu otomatik açıp `body` alanını döndürür.
+
+### GOTCHA: `powerplant_list_for_date_range` tarih parametreleri GÖRÜNÜŞTE çalışır, GERÇEKTE farklı davranır (canlı test, 2026-07-26)
+
+Bu servisin `startDate`/`endDate` parametreleri **santral bazında günlük aktiflik filtresi
+DEĞİLDİR** — "X santrali Y tarihinde aktif miydi" diye doğrudan sorulamaz. Canlı testle
+doğrulanan gerçek davranış:
+
+- **Dar pencere (tek gün, hatta TAM 1 AY) tarihi görmezden gelir**: `ids_for(2018-01-01,
+  2018-02-01)` (gerçek 1 aylık pencere, tek gün DEĞİL) `powerplant_list()` (plain, parametresiz,
+  "şu an aktif") ile **birebir aynı** id setini döndürür — 2018'i sorsanız bile bugünün listesini
+  alırsınız.
+- Bu "bugüne çökme" davranışı **`startDate=2018-01-01` sabitken `endDate` yaklaşık `2019-10-01`'e
+  kadar** sürer (canlı bisection ile bulunan eşik). Bu tarihten SONRA endDate büyütüldükçe küme
+  gerçekten farklılaşmaya/büyümeye başlar.
+- **Model**: response = (ŞU AN AKTİF tüm roster, tarih parametrelerinden BAĞIMSIZ koşulsuz dahil)
+  ∪ (pasif/kapanmış santraller için TEK bir "kapanma tarihi [startDate,endDate] içinde mi"
+  filtresi). **Aktivasyon/komisyon tarihi için HİÇBİR sinyal yoktur** — aktif santraller her
+  sorguda koşulsuz göründüğü için ne zaman başladıkları asla bu endpoint'ten tespit edilemez.
+  Pasif bir santral için "ilk görüldüğü" endDate ≈ o santralin yaklaşık kapanma tarihi (ay
+  çözünürlüğünde, eşikten SONRAsı için güvenilir — eşik ÖNCESİ tespitler güvenilmez, tüm o dönem
+  "bugüne çökmüş" olabilir).
+
+### GOTCHA: `powerplant_generation` (`realtime-generation`) / `powerplant_generation_bulk` (`realtime-generation-bulk`) — tek-gün sınırı VE 1000 id limiti (canlı test + swagger, 2026-07-26)
+
+`epint`'in fuzzy method matching'i `powerplant_generation(_bulk)` adını gerçek operationId'lere
+eşler: `realtime-generation` (tekli) ve `realtime-generation-bulk` (toplu). Swagger'a göre bu iki
+endpoint'in ŞEMASI dahi farklı:
+
+- **`realtime-generation`** (`RealtimeGenerationRequestDto`): `startDate`+`endDate` (ikisi de
+  required) + `powerPlantId` (TEKİL). Swagger description'ı zaten uyarıyor: *"en son bir önceki
+  günün verileri gelmekte, ilgili güne ait [bugünün] santral verileri çekilmek istendiğinde hatalı
+  istek bilgisi dönmektedir"* — canlı testte doğrulandı: `endDate=bugün` → 400 `(BUS)SEF1149`.
+  **`startDate`/`endDate` aralığı 3 AYDAN FAZLA olamaz** (canlı test, 2026-07-27): daha geniş
+  aralık `400 (BUS)SEF1117` — *"Verilen tarihler tanımlanmış aralıktan (3 MONTH) fazla olamaz!"*
+  ile reddedilir. Swagger'da bu sınır YAZMIYOR, sadece canlı denemede ortaya çıktı. Çok-yıllık
+  bir aralık (ör. coldstart) çekilecekse ~89 günlük (3 takvim ayının güvenli altı) parçalara
+  bölüp SIRALI çağrı yapılmalı (bulk'un günlük döngüsünden YİNE de çok daha az çağrı, ama TEK
+  istek YETMEZ).
+  **Bazı id'ler için `400 (BUS)SEF1122`** — *"Verilen Santral id(...) sistemde bulunamadı!"*
+  döner (canlı test, 2026-07-27) - bu servisin bir pid'i TANIMADIĞI anlamına geliyor. Kök neden
+  ARAŞTIRILDI ama KESİN bulunamadı: santralin güncel/tarihsel "aktif" durumuyla İLİŞKİLENDİRİLEMEDİ
+  - bu servisin hangi id'leri tanıdığı harici bir santral kataloğundan TAHMİN EDİLEMİYOR.
+  `realtime-generation-bulk` bu konuda FARKLI davranıyor - pasif/eski id'leri her zaman sorunsuz
+  kabul ediyor (tasarım gereği "artık pasif olanlar dahil TÜM id'ler" için kullanılıyor). Pragmatik
+  çözüm: ÖNCEDEN tahmin etmeye ÇALIŞMA, tekli servisi DENE, `SEF1122` gelirse (retry'siz, anında -
+  bu KALICI bir red, transient değil) o pid/alt-aralığı bulk'a (her id'yi kabul eder) düşür.
+- **`realtime-generation-bulk`** (`RealtimeGenerationBulkRequestDto`): startDate/endDate YOK,
+  şemada SADECE TEKİL bir **`date`** alanı var (+ `powerPlantIds` dizisi). Yani bu servis
+  TASARIM GEREĞİ tek-günlük — "aralık verip görmezden geliniyor" değil, aralık parametresi
+  başından beri YOK. Çok-yıllık geriye dönük veri çekmek amacıyla **HER GÜN İÇİN AYRI ÇAĞRI**
+  şart (bkz. 1000 id limiti aşağıda).
+- **`powerPlantIds` en fazla 1000 olmalı** (swagger: *"1000'den fazla olmamalıdır. Mükerrer id
+  girmemeye dikkat ediniz."*) — canlı testte 2229 id tek çağrıda verilince WAF 403 ("Erişim
+  Talebiniz Engellendi") ile bloklandı, hata mesajı API'den DEĞİL kenar-WAF'tan geldiği için
+  yanıltıcı olabilir (400/429 değil, düz 403+HTML). **Katalogdaki id'leri ≤1000'lik parçalara
+  BÖLÜP her parça için ayrı çağrı yapın.**
+- **Bugünün verisi YOK** (yukarıda): sadece dünden eskiye veri var, `endDate`/`date` en fazla
+  dün olmalı.
+- `realtime-generation-bulk` yanıtı **`powerPlantId` DEĞİL `powerPlantName`** ile döner (ör.
+  `"ATATÜRK HES-40W000000000142N-641"`) — id'ye çevirmek için ayrı bir katalog (isim->id eşlemesi)
+  gerekir. `realtime-generation` (tekli) ise zaten `powerPlantId` parametresiyle çağrıldığı için
+  bu sorun yok, id caller'da zaten biliniyor.
+- Response'ta hem kaynak-bazlı kırılım (`naturalGas`, `dammedHydro`, ... camelCase) hem de
+  `total` (toplam) alanı birlikte gelir — `total` kaynak kırılımından türetilebilir.
+- `page.total` bu endpoint'te de GÜVENİLMEZ bulundu (aynı sorgu farklı anlarda farklı toplam
+  dönebiliyor) — diğer TPYS/EPYS pagination'larında olduğu gibi "items boş/page_size'dan kısa
+  dönene kadar ilerle" deseni kullanılmalı, `page.total`'a asla güvenilmemeli.
+- Rate limit bu endpoint'lerde DAHA SIKI: `RateLimit-Limit: 60;w=60` (60 istek/60sn) görüldü —
+  `powerplant-list-for-date-range`'in 80/60sn'sinden düşük, pacing buna göre ayarlanmalı.
+
+### GOTCHA: `injection_quantity` (UEVM) — AYNI 3-ay sınırı `realtime-generation`'la, ama farklı hata kodu (canlı test, 2026-07-28)
+
+`injection_quantity` (`/v1/generation/data/injection-quantity`, tekli - `startDate`+`endDate`+
+`powerplantId`+`page`) `realtime-generation` ailesiyle AYNI "generation-data-controller" grubunda
+ve AYNI 3-ay sınırını taşıyor - canlı testte `export` varyantı (`/v1/generation/export/
+injection-quantity`) ile doğrulandı: 6 aylık aralık (2026-01-01..2026-07-01) `400 (BUS)SEF1117`
+*"Verilen tarihler tanımlanmış aralıktan (3 MONTH) fazla olamaz!"* ile reddedildi - normal (export
+olmayan) `injection_quantity` da AYNI kısıtı miras alır (aynı backend kontrolü). Çözüm AYNI:
+~89 günlük parçalara bölüp sıralı çağrı.
+
+Response şeması `realtime-generation` (tekli) ile BİREBİR aynı: `date`+`hour`+`total`+kaynak
+kırılımı (`naturalGas`, `dam`, ...) - `powerPlantName`/`powerPlantId` YOK (zaten tekli çağrıda id
+biliniyor).
+
+`date_init` (`/v1/main/date-init`) yanıtındaki `conciliationPeriod` alanı - "şu an FİNALİZE
+EDİLMİŞ uzlaştırma dönemi" sınırını işaret eder (ör. bugün 2026-07-28 iken conciliationPeriod
+2026-06-01 dönebilir - Haziran hâlâ "açık"/kesinleşmemiş demek). `injection_quantity` (UEVM =
+Uzlaştırma Esas Veriş Miktarı, ismi zaten bunu ima ediyor) verisi bu döneme kadar FİNAL kabul
+edilebilir - santral bazında checkpoint bu döneme ulaşmışsa servis tekrar çağrılmasına gerek yoktur
+(aylık bazda doğal olarak ilerleyen bir "zaten güncel" eşiği).
 
 ## Örnek kullanım
 
