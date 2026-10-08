@@ -1,0 +1,3533 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "EPYS - Teminat Servisleri",
+    "description": "EPYS Teminat Modülü web servisleri (EPYS Teminat Modülü Web Servis Dokümanı v1.0). Şemalar epys.epias.com.tr/<servis>/v2/api-docs adreslerinden alınmıştır. Servisler farklı mikroservislere dağıldığı için basePath tanımlı değildir; path'ler servis önekini içerir."
+  },
+  "host": "epys.epias.com.tr",
+  "tags": [
+    {
+      "name": "gogi-collateral",
+      "description": "Başlangıç ve GÖGİ teminatı (gogi-collateral servisi)"
+    },
+    {
+      "name": "collateral",
+      "description": "Ek teminat ve teminat raporu (collateral servisi)"
+    },
+    {
+      "name": "imbalance-collateral",
+      "description": "Dengesizlik teminatı (imbalance-collateral servisi)"
+    },
+    {
+      "name": "risk-collateral",
+      "description": "Risk teminatı (risk-collateral servisi)"
+    },
+    {
+      "name": "rbs-collateral",
+      "description": "Destekleme bedeli teminatı (rbs-collateral servisi)"
+    },
+    {
+      "name": "res-collateral",
+      "description": "YEK teminatı (res-collateral servisi)"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/gogi-collateral/rest/v1/initial-collateral/list": {
+      "post": {
+        "tags": [
+          "gogi-collateral"
+        ],
+        "summary": "Başlangıç Teminatı Listeleme",
+        "description": "Sorgulanan gün için geçerli başlangıç teminatı tutarını (amount) ve tutarın geçerli olduğu tarihi (effectiveDate) döner. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "initial-collateral-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InitialCollateralListRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseInitialCollateralListResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/gogi-collateral/rest/v1/calculation/calculated/details": {
+      "post": {
+        "tags": [
+          "gogi-collateral"
+        ],
+        "summary": "GÖGİ Teminatı Listeleme",
+        "description": "GÖGİ teminatını GÖP (DAM) ve GİP (IDM) kırılımında alacak/borç/net tutarlar ve k günü sayısı (kdays) ile döner. Geçerlilik tarihine (validityDate) göre sorgulanır; EPYS ekranı ise ödeme tarihine göre gösterir ve bugün hesaplanan değerin ödeme tarihi bir sonraki iş günüdür. Örneğin ekranda 2023-09-28 saat 11 kontrolü için görülen değer için validityDate=2023-09-27 gönderilmelidir. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "gogi-collateral-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GogiDetailListReqDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseGogiDetailListRespDto"
+            }
+          }
+        }
+      }
+    },
+    "/gogi-collateral/rest/v1/data/details": {
+      "post": {
+        "tags": [
+          "gogi-collateral"
+        ],
+        "summary": "GÖGİ Teminatı Detay Listeleme",
+        "description": "GÖP/GİP alacak ve borç detaylarını döner. Geçerlilik tarihine (validityDate) göre sorgulanır; EPYS ekranı ise ödeme tarihine göre gösterir ve bugün hesaplanan değerin ödeme tarihi bir sonraki iş günüdür. Örneğin ekranda 2023-09-28 saat 11 kontrolü için görülen değer için validityDate=2023-09-27 gönderilmelidir. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "gogi-collateral-detail-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GogiDetailListReqDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseGogiDataNdaysRespDto"
+            }
+          }
+        }
+      }
+    },
+    "/collateral/rest/v1/additional/list": {
+      "post": {
+        "tags": [
+          "collateral"
+        ],
+        "summary": "Ek Teminat Listeleme",
+        "description": "Sorgulanan ödeme tarihli ve varsa bir sonraki ödeme tarihli ek teminat değerlerini döner. HOUR_17 seçilirse bu kontrolde sorgulanan tarihten sonraki ödeme tarihi kullanıldığı için o değer döner. controlHour yalnızca HOUR_11 veya HOUR_17 değerini alır. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "additional-collateral-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AdditionalCollateralRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseAdditionalCollateralRespDto"
+            }
+          }
+        }
+      }
+    },
+    "/imbalance-collateral/v1/imbalance-collateral/list": {
+      "post": {
+        "tags": [
+          "imbalance-collateral"
+        ],
+        "summary": "Dengesizlik Teminatı Listeleme",
+        "description": "Dengesizlik teminatı tutarını, AOSMF hesabında kullanılan ay sayısını (aosmfMonthCount) ve hesaplamanın yapıldığı uzlaştırma dönemini (aosmfQueryPeriod) döner. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "imbalance-collateral-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImbalanceCollateralListReqDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseImbalanceCollateralListRespDto"
+            }
+          }
+        }
+      }
+    },
+    "/imbalance-collateral/v1/imbalance-collateral/list/detail": {
+      "post": {
+        "tags": [
+          "imbalance-collateral"
+        ],
+        "summary": "Dengesizlik Teminatı Detay Listeleme",
+        "description": "effectiveDateStart olarak dengesizlik teminatının hesaplandığı uzlaştırma dönemi, yani imbalance-collateral-list yanıtındaki aosmfQueryPeriod değeri gönderilmelidir. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "imbalance-collateral-detail-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImbalanceCollateralDetailListReqDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseImbalanceCollateralDetailListRespDto"
+            }
+          }
+        }
+      }
+    },
+    "/imbalance-collateral/v1/imbalance-collateral/list/aosmf": {
+      "post": {
+        "tags": [
+          "imbalance-collateral"
+        ],
+        "summary": "SMF Detay Listeleme",
+        "description": "Uzlaştırma dönemleri için hesaplanan SMF ortalamalarını (aosmf) döner. Dokümandaki örnek istek: effectiveDateStart=2023-08-01, monthCount=12. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "aosmf-detail-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImbalanceCollateralAosmfListReqDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseAosmfListDto"
+            }
+          }
+        }
+      }
+    },
+    "/risk-collateral/rest/v1/list/risk-collateral-by-org": {
+      "post": {
+        "tags": [
+          "risk-collateral"
+        ],
+        "summary": "Risk Teminatı Listeleme",
+        "description": "Risk teminatı tutarını ve fatura son ödeme tarihi için yapılan ikinci risk hesabından elde edilen tutarı (riskCollateralLastPaymentDateAmount) döner. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "risk-collateral-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RiskGetServiceRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseRiskCollateralResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/risk-collateral/rest/v1/list/risk-daily-by-validity-date": {
+      "post": {
+        "tags": [
+          "risk-collateral"
+        ],
+        "summary": "Risk Teminatı Detay Listeleme",
+        "description": "Sorgulanan tarihin toplam risk teminatı tutarını (totalAmount) ve hesaplamaya giren günlük risk kalemlerini (dailyRiskCollateralList) döner. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "risk-collateral-detail-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RiskDailyCollateralRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseRiskDailyDetailRespDto"
+            }
+          }
+        }
+      }
+    },
+    "/risk-collateral/rest/v1/list/dsg-risk-daily-generation": {
+      "post": {
+        "tags": [
+          "risk-collateral"
+        ],
+        "summary": "Günlük Üretim Detay Listeleme",
+        "description": "YTBS üretimi, işletmedeki güce göre üretim, asenkron kapasite ve manuel üretim miktarlarını döner. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "daily-generation-detail-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RiskDailyDsgGenerationListReqDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseRiskCollateralDsgGenerationResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/risk-collateral/v1/portfolio/dsg/list": {
+      "post": {
+        "tags": [
+          "risk-collateral"
+        ],
+        "summary": "Günlük Portföy Detay Listeleme",
+        "description": "Sayaç okuyan kurum bazında tüketim, mevsimsellik katsayısı ve katsayı uygulanmış tüketim değerlerini (portfolioDetails), asenkron kapasite ve manuel tüketim miktarlarını döner. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "daily-portfolio-detail-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RiskPortfolioDetailDsgListReqDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseRiskPortfolioDetailDsgListResDto"
+            }
+          }
+        }
+      }
+    },
+    "/rbs-collateral/rest/v1/list": {
+      "post": {
+        "tags": [
+          "rbs-collateral"
+        ],
+        "summary": "Destekleme Bedeli Teminatı Listeleme",
+        "description": "Ödeme tarihi için destekleme bedeli teminatı tutarını (rbsCollateralAmount) döner. controlHour yalnızca HOUR_11 veya HOUR_17 değerini alır. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "rbs-collateral-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RbsCollateralGetRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseRbsCollateralGetResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/rbs-collateral/rest/v1/powerplant/list": {
+      "post": {
+        "tags": [
+          "rbs-collateral"
+        ],
+        "summary": "Destekleme Bedeli Teminatı Detay Listeleme",
+        "description": "Santral bazında destekleme bedeli tutarlarını (items) ve toplam tutarı (summaryDto.price) döner. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "rbs-collateral-powerplant-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RbsCollateralPowerPlantRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseRbsCollateralPowerPlantPageResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/rbs-collateral/rest/v1/powerplant/detail": {
+      "post": {
+        "tags": [
+          "rbs-collateral"
+        ],
+        "summary": "Destekleme Bedeli Teminatı Santral Detay Listeleme",
+        "description": "Seçilen santralin (powerPlantId) günlük toplam destekleme bedeli teminatı tutarlarını döner. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "rbs-collateral-powerplant-detail-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RbsCollateralPowerPlantDetailRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseRbsCollateralPowerPlantDetailPageResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/rbs-collateral/rest/v1/powerplant/hourly": {
+      "post": {
+        "tags": [
+          "rbs-collateral"
+        ],
+        "summary": "Destekleme Bedeli Teminatı Saatlik Detay Listeleme",
+        "description": "Seçilen santral ve gün için saatlik PTF (mcp), ikili anlaşma fiyatı ve miktarı, AUF, üretim ve tutar değerlerini döner. Sayfalıdır (page.number, page.size). Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "rbs-collateral-powerplant-hourly-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RbsCollateralPowerPlantHourlyRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseRbsCollateralPowerPlantHourlyPageResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/res-collateral/rest/v1/list": {
+      "post": {
+        "tags": [
+          "res-collateral"
+        ],
+        "summary": "YEK Teminatı Listeleme",
+        "description": "Ödeme tarihi için YEK teminatı tutarını (resCollateralAmount) döner. controlHour yalnızca HOUR_11 veya HOUR_17 değerini alır. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "res-collateral-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResCollateralGetRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseResCollateralGetResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/res-collateral/rest/v1/list/res-daily-detail": {
+      "post": {
+        "tags": [
+          "res-collateral"
+        ],
+        "summary": "YEK Teminatı Günlük Detay Listeleme",
+        "description": "Günlük tüketim, otoprodüktör çekiş/üretim, öngörülen YEK birim maliyeti ve günlük YEK tutarlarını döner. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "res-collateral-daily-detail-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResDailyCollateralRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseResDailyCollateralResponse"
+            }
+          }
+        }
+      }
+    },
+    "/res-collateral/rest/v1/withdrawal-details/list": {
+      "post": {
+        "tags": [
+          "res-collateral"
+        ],
+        "summary": "YEK Teminatı Tüketim Detay Listeleme",
+        "description": "Sayaç okuyan kurum bazında tüketim türü, mevsimsellik katsayısı ve katsayı uygulanmış tüketim değerlerini döner. Yetki: Teminat - Teminat Bilgileri Okuma Yetkisi.",
+        "operationId": "res-collateral-withdrawal-detail-list",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResWithdrawalDetailReqDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseResWithdrawalDto"
+            }
+          }
+        }
+      }
+    },
+    "/risk-collateral/rest/v1/list/risk-daily-detail": {
+      "post": {
+        "tags": [
+          "risk-collateral"
+        ],
+        "summary": "Raporlar - Günlük Risk Detay Listeleme",
+        "description": "Tarih aralığındaki günlük risk detaylarını ilgili günün son versiyon değerleriyle döner (risk-collateral-detail-list ise hesaplamaya giren versiyonları döner). totalAmount bu serviste kullanılmaz. Yetki: Teminat - Günlük Risk Detay Okuma Yetkisi.",
+        "operationId": "risk-daily-detail-report",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RiskDailyDetailReqDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseRiskManuelCalculationAmountResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/risk-collateral/seasonal/v1/list/seasonal": {
+      "post": {
+        "tags": [
+          "risk-collateral"
+        ],
+        "summary": "Raporlar - Mevsimsellik Katsayısı Listeleme",
+        "description": "Bölge ve dönem bazında uzlaştırma bildirimi öncesi ve sonrası mevsimsellik katsayılarını döner. Yetki: Teminat - Mevsimsellik Katsayısı Okuma Yetkisi.",
+        "operationId": "seasonal-constant-report",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SeasonalConstansListRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseSeasonalConstansResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/collateral/rest/v1/report/list": {
+      "post": {
+        "tags": [
+          "collateral"
+        ],
+        "summary": "Raporlar - Teminat Raporu Listeleme",
+        "description": "Organizasyon bazında teminat kalemlerini (başlangıç, GÖGİ, dengesizlik, risk, YEK, destekleme bedeli, ek teminat) ve gerekli/mevcut nakit ve toplam teminat tutarlarını döner. Sayfalıdır (page.number, page.size). controlHour yalnızca HOUR_11 veya HOUR_17 değerini alır. Yetki: Teminat - Teminat Raporu Okuma Yetkisi.",
+        "operationId": "collateral-report",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CollateralReportRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RestResponseCollateralReportPageRespDto"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdditionalCollateralRequestDto": {
+      "type": "object",
+      "properties": {
+        "controlHour": {
+          "type": "string",
+          "enum": [
+            "HOUR_11",
+            "HOUR_17"
+          ]
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2022-01-01T00:00:00+03:00"
+        }
+      },
+      "title": "AdditionalCollateralRequestDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "AdditionalCollateralRespDto": {
+      "type": "object",
+      "properties": {
+        "additionalCollateralAmount": {
+          "type": "number"
+        },
+        "calculatedAdditionalCollateralAmount": {
+          "type": "number"
+        },
+        "defaultAdvanceAmount": {
+          "type": "number"
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "AdditionalCollateralRespDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "AosmfListDto": {
+      "type": "object",
+      "properties": {
+        "aosmf": {
+          "type": "number"
+        },
+        "period": {
+          "type": "string"
+        }
+      },
+      "title": "AosmfListDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "BaseDTO": {
+      "type": "object",
+      "title": "BaseDTO",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "CollateralReportDto": {
+      "type": "object",
+      "properties": {
+        "additionalCollateralAmount": {
+          "type": "number"
+        },
+        "calculatedAdditionalCollateralAmount": {
+          "type": "number"
+        },
+        "currentCashCollateral": {
+          "type": "number"
+        },
+        "currentTotalCollateral": {
+          "type": "number"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "defaultAdvanceAmount": {
+          "type": "number"
+        },
+        "gogiCollateralAmount": {
+          "type": "number"
+        },
+        "imbalanceCollateralAmount": {
+          "type": "number"
+        },
+        "initialCollateralAmount": {
+          "type": "number"
+        },
+        "necessaryCashCollateral": {
+          "type": "number"
+        },
+        "necessaryTotalCollateral": {
+          "type": "number"
+        },
+        "organizationEtsoCode": {
+          "type": "string"
+        },
+        "organizationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "organizationName": {
+          "type": "string"
+        },
+        "rbsCollateralAmount": {
+          "type": "number"
+        },
+        "resCollateralAmount": {
+          "type": "number"
+        },
+        "riskCollateralAmount": {
+          "type": "number"
+        }
+      },
+      "title": "CollateralReportDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "CollateralReportPageRespDto": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollateralReportDto"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/Page"
+        }
+      },
+      "title": "CollateralReportPageRespDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "CollateralReportRequestDto": {
+      "type": "object",
+      "properties": {
+        "controlHour": {
+          "type": "string",
+          "enum": [
+            "HOUR_11",
+            "HOUR_17"
+          ]
+        },
+        "effectiveDateEnd": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2022-01-01T00:00:00+03:00"
+        },
+        "effectiveDateStart": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2022-01-01T00:00:00+03:00"
+        },
+        "exportType": {
+          "type": "string",
+          "example": "XLSX, CSV or PDF",
+          "enum": [
+            "CSV",
+            "PDF",
+            "XLSX"
+          ]
+        },
+        "page": {
+          "$ref": "#/definitions/Page"
+        }
+      },
+      "title": "CollateralReportRequestDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "GogiDataNdaysRespDto": {
+      "type": "object",
+      "properties": {
+        "damDebt": {
+          "type": "number"
+        },
+        "damReceivable": {
+          "type": "number"
+        },
+        "idmDebt": {
+          "type": "number"
+        },
+        "idmReceivable": {
+          "type": "number"
+        },
+        "netDebt": {
+          "type": "number"
+        },
+        "organizationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "validityDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "GogiDataNdaysRespDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "GogiDetailListReqDto": {
+      "type": "object",
+      "properties": {
+        "exportType": {
+          "type": "string",
+          "enum": [
+            "CSV",
+            "PDF",
+            "XLSX"
+          ]
+        },
+        "validityDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        }
+      },
+      "title": "GogiDetailListReqDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "GogiDetailListRespDto": {
+      "type": "object",
+      "properties": {
+        "calculatedAmount": {
+          "type": "number"
+        },
+        "gogiDetailListAmongValidityDate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GogiDetailModel"
+          }
+        },
+        "kdays": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "organizationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "validityDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "GogiDetailListRespDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "GogiDetailModel": {
+      "type": "object",
+      "properties": {
+        "damCollateral": {
+          "$ref": "#/definitions/GogiDetailRespDto"
+        },
+        "intradayCollateral": {
+          "$ref": "#/definitions/GogiDetailRespDto"
+        },
+        "totalAmount": {
+          "type": "number"
+        },
+        "validityDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "GogiDetailModel",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "GogiDetailRespDto": {
+      "type": "object",
+      "properties": {
+        "collateralType": {
+          "type": "string",
+          "enum": [
+            "DAM",
+            "IDM"
+          ]
+        },
+        "debt": {
+          "type": "number"
+        },
+        "net": {
+          "type": "number"
+        },
+        "organizationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "receivable": {
+          "type": "number"
+        },
+        "validityDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "GogiDetailRespDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ImbalanceCollateralAosmfListReqDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDateStart": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        },
+        "monthCount": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "ImbalanceCollateralAosmfListReqDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ImbalanceCollateralDetailListReqDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDateStart": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        },
+        "exportType": {
+          "type": "string",
+          "example": "XLSX, CSV or PDF",
+          "enum": [
+            "CSV",
+            "PDF",
+            "XLSX"
+          ]
+        }
+      },
+      "title": "ImbalanceCollateralDetailListReqDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ImbalanceCollateralDetailListRespDto": {
+      "type": "object",
+      "properties": {
+        "aosmf": {
+          "type": "number"
+        },
+        "edm": {
+          "type": "number"
+        },
+        "period": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "sri": {
+          "type": "number"
+        },
+        "usedDamDeduction": {
+          "type": "number"
+        },
+        "usedEdm": {
+          "type": "number"
+        }
+      },
+      "title": "ImbalanceCollateralDetailListRespDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ImbalanceCollateralListReqDto": {
+      "type": "object",
+      "properties": {
+        "controlHour": {
+          "type": "string",
+          "enum": [
+            "HOUR_11",
+            "HOUR_17"
+          ]
+        },
+        "effectiveDateStart": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        },
+        "organizationId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ImbalanceCollateralListReqDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ImbalanceCollateralListRespDto": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "aosmfMonthCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "aosmfQueryPeriod": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "title": "ImbalanceCollateralListRespDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "InitialCollateralListRequestDto": {
+      "type": "object",
+      "properties": {
+        "validityDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        }
+      },
+      "title": "InitialCollateralListRequestDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "InitialCollateralListResponseDto": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "InitialCollateralListResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "LabelValueDTO": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": "LabelValueDTO",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "Page": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sort": {
+          "$ref": "#/definitions/SortDTO"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Page",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralGetRequestDto": {
+      "type": "object",
+      "properties": {
+        "controlHour": {
+          "type": "string",
+          "enum": [
+            "HOUR_11",
+            "HOUR_17"
+          ]
+        },
+        "organizationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        }
+      },
+      "title": "RbsCollateralGetRequestDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralGetResponseDto": {
+      "type": "object",
+      "properties": {
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        },
+        "rbsCollateralAmount": {
+          "type": "number"
+        }
+      },
+      "title": "RbsCollateralGetResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantDetailPageResponseDto": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RbsCollateralPowerPlantDetailResponseDto"
+          }
+        },
+        "summaryDto": {
+          "$ref": "#/definitions/RbsCollateralPowerPlantDetailSummaryDto"
+        }
+      },
+      "title": "RbsCollateralPowerPlantDetailPageResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantDetailRequestDto": {
+      "type": "object",
+      "properties": {
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        },
+        "powerPlantId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "RbsCollateralPowerPlantDetailRequestDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantDetailResponseDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "powerPlantId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "price": {
+          "type": "number"
+        }
+      },
+      "title": "RbsCollateralPowerPlantDetailResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantDetailSummaryDto": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number"
+        }
+      },
+      "title": "RbsCollateralPowerPlantDetailSummaryDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantHourlyPageResponseDto": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RbsCollateralPowerPlantHourlyResponseDto"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/Page"
+        },
+        "summaryDto": {
+          "$ref": "#/definitions/RbsCollateralPowerPlantHourlySummaryDto"
+        }
+      },
+      "title": "RbsCollateralPowerPlantHourlyPageResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantHourlyRequestDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        },
+        "page": {
+          "$ref": "#/definitions/Page"
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "powerPlantId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "RbsCollateralPowerPlantHourlyRequestDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantHourlyResponseDto": {
+      "type": "object",
+      "properties": {
+        "auf": {
+          "type": "number"
+        },
+        "bcAmount": {
+          "type": "number"
+        },
+        "bcPrice": {
+          "type": "number"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        },
+        "generation": {
+          "type": "number"
+        },
+        "mcp": {
+          "type": "number"
+        },
+        "powerPlantId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "price": {
+          "type": "number"
+        }
+      },
+      "title": "RbsCollateralPowerPlantHourlyResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantHourlySummaryDto": {
+      "type": "object",
+      "properties": {
+        "auf": {
+          "type": "number"
+        },
+        "bcAmount": {
+          "type": "number"
+        },
+        "bcPrice": {
+          "type": "number"
+        },
+        "generation": {
+          "type": "number"
+        },
+        "mcp": {
+          "type": "number"
+        },
+        "price": {
+          "type": "number"
+        }
+      },
+      "title": "RbsCollateralPowerPlantHourlySummaryDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantPageResponseDto": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RbsCollateralPowerPlantResponseDto"
+          }
+        },
+        "summaryDto": {
+          "$ref": "#/definitions/RbsCollateralPowerPlantSummaryDto"
+        }
+      },
+      "title": "RbsCollateralPowerPlantPageResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantRequestDto": {
+      "type": "object",
+      "properties": {
+        "exportType": {
+          "type": "string",
+          "example": "XLSX, CSV or PDF",
+          "enum": [
+            "CSV",
+            "PDF",
+            "XLSX"
+          ]
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2020-01-01T00:00:00+03:00"
+        }
+      },
+      "title": "RbsCollateralPowerPlantRequestDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantResponseDto": {
+      "type": "object",
+      "properties": {
+        "powerPlantId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "powerPlantName": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "sourceType": {
+          "type": "string"
+        }
+      },
+      "title": "RbsCollateralPowerPlantResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RbsCollateralPowerPlantSummaryDto": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number"
+        }
+      },
+      "title": "RbsCollateralPowerPlantSummaryDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ResCollateralGetRequestDto": {
+      "type": "object",
+      "properties": {
+        "controlHour": {
+          "type": "string",
+          "enum": [
+            "HOUR_11",
+            "HOUR_17"
+          ]
+        },
+        "organizationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        }
+      },
+      "title": "ResCollateralGetRequestDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ResCollateralGetResponseDto": {
+      "type": "object",
+      "properties": {
+        "resCollateralAmount": {
+          "type": "number"
+        },
+        "validityDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        }
+      },
+      "title": "ResCollateralGetResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ResDailyCollateralRequestDto": {
+      "type": "object",
+      "properties": {
+        "exportType": {
+          "type": "string",
+          "example": "XLSX, CSV or PDF",
+          "enum": [
+            "CSV",
+            "PDF",
+            "XLSX"
+          ]
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        }
+      },
+      "title": "ResDailyCollateralRequestDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ResDailyCollateralResponse": {
+      "type": "object",
+      "properties": {
+        "resDailyCollateralResponseDtoList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResDailyCollateralResponseDto"
+          }
+        }
+      },
+      "title": "ResDailyCollateralResponse",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ResDailyCollateralResponseDto": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "autoProducerSupply": {
+          "type": "number"
+        },
+        "autoProducerWithdrawal": {
+          "type": "number"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "resConstant": {
+          "type": "number"
+        },
+        "totalConsumption": {
+          "type": "number"
+        },
+        "withdrawal": {
+          "type": "number"
+        }
+      },
+      "title": "ResDailyCollateralResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ResWithdrawalDetailDto": {
+      "type": "object",
+      "properties": {
+        "meterReadingCompanyId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "meterReadingCompanyName": {
+          "type": "string"
+        },
+        "seasonalConstant": {
+          "type": "number"
+        },
+        "withdrawalType": {
+          "$ref": "#/definitions/LabelValueDTO"
+        },
+        "withdrawalWithSeasonalConstant": {
+          "type": "number"
+        }
+      },
+      "title": "ResWithdrawalDetailDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ResWithdrawalDetailReqDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "ResWithdrawalDetailReqDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "ResWithdrawalDto": {
+      "type": "object",
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResWithdrawalDetailDto"
+          }
+        },
+        "manualWithdrawal": {
+          "type": "number"
+        }
+      },
+      "title": "ResWithdrawalDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseAdditionalCollateralRespDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyAdditionalCollateralRespDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«AdditionalCollateralRespDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseAosmfListDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyAosmfListDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«AosmfListDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseBodyAdditionalCollateralRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/AdditionalCollateralRespDto"
+        }
+      },
+      "title": "RestResponseBody«AdditionalCollateralRespDto»"
+    },
+    "RestResponseBodyAosmfListDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/AosmfListDto"
+        }
+      },
+      "title": "RestResponseBody«AosmfListDto»"
+    },
+    "RestResponseBodyCollateralReportPageRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/CollateralReportPageRespDto"
+        }
+      },
+      "title": "RestResponseBody«CollateralReportPageRespDto»"
+    },
+    "RestResponseBodyGogiDataNdaysRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/GogiDataNdaysRespDto"
+        }
+      },
+      "title": "RestResponseBody«GogiDataNdaysRespDto»"
+    },
+    "RestResponseBodyGogiDetailListRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/GogiDetailListRespDto"
+        }
+      },
+      "title": "RestResponseBody«GogiDetailListRespDto»"
+    },
+    "RestResponseBodyImbalanceCollateralDetailListRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ImbalanceCollateralDetailListRespDto"
+        }
+      },
+      "title": "RestResponseBody«ImbalanceCollateralDetailListRespDto»"
+    },
+    "RestResponseBodyImbalanceCollateralListRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ImbalanceCollateralListRespDto"
+        }
+      },
+      "title": "RestResponseBody«ImbalanceCollateralListRespDto»"
+    },
+    "RestResponseBodyInitialCollateralListResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/InitialCollateralListResponseDto"
+        }
+      },
+      "title": "RestResponseBody«InitialCollateralListResponseDto»"
+    },
+    "RestResponseBodyRbsCollateralGetResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/RbsCollateralGetResponseDto"
+        }
+      },
+      "title": "RestResponseBody«RbsCollateralGetResponseDto»"
+    },
+    "RestResponseBodyRbsCollateralPowerPlantDetailPageResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/RbsCollateralPowerPlantDetailPageResponseDto"
+        }
+      },
+      "title": "RestResponseBody«RbsCollateralPowerPlantDetailPageResponseDto»"
+    },
+    "RestResponseBodyRbsCollateralPowerPlantHourlyPageResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/RbsCollateralPowerPlantHourlyPageResponseDto"
+        }
+      },
+      "title": "RestResponseBody«RbsCollateralPowerPlantHourlyPageResponseDto»"
+    },
+    "RestResponseBodyRbsCollateralPowerPlantPageResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/RbsCollateralPowerPlantPageResponseDto"
+        }
+      },
+      "title": "RestResponseBody«RbsCollateralPowerPlantPageResponseDto»"
+    },
+    "RestResponseBodyResCollateralGetResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ResCollateralGetResponseDto"
+        }
+      },
+      "title": "RestResponseBody«ResCollateralGetResponseDto»"
+    },
+    "RestResponseBodyResDailyCollateralResponse": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ResDailyCollateralResponse"
+        }
+      },
+      "title": "RestResponseBody«ResDailyCollateralResponse»"
+    },
+    "RestResponseBodyResWithdrawalDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/ResWithdrawalDto"
+        }
+      },
+      "title": "RestResponseBody«ResWithdrawalDto»"
+    },
+    "RestResponseBodyRiskCollateralDsgGenerationResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/RiskCollateralDsgGenerationResponseDto"
+        }
+      },
+      "title": "RestResponseBody«RiskCollateralDsgGenerationResponseDto»"
+    },
+    "RestResponseBodyRiskCollateralResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/RiskCollateralResponseDto"
+        }
+      },
+      "title": "RestResponseBody«RiskCollateralResponseDto»"
+    },
+    "RestResponseBodyRiskDailyDetailRespDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/RiskDailyDetailRespDto"
+        }
+      },
+      "title": "RestResponseBody«RiskDailyDetailRespDto»"
+    },
+    "RestResponseBodyRiskManuelCalculationAmountResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/RiskManuelCalculationAmountResponseDto"
+        }
+      },
+      "title": "RestResponseBody«RiskManuelCalculationAmountResponseDto»"
+    },
+    "RestResponseBodyRiskPortfolioDetailDsgListResDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/RiskPortfolioDetailDsgListResDto"
+        }
+      },
+      "title": "RestResponseBody«RiskPortfolioDetailDsgListResDto»"
+    },
+    "RestResponseBodySeasonalConstansResponseDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "$ref": "#/definitions/SeasonalConstansResponseDto"
+        }
+      },
+      "title": "RestResponseBody«SeasonalConstansResponseDto»"
+    },
+    "RestResponseCollateralReportPageRespDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyCollateralReportPageRespDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«CollateralReportPageRespDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseError": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponseError"
+    },
+    "RestResponseGogiDataNdaysRespDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyGogiDataNdaysRespDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«GogiDataNdaysRespDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseGogiDetailListRespDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyGogiDetailListRespDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«GogiDetailListRespDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseImbalanceCollateralDetailListRespDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyImbalanceCollateralDetailListRespDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«ImbalanceCollateralDetailListRespDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseImbalanceCollateralListRespDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyImbalanceCollateralListRespDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«ImbalanceCollateralListRespDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseInitialCollateralListResponseDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyInitialCollateralListResponseDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«InitialCollateralListResponseDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseRbsCollateralGetResponseDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyRbsCollateralGetResponseDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«RbsCollateralGetResponseDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseRbsCollateralPowerPlantDetailPageResponseDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyRbsCollateralPowerPlantDetailPageResponseDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«RbsCollateralPowerPlantDetailPageResponseDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseRbsCollateralPowerPlantHourlyPageResponseDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyRbsCollateralPowerPlantHourlyPageResponseDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«RbsCollateralPowerPlantHourlyPageResponseDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseRbsCollateralPowerPlantPageResponseDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyRbsCollateralPowerPlantPageResponseDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«RbsCollateralPowerPlantPageResponseDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseResCollateralGetResponseDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyResCollateralGetResponseDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«ResCollateralGetResponseDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseResDailyCollateralResponse": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyResDailyCollateralResponse"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«ResDailyCollateralResponse»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseResWithdrawalDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyResWithdrawalDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«ResWithdrawalDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseRiskCollateralDsgGenerationResponseDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyRiskCollateralDsgGenerationResponseDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«RiskCollateralDsgGenerationResponseDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseRiskCollateralResponseDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyRiskCollateralResponseDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«RiskCollateralResponseDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseRiskDailyDetailRespDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyRiskDailyDetailRespDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«RiskDailyDetailRespDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseRiskManuelCalculationAmountResponseDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyRiskManuelCalculationAmountResponseDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«RiskManuelCalculationAmountResponseDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseRiskPortfolioDetailDsgListResDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodyRiskPortfolioDetailDsgListResDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«RiskPortfolioDetailDsgListResDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RestResponseSeasonalConstansResponseDto": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/RestResponseBodySeasonalConstansResponseDto"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "correlationId": {
+          "type": "string"
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "userName": {
+          "type": "string"
+        }
+      },
+      "title": "RestResponse«SeasonalConstansResponseDto»",
+      "xml": {
+        "name": "response",
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskCollateralDsgGenerationListResponseDto": {
+      "type": "object",
+      "properties": {
+        "asyncCapacity": {
+          "type": "number"
+        },
+        "installedPowerGeneration": {
+          "type": "number"
+        },
+        "manualGeneration": {
+          "type": "number"
+        },
+        "ytbsGeneration": {
+          "type": "number"
+        }
+      },
+      "title": "RiskCollateralDsgGenerationListResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskCollateralDsgGenerationResponseDto": {
+      "type": "object",
+      "properties": {
+        "dsgRiskCollateralGenerationList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RiskCollateralDsgGenerationListResponseDto"
+          }
+        }
+      },
+      "title": "RiskCollateralDsgGenerationResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskCollateralResponseDto": {
+      "type": "object",
+      "properties": {
+        "explanation": {
+          "type": "string"
+        },
+        "organizationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "riskCollateralAmount": {
+          "type": "number"
+        },
+        "riskCollateralLastPaymentDateAmount": {
+          "type": "number"
+        },
+        "validityDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        }
+      },
+      "title": "RiskCollateralResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskDailyCollateralRequestDto": {
+      "type": "object",
+      "properties": {
+        "exportType": {
+          "type": "string",
+          "example": "XLSX, CSV or PDF",
+          "enum": [
+            "CSV",
+            "PDF",
+            "XLSX"
+          ]
+        },
+        "validityDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "RiskDailyCollateralRequestDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskDailyCollateralRespDto": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "bilateralContractPurchaseAmount": {
+          "type": "number"
+        },
+        "bilateralContractSalesAmount": {
+          "type": "number"
+        },
+        "damPurchaseAmount": {
+          "type": "number"
+        },
+        "damSalesAmount": {
+          "type": "number"
+        },
+        "deduction": {
+          "type": "number"
+        },
+        "downRegulationEnergy": {
+          "type": "number"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "efmPurchaseAmount": {
+          "type": "number"
+        },
+        "efmSalesAmount": {
+          "type": "number"
+        },
+        "idmPurchaseAmount": {
+          "type": "number"
+        },
+        "idmSalesAmount": {
+          "type": "number"
+        },
+        "imbalancePrice": {
+          "type": "number"
+        },
+        "quantity": {
+          "type": "number"
+        },
+        "totalConsumption": {
+          "type": "number"
+        },
+        "totalGeneration": {
+          "type": "number"
+        },
+        "upRegulationEnergy": {
+          "type": "number"
+        }
+      },
+      "title": "RiskDailyCollateralRespDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskDailyCollateralResponseDto": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number"
+        },
+        "bilateralContractPurchaseAmount": {
+          "type": "number"
+        },
+        "bilateralContractSalesAmount": {
+          "type": "number"
+        },
+        "damPurchaseAmount": {
+          "type": "number"
+        },
+        "damSalesAmount": {
+          "type": "number"
+        },
+        "deduction": {
+          "type": "number"
+        },
+        "downRegulationEnergy": {
+          "type": "number"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "efmPurchaseAmount": {
+          "type": "number"
+        },
+        "efmSalesAmount": {
+          "type": "number"
+        },
+        "idmPurchaseAmount": {
+          "type": "number"
+        },
+        "idmSalesAmount": {
+          "type": "number"
+        },
+        "imbalancePrice": {
+          "type": "number"
+        },
+        "orgEic": {
+          "type": "string"
+        },
+        "orgId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "orgName": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "number"
+        },
+        "totalConsumption": {
+          "type": "number"
+        },
+        "totalGeneration": {
+          "type": "number"
+        },
+        "upRegulationEnergy": {
+          "type": "number"
+        }
+      },
+      "title": "RiskDailyCollateralResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskDailyDetailReqDto": {
+      "type": "object",
+      "properties": {
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        },
+        "exportType": {
+          "type": "string",
+          "example": "XLSX, CSV or PDF",
+          "enum": [
+            "CSV",
+            "PDF",
+            "XLSX"
+          ]
+        },
+        "organizationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        }
+      },
+      "title": "RiskDailyDetailReqDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskDailyDetailRespDto": {
+      "type": "object",
+      "properties": {
+        "dailyRiskCollateralList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RiskDailyCollateralRespDto"
+          }
+        },
+        "totalAmount": {
+          "type": "number"
+        }
+      },
+      "title": "RiskDailyDetailRespDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskDailyDsgGenerationListReqDto": {
+      "type": "object",
+      "properties": {
+        "exportType": {
+          "type": "string",
+          "example": "XLSX, CSV or PDF",
+          "enum": [
+            "CSV",
+            "PDF",
+            "XLSX"
+          ]
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "validityDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        }
+      },
+      "title": "RiskDailyDsgGenerationListReqDto"
+    },
+    "RiskGetServiceRequestDto": {
+      "type": "object",
+      "properties": {
+        "controlHour": {
+          "type": "string",
+          "enum": [
+            "HOUR_11",
+            "HOUR_17"
+          ]
+        },
+        "organizationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "RiskGetServiceRequestDto"
+    },
+    "RiskManuelCalculationAmountResponseDto": {
+      "type": "object",
+      "properties": {
+        "dailyRiskCollateralList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RiskDailyCollateralResponseDto"
+          }
+        },
+        "totalAmount": {
+          "type": "number"
+        }
+      },
+      "title": "RiskManuelCalculationAmountResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskPortfolioDetailDsgListReqDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "RiskPortfolioDetailDsgListReqDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskPortfolioDetailDsgListResDto": {
+      "type": "object",
+      "properties": {
+        "asyncCapacityAmount": {
+          "type": "number"
+        },
+        "manualConsumption": {
+          "type": "number"
+        },
+        "manualMeterData": {
+          "type": "number"
+        },
+        "portfolioDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RiskPortfolioDetailDto"
+          }
+        }
+      },
+      "title": "RiskPortfolioDetailDsgListResDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "RiskPortfolioDetailDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "meterReadingCompanyId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "meterReadingCompanyName": {
+          "type": "string"
+        },
+        "portfolio": {
+          "type": "number"
+        },
+        "portfolioWithSeasonalConstant": {
+          "type": "number"
+        },
+        "seasonalConstant": {
+          "type": "number"
+        }
+      },
+      "title": "RiskPortfolioDetailDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "SeasonalConstansListRequestDto": {
+      "type": "object",
+      "properties": {
+        "effectiveDateEnd": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        },
+        "effectiveDateStart": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-01-01T00:00:00+03:00"
+        },
+        "exportType": {
+          "type": "string",
+          "example": "XLSX, CSV or PDF",
+          "enum": [
+            "CSV",
+            "PDF",
+            "XLSX"
+          ]
+        },
+        "meterReadingOrgId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "SeasonalConstansListRequestDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "SeasonalConstansListResponseDto": {
+      "type": "object",
+      "properties": {
+        "period": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "postInvoiceConstant": {
+          "type": "number"
+        },
+        "preInvoiceConstant": {
+          "type": "number"
+        },
+        "regionName": {
+          "type": "string"
+        }
+      },
+      "title": "SeasonalConstansListResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "SeasonalConstansResponseDto": {
+      "type": "object",
+      "properties": {
+        "resultList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeasonalConstansListResponseDto"
+          }
+        }
+      },
+      "title": "SeasonalConstansResponseDto",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    },
+    "SortDTO": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "example": "ASC",
+          "enum": [
+            "ASC",
+            "DESC"
+          ]
+        },
+        "field": {
+          "type": "string"
+        }
+      },
+      "title": "SortDTO",
+      "xml": {
+        "attribute": false,
+        "wrapped": false
+      }
+    }
+  }
+}
