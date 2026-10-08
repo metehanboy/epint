@@ -41,6 +41,7 @@ Bu repo epint'in kaynağı: `git@github.com:metehanboy/epint.git`, branch `main`
 | seffaflik-electricity | `transparency`, `seffaflik_electricity` |
 | seffaflik-natural-gas | `naturalgas`, `cng`, `dogalgaz`, `seffaflik_natural_gas` |
 | seffaflik-reporting | `reporting`, `seffaflik_reporting` |
+| teminat | `teminat` |
 
 Tek skill paketi: `.claude/skills/epint/` — hub `SKILL.md`, kategori detayları `services/<category>.md`.
 

@@ -2,7 +2,7 @@
 name: epint
 description: |
   epint (EPİAŞ Python client) kaynak reposu. epint / EPİAŞ / EPYS / şeffaflık / GOP / GİP /
-  registration / customer / demand / grid / balancing-group / reconciliation / gunici
+  registration / customer / demand / grid / balancing-group / reconciliation / gunici / teminat
   ile çalışırken kullan. Tek skill hub: kategori detayı services/<category>.md.
 ---
 
@@ -46,6 +46,7 @@ Bu repo (`metehanboy/epint`) epint'in kaynağı — kod burada yazılır. Portal
 | seffaflik-electricity | `transparency`, `seffaflik_electricity` | [`services/seffaflik-electricity.md`](services/seffaflik-electricity.md) |
 | seffaflik-natural-gas | `naturalgas`, `cng`, `dogalgaz` | [`services/seffaflik-natural-gas.md`](services/seffaflik-natural-gas.md) |
 | seffaflik-reporting | `reporting`, `seffaflik_reporting` | [`services/seffaflik-reporting.md`](services/seffaflik-reporting.md) |
+| teminat | `teminat` | [`services/teminat.md`](services/teminat.md) |
 
 ## Not
 

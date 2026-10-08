@@ -77,6 +77,7 @@ ep.[kategori].[method_adi](parametreler)
 - **`gunici`**: Gün içi servisleri
 - **`gunici_trading`**: Gün içi ticaret servisleri
 - **`index_ac`**: Endeks / Ek Tüketim servisleri
+- **`teminat`**: Teminat servisleri (başlangıç, GÖGİ, ek, dengesizlik, risk, YEK, destekleme bedeli teminatları ve raporlar)
 
 ## Örnekler
 

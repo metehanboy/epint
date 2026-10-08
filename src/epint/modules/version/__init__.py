@@ -13,8 +13,8 @@
 # limitations under the License.
 
 __major__ = 0 # stabil release
-__minor__ = 7 # yeni özellik
-__semantic__ = 9 # bug fix
+__minor__ = 8 # yeni özellik
+__semantic__ = 0 # bug fix
 __tag__ = "dev"
 
 __version__ = f"{__major__}.{__minor__}.{__semantic__}-{__tag__}"
