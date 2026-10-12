@@ -15,6 +15,114 @@
     "https"
   ],
   "paths": {
+    "/v1/brg/approve": {
+      "post": {
+        "tags": [
+          "balanceResponsibleGroup"
+        ],
+        "summary": "DSG Talep Onaylama Servisi",
+        "description": "Gönderilen DSG talebini onaylar.",
+        "operationId": "brg-approve",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrgRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseBrgTransitionDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/brg/cancel": {
+      "post": {
+        "tags": [
+          "balanceResponsibleGroup"
+        ],
+        "summary": "DSG Talep İptal Servisi",
+        "description": "Gönderilen DSG talebini iptal eder.",
+        "operationId": "brg-cancel",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrgRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseBrgTransitionDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/brg/invite": {
+      "post": {
+        "tags": [
+          "balanceResponsibleGroup"
+        ],
+        "summary": "DSG Talep Servisi",
+        "description": "DSG talepi gönderir.",
+        "operationId": "brg-invite",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrgTransitionInviteRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseBrgTransitionDto"
+            }
+          }
+        }
+      }
+    },
     "/v1/brg/query": {
       "post": {
         "tags": [
@@ -50,202 +158,191 @@
           }
         }
       }
+    },
+    "/v1/brg/query/brgp": {
+      "post": {
+        "tags": [
+          "balanceResponsibleGroup"
+        ],
+        "summary": "DSG Uygun Organizasyon Sorgulama Servisi",
+        "description": "DSG talepi almaya uygun organizasyonları sorgular.",
+        "operationId": "brg-query-brgp",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrgRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseLabelValueDTO"
+            }
+          }
+        }
+      }
+    },
+    "/v1/brg/query/invitation": {
+      "post": {
+        "tags": [
+          "balanceResponsibleGroup"
+        ],
+        "summary": "DSG Talep Sorgulama Servisi",
+        "description": "DSG talep verilerini sorgular.",
+        "operationId": "brg-query-invitation",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrgTransitionQueryRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseSortablePageResponseBrgTransitionDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/brg/quit": {
+      "post": {
+        "tags": [
+          "balanceResponsibleGroup"
+        ],
+        "summary": "DSG Gruptan Çıkma Servisi",
+        "description": "Mevcut grubu DSG üyesi tarafından sonlandırır.",
+        "operationId": "brg-quit",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrgRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseBrgDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/brg/reject": {
+      "post": {
+        "tags": [
+          "balanceResponsibleGroup"
+        ],
+        "summary": "DSG Talep Reddetme Servisi",
+        "description": "Gönderilen DSG talebini reddeder.",
+        "operationId": "brg-reject",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrgRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseBrgTransitionDto"
+            }
+          }
+        }
+      }
+    },
+    "/v1/brg/remove": {
+      "post": {
+        "tags": [
+          "balanceResponsibleGroup"
+        ],
+        "summary": "DSG Gruptan Çıkarma Servisi",
+        "description": "Mevcut grubu DSG sahibi tarafından sonlandırır.",
+        "operationId": "brg-remove",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BrgRemoveRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RestResponseBrgDto"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "BrgQueryRequestDto": {
-      "type": "object",
-      "properties": {
-        "page": {
-          "$ref": "#/definitions/Page"
-        },
-        "period": {
-          "type": "string",
-          "format": "date-time",
-          "description": "DSG Dönemi"
-        },
-        "invitationId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "DSG Talep ID"
-        },
-        "invitationIdContains": {
-          "type": "string",
-          "description": "DSG Talep ID (İçinde Arama)"
-        },
-        "brgOwner": {
-          "type": "integer",
-          "format": "int64",
-          "description": "DSG Sahibi ID"
-        },
-        "brgOwnerContains": {
-          "type": "string",
-          "description": "DSG Sahibi ID (İçinde Arama)"
-        },
-        "brgParticipant": {
-          "type": "integer",
-          "format": "int64",
-          "description": "DSG Üyesi ID"
-        },
-        "brgParticipantContains": {
-          "type": "string",
-          "description": "DSG Üyesi ID (İçinde Arama)"
-        },
-        "statusIds": {
-          "type": "array",
-          "description": "DSG Durumu",
-          "items": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      }
-    },
-    "Page": {
-      "type": "object",
-      "properties": {
-        "number": {
-          "type": "integer",
-          "format": "int64",
-          "example": "${EXAMPLE_PAGE_NUMBER}",
-          "description": "${VALUE_PAGE_NUMBER}"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int64",
-          "example": "${EXAMPLE_PAGE_SIZE}",
-          "description": "${VALUE_PAGE_SIZE}"
-        },
-        "total": {
-          "type": "integer",
-          "format": "int64",
-          "example": "${EXAMPLE_PAGE_TOTAL}",
-          "description": "${VALUE_PAGE_TOTAL}"
-        },
-        "sort": {
-          "description": "${VALUE_PAGE_SORT}",
-          "$ref": "#/definitions/SortDTO"
-        }
-      }
-    },
-    "SortDTO": {
-      "type": "object",
-      "properties": {
-        "field": {
-          "type": "string",
-          "example": "${EXAMPLE_SORT_FIELD}",
-          "description": "${VALUE_SORT_FIELD}"
-        },
-        "direction": {
-          "type": "string",
-          "example": "ASC",
-          "description": "${VALUE_SORT_DIRECTION}",
-          "enum": [
-            "ASC",
-            "DESC"
-          ]
-        }
-      }
-    },
     "BaseDTO": {
       "type": "object"
-    },
-    "RestResponseSortablePageResponseBrgDto": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
-        },
-        "correlationId": {
-          "type": "string",
-          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
-        },
-        "spanIds": {
-          "type": "string"
-        },
-        "hostName": {
-          "type": "string"
-        },
-        "clientIp": {
-          "type": "string",
-          "description": "İsteği yapan clientin ip bilgisi"
-        },
-        "userName": {
-          "type": "string",
-          "description": "İsteği yapan kullanıcı bilgisi"
-        },
-        "successMessage": {
-          "type": "string"
-        },
-        "errors": {
-          "type": "array",
-          "description": "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
-          "items": {
-            "$ref": "#/definitions/RestResponseError"
-          }
-        },
-        "unsuccessfulList": {
-          "type": "array",
-          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
-          "items": {
-            "$ref": "#/definitions/BaseDTO"
-          }
-        },
-        "dispatch": {
-          "type": "string"
-        },
-        "body": {
-          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı. İstekler başarısız ise bu alan boş gelecektir.",
-          "$ref": "#/definitions/RestResponseBodySortablePageResponseBrgDto"
-        }
-      },
-      "xml": {
-        "name": "response"
-      }
-    },
-    "RestResponseError": {
-      "type": "object",
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "Alınan hatanın kod bilgisi"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Alınan hatanın açıklaması"
-        }
-      }
-    },
-    "RestResponseBodySortablePageResponseBrgDto": {
-      "type": "object",
-      "properties": {
-        "content": {
-          "readOnly": true,
-          "$ref": "#/definitions/SortablePageResponseBrgDto"
-        }
-      }
-    },
-    "SortablePageResponseBrgDto": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BrgDto"
-          }
-        },
-        "page": {
-          "$ref": "#/definitions/Page"
-        },
-        "sortableFields": {
-          "type": "array",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "BrgDto": {
       "type": "object",
@@ -303,6 +400,222 @@
         }
       }
     },
+    "BrgQueryRequestDto": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/Page"
+        },
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DSG Dönemi"
+        },
+        "invitationId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "DSG Talep ID"
+        },
+        "invitationIdContains": {
+          "type": "string",
+          "description": "DSG Talep ID (İçinde Arama)"
+        },
+        "brgOwner": {
+          "type": "integer",
+          "format": "int64",
+          "description": "DSG Sahibi ID"
+        },
+        "brgOwnerContains": {
+          "type": "string",
+          "description": "DSG Sahibi ID (İçinde Arama)"
+        },
+        "brgParticipant": {
+          "type": "integer",
+          "format": "int64",
+          "description": "DSG Üyesi ID"
+        },
+        "brgParticipantContains": {
+          "type": "string",
+          "description": "DSG Üyesi ID (İçinde Arama)"
+        },
+        "statusIds": {
+          "type": "array",
+          "description": "DSG Durumu",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "BrgRemoveRequestDto": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "description": "DSG ID",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "BrgRequestDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "DSG ID"
+        }
+      }
+    },
+    "BrgTransitionDto": {
+      "type": "object",
+      "properties": {
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DSG Dönemi"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "DSG ID"
+        },
+        "brgOwner": {
+          "type": "integer",
+          "format": "int64",
+          "description": "DSG Sahibi ID"
+        },
+        "brgOwnerName": {
+          "type": "string",
+          "description": "DSG Sahibi Adı"
+        },
+        "brgParticipant": {
+          "type": "integer",
+          "format": "int64",
+          "description": "DSG Üyesi ID"
+        },
+        "brgParticipantName": {
+          "type": "string",
+          "description": "DSG Üyesi Adı"
+        },
+        "brgTransitionStatus": {
+          "description": "DSG Talep Durumu",
+          "$ref": "#/definitions/LookupDTO"
+        },
+        "createUser": {
+          "type": "string",
+          "description": "DSG Oluşturan Kullanıcı"
+        },
+        "modifyUser": {
+          "type": "string",
+          "description": "Durum Güncelleyen Kullanıcı"
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DSG Oluşturma Tarihi"
+        },
+        "modifyDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Durum Güncelleme Tarihi"
+        }
+      }
+    },
+    "BrgTransitionInviteRequestDto": {
+      "type": "object",
+      "properties": {
+        "brgParticipantList": {
+          "type": "array",
+          "description": "DSG Üyesi ID",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "BrgTransitionQueryRequestDto": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/Page"
+        },
+        "period": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DSG Dönemi"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "DSG Talep ID"
+        },
+        "idContains": {
+          "type": "string",
+          "description": "DSG Talep ID (İçinde Arama)"
+        },
+        "brgOwner": {
+          "type": "integer",
+          "format": "int64",
+          "description": "DSG Sahibi ID"
+        },
+        "brgOwnerContains": {
+          "type": "string",
+          "description": "DSG Sahibi ID (İçinde Arama)"
+        },
+        "brgParticipant": {
+          "type": "integer",
+          "format": "int64",
+          "description": "DSG Üyesi ID"
+        },
+        "brgParticipantContains": {
+          "type": "string",
+          "description": "DSG Üyesi ID (İçinde Arama)"
+        },
+        "kind": {
+          "type": "integer",
+          "format": "int64",
+          "description": "DSG Talep Tipi"
+        },
+        "statusIds": {
+          "type": "array",
+          "description": "DSG Talep Durumu",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "LabelValueDTO": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "LocalizationDTO": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "${LOOKUP_LANGUAGE}"
+        },
+        "text": {
+          "type": "string",
+          "description": "${LOOKUP_TEXT}"
+        }
+      }
+    },
     "LookupDTO": {
       "type": "object",
       "properties": {
@@ -324,16 +637,512 @@
         }
       }
     },
-    "LocalizationDTO": {
+    "Page": {
       "type": "object",
       "properties": {
-        "language": {
-          "type": "string",
-          "description": "${LOOKUP_LANGUAGE}"
+        "number": {
+          "type": "integer",
+          "format": "int64",
+          "example": "${EXAMPLE_PAGE_NUMBER}",
+          "description": "${VALUE_PAGE_NUMBER}"
         },
-        "text": {
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "example": "${EXAMPLE_PAGE_SIZE}",
+          "description": "${VALUE_PAGE_SIZE}"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64",
+          "example": "${EXAMPLE_PAGE_TOTAL}",
+          "description": "${VALUE_PAGE_TOTAL}"
+        },
+        "sort": {
+          "description": "${VALUE_PAGE_SORT}",
+          "$ref": "#/definitions/SortDTO"
+        }
+      }
+    },
+    "RestResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
           "type": "string",
-          "description": "${LOOKUP_TEXT}"
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
+        },
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyObject"
+        }
+      },
+      "xml": {
+        "name": "response"
+      }
+    },
+    "RestResponseBody": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "RestResponseBodyBrgDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/BrgDto"
+        }
+      }
+    },
+    "RestResponseBodyBrgTransitionDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/BrgTransitionDto"
+        }
+      }
+    },
+    "RestResponseBodyLabelValueDTO": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/LabelValueDTO"
+        }
+      }
+    },
+    "RestResponseBodyObject": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "object",
+          "readOnly": true
+        }
+      }
+    },
+    "RestResponseBodySortablePageResponseBrgDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/SortablePageResponseBrgDto"
+        }
+      }
+    },
+    "RestResponseBodySortablePageResponseBrgTransitionDto": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "readOnly": true,
+          "$ref": "#/definitions/SortablePageResponseBrgTransitionDto"
+        }
+      }
+    },
+    "RestResponseBrgDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
+        },
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyBrgDto"
+        }
+      },
+      "xml": {
+        "name": "response"
+      }
+    },
+    "RestResponseBrgTransitionDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
+        },
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyBrgTransitionDto"
+        }
+      },
+      "xml": {
+        "name": "response"
+      }
+    },
+    "RestResponseError": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Alınan hatanın kod bilgisi"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Alınan hatanın açıklaması"
+        }
+      }
+    },
+    "RestResponseLabelValueDTO": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
+        },
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodyLabelValueDTO"
+        }
+      },
+      "xml": {
+        "name": "response"
+      }
+    },
+    "RestResponseSortablePageResponseBrgDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
+        },
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodySortablePageResponseBrgDto"
+        }
+      },
+      "xml": {
+        "name": "response"
+      }
+    },
+    "RestResponseSortablePageResponseBrgTransitionDto": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Yapılan isteğin HTTP status kodunu dönmektedir."
+        },
+        "correlationId": {
+          "type": "string",
+          "description": "Yapmış olduğunuz isteği tekilleştirmeye yarar.Hata almanız durumunda bu bilgiyi göndermeniz zorunludur."
+        },
+        "spanIds": {
+          "type": "string"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "clientIp": {
+          "type": "string",
+          "description": "İsteği yapan clientin ip bilgisi"
+        },
+        "userName": {
+          "type": "string",
+          "description": "İsteği yapan kullanıcı bilgisi"
+        },
+        "successMessage": {
+          "type": "string"
+        },
+        "errors": {
+          "type": "array",
+          "description": "Başarılı durumda liste *boş* dönmektedir. Hata almanız durumunda liste içinde aldığınız hatanın hata kodu ve hata mesajlarını dönmektedir. Hatalar ile ilgili detaylı bilgi almak isterseniz bu değerleri göndermeniz gerekmektedir.",
+          "items": {
+            "$ref": "#/definitions/RestResponseError"
+          }
+        },
+        "unsuccessfulList": {
+          "type": "array",
+          "description": "Yapılan istekte hatalı olan ve sisteme kaydedilmeyen kayıtların listesini dönmektedir.",
+          "items": {
+            "$ref": "#/definitions/BaseDTO"
+          }
+        },
+        "dispatch": {
+          "type": "string"
+        },
+        "body": {
+          "description": "Yapılan istek başarılı olması durumunda çağırılan servisin cevabı. İstekler başarısız ise bu alan boş gelecektir.",
+          "$ref": "#/definitions/RestResponseBodySortablePageResponseBrgTransitionDto"
+        }
+      },
+      "xml": {
+        "name": "response"
+      }
+    },
+    "SortDTO": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string",
+          "example": "${EXAMPLE_SORT_FIELD}",
+          "description": "${VALUE_SORT_FIELD}"
+        },
+        "direction": {
+          "type": "string",
+          "example": "ASC",
+          "description": "${VALUE_SORT_DIRECTION}",
+          "enum": [
+            "ASC",
+            "DESC"
+          ]
+        }
+      }
+    },
+    "SortablePageResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/Page"
+        },
+        "sortableFields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SortablePageResponseBrgDto": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BrgDto"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/Page"
+        },
+        "sortableFields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SortablePageResponseBrgTransitionDto": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BrgTransitionDto"
+          }
+        },
+        "page": {
+          "$ref": "#/definitions/Page"
+        },
+        "sortableFields": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
